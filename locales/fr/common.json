@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "preview": "Aperçu",
+    "blog": "Blog",
+    "roadmap": "Roadmap",
+    "faq": "FAQ",
+    "join_beta": "Rejoindre la beta"
+  },
+  "footer": {
+    "product": "Produit",
+    "features": "Fonctionnalités",
+    "preview": "Aperçu",
+    "changelog": "Changelog",
+    "resources": "Ressources",
+    "documentation": "Documentation",
+    "guide": "Guide de démarrage",
+    "community": "Communauté",
+    "legal": "Légal",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "license": "Licence",
+    "description": "Le client de bases de données moderne pour les développeurs exigeants.",
+    "made_with_love": "Fait avec {{heart}} par"
+  },
+  "hero": {
+    "badges": {
+      "opensource": "Open Source",
+      "localfirst": "Local-first",
+      "hybrid": "SQL + NoSQL"
+    },
+    "title": "La base de données.\n<italic>Simplifiée.</italic>",
+    "subtitle": "Un client de bases de données <highlight>moderne</highlight>, <highlight>rapide</highlight> et <highlight>sécurisé</highlight> pour les développeurs qui en ont marre des outils lents et mal conçus.",
+    "cta": {
+      "join_beta": "Rejoindre la beta",
+      "view_project": "Voir le projet",
+      "participate": "Participer"
+    },
+    "social_proof": "Rejoignez <highlight>100+</highlight> développeurs en attente de la beta"
+  },
+  "preview": {
+    "eyebrow": "Aperçu",
+    "title": "Une interface pensée pour les <accent>développeurs</accent>",
+    "description": "Dense mais respirable. Sérieuse mais moderne.\n<subtext>Exactement ce que vous attendez d'un outil professionnel.</subtext>",
+    "browser_bar": "QoreDB — localhost",
+    "badges": {
+      "performance": "Performance optimisée",
+      "keyboard": "Keyboard-first"
+    }
+  },
+  "features": {
+    "eyebrow": "Fonctionnalités",
+    "title": "Ce que QoreDB fait <accent>bien</accent>",
+    "subtitle": "Conçu pour les développeurs qui veulent un outil qui fonctionne, tout simplement.",
+    "items": {
+      "unified": {
+        "title": "SQL + NoSQL unifié",
+        "desc": "PostgreSQL, MySQL, MongoDB dans une seule interface cohérente."
+      },
+      "vault": {
+        "title": "Vault sécurisé",
+        "desc": "Credentials chiffrés via keyring système + Argon2."
+      },
+      "ssh": {
+        "title": "SSH Tunneling",
+        "desc": "Support natif des tunnels SSH pour bases distantes."
+      },
+      "editor": {
+        "title": "Éditeur intelligent",
+        "desc": "Syntax highlighting, autocomplétion, formatage automatique."
+      },
+      "library": {
+        "title": "Query Library",
+        "desc": "Bibliothèque de requêtes avec dossiers, tags et export."
+      },
+      "envs": {
+        "title": "Protection environnements",
+        "desc": "Dev/Staging/Prod distincts, blocage mutations en prod."
+      },
+      "grid": {
+        "title": "Data Grid performant",
+        "desc": "Grille haute performance avec virtualisation."
+      },
+      "update": {
+        "title": "Auto-Update",
+        "desc": "Mise à jour automatique de l'application."
+      }
+    },
+    "compatibility": {
+      "eyebrow": "Compatibilité",
+      "title": "Bases de données supportées",
+      "coming_soon": "SQLite, Redis et d'autres à venir..."
+    }
+  }
+}

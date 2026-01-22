@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useTranslation, Trans } from "react-i18next";
 
 export function PreviewSection() {
+	const { t } = useTranslation();
+
 	return (
 		<section
 			id="preview"
@@ -33,17 +36,25 @@ export function PreviewSection() {
 				>
 					{/* Eyebrow */}
 					<span className="inline-block text-(--q-accent) text-sm font-medium tracking-widest uppercase mb-4">
-						Aperçu
+						{t("preview.eyebrow")}
 					</span>
 					
 					<h2 className="text-(--q-text-0) text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 tracking-tight">
-						Une interface pensée pour les{" "}
-						<span className="text-(--q-accent)">développeurs</span>
+						<Trans
+							i18nKey="preview.title"
+							components={{
+								accent: <span className="text-(--q-accent)" />
+							}}
+						/>
 					</h2>
 					<p className="text-(--q-text-1) text-lg max-w-2xl mx-auto leading-relaxed">
-						Dense mais respirable. Sérieuse mais moderne.
-						<br />
-						<span className="text-(--q-text-2)">Exactement ce que vous attendez d&apos;un outil professionnel.</span>
+						<Trans
+							i18nKey="preview.description"
+							components={{
+								subtext: <span className="text-(--q-text-2)" />,
+								br: <br />
+							}}
+						/>
 					</p>
 				</motion.div>
 
@@ -69,7 +80,7 @@ export function PreviewSection() {
 							</div>
 							<div className="flex-1 flex justify-center">
 								<div className="px-4 py-1 rounded-md bg-(--q-bg-2) text-(--q-text-2) text-xs font-mono">
-									QoreDB — localhost
+									{t("preview.browser_bar")}
 								</div>
 							</div>
 							<div className="w-[52px]" /> {/* Spacer for symmetry */}
@@ -95,7 +106,7 @@ export function PreviewSection() {
 						viewport={{ once: true }}
 					>
 						<div className="w-2 h-2 rounded-full bg-(--q-success) animate-pulse" />
-						<span className="text-(--q-text-0) text-sm font-medium">Performance optimisée</span>
+						<span className="text-(--q-text-0) text-sm font-medium">{t("preview.badges.performance")}</span>
 					</motion.div>
 					
 					<motion.div
@@ -108,7 +119,7 @@ export function PreviewSection() {
 						<div className="w-6 h-6 rounded-md bg-(--q-accent)/10 flex items-center justify-center">
 							<span className="text-(--q-accent) text-xs font-bold">⌘</span>
 						</div>
-						<span className="text-(--q-text-0) text-sm font-medium">Keyboard-first</span>
+						<span className="text-(--q-text-0) text-sm font-medium">{t("preview.badges.keyboard")}</span>
 					</motion.div>
 				</motion.div>
 			</div>

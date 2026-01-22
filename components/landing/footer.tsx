@@ -3,33 +3,38 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Github, ExternalLink, Twitter, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const footerLinks = {
-	product: [
-		{ label: "Fonctionnalités", href: "/#features" },
-		{ label: "Aperçu", href: "/#preview" },
-		{ label: "Roadmap", href: "/roadmap" },
-		{ label: "Changelog", href: "/blog" },
-	],
-	resources: [
-		{ label: "Documentation", href: "#", external: false },
-		{ label: "Blog", href: "/blog" },
-		{ label: "FAQ", href: "/faq" },
-		{ label: "Guide de démarrage", href: "#", external: false },
-	],
-	community: [
-		{ label: "GitHub", href: "https://github.com/raphplt/QoreDB", external: true },
-		{ label: "Discord", href: "#", external: true },
-		{ label: "Twitter", href: "#", external: true },
-	],
-	legal: [
-		{ label: "Confidentialité", href: "#" },
-		{ label: "Conditions", href: "#" },
-		{ label: "Licence", href: "#" },
-	],
-};
+
 
 export function Footer() {
+	const { t } = useTranslation();
+
+	const footerLinks = {
+		product: [
+			{ label: t("footer.features"), href: "/#features" },
+			{ label: t("footer.preview"), href: "/#preview" },
+			{ label: "Roadmap", href: "/roadmap" },
+			{ label: t("footer.changelog"), href: "/blog" },
+		],
+		resources: [
+			{ label: t("footer.documentation"), href: "#", external: false },
+			{ label: "Blog", href: "/blog" },
+			{ label: "FAQ", href: "/faq" },
+			{ label: t("footer.guide"), href: "#", external: false },
+		],
+		community: [
+			{ label: "GitHub", href: "https://github.com/raphplt/QoreDB", external: true },
+			{ label: "Discord", href: "#", external: true },
+			{ label: "Twitter", href: "#", external: true },
+		],
+		legal: [
+			{ label: t("footer.privacy"), href: "#" },
+			{ label: t("footer.terms"), href: "#" },
+			{ label: t("footer.license"), href: "#" },
+		],
+	};
+
 	return (
 		<footer className="relative z-10 border-t border-(--q-border) bg-(--q-bg-0)">
 			{/* Main footer content */}
@@ -42,7 +47,7 @@ export function Footer() {
 							<span className="text-(--q-text-0) font-bold text-xl">QoreDB</span>
 						</Link>
 						<p className="text-(--q-text-2) text-sm leading-relaxed mb-6">
-							Le client de bases de données moderne pour les développeurs exigeants.
+							{t("footer.description")}
 						</p>
 						<div className="flex items-center gap-4">
 							<a
@@ -73,7 +78,7 @@ export function Footer() {
 
 					{/* Product links */}
 					<div>
-						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">Produit</h3>
+						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">{t("footer.product")}</h3>
 						<ul className="space-y-3">
 							{footerLinks.product.map((link) => (
 								<li key={link.label}>
@@ -90,7 +95,7 @@ export function Footer() {
 
 					{/* Resources links */}
 					<div>
-						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">Ressources</h3>
+						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">{t("footer.resources")}</h3>
 						<ul className="space-y-3">
 							{footerLinks.resources.map((link) => (
 								<li key={link.label}>
@@ -107,7 +112,7 @@ export function Footer() {
 
 					{/* Community links */}
 					<div>
-						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">Communauté</h3>
+						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">{t("footer.community")}</h3>
 						<ul className="space-y-3">
 							{footerLinks.community.map((link) => (
 								<li key={link.label}>
@@ -127,7 +132,7 @@ export function Footer() {
 
 					{/* Legal links */}
 					<div>
-						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">Légal</h3>
+						<h3 className="text-(--q-text-0) font-semibold text-sm mb-4">{t("footer.legal")}</h3>
 						<ul className="space-y-3">
 							{footerLinks.legal.map((link) => (
 								<li key={link.label}>
@@ -148,12 +153,11 @@ export function Footer() {
 			<div className="border-t border-(--q-border)">
 				<div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
 					<p className="text-sm text-(--q-text-2)">
-						© {new Date().getFullYear()} QoreDB. Open Source sous licence Apache 2.0.
+						© {new Date().getFullYear()} QoreDB. Open Source under Apache 2.0 license.
 					</p>
 					<div className="flex items-center gap-2 text-sm text-(--q-text-2)">
-						<span>Fait avec</span>
-						<span className="text-(--q-accent)">♥</span>
-						<span>par</span>
+						
+						<span>Fait avec <span className="text-(--q-accent)">♥</span> par</span>
 						<a
 							href="https://github.com/raphplt"
 							target="_blank"

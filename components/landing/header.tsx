@@ -2,14 +2,19 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Github, Menu, X } from "lucide-react";
 import { ShimmerButton } from "@/components/shimmer-button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LanguageSwitcher } from "../language-switcher";
+import { ThemeToggle } from "../theme-toggle";
+import { useTranslation } from "react-i18next";
+import { Button } from "../ui/button"
 
 export function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
+	const { t } = useTranslation();
 
 	const handleLogoClick = (e: React.MouseEvent) => {
 		setMobileMenuOpen(false);
@@ -44,31 +49,31 @@ export function Header() {
 						href="/#features"
 						className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm lg:text-base"
 					>
-						Fonctionnalités
+						{t("nav.features")}
 					</Link>
 					<Link
 						href="/#preview"
 						className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm lg:text-base"
 					>
-						Aperçu
+						{t("nav.preview")}
 					</Link>
 					<Link
 						href="/blog"
 						className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm lg:text-base"
 					>
-						Blog
+						{t("nav.blog")}
 					</Link>
 					<Link
 						href="/roadmap"
 						className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm lg:text-base"
 					>
-						Roadmap
+						{t("nav.roadmap")}
 					</Link>
 					<Link
 						href="/faq"
 						className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm lg:text-base flex items-center gap-1"
 					>
-						FAQ
+						{t("nav.faq")}
 					</Link>
 				</nav>
 
@@ -81,6 +86,10 @@ export function Header() {
 				</button>
 
 				<div className="flex items-center space-x-4">
+					<div className="hidden md:flex items-center gap-2 mr-2">
+						<ThemeToggle />
+						<LanguageSwitcher />
+					</div>
 					{/* <Link
 						href="https://github.com"
 						target="_blank"
@@ -90,31 +99,13 @@ export function Header() {
 						<Github className="w-5 h-5" />
 					</Link> */}
 
-					<button
-						className="group hidden md:flex items-center gap-2 relative overflow-hidden
-							bg-(--q-text-0)/90 backdrop-blur-sm
-							text-(--q-bg-0) px-5 lg:px-5 py-2 rounded-xl 
-							text-sm lg:text-base font-semibold 
-							border border-(--q-accent)/40
-							shadow-[0_0_20px_color-mix(in_srgb,var(--q-accent)_15%,transparent)]
-							hover:border-(--q-accent)/80
-							hover:shadow-[0_0_30px_color-mix(in_srgb,var(--q-accent)_40%,transparent)]
-							hover:scale-105 hover:-translate-y-0.5
-							transition-all duration-300 ease-out"
-					>
-						<span 
-							className="absolute inset-0 bg-linear-to-r from-transparent via-(--q-accent)/20 to-transparent animate-shimmer"
-							style={{
-								backgroundSize: '200% 100%',
-								animation: 'shimmer 3s ease-in-out infinite',
-							}}
-						/>
-						<span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-linear-to-r from-transparent via-(--q-accent) to-transparent opacity-60 group-hover:opacity-100 group-hover:h-0.5 transition-all duration-300" />
-						<span className="absolute inset-0 rounded-xl bg-(--q-accent)/0 group-hover:bg-(--q-accent)/10 transition-colors duration-300" />
-						
-						<span className="relative z-10">Rejoindre la beta</span>
-						<ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-					</button>
+								<Button
+					className="bg-(--q-accent)"
+					
+				>
+					{t("hero.cta.participate")}
+					<Github className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+				</Button>
 				</div>
 			</header>
 
@@ -126,38 +117,44 @@ export function Header() {
 							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
 							onClick={() => setMobileMenuOpen(false)}
 						>
-							Fonctionnalités
+							{t("nav.features")}
 						</Link>
 						<Link
 							href="/#preview"
 							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
 							onClick={() => setMobileMenuOpen(false)}
 						>
-							Aperçu
+							{t("nav.preview")}
 						</Link>
 						<Link
 							href="/blog"
 							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
 							onClick={() => setMobileMenuOpen(false)}
 						>
-							Blog
+							{t("nav.blog")}
 						</Link>
 						<Link
 							href="/roadmap"
 							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
 							onClick={() => setMobileMenuOpen(false)}
 						>
-							Roadmap
+							{t("nav.roadmap")}
 						</Link>
 
 						<Link
 							href="/faq"
 							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors flex items-center gap-1"
 						>
-							FAQ
+							{t("nav.faq")}
 						</Link>
+						
+						<div className="flex items-center gap-4 py-2">
+							<ThemeToggle />
+							<LanguageSwitcher />
+						</div>
+
 						<ShimmerButton className="bg-(--q-accent) hover:bg-(--q-accent-strong) text-white px-6 py-2.5 rounded-xl text-sm font-medium shadow-lg w-fit">
-							Rejoindre la beta
+							{t("nav.join_beta")}
 						</ShimmerButton>
 					</nav>
 				</div>

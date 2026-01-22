@@ -1,0 +1,95 @@
+{
+    "nav": {
+        "features": "Features",
+        "preview": "Preview",
+        "blog": "Blog",
+        "roadmap": "Roadmap",
+        "faq": "FAQ",
+        "join_beta": "Join Beta"
+    },
+    "footer": {
+        "product": "Product",
+        "features": "Features",
+        "preview": "Preview",
+        "changelog": "Changelog",
+        "resources": "Resources",
+        "documentation": "Documentation",
+        "guide": "Getting Started",
+        "community": "Community",
+        "legal": "Legal",
+        "privacy": "Privacy",
+        "terms": "Terms",
+        "license": "License",
+        "description": "The modern database client for demanding developers.",
+        "made_with_love": "Made with {{heart}} by"
+    },
+    "hero": {
+        "badges": {
+            "opensource": "Open Source",
+            "localfirst": "Local-first",
+            "hybrid": "SQL + NoSQL"
+        },
+        "title": "The Database.\n<italic>Simplified.</italic>",
+        "subtitle": "A <highlight>modern</highlight>, <highlight>fast</highlight>, and <highlight>secure</highlight> database client for developers tired of slow and poorly designed tools.",
+        "cta": {
+            "join_beta": "Join Beta",
+            "view_project": "View Project",
+            "participate": "Participate"
+        },
+        "social_proof": "Join <highlight>100+</highlight> developers waiting for the beta"
+    },
+    "preview": {
+        "eyebrow": "Preview",
+        "title": "An interface built for <accent>developers</accent>",
+        "description": "Dense yet breathable. Serious yet modern.\n<subtext>Exactly what you expect from a professional tool.</subtext>",
+        "browser_bar": "QoreDB — localhost",
+        "badges": {
+            "performance": "Optimized Performance",
+            "keyboard": "Keyboard-first"
+        }
+    },
+    "features": {
+        "eyebrow": "Features",
+        "title": "What QoreDB does <accent>well</accent>",
+        "subtitle": "Designed for developers who want a tool that just works.",
+        "items": {
+            "unified": {
+                "title": "Unified SQL + NoSQL",
+                "desc": "PostgreSQL, MySQL, MongoDB in a single coherent interface."
+            },
+            "vault": {
+                "title": "Secure Vault",
+                "desc": "Credentials encrypted via system keyring + Argon2."
+            },
+            "ssh": {
+                "title": "SSH Tunneling",
+                "desc": "Native support for SSH tunnels for remote databases."
+            },
+            "editor": {
+                "title": "Smart Editor",
+                "desc": "Syntax highlighting, autocompletion, automatic formatting."
+            },
+            "library": {
+                "title": "Query Library",
+                "desc": "Query library with folders, tags, and export."
+            },
+            "envs": {
+                "title": "Environment Protection",
+                "desc": "Distinct Dev/Staging/Prod, mutation blocking in prod."
+            },
+            "grid": {
+                "title": "High Performance Grid",
+                "desc": "High-performance grid with virtualization."
+            },
+            "update": {
+                "title": "Auto-Update",
+                "desc": "Automatic application updates."
+            }
+        },
+        "compatibility": {
+            "eyebrow": "Compatibility",
+            "title": "Supported Databases",
+            "coming_soon": "SQLite, Redis and more coming soon..."
+        }
+    }
+}

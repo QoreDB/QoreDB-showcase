@@ -12,49 +12,18 @@ import {
 	RefreshCw,
 	Lock,
 } from "lucide-react";
+import { useTranslation, Trans } from "react-i18next";
 
-const features = [
-	{
-		icon: Database,
-		title: "SQL + NoSQL unifié",
-		description: "PostgreSQL, MySQL, MongoDB dans une seule interface cohérente.",
-	},
-	{
-		icon: Shield,
-		title: "Vault sécurisé",
-		description: "Credentials chiffrés via keyring système + Argon2.",
-	},
-	{
-		icon: Lock,
-		title: "SSH Tunneling",
-		description: "Support natif des tunnels SSH pour bases distantes.",
-	},
-	{
-		icon: Terminal,
-		title: "Éditeur intelligent",
-		description: "Syntax highlighting, autocomplétion, formatage automatique.",
-	},
-	{
-		icon: FolderOpen,
-		title: "Query Library",
-		description: "Bibliothèque de requêtes avec dossiers, tags et export.",
-	},
-	{
-		icon: Layers,
-		title: "Protection environnements",
-		description: "Dev/Staging/Prod distincts, blocage mutations en prod.",
-	},
-	{
-		icon: Zap,
-		title: "Data Grid performant",
-		description: "Grille haute performance avec virtualisation.",
-	},
-	{
-		icon: RefreshCw,
-		title: "Auto-Update",
-		description: "Mise à jour automatique de l'application.",
-	},
-];
+const featureIcons = {
+	unified: Database,
+	vault: Shield,
+	ssh: Lock,
+	editor: Terminal,
+	library: FolderOpen,
+	envs: Layers,
+	grid: Zap,
+	update: RefreshCw,
+};
 
 const databases = [
 	{ name: "MySQL", image: "/images/databases/mysql.png", color: "#00758F" },
@@ -63,6 +32,15 @@ const databases = [
 ];
 
 export function FeaturesSection() {
+	const { t } = useTranslation();
+
+	const features = (Object.keys(featureIcons) as Array<keyof typeof featureIcons>).map(key => ({
+		key,
+		icon: featureIcons[key],
+		title: t(`features.items.${key}.title`),
+		description: t(`features.items.${key}.desc`),
+	}));
+
 	return (
 		<section id="features" className="relative z-10 py-32 px-6 bg-(--q-bg-0)">
 			<div className="max-w-6xl mx-auto">
@@ -73,22 +51,17 @@ export function FeaturesSection() {
 					transition={{ duration: 0.6 }}
 					viewport={{ once: true }}
 				>
-					{/* Eyebrow */}
 					<span className="inline-block text-(--q-accent) text-sm font-medium tracking-widest uppercase mb-4">
-						Fonctionnalités
+						{t("features.eyebrow")}
 					</span>
 					
 					<h2 className="text-(--q-text-0) text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
-						Ce que QoreDB fait{" "}
-						<span className="relative">
-							<span className="text-(--q-accent)">bien</span>
-							<svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 100 10" preserveAspectRatio="none">
-								<path d="M0 8 Q50 0 100 8" stroke="var(--q-accent)" strokeWidth="2" fill="none" strokeLinecap="round" />
-							</svg>
-						</span>
+						<Trans i18nKey="features.title" components={{ accent: <span className="text-(--q-accent)" />, relative: <span className="relative" />, underline: <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 8 Q50 0 100 8" stroke="var(--q-accent)" strokeWidth="2" fill="none" strokeLinecap="round" /></svg> }} />
 					</h2>
+					
+
 					<p className="text-(--q-text-1) text-lg max-w-2xl mx-auto leading-relaxed">
-						Conçu pour les développeurs qui veulent un outil qui fonctionne, tout simplement.
+						{t("features.subtitle")}
 					</p>
 				</motion.div>
 
@@ -96,7 +69,7 @@ export function FeaturesSection() {
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 					{features.map((feature, index) => (
 						<motion.div
-							key={feature.title}
+							key={feature.key}
 							className="group relative p-6 rounded-2xl bg-(--q-bg-1) border border-(--q-border) hover:border-(--q-accent)/40"
 							initial={{ opacity: 0 }}
 							whileInView={{ opacity: 1 }}
@@ -131,10 +104,10 @@ export function FeaturesSection() {
 				>
 					<div className="text-center mb-12">
 						<span className="inline-block text-(--q-accent) text-sm font-medium tracking-widest uppercase mb-4">
-							Compatibilité
+							{t("features.compatibility.eyebrow")}
 						</span>
 						<h3 className="text-(--q-text-0) text-2xl sm:text-3xl font-bold tracking-tight">
-							Bases de données supportées
+							{t("features.compatibility.title")}
 						</h3>
 					</div>
 					
@@ -171,10 +144,11 @@ export function FeaturesSection() {
 					
 					{/* Coming soon hint */}
 					<p className="text-center mt-8 text-(--q-text-2) text-sm">
-						SQLite, Redis et d&apos;autres à venir...
+						{t("features.compatibility.coming_soon")}
 					</p>
 				</motion.div>
 			</div>
 		</section>
 	);
 }
+
