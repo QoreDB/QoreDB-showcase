@@ -16,9 +16,7 @@ export function HeroBackground() {
 							<radialGradient id="neonPulse1" cx="50%" cy="50%" r="50%">
 								<stop offset="0%" stopColor="rgba(255,255,255,1)" />
 								<stop offset="30%" stopColor="rgba(122,108,255,1)" />{" "}
-								{/* var(--q-accent) approx #7A6CFF */}
 								<stop offset="70%" stopColor="rgba(88,71,255,0.8)" />{" "}
-								{/* var(--q-accent-strong) approx #5847FF */}
 								<stop offset="100%" stopColor="rgba(88,71,255,0)" />
 							</radialGradient>
 							<radialGradient id="neonPulse2" cx="50%" cy="50%" r="50%">
@@ -34,22 +32,12 @@ export function HeroBackground() {
 								<stop offset="75%" stopColor="rgba(88,71,255,0.6)" />
 								<stop offset="100%" stopColor="rgba(88,71,255,0)" />
 							</radialGradient>
-
-							{/* 
-                  TEXT BACKGROUND GRADIENTS
-                  - Kept structural logic but mapped to purple
-              */}
 							<radialGradient id="heroTextBg" cx="30%" cy="50%" r="70%">
 								<stop offset="0%" stopColor="rgba(122,108,255,0.15)" />
 								<stop offset="40%" stopColor="rgba(122,108,255,0.08)" />
 								<stop offset="80%" stopColor="rgba(88,71,255,0.05)" />
 								<stop offset="100%" stopColor="rgba(0,0,0,0)" />
 							</radialGradient>
-
-							{/* 
-                  FILTERS
-                  - Kept identical to original for effects
-              */}
 							<filter id="heroTextBlur" x="-50%" y="-50%" width="200%" height="200%">
 								<feGaussianBlur stdDeviation="12" result="blur" />
 								<feTurbulence baseFrequency="0.7" numOctaves="4" result="noise" />
