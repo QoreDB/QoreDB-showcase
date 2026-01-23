@@ -119,21 +119,6 @@ export function HeroBackground() {
 					}}
 				/>
 
-				{/* Halo accent très subtil en haut à gauche */}
-				<div
-					className="absolute"
-					style={{
-						top: "0%",
-						left: "10%",
-						width: "40%",
-						height: "35%",
-						background:
-							"radial-gradient(ellipse at 50% 50%, rgba(122,108,255,0.06) 0%, transparent 70%)",
-						filter: "blur(50px)",
-						pointerEvents: "none",
-					}}
-				/>
-
 				{/* Ellipses de fond (remplace les SVG ellipses avec feGaussianBlur) */}
 				<div
 					className="absolute"
