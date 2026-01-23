@@ -33,7 +33,7 @@ export function Footer() {
 			{ label: "Twitter", href: "#", external: true },
 		],
 		legal: [
-			{ label: t("footer.privacy"), href: "#" },
+			{ label: t("footer.privacy"), href: "/privacy" },
 			{ label: t("footer.terms"), href: "#" },
 			{ label: t("footer.license"), href: "#" },
 		],
@@ -73,7 +73,7 @@ export function Footer() {
 								<Twitter className="w-5 h-5" />
 							</a>
 							<a
-								href="mailto:contact@qoredb.dev"
+								href="mailto:qoredb@gmail.com"
 								className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
 								aria-label="Email"
 							>

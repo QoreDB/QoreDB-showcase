@@ -281,5 +281,35 @@
                 "answer": "QoreDB is designed as a **long-term project**, not an experiment.\n\nTechnical, product, and open-source choices go in the direction of:\n\n* sustainability,\n* transparency,\n* developer trust."
             }
         }
+    },
+    "privacy_page": {
+        "title": "Privacy Policy",
+        "last_updated": "Last Updated: January 2026",
+        "sections": {
+            "intro": {
+                "title": "Introduction",
+                "content": "At QoreDB, we believe that your data belongs to you. This Privacy Policy explains how we handle your information when you use our database client. Our philosophy is simple: **we want to know as little as possible about your data**."
+            },
+            "data_collection": {
+                "title": "Data Collection",
+                "content": "QoreDB is a **local-first** application. This means that your database connections, queries, and results are processed entirely on your machine. We do not have access to your database credentials, schema, or content. We do not operate a cloud proxy that sits between you and your database."
+            },
+            "local_storage": {
+                "title": "Local Storage",
+                "content": "Configuration data, such as connection profiles and preferences, are stored locally on your device. We use industry-standard encryption to protect sensitive information like passwords. You have full control over this data and can delete it at any time by clearing the application data."
+            },
+            "analytics": {
+                "title": "Analytics and Telemetry",
+                "content": "We may collect anonymous usage data to help us improve the application. This includes info like OS version, app version, and error reports. Participation in this data collection is **completely voluntary** and can be opted out of in the settings. We do not collect any personally identifiable information or database content."
+            },
+            "updates": {
+                "title": "Updates to this Policy",
+                "content": "We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "content": "If you have any questions about this Privacy Policy, please contact us at [qoredb@gmail.com](mailto:qoredb@gmail.com)."
+            }
+        }
     }
 }
