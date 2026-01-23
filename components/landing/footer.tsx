@@ -24,7 +24,11 @@ export function Footer() {
 			{ label: t("footer.guide"), href: "#", external: false },
 		],
 		community: [
-			{ label: "GitHub", href: "https://github.com/raphplt/QoreDB", external: true },
+			{
+				label: "GitHub",
+				href: "https://github.com/raphplt/QoreDB",
+				external: true,
+			},
 			{ label: "Discord", href: "#", external: true },
 			{ label: "Twitter", href: "#", external: true },
 		],
@@ -43,7 +47,7 @@ export function Footer() {
 					{/* Brand column */}
 					<div className="col-span-2 md:col-span-1">
 						<Link href="/" className="flex items-center gap-3 mb-4">
-							<Image src="/icon.png" alt="QoreDB" width={40} height={40} />
+							<Image src="/logo.png" alt="QoreDB" width={40} height={40} />
 							<span className="font-heading text-(--q-text-0) font-bold text-xl">
 								QoreDB
 							</span>

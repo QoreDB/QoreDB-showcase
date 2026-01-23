@@ -133,5 +133,48 @@
     },
     "language_switcher": {
         "toggle": "Toggle language"
+    },
+    "roadmap_page": {
+        "title": "QoreDB Roadmap",
+        "subtitle": "Discover the next steps in QoreDB development.",
+        "now": {
+            "title": "Now — Solid Foundations",
+            "quote": "Make QoreDB reliable, fast, and pleasant for daily use.",
+            "items": {
+                "1": "Continuous improvement of performance and stability",
+                "2": "Reinforced local-first security and privacy",
+                "3": "Smoother user experience on existing workflows",
+                "4": "Clearer error handling and diagnostics",
+                "5": "Documentation and progressive opening to the community"
+            },
+            "goal": "Goal: a tool that developers can use and recommend with confidence."
+        },
+        "soon": {
+            "title": "Soon — Productivity and Clarity",
+            "quote": "Go beyond traditional database clients.",
+            "items": {
+                "1": "More efficient data navigation and exploration",
+                "2": "Better understanding of structures and relationships",
+                "3": "Safer and more intuitive data editing",
+                "4": "Easier data comparison and manipulation",
+                "5": "First bricks of local collaboration"
+            },
+            "goal": "Goal: save developers real time, every day."
+        },
+        "later": {
+            "title": "Later — The QoreDB Vision",
+            "quote": "Rethink how developers interact with their data.",
+            "items": {
+                "1": "Unified SQL & NoSQL experience",
+                "2": "Cross-database relationships and virtual views",
+                "3": "Intelligent assistance and automation",
+                "4": "Extensibility and open-source ecosystem",
+                "5": "Collaboration without imposed cloud dependency"
+            },
+            "goal": "Goal: become the reference tool for modern developers."
+        },
+        "transparency": {
+            "text": "This roadmap reflects the current direction of the project. It is subject to evolve based on community feedback and real-world usage."
+        }
     }
 }

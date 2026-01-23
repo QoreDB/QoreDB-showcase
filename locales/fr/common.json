@@ -133,5 +133,48 @@
   },
   "language_switcher": {
     "toggle": "Changer de langue"
+  },
+  "roadmap_page": {
+    "title": "Roadmap QoreDB",
+    "subtitle": "Découvrez les prochaines étapes du développement de QoreDB.",
+    "now": {
+      "title": "Maintenant — Fondations solides",
+      "quote": "Rendre QoreDB fiable, rapide et agréable pour un usage quotidien.",
+      "items": {
+        "1": "Amélioration continue des performances et de la stabilité",
+        "2": "Sécurité et confidentialité local-first renforcées",
+        "3": "Expérience utilisateur plus fluide sur les workflows existants",
+        "4": "Gestion des erreurs et diagnostics plus clairs",
+        "5": "Documentation et ouverture progressive à la communauté"
+      },
+      "goal": "Objectif : un outil que les développeurs peuvent utiliser et recommander en confiance."
+    },
+    "soon": {
+      "title": "Prochainement — Productivité et clarté",
+      "quote": "Aller au-delà des clients de bases de données traditionnels.",
+      "items": {
+        "1": "Navigation et exploration des données plus efficaces",
+        "2": "Meilleure compréhension des structures et relations",
+        "3": "Édition des données plus sûre et plus intuitive",
+        "4": "Comparaison et manipulation de données facilitées",
+        "5": "Premières briques de collaboration locale"
+      },
+      "goal": "Objectif : faire gagner du temps réel aux développeurs, au quotidien."
+    },
+    "later": {
+      "title": "Plus tard — La vision QoreDB",
+      "quote": "Repenser la manière dont les développeurs interagissent avec leurs données.",
+      "items": {
+        "1": "Expérience unifiée SQL & NoSQL",
+        "2": "Relations et vues virtuelles cross-databases",
+        "3": "Assistance intelligente et automatisation",
+        "4": "Extensibilité et écosystème open-source",
+        "5": "Collaboration sans dépendance à un cloud imposé"
+      },
+      "goal": "Objectif : devenir l’outil de référence des développeurs modernes."
+    },
+    "transparency": {
+      "text": "Cette roadmap reflète la direction actuelle du projet. Elle est amenée à évoluer en fonction des retours de la communauté et des usages réels."
+    }
   }
 }
