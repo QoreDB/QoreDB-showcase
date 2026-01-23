@@ -40,10 +40,8 @@ const THREAD_DATA = [
 	{ id: 24, d: "M130 721 Q290 630 460 580 Q630 530 770 560 Q910 590 1050 500 Q1190 410 1350 380", fade: "threadFade2", pulse: "neonPulse2", strokeWidth: 1.2, opacity: 0.8, r: 2.5, dur: 4.9 },
 ];
 
-// Hook personnalisé pour détecter les préférences de mouvement réduit
 function usePrefersReducedMotion() {
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-		// Initialisation côté serveur : on assume false
 		if (typeof window === 'undefined') return false;
 		return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	});
@@ -121,6 +119,65 @@ export function HeroBackground() {
 					}}
 				/>
 
+				{/* Halo accent très subtil en haut à gauche */}
+				<div
+					className="absolute"
+					style={{
+						top: "0%",
+						left: "10%",
+						width: "40%",
+						height: "35%",
+						background:
+							"radial-gradient(ellipse at 50% 50%, rgba(122,108,255,0.06) 0%, transparent 70%)",
+						filter: "blur(50px)",
+						pointerEvents: "none",
+					}}
+				/>
+
+				{/* Ellipses de fond (remplace les SVG ellipses avec feGaussianBlur) */}
+				<div
+					className="absolute"
+					style={{
+						bottom: "20%",
+						left: "50%",
+						transform: "translateX(-50%)",
+						width: "150%",
+						height: "60%",
+						background:
+							"radial-gradient(ellipse at 50% 80%, rgba(122,108,255,0.12) 0%, rgba(122,108,255,0.06) 30%, rgba(88,71,255,0.03) 50%, transparent 70%)",
+						filter: "blur(40px)",
+						pointerEvents: "none",
+					}}
+				/>
+				<div
+					className="absolute"
+					style={{
+						bottom: "15%",
+						left: "50%",
+						transform: "translateX(-50%)",
+						width: "170%",
+						height: "70%",
+						background:
+							"radial-gradient(ellipse at 50% 75%, rgba(122,108,255,0.08) 0%, rgba(88,71,255,0.04) 35%, transparent 65%)",
+						filter: "blur(50px)",
+						pointerEvents: "none",
+					}}
+				/>
+				<div
+					className="absolute"
+					style={{
+						bottom: "10%",
+						left: "50%",
+						transform: "translateX(-50%)",
+						width: "200%",
+						height: "80%",
+						background:
+							"radial-gradient(ellipse at 50% 70%, rgba(122,108,255,0.05) 0%, rgba(88,71,255,0.02) 40%, transparent 60%)",
+						filter: "blur(60px)",
+						pointerEvents: "none",
+					}}
+				/>
+
 				<div className="absolute inset-0">
 					<svg
 						className="absolute inset-0 w-full h-full"
@@ -154,18 +211,7 @@ export function HeroBackground() {
 								<stop offset="100%" stopColor="rgba(88,71,255,0)" />
 							</radialGradient>
 
-							{/* Background gradient pour les ellipses */}
-							<radialGradient id="heroTextBg" cx="30%" cy="50%" r="70%">
-								<stop offset="0%" stopColor="rgba(122,108,255,0.15)" />
-								<stop offset="40%" stopColor="rgba(122,108,255,0.08)" />
-								<stop offset="80%" stopColor="rgba(88,71,255,0.05)" />
-								<stop offset="100%" stopColor="rgba(0,0,0,0)" />
-							</radialGradient>
 
-							{/* Filtre blur simplifié mais efficace */}
-							<filter id="heroTextBlur" x="-50%" y="-50%" width="200%" height="200%">
-								<feGaussianBlur stdDeviation="15" result="blur" />
-							</filter>
 
 							{/* Thread fades avec meilleure opacité */}
 							<linearGradient id="threadFade1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -210,35 +256,6 @@ export function HeroBackground() {
 						</defs>
 
 						<g>
-							{/* Background ellipses avec meilleur effet */}
-							<ellipse
-								cx="600"
-								cy="350"
-								rx="900"
-								ry="400"
-								fill="url(#heroTextBg)"
-								filter="url(#heroTextBlur)"
-								opacity="0.6"
-							/>
-							<ellipse
-								cx="600"
-								cy="320"
-								rx="1000"
-								ry="450"
-								fill="url(#heroTextBg)"
-								filter="url(#heroTextBlur)"
-								opacity="0.4"
-							/>
-							<ellipse
-								cx="600"
-								cy="300"
-								rx="1200"
-								ry="500"
-								fill="url(#heroTextBg)"
-								filter="url(#heroTextBlur)"
-								opacity="0.2"
-							/>
-
 							{/* Threads avec animations */}
 							{THREAD_DATA.map(
 								({ id, d, fade, pulse, strokeWidth, opacity, r, dur }) => (
