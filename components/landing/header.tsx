@@ -31,7 +31,7 @@ export function Header() {
 			<header className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 sm:px-6 py-4 lg:px-12 backdrop-blur-md bg-transparent transition-all duration-300">
 				<Link
 					href={`/${locale}`}
-					className="flex items-center"
+					className="flex items-center gap-1"
 					onClick={handleLogoClick}
 				>
 					<Image
@@ -39,11 +39,16 @@ export function Header() {
 						alt="QoreDB Logo"
 						width={48}
 						height={48}
-						className="w-6 h-8 sm:w-10 sm:h-10"
+						className="w-6 sm:w-8 dark:hidden"
 					/>
-					<span className="font-heading text-(--q-text-0) font-semibold text-lg">
-						QoreDB
-					</span>
+					<Image
+						src="/logo-white.png"
+						alt="QoreDB Logo"
+						width={48}
+						height={48}
+						className="w-6 sm:w-8 hidden dark:block"
+					/>
+					<span className="text-(--q-text-0) font-semibold text-lg">QoreDB</span>
 				</Link>
 
 				<nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
