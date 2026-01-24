@@ -285,31 +285,55 @@
     },
     "privacy_page": {
         "title": "Privacy Policy",
-        "last_updated": "Last Updated: January 2026",
+        "last_updated": "Last updated: January 24, 2026",
         "sections": {
             "intro": {
-                "title": "Introduction",
-                "content": "At QoreDB, we believe that your data belongs to you. This Privacy Policy explains how we handle your information when you use our database client. Our philosophy is simple: **we want to know as little as possible about your data**."
+                "title": "1. Data Controller",
+                "content": "<p>The data controller is the editor of the <strong>QoreDB</strong> project.</p><p>Complete information regarding the legal entity will be specified as soon as the legal structure is finalized.</p>"
             },
             "data_collection": {
-                "title": "Data Collection",
-                "content": "QoreDB is a **local-first** application. This means that your database connections, queries, and results are processed entirely on your machine. We do not have access to your database credentials, schema, or content. We do not operate a cloud proxy that sits between you and your database."
+                "title": "2. Data Collection",
+                "content": "<p>QoreDB strictly limits the collection of personal data.</p><h3>2.1 Navigation Data (Website)</h3><p>When consulting the site, anonymized technical data may be collected for statistical purposes, including:</p><ul><li>pages visited,</li><li>device type and browser,</li><li>operating system,</li><li>approximate country or geographic area,</li><li>load times and performance.</li></ul><p>This data <strong>does not allow for the personal identification of a user</strong>.</p><p>QoreDB uses <strong>Vercel Analytics</strong>, a privacy-respecting analytics solution:</p><ul><li>no cookies,</li><li>no cross-site tracking,</li><li>no advertising profiling.</li></ul><h3>2.2 Voluntarily Provided Data</h3><p>Certain data may be voluntarily provided by the user, for example:</p><ul><li>during contact,</li><li>during registration for a newsletter,</li><li>during the use of future services requiring authentication.</li></ul><p>Collected data may include:</p><ul><li>email address,</li><li>name or pseudonym,</li><li>message content.</li></ul>"
             },
-            "local_storage": {
-                "title": "Local Storage",
-                "content": "Configuration data, such as connection profiles and preferences, are stored locally on your device. We use industry-standard encryption to protect sensitive information like passwords. You have full control over this data and can delete it at any time by clearing the application data."
+            "purposes": {
+                "title": "3. Purposes of Processing",
+                "content": "<p>Collected data is used solely to:</p><ul><li>ensure the proper functioning of the site and services,</li><li>improve performance and user experience,</li><li>respond to contact requests,</li><li>communicate information related to the QoreDB project.</li></ul><p>No personal data is sold, rented, or ceded to third parties for commercial purposes.</p>"
             },
-            "analytics": {
-                "title": "Analytics and Telemetry",
-                "content": "We may collect anonymous usage data to help us improve the application. This includes info like OS version, app version, and error reports. Participation in this data collection is **completely voluntary** and can be opted out of in the settings. We do not collect any personally identifiable information or database content."
+            "legal_basis": {
+                "title": "4. Legal Basis for Processing",
+                "content": "<p>Personal data processing is based on:</p><ul><li>QoreDB's legitimate interest (anonymous statistics, security),</li><li>the user's explicit consent when required,</li><li>the execution of a request initiated by the user.</li></ul>"
             },
-            "updates": {
-                "title": "Updates to this Policy",
-                "content": "We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page."
+            "cookies": {
+                "title": "5. Cookies and Trackers",
+                "content": "<p>QoreDB <strong>does not use advertising or behavioral tracking cookies</strong>.</p><p>The analytical tools used do not require prior consent in accordance with applicable regulations.</p><p>Should cookies be used in the future, this policy would be updated and a consent mechanism would be implemented.</p>"
+            },
+            "hosting": {
+                "title": "6. Hosting and Sub-processors",
+                "content": "<p>The QoreDB site and services are hosted by providers respecting high standards of security and compliance.</p><p>Data may be processed on servers located in the European Union or in countries offering an adequate level of protection in accordance with the GDPR.</p>"
+            },
+            "security": {
+                "title": "7. Data Security",
+                "content": "<p>QoreDB implements appropriate technical and organizational measures to guarantee the security, integrity, and confidentiality of data, including:</p><ul><li>encryption of communications,</li><li>access control,</li><li>monitoring and limitation of unauthorized access.</li></ul>"
+            },
+            "retention": {
+                "title": "8. Retention Period",
+                "content": "<p>Personal data is retained only for the duration necessary for the purposes for which it was collected.</p><p>Anonymized statistical data may be kept without time limitation.</p>"
+            },
+            "rights": {
+                "title": "9. User Rights",
+                "content": "<p>In accordance with the General Data Protection Regulation (GDPR), users have the following rights:</p><ul><li>right of access,</li><li>right of rectification,</li><li>right to erasure,</li><li>right to restriction of processing,</li><li>right to object,</li><li>right to data portability.</li></ul><p>Any request can be made via the contact means indicated on the site.</p>"
+            },
+            "third_party": {
+                "title": "10. Links to Third-Party Services",
+                "content": "<p>The QoreDB site may contain links to third-party services (e.g., GitHub). QoreDB is not responsible for the privacy policies applied by these services.</p>"
+            },
+            "changes": {
+                "title": "11. Policy Changes",
+                "content": "<p>QoreDB reserves the right to modify this Privacy Policy at any time.</p><p>Users are invited to consult it regularly. The date of the last update is indicated at the top of the page.</p>"
             },
             "contact": {
-                "title": "Contact Us",
-                "content": "If you have any questions about this Privacy Policy, please contact us at [qoredb@gmail.com](mailto:qoredb@gmail.com)."
+                "title": "12. Contact",
+                "content": "<p>For any questions regarding personal data protection, you can contact the QoreDB team via the official channels indicated on the site.</p>"
             }
         }
     },

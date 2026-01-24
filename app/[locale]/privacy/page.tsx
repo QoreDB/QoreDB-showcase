@@ -7,7 +7,20 @@ import { useTranslation } from "react-i18next";
 export default function PrivacyPage() {
   const { t } = useTranslation();
   
-  const sections = ["intro", "data_collection", "local_storage", "analytics", "updates", "contact"];
+  const sections = [
+			"intro",
+			"data_collection",
+			"purposes",
+			"legal_basis",
+			"cookies",
+			"hosting",
+			"security",
+			"retention",
+			"rights",
+			"third_party",
+			"changes",
+			"contact",
+		];
 
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">

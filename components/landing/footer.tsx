@@ -55,11 +55,22 @@ export function Footer() {
 				<div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
 					{/* Brand column */}
 					<div className="col-span-2 md:col-span-1">
-						<Link href="/" className="flex items-center gap-3 mb-4">
-							<Image src="/logo.png" alt="QoreDB" width={40} height={40} />
-							<span className="font-heading text-(--q-text-0) font-bold text-xl">
-								QoreDB
-							</span>
+						<Link href="/" className="flex items-center gap-1 mb-4">
+							<Image
+								src="/logo.png"
+								alt="QoreDB Logo"
+								width={48}
+								height={48}
+								className="w-6 sm:w-8 dark:hidden"
+							/>
+							<Image
+								src="/logo-white.png"
+								alt="QoreDB Logo"
+								width={48}
+								height={48}
+								className="w-6 sm:w-8 hidden dark:block"
+							/>
+							<span className="text-(--q-text-0) font-bold text-xl">QoreDB</span>
 						</Link>
 						<p className="text-(--q-text-2) text-sm leading-relaxed mb-6">
 							{t("footer.description")}
