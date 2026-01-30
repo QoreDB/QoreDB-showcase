@@ -488,6 +488,36 @@
             "content": "QoreDB stores your credentials securely via the system's native keychain and supports SSH tunneling."
         }
     },
+    "links_page": {
+        "title": "All QoreDB links",
+        "subtitle": "Find every official link in one place.",
+        "contact": "Contact",
+        "credits": "Credits",
+        "featured": {
+            "title": "Featured links",
+            "site": {
+                "title": "Website",
+                "description": "The product story in one place."
+            },
+            "github": {
+                "title": "GitHub",
+                "description": "Browse the code, issues, and updates."
+            },
+            "discord": {
+                "title": "Discord",
+                "description": "Join the community and share feedback."
+            },
+            "linkedin": {
+                "title": "LinkedIn",
+                "description": "News, updates, and the team."
+            }
+        },
+        "all_links": "All links",
+        "cta": {
+            "explore": "Explore",
+            "write": "Write us"
+        }
+    },
     "license_page": {
         "title": "Apache License 2.0",
         "last_updated": "Version 2.0, January 2004",

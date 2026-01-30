@@ -488,6 +488,36 @@
       "content": "QoreDB stocke vos identifiants de manière sécurisée via le trousseau natif du système et prend en charge le tunnel SSH."
     }
   },
+  "links_page": {
+    "title": "Tous les liens QoreDB",
+    "subtitle": "Retrouvez tous les liens officiels au même endroit.",
+    "contact": "Contact",
+    "credits": "Crédits",
+    "featured": {
+      "title": "Liens clés",
+      "site": {
+        "title": "Site vitrine",
+        "description": "L’histoire du produit en un seul endroit."
+      },
+      "github": {
+        "title": "GitHub",
+        "description": "Code source, issues et actualités."
+      },
+      "discord": {
+        "title": "Discord",
+        "description": "Rejoindre la communauté et partager vos retours."
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "description": "Actus, sorties produit et équipe."
+      }
+    },
+    "all_links": "Tous les liens",
+    "cta": {
+      "explore": "Explorer",
+      "write": "Écrire"
+    }
+  },
   "license_page": {
     "title": "Apache License 2.0",
     "last_updated": "Version 2.0, January 2004",

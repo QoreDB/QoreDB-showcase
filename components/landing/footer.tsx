@@ -4,49 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Github, ExternalLink, Mail, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-
+import { getFooterLinks } from "@/lib/footer-links";
 
 export function Footer() {
 	const { t } = useTranslation();
 
-	const footerLinks = {
-		product: [
-			{ label: t("footer.features"), href: "/#features" },
-			{ label: t("footer.preview"), href: "/#preview" },
-			{ label: "Roadmap", href: "/roadmap" },
-			{ label: t("footer.changelog"), href: "/changelog" },
-		],
-		resources: [
-			{ label: t("footer.documentation"), href: "#", external: false },
-			{ label: "Blog", href: "/blog" },
-			{ label: "FAQ", href: "/faq" },
-			{ label: t("footer.guide"), href: "/quick-start", external: false },
-		],
-		community: [
-			{
-				label: "GitHub",
-				href: "https://github.com/QoreDB/QoreDB",
-				external: true,
-			},
-			{
-				label: "Discord",
-				href: "https://discord.gg/Yr6P3wuZDt",
-				external: true,
-			},
-			{
-				label: "Linkedin",
-				href: "https://www.linkedin.com/company/qoredb/?viewAsMember=true",
-				external: true,
-			},
-		],
-		legal: [
-			{ label: t("footer.mentions_legales"), href: "/legal" },
-			{ label: t("footer.privacy"), href: "/privacy" },
-			{ label: t("footer.terms"), href: "/terms" },
-			{ label: t("footer.license"), href: "/license" },
-		],
-	};
+	const footerLinks = getFooterLinks(t);
 
 	return (
 		<footer className="relative z-10 border-t border-(--q-border) bg-(--q-bg-0)">
