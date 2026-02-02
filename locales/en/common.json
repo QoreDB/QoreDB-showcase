@@ -138,6 +138,38 @@
     "desc": "Auditable code available on GitHub."
             }
         },
+        "killer": {
+            "sandbox": {
+                "title": "Sandbox Editing + Diff + Migrations",
+                "desc": "Safely edit data locally, visualize changes with cellular diff, and generate reproducible SQL scripts.",
+                "badge": "Git for Data",
+                "list": {
+                    "local": "Local modifications (no direct commit)",
+                    "diff": "Clear list of changes (Insert/Update/Delete)",
+                    "script": "Generate SQL script with pre-conditions"
+                }
+            },
+            "er_diagram": {
+                "title": "Interactive ER Diagram",
+                "desc": "A living schema explorer. Navigate tables and relations visually, zoom, pan, and jump directly to data.",
+                "badge": "Visual",
+                "list": {
+                    "canvas": "Interactive canvas with table clustering",
+                    "nav": "Zoom, pan, and search tables",
+                    "peek": "Hover relations to see details"
+                }
+            },
+            "safety_net": {
+                "title": "Universal Query Safety Net",
+                "desc": "Active error prevention. Detects dangerous queries (DELETE without WHERE) and provides smart alerts.",
+                "badge": "Safety",
+                "list": {
+                    "detect": "Auto-detection of dangerous queries",
+                    "env": "Environment-aware alerts",
+                    "audit": "Local audit log for sensitive operations"
+                }
+            }
+        },
         "compatibility": {
             "eyebrow": "Compatibility",
             "title": "Supported Databases",

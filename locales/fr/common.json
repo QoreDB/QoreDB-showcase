@@ -138,6 +138,38 @@
         "desc": "Code auditable disponible sur GitHub."
       }
     },
+    "killer": {
+      "sandbox": {
+        "title": "Sandbox d’édition + Diff",
+        "desc": "Éditez vos données localement en toute sécurité, visualisez les changements et générez des scripts SQL propres.",
+        "badge": "Git pour la Data",
+        "list": {
+          "local": "Modifications locales (pas de commit direct)",
+          "diff": "Liste claire des changements (Insert/Update/Delete)",
+          "script": "Génération de script SQL avec pré-conditions"
+        }
+      },
+      "er_diagram": {
+        "title": "ER Diagram interactif",
+        "desc": "Un schéma vivant. Naviguez visuellement entre tables et relations, zoomez et accédez directement aux données.",
+        "badge": "Navigation",
+        "list": {
+          "canvas": "Canvas interactif avec clustering visuel",
+          "nav": "Zoom, pan et recherche de tables",
+          "peek": "Survol des relations pour les détails"
+        }
+      },
+      "safety_net": {
+        "title": "Universal Query Safety Net",
+        "desc": "Prévention active des erreurs. Détecte les requêtes dangereuses et vous protège avant l'exécution.",
+        "badge": "Protection",
+        "list": {
+          "detect": "Détection automatique des requêtes dangereuses",
+          "env": "Alertes intelligentes selon l'environnement",
+          "audit": "Journal d'audit local des opérations sensibles"
+        }
+      }
+    },
     "compatibility": {
       "eyebrow": "Compatibilité",
       "title": "Bases de données supportées",

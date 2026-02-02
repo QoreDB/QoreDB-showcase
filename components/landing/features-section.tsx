@@ -10,7 +10,12 @@ import {
 	Layers,
 	Zap,
 	Lock,
+
 	Github,
+	GitBranch,
+	Network,
+	LifeBuoy,
+	Check,
 } from "lucide-react";
 import { useTranslation, Trans } from "react-i18next";
 
@@ -111,6 +116,183 @@ export function FeaturesSection() {
 							</div>
 						</motion.div>
 					))}
+				</div>
+
+				<div className="mt-32 space-y-32">
+					{/* Feature 1: Sandbox */}
+					<motion.div
+						initial={{ opacity: 0, y: 40 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7 }}
+						viewport={{ once: true }}
+						className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
+					>
+						<div className="order-2 lg:order-1 relative group">
+							<div className="absolute -inset-4 bg-linear-to-r from-(--q-accent)/20 to-purple-500/20 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+							<div className="relative h-[300px] sm:h-[400px] rounded-2xl bg-(--q-bg-1) border border-(--q-border) overflow-hidden p-8 flex flex-col justify-center items-center">
+								<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
+								<GitBranch className="w-32 h-32 text-(--q-accent) opacity-80 drop-shadow-[0_0_15px_rgba(var(--q-accent-rgb),0.5)]" />
+								<div className="mt-8 flex gap-4 text-xs font-mono text-(--q-text-2) opacity-60">
+									<div className="bg-(--q-bg-2) px-3 py-1 rounded">UPDATE users...</div>
+									<div className="bg-(--q-bg-2) px-3 py-1 rounded">Diff: +2 / -1</div>
+								</div>
+							</div>
+						</div>
+						<div className="order-1 lg:order-2">
+							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-medium tracking-wide uppercase mb-6">
+								<GitBranch className="w-3 h-3" />
+								{t("features.killer.sandbox.badge")}
+							</div>
+							<h3 className="font-heading text-3xl sm:text-4xl font-bold text-(--q-text-0) mb-6">
+								{t("features.killer.sandbox.title")}
+							</h3>
+							<p className="text-(--q-text-1) text-lg leading-relaxed mb-8">
+								{t("features.killer.sandbox.desc")}
+							</p>
+							<ul className="space-y-4">
+								{[
+									"features.killer.sandbox.list.local",
+									"features.killer.sandbox.list.diff",
+									"features.killer.sandbox.list.script",
+								].map(key => (
+									<li key={key} className="flex items-start gap-3">
+										<div className="mt-1 w-5 h-5 rounded-full bg-(--q-accent)/10 flex items-center justify-center shrink-0">
+											<Check className="w-3 h-3 text-(--q-accent)" />
+										</div>
+										<span className="text-(--q-text-1)">{t(key)}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					</motion.div>
+
+					{/* Feature 2: ER Diagram */}
+					<motion.div
+						initial={{ opacity: 0, y: 40 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7 }}
+						viewport={{ once: true }}
+						className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
+					>
+						<div className="order-1">
+							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium tracking-wide uppercase mb-6">
+								<Network className="w-3 h-3" />
+								{t("features.killer.er_diagram.badge")}
+							</div>
+							<h3 className="font-heading text-3xl sm:text-4xl font-bold text-(--q-text-0) mb-6">
+								{t("features.killer.er_diagram.title")}
+							</h3>
+							<p className="text-(--q-text-1) text-lg leading-relaxed mb-8">
+								{t("features.killer.er_diagram.desc")}
+							</p>
+							<ul className="space-y-4">
+								{[
+									"features.killer.er_diagram.list.canvas",
+									"features.killer.er_diagram.list.nav",
+									"features.killer.er_diagram.list.peek",
+								].map(key => (
+									<li key={key} className="flex items-start gap-3">
+										<div className="mt-1 w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+											<Check className="w-3 h-3 text-blue-500" />
+										</div>
+										<span className="text-(--q-text-1)">{t(key)}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+						<div className="order-2 relative group">
+							<div className="absolute -inset-4 bg-linear-to-l from-blue-500/20 to-cyan-500/20 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+							<div className="relative h-[300px] sm:h-[400px] rounded-2xl bg-(--q-bg-1) border border-(--q-border) overflow-hidden p-8 flex flex-col justify-center items-center">
+								<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),rgba(255,255,255,0))]" />
+								<Network className="w-32 h-32 text-blue-500 opacity-80" />
+								<div className="absolute inset-0 flex items-center justify-center opacity-30">
+									<svg className="w-full h-full" viewBox="0 0 400 400">
+										<path
+											d="M50,200 Q100,100 200,50 T350,200"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+											className="text-white"
+										/>
+										<rect
+											x="180"
+											y="30"
+											width="40"
+											height="40"
+											fill="currentColor"
+											className="text-blue-500"
+										/>
+										<rect
+											x="30"
+											y="180"
+											width="40"
+											height="40"
+											fill="currentColor"
+											className="text-blue-500"
+										/>
+										<rect
+											x="330"
+											y="180"
+											width="40"
+											height="40"
+											fill="currentColor"
+											className="text-blue-500"
+										/>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</motion.div>
+
+					{/* Feature 3: Safety Net */}
+					<motion.div
+						initial={{ opacity: 0, y: 40 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7 }}
+						viewport={{ once: true }}
+						className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
+					>
+						<div className="order-2 lg:order-1 relative group">
+							<div className="absolute -inset-4 bg-linear-to-r from-emerald-500/20 to-teal-500/20 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+							<div className="relative h-[300px] sm:h-[400px] rounded-2xl bg-(--q-bg-1) border border-(--q-border) overflow-hidden p-8 flex flex-col justify-center items-center">
+								<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),rgba(255,255,255,0))]" />
+								<LifeBuoy className="w-32 h-32 text-emerald-500 opacity-80" />
+								<div className="mt-8 bg-black/40 backdrop-blur-md border border-red-500/50 rounded-lg p-4 max-w-[80%]">
+									<div className="flex items-center gap-2 text-red-400 mb-2">
+										<LifeBuoy className="w-4 h-4" />
+										<span className="font-bold text-xs uppercase">Unsafe Query Detected</span>
+									</div>
+									<code className="text-[10px] text-gray-300">DELETE FROM users; -- No WHERE clause</code>
+								</div>
+							</div>
+						</div>
+						<div className="order-1 lg:order-2">
+							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-medium tracking-wide uppercase mb-6">
+								<LifeBuoy className="w-3 h-3" />
+								{t("features.killer.safety_net.badge")}
+							</div>
+							<h3 className="font-heading text-3xl sm:text-4xl font-bold text-(--q-text-0) mb-6">
+								{t("features.killer.safety_net.title")}
+							</h3>
+							<p className="text-(--q-text-1) text-lg leading-relaxed mb-8">
+								{t("features.killer.safety_net.desc")}
+							</p>
+							<ul className="space-y-4">
+								{[
+									"features.killer.safety_net.list.detect",
+									"features.killer.safety_net.list.env",
+									"features.killer.safety_net.list.audit",
+								].map(key => (
+									<li key={key} className="flex items-start gap-3">
+										<div className="mt-1 w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
+											<Check className="w-3 h-3 text-emerald-500" />
+										</div>
+										<span className="text-(--q-text-1)">{t(key)}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					</motion.div>
 				</div>
 
 				<motion.div
