@@ -4,6 +4,7 @@ import { ArticleCard } from "../../../components/blog/ArticleCard";
 import { Metadata } from "next";
 import { Header } from "@/components/landing/header";
 import { Footer } from "@/components/landing/footer";
+import { PostDocument } from "@/types/posts";
 
 export const metadata: Metadata = {
 	title: "Blog - QoreDB",
@@ -11,7 +12,12 @@ export const metadata: Metadata = {
 		"Articles, updates and technical deep dives from the QoreDB team.",
 };
 
-export default async function BlogIndexPage() {
+export default async function BlogIndexPage({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
 	const posts = await client.fetch(POSTS_QUERY);
 
 	return (
@@ -28,12 +34,12 @@ export default async function BlogIndexPage() {
 
 				<div className="flex flex-wrap justify-center gap-8">
 					{posts.length > 0 ? (
-						posts.map((post: any) => (
+						posts.map((post: PostDocument) => (
 							<div
 								key={post._id}
 								className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]"
 							>
-								<ArticleCard post={post} />
+								<ArticleCard post={post} locale={locale} />
 							</div>
 						))
 					) : (

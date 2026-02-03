@@ -100,6 +100,14 @@
             }
         }
     },
+    "blog_section": {
+        "eyebrow": "Blog",
+        "title": "Latest articles",
+        "subtitle": "Insights, tutorials, and news about QoreDB and modern development.",
+        "cta": "View all articles",
+        "loading": "Loading the latest articles...",
+        "empty": "No articles yet."
+    },
     "features": {
         "eyebrow": "Features",
         "title": "What QoreDB does <accent>well</accent>",
