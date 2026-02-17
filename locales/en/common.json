@@ -2,6 +2,7 @@
     "nav": {
         "features": "Features",
         "preview": "Preview",
+        "pricing": "Pricing",
         "blog": "Blog",
         "roadmap": "Roadmap",
         "faq": "FAQ",
@@ -41,6 +42,7 @@
         "product": "Product",
         "features": "Features",
         "preview": "Preview",
+        "pricing": "Pricing",
         "changelog": "Changelog",
         "resources": "Resources",
         "documentation": "Documentation",
@@ -64,6 +66,8 @@
         "subtitle": "A <highlight>modern</highlight>, <highlight>fast</highlight>, and <highlight>secure</highlight> database client for developers tired of slow and poorly designed tools.",
         "cta": {
             "join_beta": "Join Beta",
+            "download_core": "Download Core (Free)",
+            "discover_pro": "Discover Pro",
             "view_project": "View Project",
             "participate": "Participate"
         },
@@ -182,14 +186,17 @@
             "eyebrow": "Compatibility",
             "title": "Supported Databases",
             "coming_soon": "SQLite, Redis and more coming soon..."
-        }
+        },
+        "pro_badge": "Pro",
+        "visual_diff_badge": "Visual Diff"
     },
     "cta": {
-        "badge": "Beta is available!",
-        "title_pre": "Try QoreDB ",
-        "title_highlight": "today",
-        "description": "Download the beta version for your OS. For any questions or partnership inquiries, feel free to contact us below.",
-        "download_button": "Download Beta",
+        "badge": "Core is free forever",
+        "title_pre": "Start using QoreDB ",
+        "title_highlight": "for free",
+        "description": "Download QoreDB Core for free. Upgrade to Pro when you need advanced workflows.",
+        "download_button": "Download Core",
+        "pricing_button": "See Pro plans",
         "contact_title": "Contact Us",
         "form": {
             "name": "Name",
@@ -370,6 +377,142 @@
                 "answer": "QoreDB is designed as a **long-term project**, not an experiment.\n\nTechnical, product, and open-source choices go in the direction of:\n\n* sustainability,\n* transparency,\n* developer trust."
             }
         }
+    },
+    "pricing_page": {
+        "badge": "Open Core",
+        "title": "Choose the plan that fits your workflow",
+        "subtitle": "Core remains complete and free. Pro adds advanced capabilities when you need them.",
+        "billing_note": "Perpetual license, one-time payment for Pro",
+        "checkout_error": "Unable to start Stripe Checkout right now.",
+        "faq_title": "Frequently asked questions",
+        "core": {
+            "title": "Core",
+            "description": "The complete open-source foundation of QoreDB.",
+            "price": "Free",
+            "badge": "Main choice",
+            "cta": "Download for free",
+            "features": {
+                "drivers": "All drivers (PostgreSQL, MySQL, MongoDB, SQLite, Redis)",
+                "crud": "Full CRUD + SQL/Mongo editor",
+                "grid": "High-performance data grid (virtual scrolling)",
+                "history": "Query history and favorites",
+                "vault": "Encrypted credential vault (Argon2)",
+                "ssh": "Native SSH tunneling",
+                "safety": "Production safety rules (env labels, read-only mode)",
+                "audit_basic": "Basic audit log (50 entries)",
+                "export_basic": "CSV / JSON / SQL export",
+                "themes": "Light and dark themes",
+                "i18n": "Multi-language (FR/EN)",
+                "shortcuts": "Keyboard shortcuts",
+                "license": "100% open source, Apache 2.0"
+            }
+        },
+        "pro": {
+            "title": "Pro",
+            "description": "The natural upgrade for demanding developers.",
+            "price": "XX€",
+            "badge": "One-time payment",
+            "cta": "Buy QoreDB Pro",
+            "features": {
+                "everything_core": "Everything in Core",
+                "sandbox": "Sandbox mode with migration generation",
+                "visual_diff": "Visual Data Diff (table comparison)",
+                "er_diagram": "Interactive ER diagram",
+                "audit_advanced": "Advanced audit log (unlimited, filterable, exportable)",
+                "profiling": "Query profiling and performance analysis",
+                "ai": "AI assistant (BYOK — OpenAI / Anthropic / Ollama)",
+                "export_advanced": "Advanced exports (XLSX, Parquet)",
+                "security_rules": "Custom safety rules",
+                "library_advanced": "Advanced query library",
+                "virtual_relations": "Auto-suggest virtual relations",
+                "offline_license": "100% offline license verification (Ed25519)"
+            }
+        },
+        "team": {
+            "title": "Team",
+            "description": "Advanced collaboration for teams.",
+            "price": "Coming soon",
+            "badge": "Coming Soon",
+            "cta": "Contact us",
+            "features": {
+                "everything_pro": "Everything in Pro",
+                "sync": "Multi-device sync",
+                "shared_queries": "Shared query libraries",
+                "permissions": "Granular permissions",
+                "managed_ai": "Managed AI"
+            }
+        },
+        "faq": {
+            "open_core_why": {
+                "question": "Why an Open Core model?",
+                "answer": "To make the solo project sustainable long term. Core stays free forever. Pro funds continuous development."
+            },
+            "data_sent": {
+                "question": "Is any of my data sent somewhere?",
+                "answer": "No. QoreDB is 100% local-first. Your data never leaves your machine. Even AI runs with your own API keys."
+            },
+            "stop_paying": {
+                "question": "What happens if I stop paying?",
+                "answer": "Pro is a perpetual license (one-time payment). You keep unlocked features. Only future major upgrades may require a paid upgrade."
+            },
+            "try_pro": {
+                "question": "Can I try Pro features first?",
+                "answer": "Core includes a limited preview of selected Pro features (for example: 3 free Sandbox changes) so you can evaluate before buying."
+            },
+            "pro_source_code": {
+                "question": "Is Pro source code available?",
+                "answer": "Pro features are under BSL 1.1 and automatically convert to Apache 2.0 after 4 years. Code is readable but redistribution is restricted during that period."
+            }
+        }
+    },
+    "license_management": {
+        "title": "License Management",
+        "subtitle": "Check your QoreDB Pro license status and resend your key by email.",
+        "fields": {
+            "email": "Email",
+            "payment_id": "Stripe payment ID"
+        },
+        "actions": {
+            "loading": "Loading..."
+        },
+        "status": {
+            "title": "Check license status",
+            "description": "Enter your purchase email and payment ID to verify if the license is active.",
+            "cta": "Check my license",
+            "result": "Status",
+            "not_found": "No purchase found",
+            "license_found": "A license key is attached to this payment."
+        },
+        "resend": {
+            "title": "Resend key by email",
+            "description": "Enter your purchase email to receive your license key again.",
+            "cta": "Resend key",
+            "success": "Email sent. Please check your inbox."
+        },
+        "errors": {
+            "status": "Unable to verify license status.",
+            "resend": "Unable to resend the key right now.",
+            "not_found": "No purchase found for this email."
+        }
+    },
+    "purchase_success": {
+        "title": "Payment confirmed",
+        "subtitle": "Your QoreDB Pro license is ready. We also sent your key by email.",
+        "license_label": "License key",
+        "pending_license": "Your key is not available yet. Please wait a few seconds and refresh this page.",
+        "session_error": "Unable to retrieve this Stripe session.",
+        "activation_title": "Activation",
+        "steps": {
+            "1": "Open QoreDB",
+            "2": "Go to Settings",
+            "3": "Open License",
+            "4": "Paste the key",
+            "5": "Activate"
+        },
+        "download_cta": "Download QoreDB",
+        "home_cta": "Back to homepage",
+        "copy": "Copy key",
+        "copied": "Copied"
     },
     "privacy_page": {
         "title": "Privacy Policy",

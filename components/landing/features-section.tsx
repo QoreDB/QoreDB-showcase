@@ -139,9 +139,17 @@ export function FeaturesSection() {
 							</div>
 						</div>
 						<div className="order-1 lg:order-2">
-							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-medium tracking-wide uppercase mb-6">
-								<GitBranch className="w-3 h-3" />
-								{t("features.killer.sandbox.badge")}
+							<div className="flex flex-wrap items-center gap-2 mb-6">
+								<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-medium tracking-wide uppercase">
+									<GitBranch className="w-3 h-3" />
+									{t("features.killer.sandbox.badge")}
+								</div>
+								<span className="inline-flex rounded-full bg-[#6B5CFF]/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#6B5CFF]">
+									{t("features.pro_badge")}
+								</span>
+								<span className="inline-flex rounded-full bg-[#6B5CFF]/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#6B5CFF]">
+									{t("features.visual_diff_badge")}
+								</span>
 							</div>
 							<h3 className="font-heading text-3xl sm:text-4xl font-bold text-(--q-text-0) mb-6">
 								{t("features.killer.sandbox.title")}
@@ -175,9 +183,14 @@ export function FeaturesSection() {
 						className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
 					>
 						<div className="order-1">
-							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium tracking-wide uppercase mb-6">
-								<Network className="w-3 h-3" />
-								{t("features.killer.er_diagram.badge")}
+							<div className="flex flex-wrap items-center gap-2 mb-6">
+								<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium tracking-wide uppercase">
+									<Network className="w-3 h-3" />
+									{t("features.killer.er_diagram.badge")}
+								</div>
+								<span className="inline-flex rounded-full bg-[#6B5CFF]/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#6B5CFF]">
+									{t("features.pro_badge")}
+								</span>
 							</div>
 							<h3 className="font-heading text-3xl sm:text-4xl font-bold text-(--q-text-0) mb-6">
 								{t("features.killer.er_diagram.title")}

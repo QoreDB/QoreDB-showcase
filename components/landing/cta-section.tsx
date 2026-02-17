@@ -14,11 +14,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { sendEmail } from "@/actions/send-email";
 import { contactSchema, ContactFormData } from "@/lib/schemas";
 
 export function CTASection() {
 	const { t } = useTranslation();
+	const params = useParams();
+	const locale = (params.locale as string) || "fr";
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [isSuccess, setIsSuccess] = useState(false);
 
@@ -45,7 +48,7 @@ export function CTASection() {
 	};
 
 	return (
-		<section className="py-24 lg:py-32 px-4 relative overflow-hidde">
+		<section id="contact" className="py-24 lg:py-32 px-4 relative overflow-hidde">
 			<div className="absolute inset-0 bg-linear-to-b from-transparent via-(--q-accent)/5 to-transparent opacity-20 pointer-events-none" />
 			<div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-(--q-accent)/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -80,11 +83,18 @@ export function CTASection() {
 
 						<div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
 							<Link
-								href="/download"
+								href={`/${locale}/download`}
 								className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-(--q-foreground) text-(--q-bg) font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:shadow-(--q-accent)/10 hover:-translate-y-0.5 overflow-hidden"
 							>
 								<div className="absolute inset-0 bg-(--q-accent) opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
 								<span>{t("cta.download_button")}</span>
+								<ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+							</Link>
+							<Link
+								href={`/${locale}/pricing`}
+								className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-(--q-border) bg-(--q-bg-0) text-(--q-text-0) font-semibold text-lg transition-all duration-300 hover:border-(--q-accent)/40 hover:-translate-y-0.5 overflow-hidden"
+							>
+								<span>{t("cta.pricing_button")}</span>
 								<ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
 							</Link>
 						</div>

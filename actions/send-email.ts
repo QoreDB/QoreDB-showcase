@@ -3,8 +3,6 @@
 import { Resend } from "resend";
 import { contactSchema, ContactFormData } from "@/lib/schemas";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function sendEmail(data: ContactFormData) {
 	const result = contactSchema.safeParse(data);
 
@@ -19,6 +17,13 @@ export async function sendEmail(data: ContactFormData) {
 		console.log("Honeypot filled, blocking spam.");
 		return { success: true };
 	}
+
+	const apiKey = process.env.RESEND_API_KEY;
+	if (!apiKey) {
+		return { success: false, error: "Email service is not configured." };
+	}
+
+	const resend = new Resend(apiKey);
 
 	try {
 		const { error } = await resend.emails.send({

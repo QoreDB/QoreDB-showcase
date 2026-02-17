@@ -1,37 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Sparkles, Download } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LineShadowText } from "@/components/line-shadow-text";
 import { useTranslation, Trans } from "react-i18next";
-import { useRouter } from "next/navigation";
-import { useDownload } from "@/contexts/DownloadProvider";
-import { AppleIcon, WindowsIcon, LinuxIcon } from "@/components/icons/os-icons";
+import { useParams, useRouter } from "next/navigation";
 
 export function Hero() {
 	const { t } = useTranslation();
 	const router = useRouter();
-	const { os, getOsDisplayName, getDownloadLink, loading, release } =
-		useDownload();
-
-	const getOsIcon = () => {
-		switch (os) {
-			case "mac":
-				return <AppleIcon className="relative z-10 w-5 h-5" />;
-			case "windows":
-				return <WindowsIcon className="relative z-10 w-5 h-5" />;
-			case "linux":
-				return <LinuxIcon className="relative z-10 w-5 h-5" />;
-			default:
-				return <Download className="relative z-10 w-5 h-5" />;
-		}
-	};
-
-	const downloadLink = getDownloadLink(os);
-	const showDirectDownload =
-		!loading && release && downloadLink && os !== "unknown";
+	const params = useParams();
+	const locale = (params.locale as string) || "fr";
 
 	return (
 		<main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-12 pt-32 pb-20 overflow-hidden w-full">
@@ -104,13 +85,7 @@ export function Hero() {
 				<motion.button
 					whileHover={{ scale: 1.05, y: -2 }}
 					whileTap={{ scale: 0.98 }}
-					onClick={() => {
-						if (showDirectDownload && downloadLink) {
-							window.location.href = downloadLink;
-						} else {
-							router.push("/download");
-						}
-					}}
+					onClick={() => router.push(`/${locale}/download`)}
 					className="group relative flex items-center justify-center gap-3 px-8 py-3 rounded-xl
 							bg-linear-to-br from-(--q-accent) to-(--q-accent-strong)
 							text-white font-bold text-lg
@@ -127,34 +102,18 @@ export function Hero() {
 					/>
 					<div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 					<div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/30 to-transparent" />
-
-					{showDirectDownload ? (
-						<>
-							{getOsIcon()}
-							<span className="relative z-10">
-								{t("download.download_for", "Download for {{platform}}").replace(
-									"{{platform}}",
-									getOsDisplayName(os),
-								)}
-							</span>
-						</>
-					) : (
-						<>
-							<span className="relative z-10">{t("nav.join_beta")}</span>
-							<ArrowRight className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-						</>
-					)}
+					<span className="relative z-10">{t("hero.cta.download_core")}</span>
+					<ArrowRight className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
 				</motion.button>
 				<Button
 					variant="outline"
 					size="lg"
-					onClick={() => window.open("https://github.com/QoreDB/QoreDB", "_blank")}
+					onClick={() => router.push(`/${locale}/pricing`)}
 					className="group border-2 border-(--q-border) hover:border-(--q-text-2) bg-(--q-bg-0)/50 backdrop-blur-sm
 						text-(--q-text-0) px-8 py-6 rounded-xl text-base font-medium 
 						flex items-center gap-3 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
 				>
-					<Github className="w-5 h-5" />
-					{t("hero.cta.view_project")}
+					{t("hero.cta.discover_pro")}
 				</Button>
 			</motion.div>
 

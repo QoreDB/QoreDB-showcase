@@ -64,6 +64,12 @@ export function Header() {
 					{t("nav.preview")}
 				</Link>
 				<Link
+					href={`/${locale}/pricing`}
+					className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm"
+				>
+					{t("nav.pricing")}
+				</Link>
+				<Link
 					href={`/${locale}/blog`}
 					className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm"
 				>
@@ -133,6 +139,13 @@ export function Header() {
 							onClick={() => setMobileMenuOpen(false)}
 						>
 							{t("nav.preview")}
+						</Link>
+						<Link
+							href={`/${locale}/pricing`}
+							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
+							onClick={() => setMobileMenuOpen(false)}
+						>
+							{t("nav.pricing")}
 						</Link>
 						<Link
 							href={`/${locale}/blog`}

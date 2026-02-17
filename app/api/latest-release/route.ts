@@ -16,7 +16,6 @@ export async function GET() {
 		}
 
 		const data = await response.json();
-		console.log("GitHub API Data:", JSON.stringify(data).substring(0, 200)); // Log part of data
 		return NextResponse.json(data);
 	} catch (error) {
 		console.error("Failed to fetch latest release:", error);

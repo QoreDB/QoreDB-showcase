@@ -10,6 +10,7 @@ export const getFooterLinks = (t: Translate) => ({
 	product: [
 		{ label: t("footer.features"), href: "/#features" },
 		{ label: t("footer.preview"), href: "/#preview" },
+		{ label: t("footer.pricing"), href: "/pricing" },
 		{ label: "Roadmap", href: "/roadmap" },
 		{ label: t("footer.changelog"), href: "/changelog" },
 	],
