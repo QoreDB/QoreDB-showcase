@@ -5,7 +5,11 @@ import { CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/landing/header";
 import { Footer } from "@/components/landing/footer";
 import { CopyLicenseButton } from "@/components/license/copy-license-button";
-import { getStripeClient, readLicenseFromPaymentIntent } from "@/lib/stripe/server";
+import {
+	getStripeClient,
+	readLicenseFromCheckoutSession,
+	readLicenseFromPaymentIntent,
+} from "@/lib/stripe/server";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 
 type PageProps = {
@@ -28,6 +32,15 @@ async function readPaymentIntent(
 	return stripe.paymentIntents.retrieve(session.payment_intent);
 }
 
+async function readLicenseKey(session: Stripe.Checkout.Session) {
+	const paymentIntent = await readPaymentIntent(session);
+	if (paymentIntent) {
+		return readLicenseFromPaymentIntent(paymentIntent);
+	}
+
+	return readLicenseFromCheckoutSession(session);
+}
+
 export default async function PurchaseSuccessPage({
 	params,
 	searchParams,
@@ -36,7 +49,7 @@ export default async function PurchaseSuccessPage({
 	const { t } = await getTranslation(locale, "common");
 	const { session_id: sessionId } = await searchParams;
 
-	let paymentIntent: Stripe.PaymentIntent | null = null;
+	let licenseKey: string | null = null;
 	let error: string | null = null;
 
 	if (sessionId) {
@@ -45,14 +58,12 @@ export default async function PurchaseSuccessPage({
 			const session = await stripe.checkout.sessions.retrieve(sessionId, {
 				expand: ["payment_intent"],
 			});
-			paymentIntent = await readPaymentIntent(session);
+			licenseKey = await readLicenseKey(session);
 		} catch (caught) {
 			error = t("purchase_success.session_error");
 			console.error("Failed to load Stripe session", caught);
 		}
 	}
-
-	const licenseKey = paymentIntent ? readLicenseFromPaymentIntent(paymentIntent) : null;
 
 	return (
 		<div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">

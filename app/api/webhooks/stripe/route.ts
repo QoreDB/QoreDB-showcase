@@ -15,6 +15,55 @@ export const runtime = "nodejs";
 const LICENSE_SENT_AT_METADATA_KEY = "qoredb_license_sent_at";
 const LICENSE_EMAIL_LAST_ERROR_METADATA_KEY = "qoredb_license_email_last_error";
 
+type LicenseStorage =
+	| {
+			type: "payment_intent";
+			id: string;
+			metadata: Stripe.Metadata;
+	  }
+	| {
+			type: "checkout_session";
+			id: string;
+			metadata: Stripe.Metadata;
+	  };
+
+async function resolveLicenseStorage(
+	stripe: Stripe,
+	session: Stripe.Checkout.Session,
+): Promise<LicenseStorage> {
+	if (session.payment_intent) {
+		const paymentIntent =
+			typeof session.payment_intent === "string"
+				? await stripe.paymentIntents.retrieve(session.payment_intent)
+				: session.payment_intent;
+
+		return {
+			type: "payment_intent",
+			id: paymentIntent.id,
+			metadata: paymentIntent.metadata ?? {},
+		};
+	}
+
+	return {
+		type: "checkout_session",
+		id: session.id,
+		metadata: session.metadata ?? {},
+	};
+}
+
+async function updateLicenseStorage(
+	stripe: Stripe,
+	storage: LicenseStorage,
+	metadata: Stripe.MetadataParam,
+) {
+	if (storage.type === "payment_intent") {
+		await stripe.paymentIntents.update(storage.id, { metadata });
+		return;
+	}
+
+	await stripe.checkout.sessions.update(storage.id, { metadata });
+}
+
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 	if (session.payment_status !== "paid") {
 		console.info("checkout.session.completed received but payment not paid", {
@@ -24,10 +73,6 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 		return;
 	}
 
-	if (typeof session.payment_intent !== "string") {
-		throw new Error("Missing payment_intent on checkout session");
-	}
-
 	const email = session.customer_details?.email ?? session.customer_email;
 	if (!email) {
 		throw new Error("Missing customer email on checkout session");
@@ -35,24 +80,23 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
 	const normalizedEmail = normalizeEmail(email);
 	const stripe = getStripeClient();
-	const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
-	const existingLicense = paymentIntent.metadata?.[LICENSE_METADATA_KEY];
-	const alreadySentAt = paymentIntent.metadata?.[LICENSE_SENT_AT_METADATA_KEY];
+	const storage = await resolveLicenseStorage(stripe, session);
+	let metadata = storage.metadata;
+	const existingLicense = metadata[LICENSE_METADATA_KEY];
+	const alreadySentAt = metadata[LICENSE_SENT_AT_METADATA_KEY];
 	const licenseKey =
 		existingLicense ??
 		(await generateLicenseKey({
 			email: normalizedEmail,
-			paymentId: paymentIntent.id,
+			paymentId: storage.id,
 		}));
-
-	await stripe.paymentIntents.update(paymentIntent.id, {
-		metadata: {
-			...paymentIntent.metadata,
-			[LICENSE_METADATA_KEY]: licenseKey,
-			[LICENSE_EMAIL_METADATA_KEY]: normalizedEmail,
-			[LICENSE_STATUS_METADATA_KEY]: "active",
-		},
-	});
+	metadata = {
+		...metadata,
+		[LICENSE_METADATA_KEY]: licenseKey,
+		[LICENSE_EMAIL_METADATA_KEY]: normalizedEmail,
+		[LICENSE_STATUS_METADATA_KEY]: "active",
+	};
+	await updateLicenseStorage(stripe, storage, metadata);
 
 	if (!alreadySentAt) {
 		try {
@@ -60,37 +104,30 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 				console.warn("RESEND_API_KEY is missing, skip license email send");
 			} else {
 				await sendLicenseEmail({ email: normalizedEmail, licenseKey });
-				await stripe.paymentIntents.update(paymentIntent.id, {
-					metadata: {
-						...paymentIntent.metadata,
-						[LICENSE_METADATA_KEY]: licenseKey,
-						[LICENSE_EMAIL_METADATA_KEY]: normalizedEmail,
-						[LICENSE_STATUS_METADATA_KEY]: "active",
-						[LICENSE_SENT_AT_METADATA_KEY]: new Date().toISOString(),
-						[LICENSE_EMAIL_LAST_ERROR_METADATA_KEY]: "",
-					},
-				});
+				metadata = {
+					...metadata,
+					[LICENSE_SENT_AT_METADATA_KEY]: new Date().toISOString(),
+					[LICENSE_EMAIL_LAST_ERROR_METADATA_KEY]: "",
+				};
+				await updateLicenseStorage(stripe, storage, metadata);
 			}
 		} catch (error) {
 			const reason = error instanceof Error ? error.message : "unknown email error";
 			console.error("License email send failed, license remains generated", {
-				paymentIntentId: paymentIntent.id,
+				paymentReferenceId: storage.id,
 				reason,
 			});
-			await stripe.paymentIntents.update(paymentIntent.id, {
-				metadata: {
-					...paymentIntent.metadata,
-					[LICENSE_METADATA_KEY]: licenseKey,
-					[LICENSE_EMAIL_METADATA_KEY]: normalizedEmail,
-					[LICENSE_STATUS_METADATA_KEY]: "active",
-					[LICENSE_EMAIL_LAST_ERROR_METADATA_KEY]: reason.slice(0, 400),
-				},
-			});
+			metadata = {
+				...metadata,
+				[LICENSE_EMAIL_LAST_ERROR_METADATA_KEY]: reason.slice(0, 400),
+			};
+			await updateLicenseStorage(stripe, storage, metadata);
 		}
 	}
 	console.info("License delivered", {
 		sessionId: session.id,
-		paymentIntentId: paymentIntent.id,
+		paymentReferenceId: storage.id,
+		paymentReferenceType: storage.type,
 		email: normalizedEmail,
 	});
 }

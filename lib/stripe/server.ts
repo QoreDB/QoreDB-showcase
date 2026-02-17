@@ -63,6 +63,10 @@ export function readPaymentIntentEmail(paymentIntent: Stripe.PaymentIntent) {
 export const readLicenseFromPaymentIntent = (paymentIntent: Stripe.PaymentIntent) =>
 	paymentIntent.metadata?.[LICENSE_METADATA_KEY] ?? null;
 
+export const readLicenseFromCheckoutSession = (
+	session: Stripe.Checkout.Session,
+) => session.metadata?.[LICENSE_METADATA_KEY] ?? null;
+
 const escapeForSearch = (value: string) => value.replace(/'/g, "\\'");
 
 export async function findLatestPaymentIntentByEmail(email: string) {
