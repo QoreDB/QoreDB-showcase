@@ -141,7 +141,7 @@ export function Header() {
 							{t("nav.preview")}
 						</Link>
 						<Link
-							href={`/${locale}/pricing`}
+							href={`/${locale}/#pricing`}
 							className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
 							onClick={() => setMobileMenuOpen(false)}
 						>

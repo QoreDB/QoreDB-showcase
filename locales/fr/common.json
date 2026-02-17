@@ -395,16 +395,14 @@
         "drivers": "Tous les drivers (PostgreSQL, MySQL, MongoDB, SQLite, Redis)",
         "crud": "CRUD complet + éditeur SQL/Mongo",
         "grid": "Grille de données haute performance (scroll virtuel)",
+        "er_diagram": "Diagramme ER interactif",
         "history": "Historique et favoris de requêtes",
         "vault": "Vault chiffré (Argon2) pour les credentials",
         "ssh": "Tunneling SSH natif",
         "safety": "Règles de sécurité production (labels environnement, mode read-only)",
         "audit_basic": "Audit log basique (50 entrées)",
         "export_basic": "Export CSV / JSON / SQL",
-        "themes": "Thèmes clair/sombre",
-        "i18n": "Multi-langue (FR/EN)",
-        "shortcuts": "Raccourcis clavier",
-        "license": "100% open source, Apache 2.0"
+        "shortcuts": "Raccourcis clavier"
       }
     },
     "pro": {
@@ -417,15 +415,13 @@
         "everything_core": "Tout ce qui est dans Core",
         "sandbox": "Mode Sandbox avec génération de migrations",
         "visual_diff": "Visual Data Diff (comparaison de tables)",
-        "er_diagram": "Diagramme ER interactif",
         "audit_advanced": "Audit log avancé (illimité, filtrable, exportable)",
         "profiling": "Profilage de requêtes (performance)",
         "ai": "Assistant IA (BYOK — OpenAI / Anthropic / Ollama)",
         "export_advanced": "Export avancé (XLSX, Parquet)",
         "security_rules": "Règles de sécurité personnalisées",
         "library_advanced": "Bibliothèque de requêtes avancée",
-        "virtual_relations": "Relations virtuelles auto-suggest",
-        "offline_license": "Vérification de licence 100% offline (Ed25519)"
+        "virtual_relations": "Relations virtuelles auto-suggest"
       }
     },
     "team": {

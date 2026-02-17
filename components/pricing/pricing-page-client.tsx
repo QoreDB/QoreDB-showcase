@@ -140,23 +140,20 @@ export default function PricingPageClient({
 		"drivers",
 		"crud",
 		"grid",
+		"er_diagram",
 		"history",
 		"vault",
 		"ssh",
 		"safety",
 		"audit_basic",
 		"export_basic",
-		"themes",
-		"i18n",
 		"shortcuts",
-		"license",
 	].map((key) => t(`pricing_page.core.features.${key}`));
 
 	const proFeatures = [
 		"everything_core",
 		"sandbox",
 		"visual_diff",
-		"er_diagram",
 		"audit_advanced",
 		"profiling",
 		"ai",
@@ -164,7 +161,6 @@ export default function PricingPageClient({
 		"security_rules",
 		"library_advanced",
 		"virtual_relations",
-		"offline_license",
 	].map((key) => t(`pricing_page.pro.features.${key}`));
 
 	const teamFeatures = [

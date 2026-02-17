@@ -48,7 +48,8 @@ export function CTASection() {
 	};
 
 	return (
-		<section id="contact" className="py-24 lg:py-32 px-4 relative overflow-hidde">
+		<section id="pricing" className="py-24 lg:py-32 px-4 relative overflow-hidde">
+			<div id="contact" className="absolute -top-24" aria-hidden />
 			<div className="absolute inset-0 bg-linear-to-b from-transparent via-(--q-accent)/5 to-transparent opacity-20 pointer-events-none" />
 			<div className="absolute top-1/2 right-0 -translate-y-1/2 w-[800px] h-[800px] bg-(--q-accent)/5 rounded-full blur-[120px] pointer-events-none" />
 

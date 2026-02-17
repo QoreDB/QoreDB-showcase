@@ -188,9 +188,6 @@ export function FeaturesSection() {
 									<Network className="w-3 h-3" />
 									{t("features.killer.er_diagram.badge")}
 								</div>
-								<span className="inline-flex rounded-full bg-[#6B5CFF]/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#6B5CFF]">
-									{t("features.pro_badge")}
-								</span>
 							</div>
 							<h3 className="font-heading text-3xl sm:text-4xl font-bold text-(--q-text-0) mb-6">
 								{t("features.killer.er_diagram.title")}
