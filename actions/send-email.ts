@@ -28,7 +28,7 @@ export async function sendEmail(data: ContactFormData) {
 	try {
 		const { error } = await resend.emails.send({
 			from: "QoreDB Contact <onboarding@resend.dev>",
-			to: ["raphael.plassart@gmail.com"],
+			to: ["qoredb@gmail.com"],
 			replyTo: email,
 			subject: `[Contact Form] ${subject}`,
 			text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,

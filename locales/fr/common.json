@@ -411,6 +411,7 @@
       "price": "XX€",
       "badge": "Paiement unique",
       "cta": "Acheter QoreDB Pro",
+      "student_note": "Étudiant ? Écris-moi.",
       "features": {
         "everything_core": "Tout ce qui est dans Core",
         "sandbox": "Mode Sandbox avec génération de migrations",

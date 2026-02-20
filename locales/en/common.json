@@ -411,6 +411,7 @@
             "price": "XX€",
             "badge": "One-time payment",
             "cta": "Buy QoreDB Pro",
+            "student_note": "Student? Get in touch.",
             "features": {
                 "everything_core": "Everything in Core",
                 "sandbox": "Sandbox mode with migration generation",

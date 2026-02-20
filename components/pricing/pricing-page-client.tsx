@@ -248,6 +248,14 @@ export default function PricingPageClient({
 								ctaLabel={t("pricing_page.pro.cta")}
 								onClick={startCheckout}
 								loading={loadingCheckout}
+								footerNote={
+									<a
+										href="mailto:qoredb@gmail.com"
+										className="block text-center text-xs text-(--q-text-2) mt-3 hover:text-(--q-accent) transition"
+									>
+										{t("pricing_page.pro.student_note")}
+									</a>
+								}
 							/>
 						</motion.div>
 
