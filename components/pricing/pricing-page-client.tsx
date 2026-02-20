@@ -22,6 +22,7 @@ function PlanCard({
 	disabled,
 	highlighted,
 	loading,
+	footerNote,
 }: {
 	title: string;
 	description: string;
@@ -35,6 +36,7 @@ function PlanCard({
 	disabled?: boolean;
 	highlighted?: boolean;
 	loading?: boolean;
+	footerNote?: React.ReactNode;
 }) {
 	return (
 		<div
@@ -111,6 +113,7 @@ function PlanCard({
 					)}
 				</button>
 			)}
+			{footerNote}
 		</div>
 	);
 }
