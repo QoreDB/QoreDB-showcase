@@ -132,14 +132,13 @@ export function FeaturesSection() {
 					>
 						<div className="order-2 lg:order-1 relative group">
 							<div className="absolute -inset-4 bg-linear-to-r from-(--q-accent)/20 to-purple-500/20 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-							<div className="relative h-[300px] sm:h-[400px] rounded-2xl bg-(--q-bg-1) border border-(--q-border) overflow-hidden p-8 flex flex-col justify-center items-center">
-								<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
-								<GitBranch className="w-32 h-32 text-(--q-accent) opacity-80 drop-shadow-[0_0_15px_rgba(var(--q-accent-rgb),0.5)]" />
-								<div className="mt-8 flex gap-4 text-xs font-mono text-(--q-text-2) opacity-60">
-									<div className="bg-(--q-bg-2) px-3 py-1 rounded">UPDATE users...</div>
-									<div className="bg-(--q-bg-2) px-3 py-1 rounded">Diff: +2 / -1</div>
-								</div>
-							</div>
+							<Image
+								src="/images/features/sandbox.png"
+								alt="Sandbox feature"
+								width={1200}
+								height={800}
+								className="relative w-full h-auto"
+							/>
 						</div>
 						<div className="order-1 lg:order-2">
 							<div className="flex flex-wrap items-center gap-2 mb-6">
@@ -215,45 +214,13 @@ export function FeaturesSection() {
 						</div>
 						<div className="order-2 relative group">
 							<div className="absolute -inset-4 bg-linear-to-l from-blue-500/20 to-cyan-500/20 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-							<div className="relative h-[300px] sm:h-[400px] rounded-2xl bg-(--q-bg-1) border border-(--q-border) overflow-hidden p-8 flex flex-col justify-center items-center">
-								<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.1),rgba(255,255,255,0))]" />
-								<Network className="w-32 h-32 text-blue-500 opacity-80" />
-								<div className="absolute inset-0 flex items-center justify-center opacity-30">
-									<svg className="w-full h-full" viewBox="0 0 400 400">
-										<path
-											d="M50,200 Q100,100 200,50 T350,200"
-											fill="none"
-											stroke="currentColor"
-											strokeWidth="2"
-											className="text-white"
-										/>
-										<rect
-											x="180"
-											y="30"
-											width="40"
-											height="40"
-											fill="currentColor"
-											className="text-blue-500"
-										/>
-										<rect
-											x="30"
-											y="180"
-											width="40"
-											height="40"
-											fill="currentColor"
-											className="text-blue-500"
-										/>
-										<rect
-											x="330"
-											y="180"
-											width="40"
-											height="40"
-											fill="currentColor"
-											className="text-blue-500"
-										/>
-									</svg>
-								</div>
-							</div>
+							<Image
+								src="/images/features/er-diagram.png"
+								alt="ER Diagram feature"
+								width={1200}
+								height={800}
+								className="relative w-full h-auto"
+							/>
 						</div>
 					</motion.div>
 
@@ -267,17 +234,13 @@ export function FeaturesSection() {
 					>
 						<div className="order-2 lg:order-1 relative group">
 							<div className="absolute -inset-4 bg-linear-to-r from-emerald-500/20 to-teal-500/20 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-							<div className="relative h-[300px] sm:h-[400px] rounded-2xl bg-(--q-bg-1) border border-(--q-border) overflow-hidden p-8 flex flex-col justify-center items-center">
-								<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),rgba(255,255,255,0))]" />
-								<LifeBuoy className="w-32 h-32 text-emerald-500 opacity-80" />
-								<div className="mt-8 bg-black/40 backdrop-blur-md border border-red-500/50 rounded-lg p-4 max-w-[80%]">
-									<div className="flex items-center gap-2 text-red-400 mb-2">
-										<LifeBuoy className="w-4 h-4" />
-										<span className="font-bold text-xs uppercase">Unsafe Query Detected</span>
-									</div>
-									<code className="text-[10px] text-gray-300">DELETE FROM users; -- No WHERE clause</code>
-								</div>
-							</div>
+							<Image
+								src="/images/features/query-safety.png"
+								alt="Query safety feature"
+								width={1200}
+								height={800}
+								className="relative w-full h-auto"
+							/>
 						</div>
 						<div className="order-1 lg:order-2">
 							<div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-medium tracking-wide uppercase mb-6">
