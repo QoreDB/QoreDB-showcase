@@ -118,8 +118,8 @@
     "subtitle": "Conçu pour les développeurs qui veulent un outil qui fonctionne, tout simplement.",
     "items": {
       "unified": {
-        "title": "SQL + NoSQL unifié",
-        "desc": "PostgreSQL, MySQL, MongoDB dans une seule interface cohérente."
+        "title": "7 drivers natifs",
+        "desc": "PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB et Redis dans une seule interface."
       },
       "vault": {
         "title": "Sécurité & Privée",
@@ -131,11 +131,11 @@
       },
       "editor": {
         "title": "Éditeur intelligent",
-        "desc": "Syntax highlighting, autocomplétion, formatage automatique."
+        "desc": "Syntax highlighting, snippets, formatage et exécution multi-statements."
       },
       "library": {
         "title": "Query Library",
-        "desc": "Bibliothèque de requêtes avec dossiers, tags et export."
+        "desc": "Dossiers, tags, import/export JSON et requêtes réutilisables."
       },
       "envs": {
         "title": "Protection environnements",
@@ -143,7 +143,7 @@
       },
       "grid": {
         "title": "Data Grid performant",
-        "desc": "Grille haute performance avec virtualisation."
+        "desc": "Virtualisation, filtres serveur, édition inline, pagination et scroll infini."
       },
       "opensource": {
         "title": "Open Source",
@@ -185,7 +185,7 @@
     "compatibility": {
       "eyebrow": "Compatibilité",
       "title": "Bases de données supportées",
-      "coming_soon": "SQLite, Redis et d'autres à venir..."
+      "coming_soon": "Et d'autres à venir..."
     },
     "pro_badge": "Pro",
     "visual_diff_badge": "Visual Diff"
@@ -334,7 +334,7 @@
       },
       "supported_databases": {
         "question": "Quelles bases de données sont supportées ?",
-        "answer": "QoreDB supporte actuellement :\n\n* PostgreSQL\n* MySQL / MariaDB\n* MongoDB\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
+        "answer": "QoreDB supporte actuellement :\n\n* PostgreSQL\n* MySQL / MariaDB\n* SQL Server\n* SQLite\n* DuckDB\n* MongoDB\n* Redis\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
       },
       "remote_ssh": {
         "question": "Fonctionne-t-il avec des connexions distantes et SSH ?",
@@ -392,7 +392,7 @@
       "badge": "Plan principal",
       "cta": "Télécharger gratuitement",
       "features": {
-        "drivers": "Tous les drivers (PostgreSQL, MySQL, MongoDB, SQLite, Redis)",
+        "drivers": "Tous les drivers (PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis)",
         "crud": "CRUD complet + éditeur SQL/Mongo",
         "grid": "Grille de données haute performance (scroll virtuel)",
         "er_diagram": "Diagramme ER interactif",
@@ -673,7 +673,7 @@
       },
       "connect": {
         "title": "2. Créer votre première connexion",
-        "content": "<p>Cliquez sur <strong>“+”</strong> dans la barre latérale pour ajouter une base :</p><ul><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li></ul><p>Renseignez l’hôte, le port, la base, l’utilisateur et l’environnement (dev/staging/prod).</p>"
+        "content": "<p>Cliquez sur <strong>+</strong> dans la barre latérale pour ajouter une base :</p><ul><li>PostgreSQL</li><li>MySQL / MariaDB</li><li>SQL Server</li><li>SQLite</li><li>DuckDB</li><li>MongoDB</li><li>Redis</li></ul><p>Renseignez l’hôte, le port, la base, l’utilisateur et l’environnement (dev/staging/prod).</p>"
       },
       "explore": {
         "title": "3. Explorer vos données",

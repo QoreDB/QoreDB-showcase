@@ -118,8 +118,8 @@
         "subtitle": "Designed for developers who want a tool that just works.",
         "items": {
             "unified": {
-                "title": "Unified SQL + NoSQL",
-                "desc": "PostgreSQL, MySQL, MongoDB in a single coherent interface."
+                "title": "7 Native Drivers",
+                "desc": "PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB and Redis in one interface."
             },
             "vault": {
                 "title": "Security & Privacy",
@@ -131,11 +131,11 @@
             },
             "editor": {
                 "title": "Smart Editor",
-                "desc": "Syntax highlighting, autocompletion, automatic formatting."
+                "desc": "Syntax highlighting, snippets, formatting and multi-statement execution."
             },
             "library": {
                 "title": "Query Library",
-                "desc": "Query library with folders, tags, and export."
+                "desc": "Folders, tags, JSON import/export and reusable queries."
             },
             "envs": {
                 "title": "Environment Protection",
@@ -143,7 +143,7 @@
             },
             "grid": {
                 "title": "High Performance Grid",
-                "desc": "High-performance grid with virtualization."
+                "desc": "Virtualization, server-side filtering, inline editing, pagination and infinite scroll."
             },
 "opensource": {
     "title": "Open Source",
@@ -185,7 +185,7 @@
         "compatibility": {
             "eyebrow": "Compatibility",
             "title": "Supported Databases",
-            "coming_soon": "SQLite, Redis and more coming soon..."
+            "coming_soon": "And more coming soon..."
         },
         "pro_badge": "Pro",
         "visual_diff_badge": "Visual Diff"
@@ -334,7 +334,7 @@
             },
             "supported_databases": {
                 "question": "Which databases are supported?",
-                "answer": "QoreDB currently supports:\n\n* PostgreSQL\n* MySQL / MariaDB\n* MongoDB\n\nOther engines are planned as the architecture evolves."
+                "answer": "QoreDB currently supports:\n\n* PostgreSQL\n* MySQL / MariaDB\n* SQL Server\n* SQLite\n* DuckDB\n* MongoDB\n* Redis\n\nMore engines are planned as the architecture evolves."
             },
             "remote_ssh": {
                 "question": "Does it work with remote connections and SSH?",
@@ -392,7 +392,7 @@
             "badge": "Main choice",
             "cta": "Download for free",
             "features": {
-                "drivers": "All drivers (PostgreSQL, MySQL, MongoDB, SQLite, Redis)",
+                "drivers": "All drivers (PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis)",
                 "crud": "Full CRUD + SQL/Mongo editor",
                 "grid": "High-performance data grid (virtual scrolling)",
                 "er_diagram": "Interactive ER diagram",
@@ -673,7 +673,7 @@
             },
             "connect": {
                 "title": "2. Create Your First Connection",
-                "content": "<p>Click on <strong>“+”</strong> in the sidebar to add a database:</p><ul><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li></ul><p>Enter the host, port, database, user, and environment (dev/staging/prod).</p>"
+                "content": "<p>Click on <strong>+</strong> in the sidebar to add a database:</p><ul><li>PostgreSQL</li><li>MySQL / MariaDB</li><li>SQL Server</li><li>SQLite</li><li>DuckDB</li><li>MongoDB</li><li>Redis</li></ul><p>Enter the host, port, database, user, and environment (dev/staging/prod).</p>"
             },
             "explore": {
                 "title": "3. Explore Your Data",
