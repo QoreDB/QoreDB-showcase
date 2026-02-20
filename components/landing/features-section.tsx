@@ -31,10 +31,10 @@ const featureIcons = {
 };
 
 const databases = [
-	{ name: "MySQL", image: "/images/databases/mysql.png", color: "#00758F" },
-	{ name: "PostgreSQL", image: "/images/databases/postgresql.png", color: "#336791" },
-	{ name: "MongoDB", image: "/images/databases/mongodb.png", color: "#47A248" },
-	{ name: "SQLite", image: "/images/databases/sqlite.png", color: "#00758F" },
+	{ name: "MySQL", image: "/images/databases/mysql.webp", color: "#00758F" },
+	{ name: "PostgreSQL", image: "/images/databases/postgresql.webp", color: "#336791" },
+	{ name: "MongoDB", image: "/images/databases/mongodb.webp", color: "#47A248" },
+	{ name: "SQLite", image: "/images/databases/sqlite.webp", color: "#00758F" },
 ];
 
 export function FeaturesSection() {

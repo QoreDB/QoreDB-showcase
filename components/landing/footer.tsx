@@ -20,14 +20,14 @@ export function Footer() {
 					<div className="col-span-2 md:col-span-1">
 						<Link href="/" className="flex items-center gap-1 mb-4">
 							<Image
-								src="/logo.png"
+								src="/logo.webp"
 								alt="QoreDB Logo"
 								width={48}
 								height={48}
 								className="w-6 sm:w-8 dark:hidden"
 							/>
 							<Image
-								src="/logo-white.png"
+								src="/logo-white.webp"
 								alt="QoreDB Logo"
 								width={48}
 								height={48}

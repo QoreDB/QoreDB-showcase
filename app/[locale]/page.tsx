@@ -1,84 +1,59 @@
-"use client";
-
-import { useEffect, useState, useCallback, useRef } from "react";
-import { HeroBackground } from "@/components/hero-background";
+import dynamic from "next/dynamic";
 import { Header } from "@/components/landing/header";
 import { Hero } from "@/components/landing/hero";
-import { WhySection } from "@/components/landing/why-section";
-import { FeaturesSection } from "@/components/landing/features-section";
-import { PreviewSection } from "@/components/landing/preview-section";
-import { BlogSection } from "@/components/landing/blog-section";
-import { CTASection } from "@/components/landing/cta-section";
-import { Footer } from "@/components/landing/footer";
+import { HeroBackgroundManager } from "@/components/hero-background-manager";
+import { client } from "@/lib/sanity/client";
+import { LATEST_POSTS_QUERY } from "@/lib/sanity/queries";
 
-export default function HomePage() {
-	const [showHeroBackground, setShowHeroBackground] = useState(true);
-	const [bgKey, setBgKey] = useState(0);
-	const wasHiddenRef = useRef(false);
-	const bgWrapperRef = useRef<HTMLDivElement | null>(null);
-	const rafIdRef = useRef<number | null>(null);
-	const lastScrollYRef = useRef(0);
-	const lastViewportHeightRef = useRef(0);
-	const showHeroBackgroundRef = useRef(true);
+const WhySection = dynamic(() =>
+	import("@/components/landing/why-section").then((m) => ({
+		default: m.WhySection,
+	}))
+);
+const FeaturesSection = dynamic(() =>
+	import("@/components/landing/features-section").then((m) => ({
+		default: m.FeaturesSection,
+	}))
+);
+const PreviewSection = dynamic(() =>
+	import("@/components/landing/preview-section").then((m) => ({
+		default: m.PreviewSection,
+	}))
+);
+const BlogSection = dynamic(() =>
+	import("@/components/landing/blog-section").then((m) => ({
+		default: m.BlogSection,
+	}))
+);
+const CTASection = dynamic(() =>
+	import("@/components/landing/cta-section").then((m) => ({
+		default: m.CTASection,
+	}))
+);
+const Footer = dynamic(() =>
+	import("@/components/landing/footer").then((m) => ({
+		default: m.Footer,
+	}))
+);
 
-	const handleScroll = useCallback(() => {
-		lastScrollYRef.current = window.scrollY;
-		lastViewportHeightRef.current = window.innerHeight;
-
-		if (rafIdRef.current != null) return;
-		rafIdRef.current = window.requestAnimationFrame(() => {
-			rafIdRef.current = null;
-			const scrollY = lastScrollYRef.current;
-			const viewportHeight = lastViewportHeightRef.current || window.innerHeight;
-			const shouldShow = scrollY <= viewportHeight;
-
-			if (shouldShow !== showHeroBackgroundRef.current) {
-				showHeroBackgroundRef.current = shouldShow;
-				setShowHeroBackground(shouldShow);
-				if (!shouldShow) {
-					wasHiddenRef.current = true;
-				} else if (wasHiddenRef.current) {
-					setBgKey((prev) => prev + 1);
-					wasHiddenRef.current = false;
-				}
-			}
-
-			if (shouldShow && bgWrapperRef.current) {
-				bgWrapperRef.current.style.transform = `translate3d(0, ${scrollY * 0.3}px, 0)`;
-			}
-		});
-	}, []);
-
-	useEffect(() => {
-		handleScroll();
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-			if (rafIdRef.current != null) {
-				window.cancelAnimationFrame(rafIdRef.current);
-				rafIdRef.current = null;
-			}
-		};
-	}, [handleScroll]);
+export default async function HomePage() {
+	let posts = [];
+	try {
+		posts = await client.fetch(LATEST_POSTS_QUERY);
+		if (!Array.isArray(posts)) posts = [];
+	} catch {
+		posts = [];
+	}
 
 	return (
 		<div className="min-h-screen overflow-hidden relative">
-			{showHeroBackground && (
-				<div
-					key={bgKey}
-					ref={bgWrapperRef}
-					className="fixed inset-0 -z-10"
-					style={{ transform: "translate3d(0, 0, 0)", willChange: "transform" }}
-				>
-					<HeroBackground />
-				</div>
-			)}
+			<HeroBackgroundManager />
 			<Header />
 			<Hero />
 			<WhySection />
 			<FeaturesSection />
 			<PreviewSection />
-			<BlogSection />
+			<BlogSection posts={posts} />
 			<CTASection />
 			<Footer />
 		</div>

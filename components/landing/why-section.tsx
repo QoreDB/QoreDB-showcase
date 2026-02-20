@@ -7,17 +7,17 @@ import Image from "next/image";
 const painPoints = [
 	{
 		key: "slow",
-		image: "/images/illustrations/time.png",
+		image: "/images/illustrations/time.webp",
 		color: "--q-warning",
 	},
 	{
 		key: "dated",
-		image: "/images/illustrations/palette.png",
+		image: "/images/illustrations/palette.webp",
 		color: "--q-error",
 	},
 	{
 		key: "tiring",
-		image: "/images/illustrations/brain.png",
+		image: "/images/illustrations/brain.webp",
 		color: "--q-text-2",
 	},
 ];

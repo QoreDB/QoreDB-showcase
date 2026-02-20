@@ -1,45 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import { useParams } from "next/navigation";
-import { client } from "@/lib/sanity/client";
-import { LATEST_POSTS_QUERY } from "@/lib/sanity/queries";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { PostDocument } from "@/types/posts";
 
-export function BlogSection() {
+interface BlogSectionProps {
+	posts?: PostDocument[];
+}
+
+export function BlogSection({ posts = [] }: BlogSectionProps) {
 	const { t } = useTranslation();
 	const params = useParams();
 	const locale = params?.locale as string | undefined;
-
-	const [posts, setPosts] = useState<PostDocument[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		let isMounted = true;
-
-		client
-			.fetch(LATEST_POSTS_QUERY)
-			.then((data) => {
-				if (!isMounted) return;
-				setPosts(Array.isArray(data) ? data : []);
-			})
-			.catch(() => {
-				if (!isMounted) return;
-				setPosts([]);
-			})
-			.finally(() => {
-				if (!isMounted) return;
-				setIsLoading(false);
-			});
-
-		return () => {
-			isMounted = false;
-		};
-	}, []);
 
 	return (
 		<section className="relative z-10 py-24 sm:py-32 px-6 bg-(--q-bg-0)">
@@ -64,11 +39,7 @@ export function BlogSection() {
 				</div>
 
 				<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-					{isLoading ? (
-						<div className="col-span-full text-center text-(--q-text-2)">
-							{t("blog_section.loading")}
-						</div>
-					) : posts.length > 0 ? (
+					{posts.length > 0 ? (
 						posts.map((post) => (
 							<div key={post._id} className="w-full">
 								<ArticleCard post={post} locale={locale} />
