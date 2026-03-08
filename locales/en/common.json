@@ -101,6 +101,10 @@
             "table": {
                 "title": "Data View",
                 "description": "Smooth manipulation with a high-performance grid."
+            },
+            "query": {
+                "title": "SQL Editor",
+                "description": "Write and run queries with autocompletion and syntax highlighting."
             }
         }
     },

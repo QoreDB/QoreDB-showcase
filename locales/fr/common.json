@@ -101,6 +101,10 @@
       "table": {
         "title": "Données",
         "description": "Manipulation fluide avec une grille performante."
+      },
+      "query": {
+        "title": "Éditeur SQL",
+        "description": "Écrivez et exécutez vos requêtes avec autocomplétion et coloration syntaxique."
       }
     }
   },

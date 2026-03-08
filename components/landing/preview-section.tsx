@@ -126,9 +126,9 @@ export function PreviewSection() {
 					</p>
 				</motion.div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+				<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 					{/* Left Column: Tabs */}
-					<div className="lg:col-span-3 flex flex-col gap-2">
+					<div className="lg:col-span-4 flex flex-col gap-1">
 						{TABS.map((tab) => {
 							const Icon = tab.icon;
 							const isActive = activeTab === tab.id;
@@ -195,7 +195,7 @@ export function PreviewSection() {
 					</div>
 
 					{/* Right Column: Preview Area */}
-					<div className="lg:col-span-9 relative">
+					<div className="lg:col-span-8 relative">
 						{/* Glow effects */}
 						<div className="absolute -inset-4 bg-linear-to-r from-(--q-accent)/20 via-transparent to-(--q-accent)/20 blur-3xl opacity-30 pointer-events-none" />
 
