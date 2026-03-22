@@ -134,7 +134,7 @@
   "features": {
     "eyebrow": "Features",
     "title": "Everything you need, <accent>nothing you don't</accent>",
-    "subtitle": "8 drivers, one interface. No Electron, no cloud dependency, no bloat.",
+    "subtitle": "9 drivers, one interface. No Electron, no cloud dependency, no bloat.",
     "items": {
       "unified": {
         "title": "8 Native Drivers",

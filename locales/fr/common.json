@@ -134,10 +134,10 @@
   "features": {
     "eyebrow": "Fonctionnalités",
     "title": "Tout ce qu'il faut, <accent>rien de superflu</accent>",
-    "subtitle": "8 drivers, une interface. Pas d'Electron, pas de cloud, pas de bloat.",
+    "subtitle": "9 drivers, une interface. Pas d'Electron, pas de cloud, pas de bloat.",
     "items": {
       "unified": {
-        "title": "8 drivers natifs",
+        "title": "9 drivers natifs",
         "desc": "PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis et CockroachDB dans une seule interface."
       },
       "vault": {
@@ -897,7 +897,7 @@
     "title": "Tarification simple et transparente",
     "subtitle": "Core est gratuit pour toujours. Pro débloque les fonctionnalités avancées.",
     "core_price": "Gratuit",
-    "core_1": "8 drivers de bases de données natifs",
+    "core_1": "9 drivers de bases de données natifs",
     "core_2": "Éditeur SQL avec autocomplétion",
     "core_3": "Coffre-fort chiffré & tunnels SSH",
     "core_4": "Protection des environnements de production",
