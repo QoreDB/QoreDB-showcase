@@ -1,4 +1,4 @@
-import { CalendarIcon, Clock, Link2 } from "lucide-react";
+import { ArrowLeft, CalendarIcon, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -61,7 +61,7 @@ export default async function BlogPostPage({
               href={`/${locale}/blog`}
               className="inline-flex items-center text-sm text-(--q-text-2) hover:text-(--q-text-0) transition-colors mb-4"
             >
-              <Link2 className="w-4 h-4 mr-1" />
+              <ArrowLeft className="w-4 h-4 mr-1" />
               {locale === "en" ? "Back to blog" : "Retour au blog"}
             </Link>
             <div className="flex items-center justify-center gap-4 text-sm text-(--q-text-2)">
