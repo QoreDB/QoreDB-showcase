@@ -67,14 +67,15 @@
       "title": "Pourquoi QoreDB bloque les mutations en production par défaut",
       "category": "Security",
       "publishedAt": "2026-03-23"
+    },
+    {
+      "slug": "modele-open-core-qoredb-libre-premium",
+      "title": "Le modèle open-core de QoreDB : ce qui est libre, ce qui ne l'est pas",
+      "category": "Open Source",
+      "publishedAt": "2026-03-24"
     }
   ],
   "queue": [
-    {
-      "title": "Le modèle open-core de QoreDB : ce qui est libre, ce qui ne l'est pas",
-      "category": "Open Source",
-      "topic_notes": "Apache 2.0 vs BUSL-1.1, périmètre core/premium, transparence licensing"
-    },
     {
       "title": "Comment QoreDB gère les tunnels SSH sans agent tiers",
       "category": "Architecture",
