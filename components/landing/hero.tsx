@@ -141,27 +141,6 @@ export function Hero() {
         </span>
       </motion.div>
 
-      <motion.div
-        className="mb-16"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
-        <a
-          href="https://www.producthunt.com/products/qoredb?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-qoredb"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1107973&theme=light&t=1774948589240"
-            alt="QoreDB - The fast, open-source database client built with Rust | Product Hunt"
-            width={250}
-            height={54}
-          />
-        </a>
-      </motion.div>
-
       {/* Single hero screenshot */}
       <motion.div
         className="relative w-full max-w-5xl"

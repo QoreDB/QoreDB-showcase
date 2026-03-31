@@ -67,6 +67,20 @@ export function Footer() {
                 <Mail className="w-5 h-5" />
               </a>
             </div>
+            <a
+              href="https://www.producthunt.com/products/qoredb?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-qoredb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1107973&theme=light&t=1774948589240"
+                alt="QoreDB - The fast, open-source database client built with Rust | Product Hunt"
+                width={250}
+                height={54}
+              />
+            </a>
           </div>
 
           {/* Product links */}
