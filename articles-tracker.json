@@ -103,19 +103,21 @@
       "title": "Pourquoi QoreDB ne traduit pas les requêtes entre moteurs",
       "category": "Vision",
       "publishedAt": "2026-03-31"
+    },
+    {
+      "slug": "driver-sqlite-wal-extensions-fichiers-locaux",
+      "title": "Le driver SQLite dans QoreDB : WAL, extensions et fichiers locaux",
+      "category": "Architecture",
+      "publishedAt": "2026-04-01"
+    },
+    {
+      "slug": "duckdb-moteur-federation-pourquoi-comment",
+      "title": "DuckDB comme moteur de fédération : pourquoi et comment",
+      "category": "Architecture",
+      "publishedAt": "2026-04-02"
     }
   ],
   "queue": [
-    {
-      "title": "Le driver SQLite dans QoreDB : WAL, extensions et fichiers locaux",
-      "category": "Architecture",
-      "topic_notes": "WAL mode, extensions, cas d'usage dev local, limitations concurrence"
-    },
-    {
-      "title": "DuckDB comme moteur de fédération : pourquoi et comment",
-      "category": "Architecture",
-      "topic_notes": "DuckDB embarqué, source mapping, OLAP local, jointures cross-database"
-    },
     {
       "title": "Le système d'environnements : Dev, Staging, Prod et leurs garde-fous",
       "category": "Security",
