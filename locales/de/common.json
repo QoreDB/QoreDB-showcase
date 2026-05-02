@@ -70,7 +70,8 @@
       "download_core": "Kostenlos herunterladen",
       "discover_pro": "Auf GitHub ansehen",
       "view_project": "Projekt anzeigen",
-      "participate": "Mitmachen"
+      "participate": "Mitmachen",
+      "community": "Discord beitreten"
     },
     "social_proof": "Schließen Sie sich <highlight>100+</highlight> Entwicklern an, die auf die Beta warten",
     "meta": {
@@ -536,10 +537,10 @@
         "history": "Abfrageverlauf, Favoriten und Tab Groups",
         "vault": "Verschlüsselter Tresor (Argon2) + Proxy- und ssh-agent-Unterstützung",
         "ssh": "Natives SSH-Tunneling (OpenSSH, Proxy Jump)",
-        "safety": "Produktionssicherheitsregeln (Umgebungslabels, schreibgeschützter Modus, Governance-Limits)",
+        "safety": "Produktionssicherheitsregeln (Umgebungslabels, schreibgeschützter Modus) + grundlegendes Audit-Protokoll mit Redaction",
         "audit_basic": "Grundlegendes Audit-Protokoll (50 Einträge) mit Abfrage-Redaction",
         "export_basic": "CSV-/JSON-/SQL-Export und teilbare Ergebnis-Links",
-        "shortcuts": "Tastaturkürzel und 9 UI-Sprachen"
+        "shortcuts": "Verlauf, Favoriten, Tab Groups, Tastaturkürzel und 9 UI-Sprachen"
       }
     },
     "pro": {

@@ -70,7 +70,8 @@
       "download_core": "無料ダウンロード",
       "discover_pro": "GitHub で見る",
       "view_project": "プロジェクトを見る",
-      "participate": "参加する"
+      "participate": "参加する",
+      "community": "Discord に参加"
     },
     "social_proof": "ベータ版を待っている <highlight>100+</highlight> 人の開発者に参加しましょう",
     "meta": {
@@ -536,10 +537,10 @@
         "history": "クエリ履歴、お気に入り、tab groups",
         "vault": "暗号化された資格情報ボールト (Argon2) + プロキシと ssh-agent サポート",
         "ssh": "ネイティブ SSH トンネリング（OpenSSH、proxy jump）",
-        "safety": "実稼働安全ルール（環境ラベル、読み取り専用モード、ガバナンス制限）",
+        "safety": "実稼働安全ルール（環境ラベル、読み取り専用モード）＋ redaction 付き基本監査ログ",
         "audit_basic": "基本監査ログ (50 エントリ) およびクエリ redaction",
         "export_basic": "CSV / JSON / SQL エクスポートと共有可能な結果リンク",
-        "shortcuts": "キーボード ショートカットと 9 つの UI 言語"
+        "shortcuts": "履歴、お気に入り、tab groups、キーボード ショートカット、9 つの UI 言語"
       }
     },
     "pro": {

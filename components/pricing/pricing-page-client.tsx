@@ -75,16 +75,16 @@ function PlanCard({
         </div>
       </div>
 
-      <ul className="space-y-3 mb-8 flex-1">
+      <ul className="space-y-2.5 mb-6 flex-1">
         {features.map((feature) => (
           <li
             key={feature}
-            className="flex items-start gap-3 text-(--q-text-1)"
+            className="flex items-start gap-2.5 text-(--q-text-1)"
           >
             <span className="mt-0.5 rounded-full bg-(--q-accent)/10 p-1 shrink-0">
               <Check className="h-3 w-3 text-(--q-accent)" />
             </span>
-            <span className="text-sm leading-relaxed">{feature}</span>
+            <span className="text-[13px] leading-snug">{feature}</span>
           </li>
         ))}
       </ul>
@@ -173,11 +173,9 @@ export default function PricingPageClient({
     "grid",
     "er_diagram",
     "ddl",
-    "history",
     "vault",
     "ssh",
     "safety",
-    "audit_basic",
     "export_basic",
     "shortcuts",
   ].map((key) => t(`pricing_page.core.features.${key}`));

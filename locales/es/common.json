@@ -70,7 +70,8 @@
       "download_core": "Descargar gratis",
       "discover_pro": "Ver en GitHub",
       "view_project": "Ver proyecto",
-      "participate": "participar"
+      "participate": "participar",
+      "community": "Unirse a Discord"
     },
     "social_proof": "Únase a <highlight>100+</highlight> desarrolladores que esperan la versión beta",
     "meta": {
@@ -536,10 +537,10 @@
         "history": "Historial, favoritos y tab groups",
         "vault": "Bóveda cifrada (Argon2) + soporte de proxy y ssh-agent",
         "ssh": "Túnel SSH nativo (OpenSSH, proxy jump)",
-        "safety": "Reglas de seguridad de producción (etiquetas de entorno, modo solo lectura, límites de gobernanza)",
+        "safety": "Reglas de seguridad de producción (etiquetas de entorno, modo solo lectura) + registro de auditoría básico con redacción",
         "audit_basic": "Registro de auditoría básico (50 entradas) con redacción de consultas",
         "export_basic": "Exportación CSV / JSON / SQL y enlaces para compartir resultados",
-        "shortcuts": "Atajos de teclado y 9 idiomas de interfaz"
+        "shortcuts": "Historial, favoritos, tab groups, atajos de teclado y 9 idiomas de interfaz"
       }
     },
     "pro": {

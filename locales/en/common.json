@@ -70,7 +70,8 @@
       "download_core": "Download Free",
       "discover_pro": "View on GitHub",
       "view_project": "View Project",
-      "participate": "Participate"
+      "participate": "Participate",
+      "community": "Join Discord"
     },
     "social_proof": "Join <highlight>100+</highlight> developers waiting for the beta",
     "meta": {
@@ -536,10 +537,10 @@
         "history": "Query history, favorites and tab groups",
         "vault": "Encrypted credential vault (Argon2) + proxy and ssh-agent support",
         "ssh": "Native SSH tunneling (OpenSSH, proxy jump)",
-        "safety": "Production safety rules (env labels, read-only mode, governance limits)",
+        "safety": "Production safety rules (env labels, read-only mode) + basic audit log with redaction",
         "audit_basic": "Basic audit log (50 entries) with query redaction",
         "export_basic": "CSV / JSON / SQL export and shareable result links",
-        "shortcuts": "Keyboard shortcuts and 9 UI languages"
+        "shortcuts": "Query history, favorites, tab groups, keyboard shortcuts and 9 UI languages"
       }
     },
     "pro": {

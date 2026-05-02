@@ -16,29 +16,6 @@ export function Hero() {
 
   return (
     <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-12 pt-32 pb-20 overflow-hidden w-full">
-      <motion.div
-        className="mb-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <a
-          href="https://www.producthunt.com/products/qoredb/reviews/new"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="inline-flex items-center gap-2 bg-(--q-accent)/10 border border-(--q-accent)/30 rounded-full px-4 py-2 hover:bg-(--q-accent)/20 transition-colors cursor-pointer">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-            </span>
-            <span className="text-(--q-accent) text-xs sm:text-sm font-semibold">
-              {t("hero.ph_badge")}
-            </span>
-          </div>
-        </a>
-      </motion.div>
-
       <motion.h1
         className="font-heading text-(--q-text-0) text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight text-center max-w-5xl"
         initial={{ opacity: 0, y: 30 }}

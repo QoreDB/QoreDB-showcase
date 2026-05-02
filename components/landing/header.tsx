@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Menu, X } from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
@@ -103,13 +103,11 @@ export function Header() {
 
         <Button
           variant="outline"
-          className="hidden md:flex"
-          onClick={() =>
-            window.open("https://github.com/QoreDB/QoreDB", "_blank")
-          }
+          className="hidden md:flex group gap-2 border-[#5865F2]/40 text-[#5865F2] hover:text-[#5865F2] hover:border-[#5865F2] hover:bg-[#5865F2]/10"
+          onClick={() => window.open("https://discord.gg/Yr6P3wuZDt", "_blank")}
         >
-          {t("hero.cta.participate")}
-          <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+          <MessageCircle className="w-4 h-4" />
+          {t("hero.cta.community")}
         </Button>
       </div>
 

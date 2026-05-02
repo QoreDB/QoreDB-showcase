@@ -70,7 +70,8 @@
       "download_core": "免费下载",
       "discover_pro": "在 GitHub 上查看",
       "view_project": "查看项目",
-      "participate": "参与"
+      "participate": "参与",
+      "community": "加入 Discord"
     },
     "social_proof": "与 <highlight>100+</highlight> 开发者一起等待 Beta 版",
     "meta": {
@@ -536,10 +537,10 @@
         "history": "查询历史记录、收藏夹和 tab groups",
         "vault": "加密凭证库 (Argon2) + 代理和 ssh-agent 支持",
         "ssh": "原生 SSH 隧道（OpenSSH、proxy jump）",
-        "safety": "生产安全规则（环境标签、只读模式、治理限制）",
+        "safety": "生产安全规则（环境标签、只读模式）+ 含 redaction 的基本审核日志",
         "audit_basic": "基本审核日志（50 条）含查询 redaction",
         "export_basic": "CSV/JSON/SQL 导出和可分享的结果链接",
-        "shortcuts": "键盘快捷键和 9 种界面语言"
+        "shortcuts": "历史记录、收藏夹、tab groups、键盘快捷键和 9 种界面语言"
       }
     },
     "pro": {
