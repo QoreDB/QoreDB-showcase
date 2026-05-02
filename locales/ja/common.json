@@ -64,7 +64,7 @@
     },
     "ph_badge": "Product Hunt での発売",
     "title": "<italic>すべてのデータベース</italic> に 1 つのアプリで対応",
-    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>12 個のネイティブ ドライバー</highlight>（PostgreSQL ファミリー — Supabase、Neon、TimescaleDB を含む）に、単一の美しいインターフェイスから接続できます。ローカルファースト — データは自分のもののままです。",
+    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>12 個のネイティブ ドライバー</highlight>（PostgreSQL ファミリー：Supabase、Neon、TimescaleDB を含む）に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
     "cta": {
       "join_beta": "ベータ版に参加する",
       "download_core": "無料ダウンロード",
@@ -151,7 +151,7 @@
       },
       "ddl": {
         "title": "DDL 管理",
-        "desc": "CREATE / ALTER TABLE、外部キー、インデックス、制約 — ドライバー固有の SQL プレビューと警告付き。"
+        "desc": "CREATE / ALTER TABLE、外部キー、インデックス、制約。ドライバー固有の SQL プレビューと警告付き。"
       },
       "vault": {
         "title": "セキュリティとプライバシー",
@@ -167,7 +167,7 @@
       },
       "library": {
         "title": "クエリライブラリ",
-        "desc": "フォルダー、タグ、JSON インポート/エクスポート、再利用可能なクエリ — ワンクリックでノートブックに変換可能。"
+        "desc": "フォルダー、タグ、JSON インポート/エクスポート、再利用可能なクエリ。ワンクリックでノートブックに変換可能。"
       },
       "envs": {
         "title": "環境保護",
@@ -191,7 +191,7 @@
       },
       "export": {
         "title": "マルチフォーマットエクスポート",
-        "desc": "結果を CSV、JSON、SQL、HTML、XLSX、Parquet、または自己完結型 HTML としてエクスポート — 設定可能なプロバイダー経由で共有できます。"
+        "desc": "結果を CSV、JSON、SQL、HTML、XLSX、Parquet、または自己完結型 HTML としてエクスポート。設定可能なプロバイダー経由で共有できます。"
       },
       "opensource": {
         "title": "オープンソース",
@@ -355,9 +355,9 @@
     "title": "実際のワークフロー向けに構築"
   },
   "code_demo": {
-    "title_bar": "QoreDB — prod-api @ PostgreSQL",
+    "title_bar": "QoreDB - prod-api @ PostgreSQL",
     "comment": "-- 今月最もアクティブなユーザーを見つける",
-    "result": "23 ミリ秒で 10 行が返されました — ストリーミングが完了しました"
+    "result": "23 ミリ秒で 10 行が返されました。ストリーミングが完了しました"
   },
   "why": {
     "items": {
@@ -390,11 +390,11 @@
     "title": "QoreDB ロードマップ",
     "subtitle": "QoreDB 開発の次のステップをご覧ください。",
     "now": {
-      "title": "リリース済み — v0.1.23 → v0.1.27",
+      "title": "リリース済み：v0.1.23 → v0.1.27",
       "quote": "QoreDB はより速く、より安全になり、本格的な日常使用の準備が整いました。",
       "items": {
-        "1": "Workspaces — 接続、クエリ、ノートブックをプロジェクトごとにグループ化",
-        "2": "Time Travel — 行履歴の参照とロールバック SQL の生成",
+        "1": "Workspaces：接続、クエリ、ノートブックをプロジェクトごとにグループ化",
+        "2": "Time Travel：行履歴の参照とロールバック SQL の生成",
         "3": "12 個のネイティブ ドライバー、Supabase、Neon、TimescaleDB を含む",
         "4": "DDL 管理（CREATE / ALTER TABLE）、bulk edit、tab groups",
         "5": "ストリーミング 25% 高速化、高度なフィルター、9 つの UI 言語"
@@ -402,7 +402,7 @@
       "goal": "目標: 開発者がすでに自信を持って使用し、推奨しているツール。"
     },
     "soon": {
-      "title": "まもなく — 生産性と明快さ",
+      "title": "まもなく：生産性と明快さ",
       "quote": "従来のデータベース クライアントを超えてください。",
       "items": {
         "1": "より深い MongoDB ツールとよりリッチな集計ワークフロー",
@@ -414,7 +414,7 @@
       "goal": "目標: 開発者を毎日リアルタイムで節約します。"
     },
     "later": {
-      "title": "その後 — QoreDB ビジョン",
+      "title": "その後：QoreDB ビジョン",
       "quote": "開発者がデータをどのように操作するかを再考してください。",
       "items": {
         "1": "統合された SQL と NoSQL のエクスペリエンス",
@@ -430,7 +430,7 @@
     }
   },
   "faq_page": {
-    "title": "よくある質問 — QoreDB",
+    "title": "よくある質問 - QoreDB",
     "search_placeholder": "答えを探してください...",
     "no_results": "結果が見つかりませんでした",
     "filters": {
@@ -470,7 +470,7 @@
       },
       "supported_databases": {
         "question": "どのデータベースがサポートされていますか?",
-        "answer": "QoreDB は現在 12 個のネイティブ ドライバーをサポートしています:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB（PostgreSQL ファミリー）\n* MySQL / MariaDB\n* SQL Server（Windows 認証 — NTLM および Kerberos を含む）\n* SQLite\n* DuckDB\n* MongoDB（エディタのオートコンプリートと集計の linting 付き）\n* Redis（フルキー管理付き）\n* CockroachDB\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
+        "answer": "QoreDB は現在 12 個のネイティブ ドライバーをサポートしています:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB（PostgreSQL ファミリー）\n* MySQL / MariaDB\n* SQL Server（Windows 認証：NTLM および Kerberos を含む）\n* SQLite\n* DuckDB\n* MongoDB（エディタのオートコンプリートと集計の linting 付き）\n* Redis（フルキー管理付き）\n* CockroachDB\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
       },
       "remote_ssh": {
         "question": "リモート接続と SSH は機能しますか?",
@@ -528,12 +528,12 @@
       "badge": "主な選択肢",
       "cta": "無料でダウンロード",
       "features": {
-        "drivers": "12 個のネイティブ ドライバー（PostgreSQL ファミリー — Supabase、Neon、TimescaleDB を含む — MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
+        "drivers": "12 個のネイティブ ドライバー（PostgreSQL ファミリー：Supabase、Neon、TimescaleDB を含む。MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
         "crud": "完全な CRUD + オートコンプリートと linting 付きの SQL/Mongo エディター",
-        "workspaces": "Workspaces — 接続、クエリ、ノートブックをプロジェクトごとにグループ化",
+        "workspaces": "Workspaces：接続、クエリ、ノートブックをプロジェクトごとにグループ化",
         "grid": "bulk edit と高度なフィルター付きの高性能データ グリッド",
         "er_diagram": "インタラクティブな ER 図と Table Insights",
-        "ddl": "DDL 管理 — CREATE / ALTER TABLE、外部キー、インデックス",
+        "ddl": "DDL 管理：CREATE / ALTER TABLE、外部キー、インデックス",
         "history": "クエリ履歴、お気に入り、tab groups",
         "vault": "暗号化された資格情報ボールト (Argon2) + プロキシと ssh-agent サポート",
         "ssh": "ネイティブ SSH トンネリング（OpenSSH、proxy jump）",
@@ -553,11 +553,11 @@
       "features": {
         "everything_core": "コアのすべて",
         "sandbox": "移行世代を含むサンドボックス モード",
-        "time_travel": "Time Travel — 行履歴、バージョン diff、ロールバック SQL",
+        "time_travel": "Time Travel：行履歴、バージョン diff、ロールバック SQL",
         "visual_diff": "Visual Data Diff (テーブル比較)",
         "audit_advanced": "高度な監査ログ (無制限、フィルター可能、エクスポート可能)",
         "profiling": "クエリプロファイリングとパフォーマンス分析",
-        "ai": "AI アシスタント (BYOK — OpenAI / Anthropic / Ollama)",
+        "ai": "AI アシスタント (BYOK：OpenAI / Anthropic / Ollama)",
         "export_advanced": "高度なエクスポート (XLSX、Parquet)",
         "security_rules": "カスタム安全ルール",
         "library_advanced": "高度なクエリ ライブラリ",
@@ -926,7 +926,7 @@
     "cta": "料金の詳細を確認する"
   },
   "metadata": {
-    "site_title": "QoreDB — 最新のデータベース クライアント",
+    "site_title": "QoreDB - 最新のデータベース クライアント",
     "site_description": "開発者向けの高速で安全な最新のデータベース クライアント。統合 SQL + NoSQL、安全なボールト、ローカルファースト。",
     "blog_title": "ブログ - QoreDB",
     "blog_description": "QoreDB チームによる記事、最新情報、技術的な詳細。",

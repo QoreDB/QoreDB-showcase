@@ -169,14 +169,15 @@
       "title": "Le diagramme ER interactif : visualiser un schéma relationnel",
       "category": "Produit",
       "publishedAt": "2026-04-16"
+    },
+    {
+      "slug": "sandbox-mode-tester-modifications-sans-toucher-base",
+      "title": "Le Sandbox Mode de QoreDB : tester des modifications sans toucher la base",
+      "category": "Produit",
+      "publishedAt": "2026-05-02"
     }
   ],
   "queue": [
-    {
-      "title": "Le Sandbox Mode : tester des modifications sans toucher la base",
-      "category": "Produit",
-      "topic_notes": "Bac à sable local, génération migrations, indicateur visuel, rollback"
-    },
     {
       "title": "Redaction automatique : pourquoi aucun secret ne sort dans les logs",
       "category": "Security",

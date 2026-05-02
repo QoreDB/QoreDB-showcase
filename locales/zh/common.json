@@ -64,7 +64,7 @@
     },
     "ph_badge": "启动产品搜寻",
     "title": "一款适用于<italic>所有数据库</italic>的应用程序",
-    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>12 个原生驱动</highlight>，包括 PostgreSQL 系列（Supabase、Neon、TimescaleDB）。本地优先——您的数据归您所有。",
+    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>12 个原生驱动</highlight>，包括 PostgreSQL 系列（Supabase、Neon、TimescaleDB）。本地优先：您的数据归您所有。",
     "cta": {
       "join_beta": "加入测试版",
       "download_core": "免费下载",
@@ -151,7 +151,7 @@
       },
       "ddl": {
         "title": "DDL 管理",
-        "desc": "CREATE / ALTER TABLE、外键、索引和约束 — 提供驱动特定的 SQL 预览和警告。"
+        "desc": "CREATE / ALTER TABLE、外键、索引和约束。提供驱动特定的 SQL 预览和警告。"
       },
       "vault": {
         "title": "安全与隐私",
@@ -167,7 +167,7 @@
       },
       "library": {
         "title": "查询库",
-        "desc": "文件夹、标签、JSON 导入/导出和可重用查询 — 一键转换为笔记本。"
+        "desc": "文件夹、标签、JSON 导入/导出和可重用查询，一键转换为笔记本。"
       },
       "envs": {
         "title": "环境保护",
@@ -191,7 +191,7 @@
       },
       "export": {
         "title": "多格式导出",
-        "desc": "将结果导出为 CSV、JSON、SQL、HTML、XLSX、Parquet 或独立 HTML — 通过可配置的提供商共享。"
+        "desc": "将结果导出为 CSV、JSON、SQL、HTML、XLSX、Parquet 或独立 HTML。可通过可配置的提供商共享。"
       },
       "opensource": {
         "title": "开源",
@@ -355,9 +355,9 @@
     "title": "专为真实工作流程而打造"
   },
   "code_demo": {
-    "title_bar": "QoreDB — prod-api @ PostgreSQL",
+    "title_bar": "QoreDB - prod-api @ PostgreSQL",
     "comment": "-- 查找本月最活跃的用户",
-    "result": "23 毫秒内返回 10 行 — 流式传输完成"
+    "result": "23 毫秒内返回 10 行。流式传输完成"
   },
   "why": {
     "items": {
@@ -390,11 +390,11 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "刚刚发布 — v0.1.23 → v0.1.27",
+      "title": "刚刚发布：v0.1.23 → v0.1.27",
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
-        "1": "Workspaces — 按项目分组连接、查询和笔记本",
-        "2": "Time Travel — 浏览行历史并生成回滚 SQL",
+        "1": "Workspaces：按项目分组连接、查询和笔记本",
+        "2": "Time Travel：浏览行历史并生成回滚 SQL",
         "3": "12 个原生驱动，包括 Supabase、Neon 和 TimescaleDB",
         "4": "DDL 管理（CREATE / ALTER TABLE）、批量编辑和 tab groups",
         "5": "流式传输速度提升 25%、高级过滤器和 9 种界面语言"
@@ -402,7 +402,7 @@
       "goal": "目标：开发者已经放心使用和推荐的工具。"
     },
     "soon": {
-      "title": "很快——生产力和清晰度",
+      "title": "很快：生产力和清晰度",
       "quote": "超越传统的数据库客户端。",
       "items": {
         "1": "更深入的 MongoDB 工具和更丰富的聚合工作流",
@@ -414,7 +414,7 @@
       "goal": "目标：每天为开发人员实时节省开支。"
     },
     "later": {
-      "title": "后来 — QoreDB 愿景",
+      "title": "后来：QoreDB 愿景",
       "quote": "重新思考开发人员如何与其数据交互。",
       "items": {
         "1": "统一的 SQL 和 NoSQL 体验",
@@ -430,7 +430,7 @@
     }
   },
   "faq_page": {
-    "title": "常见问题解答 — QoreDB",
+    "title": "常见问题解答 - QoreDB",
     "search_placeholder": "寻找答案...",
     "no_results": "没有找到结果",
     "filters": {
@@ -470,7 +470,7 @@
       },
       "supported_databases": {
         "question": "支持哪些数据库？",
-        "answer": "QoreDB 目前支持 12 个原生驱动：\n\n* PostgreSQL\n* Supabase、Neon、TimescaleDB（PostgreSQL 系列）\n* MySQL / MariaDB\n* SQL Server（含 Windows 身份验证 — NTLM 和 Kerberos）\n* SQLite\n* DuckDB\n* MongoDB（带编辑器自动补全和聚合 linting）\n* Redis（含完整键管理）\n* CockroachDB\n\n随着架构的发展，计划推出更多引擎。"
+        "answer": "QoreDB 目前支持 12 个原生驱动：\n\n* PostgreSQL\n* Supabase、Neon、TimescaleDB（PostgreSQL 系列）\n* MySQL / MariaDB\n* SQL Server（含 Windows 身份验证：NTLM 和 Kerberos）\n* SQLite\n* DuckDB\n* MongoDB（带编辑器自动补全和聚合 linting）\n* Redis（含完整键管理）\n* CockroachDB\n\n随着架构的发展，计划推出更多引擎。"
       },
       "remote_ssh": {
         "question": "它可以与远程连接和 SSH 一起使用吗？",
@@ -528,12 +528,12 @@
       "badge": "主要选择",
       "cta": "免费下载",
       "features": {
-        "drivers": "12 个原生驱动（PostgreSQL 系列 — 含 Supabase、Neon、TimescaleDB —、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
+        "drivers": "12 个原生驱动（PostgreSQL 系列：含 Supabase、Neon、TimescaleDB；MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
         "crud": "完整的 CRUD + 带自动补全和 linting 的 SQL/Mongo 编辑器",
-        "workspaces": "Workspaces — 按项目分组连接、查询和笔记本",
+        "workspaces": "Workspaces：按项目分组连接、查询和笔记本",
         "grid": "支持批量编辑和高级过滤的高性能数据网格",
         "er_diagram": "交互式 ER 图和 Table Insights",
-        "ddl": "DDL 管理 — CREATE / ALTER TABLE、外键、索引",
+        "ddl": "DDL 管理：CREATE / ALTER TABLE、外键、索引",
         "history": "查询历史记录、收藏夹和 tab groups",
         "vault": "加密凭证库 (Argon2) + 代理和 ssh-agent 支持",
         "ssh": "原生 SSH 隧道（OpenSSH、proxy jump）",
@@ -553,11 +553,11 @@
       "features": {
         "everything_core": "一切尽在核心",
         "sandbox": "具有迁移生成的沙箱模式",
-        "time_travel": "Time Travel — 行历史、版本 diff 和回滚 SQL",
+        "time_travel": "Time Travel：行历史、版本 diff 和回滚 SQL",
         "visual_diff": "视觉数据差异（表格比较）",
         "audit_advanced": "高级审核日志（无限制、可过滤、可导出）",
         "profiling": "查询分析和性能分析",
-        "ai": "AI 助手（BYOK — OpenAI / Anthropic / Ollama）",
+        "ai": "AI 助手（BYOK：OpenAI / Anthropic / Ollama）",
         "export_advanced": "高级导出（XLSX、Parquet）",
         "security_rules": "自定义安全规则",
         "library_advanced": "高级查询库",
@@ -926,7 +926,7 @@
     "cta": "查看完整的定价详情"
   },
   "metadata": {
-    "site_title": "QoreDB — 现代数据库客户端",
+    "site_title": "QoreDB - 现代数据库客户端",
     "site_description": "为开发人员提供的快速、安全的现代数据库客户端。统一 SQL + NoSQL、安全保管库、本地优先。",
     "blog_title": "博客 - QoreDB",
     "blog_description": "来自 QoreDB 团队的文章、更新和技术深入探讨。",

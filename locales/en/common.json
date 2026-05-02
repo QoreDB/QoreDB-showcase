@@ -64,7 +64,7 @@
     },
     "ph_badge": "Launching on Product Hunt",
     "title": "One app for <italic>all your databases</italic>",
-    "subtitle": "The fast, open-source database client built with Rust. Connect to <highlight>12 native drivers</highlight> — including the PostgreSQL family (Supabase, Neon, TimescaleDB) — from a single, beautiful interface. Local-first — your data stays yours.",
+    "subtitle": "The fast, open-source database client built with Rust. Connect to <highlight>12 native drivers</highlight>, including the PostgreSQL family (Supabase, Neon, TimescaleDB), from a single, beautiful interface. Local-first: your data stays yours.",
     "cta": {
       "join_beta": "Join Beta",
       "download_core": "Download Free",
@@ -151,7 +151,7 @@
       },
       "ddl": {
         "title": "DDL Management",
-        "desc": "CREATE / ALTER TABLE, foreign keys, indexes and constraints — with driver-specific SQL preview and warnings."
+        "desc": "CREATE / ALTER TABLE, foreign keys, indexes and constraints, with driver-specific SQL preview and warnings."
       },
       "vault": {
         "title": "Security & Privacy",
@@ -167,7 +167,7 @@
       },
       "library": {
         "title": "Query Library",
-        "desc": "Folders, tags, JSON import/export and reusable queries — convertible to notebooks in one click."
+        "desc": "Folders, tags, JSON import/export and reusable queries, convertible to notebooks in one click."
       },
       "envs": {
         "title": "Environment Protection",
@@ -191,7 +191,7 @@
       },
       "export": {
         "title": "Multi-Format Export",
-        "desc": "Export results as CSV, JSON, SQL, HTML, XLSX, Parquet or self-contained HTML — and share via configurable providers."
+        "desc": "Export results as CSV, JSON, SQL, HTML, XLSX, Parquet or self-contained HTML. Share via configurable providers."
       },
       "opensource": {
         "title": "Open Source",
@@ -355,9 +355,9 @@
     "title": "Built for Real Workflows"
   },
   "code_demo": {
-    "title_bar": "QoreDB — prod-api @ PostgreSQL",
+    "title_bar": "QoreDB - prod-api @ PostgreSQL",
     "comment": "-- Find our most active users this month",
-    "result": "10 rows returned in 23ms — Streaming complete"
+    "result": "10 rows returned in 23ms. Streaming complete"
   },
   "why": {
     "items": {
@@ -390,11 +390,11 @@
     "title": "QoreDB Roadmap",
     "subtitle": "Discover what just shipped and what's coming next.",
     "now": {
-      "title": "Just shipped — v0.1.23 → v0.1.27",
+      "title": "Just shipped: v0.1.23 → v0.1.27",
       "quote": "QoreDB is faster, safer and ready for serious daily use.",
       "items": {
-        "1": "Workspaces — group connections, queries and notebooks by project",
-        "2": "Time Travel — browse row history and generate rollback SQL",
+        "1": "Workspaces:group connections, queries and notebooks by project",
+        "2": "Time Travel:browse row history and generate rollback SQL",
         "3": "12 native drivers, including Supabase, Neon and TimescaleDB",
         "4": "DDL management (CREATE / ALTER TABLE), bulk edit and tab groups",
         "5": "25% faster streaming, advanced filters and 9 UI languages"
@@ -402,7 +402,7 @@
       "goal": "Goal: a tool developers already use and recommend with confidence."
     },
     "soon": {
-      "title": "Soon — Productivity and Clarity",
+      "title": "Soon: Productivity and Clarity",
       "quote": "Go beyond traditional database clients.",
       "items": {
         "1": "Deeper MongoDB tooling and richer aggregation workflows",
@@ -414,7 +414,7 @@
       "goal": "Goal: save developers real time, every day."
     },
     "later": {
-      "title": "Later — The QoreDB Vision",
+      "title": "Later: The QoreDB Vision",
       "quote": "Rethink how developers interact with their data.",
       "items": {
         "1": "Unified SQL & NoSQL experience",
@@ -430,7 +430,7 @@
     }
   },
   "faq_page": {
-    "title": "FAQ — QoreDB",
+    "title": "FAQ - QoreDB",
     "search_placeholder": "Search for an answer...",
     "no_results": "No results found for",
     "filters": {
@@ -470,7 +470,7 @@
       },
       "supported_databases": {
         "question": "Which databases are supported?",
-        "answer": "QoreDB currently supports 12 native drivers:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (PostgreSQL family)\n* MySQL / MariaDB\n* SQL Server (incl. Windows authentication — NTLM and Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (with editor autocomplete and aggregation linting)\n* Redis (with full key management)\n* CockroachDB\n\nMore engines are planned as the architecture evolves."
+        "answer": "QoreDB currently supports 12 native drivers:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (PostgreSQL family)\n* MySQL / MariaDB\n* SQL Server (incl. Windows authentication: NTLM and Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (with editor autocomplete and aggregation linting)\n* Redis (with full key management)\n* CockroachDB\n\nMore engines are planned as the architecture evolves."
       },
       "remote_ssh": {
         "question": "Does it work with remote connections and SSH?",
@@ -528,12 +528,12 @@
       "badge": "Main choice",
       "cta": "Download for free",
       "features": {
-        "drivers": "12 native drivers (PostgreSQL family — incl. Supabase, Neon, TimescaleDB —, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB)",
+        "drivers": "12 native drivers (PostgreSQL family with Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB)",
         "crud": "Full CRUD + SQL/Mongo editor with autocomplete and linting",
-        "workspaces": "Workspaces — group connections, queries and notebooks by project",
+        "workspaces": "Workspaces:group connections, queries and notebooks by project",
         "grid": "High-performance data grid with bulk edit and advanced filters",
         "er_diagram": "Interactive ER diagram and Table Insights",
-        "ddl": "DDL management — CREATE / ALTER TABLE, foreign keys, indexes",
+        "ddl": "DDL management: CREATE / ALTER TABLE, foreign keys, indexes",
         "history": "Query history, favorites and tab groups",
         "vault": "Encrypted credential vault (Argon2) + proxy and ssh-agent support",
         "ssh": "Native SSH tunneling (OpenSSH, proxy jump)",
@@ -553,11 +553,11 @@
       "features": {
         "everything_core": "Everything in Core",
         "sandbox": "Sandbox mode with migration generation",
-        "time_travel": "Time Travel — row history, version diff and rollback SQL",
+        "time_travel": "Time Travel:row history, version diff and rollback SQL",
         "visual_diff": "Visual Data Diff (table comparison)",
         "audit_advanced": "Advanced audit log (unlimited, filterable, exportable)",
         "profiling": "Query profiling and performance analysis",
-        "ai": "AI assistant (BYOK — OpenAI / Anthropic / Ollama)",
+        "ai": "AI assistant (BYOK: OpenAI / Anthropic / Ollama)",
         "export_advanced": "Advanced exports (XLSX, Parquet)",
         "security_rules": "Custom safety rules",
         "library_advanced": "Advanced query library",
@@ -926,7 +926,7 @@
     "cta": "See full pricing details"
   },
   "metadata": {
-    "site_title": "QoreDB — The modern database client",
+    "site_title": "QoreDB - The modern database client",
     "site_description": "A fast, secure modern database client for developers. Unified SQL + NoSQL, secure vault, local-first.",
     "blog_title": "Blog - QoreDB",
     "blog_description": "Articles, updates and technical deep dives from the QoreDB team.",
