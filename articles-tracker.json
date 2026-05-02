@@ -115,54 +115,63 @@
       "title": "DuckDB comme moteur de fédération : pourquoi et comment",
       "category": "Architecture",
       "publishedAt": "2026-04-02"
+    },
+    {
+      "slug": "systeme-environnements-dev-staging-prod-garde-fous",
+      "title": "Le système d'environnements : Dev, Staging, Prod et leurs garde-fous",
+      "category": "Security",
+      "publishedAt": "2026-04-03"
+    },
+    {
+      "slug": "exporter-donnees-csv-json-sql-html-xlsx-parquet",
+      "title": "Exporter ses données en CSV, JSON, SQL, HTML, XLSX et Parquet",
+      "category": "Produit",
+      "publishedAt": "2026-04-05"
+    },
+    {
+      "slug": "visual-data-diff-comparer-prod-staging",
+      "title": "Le Visual Data Diff : comparer Prod et Staging côte à côte",
+      "category": "Produit",
+      "publishedAt": "2026-04-06"
+    },
+    {
+      "slug": "tauri-2-runtime-desktop-choix-contraintes-benefices",
+      "title": "Tauri 2 comme runtime desktop : choix, contraintes, bénéfices",
+      "category": "Architecture",
+      "publishedAt": "2026-04-06"
+    },
+    {
+      "slug": "universal-query-interceptor-hooks-profiling-prevention",
+      "title": "Le Universal Query Interceptor : hooks, profiling et prévention",
+      "category": "Architecture",
+      "publishedAt": "2026-04-07"
+    },
+    {
+      "slug": "pourquoi-qoredb-nemule-pas-features-absentes",
+      "title": "Pourquoi QoreDB n'émule pas les features absentes d'un moteur",
+      "category": "Vision",
+      "publishedAt": "2026-04-08"
+    },
+    {
+      "slug": "connexion-resiliente-health-checks-reconnexion-ssh",
+      "title": "Le système de connexion résiliente dans QoreDB : health checks et reconnexion SSH",
+      "category": "Architecture",
+      "publishedAt": "2026-04-12"
+    },
+    {
+      "slug": "recherche-fulltext-scanner-toutes-les-tables",
+      "title": "La recherche full-text dans QoreDB : scanner toutes les tables d'une base",
+      "category": "Produit",
+      "publishedAt": "2026-04-13"
+    },
+    {
+      "slug": "diagramme-er-interactif-visualiser-schema-relationnel",
+      "title": "Le diagramme ER interactif : visualiser un schéma relationnel",
+      "category": "Produit",
+      "publishedAt": "2026-04-16"
     }
   ],
   "queue": [
-    {
-      "title": "Le système d'environnements : Dev, Staging, Prod et leurs garde-fous",
-      "category": "Security",
-      "topic_notes": "Classification couleur, regex destructrices, confirmation backend, pas juste UI"
-    },
-    {
-      "title": "Exporter ses données en CSV, JSON, SQL, HTML, XLSX et Parquet",
-      "category": "Produit",
-      "topic_notes": "Formats multiples, export self-contained HTML, limites par format, XLSX/Parquet pro"
-    },
-    {
-      "title": "Le Visual Data Diff : comparer Prod et Staging côte à côte",
-      "category": "Produit",
-      "topic_notes": "Diff type Git, comparaison résultats, snapshots, cas d'usage réels"
-    },
-    {
-      "title": "Tauri 2 comme runtime desktop : choix, contraintes, bénéfices",
-      "category": "Architecture",
-      "topic_notes": "Pas Electron, webview native, binaire léger, IPC Rust/JS, limitations"
-    },
-    {
-      "title": "Le Universal Query Interceptor : hooks, profiling et prévention",
-      "category": "Architecture",
-      "topic_notes": "Intercepteur universel, logging, audit, blocage requêtes destructrices"
-    },
-    {
-      "title": "Pourquoi QoreDB n'émule pas les features absentes d'un moteur",
-      "category": "Vision",
-      "topic_notes": "Pas de polyfill SQL, transactions MongoDB, honnêteté sur les capacités"
-    },
-    {
-      "title": "Le système de connexion résiliente : reconnexion et keep-alive",
-      "category": "Architecture",
-      "topic_notes": "Health checks, reconnexion auto, recovery SSH, monitoring proactif"
-    },
-    {
-      "title": "La recherche globale full-text : scanner toutes les tables d'une base",
-      "category": "Produit",
-      "topic_notes": "Scan multi-tables, LIKE/regex par driver, coût réel, limitations"
-    },
-    {
-      "title": "Le diagramme ER interactif : visualiser un schéma relationnel",
-      "category": "Produit",
-      "topic_notes": "Rendu SVG, isolation tables, FK visibles, pas de reverse engineering magique"
-    },
     {
       "title": "Le Sandbox Mode : tester des modifications sans toucher la base",
       "category": "Produit",

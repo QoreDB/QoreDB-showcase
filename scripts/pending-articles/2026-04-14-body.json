@@ -1,0 +1,366 @@
+[
+  {
+    "_type": "block",
+    "_key": "0e40bf75491a",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "7505637b735f",
+        "text": "Quand on ouvre une base que l'on n'a pas conçue, la première question est toujours la même : à quoi ressemble le schéma, et qui pointe vers qui. Sans réponse rapide, on tâtonne dans la sidebar, on ouvre dix fois la même table, on essaie de reconstituer mentalement les relations à coups de descriptions textuelles. C'est lent, c'est frustrant, et ça décourage l'exploration.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "d4435f360b97",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "6967ae67f732",
+        "text": "Le diagramme ER de QoreDB répond à ce problème avec un parti pris simple : afficher exactement ce que la base déclare, le mettre en page automatiquement, et laisser l'utilisateur naviguer librement dans le résultat. Pas de devinette, pas de reconstruction magique, pas de schéma inventé. Le diagramme est un miroir du schéma réel, augmenté d'une couche d'interaction.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "1b83fad23947",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "c32d78ed3adc",
+        "text": "Un rendu SVG natif, sans librairie de graphes",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "232954191e7e",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "7e1c944512d4",
+        "text": "Le composant ERDiagram est un fichier React unique qui calcule lui-même la mise en page et dessine ses tables et ses arêtes en SVG. Il n'utilise ni D3, ni vis.js, ni react-flow. Ce choix peut surprendre, mais il a une raison précise : un schéma de base de données n'est pas un graphe générique. C'est un cas particulier, avec des contraintes simples, et la mise en page doit être prévisible.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "3f0810ca8770",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "1d9ab93d1c48",
+        "text": "Concrètement, les tables sont triées par ordre alphabétique puis distribuées dans une grille de quatre colonnes maximum, en équilibrant la hauteur de chaque colonne. Chaque table affiche une largeur fixe de 240 pixels, un en-tête, ses colonnes principales, un éventuel compteur de colonnes masquées. Les arêtes sont des courbes de Bézier qui partent du bord d'une table et arrivent au bord de l'autre, ancrées sur la ligne précise de la colonne concernée.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "252256b4c986",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "225c968f7c53",
+        "text": "Cette logique tient en quelques fonctions, sans dépendance lourde, et donne un rendu identique à chaque ouverture pour un schéma donné. C'est important pour la mémoire visuelle : un développeur qui revient sur sa base retrouve les tables aux mêmes endroits, ce qui n'est pas garanti avec un layout force-directed qui dépend du temps de calcul ou de l'état initial.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "dd2ae6758380",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "2afea0221023",
+        "text": "Lire ce que le moteur expose, sans inventer",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "8213f3ec088d",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "fd97aee6e5a1",
+        "text": "Le diagramme se construit en interrogeant le cache de schéma de QoreDB. Pour chaque table de la base, on récupère la liste des colonnes, la clé primaire, et les clés étrangères telles que le moteur les déclare. Ces informations viennent du driver natif (PostgreSQL, MySQL, SQL Server, SQLite, CockroachDB), via des requêtes sur l'information_schema ou les vues système équivalentes.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "189f05c59e03",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "1ed6808c8d81",
+        "text": "Aucune relation n'est devinée à partir des noms de colonnes. Si une colonne s'appelle ",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "c5a6c12fa414",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "c7a9781ce14f",
+        "text": "Le chargement est parallélisé avec un pool de six workers asynchrones qui consomment une file d'attente de tables. Sur une base de cinquante tables, le diagramme s'affiche en quelques secondes, avec une barre de progression qui indique combien de tables ont déjà été lues. Le tout reste annulable : si l'utilisateur change de base ou ferme l'onglet pendant le chargement, un identifiant de génération invalide les workers en cours et évite les mises à jour fantômes.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "3e1cf5cc25c1",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "0328993651a3",
+        "text": "Isolation, recherche et zoom pour explorer un grand schéma",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "c77c4a66eed7",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "f5beba14f982",
+        "text": "Sur une base de production, afficher cinquante ou cent tables d'un coup ne sert à rien : on ne distingue plus rien. Le diagramme propose donc plusieurs niveaux de filtrage.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "338fca158504",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "471fd0ba65ac",
+        "text": "Le mode isolation, déclenché en sélectionnant une table, recalcule la vue pour ne garder que cette table et ses voisines directes, c'est-à-dire les tables qui pointent vers elle ou vers lesquelles elle pointe. C'est l'équivalent d'un sous-graphe d'une profondeur de un. Pour explorer une zone précise du schéma, c'est immédiat et lisible.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "8ae399eaf9f7",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "cd9477fad13d",
+        "text": "La barre de recherche en haut filtre les tables par nom, sans modifier la mise en page mais en mettant en évidence la première correspondance. Combinée au bouton de centrage, elle permet de retrouver une table en deux clics, même dans un schéma large.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "80a0cb794298",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "81098c10516c",
+        "text": "Le pan-and-zoom est implémenté sur un viewport pointer events. Le glisser de la souris déplace la vue, la molette défile, et la molette avec ",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "e07c825bf8c0",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "8eda9e8e4bbc",
+        "text": "Les Virtual Relations s'intègrent naturellement",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "2c3b68debe8e",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "9a90dcf3ebc9",
+        "text": "Toutes les bases ne déclarent pas leurs clés étrangères. Les schémas MongoDB n'ont pas de FK natives, et beaucoup de bases relationnelles ont été créées sans contraintes par souci de performance ou par négligence. Pour ces cas, QoreDB propose un système de Virtual Relations : des relations FK définies côté client, stockées dans le projet, qui s'ajoutent au diagramme.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "f4896c5c5c1a",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "333ca433b1ac",
+        "text": "Dans le code, ces relations virtuelles sont chargées par le hook de cache de schéma au même titre que les FK déclarées en base. Elles apparaissent dans le diagramme avec un style visuel distinct pour qu'on puisse identifier rapidement ce qui vient du moteur et ce qui vient de l'utilisateur. Cette transparence est essentielle : un développeur doit toujours savoir si une relation affichée est garantie par la base ou seulement par sa propre déclaration.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b9ae010c8d06",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "dbb5ae5dbe83",
+        "text": "Un panneau dédié, accessible depuis le diagramme, permet de gérer ces virtual relations sans quitter la vue. On peut ajouter une FK virtuelle entre deux collections MongoDB, par exemple, puis la voir immédiatement dessinée sur le diagramme.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b4f1a70b7845",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "c9fb6afb92f6",
+        "text": "À quoi ça ressemble en usage réel",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "251a8d39262a",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "352a97b2d246",
+        "text": "Le flux typique commence par l'ouverture d'une base depuis la sidebar. L'onglet schéma propose une vue tabulaire et une vue diagramme. En basculant sur le diagramme, le chargement démarre, la barre de progression avance, et au bout de quelques secondes le schéma complet apparaît, centré et ajusté.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "249773f42162",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "ada9cdf31af7",
+        "text": "Pour comprendre une zone précise, on clique sur une table : le mode isolation se déclenche, et seules les tables liées restent visibles. Les arêtes affichent le nom de la colonne source et de la colonne cible au survol, avec la contrainte associée. Pour voir toutes les colonnes d'une table, un clic sur l'icône d'expansion déplie la table dans le diagramme, sans casser la mise en page globale.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "ce8c5b61eb4e",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "4d34c74c89d0",
+        "text": "Lorsque le schéma évolue (création ou suppression de table dans un autre onglet), le diagramme se rafraîchit automatiquement grâce à un système d'événements interne qui notifie les composants concernés. Pas besoin de fermer puis rouvrir l'onglet pour voir une nouvelle table apparaître.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "f155f36abef3",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "d72298116db5",
+        "text": "Un outil d'exploration, pas de modélisation",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b54ea2bc83ab",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "6894002e61fd",
+        "text": "Le diagramme ER de QoreDB est conçu comme une lecture du schéma existant, pas comme un éditeur visuel. On ne dessine pas une table en faisant glisser un rectangle, on ne crée pas une FK en tirant un lien à la souris. Pour ces opérations, l'interface dédiée de gestion des tables et le mode sandbox sont mieux adaptés : ils génèrent du SQL explicite que l'on peut relire et exécuter.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "833fefe5ef23",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "d8ebac627549",
+        "text": "Ce parti pris garde le diagramme lisible et prévisible. Il sert à un seul objectif : comprendre rapidement la structure d'une base, ses relations, ses points centraux. Pour un développeur qui débarque sur un projet ou qui doit auditer une base inconnue, c'est exactement le bon niveau d'abstraction.",
+        "marks": []
+      }
+    ]
+  }
+]
