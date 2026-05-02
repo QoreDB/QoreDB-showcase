@@ -5,9 +5,13 @@ import {
   Brain,
   Combine,
   Database,
+  FolderKanban,
+  Gauge,
+  History,
   Layers,
   Lock,
   Shield,
+  Table,
   Terminal,
   Zap,
 } from "lucide-react";
@@ -15,6 +19,9 @@ import { Trans, useTranslation } from "react-i18next";
 
 const featureIcons = {
   unified: Database,
+  workspaces: FolderKanban,
+  time_travel: History,
+  ddl: Table,
   vault: Shield,
   ssh: Lock,
   editor: Terminal,
@@ -22,6 +29,7 @@ const featureIcons = {
   grid: Zap,
   ai: Brain,
   federation: Combine,
+  performance: Gauge,
 };
 
 export function FeaturesSection() {

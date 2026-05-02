@@ -64,7 +64,7 @@
     },
     "ph_badge": "Lancement sur Product Hunt",
     "title": "Une app pour <italic>toutes vos bases</italic>",
-    "subtitle": "Le client de bases de données open-source, rapide, propulsé par Rust. Connectez <highlight>9 bases de données</highlight> depuis une seule interface. Local-first — vos données restent chez vous.",
+    "subtitle": "Le client de bases de données open-source, rapide, propulsé par Rust. Connectez-vous à <highlight>12 drivers natifs</highlight> — dont la famille PostgreSQL (Supabase, Neon, TimescaleDB) — depuis une seule interface. Local-first — vos données restent chez vous.",
     "cta": {
       "join_beta": "Rejoindre la beta",
       "download_core": "Télécharger gratuitement",
@@ -134,35 +134,47 @@
   "features": {
     "eyebrow": "Fonctionnalités",
     "title": "Tout ce qu'il faut, <accent>rien de superflu</accent>",
-    "subtitle": "9 drivers, une interface. Pas d'Electron, pas de cloud, pas de bloat.",
+    "subtitle": "12 drivers, une interface. Pas d'Electron, pas de cloud, pas de bloat.",
     "items": {
       "unified": {
-        "title": "9 drivers natifs",
-        "desc": "PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis et CockroachDB dans une seule interface."
+        "title": "12 drivers natifs",
+        "desc": "Famille PostgreSQL (dont Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis et CockroachDB."
+      },
+      "workspaces": {
+        "title": "Workspaces",
+        "desc": "Regroupez connexions, requêtes, notebooks et historique par projet. Changez de contexte en un clic."
+      },
+      "time_travel": {
+        "title": "Time Travel",
+        "desc": "Parcourez l'historique d'une ligne, comparez les versions et générez le SQL de rollback en un clic."
+      },
+      "ddl": {
+        "title": "Gestion DDL",
+        "desc": "CREATE / ALTER TABLE, clés étrangères, index et contraintes — avec aperçu SQL spécifique au driver et alertes."
       },
       "vault": {
         "title": "Sécurité & Privée",
-        "desc": "Credentials chiffrés (Argon2) et respect RGPD (zéro télémétrie)."
+        "desc": "Credentials chiffrés (Argon2), support proxy et respect RGPD (zéro télémétrie)."
       },
       "ssh": {
         "title": "SSH Tunneling",
-        "desc": "Support natif des tunnels SSH pour bases distantes."
+        "desc": "Client OpenSSH natif avec proxy jump, intégration ssh-agent et messages d'erreur clairs."
       },
       "editor": {
         "title": "Éditeur intelligent",
-        "desc": "Syntax highlighting, snippets, formatage et exécution multi-statements."
+        "desc": "Coloration syntaxique, autocomplétion (incl. collections MongoDB), linting temps réel et exécution multi-statements."
       },
       "library": {
         "title": "Query Library",
-        "desc": "Dossiers, tags, import/export JSON et requêtes réutilisables."
+        "desc": "Dossiers, tags, import/export JSON et requêtes réutilisables — convertibles en notebooks en un clic."
       },
       "envs": {
         "title": "Protection environnements",
-        "desc": "Dev/Staging/Prod distincts, blocage mutations en prod."
+        "desc": "Dev/Staging/Prod distincts, blocage des mutations en prod, limites de gouvernance et redaction d'audit."
       },
       "grid": {
         "title": "Data Grid performant",
-        "desc": "Virtualisation, filtres serveur, édition inline, pagination et scroll infini."
+        "desc": "Virtualisation, filtres avancés serveur, bulk edit, édition inline et scroll infini."
       },
       "ai": {
         "title": "Assistant IA",
@@ -172,17 +184,17 @@
         "title": "Fédération inter-bases",
         "desc": "Exécutez des requêtes SQL cross-database avec jointures entre connexions actives."
       },
-      "ddl": {
-        "title": "Gestion DDL",
-        "desc": "Créez/supprimez bases, tables, routines, triggers et lancez des opérations de maintenance."
+      "performance": {
+        "title": "25% plus rapide",
+        "desc": "Streaming par batch, encodage MessagePack, décodeurs par colonne et Profile-Guided Optimization."
       },
       "export": {
         "title": "Export multi-formats",
-        "desc": "Exportez vos résultats en CSV, JSON, SQL, HTML, XLSX, Parquet ou HTML autonome."
+        "desc": "Exportez en CSV, JSON, SQL, HTML, XLSX, Parquet ou HTML autonome — et partagez via vos providers."
       },
       "opensource": {
         "title": "Open Source",
-        "desc": "Code auditable disponible sur GitHub."
+        "desc": "Code auditable sur GitHub. Packages AUR pour Arch Linux."
       }
     },
     "killer": {
@@ -245,7 +257,7 @@
     "label": "Une interface, toutes les bases"
   },
   "social_proof": {
-    "databases": "9 bases de données",
+    "databases": "12 drivers natifs",
     "binary_size": "~15 Mo le binaire",
     "startup": "<1s au démarrage",
     "license": "Apache 2.0"
@@ -272,7 +284,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "9 moteurs",
+        "multidb": "12 drivers",
         "native": "Rust/Tauri",
         "local": "Oui",
         "vault": "Argon2",
@@ -375,28 +387,28 @@
   },
   "roadmap_page": {
     "title": "Roadmap QoreDB",
-    "subtitle": "Découvrez les prochaines étapes du développement de QoreDB.",
+    "subtitle": "Ce qui vient d'être livré, et ce qui arrive ensuite.",
     "now": {
-      "title": "Maintenant — Fondations solides",
-      "quote": "Rendre QoreDB fiable, rapide et agréable pour un usage quotidien.",
+      "title": "Tout juste livré — v0.1.23 → v0.1.27",
+      "quote": "QoreDB est plus rapide, plus sûr, prêt pour un usage quotidien sérieux.",
       "items": {
-        "1": "Amélioration continue des performances et de la stabilité",
-        "2": "Sécurité et confidentialité local-first renforcées",
-        "3": "Expérience utilisateur plus fluide sur les workflows existants",
-        "4": "Gestion des erreurs et diagnostics plus clairs",
-        "5": "Documentation et ouverture progressive à la communauté"
+        "1": "Workspaces — regroupez connexions, requêtes et notebooks par projet",
+        "2": "Time Travel — historique des lignes et SQL de rollback",
+        "3": "12 drivers natifs, dont Supabase, Neon et TimescaleDB",
+        "4": "Gestion DDL (CREATE / ALTER TABLE), bulk edit et tab groups",
+        "5": "Streaming 25% plus rapide, filtres avancés et 9 langues d'interface"
       },
-      "goal": "Objectif : un outil que les développeurs peuvent utiliser et recommander en confiance."
+      "goal": "Objectif : un outil que les développeurs utilisent et recommandent déjà en confiance."
     },
     "soon": {
       "title": "Prochainement — Productivité et clarté",
       "quote": "Aller au-delà des clients de bases de données traditionnels.",
       "items": {
-        "1": "Navigation et exploration des données plus efficaces",
-        "2": "Meilleure compréhension des structures et relations",
-        "3": "Édition des données plus sûre et plus intuitive",
-        "4": "Comparaison et manipulation de données facilitées",
-        "5": "Premières briques de collaboration locale"
+        "1": "Outillage MongoDB plus poussé et workflows d'agrégation enrichis",
+        "2": "Migrations de schéma visuelles et aperçus de refactor",
+        "3": "Notebooks plus aboutis pour l'exploration et le reporting",
+        "4": "Assistance IA plus fine pour explications, fixes et reviews",
+        "5": "Premières briques de collaboration et sync local-first"
       },
       "goal": "Objectif : faire gagner du temps réel aux développeurs, au quotidien."
     },
@@ -457,7 +469,7 @@
       },
       "supported_databases": {
         "question": "Quelles bases de données sont supportées ?",
-        "answer": "QoreDB supporte actuellement :\n\n* PostgreSQL\n* MySQL / MariaDB\n* SQL Server\n* SQLite\n* DuckDB\n* MongoDB\n* Redis\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
+        "answer": "QoreDB supporte actuellement 12 drivers natifs :\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famille PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. authentification Windows — NTLM et Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (avec autocomplétion d'éditeur et linting d'agrégations)\n* Redis (avec gestion complète des clés)\n* CockroachDB\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
       },
       "remote_ssh": {
         "question": "Fonctionne-t-il avec des connexions distantes et SSH ?",
@@ -515,17 +527,19 @@
       "badge": "Plan principal",
       "cta": "Télécharger gratuitement",
       "features": {
-        "drivers": "Tous les drivers (PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB)",
-        "crud": "CRUD complet + éditeur SQL/Mongo",
-        "grid": "Grille de données haute performance (scroll virtuel)",
-        "er_diagram": "Diagramme ER interactif",
-        "history": "Historique et favoris de requêtes",
-        "vault": "Vault chiffré (Argon2) pour les credentials",
-        "ssh": "Tunneling SSH natif",
-        "safety": "Règles de sécurité production (labels environnement, mode read-only)",
-        "audit_basic": "Audit log basique (50 entrées)",
-        "export_basic": "Export CSV / JSON / SQL",
-        "shortcuts": "Raccourcis clavier"
+        "drivers": "12 drivers natifs (famille PostgreSQL — dont Supabase, Neon, TimescaleDB —, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB)",
+        "crud": "CRUD complet + éditeur SQL/Mongo avec autocomplétion et linting",
+        "workspaces": "Workspaces — regroupez connexions, requêtes et notebooks par projet",
+        "grid": "Grille haute performance avec bulk edit et filtres avancés",
+        "er_diagram": "Diagramme ER interactif et Table Insights",
+        "ddl": "Gestion DDL — CREATE / ALTER TABLE, clés étrangères, index",
+        "history": "Historique, favoris et tab groups",
+        "vault": "Vault chiffré (Argon2) + support proxy et ssh-agent",
+        "ssh": "Tunneling SSH natif (OpenSSH, proxy jump)",
+        "safety": "Règles de sécurité production (labels environnement, read-only, limites de gouvernance)",
+        "audit_basic": "Audit log basique (50 entrées) avec redaction des requêtes",
+        "export_basic": "Export CSV / JSON / SQL et liens de partage de résultats",
+        "shortcuts": "Raccourcis clavier et 9 langues d'interface"
       }
     },
     "pro": {
@@ -538,6 +552,7 @@
       "features": {
         "everything_core": "Tout ce qui est dans Core",
         "sandbox": "Mode Sandbox avec génération de migrations",
+        "time_travel": "Time Travel — historique des lignes, diff de versions et SQL de rollback",
         "visual_diff": "Visual Data Diff (comparaison de tables)",
         "audit_advanced": "Audit log avancé (illimité, filtrable, exportable)",
         "profiling": "Profilage de requêtes (performance)",
@@ -796,7 +811,7 @@
       },
       "connect": {
         "title": "2. Créer votre première connexion",
-        "content": "<p>Cliquez sur <strong>+</strong> dans la barre latérale pour ajouter une base :</p><ul><li>PostgreSQL</li><li>MySQL / MariaDB</li><li>SQL Server</li><li>SQLite</li><li>DuckDB</li><li>MongoDB</li><li>Redis</li></ul><p>Renseignez l’hôte, le port, la base, l’utilisateur et l’environnement (dev/staging/prod).</p>"
+        "content": "<p>Cliquez sur <strong>+</strong> dans la barre latérale pour ajouter une base. QoreDB embarque 12 drivers natifs :</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (auth Windows supportée)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li></ul><p>Collez une chaîne de connexion pour la détection automatique du driver, ou renseignez l’hôte, le port, la base, l’utilisateur et l’environnement (dev/staging/prod). Organisez le tout en <strong>Workspaces</strong> pour garder vos projets propres.</p>"
       },
       "explore": {
         "title": "3. Explorer vos données",
@@ -897,15 +912,15 @@
     "title": "Tarification simple et transparente",
     "subtitle": "Core est gratuit pour toujours. Pro débloque les fonctionnalités avancées.",
     "core_price": "Gratuit",
-    "core_1": "9 drivers de bases de données natifs",
-    "core_2": "Éditeur SQL avec autocomplétion",
-    "core_3": "Coffre-fort chiffré & tunnels SSH",
-    "core_4": "Protection des environnements de production",
+    "core_1": "12 drivers natifs (dont Supabase, Neon, TimescaleDB)",
+    "core_2": "Workspaces, DDL, bulk edit et filtres avancés",
+    "core_3": "Coffre-fort chiffré & tunnels SSH natifs",
+    "core_4": "Protection production et 9 langues d'interface",
     "pro_badge": "Achat unique",
     "pro_price_note": "Tout ce qui est dans Core, plus les workflows avancés.",
     "pro_1": "Assistant IA (BYOK)",
     "pro_2": "Sandbox + scripts de migration",
-    "pro_3": "Visual data diff",
+    "pro_3": "Time Travel + Visual Data Diff",
     "pro_4": "Fédération inter-bases",
     "cta": "Voir tous les détails tarifaires"
   },

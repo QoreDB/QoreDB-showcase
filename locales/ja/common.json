@@ -64,7 +64,7 @@
     },
     "ph_badge": "Product Hunt での発売",
     "title": "<italic>すべてのデータベース</italic> に 1 つのアプリで対応",
-    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。単一の美しいインターフェイスから <highlight>9 個のデータベース</highlight> に接続します。ローカルファースト — データは自分のもののままです。",
+    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>12 個のネイティブ ドライバー</highlight>（PostgreSQL ファミリー — Supabase、Neon、TimescaleDB を含む）に、単一の美しいインターフェイスから接続できます。ローカルファースト — データは自分のもののままです。",
     "cta": {
       "join_beta": "ベータ版に参加する",
       "download_core": "無料ダウンロード",
@@ -134,35 +134,47 @@
   "features": {
     "eyebrow": "特長",
     "title": "必要なものはすべて揃っており、<accent>必要なものは何もありません</accent>",
-    "subtitle": "9 つのドライバー、1 つのインターフェイス。 Electron もクラウドへの依存も膨張もありません。",
+    "subtitle": "12 個のドライバー、1 つのインターフェイス。Electron もクラウド依存も bloat もありません。",
     "items": {
       "unified": {
-        "title": "9 ネイティブドライバー",
-        "desc": "PostgreSQL、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB を 1 つのインターフェイスで。"
+        "title": "12 個のネイティブ ドライバー",
+        "desc": "PostgreSQL ファミリー（Supabase、Neon、TimescaleDB を含む）、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB。"
+      },
+      "workspaces": {
+        "title": "Workspaces",
+        "desc": "接続、クエリ、ノートブック、履歴をプロジェクトごとにグループ化。ワンクリックでコンテキストを切り替えできます。"
+      },
+      "time_travel": {
+        "title": "Time Travel",
+        "desc": "任意の行の履歴を参照し、バージョンを並べて比較し、ロールバック SQL をワンクリックで生成します。"
+      },
+      "ddl": {
+        "title": "DDL 管理",
+        "desc": "CREATE / ALTER TABLE、外部キー、インデックス、制約 — ドライバー固有の SQL プレビューと警告付き。"
       },
       "vault": {
         "title": "セキュリティとプライバシー",
-        "desc": "暗号化された認証情報 (Argon2) および GDPR 準拠 (ゼロ テレメトリ)。"
+        "desc": "暗号化された認証情報 (Argon2)、プロキシ サポート、および GDPR 準拠 (ゼロ テレメトリ)。"
       },
       "ssh": {
         "title": "SSHトンネリング",
-        "desc": "リモート データベースの SSH トンネルのネイティブ サポート。"
+        "desc": "ネイティブ OpenSSH クライアント、proxy jump、ssh-agent 統合、明確なエラー報告。"
       },
       "editor": {
         "title": "スマートエディター",
-        "desc": "構文の強調表示、スニペット、書式設定、および複数ステートメントの実行。"
+        "desc": "構文の強調表示、オートコンプリート（MongoDB コレクション含む）、リアルタイム linting、複数ステートメント実行。"
       },
       "library": {
         "title": "クエリライブラリ",
-        "desc": "フォルダー、タグ、JSON インポート/エクスポート、および再利用可能なクエリ。"
+        "desc": "フォルダー、タグ、JSON インポート/エクスポート、再利用可能なクエリ — ワンクリックでノートブックに変換可能。"
       },
       "envs": {
         "title": "環境保護",
-        "desc": "個別の開発/ステージング/本番、本番での突然変異のブロック。"
+        "desc": "Dev/Staging/Prod の分離、本番での mutation ブロック、ガバナンス制限、監査の redaction。"
       },
       "grid": {
         "title": "高性能グリッド",
-        "desc": "仮想化、サーバー側フィルタリング、インライン編集、ページネーション、無限スクロール。"
+        "desc": "仮想化、サーバーサイドの高度なフィルター、bulk edit、インライン編集、無限スクロール。"
       },
       "ai": {
         "title": "AIアシスタント",
@@ -172,17 +184,17 @@
         "title": "クロス DB フェデレーション",
         "desc": "アクティブな接続間の結合を使用して、複数のデータベースにわたって SQL クエリを実行します。"
       },
-      "ddl": {
-        "title": "DDL 管理",
-        "desc": "データベース、テーブル、ルーチン、トリガーを作成/削除し、メンテナンス操作を実行します。"
+      "performance": {
+        "title": "25% 高速化",
+        "desc": "バッチ ストリーミング、MessagePack エンコーディング、列単位デコーダー、Profile-Guided Optimization。"
       },
       "export": {
         "title": "マルチフォーマットエクスポート",
-        "desc": "結果を CSV、JSON、SQL、HTML、XLSX、Parquet、または自己完結型 HTML としてエクスポートします。"
+        "desc": "結果を CSV、JSON、SQL、HTML、XLSX、Parquet、または自己完結型 HTML としてエクスポート — 設定可能なプロバイダー経由で共有できます。"
       },
       "opensource": {
         "title": "オープンソース",
-        "desc": "監査可能なコードは GitHub で入手できます。"
+        "desc": "監査可能なコードを GitHub で公開。Arch Linux 用の AUR パッケージあり。"
       }
     },
     "killer": {
@@ -245,7 +257,7 @@
     "label": "1 つのインターフェイス、すべてのデータベース"
   },
   "social_proof": {
-    "databases": "9 つのデータベース",
+    "databases": "12ドライバー",
     "binary_size": "~15 MB バイナリ",
     "startup": "1秒未満の起動",
     "license": "アパッチ2.0"
@@ -272,7 +284,7 @@
     "values": {
       "qoredb": {
         "opensource": "アパッチ2.0",
-        "multidb": "9 エンジン",
+        "multidb": "12ドライバー",
         "native": "ラスト/タウリ",
         "local": "はい",
         "vault": "アルゴン2",
@@ -377,26 +389,26 @@
     "title": "QoreDB ロードマップ",
     "subtitle": "QoreDB 開発の次のステップをご覧ください。",
     "now": {
-      "title": "今 - 強固な基盤",
-      "quote": "QoreDB を信頼性が高く、高速で、毎日快適に使用できるようにします。",
+      "title": "リリース済み — v0.1.23 → v0.1.27",
+      "quote": "QoreDB はより速く、より安全になり、本格的な日常使用の準備が整いました。",
       "items": {
-        "1": "パフォーマンスと安定性の継続的な改善",
-        "2": "ローカルファーストのセキュリティとプライバシーの強化",
-        "3": "既存のワークフローでのよりスムーズなユーザー エクスペリエンス",
-        "4": "より明確なエラー処理と診断",
-        "5": "ドキュメント化とコミュニティへの漸進的な開放"
+        "1": "Workspaces — 接続、クエリ、ノートブックをプロジェクトごとにグループ化",
+        "2": "Time Travel — 行履歴の参照とロールバック SQL の生成",
+        "3": "12 個のネイティブ ドライバー、Supabase、Neon、TimescaleDB を含む",
+        "4": "DDL 管理（CREATE / ALTER TABLE）、bulk edit、tab groups",
+        "5": "ストリーミング 25% 高速化、高度なフィルター、9 つの UI 言語"
       },
-      "goal": "目標: 開発者が自信を持って使用し、推奨できるツール。"
+      "goal": "目標: 開発者がすでに自信を持って使用し、推奨しているツール。"
     },
     "soon": {
       "title": "まもなく — 生産性と明快さ",
       "quote": "従来のデータベース クライアントを超えてください。",
       "items": {
-        "1": "より効率的なデータのナビゲーションと探索",
-        "2": "構造と関係をより深く理解する",
-        "3": "より安全で直感的なデータ編集",
-        "4": "データの比較と操作が容易になる",
-        "5": "地域連携の最初のブロック"
+        "1": "より深い MongoDB ツールとよりリッチな集計ワークフロー",
+        "2": "視覚的なスキーマ移行と refactor プレビュー",
+        "3": "データ探索とレポート作成のためのより充実したノートブック",
+        "4": "より賢い AI 支援による説明、修正、レビュー",
+        "5": "ローカルファーストのコラボレーションと同期の最初のブロック"
       },
       "goal": "目標: 開発者を毎日リアルタイムで節約します。"
     },
@@ -457,7 +469,7 @@
       },
       "supported_databases": {
         "question": "どのデータベースがサポートされていますか?",
-        "answer": "QoreDB は現在以下をサポートしています:\n\n* ポストグレSQL\n* MySQL / マリアDB\n* SQLサーバー\n*SQLite\n*ダックDB\n* モンゴDB\n* レディス\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
+        "answer": "QoreDB は現在 12 個のネイティブ ドライバーをサポートしています:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB（PostgreSQL ファミリー）\n* MySQL / MariaDB\n* SQL Server（Windows 認証 — NTLM および Kerberos を含む）\n* SQLite\n* DuckDB\n* MongoDB（エディタのオートコンプリートと集計の linting 付き）\n* Redis（フルキー管理付き）\n* CockroachDB\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
       },
       "remote_ssh": {
         "question": "リモート接続と SSH は機能しますか?",
@@ -515,17 +527,19 @@
       "badge": "主な選択肢",
       "cta": "無料でダウンロード",
       "features": {
-        "drivers": "すべてのドライバー (PostgreSQL、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB)",
-        "crud": "完全な CRUD + SQL/Mongo エディター",
-        "grid": "高性能データグリッド（仮想スクロール）",
-        "er_diagram": "インタラクティブなER図",
-        "history": "クエリ履歴とお気に入り",
-        "vault": "暗号化された資格情報ボールト (Argon2)",
-        "ssh": "ネイティブ SSH トンネリング",
-        "safety": "実稼働安全ルール (環境ラベル、読み取り専用モード)",
-        "audit_basic": "基本監査ログ (50 エントリ)",
-        "export_basic": "CSV / JSON / SQL エクスポート",
-        "shortcuts": "キーボードショートカット"
+        "drivers": "12 個のネイティブ ドライバー（PostgreSQL ファミリー — Supabase、Neon、TimescaleDB を含む — MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
+        "crud": "完全な CRUD + オートコンプリートと linting 付きの SQL/Mongo エディター",
+        "workspaces": "Workspaces — 接続、クエリ、ノートブックをプロジェクトごとにグループ化",
+        "grid": "bulk edit と高度なフィルター付きの高性能データ グリッド",
+        "er_diagram": "インタラクティブな ER 図と Table Insights",
+        "ddl": "DDL 管理 — CREATE / ALTER TABLE、外部キー、インデックス",
+        "history": "クエリ履歴、お気に入り、tab groups",
+        "vault": "暗号化された資格情報ボールト (Argon2) + プロキシと ssh-agent サポート",
+        "ssh": "ネイティブ SSH トンネリング（OpenSSH、proxy jump）",
+        "safety": "実稼働安全ルール（環境ラベル、読み取り専用モード、ガバナンス制限）",
+        "audit_basic": "基本監査ログ (50 エントリ) およびクエリ redaction",
+        "export_basic": "CSV / JSON / SQL エクスポートと共有可能な結果リンク",
+        "shortcuts": "キーボード ショートカットと 9 つの UI 言語"
       }
     },
     "pro": {
@@ -538,6 +552,7 @@
       "features": {
         "everything_core": "コアのすべて",
         "sandbox": "移行世代を含むサンドボックス モード",
+        "time_travel": "Time Travel — 行履歴、バージョン diff、ロールバック SQL",
         "visual_diff": "Visual Data Diff (テーブル比較)",
         "audit_advanced": "高度な監査ログ (無制限、フィルター可能、エクスポート可能)",
         "profiling": "クエリプロファイリングとパフォーマンス分析",
@@ -796,7 +811,7 @@
       },
       "connect": {
         "title": "2. 最初の接続を作成する",
-        "content": "<p>サイドバーの <strong>+</strong> をクリックしてデータベースを追加します:</p><ul><li>PostgreSQL</li><li>MySQL / MariaDB</li><li>SQL Server</li><li>SQLite</li><li>DuckDB</li><li>MongoDB</li><li>Redis</li></ul><p>ホスト、ポート、データベース、ユーザー、環境 (dev/staging/prod) を入力します。</p>"
+        "content": "<p>サイドバーの <strong>+</strong> をクリックしてデータベースを追加します。QoreDB には 12 個のネイティブ ドライバーが付属しています:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（Windows 認証対応）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li></ul><p>接続文字列を貼り付けるとドライバーが自動検出されます。または、ホスト、ポート、データベース、ユーザー、環境 (dev/staging/prod) を入力します。すべてを <strong>Workspaces</strong> にまとめて、プロジェクトをきれいに保ちましょう。</p>"
       },
       "explore": {
         "title": "3. データを探索する",
@@ -897,15 +912,15 @@
     "title": "シンプルで透明性のある価格設定",
     "subtitle": "コアは永久に無料です。 Pro ではパワーユーザー向けの機能が利用可能になります。",
     "core_price": "無料",
-    "core_1": "8 つのネイティブ データベース ドライバー",
-    "core_2": "オートコンプリート機能を備えた SQL エディター",
-    "core_3": "暗号化されたボールトと SSH トンネリング",
-    "core_4": "生産安全装置",
+    "core_1": "12 個のネイティブ ドライバー（Supabase、Neon、TimescaleDB を含む）",
+    "core_2": "Workspaces、DDL、bulk edit、高度なフィルター",
+    "core_3": "暗号化されたボールトとネイティブ SSH トンネリング",
+    "core_4": "実稼働安全装置と 9 つの UI 言語",
     "pro_badge": "1回限りの購入",
     "pro_price_note": "Core のすべてに加えて、高度なワークフロー。",
     "pro_1": "AIアシスタント（BYOK）",
     "pro_2": "サンドボックス モード + 移行スクリプト",
-    "pro_3": "ビジュアルデータの差分",
+    "pro_3": "Time Travel + Visual Data Diff",
     "pro_4": "クロスデータベースフェデレーション",
     "cta": "料金の詳細を確認する"
   },

@@ -169,8 +169,10 @@ export default function PricingPageClient({
   const coreFeatures = [
     "drivers",
     "crud",
+    "workspaces",
     "grid",
     "er_diagram",
+    "ddl",
     "history",
     "vault",
     "ssh",
@@ -183,6 +185,7 @@ export default function PricingPageClient({
   const proFeatures = [
     "everything_core",
     "sandbox",
+    "time_travel",
     "visual_diff",
     "audit_advanced",
     "profiling",

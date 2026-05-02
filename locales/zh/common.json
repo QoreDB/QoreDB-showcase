@@ -64,7 +64,7 @@
     },
     "ph_badge": "启动产品搜寻",
     "title": "一款适用于<italic>所有数据库</italic>的应用程序",
-    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>9 数据库</highlight>。本地优先——您的数据归您所有。",
+    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>12 个原生驱动</highlight>，包括 PostgreSQL 系列（Supabase、Neon、TimescaleDB）。本地优先——您的数据归您所有。",
     "cta": {
       "join_beta": "加入测试版",
       "download_core": "免费下载",
@@ -134,35 +134,47 @@
   "features": {
     "eyebrow": "特点",
     "title": "您需要的一切，<accent>您不需要的一切</accent>",
-    "subtitle": "9 个驱动程序，1 个接口。没有 Electron，没有云依赖，没有膨胀。",
+    "subtitle": "12 个驱动，1 个界面。没有 Electron，没有云依赖，没有膨胀。",
     "items": {
       "unified": {
-        "title": "9 本机驱动程序",
-        "desc": "PostgreSQL、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis 和 CockroachDB 在一个界面中。"
+        "title": "12 个原生驱动",
+        "desc": "PostgreSQL 系列（含 Supabase、Neon、TimescaleDB）、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis 和 CockroachDB。"
+      },
+      "workspaces": {
+        "title": "Workspaces",
+        "desc": "按项目分组连接、查询、笔记本和历史记录。一键切换上下文。"
+      },
+      "time_travel": {
+        "title": "Time Travel",
+        "desc": "浏览任何行的历史记录，并排比较版本，并一键生成回滚 SQL。"
+      },
+      "ddl": {
+        "title": "DDL 管理",
+        "desc": "CREATE / ALTER TABLE、外键、索引和约束 — 提供驱动特定的 SQL 预览和警告。"
       },
       "vault": {
         "title": "安全与隐私",
-        "desc": "加密凭证 (Argon2) 且符合 GDPR（零遥测）。"
+        "desc": "加密凭证 (Argon2)、代理支持，且符合 GDPR（零遥测）。"
       },
       "ssh": {
         "title": "SSH 隧道",
-        "desc": "对远程数据库的 SSH 隧道的本机支持。"
+        "desc": "原生 OpenSSH 客户端，支持 proxy jump、ssh-agent 集成，并提供清晰的错误报告。"
       },
       "editor": {
         "title": "智能编辑器",
-        "desc": "语法突出显示、片段、格式化和多语句执行。"
+        "desc": "语法高亮、自动完成（包括 MongoDB 集合）、实时 linting 和多语句执行。"
       },
       "library": {
         "title": "查询库",
-        "desc": "文件夹、标签、JSON 导入/导出和可重用查询。"
+        "desc": "文件夹、标签、JSON 导入/导出和可重用查询 — 一键转换为笔记本。"
       },
       "envs": {
         "title": "环境保护",
-        "desc": "独特的开发/分阶段/产品，产品中的突变阻止。"
+        "desc": "Dev/Staging/Prod 分离，生产环境阻止变更，治理限制和审计 redaction。"
       },
       "grid": {
         "title": "高性能网格",
-        "desc": "虚拟化、服务器端过滤、内联编辑、分页和无限滚动。"
+        "desc": "虚拟化、服务器端高级过滤、批量编辑、内联编辑和无限滚动。"
       },
       "ai": {
         "title": "人工智能助手",
@@ -172,17 +184,17 @@
         "title": "跨数据库联邦",
         "desc": "通过活动连接之间的联接跨多个数据库运行 SQL 查询。"
       },
-      "ddl": {
-        "title": "DDL管理",
-        "desc": "创建/删除数据库、表、例程、触发器并运行维护操作。"
+      "performance": {
+        "title": "速度提升 25%",
+        "desc": "批量流式传输、MessagePack 编码、按列解码器和 Profile-Guided Optimization。"
       },
       "export": {
         "title": "多格式导出",
-        "desc": "将结果导出为 CSV、JSON、SQL、HTML、XLSX、Parquet 或独立 HTML。"
+        "desc": "将结果导出为 CSV、JSON、SQL、HTML、XLSX、Parquet 或独立 HTML — 通过可配置的提供商共享。"
       },
       "opensource": {
         "title": "开源",
-        "desc": "GitHub 上提供了可审核的代码。"
+        "desc": "GitHub 上提供可审核的代码。Arch Linux 提供 AUR 软件包。"
       }
     },
     "killer": {
@@ -245,7 +257,7 @@
     "label": "一个界面，每个数据库"
   },
   "social_proof": {
-    "databases": "9个数据库",
+    "databases": "12 个驱动",
     "binary_size": "~15 MB 二进制文件",
     "startup": "<1秒启动",
     "license": "阿帕奇2.0"
@@ -272,7 +284,7 @@
     "values": {
       "qoredb": {
         "opensource": "阿帕奇2.0",
-        "multidb": "9 台发动机",
+        "multidb": "12 个驱动",
         "native": "铁锈/金牛座",
         "local": "是的",
         "vault": "氩气2",
@@ -377,26 +389,26 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "现在——坚实的基础",
-      "quote": "使 QoreDB 可靠、快速且适合日常使用。",
+      "title": "刚刚发布 — v0.1.23 → v0.1.27",
+      "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
-        "1": "性能和稳定性持续提升",
-        "2": "增强本地优先的安全和隐私",
-        "3": "现有工作流程上更流畅的用户体验",
-        "4": "更清晰的错误处理和诊断",
-        "5": "文档和逐步向社区开放"
+        "1": "Workspaces — 按项目分组连接、查询和笔记本",
+        "2": "Time Travel — 浏览行历史并生成回滚 SQL",
+        "3": "12 个原生驱动，包括 Supabase、Neon 和 TimescaleDB",
+        "4": "DDL 管理（CREATE / ALTER TABLE）、批量编辑和 tab groups",
+        "5": "流式传输速度提升 25%、高级过滤器和 9 种界面语言"
       },
-      "goal": "目标：开发者可以放心使用和推荐的工具。"
+      "goal": "目标：开发者已经放心使用和推荐的工具。"
     },
     "soon": {
       "title": "很快——生产力和清晰度",
       "quote": "超越传统的数据库客户端。",
       "items": {
-        "1": "更高效的数据导航和探索",
-        "2": "更好地理解结构和关系",
-        "3": "更安全、更直观的数据编辑",
-        "4": "更轻松的数据比较和操作",
-        "5": "本地合作的第一块砖"
+        "1": "更深入的 MongoDB 工具和更丰富的聚合工作流",
+        "2": "可视化模式迁移和重构预览",
+        "3": "更完善的笔记本，用于数据探索和报告",
+        "4": "更智能的 AI 辅助解释、修复和审查",
+        "5": "本地优先协作和同步的第一块砖"
       },
       "goal": "目标：每天为开发人员实时节省开支。"
     },
@@ -457,7 +469,7 @@
       },
       "supported_databases": {
         "question": "支持哪些数据库？",
-        "answer": "QoreDB 目前支持：\n\n* PostgreSQL\n* MySQL/MariaDB\n* SQL服务器\n* SQLite\n* 鸭数据库\n* MongoDB\n* 雷迪斯\n\n随着架构的发展，计划推出更多引擎。"
+        "answer": "QoreDB 目前支持 12 个原生驱动：\n\n* PostgreSQL\n* Supabase、Neon、TimescaleDB（PostgreSQL 系列）\n* MySQL / MariaDB\n* SQL Server（含 Windows 身份验证 — NTLM 和 Kerberos）\n* SQLite\n* DuckDB\n* MongoDB（带编辑器自动补全和聚合 linting）\n* Redis（含完整键管理）\n* CockroachDB\n\n随着架构的发展，计划推出更多引擎。"
       },
       "remote_ssh": {
         "question": "它可以与远程连接和 SSH 一起使用吗？",
@@ -515,17 +527,19 @@
       "badge": "主要选择",
       "cta": "免费下载",
       "features": {
-        "drivers": "所有驱动程序（PostgreSQL、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
-        "crud": "完整的 CRUD + SQL/Mongo 编辑器",
-        "grid": "高性能数据网格（虚拟滚动）",
-        "er_diagram": "交互式 ER 图",
-        "history": "查询历史记录和收藏夹",
-        "vault": "加密凭证库 (Argon2)",
-        "ssh": "本机 SSH 隧道",
-        "safety": "生产安全规则（env标签、只读模式）",
-        "audit_basic": "基本审核日志（50 条）",
-        "export_basic": "CSV/JSON/SQL 导出",
-        "shortcuts": "键盘快捷键"
+        "drivers": "12 个原生驱动（PostgreSQL 系列 — 含 Supabase、Neon、TimescaleDB —、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
+        "crud": "完整的 CRUD + 带自动补全和 linting 的 SQL/Mongo 编辑器",
+        "workspaces": "Workspaces — 按项目分组连接、查询和笔记本",
+        "grid": "支持批量编辑和高级过滤的高性能数据网格",
+        "er_diagram": "交互式 ER 图和 Table Insights",
+        "ddl": "DDL 管理 — CREATE / ALTER TABLE、外键、索引",
+        "history": "查询历史记录、收藏夹和 tab groups",
+        "vault": "加密凭证库 (Argon2) + 代理和 ssh-agent 支持",
+        "ssh": "原生 SSH 隧道（OpenSSH、proxy jump）",
+        "safety": "生产安全规则（环境标签、只读模式、治理限制）",
+        "audit_basic": "基本审核日志（50 条）含查询 redaction",
+        "export_basic": "CSV/JSON/SQL 导出和可分享的结果链接",
+        "shortcuts": "键盘快捷键和 9 种界面语言"
       }
     },
     "pro": {
@@ -538,6 +552,7 @@
       "features": {
         "everything_core": "一切尽在核心",
         "sandbox": "具有迁移生成的沙箱模式",
+        "time_travel": "Time Travel — 行历史、版本 diff 和回滚 SQL",
         "visual_diff": "视觉数据差异（表格比较）",
         "audit_advanced": "高级审核日志（无限制、可过滤、可导出）",
         "profiling": "查询分析和性能分析",
@@ -796,7 +811,7 @@
       },
       "connect": {
         "title": "2. 创建您的第一个连接",
-        "content": "<p>点击侧边栏的<strong>+</strong>添加数据库：</p><ul><li>PostgreSQL</li><li>MySQL / MariaDB</li><li>SQL Server</li><li>SQLite</li><li>DuckDB</li><li>MongoDB</li><li>Redis</li></ul><p>输入主机、端口、数据库、用户和环境（dev/staging/prod）。</p>"
+        "content": "<p>点击侧边栏的 <strong>+</strong> 添加数据库。QoreDB 提供 12 个原生驱动：</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（支持 Windows 身份验证）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li></ul><p>粘贴连接字符串可自动检测驱动，或者输入主机、端口、数据库、用户和环境（dev/staging/prod）。将所有内容组织到 <strong>Workspaces</strong> 中以保持项目整洁。</p>"
       },
       "explore": {
         "title": "3. 探索您的数据",
@@ -897,15 +912,15 @@
     "title": "简单、透明的定价",
     "subtitle": "核心永远免费。 Pro 解锁高级用户功能。",
     "core_price": "免费",
-    "core_1": "8 个本机数据库驱动程序",
-    "core_2": "具有自动完成功能的 SQL 编辑器",
-    "core_3": "加密保管库和 SSH 隧道",
-    "core_4": "生产安全卫士",
+    "core_1": "12 个原生驱动（含 Supabase、Neon、TimescaleDB）",
+    "core_2": "Workspaces、DDL、批量编辑和高级过滤",
+    "core_3": "加密保管库和原生 SSH 隧道",
+    "core_4": "生产安全卫士和 9 种界面语言",
     "pro_badge": "一次性购买",
     "pro_price_note": "一切都在 Core 中，加上高级工作流程。",
     "pro_1": "人工智能助手（BYOK）",
     "pro_2": "沙盒模式+迁移脚本",
-    "pro_3": "可视化数据差异",
+    "pro_3": "Time Travel + Visual Data Diff",
     "pro_4": "跨数据库联合",
     "cta": "查看完整的定价详情"
   },
