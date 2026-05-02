@@ -151,9 +151,7 @@ export default async function DocPage({
             <h1 className="font-heading text-3xl font-bold tracking-tight text-(--q-text-0)">
               {frontmatter.title}
             </h1>
-            {frontmatter.premium ? (
-              <PremiumBadge locale={locale} />
-            ) : null}
+            {frontmatter.premium ? <PremiumBadge /> : null}
           </div>
           {frontmatter.description ? (
             <p className="mt-2 text-lg text-(--q-text-2)">

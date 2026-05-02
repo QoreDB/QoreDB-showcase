@@ -20,7 +20,8 @@ export function CodeTabs({ children }: { children: ReactNode }) {
 
   const tabs = Children.toArray(children).filter(
     (c): c is React.ReactElement<TabElementProps> =>
-      isValidElement(c) && typeof c.props.label === "string",
+      isValidElement(c) &&
+      typeof (c.props as TabElementProps).label === "string",
   );
 
   const [active, setActive] = useState(0);
