@@ -1,0 +1,241 @@
+/* Prose styles for the docs MDX content. Scoped to .docs-prose. */
+
+.docs-prose {
+  color: var(--q-text-1);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.docs-prose h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--q-text-0);
+  margin-bottom: 0.75rem;
+}
+
+.docs-prose h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--q-text-0);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 5rem;
+}
+
+.docs-prose h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--q-text-0);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.docs-prose h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--q-text-0);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.docs-prose p {
+  margin: 1rem 0;
+}
+
+.docs-prose a {
+  color: var(--q-accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--q-accent) 40%, transparent);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.docs-prose a:hover {
+  color: var(--q-accent-strong);
+  text-decoration-color: var(--q-accent-strong);
+}
+
+.docs-prose ul,
+.docs-prose ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.docs-prose ul {
+  list-style: disc;
+}
+
+.docs-prose ol {
+  list-style: decimal;
+}
+
+.docs-prose li {
+  margin: 0.4rem 0;
+}
+
+.docs-prose li::marker {
+  color: var(--q-text-2);
+}
+
+.docs-prose blockquote {
+  border-left: 3px solid var(--q-border);
+  padding-left: 1rem;
+  color: var(--q-text-2);
+  margin: 1.25rem 0;
+  font-style: italic;
+}
+
+.docs-prose hr {
+  border: none;
+  border-top: 1px solid var(--q-border);
+  margin: 2rem 0;
+}
+
+.docs-prose code:not(pre code) {
+  background: var(--q-bg-1);
+  border: 1px solid var(--q-border);
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  color: var(--q-text-0);
+}
+
+.docs-prose pre {
+  background: var(--q-bg-1);
+  border: 1px solid var(--q-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.docs-prose pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* rehype-pretty-code (Shiki) line styling */
+.docs-prose pre [data-line] {
+  display: inline-block;
+  width: 100%;
+  padding-inline: 0.25rem;
+}
+
+.docs-prose pre [data-highlighted-line] {
+  background: color-mix(in srgb, var(--q-accent) 12%, transparent);
+}
+
+.docs-prose pre [data-rehype-pretty-code-figure] {
+  margin: 0;
+}
+
+.docs-prose [data-rehype-pretty-code-title] {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--q-text-2);
+  background: var(--q-bg-2);
+  border: 1px solid var(--q-border);
+  border-bottom: 0;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  padding: 0.4rem 0.85rem;
+}
+
+.docs-prose [data-rehype-pretty-code-title] + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0;
+}
+
+.docs-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 14px;
+}
+
+.docs-prose thead th {
+  background: var(--q-bg-1);
+  text-align: left;
+  font-weight: 600;
+  color: var(--q-text-0);
+  border-bottom: 1px solid var(--q-border);
+  padding: 0.65rem 0.75rem;
+}
+
+.docs-prose tbody td {
+  border-bottom: 1px solid var(--q-border);
+  padding: 0.6rem 0.75rem;
+}
+
+.docs-prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Anchor links on headings (rehype-autolink-headings) */
+.docs-prose .docs-anchor {
+  margin-left: 0.5rem;
+  color: var(--q-text-2);
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.docs-prose h2:hover .docs-anchor,
+.docs-prose h3:hover .docs-anchor,
+.docs-prose h4:hover .docs-anchor {
+  opacity: 1;
+}
+
+.docs-prose .docs-anchor::before {
+  content: "#";
+}
+
+/* Steps component */
+.docs-steps > li {
+  counter-increment: steps;
+  position: relative;
+  margin: 1.25rem 0;
+}
+
+.docs-steps > li::before {
+  content: counter(steps);
+  position: absolute;
+  left: -2.6rem;
+  top: 0;
+  display: inline-flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--q-accent-soft);
+  color: var(--q-accent-strong);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Code tabs host: collapse vertical margins of pre inside */
+.docs-codeblock-host pre {
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+}

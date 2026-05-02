@@ -1,0 +1,99 @@
+---
+title: Open Core Model
+description: How QoreDB balances open-source freedom and sustainable development with a clear Apache 2.0 core and a BSL-licensed Pro tier.
+premium: false
+---
+
+# What's Open Core?
+
+QoreDB follows an **Open Core** model. The vast majority of the application is free, open source, and licensed under Apache 2.0. A small set of advanced features, useful in larger teams or production-grade workflows, is licensed under the Business Source License 1.1 (BSL).
+
+This page explains what each license covers, why we chose this model, and what it means for you in practice.
+
+## The two licenses
+
+| Tier         | License                                | What it means                                                                                                |
+| ------------ | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Core**     | Apache 2.0                             | Free to use, modify, redistribute and embed, including commercially. No restrictions, no royalties.          |
+| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | Source-available. Free for personal and internal business use. Becomes Apache 2.0 four years after release. |
+
+Every source file in the repository carries an SPDX header declaring its license, so you can always tell at a glance which tier a given piece of code belongs to.
+
+## What's in Core (Apache 2.0)
+
+The core covers everything you need for a complete, production-quality database client:
+
+- **All database drivers**: PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB
+- **Connection management**: vault, profiles, SSH tunneling, environment guards
+- **Query editor and execution**: SQL and MongoDB editors, syntax highlighting, autocomplete, history, query library
+- **Data grid and editing**: inline edit, virtualization, server-side filters, bulk edit (up to 5 rows)
+- **Schema browser**: tables, views, routines, triggers, indexes
+- **Visual DDL editor**: full CREATE and ALTER TABLE
+- **Notebooks**: full notebook engine with parameterized variables, Run All, import/export
+- **CSV import**, **export pipeline** (CSV/JSON/SQL/HTML), **transaction management**
+- **Sandbox mode**, **audit logging**, **read-only mode**, **dangerous query detection**
+- **Cross-database federation** via DuckDB
+- **Workspaces**, **multi-tab system**, **global search**, **9-language i18n**
+
+In other words, the core is enough to ship real work every day. Pro is not a paywall blocking essential features.
+
+## What's in Premium (BSL 1.1)
+
+<Screenshot
+  alt="ER Diagram view in QoreDB with the Premium badge visible"
+  todo="Screenshot of the ER Diagram tab open on a real schema (5–8 tables with relationships), showing the 'Pro' or 'Premium' badge in the toolbar or near the feature name. Make sure the diagram has at least 2 visible foreign-key edges so the reader understands what they're looking at."
+/>
+
+Premium features are advanced workflows that typically only become valuable once you're using QoreDB heavily or in a team setting:
+
+- **ER Diagram**: interactive schema graph with isolate/focus workflows
+- **Visual Data Diff**: side-by-side comparison of table and query results
+- **Time Travel**: full row history with visual timeline, range filters, point-to-point diff and Rollback SQL preview
+- **Chart cells in notebooks**: bar, line, pie, scatter
+- **Bulk edit beyond 5 rows**
+- **XLSX and Parquet export**
+- **AI Assistant**: contextual query generation, schema-aware suggestions, error correction
+- **Profiling and advanced query interception** for performance tuning
+
+You can read every line of source code for these features in the open repository. You can build the app yourself with these features included for personal use. The license simply prevents a third party from rebranding QoreDB as a commercial product that competes with us.
+
+## Why Open Core
+
+Pure open source under Apache 2.0 is excellent for libraries and infrastructure, but for a polished end-user product it has a known failure mode: cloud providers and competitors can repackage the project, sell it as their own, and contribute nothing back. That kills the ability to fund continued development.
+
+Pure proprietary software has the opposite failure mode: you can't audit it, can't fix bugs yourself, can't extend it, and you're locked in.
+
+Open Core threads the needle:
+
+- **You stay free**: you can read, modify, fork and run QoreDB without ever paying us.
+- **The core is forever open**: Apache 2.0 means the most useful 90% of the app is unconditionally yours.
+- **Premium features are also source-available**: you can read and learn from the code, even if you can't repackage it commercially.
+- **Premium becomes Apache 2.0 after four years**: every BSL feature converts to a permissive license over time. Today's Premium is tomorrow's Core.
+
+This is the same model used by HashiCorp's Terraform/Vault (BSL 1.1), Sentry (BSL 1.1), CockroachDB (BSL 1.1), and others.
+
+## What this means for you in practice
+
+<Callout type="info">
+**For individual developers using QoreDB at work**: you can use everything, Core and Premium, with a Pro license. No friction, no restrictions on internal use.
+</Callout>
+
+<Callout type="info">
+**For teams and companies**: a Pro license unlocks all Premium features for your members. The Core remains free regardless.
+</Callout>
+
+<Callout type="info">
+**For contributors and forks**: contribute to anything. PRs are welcome on both Core and Premium files. The SPDX headers make the license boundary explicit so you know what you're touching.
+</Callout>
+
+<Callout type="warning">
+**For competitors**: you cannot take the BSL-licensed code and ship a commercial product that competes with QoreDB. After four years, that restriction lifts automatically.
+</Callout>
+
+If you want the full legal text, see the [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) (Apache 2.0) and [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) files in the repository.
+
+## Where to go next
+
+- [Pricing](/pricing) to see what's included in Pro
+- [Installation](/docs/getting-started/installation) to get started
+- [Contributing](/docs/resources/contributing) if you want to send a PR

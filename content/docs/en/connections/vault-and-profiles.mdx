@@ -1,0 +1,108 @@
+---
+title: Vault and profiles
+description: How QoreDB stores connection credentials, the optional app lock, and how environments and workspaces help you organize many connections.
+premium: false
+---
+
+# Vault and profiles
+
+QoreDB stores your connection details in two places: a plain JSON manifest for the parts that aren't sensitive (name, host, port, environment), and an encrypted **vault** for everything that is (passwords, SSH key passphrases, proxy passwords). This page explains where each piece lives, how the encryption works, and how environments and workspaces fit into the picture.
+
+## What lives where
+
+| Data                                             | Where                                                                            |
+| ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Connection name, host, port, user, database, environment | Plain JSON manifest in your workspace folder.                            |
+| Database password, SSH password, SSH key passphrase, proxy password | Encrypted, in your operating system's native keychain.                |
+| Workspace metadata                               | `.qoredb/workspace.json` inside the workspace folder.                            |
+| App lock master password hash                    | Hashed (Argon2), stored in the keychain.                                         |
+
+The plain manifest never contains secrets. It is safe to put a workspace folder under version control or to sync it across machines; the secrets simply won't follow until you re-enter them on each machine.
+
+## The vault: where secrets actually live
+
+QoreDB uses your operating system's native credential store as the secrets backend, via the cross-platform `keyring` library. This means:
+
+- **macOS**: secrets are stored in **Keychain Access**.
+- **Windows**: secrets are stored in **Credential Manager**.
+- **Linux**: secrets are stored via the **Secret Service** API (GNOME Keyring, KWallet, or any compatible service).
+
+Each saved connection corresponds to one credential entry in the keychain, namespaced per project so different workspaces don't collide. You can open your OS keychain manager at any time to inspect or revoke entries.
+
+<Callout type="tip">
+QoreDB never persists raw connection URLs. When you paste a DSN, it is parsed into normalized fields, and only the password component lands in the vault; the rest goes to the manifest.
+</Callout>
+
+## App lock
+
+By default, QoreDB unlocks the vault as soon as the OS user session is authenticated (no extra prompt). For environments where that's not enough, you can enable an **app lock** (master password) that QoreDB requires before opening the vault.
+
+The master password is never stored in plain text. QoreDB hashes it with **Argon2** (a memory-hard password hashing algorithm designed for exactly this use case) and stores only the hash in the keychain. On unlock, your input is hashed and compared.
+
+If you forget the master password, the only way out is to reset the vault, which deletes all stored secrets. Connection metadata in the manifest survives; you'll just have to re-enter passwords on next use.
+
+## Environments
+
+Every saved connection has an **environment** tag, with three possible values:
+
+- `development`
+- `staging`
+- `production`
+
+The environment is a hint, not a permission boundary. QoreDB uses it to:
+
+- Show contextual indicators in the UI (status bar, connection chip).
+- Trigger confirmation prompts on dangerous operations against `production` connections.
+- Feed the query interceptor's safety rules.
+
+Set the environment when you create the connection, or edit it later. There is no automatic detection; it's whatever you tag it with.
+
+<Callout type="warning">
+A connection tagged `development` does not magically protect against accidents. The tag drives extra prompts, but the database doesn't know about it. Always check the connection chip and the breadcrumb before running destructive queries.
+</Callout>
+
+## Profiles via workspaces
+
+QoreDB doesn't have a separate "profiles" concept. The way you organize many connections is through **workspaces**: each workspace owns its own set of connections, its own saved-query library, and its own history.
+
+Common patterns:
+
+- **One workspace per client or project**: keep work for client A separate from client B. Switching is one click in the workspace switcher.
+- **One workspace per environment ladder**: a "production" workspace and a "development" workspace, each with the relevant connections. Combined with the environment tag, this gives a clean separation.
+- **A shared "scratch" workspace**: for one-off explorations and ad-hoc connections that don't belong anywhere permanent.
+
+Each workspace is just a folder on disk with a small manifest. You can keep workspace folders in git, sync them with Dropbox/iCloud, or copy them between machines; the manifest is portable, the secrets are not (they live in each machine's keychain).
+
+## Sharing connections across machines
+
+Because secrets are stored in each OS's native keychain, simply syncing the workspace folder isn't enough to get connections working on a second machine; you'll have re-enter passwords on first use. This is by design: keychain entries don't leave the device, which protects you if a synced folder leaks.
+
+If you need a connection to work on multiple machines:
+
+- Re-enter the credentials in the vault on each machine the first time you use the connection.
+- Or, for service accounts that don't have a personal owner, store the password in a team password manager and paste it in.
+- Or, use SSH keys on each machine; reference the key path in the connection's SSH section, and let the keychain hold only the passphrase (or nothing, if the key is unencrypted).
+
+## Common questions
+
+<Callout type="info">
+**Can I export and re-import connections?**: yes for the metadata (the manifest is a regular JSON file you can copy), no for secrets (they live in the OS keychain). Re-imports require re-entering passwords on the target machine.
+</Callout>
+
+<Callout type="info">
+**Can I disable the vault entirely?**: no. Even if you don't use a master password, secrets always go through the OS keychain rather than being stored on disk in plain text.
+</Callout>
+
+<Callout type="info">
+**What happens if I delete a connection?**: the manifest entry is removed and the corresponding keychain entry is deleted. The secret is gone for good.
+</Callout>
+
+<Callout type="info">
+**Does the vault sync between machines?**: not by itself. The manifest can be synced; the secrets stay device-local. If you need cross-device synced secrets, use a team password manager and paste credentials in on each machine.
+</Callout>
+
+## Where to go next
+
+- [Vault encryption](/docs/security/vault-encryption) for a deeper dive into the security model
+- [SSH tunneling](/docs/connections/ssh-tunneling) for connections behind a bastion
+- [PostgreSQL](/docs/connections/postgresql), [MySQL](/docs/connections/mysql), [MongoDB](/docs/connections/mongodb) driver-specific guides

@@ -8,7 +8,8 @@
     "faq": "よくある質問",
     "changelog": "変更履歴",
     "download": "ダウンロード",
-    "join_beta": "ベータ版に参加する"
+    "join_beta": "ベータ版に参加する",
+    "docs": "ドキュメント"
   },
   "download": {
     "title": "QoreDB をダウンロード",
@@ -946,5 +947,19 @@
     "share": "シェアする",
     "copied": "コピーしました！",
     "copy_link": "リンクをコピー"
+  },
+  "docs": {
+    "search_label": "ドキュメントを検索",
+    "search_placeholder": "ドキュメントを検索…",
+    "on_this_page": "このページの内容",
+    "last_updated": "最終更新: {{date}}",
+    "edit_on_github": "このページを GitHub で編集",
+    "previous": "前へ",
+    "next": "次へ",
+    "premium_badge": "Premium",
+    "not_found_title": "ページが見つかりません",
+    "not_found_body": "このドキュメントページは存在しないか、まだ執筆されていません。",
+    "landing_title": "QoreDB ドキュメント",
+    "landing_subtitle": "QoreDB のインストール、データベース接続、開発高速化に必要なすべて。"
   }
 }

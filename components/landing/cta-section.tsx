@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Github } from "lucide-react";
+import { ArrowRight, BookOpen, Github } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -64,6 +64,17 @@ export function CTASection() {
             <Github className="w-5 h-5" />
             {t("cta.github_button")}
           </a>
+        </div>
+
+        <div className="mt-8">
+          <Link
+            href={`/${locale}/docs`}
+            className="group inline-flex items-center gap-2 text-sm font-medium text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
+          >
+            <BookOpen className="size-4" />
+            {t("cta.docs_link")}
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
       </motion.div>
     </section>

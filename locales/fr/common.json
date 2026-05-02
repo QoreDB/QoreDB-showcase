@@ -8,7 +8,8 @@
     "faq": "FAQ",
     "changelog": "Changelog",
     "download": "Télécharger",
-    "join_beta": "Rejoindre la beta"
+    "join_beta": "Rejoindre la beta",
+    "docs": "Docs"
   },
   "download": {
     "title": "Télécharger QoreDB",
@@ -28,7 +29,18 @@
     "linux_appimage": "AppImage (Universel)",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
-    "view_all_releases": "Voir toutes les versions sur GitHub"
+    "view_all_releases": "Voir toutes les versions sur GitHub",
+    "next_steps": {
+      "eyebrow": "Après l'installation",
+      "title": "Place à la première connexion",
+      "description": "Trois pages courtes et QoreDB n'aura plus de secret pour vous.",
+      "first_connection_title": "Votre première connexion",
+      "first_connection_description": "Collez un DSN ou remplissez le formulaire. Connecté en moins d'une minute.",
+      "interface_tour_title": "Tour de l'interface",
+      "interface_tour_description": "Sidebar, onglets, éditeur, panneau de résultats : tout le modèle mental.",
+      "full_docs_title": "Parcourir toute la documentation",
+      "full_docs_description": "Drivers, requêtes, sécurité, raccourcis clavier, et plus encore."
+    }
   },
   "changelog": {
     "title": "Changelog",
@@ -71,7 +83,8 @@
       "discover_pro": "Voir sur GitHub",
       "view_project": "Voir le projet",
       "participate": "Participer",
-      "community": "Rejoindre Discord"
+      "community": "Rejoindre Discord",
+      "read_docs": "Lire la documentation"
     },
     "social_proof": "Rejoignez <highlight>100+</highlight> développeurs en attente de la beta",
     "meta": {
@@ -252,7 +265,8 @@
     "title": "Arrêtez de vous battre avec votre outil de BDD",
     "description": "Téléchargez QoreDB et voyez la différence en 30 secondes.",
     "download_button": "Télécharger gratuitement",
-    "github_button": "Star sur GitHub"
+    "github_button": "Star sur GitHub",
+    "docs_link": "Ou commencez par lire la doc"
   },
   "database_strip": {
     "label": "Une interface, toutes les bases"
@@ -946,5 +960,21 @@
     "share": "Partager",
     "copied": "Copié !",
     "copy_link": "Copier le lien"
+  },
+  "docs": {
+    "search_label": "Chercher dans la doc",
+    "search_placeholder": "Chercher dans la doc…",
+    "on_this_page": "Sur cette page",
+    "last_updated": "Mis à jour le {{date}}",
+    "edit_on_github": "Modifier cette page sur GitHub",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "premium_badge": "Premium",
+    "not_found_title": "Page introuvable",
+    "not_found_body": "Cette page de documentation n'existe pas ou n'a pas encore été rédigée.",
+    "landing_title": "Documentation QoreDB",
+    "landing_subtitle": "Tout pour installer QoreDB, connecter vos bases de données et avancer plus vite.",
+    "fallback_banner_title": "Version anglaise affichée",
+    "fallback_banner_body": "Cette page n'est pas encore traduite. La version anglaise est affichée ci-dessous."
   }
 }

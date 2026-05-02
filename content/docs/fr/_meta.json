@@ -1,0 +1,15 @@
+{
+  "label": "Documentation",
+  "items": [
+    "introduction",
+    "getting-started",
+    "connections",
+    "querying",
+    "schema",
+    "diff-and-migrations",
+    "ai-features",
+    "security",
+    "reference",
+    "resources"
+  ]
+}

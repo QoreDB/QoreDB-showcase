@@ -1,0 +1,101 @@
+---
+title: MySQL & MariaDB
+description: Connect QoreDB to MySQL, MariaDB and any MySQL-compatible service. Same driver, same DSN format.
+premium: false
+---
+
+# MySQL & MariaDB
+
+QoreDB connects to MySQL and MariaDB through a single driver. The two engines speak the same wire protocol, so the connection flow, the DSN format and the SSL options are identical.
+
+## Quick connect
+
+The fastest way is to paste a DSN. QoreDB recognizes the `mysql://` scheme.
+
+```
+mysql://USER:PASSWORD@HOST:3306/DATABASE
+mysql://USER:PASSWORD@HOST:3306/DATABASE?ssl-mode=REQUIRED
+```
+
+Open **New Connection**, choose **MySQL/MariaDB**, paste the URL, click **Test connection**, then **Save**.
+
+## Connection fields
+
+If you prefer the form, fill these fields directly:
+
+| Field        | Required | Notes                                                                            |
+| ------------ | -------- | -------------------------------------------------------------------------------- |
+| **Host**     | Yes      | Hostname or IP address.                                                          |
+| **Port**     | Yes      | Defaults to `3306`.                                                              |
+| **User**     | Yes      | MySQL user.                                                                      |
+| **Password** | Optional | Stored encrypted in the vault.                                                   |
+| **Database** | Optional | Database name. Optional if your user has privileges on multiple databases.       |
+| **SSL mode** | Optional | One of `disabled`, `preferred`, `required`, `verify-ca`, `verify-identity`.      |
+
+The **SSH tunnel** section is available if your database is behind a bastion. See [SSH tunneling](/docs/connections/ssh-tunneling).
+
+## SSL / TLS modes
+
+MySQL has its own naming for SSL modes; the underlying behavior maps roughly to the equivalent PostgreSQL modes.
+
+| Mode              | Encrypted?  | Server cert checked? | Server hostname checked? |
+| ----------------- | ----------- | -------------------- | ------------------------ |
+| `disabled`        | No          | No                   | No                       |
+| `preferred`       | If offered  | No                   | No                       |
+| `required`        | Yes         | No                   | No                       |
+| `verify-ca`       | Yes         | Yes                  | No                       |
+| `verify-identity` | Yes         | Yes                  | Yes                      |
+
+For production traffic over the public internet, `verify-identity` is the safest default. `required` is acceptable on a trusted private network.
+
+You can pass the mode either through the form (SSL mode dropdown) or as a `?ssl-mode=…` parameter on the URL.
+
+## MySQL vs MariaDB
+
+The driver is the same. A few practical differences worth knowing:
+
+- **Authentication plugins**: MySQL 8 defaults to `caching_sha2_password`, MariaDB defaults to `mysql_native_password`. QoreDB handles both, but if your client tooling is older and you see authentication errors against MySQL 8, you may need to change the user's authentication plugin server-side (`ALTER USER … IDENTIFIED WITH mysql_native_password BY …`) or upgrade.
+- **JSON type**: both engines have a `JSON` type but with slightly different functions (`JSON_EXTRACT` vs MariaDB's `JSON_VALUE`). Queries that rely on these functions are not portable between the two.
+- **Character set**: MySQL 8 defaults to `utf8mb4`. MariaDB up to 10.5 defaults to `utf8mb3`; from 10.6+ also `utf8mb4`. If you see mojibake or "Incorrect string value" errors, check the connection's character set and the column's collation.
+
+## MySQL-compatible providers
+
+The following services use the MySQL wire protocol and connect through this driver:
+
+- **PlanetScale**: paste the connection string from your dashboard. PlanetScale enforces TLS, so use `?ssl-mode=REQUIRED` (or higher).
+- **AWS RDS for MySQL/MariaDB**: standard `mysql://` DSN. RDS instances accessed from outside the VPC need either public access enabled or a tunnel. SSL is recommended.
+- **Aiven, DigitalOcean Managed MySQL, Google Cloud SQL**: standard MySQL DSN. All require TLS by default.
+
+## Schema browsing
+
+Once connected, expand the connection in the sidebar:
+
+```
+Connection → Database → Tables / Views / Routines / Triggers
+```
+
+MySQL doesn't have schemas in the PostgreSQL sense; in MySQL "schema" and "database" are synonymous. Pick the database you want to work in from the tree.
+
+## Common issues
+
+<Callout type="warning">
+**"Access denied for user 'X'@'host'"**: MySQL grants are tied to a `(user, host)` pair. The same user can have different privileges depending on where they connect from. Check `SHOW GRANTS FOR 'user'@'%';` and adjust the host pattern if needed.
+</Callout>
+
+<Callout type="warning">
+**"Authentication plugin 'caching_sha2_password' cannot be loaded"**: older clients can't speak SHA-256 auth to MySQL 8. Either upgrade or set the user to use `mysql_native_password`.
+</Callout>
+
+<Callout type="warning">
+**"Lost connection to MySQL server during query"**: usually a long-running query hitting the server's `wait_timeout` or a slow network. Check `wait_timeout` and `interactive_timeout` server-side, and consider running heavy queries from within the same network as the database.
+</Callout>
+
+<Callout type="warning">
+**"Incorrect string value: '\xF0\x9F…' for column 'X'"**: emoji or 4-byte UTF-8 character against a `utf8mb3` column. Migrate the column (or the whole table) to `utf8mb4` and rerun.
+</Callout>
+
+## Where to go next
+
+- [SSH tunneling](/docs/connections/ssh-tunneling) for databases behind a bastion
+- [Vault and profiles](/docs/connections/vault-and-profiles) to organize many connections
+- [Querying: editor and autocomplete](/docs/querying/editor) to start writing SQL

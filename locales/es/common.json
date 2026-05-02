@@ -8,7 +8,8 @@
     "faq": "Preguntas frecuentes",
     "changelog": "Registro de cambios",
     "download": "Descargar",
-    "join_beta": "Unirse a la beta"
+    "join_beta": "Unirse a la beta",
+    "docs": "Docs"
   },
   "download": {
     "title": "Descargar QoreDB",
@@ -946,5 +947,19 @@
     "share": "Compartir",
     "copied": "¡Copiado!",
     "copy_link": "Copiar enlace"
+  },
+  "docs": {
+    "search_label": "Buscar en la documentación",
+    "search_placeholder": "Buscar en la documentación…",
+    "on_this_page": "En esta página",
+    "last_updated": "Actualizado el {{date}}",
+    "edit_on_github": "Editar esta página en GitHub",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "premium_badge": "Premium",
+    "not_found_title": "Página no encontrada",
+    "not_found_body": "Esta página de documentación no existe o aún no se ha escrito.",
+    "landing_title": "Documentación de QoreDB",
+    "landing_subtitle": "Todo lo necesario para instalar QoreDB, conectar tus bases de datos y avanzar más rápido."
   }
 }

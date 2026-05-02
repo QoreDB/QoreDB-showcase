@@ -1,0 +1,123 @@
+---
+title: MongoDB
+description: Connect QoreDB to MongoDB, including standalone instances, replica sets and MongoDB Atlas via SRV records.
+premium: false
+---
+
+# MongoDB
+
+QoreDB connects to MongoDB through the official native driver. Standalone instances, replica sets and MongoDB Atlas clusters all work through the same flow.
+
+## Quick connect
+
+The fastest way is to paste a connection URI. QoreDB recognizes both `mongodb://` and `mongodb+srv://` schemes.
+
+```
+mongodb://USER:PASSWORD@HOST:27017/DATABASE
+mongodb+srv://USER:PASSWORD@CLUSTER.mongodb.net/DATABASE?authSource=admin
+```
+
+Open **New Connection**, choose **MongoDB**, paste the URI, click **Test connection**, then **Save**.
+
+## Connection fields
+
+If you prefer the form, fill these fields directly:
+
+| Field          | Required | Notes                                                                                  |
+| -------------- | -------- | -------------------------------------------------------------------------------------- |
+| **Host**       | Yes      | Hostname for `mongodb://`, or the SRV hostname (without `_mongodb._tcp.`) for `+srv`.  |
+| **Port**       | Optional | Defaults to `27017`. Ignored by `mongodb+srv://` (resolved from SRV records).          |
+| **User**       | Optional | If your cluster requires authentication.                                               |
+| **Password**   | Optional | Stored encrypted in the vault.                                                         |
+| **Database**   | Optional | The database to connect to. The user is authenticated against `authSource`, not this.  |
+| **authSource** | Optional | Database where the user lives. Defaults to `admin` for most managed setups.            |
+| **replicaSet** | Optional | Replica set name when connecting to a non-SRV replica set directly.                    |
+| **TLS / SSL**  | Optional | Boolean. Enabled implicitly for `mongodb+srv://`.                                      |
+
+## `mongodb://` vs `mongodb+srv://`
+
+The two schemes do the same thing but discover hosts differently.
+
+- `mongodb://` connects directly to one or more hostnames you specify. Use it for self-hosted instances, ReplicaSets where you list members explicitly, or local development.
+- `mongodb+srv://` looks up SRV and TXT records to discover the hosts and default options. TLS is enabled by default. This is what MongoDB Atlas hands you, and what you generally want for any cloud-managed cluster.
+
+```
+# Self-hosted standalone or replica set with explicit hosts
+mongodb://USER:PASSWORD@host1:27017,host2:27017,host3:27017/myapp?replicaSet=rs0
+
+# Atlas (or any provider with proper SRV setup)
+mongodb+srv://USER:PASSWORD@cluster0.abc12.mongodb.net/myapp
+```
+
+## Authentication
+
+Mongo authentication is tied to a database (called the **authentication source**), which is not necessarily the database your data lives in. Three patterns:
+
+- **Atlas**: the user typically lives in `admin`, so set `authSource=admin` (Atlas does this for you in the connection string).
+- **Self-hosted with users in the data database**: omit `authSource`, or set it to the same database you want to use.
+- **No auth**: works for unauthenticated localhost setups; just omit user and password.
+
+If authentication fails with a working URI, the most common cause is a wrong `authSource`.
+
+## TLS
+
+`mongodb+srv://` enables TLS automatically. For `mongodb://`, enable TLS explicitly through the form (or `?tls=true` on the URI). For self-signed certs in development, add `?tlsInsecure=true`, but never use that for production traffic.
+
+## Replica sets and transactions
+
+QoreDB supports multi-document transactions, but MongoDB requires a replica set to enable them. **A standalone, single-instance MongoDB does not support transactions**, regardless of client. If you try to start one, the server itself rejects it.
+
+For local development, the easiest way to get transactions working is to run a single-node replica set:
+
+```bash
+docker run -d --name mongo-rs -p 27017:27017 \
+  mongo:7 --replSet rs0 --bind_ip_all
+docker exec -it mongo-rs mongosh --eval 'rs.initiate()'
+```
+
+Then connect with `mongodb://localhost:27017/myapp?replicaSet=rs0`.
+
+## The MongoDB editor
+
+When you open a query tab against a MongoDB connection, you get a JSON-aware editor with a few extras:
+
+- **Operator highlighting**: MongoDB operators (`$match`, `$group`, `$lookup`, etc.) are visually distinct from regular keys.
+- **Autocomplete on collections**: collection names from the active connection appear as suggestions.
+- **Real-time JSON linting**: invalid JSON is flagged as you type.
+- **Aggregation pipeline validation**: certain server-side operators considered dangerous (`$function`, `$accumulator`, `$where`) are rejected before being sent. Pipeline depth is also capped.
+
+You can run the standard CRUD methods (`find`, `insertOne`, `updateMany`, `deleteOne`, etc.) and `aggregate` pipelines.
+
+## Schema browsing
+
+Once connected, the sidebar tree shows:
+
+```
+Connection → Database → Collections → (Indexes)
+```
+
+Mongo has no fixed schemas, so QoreDB samples documents to infer fields when you open a collection. The data view is built for unstructured data: collapsible JSON, per-field filters, and inline edit.
+
+## Common issues
+
+<Callout type="warning">
+**"Authentication failed"**: almost always a wrong `authSource`. Check where your user actually lives (often `admin`), and adjust the URI parameter.
+</Callout>
+
+<Callout type="warning">
+**"server selection timed out"** with `mongodb+srv://`: the SRV lookup is failing. Check DNS resolution and that your network allows outbound DNS queries. Some corporate networks block SRV.
+</Callout>
+
+<Callout type="warning">
+**"Transaction numbers are only allowed on a replica set member or mongos"**: you tried to start a transaction against a standalone instance. Convert the instance to a single-node replica set (see above) or run multi-statement work outside a transaction.
+</Callout>
+
+<Callout type="warning">
+**"$function/$accumulator/$where is not allowed"**: QoreDB rejects these server-side execution operators by default for safety. If you really need them and trust your input, run the operation through `mongosh` directly.
+</Callout>
+
+## Where to go next
+
+- [SSH tunneling](/docs/connections/ssh-tunneling) for clusters behind a bastion
+- [Vault and profiles](/docs/connections/vault-and-profiles) to organize many connections
+- [Querying: editor and autocomplete](/docs/querying/editor) for editor specifics

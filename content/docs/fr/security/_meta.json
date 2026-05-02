@@ -1,0 +1,9 @@
+{
+  "label": "Sécurité",
+  "items": [
+    "vault-encryption",
+    "sandbox-mode",
+    "sql-safety-validation",
+    "best-practices"
+  ]
+}

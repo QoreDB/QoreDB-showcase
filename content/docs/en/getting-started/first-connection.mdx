@@ -1,0 +1,151 @@
+---
+title: Your first connection
+description: Connect QoreDB to your first database in under a minute. Paste a DSN, fill the form, or start with a local SQLite file.
+premium: false
+---
+
+# Your first connection
+
+QoreDB has no project setup, no global configuration to fill in, no account to create. You launch the app, add a connection, and start querying. This page walks you through that flow.
+
+## The two ways to add a connection
+
+You can create a new connection in two ways. Both end up with the same normalized configuration, encrypted in the local vault.
+
+**Paste a DSN/URL.** Fastest path. If you have a connection string already (from your `.env`, your hosting provider's dashboard, or your team wiki), paste it and QoreDB parses it for you. Driver auto-detection picks the right engine: `postgresql://` becomes Postgres, `mongodb+srv://` becomes MongoDB Atlas, and so on.
+
+**Fill the form.** Driver-specific form with separate fields for host, port, user, password, database, SSL/TLS, and any options that engine supports. Useful when you don't have a DSN handy or when you want to inspect every field explicitly.
+
+You can switch between the two modes inside the connection dialog at any time.
+
+## Walk-through: connect to a database
+
+<Steps>
+1. Click the **+** button in the connection sidebar (bottom-left).
+
+2. Choose your database engine.
+
+3. Either:
+   - Toggle **Use URL** and paste your connection string, then click **Parse**, or
+   - Fill the form fields directly.
+
+4. Click **Test connection** to verify QoreDB can reach the database.
+
+5. Click **Save**. The connection appears in the sidebar.
+
+6. Double-click the connection (or click **Connect**) to open a session and start exploring.
+</Steps>
+
+<Screenshot
+  src="/images/docs/connection-dialog.png"
+  alt="New connection dialog with the engine picker open"
+  todo="The full connection dialog open, showing the engine grid: PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB. Capture this on a clean app state (no other tabs open behind). PostgreSQL pre-selected so the form fields below are visible."
+/>
+
+<Screenshot
+  src="/images/docs/connection-dialog-configure.png"
+  alt="Connection dialog with a DSN pasted and parsed into fields"
+  todo="The connection dialog with the 'Use URL/DSN' toggle ON, a real-looking PostgreSQL DSN pasted (e.g. postgresql://user:••••@db.example.com:5432/myapp), and the parsed fields visible underneath (host, port, user, database). Mask the password so we can use this safely."
+/>
+
+## DSN examples per driver
+
+Here are the formats QoreDB accepts for the most common engines:
+
+<CodeTabs>
+  <Tab label="PostgreSQL">
+  ```
+  postgresql://user:password@host:5432/database
+  postgresql://user:password@host:5432/database?sslmode=require
+  ```
+  </Tab>
+  <Tab label="MySQL">
+  ```
+  mysql://user:password@host:3306/database
+  mysql://user:password@host:3306/database?ssl-mode=REQUIRED
+  ```
+  </Tab>
+  <Tab label="MongoDB">
+  ```
+  mongodb://user:password@host:27017/database
+  mongodb+srv://user:password@cluster.mongodb.net/database?authSource=admin
+  ```
+  </Tab>
+  <Tab label="SQLite">
+  ```
+  sqlite:///absolute/path/to/database.db
+  sqlite://./relative/path/to/database.db
+  ```
+  </Tab>
+</CodeTabs>
+
+A complete reference of all supported URL formats, including SQL Server, Redis, DuckDB, and per-driver options, lives on the [Connection URLs](/docs/reference/connection-urls) page.
+
+<Callout type="tip">
+QoreDB never stores the raw URL. It is parsed into normalized fields (host, port, user, password, database, options) and only those fields are saved. The password ends up in the encrypted vault, the rest in your local config.
+</Callout>
+
+## Try it locally with SQLite
+
+If you don't have a database to connect to right now, the easiest way to play with QoreDB is to point it at a local SQLite file. SQLite needs no server.
+
+<Steps>
+1. Click **+** in the connection sidebar.
+2. Pick **SQLite**.
+3. Click **Browse** and either select an existing `.db`/`.sqlite` file, or type a path to a new file. QoreDB will create it for you.
+4. Click **Connect**. You're in.
+</Steps>
+
+From there you can run `CREATE TABLE`, insert rows, and explore the full editor without needing a network connection.
+
+## Save the connection in the vault
+
+When you save a connection, the password (and any sensitive option like an SSH key passphrase) is stored in the **vault**: an encrypted store backed by your operating system's native keychain.
+
+- **macOS**: Keychain Access
+- **Windows**: Credential Manager
+- **Linux**: Secret Service (GNOME Keyring, KWallet)
+
+The vault uses Argon2 for key derivation. You can also enable an optional **app lock** that requires a passphrase every time you launch QoreDB. See [Vault encryption](/docs/security/vault-encryption) for details.
+
+## SSH tunneling
+
+<Screenshot
+  src="/images/docs/connection-dialog-ssh.png"
+  alt="SSH tunnel section expanded in the connection dialog"
+  todo="Connection dialog scrolled to the SSH tunnel section, with the section expanded. Show fields for SSH host, port, user, key file path, and the 'Proxy jump' option. Filled with realistic but obviously-placeholder values like 'bastion.example.com' so the reader sees what each field expects."
+/>
+
+If your database is behind a bastion or a private network, expand the **SSH tunnel** section of the connection dialog. QoreDB supports:
+
+- Standard SSH host/port, with username/password or key file authentication
+- **Proxy jump** through a chain of intermediate hosts
+- Custom SSH options
+
+QoreDB uses a native OpenSSH client under the hood, so behavior matches what you would get from `ssh -L` on the command line.
+
+See [SSH tunneling](/docs/connections/ssh-tunneling) for the complete guide.
+
+## Common issues
+
+<Callout type="warning">
+**"Connection refused"**: the host or port is wrong, or the server is not accepting external connections. For Postgres, check `pg_hba.conf` and `listen_addresses`. For MongoDB Atlas, check the IP allowlist.
+</Callout>
+
+<Callout type="warning">
+**"SSL/TLS required"**: the server requires an encrypted connection. For Postgres, append `?sslmode=require` to the URL or set SSL mode to `require` in the form. For MongoDB Atlas, the `mongodb+srv://` scheme already implies TLS.
+</Callout>
+
+<Callout type="warning">
+**"Authentication failed"**: double-check the username and password. For Postgres specifically, verify the database user has a password set (`ALTER USER ... WITH PASSWORD ...`) and that the right authentication method is enabled in `pg_hba.conf`.
+</Callout>
+
+<Callout type="warning">
+**"Cannot connect to localhost from inside Docker"**: if your DB runs in Docker and QoreDB runs on the host, use `localhost` and the published port. If both run in Docker, use the container hostname or `host.docker.internal` on macOS/Windows.
+</Callout>
+
+## Where to go next
+
+- [Interface tour](/docs/getting-started/interface-tour): get familiar with the main UI
+- [Connections overview](/docs/connections/postgresql): driver-specific guides
+- [Vault and profiles](/docs/connections/vault-and-profiles): group, organize and switch between connections

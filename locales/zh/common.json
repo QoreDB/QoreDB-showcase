@@ -8,7 +8,8 @@
     "faq": "常见问题解答",
     "changelog": "变更日志",
     "download": "下载",
-    "join_beta": "加入测试版"
+    "join_beta": "加入测试版",
+    "docs": "文档"
   },
   "download": {
     "title": "下载QoreDB",
@@ -946,5 +947,19 @@
     "share": "分享",
     "copied": "已复制！",
     "copy_link": "复制链接"
+  },
+  "docs": {
+    "search_label": "搜索文档",
+    "search_placeholder": "搜索文档…",
+    "on_this_page": "本页内容",
+    "last_updated": "更新于 {{date}}",
+    "edit_on_github": "在 GitHub 上编辑本页",
+    "previous": "上一页",
+    "next": "下一页",
+    "premium_badge": "Premium",
+    "not_found_title": "页面未找到",
+    "not_found_body": "此文档页面不存在或尚未撰写。",
+    "landing_title": "QoreDB 文档",
+    "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。"
   }
 }

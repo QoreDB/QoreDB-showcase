@@ -32,7 +32,7 @@ export const INDEXABLE_PATHS = [
   "/pricing",
   "/roadmap",
   "/faq",
-  "/quick-start",
+  "/docs",
   "/blog",
   "/changelog",
   "/links",

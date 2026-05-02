@@ -16,10 +16,14 @@ export const getFooterLinks = (t: Translate) => ({
     { label: t("footer.changelog"), href: "/changelog" },
   ],
   resources: [
-    { label: t("footer.documentation"), href: "#", external: false },
+    { label: t("footer.documentation"), href: "/docs", external: false },
+    {
+      label: t("footer.guide"),
+      href: "/docs/getting-started/installation",
+      external: false,
+    },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
-    { label: t("footer.guide"), href: "/quick-start", external: false },
   ],
   community: [
     {

@@ -1,0 +1,10 @@
+{
+  "label": "Requêtes",
+  "items": [
+    "editor",
+    "running-queries",
+    "results-and-exports",
+    "query-history",
+    "saved-queries"
+  ]
+}

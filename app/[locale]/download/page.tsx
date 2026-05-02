@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { DownloadSection } from "@/components/download/download-section";
+import { NextSteps } from "@/components/download/next-steps";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import TranslationsProvider from "@/components/TranslationsProvider";
@@ -44,6 +45,7 @@ export default async function DownloadPage({
       <main className="min-h-screen bg-background text-foreground overflow-hidden">
         <Header />
         <DownloadSection />
+        <NextSteps />
         <Footer />
       </main>
     </TranslationsProvider>

@@ -1,0 +1,123 @@
+---
+title: SSH tunneling
+description: Reach databases behind a bastion or in a private network. QoreDB uses your system's native OpenSSH client under the hood.
+premium: false
+---
+
+# SSH tunneling
+
+If your database is not reachable directly from your machine (because it's in a VPC, behind a bastion, or only accessible via a corporate jump host), you can connect through an SSH tunnel. QoreDB uses the native **OpenSSH** client on your system, so the behavior matches what you would get from `ssh -L` on the command line.
+
+## When you need a tunnel
+
+You need a tunnel whenever:
+
+- The database listens on a private IP that is not routable from your laptop.
+- The database is in a VPC and only the bastion has a public IP.
+- A firewall blocks direct connections to the database port from outside the network.
+- Compliance rules require all access to go through an audited jump host.
+
+You do **not** need a tunnel if your database has a public endpoint (RDS public, Atlas public, etc.) and your IP is allowlisted; a regular connection works.
+
+## Quick set-up
+
+In the connection dialog, expand the **SSH tunnel** section and fill the bastion details. QoreDB sets up a local port forward and connects the database driver to it, transparently.
+
+## Authentication
+
+Two authentication methods are supported.
+
+### Key file (recommended)
+
+Point QoreDB at your private key file (typically under `~/.ssh/`). If the key is encrypted with a passphrase, provide it; QoreDB stores it in the encrypted vault, never in plain text.
+
+| Field             | Notes                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| **Auth type**     | `Key file`                                                                           |
+| **Key path**      | Absolute path to your private key (e.g. `~/.ssh/id_ed25519`). Public key is implied. |
+| **Key passphrase** | Optional. Required if the key is encrypted.                                          |
+
+This is the recommended method, both for security and because it matches your normal SSH workflow.
+
+### Password
+
+| Field         | Notes                                  |
+| ------------- | -------------------------------------- |
+| **Auth type** | `Password`                             |
+| **Password**  | The user's SSH password on the bastion |
+
+This works for legacy hosts that don't support key auth. Avoid where possible; passwords are weaker against brute-force.
+
+## Host key verification
+
+Every SSH connection verifies the bastion's host key against your `~/.ssh/known_hosts` file. QoreDB exposes three policies:
+
+- **`accept_new`** (default for new connections): accept and pin a new host key the first time, error out if it changes later. This matches OpenSSH's `StrictHostKeyChecking=accept-new`.
+- **`strict`**: refuse to connect if the host is not already in `known_hosts`. Most secure; useful in environments with managed `known_hosts` distribution.
+- **`insecure_no_check`**: accept any host key without verification. Convenient for ephemeral test environments, but vulnerable to man-in-the-middle attacks. Avoid for anything sensitive.
+
+The default `accept_new` is a sensible compromise: protected against MITM after the first connection, with no manual setup.
+
+## Proxy jump (chain of bastions)
+
+Some networks require going through multiple jump hosts to reach the database. QoreDB supports this via the **Proxy jump** field, which mirrors OpenSSH's `-J` flag.
+
+```
+user1@jump1.example.com:22,user2@jump2.example.com
+```
+
+You can list one or several intermediate hosts, separated by commas. QoreDB hops through them in order before reaching the final SSH host configured in the dialog.
+
+<Callout type="tip">
+The proxy chain shares the same authentication settings as the main SSH host (key path, passphrase). If your jumps need different keys, configure them in your local `~/.ssh/config` and let OpenSSH handle key selection by hostname.
+</Callout>
+
+## Timeouts and keepalive
+
+Three optional fields tune the tunnel's resilience:
+
+| Field                       | Notes                                                                  |
+| --------------------------- | ---------------------------------------------------------------------- |
+| **Connect timeout**         | Seconds to wait for the initial TCP handshake before giving up.        |
+| **Keepalive interval**      | Seconds between keepalive probes once the tunnel is up.                |
+| **Keepalive count max**     | Number of failed probes before considering the tunnel dead and closing it. |
+
+These default to sensible values. Adjust them if you have a flaky network or a strict firewall that drops idle connections aggressively.
+
+## Behavior on errors
+
+If the SSH process can't start the tunnel (auth failure, host unreachable, key rejected, etc.), QoreDB surfaces the standard error from OpenSSH directly. The same error you would see if you had run `ssh -v -L … …` on the command line.
+
+The most common failure modes:
+
+<Callout type="warning">
+**"Permission denied (publickey)"**: your key is not authorized on the bastion, or the wrong key is being offered. Check the bastion's `~/.ssh/authorized_keys` and the local key path.
+</Callout>
+
+<Callout type="warning">
+**"Host key verification failed"**: the bastion's host key changed since you first connected. Either the host was reinstalled, or someone is intercepting your connection. Don't blindly accept; verify with the host's admin first, then update your `known_hosts`.
+</Callout>
+
+<Callout type="warning">
+**"channel 1: open failed: connect failed: Connection refused"**: the SSH connection itself works, but the database is not reachable from the bastion. Check the database host/port from inside the bastion (`telnet db.internal 5432` or similar).
+</Callout>
+
+<Callout type="warning">
+**"Operation timed out"**: the bastion is unreachable, or a firewall is silently dropping packets. Check that you have network access to the bastion's IP and port.
+</Callout>
+
+## Verifying with the OpenSSH CLI
+
+If a tunnel won't start from QoreDB, the fastest way to debug is to reproduce it on the command line. The exact equivalent of what QoreDB sets up is:
+
+```bash
+ssh -L 15432:DB_HOST:5432 -i ~/.ssh/id_ed25519 user@BASTION
+# Then connect QoreDB directly to localhost:15432 (no SSH section enabled)
+```
+
+If `ssh -L` works but QoreDB doesn't, the problem is in QoreDB's tunnel config. If `ssh -L` doesn't work either, the problem is upstream (network, bastion config, key, etc.).
+
+## Where to go next
+
+- [Vault and profiles](/docs/connections/vault-and-profiles) to organize many connections, including those that share the same bastion
+- [PostgreSQL](/docs/connections/postgresql), [MySQL](/docs/connections/mysql), [MongoDB](/docs/connections/mongodb) driver-specific guides

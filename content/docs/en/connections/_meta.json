@@ -1,0 +1,11 @@
+{
+  "label": "Connections",
+  "items": [
+    "postgresql",
+    "mysql",
+    "mongodb",
+    "sqlite",
+    "ssh-tunneling",
+    "vault-and-profiles"
+  ]
+}

@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Monitor, Shield, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, Github, Monitor, Shield, Zap } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Trans, useTranslation } from "react-i18next";
 import { LineShadowText } from "@/components/line-shadow-text";
@@ -90,6 +91,22 @@ export function Hero() {
           <Github className="w-5 h-5" />
           {t("hero.cta.discover_pro")}
         </Button>
+      </motion.div>
+
+      <motion.div
+        className="mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.35 }}
+      >
+        <Link
+          href={`/${locale}/docs`}
+          className="group inline-flex items-center gap-2 text-sm font-medium text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
+        >
+          <BookOpen className="size-4" />
+          {t("hero.cta.read_docs")}
+          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+        </Link>
       </motion.div>
 
       <motion.div

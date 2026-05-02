@@ -1,0 +1,94 @@
+---
+title: SQLite
+description: Open a local SQLite database file or an in-memory database. No server, no port, no credentials.
+premium: false
+---
+
+# SQLite
+
+SQLite is the simplest engine to connect to: there is no server and no network. You point QoreDB at a file on disk (or an in-memory database) and you are connected.
+
+## Quick connect
+
+Open **New Connection**, choose **SQLite**, and either browse to a file or paste a path.
+
+You can also use a `sqlite://` URI:
+
+```
+sqlite:///absolute/path/to/database.db
+sqlite://./relative/path/to/database.db
+sqlite://:memory:
+```
+
+## Connection fields
+
+| Field           | Required | Notes                                                                                |
+| --------------- | -------- | ------------------------------------------------------------------------------------ |
+| **Path**        | Yes      | Absolute or relative path to a `.db` / `.sqlite` / `.sqlite3` file. Or `:memory:`.   |
+
+There is no host, port, user or password for SQLite. The "vault" of QoreDB still applies if you save the connection (for naming, environment, SSH, etc.), but no secrets are stored for SQLite itself.
+
+## File creation and extensions
+
+QoreDB **creates the file automatically** if it does not exist. You can point at a path that has not been used yet, click Connect, and the file will be created on disk on first write.
+
+The driver validates the file extension. Supported extensions are:
+
+- `.db`
+- `.sqlite`
+- `.sqlite3`
+- `.db3`
+- `.s3db`
+- `.sl3`
+
+If you want a different extension, rename the file or use the `:memory:` form.
+
+## In-memory databases
+
+Use `:memory:` to create a database that lives only in RAM and disappears when the connection closes. Great for quick experiments, throwaway tests and scratch pads.
+
+```
+sqlite::memory:
+```
+
+You can also write `sqlite::memory:` directly in the path field. There is no persistence; quitting the app or closing the connection drops everything.
+
+## WAL mode
+
+QoreDB opens SQLite databases in **Write-Ahead Logging** (WAL) journal mode by default. WAL is the recommended journal mode for most modern uses: better concurrency (readers don't block writers and vice versa), faster commits, and no extra steps from your side.
+
+A side effect of WAL is that two extra files appear next to your database file: `myapp.db-wal` and `myapp.db-shm`. They are part of normal operation; do not delete them while the database is in use.
+
+If your database needs to be opened by an older tool that doesn't support WAL, you can switch back to rollback journal mode in that tool by running `PRAGMA journal_mode=DELETE;`.
+
+## Concurrency notes
+
+SQLite allows many concurrent readers but only one writer at a time. With WAL, readers don't block the writer and vice versa, which makes the experience feel concurrent for most desktop and embedded use cases. But:
+
+- Long write transactions can starve other writers.
+- Two QoreDB connections (or QoreDB plus another tool) opening the same file simultaneously is fine for reads, fine for one writer at a time, and **not fine** if both try to write at the same instant; the second one will get `SQLITE_BUSY`.
+
+If you are using SQLite as a backing store for a multi-user application, that's likely the wrong tool. For desktop, embedded and single-user development workflows, it is excellent.
+
+## Common issues
+
+<Callout type="warning">
+**"unable to open database file"**: the path is wrong, or the directory does not exist, or the process does not have permission to write there. Verify the path; remember that relative paths are resolved against QoreDB's working directory, not where you launched it from.
+</Callout>
+
+<Callout type="warning">
+**"file is not a database"**: the file you opened is not a valid SQLite file. Either it was created by a different system, or it is corrupted. Try opening it with the `sqlite3` CLI to see if it can read it.
+</Callout>
+
+<Callout type="warning">
+**"database is locked"** (`SQLITE_BUSY`): another connection or process is writing to the same database. With WAL enabled this is rare, but it can happen during long-running transactions or with non-WAL-aware tools holding a lock.
+</Callout>
+
+<Callout type="tip">
+SQLite ignores type definitions on column declarations (it has dynamic typing with type "affinity"). A column declared `INTEGER` will happily store a string. If your data integrity matters, validate at the application layer or use `CHECK` constraints.
+</Callout>
+
+## Where to go next
+
+- [Querying: editor and autocomplete](/docs/querying/editor) for the SQL editor
+- [Reference: connection URLs](/docs/reference/connection-urls) for the full URI grammar

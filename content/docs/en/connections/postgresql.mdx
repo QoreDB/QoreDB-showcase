@@ -1,0 +1,131 @@
+---
+title: PostgreSQL
+description: Connect QoreDB to PostgreSQL and any Postgres-compatible service such as Supabase, Neon, TimescaleDB or CockroachDB.
+premium: false
+---
+
+# PostgreSQL
+
+PostgreSQL is QoreDB's primary supported engine. Anything that speaks the Postgres wire protocol works through this driver, including managed providers like Supabase, Neon, TimescaleDB and Aiven.
+
+## Quick connect
+
+The fastest path is to paste a connection string. QoreDB recognizes both `postgres://` and `postgresql://` schemes and parses the URL into the form fields automatically.
+
+```
+postgresql://USER:PASSWORD@HOST:5432/DATABASE
+postgresql://USER:PASSWORD@HOST:5432/DATABASE?sslmode=require
+```
+
+Open **New Connection**, choose **PostgreSQL**, paste the URL, click **Test connection**, then **Save**.
+
+## Connection fields
+
+If you prefer the form, fill these fields directly:
+
+| Field        | Required | Notes                                                                            |
+| ------------ | -------- | -------------------------------------------------------------------------------- |
+| **Host**     | Yes      | Hostname or IP address of the server.                                            |
+| **Port**     | Yes      | Defaults to `5432`.                                                              |
+| **User**     | Yes      | Database user.                                                                   |
+| **Password** | Optional | Stored encrypted in the vault. Leave empty if the user has no password.          |
+| **Database** | Optional | Database name. If omitted, QoreDB connects to the default database for the user. |
+| **SSL mode** | Optional | One of `disable`, `prefer`, `require`, `verify-ca`, `verify-full`.               |
+
+You can also expand the **SSH tunnel** section if your database is behind a bastion. See [SSH tunneling](/docs/connections/ssh-tunneling).
+
+## SSL / TLS modes
+
+PostgreSQL supports a granular set of SSL modes; QoreDB exposes all of them.
+
+| Mode             | Encrypted? | Server cert checked? | Server hostname checked? |
+| ---------------- | ---------- | -------------------- | ------------------------ |
+| `disable`        | No         | No                   | No                       |
+| `prefer`         | If offered | No                   | No                       |
+| `require`        | Yes        | No                   | No                       |
+| `verify-ca`      | Yes        | Yes                  | No                       |
+| `verify-full`    | Yes        | Yes                  | Yes                      |
+
+For production traffic over the public internet, `verify-full` is the safe default. `require` is enough on a private network where you trust the route. Most managed providers (Supabase, Neon, etc.) require at least `require`.
+
+You can pass the mode either through the form (SSL mode dropdown) or as a `?sslmode=…` parameter on the URL.
+
+<Callout type="tip">
+If you see a `connection requires SSL` error, set the SSL mode to `require` (or higher) and try again. Most cloud-hosted Postgres servers reject unencrypted connections by default.
+</Callout>
+
+## Postgres-compatible providers
+
+Anything that speaks the Postgres wire protocol works through this driver. There is no special configuration: paste the DSN your provider gives you and connect.
+
+### Supabase
+
+Use the connection string from **Project settings → Database → Connection string**. Pick the **Direct connection** string for read/write workloads, or the **Pooled** (PgBouncer) string for serverless or high-fan-out workloads.
+
+```
+postgresql://postgres.PROJECT_REF:PASSWORD@aws-0-REGION.pooler.supabase.com:6543/postgres
+```
+
+`sslmode=require` is implicit. Supabase also supports IP allowlisting; make sure your machine is allowed if you have it enabled.
+
+### Neon
+
+Grab the connection string from the Neon dashboard. It includes the endpoint hostname and an `?sslmode=require` parameter.
+
+```
+postgresql://USER:PASSWORD@ep-xxxxx.REGION.aws.neon.tech/DATABASE?sslmode=require
+```
+
+Neon endpoints can scale to zero. The first query after a cold start takes a moment longer than usual; subsequent queries are fast.
+
+### TimescaleDB and Timescale Cloud
+
+Identical to PostgreSQL. The hypertables, continuous aggregates and other Timescale features show up as regular tables and views in the schema browser; you query them with standard SQL.
+
+### CockroachDB
+
+CockroachDB ships as its own dedicated driver in QoreDB (it has its own engine option), but the connection format is the same:
+
+```
+postgresql://USER:PASSWORD@HOST:26257/DATABASE?sslmode=verify-full
+```
+
+The default port is `26257`, not `5432`.
+
+## Schema browsing
+
+Once connected, expand the connection in the sidebar to walk down the tree:
+
+```
+Connection → Database → Schema → Tables / Views / Routines / Triggers
+```
+
+The default search path follows your role's `search_path` setting. If you don't see your tables, make sure you opened the right database (each PG instance can hold many) and that you have privileges on the schema.
+
+## Roles and permissions
+
+QoreDB uses whatever role you connect as. Common gotchas:
+
+- **Read-only role**: works fine for SELECT, but the inline data editor and the DDL editor will surface permission errors when you try to mutate.
+- **No CONNECT on database**: the connection itself fails. Check `GRANT CONNECT ON DATABASE …`.
+- **Default `public` schema removed in PG 15+**: in fresh PG 15 clusters, the public schema is restricted. Ask your DBA or grant explicit `USAGE`/`CREATE` to your role.
+
+## Common issues
+
+<Callout type="warning">
+**"FATAL: no pg_hba.conf entry for host …"**: the server's `pg_hba.conf` does not allow your client IP or auth method. Edit `pg_hba.conf` (typically in `/etc/postgresql/<version>/main/`), add a rule for your client, and reload Postgres.
+</Callout>
+
+<Callout type="warning">
+**"SSL connection has been closed unexpectedly"**: usually caused by aggressive idle timeouts on a load balancer or PgBouncer in transaction-pooling mode. Either tune the timeout, switch to session pooling, or use the direct connection string from your provider.
+</Callout>
+
+<Callout type="warning">
+**"role 'postgres' does not exist"**: you are using the default `postgres` user but the cluster was provisioned with a different superuser. Check your provider's docs for the actual default user (Supabase uses `postgres` plus a project-scoped suffix, for example).
+</Callout>
+
+## Where to go next
+
+- [SSH tunneling](/docs/connections/ssh-tunneling) for databases behind a bastion
+- [Vault and profiles](/docs/connections/vault-and-profiles) to organize many connections
+- [Querying: editor and autocomplete](/docs/querying/editor) to start writing SQL
