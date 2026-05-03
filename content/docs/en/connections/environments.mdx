@@ -1,0 +1,119 @@
+---
+title: Environments
+description: How QoreDB tags each connection as development, staging or production, and what changes in the UI and the safety prompts based on that tag.
+premium: false
+---
+
+# Environments
+
+Every saved connection in QoreDB carries an **environment** tag. There are three values and the choice affects two things: how the connection is **shown in the UI** (color-coded badge) and how QoreDB **prompts you before running destructive queries**. It is one of QoreDB's main safety mechanisms.
+
+## The three environments
+
+| Value         | Default? | UI color | Short label |
+| ------------- | -------- | -------- | ----------- |
+| `development` | Yes      | Green    | `DEV`       |
+| `staging`     | No       | Amber    | `STG`       |
+| `production`  | No       | Red      | `PROD`      |
+
+The environment is set on the connection itself, not on the workspace, and not globally. You pick it (radio buttons) when you create a connection, and you can change it later from the connection's settings.
+
+## Where you see the badge
+
+QoreDB shows the environment in two places:
+
+- **Status bar**, at the bottom of the main area, with a `Shield` icon and the short label (`DEV`, `STG`, `PROD`). The production badge is rendered with full color and a subtle pulse animation, so it's hard to miss.
+- **Sidebar**, on each connection chip. The badge is **only shown for staging and production**; development is intentionally silent (your everyday default doesn't need to clutter the sidebar).
+
+The colors are consistent everywhere: green for development, amber for staging, red for production.
+
+<Callout type="tip">
+The badge is your at-a-glance reminder of where you are. Build a habit of checking the status bar before running anything that mutates data.
+</Callout>
+
+## What changes for production
+
+Two confirmation dialogs gate destructive work against `production` connections.
+
+### Dangerous-query confirmation
+
+QoreDB recognizes a set of patterns as "dangerous":
+
+- `DROP TABLE`, `DROP DATABASE`, `DROP SCHEMA`, `DROP INDEX`, `DROP VIEW`, `DROP FUNCTION`, `DROP TRIGGER`
+- `TRUNCATE …`
+- `DELETE FROM …` **without** a `WHERE` clause
+- `UPDATE …` **without** a `WHERE` clause
+- `ALTER TABLE … DROP …`
+- MongoDB equivalents: `.drop()`, `.dropDatabase()`, `.deleteMany()` without filter, etc.
+
+Against a **production** connection, these queries open a confirmation dialog that requires you to **type the target name** (table, database, or connection) before the query is sent. Against staging or development, the same queries run without a prompt.
+
+`DROP DATABASE …` is the one exception: it always requires typing, regardless of the environment.
+
+`DELETE` and `UPDATE` **with a `WHERE` clause** are not considered dangerous by this detector; they go through the second dialog.
+
+### Production-mutation confirmation
+
+For any mutation that isn't covered by the dangerous-query rules (regular `INSERT`, `UPDATE … WHERE …`, `DELETE … WHERE …`), a lighter **production confirmation dialog** still asks you to type the connection or database name before the query runs.
+
+The result is that against a production connection, every mutation requires an explicit confirmation. Read-only queries (`SELECT`, etc.) are unaffected.
+
+### Staging is silent
+
+Staging is **identical to development** for confirmation behavior: no dialog, no typing, queries run as you press them. The badge is the only signal.
+
+This is a deliberate choice: the cost of friction in dev/staging is high, the cost of a production accident is much higher, so the friction is concentrated where it matters.
+
+## Environment vs read-only
+
+The environment tag and the **read-only** toggle are two different mechanisms:
+
+- **Environment**: a label that drives confirmation dialogs and visual indicators. It does not block anything outright.
+- **Read-only**: a per-connection switch that **rejects mutating statements** before they leave the client.
+
+Read-only is *not* automatically enabled when you set environment to production. You have to flip both if you want both behaviors. The combination is the strongest setup for a production replica you only use for reads:
+
+- Environment: `production` (red badge, confirmation prompts)
+- Read-only: `on` (mutations rejected client-side regardless)
+
+Plus, ideally, a database role with read-only privileges server-side, so neither the client guard nor the dialog is your last line of defense.
+
+## Built-in safety rules
+
+QoreDB ships a set of built-in rules in its query interceptor that target production specifically:
+
+- `builtin-no-drop-production`: surfaces a warning on `DROP …` against production.
+- `builtin-no-truncate-production`: same for `TRUNCATE …`.
+- `builtin-confirm-delete-production`: matches `DELETE` against production.
+- `builtin-warn-alter-production`: warns on `ALTER` against production.
+
+These rules are part of QoreDB's safety/audit machinery rather than the client-side confirmation dialogs, but they all key off the same environment tag.
+
+## Choosing the environment when you create a connection
+
+In the **New Connection** dialog, the environment is presented as a row of three radio buttons (`development`, `staging`, `production`). Pick the one that matches what the connection actually points to.
+
+A useful pattern when you have one app with several environments:
+
+| Connection name      | Environment    | Notes                                        |
+| -------------------- | -------------- | -------------------------------------------- |
+| `myapp-dev`          | `development`  | Local Postgres or dev cluster.               |
+| `myapp-staging`      | `staging`      | Pre-production replica.                      |
+| `myapp-prod`         | `production`   | The real thing. Optionally with read-only.   |
+| `myapp-prod-replica` | `production`   | Read-only replica, with read-only ON.        |
+
+Naming the connection clearly (`-prod`, `-staging`, etc.) on top of the environment tag gives you two layers of "what is this?" before you run anything.
+
+## Editing the environment later
+
+Open the connection's settings (right-click in the sidebar, or "Edit connection" from the command palette) and change the radio button. The badge updates immediately and any new query you run picks up the new behavior.
+
+<Callout type="warning">
+Changing a connection from `production` to `development` removes the confirmation prompts. Do this only when you are sure the connection no longer points at production data.
+</Callout>
+
+## Where to go next
+
+- [Vault and profiles](/docs/connections/vault-and-profiles): how QoreDB stores connection credentials
+- [Running queries](/docs/querying/running-queries): the run flow, including the confirmation dialogs in detail
+- [SSH tunneling](/docs/connections/ssh-tunneling): for production databases behind a bastion

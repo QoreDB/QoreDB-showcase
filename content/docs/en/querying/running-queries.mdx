@@ -81,7 +81,9 @@ Before sending a destructive statement, QoreDB checks for patterns that have a h
 - `DELETE FROM …` without a `WHERE` clause
 - `UPDATE …` without a `WHERE` clause
 
-When such a pattern is detected against a **production** connection, a confirmation dialog blocks the run and asks you to type the connection or table name to proceed. The exact threshold depends on the connection's environment tag (development, staging, production) and the safety settings.
+When such a pattern is detected against a **production** connection, a confirmation dialog blocks the run and asks you to type the connection or table name to proceed. Against staging or development, the same query runs without a prompt; the environment tag is the gate.
+
+For the full picture of how environments control these prompts (and the difference with the per-connection read-only flag), see [Environments](/docs/connections/environments).
 
 <Callout type="warning">
 The detector is heuristic. It catches the common shapes (no `WHERE`, `DROP DATABASE`, etc.) but a sufficiently exotic statement can sneak through. The environment tag and a database role with limited privileges are your real safety net.

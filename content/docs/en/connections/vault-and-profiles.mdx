@@ -43,23 +43,9 @@ If you forget the master password, the only way out is to reset the vault, which
 
 ## Environments
 
-Every saved connection has an **environment** tag, with three possible values:
+Every saved connection carries an **environment** tag (`development`, `staging`, or `production`). The tag drives the color-coded badge in the status bar and sidebar, and gates production mutations behind a typed confirmation dialog.
 
-- `development`
-- `staging`
-- `production`
-
-The environment is a hint, not a permission boundary. QoreDB uses it to:
-
-- Show contextual indicators in the UI (status bar, connection chip).
-- Trigger confirmation prompts on dangerous operations against `production` connections.
-- Feed the query interceptor's safety rules.
-
-Set the environment when you create the connection, or edit it later. There is no automatic detection; it's whatever you tag it with.
-
-<Callout type="warning">
-A connection tagged `development` does not magically protect against accidents. The tag drives extra prompts, but the database doesn't know about it. Always check the connection chip and the breadcrumb before running destructive queries.
-</Callout>
+The full behavior is documented on its own page: [Environments](/docs/connections/environments).
 
 ## Profiles via workspaces
 
