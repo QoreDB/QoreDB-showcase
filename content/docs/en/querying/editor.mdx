@@ -1,21 +1,96 @@
 ---
 title: Editor & autocomplete
-description: Write queries fast with smart autocomplete.
+description: The QoreDB editor for SQL and MongoDB. Built on CodeMirror with schema-aware autocomplete, snippets, and a JSON-aware Mongo linter.
 premium: false
 ---
 
 # Editor & autocomplete
 
-This page is a placeholder. Real content is being written.
+QoreDB has two editors, one for SQL drivers (Postgres, MySQL, SQL Server, SQLite, CockroachDB, DuckDB) and one for MongoDB. Both are built on CodeMirror 6 and share the same look and core feel; the language support and the autocomplete sources are what differ.
 
-## Overview
+## The SQL editor
 
-Write queries fast with smart autocomplete.
+When you open a query tab against a SQL connection, you get an editor with:
 
-## What's next
+- **Syntax highlighting** for the active driver's dialect. The dialect (Postgres, MySQL, SQL Server, etc.) is selected automatically based on the connection.
+- **Line numbers** and **active line highlighting**, on by default.
+- **Autocomplete** that triggers as you type, with three sources combined:
+  - **SQL keywords** for the active dialect.
+  - **Custom snippets** (see below).
+  - **Schema-aware suggestions**: table names from the connection's active database, and column names once you write `<schema>.<table>` or `<table>` and start typing a column.
 
-Once finalized, this page will cover:
+There is no built-in SQL linter (errors come from the server when you run the query, not as you type).
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+### Snippets
+
+Seven SQL snippets are available out of the box. Type the prefix and pick the snippet from the autocomplete dropdown. Tab through the placeholders to fill them in.
+
+| Prefix          | Expands to                                            |
+| --------------- | ----------------------------------------------------- |
+| `select`        | `SELECT … FROM …`                                     |
+| `select_where`  | `SELECT … FROM … WHERE …`                             |
+| `insert`        | `INSERT INTO … (…) VALUES (…)`                        |
+| `update`        | `UPDATE … SET … WHERE …`                              |
+| `delete`        | `DELETE FROM … WHERE …`                               |
+| `join`          | `SELECT … FROM a JOIN b ON …`                         |
+| `create_table`  | `CREATE TABLE … ( … )`                                |
+
+### Editor keyboard shortcuts
+
+| Shortcut                                       | Action                                          |
+| ---------------------------------------------- | ----------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+Enter" />      | Run the current query, or the selection if any  |
+| <KeyboardShortcut shortcut="Cmd+Shift+F" />    | Format the query                                |
+| <KeyboardShortcut shortcut="Shift+Alt+F" />    | Format the query (alternative binding)          |
+
+If text is selected when you press the run shortcut, only the selection is executed. With nothing selected, the whole tab is executed.
+
+## The MongoDB editor
+
+When you open a query tab against a MongoDB connection, you get an editor optimized for the Mongo shell idiom:
+
+- **JSON-aware syntax highlighting**.
+- **Mongo operator highlighting**: tokens starting with `$` (operators like `$match`, `$set`, `$sum`, etc.) are visually distinct from regular keys.
+- **Real-time JSON linter** that flags invalid JSON as you type. The linter is forgiving: it normalizes trailing commas, line comments, and single-quoted strings before validating, so the relaxed syntax most developers actually write works.
+- **Autocomplete** with four sources:
+  - **Collection names** after typing `db.`
+  - **Mongo CRUD methods** after typing `db.<collection>.` (18 methods, including `find`, `findOne`, `aggregate`, `insertOne`, `updateMany`, `deleteOne`, `createIndex`, etc.)
+  - **Mongo operators** after typing `$` (74 operators across query, logical, update, aggregation stage and aggregation expression categories)
+  - **Field names** inferred from the targeted collection's sampled schema
+
+There are no built-in snippets for MongoDB.
+
+### Aggregation pipelines
+
+The editor highlights and autocompletes all standard aggregation stages (`$match`, `$project`, `$group`, `$sort`, `$limit`, `$lookup`, `$facet`, `$bucket`, `$graphLookup`, etc.). The client-side linter only validates JSON syntax; semantic validation happens server-side at execution.
+
+<Callout type="warning">
+A few server-side execution operators are blocked by QoreDB on safety grounds: `$function`, `$accumulator`, and `$where`. If you need them, run the query through `mongosh` directly.
+</Callout>
+
+### Editor keyboard shortcuts
+
+| Shortcut                                  | Action                                          |
+| ----------------------------------------- | ----------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+Enter" /> | Run the current query, or the selection if any  |
+
+## Autocomplete behavior
+
+Autocomplete activates as soon as you start typing (no manual trigger needed). To force the popup at any time, the standard CodeMirror binding is `Ctrl + Space`.
+
+The schema-aware suggestions for SQL connections come from the same metadata QoreDB uses to populate the sidebar tree. If a table or column is missing from autocomplete, expanding the connection in the sidebar typically refreshes the cache.
+
+## Run vs run-selection
+
+There is only one run shortcut, <KeyboardShortcut shortcut="Cmd+Enter" />, but it adapts to context:
+
+- **No selection**: runs the entire tab.
+- **Text selected**: runs only the selection.
+
+This means you can keep many statements in a single tab and run any one of them by selecting it before pressing the run shortcut. For multi-statement execution, see [Running queries](/docs/querying/running-queries).
+
+## Where to go next
+
+- [Running queries](/docs/querying/running-queries): multi-statement execution, transactions, cancellation
+- [Results and exports](/docs/querying/results-and-exports): the data grid below the editor
+- [Saved queries](/docs/querying/saved-queries): the query library and folders

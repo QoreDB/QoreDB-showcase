@@ -3,8 +3,12 @@
   "items": [
     "postgresql",
     "mysql",
-    "mongodb",
+    "sqlserver",
     "sqlite",
+    "cockroachdb",
+    "mongodb",
+    "redis",
+    "duckdb",
     "ssh-tunneling",
     "vault-and-profiles"
   ]

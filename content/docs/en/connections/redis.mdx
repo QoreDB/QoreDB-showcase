@@ -1,0 +1,87 @@
+---
+title: Redis
+description: Connect QoreDB to Redis (or Redis-compatible servers) and browse keys across all native data types.
+premium: false
+---
+
+# Redis
+
+QoreDB connects to Redis through the official `redis-rs` driver. Standalone instances and managed Redis services (AWS ElastiCache, Redis Cloud, Upstash, DigitalOcean Managed Redis, etc.) all work through the same flow.
+
+## Quick connect
+
+Paste a connection URI. QoreDB recognizes both `redis://` (plain TCP) and `rediss://` (TLS) schemes.
+
+```
+redis://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+rediss://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+```
+
+Open **New Connection**, choose **Redis**, paste the URI, click **Test connection**, then **Save**.
+
+## Connection fields
+
+| Field         | Required | Notes                                                                              |
+| ------------- | -------- | ---------------------------------------------------------------------------------- |
+| **Host**      | Yes      | Hostname or IP address.                                                            |
+| **Port**      | Yes      | Defaults to `6379`.                                                                |
+| **User**      | Optional | For Redis 6+ with ACL. Leave empty for legacy `requirepass`-only setups.           |
+| **Password**  | Optional | Stored encrypted in the vault.                                                     |
+| **Database**  | Optional | Database index, an integer between `0` and `15` (configurable server-side).        |
+| **SSL/TLS**   | Optional | Enables `rediss://` mode for encrypted connections.                                |
+
+## Authentication
+
+Redis 6 introduced ACLs (Access Control Lists). Two patterns are supported:
+
+- **Password only** (Redis 5 and earlier, or Redis 6 with `requirepass`): leave **User** empty, fill **Password**. Authenticates as the implicit `default` user.
+- **ACL user + password** (Redis 6+): fill both fields. Authenticates as the named user with their granted command and key permissions.
+
+If your provider only documents a password, you're on the password-only mode. Managed services (Upstash, Redis Cloud) typically use ACL with a generated user.
+
+## Database index
+
+A single Redis instance can hold up to 16 logical databases (numbered `0` to `15`), partitioned by index. The default is `0`. Use the **Database** field (or the trailing `/N` segment of the URI) to switch.
+
+Note: Redis Cluster and most managed services use only database `0`; the multi-database feature is rarely used in production.
+
+## TLS
+
+Use `rediss://` (with two `s`) or enable the SSL/TLS toggle to encrypt the connection. This is required by:
+
+- AWS ElastiCache for Redis when "in-transit encryption" is enabled
+- Redis Cloud
+- Upstash
+- Most managed Redis services accessed over the public internet
+
+## What you can do once connected
+
+QoreDB shows the connected Redis instance in the sidebar. You can:
+
+- **Browse keys** across all native types: STRING, HASH, LIST, SET, ZSET (sorted set), and STREAM.
+- **Inspect values**, with type-aware viewers (a hash shows fields and values, a sorted set shows members with their scores, etc.).
+- **Run commands** through the editor for ad-hoc work.
+
+## Common issues
+
+<Callout type="warning">
+**"NOAUTH Authentication required"**: the server has `requirepass` set but no password was provided. Fill the password field.
+</Callout>
+
+<Callout type="warning">
+**"WRONGPASS invalid username-password pair or user is disabled"**: the credentials are wrong, the ACL user is disabled, or you're targeting Redis 6+ ACL with the legacy password-only flow. Verify the user with `ACL WHOAMI` and `ACL LIST` from a working session.
+</Callout>
+
+<Callout type="warning">
+**"connection refused" with `rediss://`**: the server isn't listening on TLS. Either it's plain Redis (use `redis://`) or you're using the wrong port. Some managed providers expose TLS on a different port.
+</Callout>
+
+<Callout type="warning">
+**"DB index is out of range"**: you targeted a database index above the server's `databases` setting (default 16). Lower the index or raise the server limit.
+</Callout>
+
+## Where to go next
+
+- [SSH tunneling](/docs/connections/ssh-tunneling) for instances behind a bastion
+- [Vault and profiles](/docs/connections/vault-and-profiles) to organize many connections
+- [Querying: editor and autocomplete](/docs/querying/editor) for the editor specifics

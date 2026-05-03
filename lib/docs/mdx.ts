@@ -42,6 +42,22 @@ function extractHeadings(markdown: string): DocHeading[] {
   return out;
 }
 
+/**
+ * Remove a leading top-level heading (`# …`) from the MDX source.
+ *
+ * The page layout already renders the frontmatter `title` as the page's
+ * `<h1>`, so a body that starts with `# Title` produces a duplicate
+ * heading. We strip exactly one leading H1 (allowing optional blank lines
+ * and MDX components above it) and leave deeper headings (`##`, `###`)
+ * untouched.
+ */
+function stripLeadingH1(source: string): string {
+  // Skip optional leading whitespace/blank lines before the H1.
+  const match = source.match(/^[ \t]*\n*#[ \t]+[^\n]*(\r?\n)+/);
+  if (!match) return source;
+  return source.slice(match[0].length);
+}
+
 export function loadDoc(filePath: string): LoadedDoc {
   const raw = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(raw);
@@ -53,7 +69,7 @@ export function loadDoc(filePath: string): LoadedDoc {
     draft: data.draft === true,
   };
   return {
-    source: content,
+    source: stripLeadingH1(content),
     frontmatter,
     headings: extractHeadings(content),
   };

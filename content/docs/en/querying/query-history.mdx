@@ -1,21 +1,94 @@
 ---
 title: Query history
-description: Find any query you ran in the past.
+description: Every query you have run, searchable, with timing and row count. Per-workspace, capped at 100 entries, with optional redaction.
 premium: false
 ---
 
 # Query history
 
-This page is a placeholder. Real content is being written.
+Every query QoreDB executes is recorded in a local history. You can search the log, re-run an entry, mark favorites, and use it as a memory of what you did against which database. The history is stored locally; nothing leaves your machine.
 
-## Overview
+## What gets stored
 
-Find any query you ran in the past.
+Each entry records:
 
-## What's next
+- The **query text**.
+- The **session** it ran against (which connection / database).
+- The **driver** that handled it (PostgreSQL, MySQL, MongoDB, etc.).
+- The **target database** (when the driver exposes one).
+- The **timestamp** of execution.
+- The **execution time** and **total time**, in milliseconds.
+- The **row count** returned (when applicable).
+- The **error message**, if the query failed.
 
-Once finalized, this page will cover:
+Together that's enough to identify a query weeks later and re-run it as is or with edits.
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+## Storage and limits
+
+History is persisted to your browser's `localStorage` under a key namespaced by the active workspace, so different workspaces have different histories. Switching workspaces switches the history view too.
+
+The log is capped at **100 entries** per workspace. Once full, the oldest entry is dropped when a new query is added.
+
+This means history is not a long-term audit log; it is a short-term scratchpad of recent activity. For permanent records, save the queries you care about to the [library](/docs/querying/saved-queries) or use the audit log feature.
+
+## Opening the history
+
+The history panel opens from:
+
+- The **history button** in the title bar.
+- The **command palette** (<KeyboardShortcut shortcut="Cmd+K" />, then search "history").
+
+The panel shows entries newest-first, with the query text, timestamp, status (success or error), driver, and row count.
+
+## Searching
+
+A search box at the top of the panel does a case-insensitive substring match on the query text. Useful patterns:
+
+- Search for a table name to find all queries that touched it.
+- Search for an error keyword to find failed runs.
+- Search for the start of a `SELECT … FROM …` to find a particular query you wrote yesterday.
+
+There is no operator syntax; it's plain substring search.
+
+## Re-running an entry
+
+Click any history entry to load its query into a new editor tab against the same connection. From there you can edit and run as usual. The history entry itself is unchanged; running again creates a fresh entry.
+
+## Favorites
+
+Mark frequently-needed queries as favorites with the star icon. Favorites:
+
+- Stay searchable from the global command palette (<KeyboardShortcut shortcut="Cmd+K" />), so you don't need to open the history panel to find them.
+- Can be filtered to in the history view ("Favorites only").
+
+Favorites are scoped to the workspace, like the rest of the history.
+
+## Redaction and privacy
+
+Some workspaces handle queries that contain secrets in literals (passwords, API keys, PII). For those, the **history retention** setting controls what gets persisted:
+
+- **Full history** (default): query text is stored verbatim.
+- **Redacted history**: queries are stored but with literals redacted. You see the shape of the query (`SELECT … WHERE password = '<REDACTED>'`) but not the actual values.
+- **Off**: no history is persisted at all. The current session still has an in-memory history, but nothing survives a restart.
+
+The setting lives in **Settings → Data → History retention**.
+
+<Callout type="tip">
+Redaction normalizes string and numeric literals to placeholders. It's enough to keep credentials and PII out of `localStorage`, but it's not a guarantee against leakage in every edge case (an unusual query shape may slip through). When working against highly sensitive systems, prefer the "off" setting.
+</Callout>
+
+## Clearing the history
+
+To wipe the history for the current workspace, use the trash icon in the history panel (a confirmation prompts before deleting).
+
+To wipe history globally across all workspaces, clear QoreDB's `localStorage` from the OS-level developer tools. There is no in-app "wipe everything" button.
+
+## Exporting
+
+History is not exported as a first-class workflow (since the cap of 100 entries makes it short-term). If you need to keep a query, save it to the [query library](/docs/querying/saved-queries) instead.
+
+## Where to go next
+
+- [Saved queries](/docs/querying/saved-queries): the durable, organized counterpart to history
+- [Running queries](/docs/querying/running-queries): execution and timing details
+- [Reference: keyboard shortcuts](/docs/reference/keyboard-shortcuts): every QoreDB shortcut at a glance

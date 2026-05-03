@@ -1,21 +1,96 @@
 ---
 title: Saved queries
-description: Bookmark and reuse your queries.
+description: The QoreDB query library. Save, organize and reuse SQL and Mongo queries with folders, tags and favorites.
 premium: false
 ---
 
 # Saved queries
 
-This page is a placeholder. Real content is being written.
+The **query library** is QoreDB's durable store for queries you want to keep around. Unlike the [history](/docs/querying/query-history), which is short-term and capped, the library is meant for queries you'll come back to: a fleet-status dashboard query, an "add new tenant" template, a tricky aggregation you finally got right.
 
-## Overview
+## Saving a query
 
-Bookmark and reuse your queries.
+From any query tab, the save action stores the current text into the library. You can give it a name, choose a folder, and add tags right away, or just save it under a generic name and organize later.
 
-## What's next
+Saved queries are scoped to the **active workspace**, like history.
 
-Once finalized, this page will cover:
+## Opening the library
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+The library opens from:
+
+- The keyboard shortcut <KeyboardShortcut shortcut="Cmd+Shift+L" />.
+- The **command palette** (<KeyboardShortcut shortcut="Cmd+K" />, then search "library").
+- A button in the editor toolbar.
+
+The library is presented as a modal with three views: **All**, **Favorites**, and **Folders**. A search box at the top filters by name, query text, or tag.
+
+## Folders
+
+Folders group related queries. The folder list is **flat**: a folder is a single label with no parent, no nesting. This keeps the model simple and the UI fast.
+
+You can:
+
+- **Create** a folder from the library modal.
+- **Rename** a folder; existing queries keep their assignment.
+- **Delete** a folder; its queries either move to "Unsorted" or are deleted, depending on what you choose at the confirmation prompt.
+
+There is a hard limit of **100 folders** per workspace.
+
+## Tags
+
+Each query can carry up to **12 tags**, useful for cross-cutting categorization that doesn't fit a single folder ("dashboard", "billing", "investigation", "draft", etc.). Tags are normalized (lowercased, trimmed, stripped of duplicates) when you add them.
+
+Click a tag in the library to filter the view to queries that share it.
+
+## Favorites
+
+Star a query to mark it as a favorite. Favorites:
+
+- Are highlighted in the library view.
+- Are filterable as a separate view in the modal.
+- Are searchable from the global command palette.
+
+Favorites are scoped to the workspace.
+
+## Limits
+
+- **Items**: up to **300** queries per workspace.
+- **Folders**: up to **100** per workspace.
+- **Tags**: up to **12** per query.
+
+If you bump into the item limit, archive (delete) old queries you're no longer using. The library is meant for the queries you reach for, not an audit log.
+
+## Storage
+
+The library lives in your browser's `localStorage` under a key namespaced by the active workspace.
+
+For **file-based workspaces** (a workspace that points at a folder on disk), QoreDB also writes the library to a JSON file inside the workspace folder, debounced after edits. This means:
+
+- The library follows the workspace folder, so you can sync it via git, Dropbox, iCloud, etc.
+- Two machines pointing at the same workspace folder share the same library (as long as you don't edit on both at once and confuse the sync).
+
+For the **default workspace** (no folder picked), the library lives only in `localStorage` and stays on the current machine.
+
+## Import and export
+
+Library data is exportable as JSON, which lets you:
+
+- Back up the library outside QoreDB.
+- Move it to another machine.
+- Share a curated set of queries with a teammate or a client.
+
+The export format is versioned (`QueryLibraryExportV1`) and contains the folders array plus the items array. Importing replaces or merges with the current library, depending on the option you pick.
+
+You can also choose to **redact literals** on export, which replaces values inside string and numeric literals with placeholders. Useful when sharing queries that originally contained credentials or PII.
+
+## Reusing a saved query
+
+Click an entry in the library to load it into a new editor tab against the workspace's current connection (or against a specific connection if the entry has one pinned). From there, edit and run as usual.
+
+If you frequently parameterize a query (different IDs, different date ranges), consider promoting it to a **notebook** instead. Notebooks support typed parameters and can run cells in sequence, which is closer to what you actually want for a parameterized template.
+
+## Where to go next
+
+- [Query history](/docs/querying/query-history): the short-term, automatic counterpart
+- [Editor and autocomplete](/docs/querying/editor): writing the queries you'll save
+- [Running queries](/docs/querying/running-queries): execution flow

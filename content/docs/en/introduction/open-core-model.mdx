@@ -23,12 +23,13 @@ Every source file in the repository carries an SPDX header declaring its license
 
 The core covers everything you need for a complete, production-quality database client:
 
-- **All database drivers**: PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB
+- **All database drivers**: PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB (and more coming soon)
 - **Connection management**: vault, profiles, SSH tunneling, environment guards
 - **Query editor and execution**: SQL and MongoDB editors, syntax highlighting, autocomplete, history, query library
 - **Data grid and editing**: inline edit, virtualization, server-side filters, bulk edit (up to 5 rows)
 - **Schema browser**: tables, views, routines, triggers, indexes
 - **Visual DDL editor**: full CREATE and ALTER TABLE
+- **ER Diagram**: interactive schema graph with isolate/focus workflows
 - **Notebooks**: full notebook engine with parameterized variables, Run All, import/export
 - **CSV import**, **export pipeline** (CSV/JSON/SQL/HTML), **transaction management**
 - **Sandbox mode**, **audit logging**, **read-only mode**, **dangerous query detection**
@@ -40,22 +41,21 @@ In other words, the core is enough to ship real work every day. Pro is not a pay
 ## What's in Premium (BSL 1.1)
 
 <Screenshot
-  alt="ER Diagram view in QoreDB with the Premium badge visible"
-  todo="Screenshot of the ER Diagram tab open on a real schema (5–8 tables with relationships), showing the 'Pro' or 'Premium' badge in the toolbar or near the feature name. Make sure the diagram has at least 2 visible foreign-key edges so the reader understands what they're looking at."
+  src="/images/docs/visual-diff-premium.png"
+  alt="Visual diff view in QoreDB with the Premium badge visible"
 />
 
 Premium features are advanced workflows that typically only become valuable once you're using QoreDB heavily or in a team setting:
 
-- **ER Diagram**: interactive schema graph with isolate/focus workflows
 - **Visual Data Diff**: side-by-side comparison of table and query results
 - **Time Travel**: full row history with visual timeline, range filters, point-to-point diff and Rollback SQL preview
 - **Chart cells in notebooks**: bar, line, pie, scatter
 - **Bulk edit beyond 5 rows**
 - **XLSX and Parquet export**
-- **AI Assistant**: contextual query generation, schema-aware suggestions, error correction
+- **AI Assistant (BYOK)**: contextual query generation, schema-aware suggestions, error correction
 - **Profiling and advanced query interception** for performance tuning
 
-You can read every line of source code for these features in the open repository. You can build the app yourself with these features included for personal use. The license simply prevents a third party from rebranding QoreDB as a commercial product that competes with us.
+You can read every line of source code for these features in the [open repository](https://github.com/QoreDB/QoreDB). You can build the app yourself with these features included for personal use. The license simply prevents a third party from rebranding QoreDB as a commercial product that competes with us.
 
 ## Why Open Core
 
@@ -76,13 +76,9 @@ This is the same model used by HashiCorp's Terraform/Vault (BSL 1.1), Sentry (BS
 
 <Callout type="info">
 **For individual developers using QoreDB at work**: you can use everything, Core and Premium, with a Pro license. No friction, no restrictions on internal use.
-</Callout>
 
-<Callout type="info">
 **For teams and companies**: a Pro license unlocks all Premium features for your members. The Core remains free regardless.
-</Callout>
 
-<Callout type="info">
 **For contributors and forks**: contribute to anything. PRs are welcome on both Core and Premium files. The SPDX headers make the license boundary explicit so you know what you're touching.
 </Callout>
 

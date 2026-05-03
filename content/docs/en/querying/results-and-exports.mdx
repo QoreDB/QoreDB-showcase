@@ -1,21 +1,103 @@
 ---
 title: Results & exports
-description: Browse results and export to CSV/JSON.
+description: The results pane in QoreDB. Sortable columns, per-column filters, inline editing, blob viewer, and exports to CSV, JSON, SQL, HTML, XLSX or Parquet.
 premium: false
 ---
 
 # Results & exports
 
-This page is a placeholder. Real content is being written.
+When a query returns rows, they appear in the results pane below the editor. The grid is built on TanStack Table with row virtualization, so a million-row result set scrolls smoothly without freezing the UI.
 
-## Overview
+## The data grid
 
-Browse results and export to CSV/JSON.
+### Sorting
 
-## What's next
+Click a column header to sort ascending, click again for descending, click a third time to clear. Sorting is single-column.
 
-Once finalized, this page will cover:
+For SQL connections, when the result set comes from a server-side `ORDER BY`, the sort is sent to the server (it can scale beyond what the client holds). For client-only result sets, the sort is applied to the rows in memory.
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+### Per-column filters
+
+Each column header has a filter affordance. Click it to filter rows down without re-running the query. Five operators are available:
+
+| Operator | Behavior                                              |
+| -------- | ----------------------------------------------------- |
+| `like`   | The cell value contains the filter text.              |
+| `eq`     | The cell value equals the filter text exactly.        |
+| `neq`    | The cell value differs from the filter text.          |
+| `regex`  | The cell value matches the regular expression.        |
+| `text`   | Full-text style match against the cell value.         |
+
+For `regex`, you can pass standard regex syntax including flags. Matches are case-sensitive unless you use the `i` flag.
+
+### Pagination
+
+The grid paginates by default. Available page sizes are **25**, **50**, **100**, and **250**, with **50** as the default.
+
+Pagination controls (first / previous / next / last and page size selector) sit at the bottom of the grid.
+
+### Inline edit
+
+For rows that come from a single table (and where your role has the appropriate privileges), cells become editable. Edit a cell directly to issue an `UPDATE` against the row's primary key.
+
+The cell turns into an input on edit; press `Enter` to commit, `Esc` to cancel. The change is sent to the server on commit.
+
+For more complex edits, see the row modal below.
+
+### Bulk edit
+
+To update the same column on multiple rows in one operation, select the rows and use the bulk-edit affordance in the toolbar.
+
+The Core tier allows bulk edit on **up to 5 rows** at a time. The Pro tier raises the limit to **1 000 rows** per bulk operation. Pro is required for anything beyond 5.
+
+### Row modal
+
+To inspect or edit a row in full (especially useful for tables with many columns or large text fields), open it in the row modal. Every field is editable in the modal and the diff is sent on save.
+
+### Foreign key peek
+
+When a column is a foreign key, hovering or clicking it surfaces the related row from the referenced table without leaving the grid. Useful for navigating relationships without opening another tab.
+
+This works against tables with declared `FOREIGN KEY` constraints. QoreDB also supports **virtual relations** (foreign keys you declare in QoreDB without changing the schema), so you can get peek behavior on schemas that don't have proper constraints.
+
+## Inspecting cells
+
+### Blob viewer
+
+For binary or BLOB columns, QoreDB detects the content type automatically and offers several views:
+
+- **Image preview**, when the bytes look like a known image format (PNG, JPEG, GIF, SVG, BMP, ICO).
+- **Hex dump**, byte-level view of the content with offsets.
+- **Base64**, the raw base64 representation.
+- **SVG source**, when the content is SVG.
+
+Large blobs are guarded by size limits to keep the UI responsive: the preview, decoded, and hex-dump views each stop reading after a configurable threshold. This is fine for most images and JSON; for very large blobs, export the column instead.
+
+## Exports
+
+The results pane exports the current result set (after filters and sorts) to several formats:
+
+| Format       | Tier     | Notes                                                                |
+| ------------ | -------- | -------------------------------------------------------------------- |
+| **CSV**      | Core     | Standard comma-separated values.                                     |
+| **JSON**     | Core     | Array of objects, one per row.                                       |
+| **SQL**      | Core     | `INSERT INTO …` statements you can replay against another database.  |
+| **HTML**     | Core     | Self-contained HTML table.                                           |
+| **XLSX**     | Pro      | Excel workbook.                                                      |
+| **Parquet**  | Pro      | Columnar format for analytical pipelines.                            |
+
+### Streaming export
+
+Large exports stream rows as the server returns them, so you do not need to hold the entire result set in memory before writing the file. The export dialog shows progress and lets you cancel partway through.
+
+### What gets exported
+
+By default, exports apply the **current view**: the active filter, the active sort, and the current pagination range. To export the entire result set instead of just the visible page, switch to "Export all rows" in the dialog.
+
+For SQL exports, the generated `INSERT` statements use the column types as understood by the source driver. Cross-driver replays may require minor adjustments (timestamp precision, JSON columns, etc.).
+
+## Where to go next
+
+- [Editor and autocomplete](/docs/querying/editor): writing the queries that produce these results
+- [Running queries](/docs/querying/running-queries): execution flow, transactions, cancellation
+- [Saved queries](/docs/querying/saved-queries): the query library

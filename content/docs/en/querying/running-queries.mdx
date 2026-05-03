@@ -1,21 +1,98 @@
 ---
 title: Running queries
-description: Run, cancel and inspect queries.
+description: How to execute SQL or Mongo queries in QoreDB. Multi-statement, selection-only, transactions, cancellation, and the safety net for dangerous queries.
 premium: false
 ---
 
 # Running queries
 
-This page is a placeholder. Real content is being written.
+QoreDB executes one statement, a selection, or a sequence of statements depending on what you have in the editor and what you have selected. This page walks through the run flow, the safety prompts, and the transaction controls.
 
-## Overview
+## Running a query
 
-Run, cancel and inspect queries.
+The single shortcut <KeyboardShortcut shortcut="Cmd+Enter" /> runs whatever is most appropriate for your current cursor and selection.
 
-## What's next
+- **No selection**: the entire tab is sent to the server.
+- **Selection active**: only the selected text is sent.
 
-Once finalized, this page will cover:
+This applies to both the SQL editor and the MongoDB editor. There is no separate "run selection" shortcut; the selection itself decides.
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+## Multiple statements
+
+For SQL connections, QoreDB splits the input on `;` (with awareness of strings and comments) and executes each statement in sequence. If one statement fails, the remaining ones are not executed and the error is shown for that statement.
+
+Each statement gets its own row in the results pane, with timing, row count, and error if any. You can scroll between them or click on a specific statement's tab to focus its results.
+
+## Execution timing
+
+Every executed query reports two timings:
+
+- **Total time**: wall-clock time as seen by the client, including network round-trip and serialization.
+- **Execution time**: time spent on the server (when the driver returns it).
+
+Both are measured in milliseconds and shown in the results pane. They are also persisted in the history.
+
+## Cancelling a query
+
+Long-running queries can be cancelled. Click the **Cancel** button while a query is running. The driver sends a cancellation signal to the server (the underlying mechanism depends on the driver, e.g. PostgreSQL's `pg_cancel_backend`).
+
+Cancellation is best-effort: it stops a query that is still running, but a query that has already returned its rows or is in the middle of a write may not be interruptible.
+
+## Errors
+
+Errors surface in two places:
+
+- **Inline in the results pane**, where the failing statement's row shows the server's error message.
+- **As a toast notification** in the bottom-right corner, so the error is hard to miss when you are looking elsewhere.
+
+The error message comes verbatim from the database driver. Click the message to expand it for the full text and (when available) the SQL state code.
+
+## Transactions
+
+QoreDB supports explicit transactions through standard SQL commands:
+
+```sql
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+-- or ROLLBACK; if something looks wrong
+```
+
+There is no autocommit toggle in the UI; statements you run outside an explicit `BEGIN` are committed individually as the driver dictates. Transactions are scoped per session, so other tabs against the same connection share the same transactional state.
+
+<Callout type="tip">
+For multi-statement updates that must succeed or fail together, wrap them in `BEGIN … COMMIT;` and run them as a single statement. If you run each statement separately, each commit is independent.
+</Callout>
+
+## Read-only mode
+
+Each connection has a **read-only** flag in its settings. When the flag is on, QoreDB rejects mutating statements (`INSERT`, `UPDATE`, `DELETE`, `DROP`, etc.) before sending them to the server.
+
+This is a client-side guard, not a server-side permission. For a hard guarantee, also use a database role with read-only privileges.
+
+## Dangerous-query confirmation
+
+Before sending a destructive statement, QoreDB checks for patterns that have a high blast radius:
+
+- `DROP DATABASE …`
+- `DROP TABLE …`
+- `TRUNCATE …`
+- `DELETE FROM …` without a `WHERE` clause
+- `UPDATE …` without a `WHERE` clause
+
+When such a pattern is detected against a **production** connection, a confirmation dialog blocks the run and asks you to type the connection or table name to proceed. The exact threshold depends on the connection's environment tag (development, staging, production) and the safety settings.
+
+<Callout type="warning">
+The detector is heuristic. It catches the common shapes (no `WHERE`, `DROP DATABASE`, etc.) but a sufficiently exotic statement can sneak through. The environment tag and a database role with limited privileges are your real safety net.
+</Callout>
+
+## Governance limits
+
+Some workspaces apply automatic limits to result sets to keep accidental "SELECT * FROM huge_table" queries from saturating the client. When such a limit is in effect, you'll see a hint in the results pane along with a **Bypass limits** option to re-run without it (useful for exports).
+
+## Where to go next
+
+- [Editor and autocomplete](/docs/querying/editor): editor features and shortcuts
+- [Results and exports](/docs/querying/results-and-exports): inspecting and exporting results
+- [Query history](/docs/querying/query-history): every query you have run, searchable

@@ -1,0 +1,85 @@
+---
+title: CockroachDB
+description: Connect QoreDB to CockroachDB. Postgres-compatible wire protocol, port 26257, with a few CockroachDB-specific schema-browsing tweaks.
+premium: false
+---
+
+# CockroachDB
+
+CockroachDB speaks the PostgreSQL wire protocol, so QoreDB connects to it through the same client stack as PostgreSQL. The dedicated CockroachDB driver is a thin layer on top: same DSN format, same SSL story, but with a few schema-browsing details adjusted to match CockroachDB's catalogs and a default port of `26257`.
+
+## Quick connect
+
+Paste a Postgres-style DSN and pick the **CockroachDB** engine. The default port is `26257`, not `5432`.
+
+```
+postgresql://USER:PASSWORD@HOST:26257/DATABASE
+postgresql://USER:PASSWORD@HOST:26257/DATABASE?sslmode=verify-full
+```
+
+If you don't specify a database, QoreDB defaults to `defaultdb`, which is what CockroachDB ships with.
+
+## Connection fields
+
+| Field        | Required | Notes                                                                            |
+| ------------ | -------- | -------------------------------------------------------------------------------- |
+| **Host**     | Yes      | Hostname or IP. Cluster URL for managed services.                                |
+| **Port**     | Yes      | Defaults to `26257`.                                                             |
+| **User**     | Yes      | Database user.                                                                   |
+| **Password** | Optional | Stored encrypted in the vault.                                                   |
+| **Database** | Optional | Defaults to `defaultdb` if omitted.                                              |
+| **SSL mode** | Optional | One of `disable`, `prefer`, `require`, `verify-ca`, `verify-full`.               |
+
+## SSL / TLS
+
+Same modes as PostgreSQL:
+
+| Mode             | Encrypted? | Server cert checked? | Server hostname checked? |
+| ---------------- | ---------- | -------------------- | ------------------------ |
+| `disable`        | No         | No                   | No                       |
+| `prefer`         | If offered | No                   | No                       |
+| `require`        | Yes        | No                   | No                       |
+| `verify-ca`      | Yes        | Yes                  | No                       |
+| `verify-full`    | Yes        | Yes                  | Yes                      |
+
+CockroachDB Cloud (Serverless and Dedicated) requires `verify-full` and ships with a public CA cert. Self-managed clusters typically set up their own CA; you'll need to point the client at it (out of QoreDB's scope; ensure the cert is trusted by your OS or the CA file is on your system).
+
+## CockroachDB Cloud
+
+Grab the connection string from the cluster's "Connect" panel:
+
+```
+postgresql://USER:PASSWORD@CLUSTER-NAME-XXXX.cloud.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full
+```
+
+Paste it into the URL field and click **Parse**. SSL is required by default for Cloud clusters.
+
+## Differences from PostgreSQL
+
+CockroachDB is wire-compatible with Postgres but the underlying engine is different. A few practical points show up in QoreDB's schema browser:
+
+- **System catalogs are filtered**: the `crdb_internal` and `pg_extension` namespaces are hidden from the schema tree because they're noise for application work.
+- **Tables and views only**: CockroachDB doesn't have materialized views, so the schema tree shows tables and regular views, no materialized-view node.
+- **Maintenance is limited**: where Postgres exposes `VACUUM`, `ANALYZE`, `REINDEX` and friends, CockroachDB only exposes `ANALYZE` (it manages the rest itself with built-in jobs). The maintenance menus reflect this.
+
+Day to day, your queries are identical to PostgreSQL. The biggest practical differences are at the application layer (CockroachDB's transaction model retries serialization conflicts more aggressively, no row-level triggers, slightly different TIMESTAMP handling), not in QoreDB itself.
+
+## Common issues
+
+<Callout type="warning">
+**"connection refused" on port 26257**: by default, self-managed CockroachDB listens on `26257` for SQL clients and `8080` for the admin UI. Make sure you're using `26257`, not `8080`.
+</Callout>
+
+<Callout type="warning">
+**SSL errors against CockroachDB Cloud**: Cloud requires `verify-full`. Check that the SSL mode is set correctly and that the system trust store has the public CockroachDB Labs CA.
+</Callout>
+
+<Callout type="warning">
+**"transaction retry error"**: CockroachDB can ask the client to retry a transaction when it detects a serialization conflict. This is normal; the official docs describe how to handle it in application code. From a query browser like QoreDB, simply re-run the statement.
+</Callout>
+
+## Where to go next
+
+- [SSH tunneling](/docs/connections/ssh-tunneling) for clusters behind a bastion
+- [PostgreSQL](/docs/connections/postgresql) for the broader PG ecosystem
+- [Querying: editor and autocomplete](/docs/querying/editor) for the SQL editor

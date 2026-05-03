@@ -1,0 +1,85 @@
+---
+title: DuckDB
+description: Connect QoreDB to DuckDB, the in-process analytical database. File-based, in-memory, or used as the engine behind cross-database federation.
+premium: false
+---
+
+# DuckDB
+
+DuckDB is an in-process analytical database, optimized for fast aggregations, joins and reads over columnar data. It has no server: you point QoreDB at a file (or use an in-memory database) and you're connected.
+
+## Quick connect
+
+Open **New Connection**, choose **DuckDB**, and either browse to a file or paste a path.
+
+The driver also accepts a path of `:memory:` for an ephemeral in-memory database.
+
+## Connection fields
+
+| Field    | Required | Notes                                                            |
+| -------- | -------- | ---------------------------------------------------------------- |
+| **Path** | Yes      | Absolute or relative path to a `.duckdb` or `.db` file. Or `:memory:`. |
+
+Like SQLite, there is no host, port, user or password. QoreDB **creates the file automatically** if it doesn't exist; first write persists it to disk.
+
+## Supported file extensions
+
+The driver validates the file extension. Two are accepted:
+
+- `.duckdb`
+- `.db`
+
+If you have a different extension, rename the file or use `:memory:`.
+
+## In-memory databases
+
+Use `:memory:` (or `duckdb::memory:`) for a database that lives only in RAM and disappears when the connection closes. Useful for:
+
+- One-off exploratory queries
+- Testing analytical queries before persisting them
+- Loading a CSV or Parquet, doing some transformations, exporting the result
+
+## What DuckDB is good at
+
+DuckDB is a columnar engine designed for analytical workloads (OLAP). It shines at:
+
+- **Aggregations and joins** over millions of rows on a single machine, without a server.
+- **Reading Parquet and CSV directly** with SQL (`SELECT * FROM 'data.parquet'` works out of the box).
+- **Embedded analytics**: you can ship a `.duckdb` file with a desktop app and query it locally.
+- **Time-series and analytical queries** that would be slow on row-stored OLTP databases.
+
+For high-throughput transactional workloads (lots of single-row inserts and updates), pick PostgreSQL or another row-store.
+
+## Cross-database federation
+
+DuckDB is also the engine behind QoreDB's **cross-database federation**: it can attach external databases (Postgres, MySQL, SQLite, and others) and query them as if they were local DuckDB tables. This lets you join data across heterogeneous sources from a single SQL query.
+
+The federation feature is set up at the workspace level rather than per-connection. The DuckDB driver itself is for connecting to a regular DuckDB file or in-memory instance; the federation engine reuses DuckDB internally but isn't exposed through the same connection dialog.
+
+<Callout type="tip">
+For details on the federation workflow (which connections to enable, how to write cross-database joins), see your workspace's federation panel inside QoreDB. The cross-database join feature is most useful when you regularly need to combine data from several sources without a real ETL pipeline.
+</Callout>
+
+## Common issues
+
+<Callout type="warning">
+**"unable to open database file"**: the path is wrong, or the directory does not exist, or the process can't write there. Check the path; remember relative paths resolve against QoreDB's working directory, not your shell's.
+</Callout>
+
+<Callout type="warning">
+**"file is not a database"**: the file at the path isn't a valid DuckDB file. Either it was created by a different tool, or it's a different format (sqlite file with `.db` extension, for example). Open it with the `duckdb` CLI to confirm.
+</Callout>
+
+<Callout type="warning">
+**"unsupported file extension"**: only `.duckdb` and `.db` are accepted. Rename or symlink your file with one of these extensions.
+</Callout>
+
+<Callout type="tip">
+DuckDB ships its own SQL dialect, very close to PostgreSQL with some differences (window functions, EXCLUDE syntax, etc.). When in doubt, check the [DuckDB SQL reference](https://duckdb.org/docs/sql/introduction).
+</Callout>
+
+## Where to go next
+
+- [SQLite](/docs/connections/sqlite) for the row-store equivalent on a single file
+- [Querying: editor and autocomplete](/docs/querying/editor) for the SQL editor
+- [Reference: connection URLs](/docs/reference/connection-urls) for the full URI grammar
