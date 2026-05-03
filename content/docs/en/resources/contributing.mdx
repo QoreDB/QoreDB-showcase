@@ -1,21 +1,103 @@
 ---
 title: Contributing
-description: How to contribute to QoreDB.
+description: How to contribute to QoreDB. Local setup, pull request process, SPDX header convention, and where to ask for guidance.
 premium: false
 ---
 
 # Contributing
 
-This page is a placeholder. Real content is being written.
+QoreDB is open source and contributions are welcome. The repo is at [github.com/raphplt/QoreDB](https://github.com/raphplt/QoreDB), and PRs land regularly from outside the core team.
 
-## Overview
+## Prerequisites
 
-How to contribute to QoreDB.
+You need a working development environment with:
 
-## What's next
+- **Rust**: latest stable toolchain (install via [rustup](https://rustup.rs)).
+- **Node.js 18+** with **pnpm** (the project uses pnpm, not npm or yarn).
+- **Docker**: used by the test suite to spin up local instances of PostgreSQL, MySQL, MongoDB, and the rest. Tests can be selectively run without Docker if you only touch unrelated code.
+- The [Tauri system dependencies](https://tauri.app/start/prerequisites/) for your platform (typically a few GTK and WebKit packages on Linux, no extra setup on macOS/Windows).
 
-Once finalized, this page will cover:
+## Local setup
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+```bash
+git clone https://github.com/raphplt/QoreDB.git
+cd QoreDB
+pnpm install
+pnpm tauri dev      # development mode with hot reload
+```
+
+The first build takes a few minutes (Rust compiles a lot of crates). Subsequent runs are fast.
+
+To start the dev databases for testing:
+
+```bash
+docker-compose up -d
+```
+
+## Running tests
+
+```bash
+cargo test          # Rust backend tests
+pnpm test           # Frontend tests
+pnpm lint           # Linting
+pnpm format:check   # Formatting check (use format:write to fix)
+```
+
+Run all four before opening a PR.
+
+## Pull request process
+
+1. **Fork** the repo on GitHub.
+2. **Create a feature branch** off `main` (e.g. `feat/postgres-array-support`).
+3. **Make your changes** with focused commits. Conventional commit prefixes (`feat:`, `fix:`, `refactor:`, etc.) are appreciated but not required.
+4. **Add or update tests** for behavior changes.
+5. **Run lint and tests** locally.
+6. **Open the PR** with a clear description: what changed, why, and how to verify.
+
+Smaller PRs land faster than monolithic ones. If you're not sure about scope, open a draft PR or a discussion issue first.
+
+## SPDX license headers
+
+Every source file (`*.ts`, `*.tsx`, `*.rs`) must start with an SPDX header declaring its license:
+
+```ts
+// SPDX-License-Identifier: Apache-2.0
+```
+
+Or, for the small set of files in the Premium tier:
+
+```ts
+// SPDX-License-Identifier: BUSL-1.1
+```
+
+The Premium tier is documented in detail on the [License page](/docs/resources/license). Most contributions are to Core (Apache-2.0); if you're adding a file, default to Apache unless you have a reason otherwise.
+
+## Code style
+
+- **Rust**: `cargo fmt` for formatting, `cargo clippy` for lints. Both must pass cleanly.
+- **TypeScript / React**: Biome handles formatting and linting (`pnpm format:write`, `pnpm lint:fix`).
+- **No new comments** unless they explain *why*, not *what*. The code itself should explain *what*; comments are for non-obvious context.
+
+## Documentation
+
+If your change adds a feature or modifies existing behavior:
+
+- Update the relevant page in `doc/` inside the QoreDB repo (developer-facing docs).
+- Update the user docs at [github.com/raphplt/QoreDB-showcase](https://github.com/raphplt/QoreDB-showcase) if user-facing behavior changes (the docs you're reading right now).
+- Update `README.md` if the new feature is significant enough to surface there.
+
+## Where to ask
+
+- **Bug reports and feature requests**: [GitHub Issues](https://github.com/raphplt/QoreDB/issues).
+- **Discussion**: [Discord](https://discord.gg/Yr6P3wuZDt) for design conversations and quick questions.
+- **Direct contact**: see the maintainer info in the repo README for email.
+
+## Code of conduct
+
+The project ships with a `CODE_OF_CONDUCT.md`. The short version: be respectful, assume good faith, focus on the work, and the rest follows. Conduct issues are handled by the maintainer.
+
+## Where to go next
+
+- [License](/docs/resources/license) for what's Core vs Premium and the SPDX convention
+- [Roadmap](/docs/resources/roadmap) to find a feature to pick up
+- [Open Core model](/docs/introduction/open-core-model) for the licensing rationale

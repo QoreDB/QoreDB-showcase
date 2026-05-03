@@ -1,21 +1,93 @@
 ---
-title: Limitations des drivers
-description: Limitations connues par driver.
+title: Limites des pilotes
+description: Limites connues et particularités par pilote. Ce qui fonctionne différemment d'un moteur à l'autre, avec les solutions de contournement.
 premium: false
 ---
 
-# Limitations des drivers
+# Limites des pilotes
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB essaie d'exposer une interface cohérente sur tous les pilotes pris en charge, mais les moteurs sous-jacents sont différents. Cette page catalogue les limites pratiques et les particularités par pilote, afin que vous sachiez à quoi vous attendre et où se trouvent les solutions de contournement.
 
-## Aperçu
+Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionner" du point de vue de la liste des fonctionnalités, mais qui ont en réalité une mise en garde, sont répertoriées ici.
 
-Limitations connues par driver.
+## PostgreSQL
 
-## À venir
+- **Annulation** (Cancellation) : une requête en cours est annulée en émettant `pg_cancel_backend(pid)` sur une connexion distincte. Votre rôle nécessite `pg_signal_backend` ou d'être le propriétaire de la requête annulée, sinon l'annulation échoue silencieusement.
+- **Navigation inter-bases de données** : chaque connexion a pour portée (scope) une seule base de données. Pour naviguer dans une autre base de données sur le même serveur, créez une connexion QoreDB distincte.
 
-Une fois finalisée, cette page couvrira :
+## MySQL & MariaDB
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+- **Annulation** : implémentée via `KILL QUERY <id>`, ce qui nécessite le privilège `PROCESS` (et `SUPER` pour les requêtes appartenant à d'autres utilisateurs).
+- **Transactions dépendantes du moteur** : le comportement transactionnel suppose InnoDB. Les tables sur MyISAM ou d'autres moteurs non transactionnels ne sont pas annulées (roll back) lors d'un `ROLLBACK` ; le pilote ne le détecte pas pour vous.
+- **Schémas système masqués** : `information_schema`, `mysql`, `performance_schema` et `sys` n'apparaissent pas dans l'arborescence du schéma par défaut. Interrogez-les directement si vous en avez besoin.
+- **Plugins d'authentification** : MySQL 8 utilise par défaut `caching_sha2_password`. Les anciens clients peuvent échouer ; basculez l'utilisateur vers `mysql_native_password` côté serveur ou mettez à niveau.
+
+## SQL Server
+
+- **Le certificat du serveur est approuvé par défaut** : avec le SSL activé, QoreDB appelle `trust_cert()` sur la configuration Tiberius, qui accepte le certificat du serveur sans validation stricte de l'Autorité de Certification (CA). C'est parfait pour les services gérés avec des CA publiques, et pour les réseaux privés de confiance ; moins sûr sur l'internet public.
+- **Instances nommées** : QoreDB se connecte directement avec l'hôte et le port. Les instances nommées (`HOST\SQLEXPRESS`) qui nécessitent le service SQL Server Browser pour la recherche de port ne sont pas prises en charge. Trouvez le port statique sur lequel votre instance nommée écoute et utilisez-le.
+- **Modes d'authentification** : authentification SQL, Windows NTLM et Windows Integré (SSPI). Les deux derniers nécessitent Windows.
+
+## SQLite
+
+- **Écrivain unique** : SQLite sérialise les écritures. Les lectures sont simultanées ; une écriture bloque toutes les autres écritures jusqu'à la validation (commit). De longues transactions d'écriture peuvent affamer d'autres écrivains.
+- **Affinité de type, pas de types stricts** : les colonnes `INTEGER` stockent volontiers des chaînes (et vice versa) à moins que le mode `STRICT` ne soit utilisé. Si l'intégrité des types est importante, validez au niveau de la couche applicative ou utilisez des contraintes `CHECK`.
+- **Pas de regex natif** : l'opérateur `REGEXP` nécessite une fonction définie par l'utilisateur personnalisée avant SQLite 3.45. Utilisez `LIKE` ou `GLOB` pour une correspondance de modèles portable.
+- **FTS5** : la recherche en texte intégral fonctionne, mais uniquement sur les tables virtuelles créées avec `CREATE VIRTUAL TABLE … USING fts5(…)`, pas sur les tables régulières.
+
+## MongoDB
+
+- **Les transactions nécessitent un replica set** : les instances autonomes (standalone) de MongoDB ne prennent pas en charge les transactions multi-documents. Convertissez-les en un replica set à nœud unique pour le développement si vous en avez besoin.
+- **Opérateurs de pipeline bloqués par sécurité** : `$function`, `$accumulator` et `$where` sont rejetés avant l'envoi de la requête. Ils permettent l'exécution arbitraire de JavaScript côté serveur et sont bloqués par principe. Exécutez-les via `mongosh` directement si vous en avez vraiment besoin.
+- **Profondeur du pipeline d'agrégation plafonnée à 50 étapes**. Tout ce qui est plus profond est rejeté côté client.
+- **Index par défaut `_id_`** : ne peut pas être supprimé via l'interface de gestion des index.
+- **Index TTL** : uniquement à clé unique, ascendant ou descendant. Les index TTL composés ne sont pas pris en charge par Mongo lui-même.
+- **`$out` et `$merge`** : doivent être la dernière étape d'un pipeline (une contrainte propre à Mongo, affichée telle quelle).
+
+## Redis
+
+- **Écritures de mutation depuis l'interface utilisateur** : la grille de données pour Redis est orientée vers la lecture. L'édition en ligne des clés et des valeurs n'est pas prise en charge dans l'interface utilisateur actuelle ; utilisez l'éditeur avec des commandes Redis brutes (`SET`, `HSET`, `LPUSH`, etc.) à la place.
+- **`SCAN` n'est pas atomique** : l'itération des clés avec `SCAN` peut renvoyer des doublons ou manquer des clés nouvellement insérées. C'est le comportement propre à Redis, pas une limitation de QoreDB. Ne vous fiez pas aux snapshots `SCAN` pour des comptes exacts.
+- **Espaces de noms des bases de données** : les bases de données Redis sont numérotées de 0 à 15 par défaut (configurable via le paramètre `databases` du serveur). Seules les bases de données non vides sont répertoriées dans l'arborescence du schéma.
+- **Pas de schéma** : `describeTable` renvoie la forme spécifique au type (chaîne, hachage, liste, ensemble, ensemble trié, flux) plutôt que les métadonnées des colonnes.
+- **Mode Cluster** : non détecté comme un concept distinct ; le pilote se connecte à un nœud. Pour un cluster Redis, pointez vers le nœud d'entrée et laissez le pilote suivre les redirections.
+- **Scripting Lua** : `EVAL`, `EVALSHA`, `FCALL` sont classés comme des mutations. `SCRIPT LOAD` fonctionne ; `SCRIPT FLUSH`, `SCRIPT KILL`, `SLEEP`, `FLUSHALL`, `FLUSHDB`, `SHUTDOWN`, `CONFIG` déclenchent des avertissements de requête dangereuse.
+- **Annulation** : fait de son mieux. Les commandes bloquantes de longue durée peuvent ne pas répondre immédiatement à l'annulation.
+
+## DuckDB
+
+- **Extensions de fichiers** : seules `.duckdb` et `.db` sont acceptées par le validateur de chemin. Renommez les fichiers avec d'autres extensions avant de vous connecter.
+- **Mode en mémoire** : `:memory:` et `duckdb::memory:` fonctionnent tous les deux. Les données sont perdues à la fermeture de la connexion.
+- **API synchrone sur un environnement asynchrone** : les requêtes lourdes peuvent bloquer brièvement la boucle d'événements. Le pilote enveloppe l'exécution avec `spawn_blocking` pour garder l'interface utilisateur réactive.
+
+## CockroachDB
+
+- **Pas de vues matérialisées** : CockroachDB ne prend intentionnellement pas en charge `MATERIALIZED VIEW`. L'arborescence du schéma omet la section.
+- **La maintenance se limite à `ANALYZE`** : les commandes de maintenance typiques de Postgres (`VACUUM`, `REINDEX`, etc.) sont ignorées ou non prises en charge. CockroachDB les gère automatiquement.
+- **Catalogues système filtrés** : `crdb_internal` et `pg_extension` sont masqués dans l'arborescence du schéma.
+- **Base de données par défaut** : `defaultdb`, pas `postgres`.
+- **Nouvelles tentatives de transaction** : CockroachDB demande au client de réessayer les transactions lors de conflits de sérialisation plus agressivement que Postgres. Depuis l'éditeur, relancez simplement l'instruction qui a échoué.
+- **Port par défaut** : `26257`, pas `5432`. Facile à oublier.
+
+## Fournisseurs compatibles Postgres
+
+### Supabase
+
+Se connecte via le standard `postgresql://`. Deux chaînes de connexion sont généralement proposées :
+
+- **Connexion directe** : prise en charge complète des fonctionnalités, mais nombre de connexions limité.
+- **Groupée (PgBouncer)** : s'adapte à un plus grand nombre de clients, mais en mode pool de transactions, les instructions préparées et `LISTEN/NOTIFY` ne sont pas pris en charge. Pour l'utilisation interactive de QoreDB, la chaîne directe est généralement le bon choix.
+
+### Neon
+
+`postgresql://` standard. Les points de terminaison peuvent se mettre en veille (scale to zero), donc la première requête après un démarrage à froid prend un peu plus de temps que d'habitude.
+
+### TimescaleDB
+
+Même pilote que Postgres. Les hypertables et les agrégats continus apparaissent comme des tables et des vues régulières dans l'arborescence du schéma ; les requêtes fonctionnent comme du SQL standard.
+
+## Où aller ensuite
+
+- [Connexions](/docs/connections/postgresql) pour les pages de configuration par pilote
+- [URL de connexion](/docs/reference/connection-urls) pour les formats DSN
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour les particularités de l'éditeur qui s'adaptent selon le pilote

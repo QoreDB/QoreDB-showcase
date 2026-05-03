@@ -1,21 +1,46 @@
 ---
-title: Changelog
-description: Notes de version et historique.
+title: Journal des modifications (Changelog)
+description: Où trouver les notes de version de QoreDB, ce que chaque version apporte, et comment suivre les prochaines versions.
 premium: false
 ---
 
-# Changelog
+# Journal des modifications (Changelog)
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB déploie des mises à jour fréquentes, et le journal des modifications est l'enregistrement canonique de ce qui a changé et quand.
 
-## Aperçu
+## Où le lire
 
-Notes de version et historique.
+Deux sources équivalentes :
 
-## À venir
+- **Le site QoreDB** : une vue organisée et conviviale de chaque version, avec les points forts, des captures d'écran et des notes de migration lorsque cela est pertinent. Parcourez-le sur [qoredb.com/changelog](/changelog).
+- **Les versions GitHub** (GitHub Releases) : les notes de version brutes, les binaires joints et le code source étiqueté. Utile si vous souhaitez récupérer le programme d'installation d'une version spécifique ou lire le texte de publication verbatim. Voir [github.com/raphplt/QoreDB/releases](https://github.com/raphplt/QoreDB/releases).
 
-Une fois finalisée, cette page couvrira :
+Les deux restent synchronisés. Choisissez l'interface que vous préférez.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Ce qu'il y a dans une version
+
+Chaque entrée de version contient généralement :
+
+- **Le numéro de version** suivant le typage sémantique (SemVer) (`MAJEUR.MINEUR.CORRECTIF`).
+- **La date de sortie**.
+- **Les points forts** (Highlights) : les changements principaux, écrits pour les utilisateurs.
+- **Les changements détaillés** : fonctionnalités, correctifs, refactorisations, mises à jour des dépendances.
+- **Les changements majeurs** (Breaking changes), le cas échéant, avec une note de migration.
+
+La version du site regroupe les éléments associés (fonctionnalités, correctifs, performances) et ajoute un contexte pour lequel les notes de publication de GitHub n'ont pas la place.
+
+## Cadence
+
+QoreDB est mis à jour selon une cadence continue plutôt qu'un calendrier fixe. Les versions correctives (patch) arrivent lorsqu'il y a un correctif significatif ; les versions mineures regroupent les fonctionnalités lorsqu'elles sont prêtes ; les versions majeures sont réservées aux changements qui nécessitent une migration.
+
+## Mise à jour
+
+QoreDB recherche des mises à jour au lancement lorsqu'il est configuré pour le faire. Lorsqu'une nouvelle version est disponible, vous verrez une notification dans l'application avec un flux de mise à jour en un clic. Si le chemin de mise à jour automatique ne convient pas (environnements gérés, packaging personnalisé), récupérez le nouveau programme d'installation depuis la page Releases et installez-le comme n'importe quelle mise à jour.
+
+Les mises à jour préservent vos connexions enregistrées, votre coffre-fort, l'historique des requêtes, votre bibliothèque et vos carnets de notes.
+
+## Où aller ensuite
+
+- [Feuille de route (Roadmap)](/docs/resources/roadmap) pour ce qui est à venir
+- [Installation](/docs/getting-started/installation) pour le flux d'installation et de mise à jour
+- [Licence](/docs/resources/license) pour le modèle Open Core

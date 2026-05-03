@@ -1,21 +1,124 @@
 ---
 title: Configuration
-description: Réglages disponibles et leurs effets.
+description: Où QoreDB stocke ses données, ce que contrôle chaque section de paramètres, les variables d'environnement qu'il reconnaît, et comment le réinitialiser.
 premium: false
 ---
 
 # Configuration
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB conserve ses données à trois endroits : le **trousseau de clés de l'OS** pour les secrets, les **fichiers de données d'application** sur le disque pour tout le reste, et le **`localStorage`** pour quelques préférences d'interface utilisateur. Cette page répertorie ce qui vit où, les sections de paramètres qui déterminent le comportement, et les quelques solutions de secours pour la réinitialisation et le débogage.
 
-## Aperçu
+## Sections des paramètres
 
-Réglages disponibles et leurs effets.
+Ouvrez les paramètres avec <KeyboardShortcut shortcut="Cmd+," />, depuis la barre de titre, ou via la palette de commandes. Les sections :
 
-## À venir
+| Section       | Ce qu'elle contrôle                                                                       |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| **Général**   | Langue, thème, apparence, regroupement d'onglets, informations sur la version.            |
+| **Éditeur**   | Comportement de l'éditeur et de la sandbox, gestion des brouillons.                       |
+| **Sécurité**  | Règles de sécurité, confirmations de l'environnement de production, intercepteur de requêtes. |
+| **Données**   | Rétention de l'historique des requêtes, journaux, sauvegardes, voyage dans le temps (time-travel), exports et imports. |
+| **Raccourcis**| Une vue interrogeable de tous les raccourcis clavier.                                     |
+| **Licence**   | Activation de la licence et informations sur le niveau (tier).                            |
+| **IA**        | Configuration du fournisseur d'IA (OpenAI, Anthropic, Mistral, Google, DeepSeek, Ollama) avec vos propres clés (BYOK). |
 
-Une fois finalisée, cette page couvrira :
+## Emplacement des données de l'application
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+QoreDB stocke la plupart de ses données dans un dossier d'application par utilisateur. Le chemin exact dépend du système d'exploitation.
+
+| OS         | Chemin                                                              |
+| ---------- | ------------------------------------------------------------------- |
+| **macOS**  | `~/Library/Application Support/com.qoredb.app/`                     |
+| **Windows**| `%APPDATA%\com.qoredb.app\`                                         |
+| **Linux**  | `~/.local/share/com.qoredb.app/`                                    |
+
+À l'intérieur de ce dossier :
+
+```
+com.qoredb.app/
+├── interceptor/        Journal d'audit et configuration de l'intercepteur de sécurité
+├── virtual_relations/  Déclarations de relations virtuelles par connexion
+├── share/              Données cryptées pour les connexions partageables
+└── time-travel/        Données du journal des modifications pour la fonctionnalité de voyage dans le temps
+```
+
+Les données de l'espace de travail (connexions, requêtes enregistrées, historique) résident dans le dossier d'espace de travail que vous choisissez, et non dans le répertoire de données de l'application. L'espace de travail par défaut y stocke également ses fichiers.
+
+## Trousseau de clés de l'OS (OS keychain)
+
+Les secrets ne résident jamais dans le dossier des données de l'application ; ils sont stockés dans le **trousseau de clés natif du système d'exploitation** via la bibliothèque `keyring` :
+
+- **macOS** : Trousseau d'accès (Keychain Access).
+- **Windows** : Gestionnaire d'informations d'identification (Credential Manager).
+- **Linux** : Secret Service (GNOME Keyring, KWallet, ou tout service compatible).
+
+Les entrées que QoreDB écrit :
+
+- Mots de passe de connexion à la base de données, mots de passe SSH, phrases secrètes de clés SSH, mots de passe proxy (une entrée par connexion enregistrée).
+- Clés d'API des fournisseurs d'IA (une entrée par fournisseur, sous un service `qoredb_ai`).
+- Le hachage Argon2 du mot de passe maître, lorsque le verrouillage de l'application est activé.
+
+Supprimer une connexion ou un fournisseur d'IA de QoreDB supprime également l'entrée correspondante du trousseau de clés.
+
+## localStorage
+
+Un petit ensemble de préférences d'interface utilisateur réside dans `localStorage` plutôt que sur le disque :
+
+| Clé                     | Valeur                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------- |
+| `qoredb-theme`          | Soit `'light'`, `'dark'`, `'auto'`. Par défaut `'auto'` (suit l'OS).            |
+| `qoredb_query_history`  | L'historique des requêtes par espace de travail, plafonné à 100 entrées (suffixé par espace de travail). |
+| `qoredb_query_library_v1` | La bibliothèque de requêtes enregistrées par espace de travail, plafonnée à 300 éléments / 100 dossiers. |
+| `qoredb_sandbox_state`  | La mémoire tampon de la sandbox par session.                                    |
+| `qoredb_sandbox_backup` | Sauvegarde de la sandbox par connexion.                                         |
+
+Effacer le `localStorage` réinitialise ces valeurs par défaut. Les entrées liées à l'espace de travail (historique, bibliothèque, sandbox) survivent à un redémarrage de l'application, mais pas à un effacement du `localStorage`.
+
+## Variables d'environnement
+
+QoreDB reconnaît un petit ensemble de variables d'environnement, principalement pour les particularités de plateforme plutôt que pour la configuration utilisateur.
+
+| Variable                          | Effet                                                                        |
+| --------------------------------- | ---------------------------------------------------------------------------- |
+| `WEBKIT_DISABLE_DMABUF_RENDERER`  | Linux/GTK : désactive le rendu DMA-BUF lorsqu'il est défini. Utile sur les systèmes où le rendu présente des problèmes de pilote. |
+
+Il n'y a pas de famille de variables `QOREDB_*` ; la configuration se fait via les paramètres intégrés à l'application.
+
+## Thème
+
+Trois valeurs sont prises en charge :
+
+- `light` : thème clair.
+- `dark` : thème sombre.
+- `auto` : suit la préférence de l'OS (par défaut).
+
+Changez-le depuis **Paramètres → Général**, ou depuis la palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />, puis "Toggle theme"). Le choix est conservé dans le `localStorage` sous `qoredb-theme`.
+
+## Langue
+
+QoreDB est livré avec **9 langues** par défaut : Anglais, Français, Espagnol, Allemand, Portugais (Brésilien), Russe, Japonais, Coréen et Chinois (simplifié).
+
+Changez de langue depuis **Paramètres → Général → Langue**. Le choix est conservé avec les autres préférences générales.
+
+## Réinitialisation
+
+Il n'y a pas de bouton "tout réinitialiser" dans l'application. Pour effacer l'état de QoreDB manuellement :
+
+1. **Quittez l'application**.
+2. **Supprimez le dossier de données de l'application** au chemin indiqué ci-dessus (macOS / Windows / Linux). Cela supprime la configuration de l'intercepteur, les relations virtuelles, les données de partage et les données de voyage dans le temps.
+3. **Effacez le `localStorage`** via les outils de développement de la plateforme (ou en supprimant le stockage WebView de l'application). Cela supprime la préférence de thème, l'historique, la bibliothèque et l'état de la sandbox.
+4. **Supprimez les entrées du trousseau de clés**. Ouvrez le Trousseau d'accès (macOS), le Gestionnaire d'informations d'identification (Windows) ou votre interface utilisateur Secret Service (Linux) et supprimez les entrées avec le préfixe de service `qoredb`. Cela supprime les mots de passe enregistrés, les clés d'IA et le hachage du mot de passe maître.
+
+Alternativement, pour réinitialiser uniquement les données d'un espace de travail : supprimez le dossier de l'espace de travail. Les entrées du trousseau de clés pour les connexions de cet espace de travail existeront toujours ; supprimez-les via l'interface utilisateur de l'OS si vous souhaitez faire table rase.
+
+## Sauvegardes
+
+QoreDB ne sauvegarde pas ses propres données automatiquement. Pour préserver un espace de travail, copiez le dossier de l'espace de travail. Pour préserver les secrets, utilisez la sauvegarde du trousseau de clés intégrée à votre OS (Time Machine sur macOS inclut le Trousseau d'accès, Windows inclut le Gestionnaire d'informations d'identification dans le profil utilisateur, Linux varie selon l'implémentation de Secret Service).
+
+L'espace de travail par défaut stocke ses fichiers dans le dossier de données de l'application ; si vous n'utilisez que l'espace de travail par défaut, la sauvegarde de `com.qoredb.app/` est suffisante.
+
+## Où aller ensuite
+
+- [Cryptage du coffre-fort](/docs/security/vault-encryption) pour le modèle de secret soutenu par le trousseau de clés
+- [Historique des requêtes](/docs/querying/query-history) pour les paramètres de caviardage
+- [Requêtes enregistrées](/docs/querying/saved-queries) pour les limites de la bibliothèque et le stockage

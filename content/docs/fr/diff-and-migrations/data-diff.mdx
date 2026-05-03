@@ -1,19 +1,103 @@
 ---
-title: Data diff
-description: Comparer deux résultats, deux tables ou deux snapshots côte à côte.
+title: Différence de données (Data diff)
+description: Comparez deux résultats de requête, deux tables ou deux snapshots côte à côte. Voyez exactement quelles lignes ont été ajoutées, supprimées ou modifiées.
 premium: true
 ---
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+# Différence de données (Data diff)
 
-## Aperçu
+<Callout type="info">
+Cette fonctionnalité fait partie du niveau QoreDB Pro.
+</Callout>
 
-Comparer deux résultats, deux tables ou deux snapshots côte à côte.
+La **différence de données** (data diff) vous permet de comparer deux ensembles de lignes côte à côte et de voir immédiatement ce qui est identique et ce qui a changé. Les deux côtés peuvent être une table, un résultat de requête ou un [snapshot](#utiliser-les-snapshots) enregistré, dans n'importe quelle combinaison. Les lignes sont mises en correspondance sur une clé et comparées cellule par cellule.
 
-## À venir
+Utilisations typiques :
 
-Une fois finalisée, cette page couvrira :
+- Comparer une table de **staging** avec la table de **production** équivalente pour repérer les dérives.
+- Comparer un snapshot **avant** avec **maintenant** pour confirmer qu'une migration a fait ce que vous attendiez.
+- Comparer deux requêtes sur la même base de données (`WHERE created_at < '…'` vs `WHERE created_at >= '…'`) pour voir ce qui est arrivé dans une fenêtre de temps.
+- Comparer les résultats de deux pilotes différents lorsque vous passez de MySQL à Postgres, ou d'un entrepôt brut (raw warehouse) à un magasin de données organisé (curated mart).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Ouvrir le diff
+
+Le diff réside dans son propre onglet. Ouvrez-le depuis la palette de commandes globale (<KeyboardShortcut shortcut="Cmd+K" />, puis recherchez "diff") ou depuis le menu contextuel de la connexion.
+
+L'onglet est divisé horizontalement : une ligne de configuration en haut sélectionne la **source de gauche** et la **source de droite**, puis la comparaison s'exécute et les résultats s'affichent en dessous.
+
+## Choisir chaque côté
+
+Chaque côté peut être dans l'un des trois modes :
+
+| Mode de la source | Ce que c'est                                                         |
+| ----------------- | -------------------------------------------------------------------- |
+| **Table**         | Une table spécifique dans l'espace de noms d'une connexion. L'ensemble complet des lignes est chargé. |
+| **Requête**       | Une requête SQL ou Mongo ad-hoc que vous écrivez en ligne. Le résultat est la source. |
+| **Snapshot**      | Un [snapshot de résultat](#utiliser-les-snapshots) préalablement capturé. |
+
+Vous choisissez le mode indépendamment pour les côtés gauche et droit, vous pouvez donc comparer une table à une requête, une requête à un snapshot, un snapshot à un snapshot, et n'importe quel mélange entre les deux.
+
+Vous pouvez également faire pointer chaque côté vers une **connexion différente** : c'est ce qui fait de la comparaison "staging vers production" une opération à un seul onglet plutôt qu'un jonglage entre deux fenêtres.
+
+## Correspondance des lignes
+
+Les lignes sont mises en correspondance sur une **clé**, un ensemble de colonnes qui identifie de manière unique une ligne. QoreDB choisit la clé automatiquement :
+
+- Si les deux côtés proviennent d'une table connue, la **clé primaire** est détectée automatiquement via `describeTable()` et utilisée comme clé.
+- Si les deux côtés sont des requêtes, vous pouvez remplacer (override) la clé depuis la barre d'outils.
+- Si les clés primaires diffèrent entre les deux côtés, QoreDB utilise leur **intersection**.
+
+Remplacez la clé manuellement lorsque :
+
+- Les données ont un identifiant naturel qui n'est pas la PK (clé primaire) déclarée (un `external_id` métier, par exemple).
+- Vous comparez deux requêtes qui n'ont pas du tout de PK.
+- Vous souhaitez ignorer certaines lignes (regrouper par une clé plus grossière).
+
+## Lire les résultats
+
+Chaque ligne de la comparaison est étiquetée avec l'un des quatre statuts :
+
+| Statut        | Signification                                                 |
+| ------------- | ------------------------------------------------------------- |
+| **Inchangé**  | Même clé, mêmes valeurs des deux côtés.                       |
+| **Ajouté**    | La clé n'existe que du côté droit.                            |
+| **Supprimé**  | La clé n'existe que du côté gauche.                           |
+| **Modifié**   | Même clé des deux côtés, mais au moins une colonne diffère.   |
+
+La grille est virtualisée, de sorte qu'une comparaison de millions de lignes défile toujours de manière fluide.
+
+Une **barre de statistiques** en haut des résultats résume les comptes (`+12 -3 ~7 =104500`) et vous permet de basculer la visibilité de chaque statut. Masquez les lignes inchangées lorsque vous souhaitez vous concentrer sur le diff lui-même ; masquez tout sauf ce qui est modifié pour effectuer une analyse de type revue de code.
+
+## Mise en évidence au niveau de la cellule
+
+Pour les lignes modifiées, seules les cellules qui ont réellement changé sont mises en évidence, avec l'ancienne valeur à gauche et la nouvelle valeur à droite. Le reste de la ligne reste neutre pour que l'œil se pose immédiatement sur les différences.
+
+Pour les lignes ajoutées et supprimées, la ligne entière est colorée (vert pour ajouté, rouge pour supprimé) afin que vous puissiez parcourir rapidement une longue liste.
+
+## Actions de la barre d'outils
+
+La barre d'outils au-dessus des résultats propose :
+
+- **Échanger** (Swap) : inverser les côtés gauche et droit. Utile si la polarité "avant" et "après" est erronée.
+- **Actualiser** (Refresh) : réexécuter les deux côtés et recalculer le diff. Pratique lorsque les données sous-jacentes ont bougé.
+- **Exporter** : exporter le diff en **CSV** ou **JSON**. L'export inclut le statut par ligne et (pour les lignes modifiées) l'ancienne et la nouvelle valeur.
+
+## Utiliser les snapshots
+
+Un **snapshot de résultat** est une copie enregistrée d'une requête ou d'une table à un instant T. Les snapshots sont des sources de premier plan pour le diff :
+
+- Créez-en un à partir du résultat d'une requête via **Enregistrer comme snapshot** (Save as snapshot) dans le panneau de résultats.
+- Parcourez, renommez et supprimez des snapshots depuis le gestionnaire de snapshots.
+- Utilisez n'importe quel snapshot comme côté gauche ou droit d'un diff.
+
+Les snapshots facilitent les comparaisons "avant / après" sur les changements qui se produisent au fil du temps : capturez aujourd'hui, exécutez votre tâche, capturez à nouveau, puis comparez (diff).
+
+## Pilotes pris en charge
+
+Le diff de données fonctionne avec chaque connexion prise en charge par QoreDB pour les requêtes et les tables : PostgreSQL (et compatibles Postgres comme Supabase, Neon, TimescaleDB, CockroachDB), MySQL/MariaDB, SQL Server, SQLite, MongoDB, DuckDB, Redis. Comme la comparaison porte sur les lignes plutôt que sur le DDL, le moteur sous-jacent ne modifie pas le flux de travail.
+
+## Où aller ensuite
+
+- [Génération de migration](/docs/diff-and-migrations/migration-generation) pour l'équivalent piloté par la sandbox sur les modifications de schéma
+- [Résultats & exports](/docs/querying/results-and-exports) pour les fonctionnalités de grille de données que le diff réutilise
+- [Tarification](/pricing) pour voir ce qui est inclus dans l'offre Pro

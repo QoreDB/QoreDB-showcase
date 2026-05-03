@@ -1,19 +1,72 @@
 ---
 title: Diagramme ER
-description: Visualisez les relations entre tables.
+description: Diagramme Entité-Relation interactif. Visualisez les tables et les clés étrangères (y compris les relations virtuelles), avec des flux de travail pour isoler et cibler afin de naviguer dans les grands schémas.
 premium: false
 ---
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+# Diagramme ER
 
-## Aperçu
+Le **diagramme ER** restitue le schéma d'une connexion sous forme de graphe interactif : chaque table est un nœud, chaque clé étrangère est une arête. Il fonctionne à la fois sur les contraintes `FOREIGN KEY` réelles et sur les [relations virtuelles](/docs/schema/browser#cles-etrangeres-et-relations-virtuelles) que vous déclarez dans QoreDB, il est donc utile même sur les schémas dépourvus de véritables contraintes de clés étrangères.
 
-Visualisez les relations entre tables.
+## Ouvrir le diagramme
 
-## À venir
+Ouvrez l'onglet du diagramme ER sur une connexion à partir de :
 
-Une fois finalisée, cette page couvrira :
+- Le menu contextuel de la connexion, **Afficher le diagramme ER** (Show ER diagram).
+- La palette de commandes globale (<KeyboardShortcut shortcut="Cmd+K" />, puis recherchez "ER").
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+Le premier rendu échantillonne le schéma de la connexion et dispose les tables. Les ouvertures suivantes réutilisent la disposition en cache.
+
+## Lire le diagramme
+
+Chaque **table** est un nœud affichant son nom et une liste d'en-têtes de colonnes. Les colonnes affichées par défaut sont la clé primaire et les colonnes de clés étrangères ; cliquez sur un nœud pour le développer afin d'afficher la liste complète des colonnes.
+
+Chaque **clé étrangère** est un lien (arête) entre deux tables, tracé de la colonne source à la colonne cible. Deux styles visuels distinguent les deux types de clés étrangères (FK) :
+
+- Les **clés étrangères réelles** sont tracées sous forme de lignes pleines colorées.
+- Les **relations virtuelles** (déclarées dans QoreDB plutôt que dans le schéma) sont tracées sous forme de **lignes pointillées violettes**.
+
+Le survol d'une arête affiche une infobulle avec `table_source.colonne → table_cible.colonne`, le nom de la contrainte (le cas échéant) et un marqueur `(virtuel)` pour les relations virtuelles.
+
+## Naviguer dans les grands schémas
+
+Deux flux de travail rendent gérable un schéma contenant des centaines de tables.
+
+### Isoler (Isolate)
+
+Cliquez sur le bouton **Isoler** (icône de filtre) sur une table pour masquer toutes les autres tables qui ne lui sont pas connectées. Le diagramme se réduit à cette table et à ses voisins directs (parents et enfants, récursivement, selon la configuration). Utile pour comprendre le contexte immédiat d'une entité dans un schéma tentaculaire.
+
+Pendant l'isolation, un bouton **Tout afficher** (Show All) apparaît en haut pour réinitialiser la vue.
+
+### Cibler (Focus)
+
+Cliquez sur le bouton **Cibler** (icône de réticule) sur une table pour faire un panoramique de la zone de dessin afin de centrer la table, sans modifier le niveau de zoom ni masquer quoi que ce soit. C'est la plus légère des deux méthodes : vous gardez le diagramme complet en vue mais sautez sur une table spécifique.
+
+### Recherche
+
+Un champ de recherche dans la barre d'outils filtre les tables par nom au fur et à mesure de votre saisie. Appuyez sur `Entrée` pour vous concentrer sur la correspondance principale. Utile pour accéder directement à une table lorsque vous connaissez son nom mais pas son emplacement sur le canevas.
+
+### Zoom et panoramique
+
+- **Zoom** : maintenez `Ctrl` (ou `Cmd`) et faites défiler, ou utilisez les boutons de zoom dans la barre d'outils. La plage de zoom va de `0.4×` à `1.6×`.
+- **Panoramique** : faites glisser n'importe quelle zone vide du canevas.
+- **Ajuster à la vue** : un bouton calcule le bon niveau de zoom pour afficher toutes les tables visibles dans la fenêtre, avec une petite marge d'espacement.
+
+## Ce qui alimente le diagramme
+
+L'ensemble de tables et d'arêtes provient des métadonnées de schéma normalisées de QoreDB, qui sont les mêmes données qui alimentent [l'arborescence de la barre latérale](/docs/schema/browser) et l'[aperçu de clé étrangère](/docs/querying/results-and-exports). Spécifiquement :
+
+- **Tables** : chaque table (et vue, pour les moteurs qui les distinguent) dans l'espace de noms actif.
+- **Arêtes** : chaque entrée dans la liste `foreign_keys` du schéma, qu'elle soit réelle (`is_virtual: false`) ou virtuelle (`is_virtual: true`).
+
+Si une relation à laquelle vous vous attendez est manquante, vérifiez d'abord le navigateur de schéma. Si la clé étrangère n'y est pas non plus, déclarez une [relation virtuelle](/docs/schema/browser#declarer-une-relation-virtuelle) et le diagramme la prendra en compte lors du prochain rechargement.
+
+## Performances
+
+Le diagramme est rendu au format SVG. Pour les schémas comportant quelques centaines de tables, la mise en page est instantanée et les panoramiques/zooms restent fluides. Pour les très grands schémas (des milliers de tables), attendez-vous à ce que la mise en page initiale prenne un moment ; "Isoler" et "Recherche" sont les bons outils pour réduire l'ensemble de travail à une taille gérable avant de faire autre chose.
+
+## Où aller ensuite
+
+- [Navigateur de schéma](/docs/schema/browser) pour l'inspection par table basée sur l'arborescence
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser de nombreuses connexions
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour commencer à interroger les tables que vous avez découvertes

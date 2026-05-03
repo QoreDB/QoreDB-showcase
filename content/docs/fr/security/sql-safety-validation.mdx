@@ -1,21 +1,136 @@
 ---
-title: Validation de sûreté SQL
-description: Repérez les requêtes destructrices avant exécution.
+title: Validation de la sécurité SQL
+description: Comment QoreDB inspecte chaque requête avant de l'envoyer. Détection de modèles, règles intégrées de l'intercepteur, journalisation d'audit et limites de gouvernance.
 premium: false
 ---
 
-# Validation de sûreté SQL
+# Validation de la sécurité SQL
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB inspecte chaque requête avant qu'elle ne quitte votre machine. Le but n'est pas de remplacer les autorisations au niveau de la base de données (cela reste votre véritable filet de sécurité), mais d'attraper les erreurs évidentes avant qu'elles ne deviennent des pannes, et d'afficher une boîte de dialogue de confirmation lorsque le coût d'une mauvaise exécution est élevé. Cette page détaille les couches de validation, du simple détecteur de modèles à l'intercepteur configurable.
 
-## Aperçu
+## Couche 1 : le détecteur de requêtes dangereuses
 
-Repérez les requêtes destructrices avant exécution.
+Chaque requête passe par un détecteur de modèles avant son exécution. Le détecteur signale deux catégories.
 
-## À venir
+### Mutations
 
-Une fois finalisée, cette page couvrira :
+Une requête est une **mutation** si elle commence par l'un de ces mots-clés (insensible à la casse) :
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+```
+INSERT, UPDATE, DELETE, DROP, TRUNCATE, ALTER, CREATE, REPLACE,
+MERGE, GRANT, REVOKE, CALL, EXEC, EXECUTE, COPY
+```
+
+Les mutations sont soumises à l'[indicateur de lecture seule](/docs/connections/environments#environnement-vs-lecture-seule) : si la connexion est marquée en lecture seule, la mutation est rejetée avant de quitter le client.
+
+### Requêtes dangereuses
+
+Les requêtes dangereuses sont un sous-ensemble plus strict. Le détecteur signale :
+
+- `DROP TABLE`, `DROP DATABASE`, `DROP SCHEMA`, `DROP INDEX`, `DROP VIEW`, `DROP FUNCTION`, `DROP TRIGGER`
+- `TRUNCATE …`
+- `DELETE FROM …` **sans** clause `WHERE`
+- `UPDATE …` **sans** clause `WHERE`
+- `ALTER TABLE … DROP …`
+
+Un `DELETE … WHERE id = 1` est une mutation mais n'est **pas** dangereux (le `WHERE` le sauve). Un `DELETE FROM users;` est les deux.
+
+Sur une connexion de `production`, les requêtes dangereuses ouvrent une boîte de dialogue de confirmation nécessitant une saisie avant l'exécution. Sur staging ou development, elles s'exécutent sans invite. `DROP DATABASE` est la seule exception : elle nécessite toujours de taper le nom de la base de données, quelle que soit l'étiquette d'environnement.
+
+### MongoDB et Redis
+
+La même approche s'applique aux autres moteurs :
+
+- **MongoDB** : `dropDatabase`, `drop`, `deleteMany` sans filtre, `bulkWrite`, etc., sont signalés comme mutations ou dangereux selon leur forme.
+- **Redis** : `FLUSHALL` et `FLUSHDB` sont dangereux ; `SET`, `DEL`, `HSET`, `LPUSH`, `RPUSH`, `SADD`, `ZADD`, `EXPIRE`, `RENAME`, `INCR`, `DECR` sont des mutations.
+
+## Couche 2 : les règles intégrées de l'intercepteur
+
+Au-delà du simple détecteur, QoreDB intègre un **intercepteur** qui s'exécute requête par requête. L'intercepteur dispose d'un ensemble de règles intégrées qui se basent sur l'[étiquette d'environnement](/docs/connections/environments) de la connexion. Chaque règle a une action : `block` (bloquer), `warn` (avertir) ou `require_confirmation` (nécessite une confirmation).
+
+| ID de la règle                       | Action                | Se déclenche sur                                     |
+| ------------------------------------ | --------------------- | ---------------------------------------------------- |
+| `builtin-no-drop-production`         | block                 | `DROP …` sur une connexion de `production`           |
+| `builtin-no-truncate-production`     | block                 | `TRUNCATE …` sur une connexion de `production`       |
+| `builtin-confirm-delete-production`  | require_confirmation  | `DELETE …` sur une connexion de `production`         |
+| `builtin-confirm-update-no-where`    | require_confirmation  | `UPDATE …` sans `WHERE` sur production ou staging    |
+| `builtin-confirm-delete-no-where`    | require_confirmation  | `DELETE …` sans `WHERE` sur production ou staging    |
+| `builtin-warn-alter-production`      | warn                  | `ALTER …` sur une connexion de `production`          |
+
+Ces règles peuvent être activées ou désactivées individuellement dans **Paramètres → Sécurité → Intercepteur** (Settings → Security → Interceptor). Elles sont activées par défaut.
+
+Notez la différence entre les actions :
+
+- **block** (bloquer) : la requête est purement et simplement refusée, avec une explication de la règle qui l'a bloquée.
+- **require_confirmation** (nécessite une confirmation) : une boîte de dialogue de confirmation apparaît ; vous ne continuez qu'après avoir tapé le nom de la cible.
+- **warn** (avertir) : la requête s'exécute, mais un avertissement est enregistré dans le journal d'audit et (selon les paramètres) affiché sous forme de notification.
+
+## Couche 3 : règles de sécurité personnalisées (Pro)
+
+<Callout type="info">
+Les règles de sécurité personnalisées font partie du niveau QoreDB Pro.
+</Callout>
+
+En plus de l'ensemble intégré, les utilisateurs Pro peuvent définir des **règles de sécurité personnalisées** avec leur propre modèle (littéral ou regex) et leur propre action. Utilisations courantes :
+
+- **Bloquer toutes les écritures sur la connexion de `production` le week-end**, avec une expression régulière correspondant aux mots-clés de mutation plus une condition d'heure de la journée.
+- **Exiger une confirmation avant `UPDATE accounts SET balance …`**, avec une expression régulière plus stricte que les règles intégrées.
+- **Avertir sur un `SELECT … *` pour encourager les listes de colonnes explicites** lors des revues de code.
+
+Les règles sont gérées depuis les paramètres de l'intercepteur. Chaque règle possède :
+
+- Un **modèle** (sous-chaîne littérale ou regex).
+- Une liste d'**environnements** auxquels elle s'applique (n'importe quelle combinaison de development, staging, production).
+- Une **action** (block, warn, require_confirmation).
+- Un indicateur **activé** (enabled).
+
+## Couche 4 : journalisation d'audit
+
+Chaque requête exécutée est enregistrée dans le **journal d'audit** (audit log) de QoreDB, sur la machine locale. Chaque entrée contient :
+
+- Un ID d'entrée unique.
+- Le **texte complet de la requête**.
+- L'**ID de session** et l'**ID du pilote** (driver ID).
+- L'**étiquette d'environnement** de la connexion au moment de l'exécution.
+- Le **type d'opération** (mutation, lecture, etc.).
+- L'indicateur de **succès** et le **message d'erreur** si elle a échoué.
+- Le **temps d'exécution** en millisecondes et le **nombre de lignes** le cas échéant.
+- Un indicateur **bloqué** (blocked) et l'ID de la **règle de sécurité** si l'intercepteur a arrêté ou averti sur la requête.
+- Un horodatage.
+
+Le journal d'audit est conservé localement ; rien ne quitte votre machine.
+
+| Niveau| Rétention du journal d'audit                                         |
+| ----- | -------------------------------------------------------------------- |
+| Core  | Les 50 dernières entrées par espace de travail. Pas de filtres.      |
+| Pro   | Entrées illimitées. Filtrage par environnement, type d'opération, succès, recherche. |
+
+Le niveau Pro offre également l'exportation du journal d'audit au format JSON pour des revues hors ligne ou des archives de conformité.
+
+## Couche 5 : limites de gouvernance
+
+Trois plafonds optionnels qui s'appliquent globalement à un espace de travail :
+
+| Limite                      | Effet                                                    |
+| --------------------------- | -------------------------------------------------------- |
+| `max_query_duration_ms`     | Une requête s'exécutant plus longtemps que cela est annulée. |
+| `max_result_rows`           | Les ensembles de résultats plus grands que cela sont tronqués côté client. |
+| `max_concurrent_queries`    | L'exécution en parallèle de plus de requêtes que ce nombre est bloquée. |
+
+Les limites sont configurées depuis les paramètres de l'espace de travail. Utile lorsque vous souhaitez limiter les dégâts qu'un `SELECT *` incontrôlable d'un développeur fatigué peut causer, ou pour maintenir une utilisation prévisible de la mémoire sur une petite machine cliente.
+
+## Ce que ce n'est *pas*
+
+Pour être honnête quant à la limite :
+
+- Ces couches sont **côté client** dans QoreDB. La base de données elle-même n'en a pas connaissance ; si quelqu'un contourne QoreDB et se connecte avec `psql` ou `mongosh`, aucune de ces règles ne s'applique.
+- Le détecteur de modèles est **heuristique**. Une instruction suffisamment exotique (un `TRUNCATE` obfusqué, un `DELETE` caché dans une CTE) peut passer à travers. L'étiquette d'environnement, un rôle de base de données avec des privilèges limités et la revue de code restent votre véritable filet de sécurité.
+- **Les règles intégrées s'appliquent côté serveur, non via la base de données**. Elles vivent dans l'intercepteur, sur la même machine que le client. Elles protègent contre les accidents, pas contre la malveillance.
+
+Pour les modèles de menace qui nécessitent des garanties appliquées par le serveur, utilisez un rôle en lecture seule dédié pour les utilisateurs à risque, configurez `pg_hba.conf` (Postgres) ou équivalent pour restreindre l'accès, et conservez les droits destructifs sur un petit ensemble de comptes.
+
+## Où aller ensuite
+
+- [Environnements](/docs/connections/environments) pour l'étiquette par connexion qui pilote la plupart des règles
+- [Bonnes pratiques](/docs/security/best-practices) pour combiner les environnements, la lecture seule et les rôles
+- [Cryptage du coffre-fort](/docs/security/vault-encryption) pour les protections au niveau des informations d'identification

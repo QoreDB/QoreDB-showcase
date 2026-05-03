@@ -1,21 +1,95 @@
 ---
-title: Chiffrement Vault
-description: Comment les identifiants sont chiffrés au repos.
+title: Cryptage du coffre-fort
+description: Comment QoreDB protège les informations d'identification de connexion et les clés d'API IA avec le trousseau de clés du système d'exploitation, ainsi qu'un mot de passe maître facultatif haché avec Argon2.
 premium: false
 ---
 
-# Chiffrement Vault
+# Cryptage du coffre-fort
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+Le **coffre-fort** (vault) de QoreDB est l'endroit où tous les secrets résident : mots de passe de base de données, phrases secrètes de clés SSH, mots de passe de proxy et clés d'API de fournisseurs d'IA. Cette page couvre ce que fait réellement le coffre-fort, comment il stocke les secrets et dans quelle mesure vous pouvez vous y fier.
 
-## Aperçu
+## Deux couches
 
-Comment les identifiants sont chiffrés au repos.
+Le coffre-fort comporte deux couches :
 
-## À venir
+1. **Sauvegarde par le trousseau de clés du système d'exploitation** (OS keychain), utilisée pour chaque secret. Elle est toujours activée, vous ne pouvez pas la désactiver. Les secrets ne se retrouvent jamais sur le disque en texte clair.
+2. **Verrouillage de l'application avec un mot de passe maître**, facultatif. Lorsqu'il est activé, QoreDB hache le mot de passe maître avec Argon2 et refuse de déverrouiller le coffre-fort au démarrage tant que vous ne l'avez pas tapé.
 
-Une fois finalisée, cette page couvrira :
+Vous pouvez utiliser le coffre-fort avec uniquement la première couche (bonne valeur par défaut) ou avec les deux (recommandé pour les machines partagées ou le travail sensible).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Couche 1 : Sauvegarde par le trousseau de clés du système d'exploitation
+
+QoreDB stocke les secrets dans le magasin d'informations d'identification natif de votre système d'exploitation, via la bibliothèque multiplateforme `keyring` :
+
+- **macOS** : Trousseau d'accès (Keychain).
+- **Windows** : Gestionnaire d'informations d'identification (Credential Manager).
+- **Linux** : API Secret Service (GNOME Keyring, KWallet ou tout service compatible).
+
+Les informations d'identification de chaque connexion enregistrée deviennent une entrée dans le trousseau de clés. Le même backend stocke les clés d'API des fournisseurs d'IA (sous une entrée de service distincte).
+
+Conséquences pratiques :
+
+- Les secrets sont protégés par la session de l'utilisateur du système d'exploitation. Si l'utilisateur de votre OS est verrouillé, le trousseau de clés est verrouillé.
+- Ils n'apparaissent jamais dans le manifeste de connexion sur le disque ; le manifeste contient uniquement l'hôte, le port, l'utilisateur, la base de données, l'environnement, etc.
+- Les outils de sauvegarde qui copient les fichiers de QoreDB n'emportent pas les secrets ; ils résident uniquement dans le trousseau de clés de l'OS.
+- D'autres outils s'exécutant sous le même utilisateur de l'OS peuvent, en principe, accéder à ces entrées via la même API keyring. C'est l'isolation au niveau de l'OS qui les protège, pas QoreDB.
+
+## Couche 2 : Verrouillage de l'application avec mot de passe maître
+
+Le verrouillage de l'application est optionnel (opt-in). Lorsque vous l'activez, QoreDB vous demande de définir un **mot de passe maître**. À partir de ce moment :
+
+- À chaque démarrage de QoreDB, le mot de passe maître vous est demandé avant que le coffre-fort ne se déverrouille.
+- Le mot de passe n'est **jamais stocké en texte clair ou sous une forme récupérable**. QoreDB le hache avec **Argon2** (une fonction gourmande en mémoire conçue pour le hachage de mots de passe) et ne stocke que le hachage, dans le même trousseau de clés que le reste.
+- Les tentatives de mot de passe erronées renvoient une erreur d'authentification ; le coffre-fort reste verrouillé jusqu'à ce que le bon mot de passe soit saisi.
+
+Tant que le coffre-fort est verrouillé, l'interface utilisateur de QoreDB fonctionne (vous voyez la liste des connexions enregistrées, la structure de l'espace de travail) mais **aucune connexion ne peut être ouverte**, et aucune requête d'IA ne peut être envoyée. Les deux flux refusent de fonctionner sans les secrets déverrouillés.
+
+### Supprimer ou modifier le mot de passe maître
+
+Le mot de passe maître peut être supprimé (retour au mode "pas de mot de passe maître") ou modifié en entrant le mot de passe actuel et en choisissant l'opération dans les paramètres du coffre-fort. Il n'y a pas de réinitialisation en un clic et **aucun flux de récupération** si le mot de passe est perdu.
+
+### Et si vous oubliez le mot de passe maître
+
+Réponse honnête : il n'y a pas de voie de récupération. Le hachage Argon2 est à sens unique ; QoreDB ne peut pas dériver le mot de passe à partir du hachage, et il n'y a pas de séquestre (escrow).
+
+Si vous oubliez le mot de passe maître, vos options sont :
+
+- **Réinitialiser le coffre-fort** : cela supprime tous les secrets stockés. Les métadonnées de connexion dans le manifeste survivent (hôte, utilisateur, environnement, etc.) ; vous devrez saisir à nouveau chaque mot de passe lors de la prochaine utilisation.
+- **Si vous avez accès au trousseau de clés de l'utilisateur de l'OS via l'OS lui-même** (Trousseau d'accès sur macOS, Gestionnaire d'informations d'identification sur Windows, etc.), vous pouvez y lire directement les secrets individuels. La couche du mot de passe maître appartient à QoreDB ; les entrées du trousseau de clés elles-mêmes sont toujours soumises aux contrôles d'accès au niveau de l'OS.
+
+Ceci est voulu : les secrets dans QoreDB sont aussi récupérables que les secrets dans le trousseau de clés de votre OS, et le mot de passe maître est une couche au-dessus de cela.
+
+## Ce qui est stocké, exactement
+
+Pour chaque connexion enregistrée :
+
+- **Dans le manifeste** (JSON clair dans le dossier de l'espace de travail) : nom de la connexion, hôte, port, utilisateur, base de données, options SSL, étiquette d'environnement, hôte/port/utilisateur SSH, chemin du fichier de clé.
+- **Dans le trousseau de clés** : mot de passe de la base de données, mot de passe SSH (le cas échéant), phrase secrète de la clé SSH (le cas échéant), mot de passe du proxy (le cas échéant).
+
+Pour les fournisseurs d'IA :
+
+- **Dans le trousseau de clés** : clé d'API du fournisseur (une entrée par fournisseur, sous un service `qoredb_ai`).
+- **Dans les paramètres de QoreDB** : nom du fournisseur et modèle sélectionné.
+
+Pour le mot de passe maître (lorsqu'il est activé) :
+
+- **Dans le trousseau de clés** : hachage Argon2, avec un sel (salt) généré aléatoirement.
+
+Rien d'autre n'est crypté du côté de QoreDB ; le trousseau de clés de l'OS est le mécanisme de cryptage au repos pour la couche 1, et le hachage Argon2 est le mécanisme de protection pour le mot de passe maître.
+
+## Ce que le coffre-fort ne fait pas
+
+Pour être honnête quant à la limite :
+
+- **Pas de verrouillage automatique après inactivité**. Une fois déverrouillé, le coffre-fort reste déverrouillé jusqu'à ce que vous quittiez QoreDB (ou, si vous avez configuré un délai d'expiration du trousseau de clés au niveau de l'OS, jusqu'à ce que votre OS verrouille le trousseau de clés).
+- **Pas de récupération de mot de passe / phrase seed / codes de secours**. Si vous perdez le mot de passe maître et que vous n'avez pas accès au trousseau de clés au niveau de l'OS, les secrets sont perdus.
+- **Pas de protection contre un attaquant ayant accès à la session déverrouillée de votre utilisateur OS**. S'il peut exécuter n'importe quel processus sous votre identité, il peut demander au trousseau de clés les mêmes entrées que QoreDB.
+- **Pas de cryptage côté client au-delà de ce que fournit l'OS**. Le coffre-fort n'est pas un service à connaissance nulle (zero-knowledge) de "qualité Bitwarden" ; c'est un wrapper léger sur le trousseau de clés de l'OS, plus une barrière de mot de passe maître Argon2.
+
+Pour des modèles de menace qui nécessitent des garanties plus fortes (vous ne faites pas confiance à la session utilisateur de l'OS, vous avez besoin d'un HSM externe, vous voulez des sauvegardes hors ligne de vos secrets), utilisez un gestionnaire de mots de passe dédié et copiez les informations d'identification à la demande, plutôt que de vous fier au coffre-fort de QoreDB.
+
+## Où aller ensuite
+
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour les interactions du coffre-fort côté utilisateur
+- [Mode Sandbox](/docs/security/sandbox-mode) pour des modifications de données sécurisées
+- [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour les garde-fous au niveau des requêtes

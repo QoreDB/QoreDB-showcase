@@ -1,21 +1,96 @@
 ---
-title: Mode bac à sable
-description: Exécuter des requêtes risquées en toute sécurité.
-premium: false
+title: Mode Sandbox
+description: Mettez en mémoire tampon vos modifications de données localement au lieu de les envoyer directement à la base de données. Passez en revue, générez le SQL, puis appliquez ou annulez.
+premium: true
 ---
 
-# Mode bac à sable
+# Mode Sandbox
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+<Callout type="info">
+Le mode Sandbox fait partie du niveau QoreDB Pro.
+</Callout>
 
-## Aperçu
+La **sandbox** (bac à sable) est un commutateur par session qui intercepte chaque modification de données que vous effectuez via l'interface utilisateur (modifications de cellules en ligne, modifications en masse, insertions, suppressions) et **les stocke localement au lieu de les exécuter**. Vous passez en revue les modifications capturées, décidez de les convertir en un script de migration SQL, et ensuite seulement la base de données est touchée.
 
-Exécuter des requêtes risquées en toute sécurité.
+Pensez-y comme à un mode "modifier, mais ne pas valider (commit) encore". Utile lorsque vous n'êtes pas sûr à 100 % de ce que vous voulez faire, lorsque vous souhaitez qu'un collègue vérifie le SQL avant son exécution, ou lorsque vous voulez un script de migration propre comme livrable.
 
-## À venir
+Cette page couvre la mécanique d'un point de vue de la sécurité. Pour le flux de travail de génération de migration lui-même, consultez [Génération de migration](/docs/diff-and-migrations/migration-generation).
 
-Une fois finalisée, cette page couvrira :
+## L'activer
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+Basculez la sandbox depuis la barre de titre (icône Fiole) ou avec <KeyboardShortcut shortcut="Ctrl+Shift+S" />. La sandbox est **par session**, c'est-à-dire par connexion active : l'activer pour une connexion n'affecte pas les autres.
+
+Lorsqu'elle est activée, l'interface utilisateur de la connexion affiche un indicateur coloré (correspondant à l'[environnement](/docs/connections/environments)) ainsi que le décompte des modifications en attente. La grille de données fonctionne toujours normalement ; la différence est invisible jusqu'à ce que vous enregistriez une modification.
+
+## Ce qui est capturé
+
+Trois types de modifications sont capturés dans la mémoire tampon :
+
+- **Insertion** : une nouvelle ligne créée via la grille ou la modale de ligne.
+- **Mise à jour** : une cellule ou un ensemble de cellules modifiées via une édition en ligne ou en masse, enregistrées avec les anciennes et nouvelles valeurs.
+- **Suppression** : une ligne retirée.
+
+Pour chaque entrée, QoreDB stocke le nom de la table, l'espace de noms, la clé primaire, les anciennes/nouvelles valeurs pertinentes et un horodatage.
+
+QoreDB fusionne intelligemment les modifications associées avant de générer le SQL : deux mises à jour consécutives sur la même ligne fusionnent, une suppression qui suit une insertion de la même ligne annule les deux. La mémoire tampon reste compacte et le SQL généré reste propre.
+
+## Ce qui n'est *pas* capturé
+
+La sandbox capture uniquement **les modifications effectuées via l'interface utilisateur**. Les requêtes SQL directes que vous exécutez depuis l'éditeur s'exécutent toujours contre la base de données immédiatement, même lorsque la sandbox est activée.
+
+Cela signifie :
+
+- Un `DELETE FROM users WHERE id = 1` tapé dans l'éditeur SQL s'exécute comme d'habitude ; il n'est pas mis dans la sandbox.
+- Une modification en ligne sur la même ligne, en revanche, atterrit dans la sandbox.
+
+La sandbox est destinée aux **modifications de données interactives par clic**. Ce n'est pas un encapsuleur de transaction pour du SQL arbitraire.
+
+## Où réside la mémoire tampon
+
+L'état de la sandbox est conservé dans le `localStorage` de votre navigateur sous une clé associée à la session, plus une sauvegarde associée à la connexion. Cela signifie :
+
+- Quitter et rouvrir QoreDB **conserve vos modifications en attente**. Vous pouvez mettre votre travail en pause toute la nuit sans perdre la mémoire tampon.
+- L'état est **local à la machine**. Changer d'ordinateur ne transfère pas l'état de votre sandbox.
+- Effacer le `localStorage` (manuellement ou via les outils de développement du système d'exploitation) supprime l'état de la sandbox avec tout le reste.
+
+La mémoire tampon n'est pas chiffrée par QoreDB au-delà des protections que le navigateur offre pour le `localStorage`. Si votre sandbox contient des modifications en attente avec des valeurs sensibles, traitez cette entrée de stockage local comme n'importe quelle autre donnée d'espace de travail.
+
+## Environnement de production
+
+La sandbox ne contourne pas le filet de sécurité de l'[environnement](/docs/connections/environments). Lorsque la connexion active est étiquetée `production` :
+
+- Une notification d'avertissement (toast) apparaît à l'activation, vous rappelant que vous placez en sandbox des modifications de production.
+- Appliquer la mémoire tampon passe par la **boîte de dialogue de confirmation d'application** (vous devez taper `APPLY` avant que le SQL ne s'exécute).
+
+Ainsi, utiliser la sandbox en production n'est pas un moyen de "sauter" les invites de production ; cela concentre l'invite à l'étape d'application plutôt que pour chaque instruction, mais la confirmation tapée est toujours requise.
+
+## Lecture seule et la sandbox
+
+La sandbox est indépendante de l'indicateur de lecture seule (read-only) d'une connexion :
+
+- Une connexion en lecture seule rejette les mutations au niveau de l'éditeur (les SQL tapés comme `UPDATE …` sont carrément bloqués).
+- La sandbox est destinée aux modifications via la grille. Sur une connexion en lecture seule, les options d'édition de la grille de données sont généralement désactivées également.
+
+Combiner la lecture seule **activée** avec la sandbox **activée** est rarement utile : il n'y a rien à capturer. La configuration naturelle est l'une ou l'autre selon l'intention.
+
+## Appliquer, annuler, régénérer
+
+Depuis le panneau de la sandbox :
+
+- **Appliquer** (Apply) : exécute le script de migration généré sur la connexion en direct (avec confirmation tapée en production).
+- **Annuler** (Discard) : abandonne entièrement la mémoire tampon. C'est un état local, donc rien n'a été envoyé à la base de données ; rien à annuler côté serveur.
+- **Régénérer** (Regenerate) : réexécute l'étape de génération SQL à partir de la même mémoire tampon. Utile si vous avez modifié vos préférences de sandbox (par exemple, "traiter les valeurs par défaut NULL différemment") et que vous voulez un script tout neuf.
+
+Une boîte de dialogue de confirmation avant l'annulation peut être activée dans les préférences de la sandbox.
+
+## Limites à garder à l'esprit
+
+- **Pas de rollback automatique** : le script de migration est "vers le haut" (up) uniquement. La sandbox elle-même est réversible (annuler le fait), mais une fois appliquée, vous êtes engagé à ce que le script fait sur le serveur. Capturez un [snapshot](/docs/diff-and-migrations/data-diff#utiliser-les-snapshots) avant d'appliquer si vous avez besoin d'une référence "avant".
+- **Pas de sandbox multi-connexions** : chaque session possède sa propre sandbox. Vous ne pouvez pas capturer les modifications sur deux connexions et les appliquer sous la forme d'un seul script.
+- **Pas de modifications de schéma** : la sandbox est destinée aux modifications de données, pas au DDL. Les modifications de schéma (CREATE TABLE, ALTER, etc.) ne sont pas mises en sandbox ; tapez-les dans l'éditeur SQL comme d'habitude.
+
+## Où aller ensuite
+
+- [Génération de migration](/docs/diff-and-migrations/migration-generation) pour le flux complet d'application / téléchargement / annulation
+- [Environnements](/docs/connections/environments) pour les invites de sécurité qui bloquent l'étape d'application
+- [Différence de données](/docs/diff-and-migrations/data-diff) pour capturer des snapshots avant/après autour d'une application de sandbox

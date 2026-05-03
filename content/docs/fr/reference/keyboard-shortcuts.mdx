@@ -1,21 +1,84 @@
 ---
 title: Raccourcis clavier
-description: Tous les raccourcis clavier en un coup d'œil.
+description: Tous les raccourcis clavier dans QoreDB, regroupés par catégorie, avec la variante de plateforme et le contexte dans lequel ils s'appliquent.
 premium: false
 ---
 
 # Raccourcis clavier
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB privilégie la navigation au clavier. Les habitués ne cliquent presque jamais dans la barre latérale ; ils utilisent principalement la palette de commandes et une poignée de raccourcis. Cette page est l'antisèche complète.
 
-## Aperçu
+`Cmd` est le modificateur pour macOS ; sous Windows et Linux, remplacez-le par `Ctrl`.
 
-Tous les raccourcis clavier en un coup d'œil.
+## Global
 
-## À venir
+Ces raccourcis fonctionnent partout dans QoreDB.
 
-Une fois finalisée, cette page couvrira :
+| Raccourci                                                 | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+K" />                     | Ouvrir la palette de recherche globale (commandes, connexions, historique, bibliothèque). |
+| <KeyboardShortcut shortcut="Cmd+," />                     | Ouvrir les paramètres.                                   |
+| <KeyboardShortcut shortcut="Esc" />                       | Fermer la superposition active (modale, palette, boîte de dialogue). |
+| <KeyboardShortcut shortcut="?" />                         | Afficher l'antisèche des raccourcis clavier.             |
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+La palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />) est également un chemin rapide vers n'importe quel autre raccourci : recherchez la commande et exécutez-la sans avoir à retenir le raccourci.
+
+## Connexions
+
+| Raccourci                                                 | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+N" />                     | Nouvelle connexion.                                      |
+
+## Espace de travail et onglets
+
+Ceux-ci fonctionnent lorsqu'une session de connexion est active.
+
+| Raccourci                                                 | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+T" />                     | Nouvel onglet de requête.                                |
+| <KeyboardShortcut shortcut="Cmd+W" />                     | Fermer l'onglet actif.                                   |
+| <KeyboardShortcut shortcut="Cmd+Shift+L" />               | Ouvrir la bibliothèque de requêtes.                      |
+| <KeyboardShortcut shortcut="Cmd+Shift+F" />               | Ouvrir la recherche en texte intégral sur toutes les tables. |
+| <KeyboardShortcut shortcut="Cmd+Shift+N" />               | Convertir la requête actuelle en carnet de notes (notebook). |
+
+## Éditeur
+
+À l'intérieur d'un éditeur SQL ou MongoDB.
+
+| Raccourci                                                 | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+Enter" />                 | Exécuter la requête actuelle, ou la sélection le cas échéant. |
+| <KeyboardShortcut shortcut="Cmd+Shift+F" />               | Formater la requête SQL actuelle.                        |
+| <KeyboardShortcut shortcut="Shift+Alt+F" />               | Formater la requête SQL actuelle (raccourci alternatif). |
+| <KeyboardShortcut shortcut="Ctrl+Space" />                | Forcer l'apparition de l'autocomplétion (comportement par défaut de CodeMirror). |
+
+Le même `Cmd+Enter` exécute soit l'onglet entier, soit la sélection : avec du texte sélectionné, seule cette sélection est envoyée. Si rien n'est sélectionné, tout l'onglet s'exécute.
+
+## Sandbox
+
+| Raccourci                                                 | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Ctrl+Shift+S" />              | Activer/désactiver la sandbox pour la session active.    |
+
+Le raccourci de la sandbox est `Ctrl+Shift+S` sur toutes les plateformes (et non `Cmd+Shift+S` sur macOS).
+
+## Comportement sensible au contexte
+
+Quelques raccourcis se comportent différemment selon ce qui est ciblé (focus) :
+
+- **À l'intérieur d'un champ de texte** : la plupart des raccourcis sont transmis à l'entrée (saisie, sélection, etc.). Les exceptions sont <KeyboardShortcut shortcut="Cmd+K" /> et <KeyboardShortcut shortcut="Cmd+Shift+N" />, qui interceptent toujours de manière globale.
+- **Avec une superposition ouverte** : seul <KeyboardShortcut shortcut="Esc" /> est lié ; il ferme la superposition.
+- **Sans session active** : les raccourcis liés à la connexion (<KeyboardShortcut shortcut="Cmd+T" />, <KeyboardShortcut shortcut="Cmd+Shift+F" />) ne font rien.
+- **Sans onglet actif** : <KeyboardShortcut shortcut="Cmd+W" /> ne fait rien.
+
+## Personnalisation
+
+QoreDB n'expose actuellement pas d'interface utilisateur pour remapper ces raccourcis. Ils sont codés en dur pour des raisons de cohérence, avec un échange `Cmd`/`Ctrl` en fonction du système d'exploitation.
+
+Si vous avez besoin d'un raccourci différent de manière ponctuelle, la palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />) vous permet de lancer n'importe quelle commande par son nom ; vous pouvez ainsi prendre l'habitude d'utiliser le mot-clé de recherche plutôt que le raccourci clavier.
+
+## Où aller ensuite
+
+- [Éditeur et autocomplétion](/docs/querying/editor) : fonctionnalités de l'éditeur associées à ces raccourcis
+- [Exécuter des requêtes](/docs/querying/running-queries) : le flux d'exécution en détail
+- [Configuration](/docs/reference/configuration) : paramètres et emplacements de persistance

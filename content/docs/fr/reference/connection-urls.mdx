@@ -1,21 +1,170 @@
 ---
-title: URLs de connexion
-description: Formats de chaînes de connexion pris en charge.
+title: URL de connexion
+description: Tous les schémas d'URL de connexion acceptés par QoreDB, avec les paramètres de requête reconnus et les ports par défaut par pilote.
 premium: false
 ---
 
-# URLs de connexion
+# URL de connexion
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB analyse les URL de connexion en champs normalisés avant de les stocker. Cette page répertorie chaque schéma que l'analyseur accepte, les paramètres de requête qu'il reconnaît et les valeurs par défaut qui s'appliquent lorsque vous omettez quelque chose.
 
-## Aperçu
+Le pilote est automatiquement détecté à partir du schéma : collez une URL et QoreDB choisit le bon moteur. Vous n'avez pas besoin de définir le pilote manuellement si votre URL est bien formée.
 
-Formats de chaînes de connexion pris en charge.
+## Recherche rapide
 
-## À venir
+| Pilote               | Schémas                                  | Port par défaut |
+| -------------------- | ---------------------------------------- | --------------- |
+| **PostgreSQL**       | `postgres://`, `postgresql://`           | 5432            |
+| **MySQL / MariaDB**  | `mysql://`                               | 3306            |
+| **SQL Server**       | `mssql://`, `sqlserver://`               | 1433            |
+| **CockroachDB**      | `cockroachdb://`, `cockroach://`         | 26257           |
+| **MongoDB**          | `mongodb://`, `mongodb+srv://`           | 27017           |
+| **Redis**            | `redis://` (TCP), `rediss://` (TLS)      | 6379            |
+| **SQLite**           | (chemin de fichier, `:memory:`)          | n/a             |
+| **DuckDB**           | (chemin de fichier, `:memory:`)          | n/a             |
 
-Une fois finalisée, cette page couvrira :
+Les fournisseurs compatibles Postgres (Supabase, Neon, TimescaleDB) utilisent le schéma standard `postgresql://`. Choisissez le pilote dédié dans la boîte de dialogue Nouvelle connexion si vous souhaitez des fonctionnalités de schéma spécifiques au fournisseur ; dans les deux cas, le format de l'URL est le même.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## PostgreSQL
+
+```
+postgresql://UTILISATEUR:MOTDEPASSE@HOTE:PORT/BASE_DE_DONNEES?param=valeur&...
+postgres://UTILISATEUR:MOTDEPASSE@HOTE:PORT/BASE_DE_DONNEES?param=valeur&...
+```
+
+**Paramètres de requête reconnus**
+
+| Paramètre                       | Remarques                                                |
+| ------------------------------- | -------------------------------------------------------- |
+| `sslmode`                       | L'un de `disable`, `allow`, `prefer`, `require`, `verify-ca`, `verify-full`. |
+| `ssl`                           | Booléen. Accepte `true`/`false`/`1`/`0`/`yes`/`no`/`on`/`off`. |
+| `sslrootcert`, `sslcert`, `sslkey` | Chemins de fichiers. La définition de l'un d'eux active implicitement SSL. |
+
+Tout le reste est conservé tel quel dans les options de connexion.
+
+**Remarques sur le comportement**
+
+- `sslmode=disable` remplace tout paramètre lié au SSL ; la connexion se fait en TCP simple.
+- Les hôtes IPv6 fonctionnent avec la notation entre crochets : `postgresql://user@[::1]:5432/mydb`.
+
+## MySQL & MariaDB
+
+```
+mysql://UTILISATEUR:MOTDEPASSE@HOTE:PORT/BASE_DE_DONNEES?param=valeur&...
+```
+
+**Paramètres de requête reconnus**
+
+| Paramètre                                | Remarques                                                |
+| ---------------------------------------- | -------------------------------------------------------- |
+| `ssl-mode` ou `sslmode`                  | L'un de `DISABLED`, `PREFERRED`, `REQUIRED`, `VERIFY_CA`, `VERIFY_IDENTITY`. |
+| `ssl` ou `usessl`                        | Booléen.                                                 |
+| `ssl-ca`, `ssl-cert`, `ssl-key`, `ssl-cipher` | Chemins de fichiers. Activent implicitement SSL.       |
+
+## SQL Server
+
+```
+mssql://UTILISATEUR:MOTDEPASSE@HOTE:PORT/BASE_DE_DONNEES?param=valeur&...
+sqlserver://UTILISATEUR:MOTDEPASSE@HOTE:PORT/BASE_DE_DONNEES?param=valeur&...
+```
+
+**Paramètres de requête reconnus**
+
+| Paramètre  | Remarques                                                |
+| ---------- | -------------------------------------------------------- |
+| `encrypt`  | Booléen. Force le cryptage TLS.                          |
+| `ssl`      | Booléen (alias).                                         |
+
+Les modes d'authentification Windows (NTLM, Intégré) se configurent via le formulaire, et non par l'URL.
+
+## CockroachDB
+
+```
+cockroachdb://UTILISATEUR:MOTDEPASSE@HOTE:26257/BASE_DE_DONNEES?sslmode=verify-full
+cockroach://UTILISATEUR:MOTDEPASSE@HOTE:26257/BASE_DE_DONNEES?sslmode=verify-full
+```
+
+CockroachDB utilise les mêmes paramètres que PostgreSQL (il parle le protocole réseau de Postgres). Le port par défaut est **26257**, et non 5432. La base de données par défaut est **`defaultdb`**.
+
+Vous pouvez également coller une URL `postgresql://` pointant vers un cluster CockroachDB et choisir le moteur CockroachDB dans la boîte de dialogue ; les deux fonctionnent.
+
+## MongoDB
+
+```
+mongodb://UTILISATEUR:MOTDEPASSE@HOTE:27017/BASE_DE_DONNEES?param=valeur&...
+mongodb+srv://UTILISATEUR:MOTDEPASSE@CLUSTER/BASE_DE_DONNEES?param=valeur&...
+```
+
+**Paramètres de requête reconnus**
+
+| Paramètre                              | Remarques                                                   |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `tls` ou `ssl`                         | Booléen. Active TLS.                                        |
+| `authSource`                           | Base de données où l'utilisateur est authentifié (généralement `admin`). |
+| `replicaSet`                           | Nom du Replica Set lors de la connexion directe aux membres. |
+| `tlsCAFile`, `tlsClientCertificateKeyFile`, `tlsCertificateKeyFilePassword` | Chemins de fichiers TLS. Activent implicitement TLS. |
+
+**Spécificités de `mongodb+srv://`**
+
+- TLS est activé implicitement.
+- Le port est résolu à partir des enregistrements DNS SRV ; vous ne l'incluez pas dans l'URL.
+- Utilisé par MongoDB Atlas et la plupart des offres Mongo gérées.
+
+## Redis
+
+```
+redis://[UTILISATEUR:MOTDEPASSE@]HOTE:PORT[/INDEX_DB]?param=valeur&...
+rediss://[UTILISATEUR:MOTDEPASSE@]HOTE:PORT[/INDEX_DB]?param=valeur&...
+```
+
+`rediss://` (avec deux `s`) active TLS. Sinon, les schémas se comportent de la même manière.
+
+Le segment de chemin après l'hôte est l'**index de la base de données** (un entier entre 0 et 15 par défaut ; configurable côté serveur).
+
+## SQLite
+
+SQLite n'a pas de schéma d'URL au sens strict. Vous pointez vers un chemin de fichier ou `:memory:` :
+
+```
+/chemin/absolu/vers/base_de_donnees.db
+./chemin/relatif/vers/base_de_donnees.db
+:memory:
+```
+
+Extensions de fichiers acceptées : `.db`, `.sqlite`, `.sqlite3`, `.db3`, `.s3db`, `.sl3`. Le fichier est créé automatiquement lors de la première écriture s'il n'existe pas. Le mode journal WAL est activé par défaut.
+
+## DuckDB
+
+DuckDB prend également un chemin ou `:memory:` :
+
+```
+/chemin/absolu/vers/base_de_donnees.duckdb
+:memory:
+duckdb::memory:
+```
+
+Extensions acceptées : `.duckdb`, `.db`. Le fichier est créé automatiquement lors de la première écriture.
+
+## Erreurs d'analyse
+
+L'analyseur (parser) renvoie l'une de ces erreurs lorsque l'URL n'est pas valide.
+
+| Erreur                 | Cause                                                  |
+| ---------------------- | ------------------------------------------------------ |
+| `MissingHost`          | L'URL n'inclut pas d'hôte (ex. `postgres:///mydb`).      |
+| `InvalidUrl`           | L'URL est mal formée.                                  |
+| `UnsupportedScheme`    | Le schéma n'est pas dans la liste ci-dessus. Schémas reconnus : `postgres`, `postgresql`, `mysql`, `mongodb`, `mongodb+srv`, `redis`, `rediss`, `mssql`, `sqlserver`, `cockroachdb`, `cockroach`. |
+| `InvalidUtf8`          | Les caractères encodés en pourcentage ne se décodent pas en UTF-8 valide. |
+| `InvalidPort`          | Le segment de port n'est pas un entier valide.         |
+
+## Ce qui se passe après l'analyse
+
+L'analyseur produit un enregistrement normalisé avec l'hôte, le port, l'utilisateur, le mot de passe, la base de données, plus les options SSL/TLS reconnues. **L'URL brute n'est jamais persistée** : seuls les champs normalisés sont enregistrés (le mot de passe atterrit dans le coffre-fort crypté, le reste dans le manifeste de l'espace de travail).
+
+Cela signifie que vous pouvez coller une URL jetable contenant des secrets, enregistrer la connexion, et l'URL elle-même est éliminée. Si vous devez partager une connexion sans partager le mot de passe, partagez l'entrée du manifeste ; le destinataire saisira le mot de passe dans son propre coffre-fort.
+
+## Où aller ensuite
+
+- [PostgreSQL](/docs/connections/postgresql), [MySQL](/docs/connections/mysql), [MongoDB](/docs/connections/mongodb), [SQLite](/docs/connections/sqlite), [Tunnels SSH](/docs/connections/ssh-tunneling)
+- [Limites des pilotes](/docs/reference/driver-limitations) pour les particularités par moteur
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour voir comment les identifiants analysés sont stockés

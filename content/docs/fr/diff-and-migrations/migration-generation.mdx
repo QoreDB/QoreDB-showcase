@@ -1,25 +1,115 @@
 ---
-title: Génération de migrations
-description: Générez des migrations SQL à partir d'un diff.
+title: Génération de migration
+description: Effectuez des modifications de données localement dans la sandbox, passez-les en revue, puis exportez le script SQL équivalent. La boucle sécurisée pour les modifications ad hoc sans toucher d'abord à la base de données en direct.
 premium: true
 ---
 
-# Génération de migrations
+# Génération de migration
 
 <Callout type="info">
-  Ce module fait partie du palier Premium de QoreDB.
+Cette fonctionnalité fait partie du niveau QoreDB Pro.
 </Callout>
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB dispose d'un **mode bac à sable** (sandbox mode) qui intercepte vos modifications de données et les met en mémoire tampon localement au lieu de les envoyer à la base de données. Lorsque le résultat vous convient, la sandbox génère un seul script de migration SQL que vous pouvez examiner, télécharger ou appliquer via QoreDB.
 
-## Aperçu
+C'est le remplacement sécurisé de la phrase "Je vais juste ouvrir une transaction et éditer la table directement". L'état intermédiaire vit entièrement sur votre machine jusqu'à ce que vous décidiez quoi en faire.
 
-Générez des migrations SQL à partir d'un diff.
+## Le flux en un coup d'œil
 
-## À venir
+1. **Activez la sandbox** pour la session de la connexion.
+2. **Modifiez les données** comme d'habitude : modifications de cellules en ligne, modifications en masse, suppressions de lignes, insertions de lignes.
+3. **Passez en revue** les modifications en mémoire tampon dans le panneau de la sandbox.
+4. **Générez** le script de migration SQL à partir de ces modifications.
+5. **Appliquez** via QoreDB, **téléchargez** le script pour que quelqu'un d'autre l'exécute, ou **annulez** toute la sandbox si vous changez d'avis.
 
-Une fois finalisée, cette page couvrira :
+Rien des étapes 1 à 3 ne touche la base de données.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Activer et désactiver la sandbox
+
+Basculez la sandbox depuis la barre de titre (icône Fiole) ou avec <KeyboardShortcut shortcut="Ctrl+Shift+S" />. Lorsqu'elle est activée, l'interface utilisateur de la connexion affiche un indicateur de sandbox coloré (bleu pour le développement, orange pour le staging, rouge pour la production) et un décompte des modifications en attente.
+
+Tant que la sandbox est activée, chaque modification que vous effectuez via la grille de données (modification en ligne, modification en masse, insertion de ligne, suppression de ligne) est capturée dans la mémoire tampon locale. Les requêtes SQL directes que vous exécutez depuis l'éditeur s'exécutent toujours normalement.
+
+L'état de la sandbox est **par session** (par connexion) et **conservé dans le `localStorage`**, ainsi fermer et rouvrir l'application conserve vos modifications en attente.
+
+## Passer en revue les modifications en attente
+
+Le panneau de la sandbox répertorie chaque modification capturée avec son type (`insert`, `update`, `delete`), la table qu'elle touche, la clé primaire de la ligne affectée, et les anciennes/nouvelles valeurs le cas échéant.
+
+QoreDB fusionne intelligemment les modifications associées :
+
+- Deux mises à jour consécutives sur la même ligne fusionnent en une seule.
+- Une suppression qui suit une insertion de la même ligne s'annulent mutuellement.
+
+Cela permet de garder la mémoire tampon compacte et d'éviter de générer du SQL bruyant.
+
+Quelques préférences utilisateur vous permettent d'ajuster le panneau :
+
+| Préférence                  | Effet                                                    |
+| --------------------------- | -------------------------------------------------------- |
+| **Affichage des suppressions** | Afficher les lignes supprimées barrées ou les masquer entièrement. |
+| **Confirmer à l'annulation**| Demander avant d'effacer toutes les modifications de la sandbox. |
+| **Réduire automatiquement le panneau** | Masquer le panneau lorsqu'il est vide.                   |
+| **Taille de page**          | Nombre de lignes affichées par page dans la mémoire tampon. |
+
+## Génération du script de migration
+
+Lorsque vous êtes prêt, cliquez sur **Appliquer** (Apply) dans la sandbox. QoreDB :
+
+1. Envoie les modifications mises en mémoire tampon au backend.
+2. Reçoit en retour un objet `MigrationScript` contenant :
+   - Le texte `sql` (une ou plusieurs instructions séparées par `;`).
+   - Le compte d'instructions (`statement_count`).
+   - Une liste d'avertissements (`warnings`) que le backend souhaite que vous lisiez avant de lancer quoi que ce soit.
+
+Le script est un **fichier SQL unique**, et non un dossier horodaté de type Knex/Flyway. Multi-instructions, prêt à être exécuté tel quel.
+
+## Examiner avant d'appliquer
+
+Avant que quoi que ce soit ne s'exécute, QoreDB affiche une boîte de dialogue **d'aperçu de migration** avec :
+
+- Le texte SQL complet dans un bloc avec coloration syntaxique.
+- Le nombre d'instructions et le nombre total de caractères.
+- Tous les avertissements produits par le backend (par exemple, si une clé primaire a changé d'une manière qui peut nécessiter une attention particulière, ou si le script contient des opérations que le moteur signale comme risquées).
+
+Lisez le SQL. Toujours.
+
+## Appliquer, télécharger ou annuler
+
+À partir de l'aperçu, vous avez trois options :
+
+- **Appliquer** : QoreDB exécute le script sur la connexion en direct. Pour les connexions de production, cela nécessite que vous tapiez **APPLY** dans un champ de confirmation (le même modèle que la boîte de dialogue de mutation de production décrite dans [Environments](/docs/connections/environments)).
+- **Télécharger** : enregistrer le SQL sous forme de fichier nommé `migration_YYYY-MM-DD.sql`. Vous pouvez ensuite l'envoyer à un collègue, le valider dans un dossier de migrations, ou l'exécuter via votre propre pipeline de déploiement.
+- **Annuler** (Discard) : supprimer entièrement l'état de la sandbox. Rien n'a été envoyé à la base de données, il n'y a donc rien à annuler sur le serveur.
+
+Une fois qu'un script a été appliqué avec succès, la sandbox est vidée automatiquement.
+
+## Ce qui n'est pas pris en charge
+
+Pour être honnête quant au comportement actuel :
+
+- **Pas d'annulation automatique / migration vers le bas (down migration)** : le script généré est uniquement "vers le haut" (up). Si vous devez revenir en arrière, capturez un snapshot avant d'appliquer et utilisez le [diff de données](/docs/diff-and-migrations/data-diff) pour comparer, ou écrivez un SQL d'annulation (undo) manuel.
+- **Pas de sortie multi-fichiers horodatée** : il s'agit d'un seul fichier `.sql` par session, pas d'un dossier de migration structuré. Si votre projet utilise un framework de migration (Knex, Flyway, Alembic, etc.), copiez vous-même le SQL généré dans un nouveau fichier au format de ce framework.
+- **Pas de diff DDL entre deux bases de données** : cette page couvre les modifications de données capturées dans la sandbox. Pour comparer le *contenu* de deux tables côte à côte, voir [Différence de données](/docs/diff-and-migrations/data-diff). Comparer des schémas (DDL) entre deux bases de données n'est pas possible dans QoreDB aujourd'hui.
+
+## Quand utiliser la sandbox par rapport à une transaction
+
+Une transaction classique `BEGIN … COMMIT/ROLLBACK` convient lorsque :
+
+- Vous savez exactement quelles instructions vous allez exécuter.
+- Vous souhaitez des garanties au niveau de la base de données (atomicité, isolation).
+- Le travail est suffisamment court pour tenir dans une seule session.
+
+La sandbox est préférable lorsque :
+
+- Vous souhaitez **explorer** les modifications dans l'interface utilisateur avant de vous engager dans un plan (essayer, annuler, essayer à nouveau).
+- Vous souhaitez **partager le SQL** avec quelqu'un d'autre pour examen avant qu'il ne s'exécute.
+- Vous souhaitez obtenir un **script propre** à la fin sans taper le SQL à la main.
+
+Les deux ne sont pas exclusifs : capturez les modifications dans la sandbox, générez le script, puis exécutez ce script à l'intérieur d'une transaction explicite (`BEGIN … COMMIT;`) pour l'atomicité. Le meilleur des deux mondes.
+
+## Où aller ensuite
+
+- [Différence de données](/docs/diff-and-migrations/data-diff) pour comparer le résultat avant et après une migration
+- [Environnements](/docs/connections/environments) pour les invites de sécurité lors d'une application en production
+- [Tarification](/pricing) pour voir ce qui est inclus dans l'offre Pro

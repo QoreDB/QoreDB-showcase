@@ -1,21 +1,104 @@
 ---
-title: Navigateur
-description: Explorez tables, colonnes et index.
+title: Navigateur de schéma
+description: Naviguez dans le schéma de n'importe quelle connexion depuis la barre latérale. Tables, vues, routines, déclencheurs, index, et inspection par table via les onglets Données, Structure et Info.
 premium: false
 ---
 
-# Navigateur
+# Navigateur de schéma
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB expose le schéma de chaque connexion à travers l'**arborescence de la barre latérale** et une **vue par table** qui s'ouvre lorsque vous cliquez sur une table. L'arborescence est cohérente entre les pilotes, mais les catégories d'objets disponibles dépendent de ce que le pilote prend en charge.
 
-## Aperçu
+## L'arborescence de la barre latérale
 
-Explorez tables, colonnes et index.
+Lorsque vous développez une connexion dans la barre latérale, vous voyez ses espaces de noms (un espace de noms est une paire `base_de_données.schéma` pour les moteurs qui ont les deux, ou simplement la base de données pour les moteurs qui ne l'ont pas). Chaque espace de noms se développe en huit sections maximum :
 
-## À venir
+| Section              | Moteurs                                       |
+| -------------------- | --------------------------------------------- |
+| **Tables**           | Tous les moteurs SQL, plus MongoDB (sous forme de collections) |
+| **Vues**             | PostgreSQL, MySQL, SQL Server, SQLite          |
+| **Vues matérialisées** | PostgreSQL                                  |
+| **Fonctions**        | PostgreSQL, MySQL, SQL Server                  |
+| **Procédures**       | PostgreSQL, MySQL, SQL Server                  |
+| **Déclencheurs** (Triggers) | PostgreSQL, MySQL, SQL Server           |
+| **Événements**       | MySQL uniquement                               |
+| **Séquences**        | PostgreSQL, MariaDB                            |
 
-Une fois finalisée, cette page couvrira :
+Les sections que le moteur ne prend pas en charge n'apparaissent pas du tout (ainsi un espace de noms SQLite n'affiche que **Tables** et **Vues**, tandis qu'un espace de noms Postgres affiche l'ensemble complet).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+### Chargement et recherche
+
+Chaque section est chargée à la demande la première fois que vous la développez. Les développements ultérieurs sont servis depuis un cache local.
+
+Un **champ de recherche** en haut de l'arborescence filtre les tables et autres objets par nom (avec un délai anti-rebond, ~300 ms). La recherche est insensible à la casse et correspond à n'importe quel endroit du nom.
+
+Lorsqu'une section contient plus de 50 entrées, un bouton **Charger plus** (Load more) apparaît en bas ; cliquez dessus pour récupérer la page suivante. Cela évite aux schémas très larges (des milliers de tables) de bloquer l'interface utilisateur lors du premier développement.
+
+### Rafraîchissement
+
+Les données de schéma sont mises en cache. Lorsque vous modifiez le schéma directement via QoreDB (exécution d'un `CREATE TABLE`, suppression d'un objet, etc.), le cache est invalidé automatiquement. Si vous modifiez le schéma de l'extérieur (un script de migration, un autre client) et que les nouveaux objets n'apparaissent pas, cliquez sur **Actualiser** (Refresh) sur le nœud de connexion pour vider le cache et recharger.
+
+### Menus contextuels (clic droit)
+
+Un clic droit sur un nœud (une base de données, une table, une vue, une routine, etc.) ouvre un menu contextuel avec les actions pertinentes pour ce type de nœud. Les actions typiques incluent l'ouverture de l'objet, la copie de son nom, l'affichage de son DDL et le rafraîchissement du parent.
+
+## Vue par table
+
+Cliquez sur une table dans l'arborescence (ou ouvrez-la depuis la palette de recherche globale) pour la charger dans la zone principale. La vue comporte trois onglets.
+
+### Onglet Données (Data)
+
+La vue par défaut. Affiche les lignes de la table sous forme de grille de données virtualisée avec des en-têtes triables, des filtres par colonne, l'édition en ligne, la pagination, l'aperçu de clé étrangère et les exports. C'est la même grille qui gère les résultats de requête ; consultez [Résultats & exports](/docs/querying/results-and-exports) pour la liste complète des fonctionnalités.
+
+### Onglet Structure
+
+Un catalogue en lecture seule des colonnes de la table :
+
+| Colonne    | Ce qu'elle montre                                          |
+| ---------- | ---------------------------------------------------------- |
+| **#**      | Position ordinale de la colonne.                           |
+| **Colonne**| Nom. Les colonnes de clé primaire sont signalées par une icône de clé. |
+| **Type**   | Type de données spécifique au pilote (`int4`, `varchar(255)`, etc.). |
+| **Nullable** | `NULL` ou `NOT NULL`.                                    |
+| **Défaut** | Valeur par défaut, ou vide s'il n'y en a pas.             |
+
+Une petite bannière en bas répertorie les colonnes de la clé primaire dans leur ordre de déclaration.
+
+L'onglet Structure est destiné à la lecture. Pour créer ou modifier des tables, utilisez une requête SQL (l'éditeur gère le dialecte pour vous) ou la boîte de dialogue **Créer une table** (Create Table) depuis le menu contextuel de la barre latérale lorsqu'elle est disponible pour votre moteur.
+
+### Onglet Info
+
+Statistiques et métadonnées spécifiques au pilote : index, taille de la table, estimations de lignes, dernier horodatage d'analyse (analyzed timestamp), et (pour PostgreSQL) actions de maintenance comme `ANALYZE`. Le contenu exact varie selon le moteur.
+
+## Clés étrangères et relations virtuelles
+
+QoreDB prend en charge deux types de déclarations de clés étrangères à des fins de navigation et pour le [Diagramme ER](/docs/schema/er-diagram) :
+
+- **Clés étrangères réelles** : déclarées dans le schéma de la base de données avec des contraintes `FOREIGN KEY`.
+- **Relations virtuelles** : déclarées à l'intérieur de QoreDB sans modifier la base de données. Utiles lorsque le schéma sous-jacent ne possède pas de véritables contraintes de clé étrangère (systèmes hérités, entrepôts dénormalisés, collections MongoDB).
+
+### Clés étrangères réelles
+
+Lues directement depuis le schéma. Elles alimentent l'**Aperçu de clé étrangère** (Foreign-key peek) : survolez ou cliquez sur une cellule de clé étrangère dans la grille de données pour voir la ligne référencée dans la table parente sans quitter la vue actuelle.
+
+### Déclarer une relation virtuelle
+
+Ouvrez la boîte de dialogue **Gérer les relations virtuelles** (Manage Virtual Relations) depuis le menu contextuel de la connexion. La boîte de dialogue répertorie les relations virtuelles existantes pour l'espace de noms actif et vous permet d'en ajouter de nouvelles avec le bouton **Ajouter** (Add).
+
+Pour chaque relation virtuelle, vous spécifiez :
+
+- La colonne **source** (la table.colonne que vous déclarez comme clé étrangère).
+- La colonne **cible** (la table.colonne qu'elle référence).
+- Facultativement, un **nom de contrainte** à des fins d'affichage.
+
+Les relations virtuelles sont stockées **par connexion** et survivent d'une session à l'autre. Ce sont des concepts internes à l'application, invisibles du côté de la base de données. Utilisez-les lorsque vous n'avez ni l'autorisation ni l'envie d'ajouter de véritables contraintes de clé étrangère à la base de données.
+
+Une fois déclarées, les relations virtuelles se comportent comme de vraies clés étrangères dans QoreDB :
+
+- Elles alimentent l'aperçu de clé étrangère dans la grille de données.
+- Elles apparaissent dans le [Diagramme ER](/docs/schema/er-diagram) (rendues par une ligne pointillée violette distincte afin que vous puissiez les différencier des vraies clés étrangères).
+
+## Où aller ensuite
+
+- [Diagramme ER](/docs/schema/er-diagram) pour une vue interactive et visuelle du schéma
+- [Résultats & exports](/docs/querying/results-and-exports) pour les fonctionnalités de la grille de données utilisées dans l'onglet Données
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour écrire du DDL à la main

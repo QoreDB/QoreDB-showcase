@@ -1,21 +1,110 @@
 ---
 title: Aperçu des fonctionnalités IA
-description: Requêtes assistées par IA, explications et suggestions.
-premium: false
+description: L'interrogation assistée par IA dans QoreDB. Six fournisseurs, vos propres clés, des invites sensibles au schéma, et le même filet de sécurité que les requêtes manuelles.
+premium: true
 ---
 
 # Aperçu des fonctionnalités IA
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+<Callout type="info">
+L'assistant IA fait partie du niveau QoreDB Pro.
+</Callout>
 
-## Aperçu
+QoreDB intègre un **assistant IA** qui vous aide à écrire, comprendre et corriger des requêtes. C'est du **BYOK** (Bring Your Own Key - Apportez votre propre clé) : vous fournissez les identifiants de votre fournisseur, QoreDB les stocke localement dans le trousseau de clés de votre système d'exploitation, et les invites (prompts) sont envoyées directement depuis votre machine au fournisseur de votre choix. **Rien ne transite par les serveurs de QoreDB.**
 
-Requêtes assistées par IA, explications et suggestions.
+## Fournisseurs pris en charge
 
-## À venir
+Vous configurez un ou plusieurs fournisseurs depuis le panneau des paramètres IA.
 
-Une fois finalisée, cette page couvrira :
+| Fournisseur       | Clé API requise ? | Remarques                                              |
+| ----------------- | ----------------- | ------------------------------------------------------ |
+| **OpenAI**        | Oui               | GPT-4.1, GPT-4.1 Mini, o4-mini, o3-mini.               |
+| **Anthropic**     | Oui               | Claude Sonnet 4.6, Sonnet 4, Haiku 4.5.                |
+| **Mistral AI**    | Oui               | Mistral Large/Medium/Small, Codestral, Pixtral.        |
+| **Google Gemini** | Oui               | Gemini 2.5 Pro/Flash, Gemini 2.0 Flash.                |
+| **DeepSeek**      | Oui               | DeepSeek V3, DeepSeek R1.                              |
+| **Ollama**        | Non               | Modèles locaux. Llama 3.3, Llama 3.1, Qwen 2.5 Coder.    |
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+Vous pouvez en installer plusieurs à la fois et choisir lequel utiliser par requête.
+
+## Comment les clés sont stockées
+
+Les clés d'API sont stockées dans le **trousseau de clés natif de votre système d'exploitation** (Keychain sur macOS, Credential Manager sur Windows, Secret Service sur Linux), sous une entrée de service dédiée par fournisseur. Il s'agit du même backend sécurisé que QoreDB utilise pour les mots de passe de connexion.
+
+Quelques conséquences pratiques :
+
+- Les clés ne touchent jamais le stockage du projet QoreDB sur le disque en texte clair.
+- Elles restent sur la machine locale ; les outils de synchronisation qui copient votre dossier QoreDB n'emportent pas les clés avec eux.
+- Supprimer une clé de QoreDB supprime également l'entrée du trousseau de clés.
+
+## Ce que l'assistant peut faire
+
+Quatre actions sont disponibles, chacune soutenue par sa propre invite et son post-traitement.
+
+### Générer une requête
+
+Décrivez ce que vous voulez en langage naturel ; l'assistant renvoie une requête dans le bon dialecte pour la connexion active (SQL pour Postgres/MySQL/SQL Server/SQLite/CockroachDB/DuckDB, MQL pour MongoDB, syntaxe de commande pour Redis).
+
+Le résultat est diffusé (stream) au fur et à mesure de sa génération, vous voyez donc la requête prendre forme plutôt que d'attendre une réponse complète.
+
+### Expliquer un résultat
+
+Exécutez une requête, puis demandez à l'assistant d'expliquer ce qu'elle fait, ce que signifie le résultat, ou pourquoi une valeur se présente ainsi. Utile pour s'approprier des schémas peu familiers ou pour l'intégration de collègues.
+
+### Résumer le schéma
+
+Pointez l'assistant sur une table ou une base de données et obtenez un résumé lisible par un humain : ce que chaque colonne représente probablement, comment les tables sont liées entre elles, et à quels types de questions le schéma est conçu pour répondre.
+
+### Corriger une erreur
+
+Lorsqu'une requête échoue, l'assistant prend la requête et le message d'erreur et propose une version corrigée. En streaming, comme pour la génération. Modèles courants qu'il gère bien : fautes de frappe dans les noms de colonnes, jointures manquantes, erreurs de syntaxe spécifiques au dialecte.
+
+## Prise en compte du schéma
+
+Avant d'envoyer votre invite au fournisseur, l'assistant construit un contexte à partir du schéma actuel de la connexion. Il comprend :
+
+- Jusqu'à **30 tables** (en donnant la priorité à celles mentionnées dans votre invite).
+- Pour chaque table : noms de colonnes, types, nullité, clés primaires, clés étrangères, index.
+- Toutes les [relations virtuelles](/docs/schema/browser#cles-etrangeres-et-relations-virtuelles) que vous avez déclarées.
+
+Le contexte est construit localement à partir des métadonnées de schéma que QoreDB a déjà mises en cache, il n'y a donc pas d'aller-retour supplémentaire vers la base de données.
+
+## Le filet de sécurité pour les requêtes générées
+
+Chaque requête générée par l'assistant passe par la même **validation de sécurité** qu'une requête que vous auriez tapée vous-même. Cela comprend :
+
+- Le détecteur de requêtes dangereuses (`DROP`, `TRUNCATE`, `DELETE`/`UPDATE` sans `WHERE`, `ALTER … DROP …`).
+- La boîte de dialogue de confirmation de l'environnement de production si la connexion est étiquetée `production`.
+- Les règles de sécurité intégrées de l'intercepteur.
+
+Pour MongoDB, le validateur recherche également les modèles à haut risque tels que `dropDatabase`, `deleteMany` sans filtre, `bulkWrite`. Pour Redis, `FLUSHALL` et `FLUSHDB` sont signalés comme dangereux.
+
+Cela signifie qu'un `DELETE FROM users;` généré par l'IA sur une connexion de production passera par la même invite de confirmation (qui demande de taper le nom) que si vous l'aviez écrit à la main. L'assistant n'a pas de passe-droit.
+
+Pour la liste complète des modèles de sécurité et ce qu'ils déclenchent, voir [Validation de la sécurité SQL](/docs/security/sql-safety-validation).
+
+## Configuration de l'assistant
+
+Ouvrez **Paramètres → IA** (Settings → AI) pour gérer les fournisseurs :
+
+- **Ajouter une clé** : choisissez le fournisseur, collez votre clé d'API, choisissez un modèle par défaut, enregistrez.
+- **Tester la clé** : un bouton vérifie la clé par rapport à l'API du fournisseur.
+- **Supprimer une clé** : supprime à la fois la configuration côté QoreDB et l'entrée dans le trousseau de clés.
+
+Par requête, vous pouvez remplacer le modèle directement depuis le panneau de l'assistant. Utile lorsque vous souhaitez utiliser un modèle moins cher ou plus rapide pour le travail de routine et un modèle plus performant pour les problèmes complexes.
+
+## Considérations de confidentialité
+
+Puisque les invites sont envoyées au fournisseur de votre choix, les questions habituelles sur le traitement des données s'appliquent.
+
+- **Ce qui est envoyé** : votre invite, le contexte du schéma (noms des tables et colonnes de la connexion active, éventuellement quelques lignes d'échantillon selon l'action). Aucun secret, aucune valeur de ligne en dehors de la sélection active.
+- **Où ça va** : directement au fournisseur que vous avez choisi. Les serveurs de QoreDB ne sont pas sur le chemin.
+- **Ce qui est conservé** : dépend des conditions du fournisseur. OpenAI, Anthropic, Mistral, Google et DeepSeek ont chacun des politiques différentes sur la rétention et l'utilisation des données d'entraînement ; vérifiez les leurs. Ollama s'exécute localement, donc rien ne quitte votre machine.
+
+Si vous travaillez sur des schémas où même les noms de colonnes sont sensibles, préférez un modèle local (Ollama) ou n'utilisez pas l'assistant pour ces connexions.
+
+## Où aller ensuite
+
+- [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour les contrôles de sécurité par lesquels passent les requêtes générées
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour le stockage sécurisé par le trousseau de clés
+- [Tarification](/pricing) pour voir ce qui est inclus dans l'offre Pro

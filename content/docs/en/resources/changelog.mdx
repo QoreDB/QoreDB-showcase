@@ -1,21 +1,46 @@
 ---
 title: Changelog
-description: Release notes and version history.
+description: Where to find QoreDB release notes, what each version brings, and how to track upcoming releases.
 premium: false
 ---
 
 # Changelog
 
-This page is a placeholder. Real content is being written.
+QoreDB ships frequent updates, and the changelog is the canonical record of what changed and when.
 
-## Overview
+## Where to read it
 
-Release notes and version history.
+Two equivalent sources:
 
-## What's next
+- **The QoreDB site**: a curated, human-friendly view of every release, with highlights, screenshots, and migration notes when relevant. Browse it at [qoredb.com/changelog](/changelog).
+- **GitHub Releases**: the raw release notes, attached binaries, and tagged source. Useful if you want to grab a specific version's installer or read the verbatim release text. See [github.com/raphplt/QoreDB/releases](https://github.com/raphplt/QoreDB/releases).
 
-Once finalized, this page will cover:
+The two stay in sync. Pick whichever surface you prefer.
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+## What's in a release
+
+Each release entry typically contains:
+
+- **Version number** following SemVer (`MAJOR.MINOR.PATCH`).
+- **Release date**.
+- **Highlights**: the headline changes, written for users.
+- **Detailed changes**: features, fixes, refactors, dependency bumps.
+- **Breaking changes**, when applicable, with a migration note.
+
+The site version groups related items (features, fixes, performance) and adds context the GitHub release notes don't have room for.
+
+## Cadence
+
+QoreDB ships on a rolling cadence rather than a fixed schedule. Patch releases land when there's a meaningful fix; minor releases group features as they're ready; major releases are reserved for changes that require a migration.
+
+## Updating
+
+QoreDB checks for updates on launch when configured. When a new version is available, you'll see an in-app notification with a one-click update flow. If the auto-update path doesn't fit (managed environments, custom packaging), grab the new installer from the Releases page and install it like any update.
+
+Updates preserve your saved connections, vault, query history, library and notebooks.
+
+## Where to go next
+
+- [Roadmap](/docs/resources/roadmap) for what's coming
+- [Installation](/docs/getting-started/installation) for the install and update flow
+- [License](/docs/resources/license) for the Open Core model

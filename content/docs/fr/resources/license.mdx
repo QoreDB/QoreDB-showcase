@@ -1,21 +1,92 @@
 ---
-title: Licence (Open Core)
-description: Cœur Apache 2.0, modules Premium en BSL.
+title: Licence
+description: Le modèle de licence Open Core de QoreDB. Apache 2.0 pour le cœur, Business Source License 1.1 pour le niveau Pro, avec la convention d'en-tête SPDX qui rend la frontière explicite dans le code.
 premium: false
 ---
 
-# Licence (Open Core)
+# Licence
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB est sous licence avec un modèle **Open Core**. Le cœur (core) de l'application est sous licence Apache 2.0 (une licence open-source permissive), et un petit ensemble de fonctionnalités avancées est sous Business Source License 1.1 (BSL, avec code source disponible). Cette page est la référence pratique ; la page [Modèle Open Core](/docs/introduction/open-core-model) explique la logique.
 
-## Aperçu
+## En un coup d'œil
 
-Cœur Apache 2.0, modules Premium en BSL.
+| Niveau       | Licence                                | Où la lire                                               |
+| ------------ | -------------------------------------- | -------------------------------------------------------- |
+| **Core**     | Apache 2.0                             | [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) |
+| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) |
 
-## À venir
+Les deux fichiers de licence se trouvent à la racine du dépôt. Lisez-les toujours comme la source de vérité ; cette page est un résumé.
 
-Une fois finalisée, cette page couvrira :
+## Apache 2.0 : le cœur (Core)
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+Le cœur est **libre** d'être utilisé, modifié, redistribué et intégré, y compris à des fins commerciales. Il n'y a pas de redevances, pas de frais par poste, pas de restrictions d'utilisation. Les obligations standards de la licence Apache s'appliquent (conserver la mention de copyright, documenter les changements importants, ne pas utiliser les marques déposées du projet sans permission).
+
+Si vous créez un fork de QoreDB pour créer un outil qui ne nous fait pas concurrence commercialement, la licence Apache est tout ce dont vous avez besoin.
+
+## Business Source License 1.1 : Premium
+
+Un petit ensemble de fichiers est sous licence BSL. La licence rend le code source disponible avec deux propriétés importantes :
+
+- **Gratuit pour un usage personnel et un usage professionnel interne** : vous pouvez lire le code, compiler l'application vous-même et l'utiliser au sein de votre équipe. Il n'y a pas de frais pour simplement utiliser les fonctionnalités QoreDB Pro au sein de votre organisation.
+- **Restriction sur les offres commerciales concurrentes** : vous ne pouvez pas prendre le code sous licence BSL et livrer un produit commercial qui fait concurrence à QoreDB.
+- **Conversion automatique vers Apache 2.0 après quatre ans** : chaque version BSL est convertie vers Apache 2.0 quatre ans après sa date de sortie. Le Pro d'aujourd'hui est le Core de demain.
+
+C'est le même modèle utilisé par Terraform et Vault de HashiCorp, Sentry, CockroachDB et d'autres projets open-core.
+
+### Ce qui est en BSL aujourd'hui
+
+Fichiers actuellement marqués Premium :
+
+- `src/components/Diff/*` (Différence de données visuelle)
+- `src/lib/diffUtils.ts` (Utilitaires de différence)
+- `src-tauri/src/interceptor/profiling.rs` (Profilage des requêtes)
+
+La liste ci-dessus est l'état actuel. Les nouvelles fonctionnalités Pro atterrissent sous BSL au fil du temps ; les nouvelles fonctionnalités sous Apache restent dans le Core.
+
+## Convention d'en-tête SPDX
+
+Chaque fichier source dans le dépôt (`*.ts`, `*.tsx`, `*.rs`) commence par un en-tête SPDX sur une seule ligne déclarant sa licence :
+
+**Apache 2.0 (Core) :**
+
+```ts
+// SPDX-License-Identifier: Apache-2.0
+```
+
+**BSL 1.1 (Premium) :**
+
+```ts
+// SPDX-License-Identifier: BUSL-1.1
+```
+
+Remarque : l'identifiant SPDX est `BUSL-1.1`, et non `BSL-1.1`. C'est le format que le registre SPDX utilise pour la Business Source License.
+
+L'en-tête est un contrat : lorsque vous lisez un fichier, l'en-tête vous indique quelle licence s'applique. Il n'y a pas d'ambiguïté. Si vous contribuez, suivez la même convention ; les relecteurs de PR le vérifient.
+
+## Ce que vous pouvez faire
+
+| Vous voulez…                                                       | Licence         | Autorisé ?         |
+| ------------------------------------------------------------------ | --------------- | ------------------ |
+| Utiliser QoreDB au travail, avec les fonctionnalités Pro licenciées| Les deux        | Oui                |
+| Lire le code source d'une fonctionnalité Pro                       | BSL             | Oui                |
+| Compiler l'application vous-même avec les fonctionnalités Pro incluses | BSL         | Oui (usage personnel/interne) |
+| Forker le Core pour créer un outil non concurrentiel               | Apache 2.0      | Oui                |
+| Forker QoreDB et le livrer comme un concurrent commercial          | BSL             | Non (jusqu'à la conversion) |
+| Vendre une version hébergée de QoreDB Pro                          | BSL             | Non (jusqu'à la conversion) |
+| Soumettre une PR sur un fichier Pro                                | BSL             | Oui, avec plaisir  |
+| Soumettre une PR sur un fichier Core                               | Apache 2.0      | Oui, avec plaisir  |
+| Utiliser les exports SQL/exports de données générés pour tout usage | n/a             | Oui (vos données, votre choix) |
+
+En cas de doute sur un cas spécifique, les fichiers [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) et [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) contiennent le texte légal.
+
+## Activation de la licence pour Pro
+
+Si vous possédez une licence Pro, activez-la depuis **Paramètres → Licence** (Settings → License). La licence débloque les fonctionnalités Premium dans votre installation ; le code source lui-même est identique dans tous les cas. Sans licence Pro, les fonctionnalités Premium sont toujours visibles dans les menus mais sont accompagnées d'une invite de mise à niveau au lieu de s'exécuter.
+
+Les tarifs et ce qui est inclus se trouvent sur [qoredb.com/pricing](/pricing).
+
+## Où aller ensuite
+
+- [Modèle Open Core](/docs/introduction/open-core-model) pour la logique et l'explication détaillée
+- [Contribuer](/docs/resources/contributing) pour la convention d'en-tête SPDX dans les PRs
+- [Tarification](/pricing) pour le niveau Pro

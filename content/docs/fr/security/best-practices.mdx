@@ -1,21 +1,149 @@
 ---
 title: Bonnes pratiques
-description: Recommandations pour un usage sûr au quotidien.
+description: Comment combiner les fonctionnalités de sécurité de QoreDB (environnements, lecture seule, coffre-fort, SSH, journal d'audit) dans une configuration cohérente difficile à casser par accident.
 premium: false
 ---
 
 # Bonnes pratiques
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+Les fonctionnalités de sécurité de QoreDB sont organisées en **couches** : chacune détecte un type d'erreur différent, et c'est la bonne combinaison qui vous offre une configuration difficile à casser par accident. Cette page est une liste de contrôle de modèles pratiques qui tirent le meilleur parti de ces couches.
 
-## Aperçu
+Rien de tout cela ne remplace la sécurité côté serveur (rôles de base de données, `pg_hba.conf`, segmentation du réseau). Considérez QoreDB comme une "ceinture de sécurité côté client" : il rend les erreurs simples difficiles à faire, tandis la base de données elle-même reste la source de vérité pour les permissions.
 
-Recommandations pour un usage sûr au quotidien.
+## L'essentiel : étiqueter, nommer et revérifier
 
-## À venir
+La couche la moins chère est aussi la plus efficace.
 
-Une fois finalisée, cette page couvrira :
+### Étiquetez chaque connexion avec le bon environnement
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+Chaque connexion enregistrée doit avoir son [environnement](/docs/connections/environments) correctement défini : `development`, `staging` ou `production`. La plupart des invites de sécurité de QoreDB se basent sur cette étiquette, donc la configurer correctement est la base.
+
+Une erreur courante : cloner une connexion de staging pour la faire pointer vers la production, mais oublier de changer l'étiquette. Prenez l'habitude de confirmer l'étiquette juste après la création ou la duplication d'une connexion.
+
+### Nommez clairement les connexions
+
+Associez l'étiquette d'environnement à un nom clair. L'étiquette pilote les invites ; le nom guide vos yeux. `myapp-prod` et `myapp-prod-replica` sont beaucoup moins confus que `myapp` et `myapp-2`.
+
+Un modèle typique pour une application multi-environnements :
+
+| Nom de la connexion     | Environnement  | Lecture seule ?| Remarques                                |
+| ----------------------- | -------------- | -------------- | ---------------------------------------- |
+| `myapp-dev`             | `development`  | Désactivé      | Postgres local, expérimentation libre.   |
+| `myapp-staging`         | `staging`      | Désactivé      | Réplique de pré-production, tests réguliers. |
+| `myapp-prod`            | `production`   | Désactivé      | Dernier recours. Rarement ouverte.       |
+| `myapp-prod-replica`    | `production`   | **Activé**     | Réplique en lecture seule pour les requêtes quotidiennes. |
+
+### Vérifiez la barre d'état avant tout travail destructif
+
+Le badge d'environnement dans la barre d'état clignote en rouge lorsque la connexion active est en production. Jetez-y un coup d'œil avant d'exécuter quoi que ce soit qui modifie les données. Une habitude de deux secondes évite la plupart des accidents.
+
+## Configurations de production
+
+Lorsque vous devez absolument vous connecter à la production, superposez toutes les couches à votre disposition.
+
+### Utilisez une réplique en lecture seule lorsque cela est possible
+
+La plupart des tâches "J'ai juste besoin de regarder la production" sont des lectures. Une réplique en lecture seule avec un utilisateur de base de données en lecture seule résout le problème sans mettre en péril l'instance accessible en écriture. Dans QoreDB, configurez :
+
+- **Environnement** : `production` (badge rouge, invites de confirmation).
+- **Lecture seule** : activé (les mutations sont de toute façon rejetées côté client).
+
+Ajoutez à cela, côté serveur, un rôle de base de données avec des privilèges `SELECT` uniquement. Trois couches.
+
+### Deux connexions distinctes pour l'accès en écriture
+
+Si vous avez besoin d'un accès en écriture à la production, séparez-le de l'accès en lecture seule. Deux connexions enregistrées, des noms différents, des rôles différents. La connexion avec capacité d'écriture reste fermée à moins que vous n'en ayez réellement besoin.
+
+Cela rend le cas dangereux visuellement distinct du cas sûr dans la barre latérale.
+
+### Faites confiance aux invites de confirmation saisies
+
+Les invites de production vous demandent de taper un nom (table, base de données ou connexion) avant l'exécution. Ne collez pas le nom ; tapez-le. La friction est la fonctionnalité.
+
+Si l'invite semble excessive en développement, vérifiez que vous n'avez pas accidentellement étiqueté une connexion de dev comme production.
+
+## Sécurisation des informations d'identification
+
+### Utilisez toujours le coffre-fort, jamais un simple `.env`
+
+Le coffre-fort (vault) stocke les mots de passe de connexion dans le trousseau de clés de votre système d'exploitation (Keychain sur macOS, Credential Manager sur Windows, Secret Service sur Linux). Argon2 est la couche de mot de passe maître au-dessus de cela. Voir [Cryptage du coffre-fort](/docs/security/vault-encryption) pour le modèle complet.
+
+Ne collez pas de mots de passe dans des éditeurs, des scripts ou des fichiers `.env` commités dans git simplement parce que c'est pratique. Le coffre-fort rend la bonne pratique facile à suivre.
+
+### Activez le mot de passe maître sur les machines partagées
+
+Si vous utilisez QoreDB sur une station de travail partagée, un kiosque ou un ordinateur portable que vous confiez parfois à d'autres, activez le **mot de passe maître (verrouillage de l'application)**. Il ajoute une barrière protégée par Argon2 entre le lancement et vos informations d'identification enregistrées.
+
+Sur un ordinateur portable mono-utilisateur avec cryptage complet du disque, le mot de passe maître est facultatif ; la session utilisateur du système d'exploitation sécurise déjà le trousseau de clés.
+
+### Utilisez l'authentification par clé SSH pour les tunnels, avec des phrases secrètes
+
+Pour les tunnels SSH, préférez l'authentification par clé à l'authentification par mot de passe. Cryptez votre clé privée avec une phrase secrète, et laissez QoreDB stocker la phrase secrète dans le coffre-fort. Cela associe la sécurité de la clé au niveau du système d'exploitation à la commodité du coffre-fort de QoreDB.
+
+Consultez [Tunnels SSH](/docs/connections/ssh-tunneling) pour toutes les options.
+
+## Passage en revue des travaux destructifs
+
+### Utilisez la sandbox pour les modifications ad-hoc
+
+Lorsque vous devez effectuer une série de modifications et que vous souhaitez examiner le SQL avant qu'il ne s'exécute, activez la [sandbox](/docs/security/sandbox-mode) pour la session. Les modifications sont mises en mémoire tampon localement ; vous générez le script de migration, examinez le SQL, et ensuite seulement vous appliquez.
+
+C'est beaucoup plus sûr que de taper directement des UPDATE, en particulier pour les modifications qui touchent plusieurs lignes.
+
+### Snapshot avant, diff après
+
+Avant d'appliquer une modification non triviale à la production, capturez un [snapshot](/docs/diff-and-migrations/data-diff#utiliser-les-snapshots) de la table concernée. Après la modification, exécutez un [diff de données](/docs/diff-and-migrations/data-diff) entre le snapshot et l'état post-modification. Confirmez visuellement que la modification a fait exactement ce que vous vouliez, rien de plus.
+
+### Enveloppez le travail multi-instructions dans une transaction
+
+Pour les backends SQL qui le prennent en charge, enveloppez les mises à jour multi-instructions dans un `BEGIN … COMMIT;`. Si quelque chose semble incorrect avant le COMMIT, un `ROLLBACK` vous ramène en arrière. Voir [Exécuter des requêtes](/docs/querying/running-queries#transactions).
+
+La sandbox et les transactions explicites sont complémentaires : la sandbox vous permet de composer le travail, la transaction rend l'application atomique.
+
+## Renforcer l'intercepteur
+
+### Gardez les règles intégrées activées
+
+L'intercepteur de QoreDB est livré avec six règles intégrées qui ciblent les destructions en production. Elles sont activées par défaut ; gardez-les activées. Le coût est pratiquement nul (une boîte de dialogue de confirmation que vous passez 99 % du temps, un blocage strict sur les 1 % qui seraient un désastre).
+
+Consultez [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour la liste complète.
+
+### Ajoutez des règles personnalisées pour votre environnement
+
+Si votre domaine présente des dangers spécifiques (une table particulière qui ne doit jamais être tronquée, une colonne particulière dont les valeurs ne font qu'être ajoutées), encodez cela comme une [règle de sécurité personnalisée](/docs/security/sql-safety-validation#couche-3-regles-de-securite-personnalisees-pro). La règle personnalisée se déclenche avant l'exécution de la requête, ce qui est exactement le moment où vous voulez qu'on vous le rappelle.
+
+### Adaptez les limites de gouvernance à votre machine
+
+Les trois limites de gouvernance (durée maximale de la requête, nombre maximal de lignes de résultat, requêtes simultanées maximales) protègent à la fois le client et le serveur contre les accidents. Sur un ordinateur portable avec une RAM limitée, définissez `max_result_rows` sur une valeur comme `100000`. Un `SELECT *` sur une table d'un million de lignes sera tronqué plutôt que de faire planter le client.
+
+## Audit
+
+### Utilisez le journal d'audit
+
+Chaque requête exécutée est enregistrée avec son horodatage, l'environnement, le succès/échec, le statut bloqué par une règle, et la durée. Le niveau Core conserve les 50 dernières entrées ; le niveau Pro est illimité avec des filtres et une exportation JSON.
+
+Pour l'examen d'un incident ou la conformité, c'est votre trace. Ouvrez le journal d'audit périodiquement juste pour voir à quoi ressemblait le travail de la journée. Les modèles deviennent visibles.
+
+### Anonymisez l'historique sensible
+
+Si vos requêtes contiennent régulièrement des littéraux avec des secrets ou des PII, basculez le paramètre de [rétention de l'historique](/docs/querying/query-history#anonymisation-redaction-et-confidentialite) sur **Expurgé** (Redacted) ou **Désactivé** (Off). L'anonymisation normalise les chaînes et les littéraux numériques en espaces réservés avant la persistance. "Désactivé" ignore complètement la persistance.
+
+C'est un paramètre distinct du journal d'audit ; les deux peuvent être ajustés.
+
+## Ce que QoreDB ne fait *pas*
+
+Pour être honnête quant à la limite :
+
+- **Application côté serveur** : les règles de sécurité de QoreDB vivent sur le client. Quiconque se connectant via `psql`, `mongosh` ou un autre outil les contourne.
+- **Restrictions réseau** : QoreDB n'ouvre ni ne restreint de ports. Votre pare-feu et votre VPN restent vos contrôles réseau.
+- **Gestion des accès utilisateurs** : il n'y a pas de concept de "comptes utilisateurs" à l'intérieur de QoreDB. La session utilisateur du système d'exploitation et le rôle de la base de données sont vos couches d'autorisation.
+- **Sauvegardes** : QoreDB ne sauvegarde pas vos bases de données. Utilisez les outils de sauvegarde de votre fournisseur.
+
+Le bon modèle mental : QoreDB rend le flux de travail quotidien d'un développeur plus sûr grâce à des invites superposées et une interface utilisateur prudente ; la base de données, le système d'exploitation et votre réseau restent le véritable périmètre de sécurité.
+
+## Où aller ensuite
+
+- [Environnements](/docs/connections/environments) pour définir la base par connexion
+- [Cryptage du coffre-fort](/docs/security/vault-encryption) pour la protection des informations d'identification
+- [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour le détecteur de sécurité et l'intercepteur
+- [Mode Sandbox](/docs/security/sandbox-mode) pour les flux de travail "réviser avant d'appliquer"

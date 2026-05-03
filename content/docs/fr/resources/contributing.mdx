@@ -1,21 +1,103 @@
 ---
 title: Contribuer
-description: Comment contribuer à QoreDB.
+description: Comment contribuer à QoreDB. Configuration locale, processus de demande d'extraction (Pull Request), convention d'en-tête SPDX et où demander des conseils.
 premium: false
 ---
 
 # Contribuer
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB est open source et les contributions sont les bienvenues. Le dépôt se trouve sur [github.com/raphplt/QoreDB](https://github.com/raphplt/QoreDB), et des PRs (Pull Requests) arrivent régulièrement de l'extérieur de l'équipe principale.
 
-## Aperçu
+## Prérequis
 
-Comment contribuer à QoreDB.
+Vous avez besoin d'un environnement de développement fonctionnel avec :
 
-## À venir
+- **Rust** : dernière chaîne d'outils stable (installez via [rustup](https://rustup.rs)).
+- **Node.js 18+** avec **pnpm** (le projet utilise pnpm, pas npm ou yarn).
+- **Docker** : utilisé par la suite de tests pour lancer des instances locales de PostgreSQL, MySQL, MongoDB et le reste. Les tests peuvent être exécutés sélectivement sans Docker si vous ne touchez qu'à du code non lié.
+- Les [dépendances système Tauri](https://tauri.app/start/prerequisites/) pour votre plate-forme (généralement quelques paquets GTK et WebKit sous Linux, aucune configuration supplémentaire sous macOS/Windows).
 
-Une fois finalisée, cette page couvrira :
+## Configuration locale
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+```bash
+git clone https://github.com/raphplt/QoreDB.git
+cd QoreDB
+pnpm install
+pnpm tauri dev      # mode développement avec rechargement à chaud
+```
+
+La première compilation prend quelques minutes (Rust compile de nombreux crates). Les exécutions suivantes sont rapides.
+
+Pour démarrer les bases de données de développement pour les tests :
+
+```bash
+docker-compose up -d
+```
+
+## Exécuter les tests
+
+```bash
+cargo test          # Tests du backend Rust
+pnpm test           # Tests du frontend
+pnpm lint           # Vérification du code (Linting)
+pnpm format:check   # Vérification du formatage (utilisez format:write pour corriger)
+```
+
+Exécutez les quatre avant d'ouvrir une PR.
+
+## Processus de demande d'extraction (Pull Request)
+
+1. **Bifurquer (Fork)** le dépôt sur GitHub.
+2. **Créer une branche de fonctionnalité** à partir de `main` (par exemple `feat/postgres-array-support`).
+3. **Apporter vos modifications** avec des commits ciblés. Les préfixes de commits conventionnels (`feat:`, `fix:`, `refactor:`, etc.) sont appréciés mais pas obligatoires.
+4. **Ajouter ou mettre à jour des tests** pour les modifications de comportement.
+5. **Exécuter lint et test** localement.
+6. **Ouvrir la PR** avec une description claire : ce qui a changé, pourquoi, et comment vérifier.
+
+Les petites PRs sont intégrées plus rapidement que les PRs monolithiques. Si vous n'êtes pas sûr de la portée, ouvrez d'abord une PR brouillon (draft) ou un ticket de discussion.
+
+## En-têtes de licence SPDX
+
+Chaque fichier source (`*.ts`, `*.tsx`, `*.rs`) doit commencer par un en-tête SPDX déclarant sa licence :
+
+```ts
+// SPDX-License-Identifier: Apache-2.0
+```
+
+Ou, pour le petit ensemble de fichiers du niveau Premium :
+
+```ts
+// SPDX-License-Identifier: BUSL-1.1
+```
+
+Le niveau Premium est documenté en détail sur la page [Licence](/docs/resources/license). La plupart des contributions concernent le cœur du projet (Core, Apache-2.0) ; si vous ajoutez un fichier, mettez Apache par défaut, à moins que vous n'ayez une raison de faire autrement.
+
+## Style de code
+
+- **Rust** : `cargo fmt` pour le formatage, `cargo clippy` pour les vérifications de syntaxe (lints). Les deux doivent passer proprement.
+- **TypeScript / React** : Biome gère le formatage et le linting (`pnpm format:write`, `pnpm lint:fix`).
+- **Pas de nouveaux commentaires** à moins qu'ils n'expliquent *pourquoi*, et non *quoi*. Le code lui-même doit expliquer *quoi* ; les commentaires servent pour le contexte qui n'est pas évident.
+
+## Documentation
+
+Si votre modification ajoute une fonctionnalité ou modifie un comportement existant :
+
+- Mettez à jour la page correspondante dans `doc/` au sein du dépôt QoreDB (documentation destinée aux développeurs).
+- Mettez à jour la documentation utilisateur sur [github.com/raphplt/QoreDB-showcase](https://github.com/raphplt/QoreDB-showcase) si un comportement destiné aux utilisateurs change (la documentation que vous lisez en ce moment).
+- Mettez à jour le fichier `README.md` si la nouvelle fonctionnalité est suffisamment importante pour y figurer.
+
+## Où poser des questions
+
+- **Rapports de bugs et demandes de fonctionnalités** : [GitHub Issues](https://github.com/raphplt/QoreDB/issues).
+- **Discussion** : [Discord](https://discord.gg/Yr6P3wuZDt) pour les conversations de conception et les questions rapides.
+- **Contact direct** : voir les informations du mainteneur dans le fichier README du dépôt pour l'email.
+
+## Code de conduite
+
+Le projet est livré avec un `CODE_OF_CONDUCT.md`. La version courte : soyez respectueux, présumez de la bonne foi, concentrez-vous sur le travail, et le reste suivra. Les problèmes de conduite sont gérés par le mainteneur.
+
+## Où aller ensuite
+
+- [Licence](/docs/resources/license) pour différencier ce qui est Core (noyau) vs Premium et la convention SPDX
+- [Feuille de route](/docs/resources/roadmap) pour trouver une fonctionnalité à prendre en charge
+- [Modèle Open Core](/docs/introduction/open-core-model) pour les raisons du choix de licence
