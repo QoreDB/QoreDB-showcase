@@ -28,6 +28,9 @@ export function Screenshot({
   height = 1000,
 }: Props) {
   if (!src) {
+    if (process.env.NODE_ENV === "production") {
+      return null;
+    }
     return (
       <figure className="not-prose my-8">
         <div className="flex items-center justify-center rounded-xl border-2 border-dashed border-(--q-accent)/40 bg-(--q-accent-soft)/30 px-6 py-10">
