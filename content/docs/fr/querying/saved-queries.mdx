@@ -1,21 +1,96 @@
 ---
-title: Requêtes sauvegardées
-description: Marquez et réutilisez vos requêtes.
+title: Requêtes enregistrées
+description: La bibliothèque de requêtes QoreDB. Enregistrez, organisez et réutilisez des requêtes SQL et Mongo avec des dossiers, des tags et des favoris.
 premium: false
 ---
 
-# Requêtes sauvegardées
+# Requêtes enregistrées
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+La **bibliothèque de requêtes** (query library) est le stockage durable de QoreDB pour les requêtes que vous souhaitez conserver. Contrairement à l'[historique](/docs/querying/query-history), qui est à court terme et limité, la bibliothèque est destinée aux requêtes sur lesquelles vous reviendrez : une requête de tableau de bord sur l'état du parc, un modèle "ajouter un nouveau locataire" (tenant), ou une agrégation complexe que vous avez finalement réussie.
 
-## Aperçu
+## Enregistrer une requête
 
-Marquez et réutilisez vos requêtes.
+À partir de n'importe quel onglet de requête, l'action d'enregistrement stocke le texte actuel dans la bibliothèque. Vous pouvez lui donner un nom, choisir un dossier et ajouter des tags (étiquettes) immédiatement, ou simplement l'enregistrer sous un nom générique et l'organiser plus tard.
 
-## À venir
+Les requêtes enregistrées sont limitées à l'**espace de travail actif**, comme l'historique.
 
-Une fois finalisée, cette page couvrira :
+## Ouvrir la bibliothèque
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+La bibliothèque s'ouvre depuis :
+
+- Le raccourci clavier <KeyboardShortcut shortcut="Cmd+Shift+L" />.
+- La **palette de commandes** (<KeyboardShortcut shortcut="Cmd+K" />, puis recherchez "library").
+- Un bouton dans la barre d'outils de l'éditeur.
+
+La bibliothèque se présente sous forme de modale avec trois vues : **Toutes** (All), **Favoris** (Favorites) et **Dossiers** (Folders). Une zone de recherche en haut permet de filtrer par nom, texte de requête ou tag.
+
+## Dossiers
+
+Les dossiers regroupent des requêtes connexes. La liste des dossiers est **plate** : un dossier est une simple étiquette sans parent, sans imbrication. Cela maintient un modèle simple et une interface rapide.
+
+Vous pouvez :
+
+- **Créer** un dossier depuis la modale de la bibliothèque.
+- **Renommer** un dossier ; les requêtes existantes conservent leur affectation.
+- **Supprimer** un dossier ; ses requêtes sont soit déplacées vers "Non trié" (Unsorted), soit supprimées, selon votre choix à l'invite de confirmation.
+
+Il y a une limite stricte de **100 dossiers** par espace de travail.
+
+## Tags
+
+Chaque requête peut comporter jusqu'à **12 tags** (étiquettes), utiles pour une catégorisation transversale qui ne correspond pas à un seul dossier ("dashboard", "billing", "investigation", "draft", etc.). Les tags sont normalisés (mis en minuscules, expurgés des espaces et des doublons) lorsque vous les ajoutez.
+
+Cliquez sur un tag dans la bibliothèque pour filtrer la vue et afficher les requêtes qui le partagent.
+
+## Favoris
+
+Ajoutez une étoile à une requête pour la marquer comme favorite. Les favoris :
+
+- Sont mis en évidence dans la vue de la bibliothèque.
+- Peuvent être filtrés sous forme de vue distincte dans la modale.
+- Sont consultables depuis la palette de commandes globale.
+
+Les favoris sont liés à l'espace de travail.
+
+## Limites
+
+- **Éléments** : jusqu'à **300** requêtes par espace de travail.
+- **Dossiers** : jusqu'à **100** par espace de travail.
+- **Tags** : jusqu'à **12** par requête.
+
+Si vous atteignez la limite d'éléments, archivez (supprimez) les anciennes requêtes que vous n'utilisez plus. La bibliothèque est destinée aux requêtes que vous utilisez couramment, et non à un journal d'audit.
+
+## Stockage
+
+La bibliothèque réside dans le `localStorage` de votre navigateur, sous une clé liée à l'espace de travail actif.
+
+Pour les **espaces de travail basés sur des fichiers** (un espace de travail pointant sur un dossier du disque), QoreDB écrit également la bibliothèque dans un fichier JSON à l'intérieur du dossier de l'espace de travail, avec un délai d'anti-rebond (debounce) après les modifications. Cela signifie que :
+
+- La bibliothèque suit le dossier de l'espace de travail, vous pouvez donc la synchroniser via git, Dropbox, iCloud, etc.
+- Deux machines pointant vers le même dossier d'espace de travail partagent la même bibliothèque (tant que vous ne modifiez pas sur les deux en même temps et ne perturbez pas la synchronisation).
+
+Pour l'**espace de travail par défaut** (aucun dossier choisi), la bibliothèque vit uniquement dans le `localStorage` et reste sur la machine actuelle.
+
+## Import et export
+
+Les données de la bibliothèque peuvent être exportées au format JSON, ce qui vous permet de :
+
+- Sauvegarder la bibliothèque en dehors de QoreDB.
+- La déplacer vers une autre machine.
+- Partager un ensemble sélectionné de requêtes avec un collègue ou un client.
+
+Le format d'export est versionné (`QueryLibraryExportV1`) et contient le tableau de dossiers ainsi que le tableau d'éléments. L'import remplace ou fusionne avec la bibliothèque actuelle, selon l'option choisie.
+
+Vous pouvez également choisir d'**anonymiser les valeurs littérales** (redact literals) lors de l'export, ce qui remplace les valeurs dans les chaînes et les littéraux numériques par des espaces réservés (placeholders). Utile lors du partage de requêtes qui contenaient à l'origine des informations d'identification ou des PII.
+
+## Réutiliser une requête enregistrée
+
+Cliquez sur une entrée dans la bibliothèque pour la charger dans un nouvel onglet d'éditeur sur la connexion actuelle de l'espace de travail (ou sur une connexion spécifique si l'entrée a été épinglée sur l'une d'entre elles). De là, modifiez et exécutez comme d'habitude.
+
+Si vous paramétrez fréquemment une requête (différents ID, différentes plages de dates), envisagez plutôt de la transformer en un **notebook**. Les notebooks prennent en charge les paramètres typés et peuvent exécuter des cellules en séquence, ce qui est plus proche de ce que vous souhaitez réellement pour un modèle paramétré.
+
+## Où aller ensuite
+
+- [Historique des requêtes](/docs/querying/query-history) : l'équivalent automatique à court terme
+- [Éditeur et autocomplétion](/docs/querying/editor) : écrire les requêtes que vous allez enregistrer
+- [Exécuter des requêtes](/docs/querying/running-queries) : flux d'exécution

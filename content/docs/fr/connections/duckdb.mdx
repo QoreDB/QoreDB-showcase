@@ -1,21 +1,85 @@
 ---
 title: DuckDB
-description: Se connecter à DuckDB.
+description: Connectez QoreDB à DuckDB, la base de données analytique in-process. Basée sur des fichiers, en mémoire, ou utilisée comme moteur derrière la fédération inter-bases de données.
 premium: false
 ---
 
 # DuckDB
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+DuckDB est une base de données analytique in-process, optimisée pour les agrégations rapides, les jointures et les lectures sur des données en colonnes. Elle n'a pas de serveur : vous pointez QoreDB vers un fichier (ou utilisez une base de données en mémoire) et vous êtes connecté.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à DuckDB.
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **DuckDB**, et parcourez pour trouver un fichier ou collez un chemin.
 
-## À venir
+Le pilote accepte également un chemin `:memory:` pour une base de données éphémère en mémoire.
 
-Une fois finalisée, cette page couvrira :
+## Champs de connexion
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+| Champ      | Requis | Remarques                                                                        |
+| ---------- | ------ | -------------------------------------------------------------------------------- |
+| **Chemin** | Oui    | Chemin absolu ou relatif vers un fichier `.duckdb` ou `.db`. Ou `:memory:`.      |
+
+Comme pour SQLite, il n'y a pas d'hôte, de port, d'utilisateur ou de mot de passe. QoreDB **crée le fichier automatiquement** s'il n'existe pas ; la première écriture le persiste sur le disque.
+
+## Extensions de fichiers prises en charge
+
+Le pilote valide l'extension du fichier. Deux sont acceptées :
+
+- `.duckdb`
+- `.db`
+
+Si vous avez une extension différente, renommez le fichier ou utilisez `:memory:`.
+
+## Bases de données en mémoire
+
+Utilisez `:memory:` (ou `duckdb::memory:`) pour une base de données qui ne vit que dans la RAM et disparaît lorsque la connexion se ferme. Utile pour :
+
+- Requêtes exploratoires ponctuelles
+- Tester des requêtes analytiques avant de les persister
+- Charger un CSV ou un Parquet, faire quelques transformations, exporter le résultat
+
+## En quoi DuckDB excelle-t-il
+
+DuckDB est un moteur en colonnes conçu pour les charges de travail analytiques (OLAP). Il brille pour :
+
+- **Les agrégations et jointures** sur des millions de lignes sur une seule machine, sans serveur.
+- **La lecture directe de Parquet et CSV** avec SQL (`SELECT * FROM 'data.parquet'` fonctionne d'emblée).
+- **L'analytique embarquée** : vous pouvez livrer un fichier `.duckdb` avec une application de bureau et l'interroger localement.
+- **Les séries temporelles et les requêtes analytiques** qui seraient lentes sur des bases de données OLTP orientées lignes.
+
+Pour les charges de travail transactionnelles à haut débit (beaucoup d'insertions et de mises à jour d'une seule ligne), choisissez PostgreSQL ou un autre magasin orienté lignes.
+
+## Fédération inter-bases de données
+
+DuckDB est également le moteur derrière la **fédération inter-bases de données** de QoreDB : il peut s'attacher à des bases de données externes (Postgres, MySQL, SQLite et autres) et les interroger comme si elles étaient des tables DuckDB locales. Cela vous permet de joindre des données de sources hétérogènes à partir d'une seule requête SQL.
+
+La fonctionnalité de fédération est configurée au niveau de l'espace de travail plutôt que par connexion. Le pilote DuckDB lui-même sert à se connecter à un fichier DuckDB classique ou à une instance en mémoire ; le moteur de fédération réutilise DuckDB en interne mais n'est pas exposé via la même boîte de dialogue de connexion.
+
+<Callout type="tip">
+Pour plus de détails sur le flux de travail de fédération (quelles connexions activer, comment écrire des jointures inter-bases de données), consultez le panneau de fédération de votre espace de travail dans QoreDB. La fonctionnalité de jointure inter-bases de données est très utile lorsque vous avez régulièrement besoin de combiner des données de plusieurs sources sans un véritable pipeline ETL.
+</Callout>
+
+## Problèmes courants
+
+<Callout type="warning">
+**"unable to open database file"** : le chemin est incorrect, le répertoire n'existe pas ou le processus ne peut pas y écrire. Vérifiez le chemin ; n'oubliez pas que les chemins relatifs se résolvent par rapport au répertoire de travail de QoreDB, et non celui de votre shell.
+</Callout>
+
+<Callout type="warning">
+**"file is not a database"** : le fichier au chemin indiqué n'est pas un fichier DuckDB valide. Soit il a été créé par un autre outil, soit il s'agit d'un format différent (un fichier sqlite avec l'extension `.db`, par exemple). Ouvrez-le avec la CLI `duckdb` pour confirmer.
+</Callout>
+
+<Callout type="warning">
+**"unsupported file extension"** : seuls `.duckdb` et `.db` sont acceptés. Renommez ou créez un lien symbolique vers votre fichier avec l'une de ces extensions.
+</Callout>
+
+<Callout type="tip">
+DuckDB possède son propre dialecte SQL, très proche de PostgreSQL avec quelques différences (fonctions de fenêtrage, syntaxe EXCLUDE, etc.). En cas de doute, consultez la [référence SQL de DuckDB](https://duckdb.org/docs/sql/introduction).
+</Callout>
+
+## Où aller ensuite
+
+- [SQLite](/docs/connections/sqlite) pour l'équivalent orienté lignes sur un seul fichier
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour l'éditeur SQL
+- [Référence : URLs de connexion](/docs/reference/connection-urls) pour la grammaire complète des URI

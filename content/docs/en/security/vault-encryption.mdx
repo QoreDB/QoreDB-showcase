@@ -1,21 +1,95 @@
 ---
 title: Vault encryption
-description: How credentials are encrypted at rest.
+description: How QoreDB protects connection credentials and AI API keys with the OS keychain plus an optional Argon2-hashed master password.
 premium: false
 ---
 
 # Vault encryption
 
-This page is a placeholder. Real content is being written.
+The QoreDB **vault** is where every secret lives: database passwords, SSH key passphrases, proxy passwords, and AI provider API keys. This page covers what the vault actually does, how it stores secrets, and what you can rely on it for.
 
-## Overview
+## Two layers
 
-How credentials are encrypted at rest.
+The vault has two layers:
 
-## What's next
+1. **OS keychain backing**, used for every secret. This is always on, you can't disable it. Secrets never sit on disk in plain text.
+2. **App lock with master password**, optional. When enabled, QoreDB hashes the master password with Argon2 and refuses to unlock the vault on startup until you type it.
 
-Once finalized, this page will cover:
+You can use the vault with just the first layer (good default) or with both (recommended for shared machines or sensitive work).
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+## Layer 1: OS keychain backing
+
+QoreDB stores secrets in your operating system's native credential store, through the cross-platform `keyring` library:
+
+- **macOS**: Apple Keychain.
+- **Windows**: Credential Manager.
+- **Linux**: Secret Service API (GNOME Keyring, KWallet, or any compatible service).
+
+Each saved connection's credentials become one entry in the keychain. The same backend stores AI provider API keys (under a separate service entry).
+
+Practical consequences:
+
+- Secrets are protected by the OS user's session. If your OS user is locked, the keychain is locked.
+- They never appear in the connection manifest on disk; the manifest contains only host, port, user, database, environment, etc.
+- Backup tools that copy QoreDB's files don't take the secrets along; they live in the OS keychain only.
+- Other tools running under the same OS user can, in principle, access these entries through the same keyring API. The OS-level isolation is what protects them, not QoreDB.
+
+## Layer 2: App lock with master password
+
+The app lock is opt-in. When you enable it, QoreDB asks you to set a **master password**. From that point on:
+
+- On every QoreDB startup, you're prompted for the master password before the vault unlocks.
+- The password is **never stored in plain text or recoverable form**. QoreDB hashes it with **Argon2** (a memory-hard function designed for password hashing) and stores only the hash, in the same keychain as the rest.
+- Wrong password attempts return an authentication error; the vault stays locked until the right password is entered.
+
+While the vault is locked, QoreDB UI works (you see the saved connection list, the workspace structure) but **no connection can be opened**, and no AI request can be sent. Both flows refuse to operate without the unlocked secrets.
+
+### Removing or changing the master password
+
+The master password can be removed (back to "no master password" mode) or changed by entering the current one and choosing the operation in the vault settings. There is no one-click reset and **no recovery flow** if the password is lost.
+
+### What if you forget the master password
+
+Honest answer: there is no recovery path. The Argon2 hash is one-way; QoreDB cannot derive the password from the hash, and there is no escrow.
+
+If you forget the master password, your options are:
+
+- **Reset the vault**: this deletes every stored secret. Connection metadata in the manifest survives (host, user, environment, etc.); you'll have to re-enter every password on next use.
+- **If you have access to the OS user's keychain through the OS itself** (Keychain Access on macOS, Credential Manager on Windows, etc.), you can read individual secrets from there directly. The master password layer is QoreDB's; the keychain entries themselves are still subject to OS-level access controls.
+
+This is by design: secrets in QoreDB are as recoverable as secrets in your OS keychain, and the master password is a layer above that.
+
+## What gets stored, exactly
+
+For each saved connection:
+
+- **In the manifest** (plain JSON in the workspace folder): connection name, host, port, user, database, SSL options, environment tag, SSH host/port/user, key file path.
+- **In the keychain**: database password, SSH password (if any), SSH key passphrase (if any), proxy password (if any).
+
+For AI providers:
+
+- **In the keychain**: provider API key (one entry per provider, under a `qoredb_ai` service).
+- **In QoreDB settings**: provider name and selected model.
+
+For the master password (when enabled):
+
+- **In the keychain**: Argon2 hash, with a randomly generated salt.
+
+Nothing else encrypts on QoreDB's side; the OS keychain is the encryption-at-rest mechanism for layer 1, and Argon2 hashing is the protection mechanism for the master password.
+
+## What the vault does not do
+
+To stay honest about the boundary:
+
+- **No automatic lock after inactivity**. Once unlocked, the vault stays unlocked until you quit QoreDB (or, if you have an OS-level keychain timeout configured, until your OS locks the keychain).
+- **No password recovery / seed phrase / backup codes**. If you lose the master password and don't have OS-level keychain access, the secrets are gone.
+- **No protection against an attacker with access to your unlocked OS user session**. If they can run any process as you, they can ask the keychain for the entries the same way QoreDB does.
+- **No client-side encryption beyond what the OS provides**. The vault is not a "Bitwarden-grade" zero-knowledge service; it's a thin wrapper over the OS keychain plus an Argon2 master-password gate.
+
+For threat models that need stronger guarantees (you don't trust the OS user session, you need an external HSM, you want offline backups of your secrets), use a dedicated password manager and copy credentials in on demand, instead of relying on the QoreDB vault.
+
+## Where to go next
+
+- [Vault and profiles](/docs/connections/vault-and-profiles) for the user-facing vault interactions
+- [Sandbox mode](/docs/security/sandbox-mode) for safe data edits
+- [SQL safety validation](/docs/security/sql-safety-validation) for query-level guardrails

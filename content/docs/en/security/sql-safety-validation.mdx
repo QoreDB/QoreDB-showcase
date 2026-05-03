@@ -1,21 +1,136 @@
 ---
 title: SQL safety validation
-description: Catch destructive statements before they run.
+description: How QoreDB inspects every query before sending it. Pattern detection, the interceptor's built-in rules, audit logging, and governance limits.
 premium: false
 ---
 
 # SQL safety validation
 
-This page is a placeholder. Real content is being written.
+QoreDB inspects every query before it leaves your machine. The goal isn't to replace database-level permissions (that's still your real safety net), but to catch obvious mistakes before they become outages, and to surface a confirmation dialog when the cost of a wrong run is high. This page walks through the layers of validation, from the simple pattern detector to the configurable interceptor.
 
-## Overview
+## Layer 1: the dangerous-query detector
 
-Catch destructive statements before they run.
+Every query is run through a pattern detector before execution. The detector flags two categories.
 
-## What's next
+### Mutations
 
-Once finalized, this page will cover:
+A query is a **mutation** if it starts with one of these keywords (case-insensitive):
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+```
+INSERT, UPDATE, DELETE, DROP, TRUNCATE, ALTER, CREATE, REPLACE,
+MERGE, GRANT, REVOKE, CALL, EXEC, EXECUTE, COPY
+```
+
+Mutations are subject to the [read-only flag](/docs/connections/environments#environment-vs-read-only): if the connection is marked read-only, the mutation is rejected before it leaves the client.
+
+### Dangerous queries
+
+Dangerous queries are a stricter subset. The detector flags:
+
+- `DROP TABLE`, `DROP DATABASE`, `DROP SCHEMA`, `DROP INDEX`, `DROP VIEW`, `DROP FUNCTION`, `DROP TRIGGER`
+- `TRUNCATE …`
+- `DELETE FROM …` **without** a `WHERE` clause
+- `UPDATE …` **without** a `WHERE` clause
+- `ALTER TABLE … DROP …`
+
+A `DELETE … WHERE id = 1` is a mutation but **not** dangerous (the `WHERE` saves it). A `DELETE FROM users;` is both.
+
+Against a `production` connection, dangerous queries open a typed-confirmation dialog before execution. Against staging or development, they run without a prompt. `DROP DATABASE` is the one exception: it always requires typing the database name regardless of the environment tag.
+
+### MongoDB and Redis
+
+The same approach applies to other engines:
+
+- **MongoDB**: `dropDatabase`, `drop`, `deleteMany` without filter, `bulkWrite`, etc., are flagged as mutations or dangerous depending on shape.
+- **Redis**: `FLUSHALL` and `FLUSHDB` are dangerous; `SET`, `DEL`, `HSET`, `LPUSH`, `RPUSH`, `SADD`, `ZADD`, `EXPIRE`, `RENAME`, `INCR`, `DECR` are mutations.
+
+## Layer 2: the interceptor's built-in rules
+
+Beyond the simple detector, QoreDB ships an **interceptor** that runs query-by-query. The interceptor has a set of built-in rules that key off the connection's [environment tag](/docs/connections/environments). Each rule has an action: `block`, `warn`, or `require_confirmation`.
+
+| Rule ID                              | Action                | Triggers on                                          |
+| ------------------------------------ | --------------------- | ---------------------------------------------------- |
+| `builtin-no-drop-production`         | block                 | `DROP …` on a `production` connection                |
+| `builtin-no-truncate-production`     | block                 | `TRUNCATE …` on a `production` connection            |
+| `builtin-confirm-delete-production`  | require_confirmation  | `DELETE …` on a `production` connection              |
+| `builtin-confirm-update-no-where`    | require_confirmation  | `UPDATE …` without `WHERE` on production or staging  |
+| `builtin-confirm-delete-no-where`    | require_confirmation  | `DELETE …` without `WHERE` on production or staging  |
+| `builtin-warn-alter-production`      | warn                  | `ALTER …` on a `production` connection               |
+
+These rules can be individually enabled or disabled in **Settings → Security → Interceptor**. They are on by default.
+
+Note the difference between actions:
+
+- **block**: the query is refused outright, with an explanation of which rule blocked it.
+- **require_confirmation**: a confirmation dialog appears; you proceed only after typing the target name.
+- **warn**: the query runs, but a warning is logged in the audit trail and (depending on settings) shown as a notification.
+
+## Layer 3: custom safety rules (Pro)
+
+<Callout type="info">
+Custom safety rules are part of the QoreDB Pro tier.
+</Callout>
+
+In addition to the built-in set, Pro users can define **custom safety rules** with their own pattern (literal or regex) and action. Common uses:
+
+- **Block all writes against the `production` connection on weekends**, with a regex matching mutation keywords plus a time-of-day condition.
+- **Require confirmation before `UPDATE accounts SET balance …`**, with a tighter regex than the built-ins.
+- **Warn on `SELECT … *` to encourage explicit column lists** in code reviews.
+
+Rules are managed from the interceptor settings. Each rule has:
+
+- A **pattern** (literal substring or regex).
+- A list of **environments** it applies to (any combination of development, staging, production).
+- An **action** (block, warn, require_confirmation).
+- An **enabled** flag.
+
+## Layer 4: audit logging
+
+Every executed query is recorded in QoreDB's **audit log**, on the local machine. Each entry contains:
+
+- A unique entry ID.
+- The full **query text**.
+- The **session ID** and **driver ID**.
+- The **environment tag** of the connection at execution time.
+- The **operation type** (mutation, read, etc.).
+- **Success** flag and the **error message** if it failed.
+- **Execution time** in milliseconds and **row count** when applicable.
+- A **blocked** flag and **safety rule** ID if the interceptor stopped or warned on the query.
+- A timestamp.
+
+The audit log is persisted locally; nothing leaves your machine.
+
+| Tier  | Audit log retention                                                  |
+| ----- | -------------------------------------------------------------------- |
+| Core  | Last 50 entries per workspace. No filters.                           |
+| Pro   | Unlimited entries. Filter by environment, operation type, success, search. |
+
+The Pro tier also exposes export of the audit log as JSON for offline review or compliance archives.
+
+## Layer 5: governance limits
+
+Three optional ceilings that apply globally to a workspace:
+
+| Limit                       | Effect                                                   |
+| --------------------------- | -------------------------------------------------------- |
+| `max_query_duration_ms`     | A query running longer than this is cancelled.            |
+| `max_result_rows`           | Result sets larger than this are truncated client-side.   |
+| `max_concurrent_queries`    | More than this many queries running in parallel is blocked. |
+
+The limits are configured from the workspace settings. Useful when you want to bound how much damage a runaway `SELECT *` from a tired developer can do, or to keep memory usage predictable on a small client machine.
+
+## What this is *not*
+
+To stay honest about the boundary:
+
+- These layers are **client-side** in QoreDB. The database itself doesn't know about them; if someone bypasses QoreDB and connects with `psql` or `mongosh`, none of these rules apply.
+- The pattern detector is **heuristic**. A sufficiently exotic statement (an obfuscated `TRUNCATE`, a `DELETE` hidden inside a CTE) can slip through. The environment tag, a database role with limited privileges, and code review remain your real safety net.
+- **Built-in rules apply server-side, not via the database**. They live in the interceptor, on the same machine as the client. They protect against accidents, not malice.
+
+For threat models that need server-enforced guarantees, use a dedicated read-only role for risky users, set up `pg_hba.conf` (Postgres) or equivalent to restrict access, and keep the destructive grants on a small set of accounts.
+
+## Where to go next
+
+- [Environments](/docs/connections/environments) for the per-connection tag that drives most of the rules
+- [Best practices](/docs/security/best-practices) for combining environments, read-only, and roles
+- [Vault encryption](/docs/security/vault-encryption) for credential-level protections

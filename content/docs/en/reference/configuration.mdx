@@ -1,21 +1,124 @@
 ---
 title: Configuration
-description: Available settings and their effects.
+description: Where QoreDB stores its data, what each settings section controls, the env variables it recognizes, and how to reset.
 premium: false
 ---
 
 # Configuration
 
-This page is a placeholder. Real content is being written.
+QoreDB persists data in three places: the **OS keychain** for secrets, **app data files** on disk for everything else, and **`localStorage`** for a couple of UI preferences. This page lists what lives where, the settings sections that drive behavior, and the few escape hatches for reset and debugging.
 
-## Overview
+## Settings sections
 
-Available settings and their effects.
+Open settings with <KeyboardShortcut shortcut="Cmd+," />, from the title bar, or via the command palette. The sections:
 
-## What's next
+| Section       | What it controls                                                                          |
+| ------------- | ----------------------------------------------------------------------------------------- |
+| **General**   | Language, theme, appearance, tab grouping, version info.                                  |
+| **Editor**    | Editor and sandbox behavior, draft management.                                            |
+| **Security**  | Safety rules, production-environment confirmations, query interceptor.                    |
+| **Data**      | Query history retention, logs, backups, time-travel, exports and imports.                 |
+| **Shortcuts** | A searchable view of every keybinding.                                                    |
+| **License**   | License activation and tier information.                                                  |
+| **AI**        | AI provider configuration (OpenAI, Anthropic, Mistral, Google, DeepSeek, Ollama) with your own keys (BYOK). |
 
-Once finalized, this page will cover:
+## App data location
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+QoreDB stores most of its data under a per-user app folder. The exact path depends on the operating system.
+
+| OS         | Path                                                                |
+| ---------- | ------------------------------------------------------------------- |
+| **macOS**  | `~/Library/Application Support/com.qoredb.app/`                     |
+| **Windows**| `%APPDATA%\com.qoredb.app\`                                         |
+| **Linux**  | `~/.local/share/com.qoredb.app/`                                    |
+
+Inside that folder:
+
+```
+com.qoredb.app/
+├── interceptor/        Audit log and safety interceptor configuration
+├── virtual_relations/  Virtual relation declarations per connection
+├── share/              Encrypted data for shareable connections
+└── time-travel/        Changelog data for the time-travel feature
+```
+
+Workspace data (connections, saved queries, history) lives in the workspace folder you pick, not in the app data directory. The default workspace stores its files there too.
+
+## OS keychain
+
+Secrets never live in the app data folder; they're stored in the **operating system's native keyring** through the `keyring` library:
+
+- **macOS**: Keychain Access.
+- **Windows**: Credential Manager.
+- **Linux**: Secret Service (GNOME Keyring, KWallet, or any compatible service).
+
+The entries QoreDB writes:
+
+- Database connection passwords, SSH passwords, SSH key passphrases, proxy passwords (one entry per saved connection).
+- AI provider API keys (one entry per provider, under a `qoredb_ai` service).
+- The Argon2 hash of the master password, when the app lock is enabled.
+
+Removing a connection or AI provider from QoreDB also removes the corresponding keychain entry.
+
+## localStorage
+
+A small set of UI preferences lives in `localStorage` rather than on disk:
+
+| Key                     | Value                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------- |
+| `qoredb-theme`          | One of `'light'`, `'dark'`, `'auto'`. Defaults to `'auto'` (follow the OS).     |
+| `qoredb_query_history`  | The query history per workspace, capped at 100 entries (workspace-suffixed).    |
+| `qoredb_query_library_v1` | The saved query library per workspace, capped at 300 items / 100 folders.    |
+| `qoredb_sandbox_state`  | The sandbox buffer per session.                                                 |
+| `qoredb_sandbox_backup` | Sandbox backup per connection.                                                  |
+
+Clearing `localStorage` resets these to defaults. Workspace-bound entries (history, library, sandbox) survive an app restart but not a `localStorage` wipe.
+
+## Environment variables
+
+QoreDB recognizes a small set of environment variables, mostly for platform quirks rather than user configuration.
+
+| Variable                          | Effect                                                                       |
+| --------------------------------- | ---------------------------------------------------------------------------- |
+| `WEBKIT_DISABLE_DMABUF_RENDERER`  | Linux/GTK: disables the DMA-BUF renderer when set. Useful on systems where the renderer has driver issues. |
+
+There is no `QOREDB_*` family of variables; configuration is done through the in-app settings.
+
+## Theme
+
+Three values are supported:
+
+- `light`: light theme.
+- `dark`: dark theme.
+- `auto`: follow the OS preference (default).
+
+Switch from **Settings → General**, or from the command palette (<KeyboardShortcut shortcut="Cmd+K" />, then "Toggle theme"). The choice persists in `localStorage` under `qoredb-theme`.
+
+## Language
+
+QoreDB ships with **9 languages** out of the box: English, French, Spanish, German, Portuguese (Brazilian), Russian, Japanese, Korean, and Chinese (Simplified).
+
+Switch from **Settings → General → Language**. The choice is persisted alongside other general preferences.
+
+## Resetting
+
+There is no in-app "reset everything" button. To wipe QoreDB's state manually:
+
+1. **Quit the app**.
+2. **Delete the app data folder** at the path listed above (macOS / Windows / Linux). This removes the interceptor config, virtual relations, share data, and time-travel data.
+3. **Clear `localStorage`** through the platform's developer tools (or by removing the app's WebView storage). This drops the theme preference, history, library, and sandbox state.
+4. **Remove keychain entries**. Open Keychain Access (macOS), Credential Manager (Windows) or your Secret Service UI (Linux) and remove entries with the `qoredb` service prefix. This deletes saved passwords, AI keys, and the master password hash.
+
+Alternatively, to reset only one workspace's data: remove the workspace folder. The keychain entries for that workspace's connections will still exist; remove them through the OS UI if you want a fully clean slate.
+
+## Backups
+
+QoreDB does not back up its own data automatically. To preserve a workspace, copy the workspace folder. To preserve secrets, use your OS's built-in keychain backup (macOS Time Machine includes Keychain, Windows includes Credential Manager in the user profile, Linux varies by Secret Service implementation).
+
+The default workspace stores its files inside the app data folder; if you only ever use the default workspace, backing up `com.qoredb.app/` covers it.
+
+## Where to go next
+
+- [Vault encryption](/docs/security/vault-encryption) for the keychain-backed secret model
+- [Query history](/docs/querying/query-history) for the redaction settings
+- [Saved queries](/docs/querying/saved-queries) for the library limits and storage

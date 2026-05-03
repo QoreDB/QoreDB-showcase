@@ -1,21 +1,131 @@
 ---
 title: PostgreSQL
-description: Se connecter à une base PostgreSQL (incl. Supabase, Neon, Timescale).
+description: Connectez QoreDB à PostgreSQL et à tout service compatible Postgres tel que Supabase, Neon, TimescaleDB ou CockroachDB.
 premium: false
 ---
 
 # PostgreSQL
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+PostgreSQL est le principal moteur pris en charge par QoreDB. Tout ce qui parle le protocole filaire (wire protocol) Postgres fonctionne via ce pilote, y compris les fournisseurs gérés (managed providers) comme Supabase, Neon, TimescaleDB et Aiven.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à une base PostgreSQL (incl. Supabase, Neon, Timescale).
+Le chemin le plus rapide est de coller une chaîne de connexion. QoreDB reconnaît les schémas `postgres://` et `postgresql://` et analyse automatiquement l'URL dans les champs du formulaire.
 
-## À venir
+```
+postgresql://UTILISATEUR:MOTDEPASSE@HOTE:5432/BASEDEDONNEES
+postgresql://UTILISATEUR:MOTDEPASSE@HOTE:5432/BASEDEDONNEES?sslmode=require
+```
 
-Une fois finalisée, cette page couvrira :
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **PostgreSQL**, collez l'URL, cliquez sur **Tester la connexion** (Test connection), puis sur **Enregistrer** (Save).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Champs de connexion
+
+Si vous préférez le formulaire, remplissez directement ces champs :
+
+| Champ              | Requis   | Remarques                                                                        |
+| ------------------ | -------- | -------------------------------------------------------------------------------- |
+| **Hôte** (Host)    | Oui      | Nom d'hôte ou adresse IP du serveur.                                             |
+| **Port**           | Oui      | Par défaut `5432`.                                                               |
+| **Utilisateur**    | Oui      | Utilisateur de la base de données.                                               |
+| **Mot de passe**   | Optionnel| Stocké chiffré dans le coffre-fort. Laissez vide si l'utilisateur n'a pas de mot de passe. |
+| **Base de données**| Optionnel| Nom de la base de données. Si omis, QoreDB se connecte à la base de données par défaut de l'utilisateur. |
+| **Mode SSL**       | Optionnel| L'un de `disable`, `prefer`, `require`, `verify-ca`, `verify-full`.              |
+
+Vous pouvez également développer la section **Tunnel SSH** (SSH tunnel) si votre base de données se trouve derrière un bastion. Voir [Tunneling SSH](/docs/connections/ssh-tunneling).
+
+## Modes SSL / TLS
+
+PostgreSQL prend en charge un ensemble granulaire de modes SSL ; QoreDB les expose tous.
+
+| Mode             | Chiffré ? | Certificat serveur vérifié ? | Nom d'hôte serveur vérifié ? |
+| ---------------- | --------- | ---------------------------- | ---------------------------- |
+| `disable`        | Non       | Non                          | Non                          |
+| `prefer`         | Si offert | Non                          | Non                          |
+| `require`        | Oui       | Non                          | Non                          |
+| `verify-ca`      | Oui       | Oui                          | Non                          |
+| `verify-full`    | Oui       | Oui                          | Oui                          |
+
+Pour le trafic de production sur l'Internet public, `verify-full` est la valeur par défaut sûre. `require` est suffisant sur un réseau privé dont vous faites confiance au routage. La plupart des fournisseurs gérés (Supabase, Neon, etc.) exigent au moins `require`.
+
+Vous pouvez passer le mode via le formulaire (menu déroulant du mode SSL) ou en tant que paramètre `?sslmode=…` dans l'URL.
+
+<Callout type="tip">
+Si vous voyez une erreur `connection requires SSL`, définissez le mode SSL sur `require` (ou plus élevé) et réessayez. La plupart des serveurs Postgres hébergés dans le cloud rejettent les connexions non chiffrées par défaut.
+</Callout>
+
+## Fournisseurs compatibles Postgres
+
+Tout ce qui parle le protocole filaire Postgres fonctionne via ce pilote. Il n'y a pas de configuration spéciale : collez le DSN que votre fournisseur vous donne et connectez-vous.
+
+### Supabase
+
+Utilisez la chaîne de connexion de **Paramètres du projet → Base de données → Chaîne de connexion** (Project settings → Database → Connection string). Choisissez la chaîne **Connexion directe** (Direct connection) pour les charges de travail de lecture/écriture, ou la chaîne **Mise en pool** (Pooled / PgBouncer) pour les charges de travail serverless ou à fort fan-out.
+
+```
+postgresql://postgres.PROJECT_REF:PASSWORD@aws-0-REGION.pooler.supabase.com:6543/postgres
+```
+
+`sslmode=require` est implicite. Supabase prend également en charge la liste d'autorisation IP (IP allowlisting) ; assurez-vous que votre machine est autorisée si vous l'avez activée.
+
+### Neon
+
+Récupérez la chaîne de connexion dans le tableau de bord Neon. Elle inclut le nom d'hôte du point de terminaison et un paramètre `?sslmode=require`.
+
+```
+postgresql://USER:PASSWORD@ep-xxxxx.REGION.aws.neon.tech/DATABASE?sslmode=require
+```
+
+Les points de terminaison Neon peuvent se réduire à zéro (scale to zero). La première requête après un démarrage à froid prend un peu plus de temps que d'habitude ; les requêtes suivantes sont rapides.
+
+### TimescaleDB et Timescale Cloud
+
+Identique à PostgreSQL. Les hypertables, les agrégations continues et les autres fonctionnalités de Timescale apparaissent comme des tables et des vues régulières dans le navigateur de schémas ; vous les interrogez avec du SQL standard.
+
+### CockroachDB
+
+CockroachDB est fourni avec son propre pilote dédié dans QoreDB (il a sa propre option de moteur), mais le format de connexion est le même :
+
+```
+postgresql://USER:PASSWORD@HOST:26257/DATABASE?sslmode=verify-full
+```
+
+Le port par défaut est `26257` et non `5432`.
+
+## Navigation dans les schémas
+
+Une fois connecté, développez la connexion dans la barre latérale pour parcourir l'arborescence :
+
+```
+Connexion → Base de données → Schéma → Tables / Vues / Routines / Déclencheurs
+```
+
+Le chemin de recherche (search path) par défaut suit le paramètre `search_path` de votre rôle. Si vous ne voyez pas vos tables, assurez-vous d'avoir ouvert la bonne base de données (chaque instance PG peut en contenir plusieurs) et que vous avez des privilèges sur le schéma.
+
+## Rôles et autorisations
+
+QoreDB utilise le rôle avec lequel vous vous connectez. Pièges courants :
+
+- **Rôle en lecture seule** : fonctionne bien pour `SELECT`, mais l'éditeur de données en ligne et l'éditeur DDL afficheront des erreurs d'autorisation lorsque vous essaierez de muter.
+- **Pas de CONNECT sur la base de données** : la connexion elle-même échoue. Vérifiez `GRANT CONNECT ON DATABASE …`.
+- **Schéma `public` par défaut supprimé dans PG 15+** : dans les nouveaux clusters PG 15, le schéma public est restreint. Demandez à votre DBA ou accordez explicitement `USAGE`/`CREATE` à votre rôle.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"FATAL: no pg_hba.conf entry for host …"** : le fichier `pg_hba.conf` du serveur n'autorise pas l'IP ou la méthode d'authentification de votre client. Éditez `pg_hba.conf` (généralement dans `/etc/postgresql/<version>/main/`), ajoutez une règle pour votre client et rechargez Postgres.
+</Callout>
+
+<Callout type="warning">
+**"SSL connection has been closed unexpectedly"** : généralement causé par des délais d'inactivité (idle timeouts) agressifs sur un équilibreur de charge ou PgBouncer en mode de pooling de transactions. Réglez le délai d'inactivité, passez au pooling de sessions, ou utilisez la chaîne de connexion directe de votre fournisseur.
+</Callout>
+
+<Callout type="warning">
+**"role 'postgres' does not exist"** : vous utilisez l'utilisateur `postgres` par défaut, mais le cluster a été provisionné avec un superutilisateur différent. Vérifiez la documentation de votre fournisseur pour connaître le véritable utilisateur par défaut (Supabase utilise `postgres` plus un suffixe limité au projet, par exemple).
+</Callout>
+
+## Où aller ensuite
+
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les bases de données derrière un bastion
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser de nombreuses connexions
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour commencer à écrire du SQL

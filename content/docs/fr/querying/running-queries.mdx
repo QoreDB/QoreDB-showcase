@@ -1,21 +1,100 @@
 ---
-title: Exécution des requêtes
-description: Exécuter, annuler et inspecter les requêtes.
+title: Exécuter des requêtes
+description: Comment exécuter des requêtes SQL ou Mongo dans QoreDB. Multi-instructions, sélection uniquement, transactions, annulation, et filet de sécurité pour les requêtes dangereuses.
 premium: false
 ---
 
-# Exécution des requêtes
+# Exécuter des requêtes
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB exécute une instruction, une sélection, ou une séquence d'instructions selon ce que vous avez dans l'éditeur et ce que vous avez sélectionné. Cette page détaille le flux d'exécution, les invites de sécurité et les contrôles de transaction.
 
-## Aperçu
+## Exécuter une requête
 
-Exécuter, annuler et inspecter les requêtes.
+Le raccourci unique <KeyboardShortcut shortcut="Cmd+Enter" /> exécute ce qui est le plus approprié pour votre curseur et votre sélection actuelle.
 
-## À venir
+- **Aucune sélection** : l'onglet entier est envoyé au serveur.
+- **Sélection active** : seul le texte sélectionné est envoyé.
 
-Une fois finalisée, cette page couvrira :
+Cela s'applique à la fois à l'éditeur SQL et à l'éditeur MongoDB. Il n'y a pas de raccourci "exécuter la sélection" séparé ; la sélection elle-même décide.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Multi-instructions
+
+Pour les connexions SQL, QoreDB divise l'entrée sur `;` (en tenant compte des chaînes de caractères et des commentaires) et exécute chaque instruction en séquence. Si une instruction échoue, les suivantes ne sont pas exécutées et l'erreur est affichée pour cette instruction.
+
+Chaque instruction obtient sa propre ligne dans le panneau de résultats, avec le temps d'exécution, le nombre de lignes, et l'erreur le cas échéant. Vous pouvez faire défiler entre elles ou cliquer sur l'onglet d'une instruction spécifique pour vous concentrer sur ses résultats.
+
+## Temps d'exécution
+
+Chaque requête exécutée rapporte deux temps :
+
+- **Temps total** : temps écoulé (wall-clock time) vu par le client, y compris l'aller-retour réseau et la sérialisation.
+- **Temps d'exécution** : temps passé sur le serveur (lorsque le pilote le renvoie).
+
+Les deux sont mesurés en millisecondes et affichés dans le panneau de résultats. Ils sont également conservés dans l'historique.
+
+## Annuler une requête
+
+Les requêtes longues peuvent être annulées. Cliquez sur le bouton **Annuler** (Cancel) pendant qu'une requête est en cours d'exécution. Le pilote envoie un signal d'annulation au serveur (le mécanisme sous-jacent dépend du pilote, par exemple `pg_cancel_backend` pour PostgreSQL).
+
+L'annulation est une tentative ("best-effort") : elle arrête une requête qui est encore en cours d'exécution, mais une requête qui a déjà renvoyé ses lignes ou qui est au milieu d'une écriture peut ne pas être interruptible.
+
+## Erreurs
+
+Les erreurs apparaissent à deux endroits :
+
+- **En ligne dans le panneau de résultats**, où la ligne de l'instruction en échec affiche le message d'erreur du serveur.
+- **Comme une notification (toast)** dans le coin inférieur droit, de sorte que l'erreur est difficile à manquer lorsque vous regardez ailleurs.
+
+Le message d'erreur provient tel quel du pilote de la base de données. Cliquez sur le message pour l'agrandir et obtenir le texte complet et (lorsque disponible) le code d'état SQL.
+
+## Transactions
+
+QoreDB prend en charge les transactions explicites via les commandes SQL standard :
+
+```sql
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+-- ou ROLLBACK; si quelque chose vous semble incorrect
+```
+
+Il n'y a pas de bouton bascule d'autocommit dans l'interface utilisateur ; les instructions que vous exécutez en dehors d'un `BEGIN` explicite sont validées (commit) individuellement selon les règles du pilote. Les transactions ont une portée par session, de sorte que d'autres onglets sur la même connexion partagent le même état transactionnel.
+
+<Callout type="tip">
+Pour les mises à jour multi-instructions qui doivent réussir ou échouer ensemble, enveloppez-les dans `BEGIN … COMMIT;` et exécutez-les comme une seule instruction. Si vous exécutez chaque instruction séparément, chaque commit est indépendant.
+</Callout>
+
+## Mode lecture seule
+
+Chaque connexion a un indicateur de **lecture seule** (read-only) dans ses paramètres. Lorsque cet indicateur est activé, QoreDB rejette les instructions de mutation (`INSERT`, `UPDATE`, `DELETE`, `DROP`, etc.) avant de les envoyer au serveur.
+
+Il s'agit d'une protection côté client, pas d'une permission côté serveur. Pour une garantie absolue, utilisez également un rôle de base de données avec des privilèges de lecture seule.
+
+## Confirmation de requête dangereuse
+
+Avant d'envoyer une instruction destructive, QoreDB vérifie les modèles qui ont un grand rayon d'action (blast radius) :
+
+- `DROP DATABASE …`
+- `DROP TABLE …`
+- `TRUNCATE …`
+- `DELETE FROM …` sans clause `WHERE`
+- `UPDATE …` sans clause `WHERE`
+
+Lorsqu'un tel modèle est détecté sur une connexion de **production**, une boîte de dialogue de confirmation bloque l'exécution et vous demande de taper le nom de la connexion ou de la table pour continuer. Sur staging ou development, la même requête s'exécute sans invite ; l'étiquette d'environnement est la barrière.
+
+Pour avoir une vue d'ensemble de la façon dont les environnements contrôlent ces invites (et la différence avec l'indicateur de lecture seule par connexion), consultez [Environnements](/docs/connections/environments).
+
+<Callout type="warning">
+Le détecteur est heuristique. Il repère les formes courantes (pas de `WHERE`, `DROP DATABASE`, etc.) mais une instruction suffisamment exotique peut passer à travers. L'étiquette d'environnement et un rôle de base de données avec des privilèges limités sont votre véritable filet de sécurité.
+</Callout>
+
+## Limites de gouvernance
+
+Certains espaces de travail appliquent des limites automatiques aux ensembles de résultats afin d'éviter que des requêtes accidentelles "SELECT * FROM enorme_table" ne saturent le client. Lorsqu'une telle limite est en vigueur, vous verrez une indication dans le panneau de résultats avec une option **Ignorer les limites** (Bypass limits) pour réexécuter la requête sans celles-ci (utile pour les exports).
+
+## Où aller ensuite
+
+- [Éditeur et autocomplétion](/docs/querying/editor) : fonctionnalités de l'éditeur et raccourcis
+- [Résultats et exports](/docs/querying/results-and-exports) : inspection et exportation des résultats
+- [Historique des requêtes](/docs/querying/query-history) : chaque requête que vous avez exécutée, consultable

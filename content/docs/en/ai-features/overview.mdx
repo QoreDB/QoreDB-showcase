@@ -1,21 +1,110 @@
 ---
 title: AI features overview
-description: AI-assisted querying, explanations and suggestions.
-premium: false
+description: AI-assisted querying in QoreDB. Six providers, your own keys, schema-aware prompts, and the same safety net as manual queries.
+premium: true
 ---
 
 # AI features overview
 
-This page is a placeholder. Real content is being written.
+<Callout type="info">
+The AI assistant is part of the QoreDB Pro tier.
+</Callout>
 
-## Overview
+QoreDB integrates an **AI assistant** that helps you write, understand and fix queries. It's **BYOK** (Bring Your Own Key): you provide your provider credentials, QoreDB stores them locally in your OS keychain, and prompts are sent directly from your machine to your chosen provider. **Nothing transits through QoreDB's servers.**
 
-AI-assisted querying, explanations and suggestions.
+## Supported providers
 
-## What's next
+You configure one or several providers from the AI settings panel.
 
-Once finalized, this page will cover:
+| Provider          | API key required? | Notes                                                  |
+| ----------------- | ----------------- | ------------------------------------------------------ |
+| **OpenAI**        | Yes               | GPT-4.1, GPT-4.1 Mini, o4-mini, o3-mini.               |
+| **Anthropic**     | Yes               | Claude Sonnet 4.6, Sonnet 4, Haiku 4.5.                |
+| **Mistral AI**    | Yes               | Mistral Large/Medium/Small, Codestral, Pixtral.        |
+| **Google Gemini** | Yes               | Gemini 2.5 Pro/Flash, Gemini 2.0 Flash.                |
+| **DeepSeek**      | Yes               | DeepSeek V3, DeepSeek R1.                              |
+| **Ollama**        | No                | Local models. Llama 3.3, Llama 3.1, Qwen 2.5 Coder.    |
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+You can install several at once and pick which one to use per request.
+
+## How keys are stored
+
+API keys are stored in your **operating system's native keyring** (Keychain on macOS, Credential Manager on Windows, Secret Service on Linux), under a dedicated service entry per provider. The same secure backend QoreDB uses for connection passwords.
+
+A few practical consequences:
+
+- Keys never touch the QoreDB project's storage on disk in plain text.
+- They stay on the local machine; sync tools that copy your QoreDB folder don't take the keys with them.
+- Removing a key from QoreDB also removes the keychain entry.
+
+## What the assistant can do
+
+Four actions are available, each backed by its own prompt and post-processing.
+
+### Generate a query
+
+Describe what you want in natural language; the assistant returns a query in the right dialect for the active connection (SQL for Postgres/MySQL/SQL Server/SQLite/CockroachDB/DuckDB, MQL for MongoDB, command syntax for Redis).
+
+The result streams as it's generated, so you see the query taking shape rather than waiting for a complete response.
+
+### Explain a result
+
+Run a query, then ask the assistant to explain what it does, what the result means, or why a value looks the way it does. Useful for picking up unfamiliar schemas or onboarding teammates.
+
+### Summarize the schema
+
+Point the assistant at a table or a database and get a human-readable summary: what each column likely represents, how tables relate to each other, and what kinds of questions the schema is built to answer.
+
+### Fix an error
+
+When a query fails, the assistant takes the query and the error message and proposes a corrected version. Streaming, like generation. Common patterns it handles well: typos in column names, missing joins, dialect-specific syntax mistakes.
+
+## Schema awareness
+
+Before sending your prompt to the provider, the assistant builds a context payload from the connection's current schema. It includes:
+
+- Up to **30 tables** (prioritizing the ones mentioned in your prompt).
+- For each table: column names, types, nullability, primary keys, foreign keys, indexes.
+- Any [virtual relations](/docs/schema/browser#foreign-keys-and-virtual-relations) you've declared.
+
+The context is built locally from the schema metadata QoreDB already has cached, so there's no extra round-trip to the database.
+
+## The safety net for generated queries
+
+Every query the assistant generates passes through the same **safety validation** as a query you typed yourself. That includes:
+
+- The dangerous-query detector (`DROP`, `TRUNCATE`, `DELETE`/`UPDATE` without `WHERE`, `ALTER … DROP …`).
+- The production-environment confirmation dialog if the connection is tagged `production`.
+- The interceptor's built-in safety rules.
+
+For MongoDB, the validator also looks for high-risk patterns like `dropDatabase`, `deleteMany` without filter, `bulkWrite`. For Redis, `FLUSHALL` and `FLUSHDB` are flagged as dangerous.
+
+This means an AI-generated `DELETE FROM users;` against a production connection still hits the same typed-confirmation prompt as if you had written it by hand. The assistant doesn't get a free pass.
+
+For the full list of safety patterns and what they trigger, see [SQL safety validation](/docs/security/sql-safety-validation).
+
+## Configuring the assistant
+
+Open **Settings → AI** to manage providers:
+
+- **Add a key**: pick the provider, paste your API key, choose a default model, save.
+- **Test the key**: a button verifies the key against the provider's API.
+- **Remove a key**: deletes both the QoreDB-side configuration and the keychain entry.
+
+Per-request, you can override the model from the assistant panel itself. Useful when you want to use a cheaper or faster model for routine work and a more capable one for hard problems.
+
+## Privacy considerations
+
+Because prompts are sent to your chosen provider, the usual data-handling questions apply.
+
+- **What gets sent**: your prompt, the schema context (table and column names from the active connection, optionally a few sample rows depending on the action). No secrets, no row values from outside the active selection.
+- **Where it goes**: directly to the provider you picked. QoreDB's servers are not in the path.
+- **What gets retained**: depends on the provider's terms. OpenAI, Anthropic, Mistral, Google and DeepSeek each have different policies on retention and training-data use; check theirs. Ollama runs locally, so nothing leaves your machine.
+
+If you work against schemas where even column names are sensitive, prefer a local model (Ollama) or skip the assistant for those connections.
+
+## Where to go next
+
+- [SQL safety validation](/docs/security/sql-safety-validation) for the safety checks generated queries pass through
+- [Vault and profiles](/docs/connections/vault-and-profiles) for the keychain-backed storage
+- [Pricing](/pricing) to see what's included in Pro

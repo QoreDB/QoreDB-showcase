@@ -1,21 +1,103 @@
 ---
 title: SQL Server
-description: Se connecter à Microsoft SQL Server.
+description: Connectez QoreDB à Microsoft SQL Server avec l'authentification SQL ou l'authentification Windows (NTLM et intégrée).
 premium: false
 ---
 
 # SQL Server
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB se connecte à Microsoft SQL Server via le pilote Tiberius (une implémentation Rust native du protocole TDS). Les serveurs SQL modernes (Linux et Windows) et Azure SQL Database sont pris en charge.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à Microsoft SQL Server.
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **SQL Server**, et remplissez le formulaire. Contrairement aux pilotes SQL/Mongo, SQL Server n'a pas un seul schéma DSN canonique ; vous remplirez généralement les champs directement.
 
-## À venir
+## Champs de connexion
 
-Une fois finalisée, cette page couvrira :
+| Champ              | Requis   | Remarques                                                                              |
+| ------------------ | -------- | -------------------------------------------------------------------------------------- |
+| **Hôte** (Host)    | Oui      | Nom d'hôte ou adresse IP de l'instance SQL Server.                                     |
+| **Port**           | Oui      | Par défaut `1433`.                                                                     |
+| **Utilisateur**    | Cond.    | Requis pour l'authentification SQL. Pour l'authentification Windows intégrée, laissez vide. |
+| **Mot de passe**   | Cond.    | Requis pour l'authentification SQL et NTLM. Stocké chiffré dans le coffre-fort.        |
+| **Base de données**| Optionnel| Base de données initiale. Si omis, vous vous connecterez à la base de données par défaut de l'utilisateur. |
+| **SSL**            | Optionnel| S'il est activé, le chiffrement est `Required` (requis). Le certificat du serveur est approuvé par défaut. |
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Modes d'authentification
+
+QoreDB prend en charge trois modes d'authentification :
+
+### Authentification SQL (par défaut)
+
+Nom d'utilisateur et mot de passe standard pour une connexion SQL définie dans SQL Server. Fonctionne sur toutes les plateformes (macOS, Windows, Linux). C'est ce qu'exigent la plupart des fournisseurs de cloud (Azure SQL Database, RDS for SQL Server).
+
+```
+Utilisateur : app_user
+Mot de passe : ••••••••
+```
+
+### Windows NTLM
+
+Authentifiez-vous à l'aide d'un compte Windows, même à partir d'une machine non Windows. Le nom d'utilisateur peut prendre l'une ou l'autre forme :
+
+```
+DOMAINE\nom_utilisateur
+nom_utilisateur@domaine.exemple.com
+```
+
+Utilisez NTLM lorsque votre SQL Server n'accepte que les informations d'identification Windows et que vous vous connectez en dehors d'une session Windows (par exemple, depuis un Mac ou une machine Linux sur un réseau d'entreprise).
+
+### Authentification Windows intégrée (SSPI)
+
+Utilisez les informations d'identification de l'utilisateur Windows actuellement connecté. **Windows uniquement.** Aucun nom d'utilisateur ou mot de passe n'est nécessaire ; l'OS gère la négociation (handshake) de manière transparente. C'est le mode le plus convivial dans un environnement d'entreprise joint à un domaine.
+
+## SSL / chiffrement
+
+Le chiffrement de SQL Server est binaire dans QoreDB :
+
+- **SSL désactivé** : le chiffrement est désactivé.
+- **SSL activé** : le chiffrement est requis. Le certificat du serveur est approuvé automatiquement.
+
+Pour le trafic de production sur l'Internet public, laissez SSL activé. La plupart des déploiements SQL Server gérés dans le cloud appliquent le chiffrement côté serveur et rejettent les connexions non chiffrées.
+
+<Callout type="warning">
+QoreDB approuve actuellement le certificat du serveur par défaut lorsque SSL est activé. C'est suffisant pour les services gérés (Azure SQL Database, RDS) où le certificat est signé par une autorité de certification (CA) publique, et pour les connexions au sein d'un réseau privé. Si vous avez besoin d'une validation stricte des certificats contre une CA d'entreprise, soulevez la question sur le suivi des problèmes (issue tracker).
+</Callout>
+
+## Pool de connexions
+
+Chaque connexion SQL Server enregistrée alimente un pool allant jusqu'à 10 connexions TDS sous-jacentes, avec un délai d'attente de 15 secondes lors de l'acquisition de l'une d'entre elles. Cela vous permet d'exécuter plusieurs requêtes en parallèle à partir de la même session QoreDB sans vous reconnecter.
+
+## Navigation dans les schémas
+
+Une fois connecté, développez la connexion dans la barre latérale :
+
+```
+Connexion → Base de données → Schéma → Tables / Vues / Routines
+```
+
+SQL Server possède à la fois des bases de données (conteneurs de niveau supérieur) et des schémas (espaces de noms à l'intérieur d'une base de données). Le schéma par défaut pour un utilisateur est généralement `dbo`. Les tables d'autres schémas apparaissent sous leurs nœuds respectifs.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"Login failed for user 'X'"** : échec d'authentification SQL typique. Vérifiez que l'utilisateur existe, a accès à la base de données demandée (`USE …; SELECT 1`), et est activé (`SELECT name, is_disabled FROM sys.sql_logins WHERE name = 'X';`).
+</Callout>
+
+<Callout type="warning">
+**"Cannot open database 'X' requested by the login"** : les informations d'identification sont valides mais l'utilisateur n'a aucune autorisation sur la base de données. Accordez `CONNECT`, ou omettez la base de données pour vous connecter à celle par défaut de l'utilisateur.
+</Callout>
+
+<Callout type="warning">
+**Erreurs TLS ou de certificat sur un serveur SQL Server sur site** : le serveur a un certificat auto-signé et votre client le refuse. Avec SSL activé, QoreDB approuve le certificat par défaut ; si vous voyez toujours ceci, le certificat est peut-être expiré ou a une chaîne incorrecte. Vérifiez `SELECT * FROM sys.dm_server_audit_status` et la configuration TLS du serveur.
+</Callout>
+
+<Callout type="warning">
+**"named instance not supported"** : SQL Server peut être adressé via des instances nommées (par exemple `HOTE\SQLEXPRESS`) qui nécessitent des recherches du service browser. QoreDB se connecte directement via l'hôte et le port ; trouvez le port statique sur lequel votre instance nommée écoute et utilisez-le.
+</Callout>
+
+## Où aller ensuite
+
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les instances SQL Server derrière un bastion
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser les connexions par environnement
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour l'éditeur SQL

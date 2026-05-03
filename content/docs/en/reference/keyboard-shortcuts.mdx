@@ -1,21 +1,84 @@
 ---
 title: Keyboard shortcuts
-description: All keyboard shortcuts at a glance.
+description: Every keyboard shortcut in QoreDB, grouped by category, with the platform variant and the context it applies in.
 premium: false
 ---
 
 # Keyboard shortcuts
 
-This page is a placeholder. Real content is being written.
+QoreDB favors keyboard navigation. Most regulars never click in the sidebar; they live inside the command palette and a handful of shortcuts. This page is the complete cheatsheet.
 
-## Overview
+`Cmd` is the macOS modifier; on Windows and Linux, replace it with `Ctrl`.
 
-All keyboard shortcuts at a glance.
+## Global
 
-## What's next
+These shortcuts work everywhere in QoreDB.
 
-Once finalized, this page will cover:
+| Shortcut                                                  | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+K" />                     | Open the global search palette (commands, connections, history, library). |
+| <KeyboardShortcut shortcut="Cmd+," />                     | Open settings.                                           |
+| <KeyboardShortcut shortcut="Esc" />                       | Close the active overlay (modal, palette, dialog).       |
+| <KeyboardShortcut shortcut="?" />                         | Show the keyboard shortcut cheatsheet.                   |
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+The command palette (<KeyboardShortcut shortcut="Cmd+K" />) is also a fast path to any other shortcut: search the command and run it without remembering the binding.
+
+## Connections
+
+| Shortcut                                                  | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+N" />                     | New connection.                                          |
+
+## Workspace and tabs
+
+These work whenever a connection session is active.
+
+| Shortcut                                                  | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+T" />                     | New query tab.                                           |
+| <KeyboardShortcut shortcut="Cmd+W" />                     | Close the active tab.                                    |
+| <KeyboardShortcut shortcut="Cmd+Shift+L" />               | Open the query library.                                  |
+| <KeyboardShortcut shortcut="Cmd+Shift+F" />               | Open full-text search across all tables.                 |
+| <KeyboardShortcut shortcut="Cmd+Shift+N" />               | Convert the current query to a notebook.                 |
+
+## Editor
+
+Inside a SQL or MongoDB editor.
+
+| Shortcut                                                  | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+Enter" />                 | Run the current query, or the selection if any.          |
+| <KeyboardShortcut shortcut="Cmd+Shift+F" />               | Format the current SQL query.                            |
+| <KeyboardShortcut shortcut="Shift+Alt+F" />               | Format the current SQL query (alternative binding).       |
+| <KeyboardShortcut shortcut="Ctrl+Space" />                | Force the autocomplete popup (CodeMirror default).       |
+
+The same `Cmd+Enter` runs either the full tab or the selection: with text selected, only that selection is sent. With nothing selected, the whole tab runs.
+
+## Sandbox
+
+| Shortcut                                                  | Action                                                   |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| <KeyboardShortcut shortcut="Ctrl+Shift+S" />              | Toggle the sandbox for the active session.               |
+
+The sandbox shortcut is `Ctrl+Shift+S` on every platform (not `Cmd+Shift+S` on macOS).
+
+## Context-sensitive behavior
+
+A few shortcuts behave differently depending on what's focused:
+
+- **Inside a text input**: most shortcuts are passed through to the input (typing, selection, etc.). The exceptions are <KeyboardShortcut shortcut="Cmd+K" /> and <KeyboardShortcut shortcut="Cmd+Shift+N" />, which always intercept globally.
+- **With an overlay open**: only <KeyboardShortcut shortcut="Esc" /> is bound; it closes the overlay.
+- **Without an active session**: connection-scoped shortcuts (<KeyboardShortcut shortcut="Cmd+T" />, <KeyboardShortcut shortcut="Cmd+Shift+F" />) do nothing.
+- **Without an active tab**: <KeyboardShortcut shortcut="Cmd+W" /> does nothing.
+
+## Customization
+
+QoreDB doesn't currently expose a UI to remap these bindings. They're hardcoded for consistency, with `Cmd`/`Ctrl` swapping based on the OS.
+
+If you need a different binding for a one-off, the command palette (<KeyboardShortcut shortcut="Cmd+K" />) lets you fire any command by name; you can build a habit on the search keyword instead of the shortcut.
+
+## Where to go next
+
+- [Editor & autocomplete](/docs/querying/editor): editor features that pair with these shortcuts
+- [Running queries](/docs/querying/running-queries): the run flow in detail
+- [Configuration](/docs/reference/configuration): settings and persistence locations

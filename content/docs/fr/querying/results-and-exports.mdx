@@ -1,21 +1,103 @@
 ---
-title: Résultats et exports
-description: Parcourez les résultats et exportez en CSV/JSON.
+title: Résultats & exports
+description: Le panneau de résultats dans QoreDB. Colonnes triables, filtres par colonne, édition en ligne, visualiseur de blob, et exports vers CSV, JSON, SQL, HTML, XLSX ou Parquet.
 premium: false
 ---
 
-# Résultats et exports
+# Résultats & exports
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+Lorsqu'une requête renvoie des lignes, elles apparaissent dans le panneau de résultats sous l'éditeur. La grille est basée sur TanStack Table avec virtualisation des lignes, de sorte qu'un ensemble de résultats d'un million de lignes défile de manière fluide sans figer l'interface utilisateur.
 
-## Aperçu
+## La grille de données
 
-Parcourez les résultats et exportez en CSV/JSON.
+### Tri
 
-## À venir
+Cliquez sur l'en-tête d'une colonne pour trier par ordre croissant, cliquez à nouveau pour trier par ordre décroissant, cliquez une troisième fois pour effacer le tri. Le tri se fait sur une seule colonne.
 
-Une fois finalisée, cette page couvrira :
+Pour les connexions SQL, lorsque l'ensemble de résultats provient d'un `ORDER BY` côté serveur, le tri est envoyé au serveur (il peut gérer une charge supérieure à ce que le client conserve). Pour les ensembles de résultats côté client uniquement, le tri est appliqué aux lignes en mémoire.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+### Filtres par colonne
+
+Chaque en-tête de colonne dispose d'une option de filtrage. Cliquez dessus pour filtrer les lignes sans réexécuter la requête. Cinq opérateurs sont disponibles :
+
+| Opérateur| Comportement                                          |
+| -------- | ----------------------------------------------------- |
+| `like`   | La valeur de la cellule contient le texte du filtre.  |
+| `eq`     | La valeur de la cellule correspond exactement au texte du filtre. |
+| `neq`    | La valeur de la cellule diffère du texte du filtre.   |
+| `regex`  | La valeur de la cellule correspond à l'expression régulière. |
+| `text`   | Recherche de type plein texte (full-text) dans la valeur de la cellule. |
+
+Pour `regex`, vous pouvez passer la syntaxe regex standard, y compris les drapeaux (flags). Les correspondances sont sensibles à la casse sauf si vous utilisez le drapeau `i`.
+
+### Pagination
+
+La grille pagine par défaut. Les tailles de page disponibles sont **25**, **50**, **100** et **250**, avec **50** par défaut.
+
+Les contrôles de pagination (premier / précédent / suivant / dernier et sélecteur de taille de page) se trouvent au bas de la grille.
+
+### Édition en ligne
+
+Pour les lignes provenant d'une seule table (and lorsque votre rôle dispose des privilèges appropriés), les cellules deviennent modifiables. Modifiez une cellule directement pour émettre un `UPDATE` contre la clé primaire de la ligne.
+
+La cellule se transforme en champ de saisie lors de l'édition ; appuyez sur `Entrée` pour valider, `Échap` pour annuler. Le changement est envoyé au serveur lors de la validation.
+
+Pour des modifications plus complexes, voir la modale de ligne ci-dessous.
+
+### Édition en masse
+
+Pour mettre à jour la même colonne sur plusieurs lignes en une seule opération, sélectionnez les lignes et utilisez l'outil d'édition en masse (bulk-edit) dans la barre d'outils.
+
+Le niveau Core permet l'édition en masse de **jusqu'à 5 lignes** à la fois. Le niveau Pro augmente la limite à **1 000 lignes** par opération en masse. La version Pro est requise pour toute édition dépassant 5 lignes.
+
+### Modale de ligne
+
+Pour inspecter ou modifier une ligne dans son intégralité (particulièrement utile pour les tables avec de nombreuses colonnes ou de grands champs de texte), ouvrez-la dans la modale de ligne. Chaque champ est modifiable dans la modale et la différence (diff) est envoyée lors de la sauvegarde.
+
+### Aperçu de clé étrangère (Foreign key peek)
+
+Lorsqu'une colonne est une clé étrangère, le survol ou le clic sur celle-ci affiche la ligne associée de la table référencée sans quitter la grille. Utile pour naviguer dans les relations sans ouvrir un autre onglet.
+
+Cela fonctionne avec les tables ayant des contraintes `FOREIGN KEY` déclarées. QoreDB prend également en charge les **relations virtuelles** (clés étrangères que vous déclarez dans QoreDB sans modifier le schéma), ce qui vous permet d'obtenir un aperçu sur les schémas qui n'ont pas de véritables contraintes.
+
+## Inspecter les cellules
+
+### Visualiseur de Blob
+
+Pour les colonnes binaires ou BLOB, QoreDB détecte automatiquement le type de contenu et propose plusieurs vues :
+
+- **Aperçu de l'image**, lorsque les octets ressemblent à un format d'image connu (PNG, JPEG, GIF, SVG, BMP, ICO).
+- **Vidage hexadécimal (Hex dump)**, vue au niveau de l'octet du contenu avec des décalages (offsets).
+- **Base64**, la représentation raw (brute) en base64.
+- **Source SVG**, lorsque le contenu est du SVG.
+
+Les gros blobs sont protégés par des limites de taille pour maintenir la réactivité de l'interface utilisateur : l'aperçu, la vue décodée et la vue hexadécimale arrêtent chacune la lecture après un seuil configurable. Cela convient à la plupart des images et au JSON ; pour les très gros blobs, exportez plutôt la colonne.
+
+## Exports
+
+Le panneau de résultats exporte l'ensemble de résultats actuel (après filtres et tris) vers plusieurs formats :
+
+| Format       | Niveau   | Remarques                                                            |
+| ------------ | -------- | -------------------------------------------------------------------- |
+| **CSV**      | Core     | Valeurs séparées par des virgules standard.                          |
+| **JSON**     | Core     | Tableau d'objets, un par ligne.                                      |
+| **SQL**      | Core     | Instructions `INSERT INTO …` que vous pouvez rejouer sur une autre base de données. |
+| **HTML**     | Core     | Table HTML autonome.                                                 |
+| **XLSX**     | Pro      | Classeur Excel.                                                      |
+| **Parquet**  | Pro      | Format en colonnes pour les pipelines analytiques.                   |
+
+### Exportation en streaming
+
+Les exports volumineux diffusent (stream) les lignes au fur et à mesure que le serveur les renvoie, de sorte que vous n'avez pas besoin de conserver l'intégralité de l'ensemble de résultats en mémoire avant d'écrire le fichier. La boîte de dialogue d'exportation affiche la progression et vous permet d'annuler en cours de route.
+
+### Ce qui est exporté
+
+Par défaut, les exports appliquent la **vue actuelle** : le filtre actif, le tri actif, et la plage de pagination actuelle. Pour exporter l'ensemble des résultats plutôt que seulement la page visible, basculez sur "Exporter toutes les lignes" (Export all rows) dans la boîte de dialogue.
+
+Pour les exports SQL, les instructions `INSERT` générées utilisent les types de colonnes tels qu'ils sont compris par le pilote source. Les rejeux (replays) entre pilotes peuvent nécessiter des ajustements mineurs (précision du timestamp, colonnes JSON, etc.).
+
+## Où aller ensuite
+
+- [Éditeur et autocomplétion](/docs/querying/editor) : écrire les requêtes qui produisent ces résultats
+- [Exécuter des requêtes](/docs/querying/running-queries) : flux d'exécution, transactions, annulation
+- [Requêtes enregistrées](/docs/querying/saved-queries) : la bibliothèque de requêtes

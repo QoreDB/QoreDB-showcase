@@ -1,21 +1,85 @@
 ---
 title: CockroachDB
-description: Se connecter à CockroachDB.
+description: Connectez QoreDB à CockroachDB. Protocole filaire compatible Postgres, port 26257, avec quelques ajustements de navigation dans le schéma spécifiques à CockroachDB.
 premium: false
 ---
 
 # CockroachDB
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+CockroachDB parle le protocole filaire de PostgreSQL, QoreDB s'y connecte donc via la même pile client que PostgreSQL. Le pilote dédié à CockroachDB est une couche fine superposée : même format DSN, même histoire SSL, mais avec quelques détails de navigation dans les schémas ajustés pour correspondre aux catalogues de CockroachDB et un port par défaut `26257`.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à CockroachDB.
+Collez un DSN de type Postgres et choisissez le moteur **CockroachDB**. Le port par défaut est `26257` et non `5432`.
 
-## À venir
+```
+postgresql://UTILISATEUR:MOTDEPASSE@HOTE:26257/BASEDEDONNEES
+postgresql://UTILISATEUR:MOTDEPASSE@HOTE:26257/BASEDEDONNEES?sslmode=verify-full
+```
 
-Une fois finalisée, cette page couvrira :
+Si vous ne spécifiez pas de base de données, QoreDB utilise par défaut `defaultdb`, qui est ce avec quoi CockroachDB est livré.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Champs de connexion
+
+| Champ              | Requis   | Remarques                                                                        |
+| ------------------ | -------- | -------------------------------------------------------------------------------- |
+| **Hôte** (Host)    | Oui      | Nom d'hôte ou IP. URL du cluster pour les services gérés.                        |
+| **Port**           | Oui      | Par défaut `26257`.                                                              |
+| **Utilisateur**    | Oui      | Utilisateur de la base de données.                                               |
+| **Mot de passe**   | Optionnel| Stocké chiffré dans le coffre-fort.                                              |
+| **Base de données**| Optionnel| Par défaut `defaultdb` si omis.                                                  |
+| **Mode SSL**       | Optionnel| L'un de `disable`, `prefer`, `require`, `verify-ca`, `verify-full`.              |
+
+## SSL / TLS
+
+Mêmes modes que PostgreSQL :
+
+| Mode             | Chiffré ? | Certificat serveur vérifié ? | Nom d'hôte serveur vérifié ? |
+| ---------------- | --------- | ---------------------------- | ---------------------------- |
+| `disable`        | Non       | Non                          | Non                          |
+| `prefer`         | Si offert | Non                          | Non                          |
+| `require`        | Oui       | Non                          | Non                          |
+| `verify-ca`      | Oui       | Oui                          | Non                          |
+| `verify-full`    | Oui       | Oui                          | Oui                          |
+
+CockroachDB Cloud (Serverless et Dedicated) nécessite `verify-full` et est fourni avec un certificat CA public. Les clusters auto-gérés configurent généralement leur propre CA ; vous devrez pointer le client vers elle (hors du champ d'application de QoreDB ; assurez-vous que le certificat est approuvé par votre OS ou que le fichier CA est sur votre système).
+
+## CockroachDB Cloud
+
+Récupérez la chaîne de connexion dans le panneau "Connect" du cluster :
+
+```
+postgresql://USER:PASSWORD@CLUSTER-NAME-XXXX.cloud.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full
+```
+
+Collez-la dans le champ URL et cliquez sur **Analyser** (Parse). Le SSL est requis par défaut pour les clusters Cloud.
+
+## Différences avec PostgreSQL
+
+CockroachDB est compatible avec le protocole filaire de Postgres, mais le moteur sous-jacent est différent. Quelques points pratiques apparaissent dans le navigateur de schémas de QoreDB :
+
+- **Les catalogues système sont filtrés** : les espaces de noms `crdb_internal` et `pg_extension` sont masqués de l'arborescence des schémas car ils constituent du bruit pour le travail applicatif.
+- **Tables et vues uniquement** : CockroachDB n'a pas de vues matérialisées, donc l'arborescence des schémas affiche des tables et des vues régulières, pas de nœud de vue matérialisée.
+- **La maintenance est limitée** : là où Postgres expose `VACUUM`, `ANALYZE`, `REINDEX` et consorts, CockroachDB n'expose que `ANALYZE` (il gère le reste lui-même avec des tâches intégrées). Les menus de maintenance reflètent cela.
+
+Au quotidien, vos requêtes sont identiques à celles de PostgreSQL. Les différences pratiques les plus importantes se situent au niveau de la couche applicative (le modèle de transaction de CockroachDB réessaie les conflits de sérialisation plus agressivement, pas de déclencheurs au niveau des lignes, gestion des TIMESTAMP légèrement différente), et non dans QoreDB lui-même.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"connection refused" sur le port 26257** : par défaut, un CockroachDB auto-géré écoute sur `26257` pour les clients SQL et sur `8080` pour l'interface utilisateur d'administration. Assurez-vous d'utiliser `26257`, et non `8080`.
+</Callout>
+
+<Callout type="warning">
+**Erreurs SSL contre CockroachDB Cloud** : Cloud requiert `verify-full`. Vérifiez que le mode SSL est correctement défini et que le magasin de confiance système contient la CA publique de CockroachDB Labs.
+</Callout>
+
+<Callout type="warning">
+**"transaction retry error"** : CockroachDB peut demander au client de réessayer une transaction lorsqu'il détecte un conflit de sérialisation. C'est normal ; la documentation officielle décrit comment le gérer dans le code de l'application. Depuis un navigateur de requêtes comme QoreDB, réexécutez simplement l'instruction.
+</Callout>
+
+## Où aller ensuite
+
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les clusters derrière un bastion
+- [PostgreSQL](/docs/connections/postgresql) pour l'écosystème PG plus large
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour l'éditeur SQL

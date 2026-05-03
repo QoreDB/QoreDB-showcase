@@ -1,21 +1,104 @@
 ---
-title: Browser
-description: Explore tables, columns and indexes.
+title: Schema browser
+description: Navigate the schema of any connection from the sidebar. Tables, views, routines, triggers, indexes, and per-table inspection through Data, Structure, and Info tabs.
 premium: false
 ---
 
-# Browser
+# Schema browser
 
-This page is a placeholder. Real content is being written.
+QoreDB exposes the schema of every connection through the **sidebar tree** and a **per-table view** that opens when you click a table. The tree is consistent across drivers, but the categories of objects available depend on what the driver supports.
 
-## Overview
+## The sidebar tree
 
-Explore tables, columns and indexes.
+When you expand a connection in the sidebar, you see its namespaces (a namespace is a `database.schema` pair for engines that have both, or just the database for engines that don't). Each namespace expands into up to eight sections:
 
-## What's next
+| Section              | Engines                                       |
+| -------------------- | --------------------------------------------- |
+| **Tables**           | All SQL engines, plus MongoDB (as collections) |
+| **Views**            | PostgreSQL, MySQL, SQL Server, SQLite          |
+| **Materialized views** | PostgreSQL                                  |
+| **Functions**        | PostgreSQL, MySQL, SQL Server                  |
+| **Procedures**       | PostgreSQL, MySQL, SQL Server                  |
+| **Triggers**         | PostgreSQL, MySQL, SQL Server                  |
+| **Events**           | MySQL only                                     |
+| **Sequences**        | PostgreSQL, MariaDB                            |
 
-Once finalized, this page will cover:
+Sections that the engine doesn't support don't appear at all (so a SQLite namespace shows just **Tables** and **Views**, while a Postgres namespace shows the full set).
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+### Loading and search
+
+Each section is loaded on demand the first time you expand it. Subsequent expansions are served from a local cache.
+
+A **search field** at the top of the tree filters tables and other objects by name (debounced, ~300 ms). The search is case-insensitive and matches anywhere in the name.
+
+When a section has more than 50 entries, a **Load more** button appears at the bottom; click it to fetch the next page. This keeps very wide schemas (thousands of tables) from blocking the UI on first expand.
+
+### Refreshing
+
+Schema data is cached. When you change the schema directly through QoreDB (run a `CREATE TABLE`, drop something, etc.), the cache is invalidated automatically. If you change the schema from outside (a migration script, another client) and the new objects don't show up, click **Refresh** on the connection node to clear the cache and reload.
+
+### Right-click context menus
+
+Right-clicking a node (a database, table, view, routine, etc.) opens a context menu with the relevant actions for that node type. Typical actions include opening the object, copying its name, viewing its DDL, and refreshing the parent.
+
+## Per-table view
+
+Click a table in the tree (or open it from the global search palette) to load it in the main area. The view has three tabs.
+
+### Data tab
+
+The default view. Shows the rows of the table as a virtualized data grid with sortable headers, per-column filters, inline editing, pagination, foreign-key peek, and exports. This is the same grid that powers query results; see [Results & exports](/docs/querying/results-and-exports) for the full feature list.
+
+### Structure tab
+
+A read-only catalog of the table's columns:
+
+| Column     | What it shows                                              |
+| ---------- | ---------------------------------------------------------- |
+| **#**      | Ordinal position of the column.                            |
+| **Column** | Name. Primary-key columns are flagged with a key icon.     |
+| **Type**   | Driver-specific data type (`int4`, `varchar(255)`, etc.).  |
+| **Nullable** | `NULL` or `NOT NULL`.                                    |
+| **Default** | Default value, or empty if none.                          |
+
+A small banner at the bottom lists the primary key columns in declaration order.
+
+The Structure tab is for reading. To create or alter tables, use a SQL query (the editor handles the dialect for you) or the **Create Table** dialog from the sidebar's right-click menu when available for your engine.
+
+### Info tab
+
+Driver-specific stats and metadata: indexes, table size, row estimates, last analyzed timestamp, and (for PostgreSQL) maintenance actions like `ANALYZE`. The exact contents vary by engine.
+
+## Foreign keys and virtual relations
+
+QoreDB supports two kinds of foreign-key declarations for the purpose of navigation and the [ER diagram](/docs/schema/er-diagram):
+
+- **Real foreign keys**: declared in the database schema with `FOREIGN KEY` constraints.
+- **Virtual relations**: declared inside QoreDB without changing the database. Useful when the underlying schema doesn't have proper FK constraints (legacy systems, denormalized warehouses, MongoDB collections).
+
+### Real foreign keys
+
+Read directly from the schema. They power **Foreign-key peek**: hover or click a foreign-key cell in the data grid to see the referenced row from the parent table without leaving the current view.
+
+### Declaring a virtual relation
+
+Open the **Manage Virtual Relations** dialog from the connection's context menu. The dialog lists existing virtual relations for the active namespace and lets you add new ones with the **Add** button.
+
+For each virtual relation, you specify:
+
+- The **source** column (a table.column you're declaring as a foreign key).
+- The **target** column (the table.column it references).
+- Optionally, a **constraint name** for display purposes.
+
+Virtual relations are stored **per connection** and survive across sessions. They are an in-app concept, invisible from the database side. Use them when you don't have permission or appetite to add real FK constraints to the database.
+
+Once declared, virtual relations behave like real FKs in QoreDB:
+
+- They power foreign-key peek in the data grid.
+- They appear in the [ER diagram](/docs/schema/er-diagram) (rendered with a distinct purple dashed line so you can tell them from real FKs).
+
+## Where to go next
+
+- [ER diagram](/docs/schema/er-diagram) for an interactive visual schema view
+- [Results & exports](/docs/querying/results-and-exports) for the data grid features used in the Data tab
+- [Querying: editor and autocomplete](/docs/querying/editor) for writing DDL by hand

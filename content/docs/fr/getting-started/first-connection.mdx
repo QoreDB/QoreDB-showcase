@@ -1,21 +1,153 @@
 ---
-title: Première connexion
-description: Connectez QoreDB à votre première base de données en moins d'une minute.
+title: Votre première connexion
+description: Connectez QoreDB à votre première base de données en moins d'une minute. Collez un DSN, remplissez le formulaire, ou commencez avec un fichier SQLite local.
 premium: false
 ---
 
-# Première connexion
+# Votre première connexion
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB ne nécessite aucune configuration de projet, aucune configuration globale à remplir, aucun compte à créer. Vous lancez l'application, ajoutez une connexion et commencez à interroger. Cette page vous guide à travers ce flux.
 
-## Aperçu
+## Les deux façons d'ajouter une connexion
 
-Connectez QoreDB à votre première base de données en moins d'une minute.
+Vous pouvez créer une nouvelle connexion de deux manières. Les deux aboutissent à la même configuration normalisée, chiffrée dans le coffre-fort local.
 
-## À venir
+**Coller un DSN/URL.** Le chemin le plus rapide. Si vous avez déjà une chaîne de connexion (depuis votre `.env`, le tableau de bord de votre hébergeur ou le wiki de votre équipe), collez-la et QoreDB l'analyse pour vous. La détection automatique du pilote choisit le bon moteur : `postgresql://` devient Postgres, `mongodb+srv://` devient MongoDB Atlas, et ainsi de suite.
 
-Une fois finalisée, cette page couvrira :
+**Remplir le formulaire.** Formulaire spécifique au pilote avec des champs séparés pour l'hôte, le port, l'utilisateur, le mot de passe, la base de données, SSL/TLS et toutes les options prises en charge par ce moteur. Utile lorsque vous n'avez pas de DSN sous la main ou lorsque vous souhaitez inspecter chaque champ de manière explicite.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+Vous pouvez basculer entre les deux modes dans la boîte de dialogue de connexion à tout moment.
+
+## Guide pas-à-pas : se connecter à une base de données
+
+<Steps>
+1. Cliquez sur le bouton **+** dans la barre latérale de connexion (en bas à gauche).
+
+2. Choisissez votre moteur de base de données.
+
+3. Soit :
+   - Activez **Utiliser URL** (Use URL) et collez votre chaîne de connexion, puis cliquez sur **Analyser** (Parse), ou
+   - Remplissez directement les champs du formulaire.
+
+4. Cliquez sur **Tester la connexion** pour vérifier que QoreDB peut joindre la base de données.
+
+5. Choisissez un **environnement** (développement, pré-production/staging ou production). La valeur par défaut est `development`. L'environnement détermine un badge coloré dans l'interface utilisateur et protège les mutations en production derrière une confirmation tapée. Voir [Environnements](/docs/connections/environments) pour le comportement complet.
+
+6. Cliquez sur **Enregistrer**. La connexion apparaît dans la barre latérale.
+
+7. Double-cliquez sur la connexion (ou cliquez sur **Se connecter**) pour ouvrir une session et commencer à explorer.
+</Steps>
+
+<Screenshot
+  src="/images/docs/connection-dialog.png"
+  alt="Boîte de dialogue de nouvelle connexion avec le sélecteur de moteur ouvert"
+  todo="The full connection dialog open, showing the engine grid: PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB. Capture this on a clean app state (no other tabs open behind). PostgreSQL pre-selected so the form fields below are visible."
+/>
+
+<Screenshot
+  src="/images/docs/connection-dialog-configure.png"
+  alt="Boîte de dialogue de connexion avec un DSN collé et analysé dans les champs"
+  todo="The connection dialog with the 'Use URL/DSN' toggle ON, a real-looking PostgreSQL DSN pasted (e.g. postgresql://user:••••@db.example.com:5432/myapp), and the parsed fields visible underneath (host, port, user, database). Mask the password so we can use this safely."
+/>
+
+## Exemples de DSN par pilote
+
+Voici les formats que QoreDB accepte pour les moteurs les plus courants :
+
+<CodeTabs>
+  <Tab label="PostgreSQL">
+  ```
+  postgresql://user:password@host:5432/database
+  postgresql://user:password@host:5432/database?sslmode=require
+  ```
+  </Tab>
+  <Tab label="MySQL">
+  ```
+  mysql://user:password@host:3306/database
+  mysql://user:password@host:3306/database?ssl-mode=REQUIRED
+  ```
+  </Tab>
+  <Tab label="MongoDB">
+  ```
+  mongodb://user:password@host:27017/database
+  mongodb+srv://user:password@cluster.mongodb.net/database?authSource=admin
+  ```
+  </Tab>
+  <Tab label="SQLite">
+  ```
+  sqlite:///absolute/path/to/database.db
+  sqlite://./relative/path/to/database.db
+  ```
+  </Tab>
+</CodeTabs>
+
+Une référence complète de tous les formats d'URL pris en charge, y compris SQL Server, Redis, DuckDB et les options spécifiques aux pilotes, se trouve sur la page [URLs de connexion](/docs/reference/connection-urls).
+
+<Callout type="tip">
+QoreDB ne stocke jamais l'URL brute. Elle est analysée en champs normalisés (hôte, port, utilisateur, mot de passe, base de données, options) et seuls ces champs sont enregistrés. Le mot de passe finit dans le coffre-fort chiffré, le reste dans votre configuration locale.
+</Callout>
+
+## Essayez localement avec SQLite
+
+Si vous n'avez pas de base de données à laquelle vous connecter pour le moment, le moyen le plus simple de jouer avec QoreDB est de le pointer vers un fichier SQLite local. SQLite ne nécessite aucun serveur.
+
+<Steps>
+1. Cliquez sur **+** dans la barre latérale de connexion.
+2. Choisissez **SQLite**.
+3. Cliquez sur **Parcourir** et sélectionnez un fichier `.db`/`.sqlite` existant, ou tapez un chemin vers un nouveau fichier. QoreDB le créera pour vous.
+4. Cliquez sur **Se connecter**. Vous y êtes.
+</Steps>
+
+À partir de là, vous pouvez exécuter `CREATE TABLE`, insérer des lignes et explorer l'éditeur complet sans avoir besoin d'une connexion réseau.
+
+## Enregistrer la connexion dans le coffre-fort
+
+Lorsque vous enregistrez une connexion, le mot de passe (et toute option sensible comme la phrase secrète d'une clé SSH) est stocké dans le **coffre-fort** (vault) : un magasin chiffré adossé au trousseau natif de votre système d'exploitation.
+
+- **macOS** : Trousseau d'accès (Keychain Access)
+- **Windows** : Gestionnaire d'informations d'identification (Credential Manager)
+- **Linux** : Service secret (GNOME Keyring, KWallet)
+
+Le coffre-fort utilise Argon2 pour la dérivation de clé. Vous pouvez également activer un **verrou d'application** (app lock) optionnel qui nécessite une phrase secrète à chaque lancement de QoreDB. Voir [Chiffrement du coffre-fort](/docs/security/vault-encryption) pour plus de détails.
+
+## Tunneling SSH
+
+<Screenshot
+  src="/images/docs/connection-dialog-ssh.png"
+  alt="Section du tunnel SSH développée dans la boîte de dialogue de connexion"
+  todo="Connection dialog scrolled to the SSH tunnel section, with the section expanded. Show fields for SSH host, port, user, key file path, and the 'Proxy jump' option. Filled with realistic but obviously-placeholder values like 'bastion.example.com' so the reader sees what each field expects."
+/>
+
+Si votre base de données se trouve derrière un bastion ou un réseau privé, développez la section **Tunnel SSH** de la boîte de dialogue de connexion. QoreDB prend en charge :
+
+- Hôte/port SSH standard, avec authentification par nom d'utilisateur/mot de passe ou fichier de clé
+- **Saut de proxy** (Proxy jump) à travers une chaîne d'hôtes intermédiaires
+- Options SSH personnalisées
+
+QoreDB utilise un client OpenSSH natif sous le capot, le comportement correspond donc à ce que vous obtiendriez de `ssh -L` sur la ligne de commande.
+
+Voir [Tunneling SSH](/docs/connections/ssh-tunneling) pour le guide complet.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"Connection refused" (Connexion refusée)** : l'hôte ou le port est incorrect, ou le serveur n'accepte pas les connexions externes. Pour Postgres, vérifiez `pg_hba.conf` et `listen_addresses`. Pour MongoDB Atlas, vérifiez la liste d'autorisation IP.
+</Callout>
+
+<Callout type="warning">
+**"SSL/TLS required" (SSL/TLS requis)** : le serveur nécessite une connexion chiffrée. Pour Postgres, ajoutez `?sslmode=require` à l'URL ou définissez le mode SSL sur `require` dans le formulaire. Pour MongoDB Atlas, le schéma `mongodb+srv://` implique déjà TLS.
+</Callout>
+
+<Callout type="warning">
+**"Authentication failed" (Échec de l'authentification)** : revérifiez le nom d'utilisateur et le mot de passe. Pour Postgres spécifiquement, vérifiez que l'utilisateur de la base de données a un mot de passe défini (`ALTER USER ... WITH PASSWORD ...`) et que la bonne méthode d'authentification est activée dans `pg_hba.conf`.
+</Callout>
+
+<Callout type="warning">
+**"Cannot connect to localhost from inside Docker" (Impossible de se connecter à localhost depuis l'intérieur de Docker)** : si votre BD s'exécute dans Docker et QoreDB sur l'hôte, utilisez `localhost` et le port publié. Si les deux s'exécutent dans Docker, utilisez le nom d'hôte du conteneur ou `host.docker.internal` sur macOS/Windows.
+</Callout>
+
+## Où aller ensuite
+
+- [Visite de l'interface](/docs/getting-started/interface-tour) : familiarisez-vous avec l'interface utilisateur principale
+- [Aperçu des connexions](/docs/connections/postgresql) : guides spécifiques aux pilotes
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) : groupez, organisez et basculez entre les connexions

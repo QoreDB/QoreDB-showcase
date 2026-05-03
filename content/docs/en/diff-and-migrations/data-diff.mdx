@@ -1,0 +1,103 @@
+---
+title: Data diff
+description: Compare two query results, two tables, or two snapshots side by side. See exactly which rows were added, removed, or modified.
+premium: true
+---
+
+# Data diff
+
+<Callout type="info">
+This feature is part of the QoreDB Pro tier.
+</Callout>
+
+The **data diff** lets you compare two sets of rows side by side and immediately see what's the same and what changed. The two sides can each be a table, a query result, or a saved [snapshot](#using-snapshots), in any combination. Rows are matched on a key and compared cell by cell.
+
+Typical uses:
+
+- Compare a **staging** table with the equivalent **production** table to spot drift.
+- Compare a **before** snapshot with **now** to confirm a migration did what you expected.
+- Compare two queries on the same database (`WHERE created_at < '…'` vs `WHERE created_at >= '…'`) to see what arrived in a window.
+- Compare results from two different drivers when you're moving from MySQL to Postgres, or from a raw warehouse to a curated mart.
+
+## Opening the diff
+
+The diff lives in its own tab. Open it from the global command palette (<KeyboardShortcut shortcut="Cmd+K" />, then search "diff") or from the connection's right-click menu.
+
+The tab is split horizontally: a configuration row at the top picks the **left source** and the **right source**, then the comparison runs and the results show below.
+
+## Choosing each side
+
+Each side can be one of three modes:
+
+| Source mode  | What it is                                                           |
+| ------------ | -------------------------------------------------------------------- |
+| **Table**    | A specific table in a connection's namespace. The full row set is loaded. |
+| **Query**    | An ad-hoc SQL or Mongo query you write inline. The result is the source. |
+| **Snapshot** | A previously captured [result snapshot](#using-snapshots).           |
+
+You pick the mode independently for the left and right sides, so you can compare table vs query, query vs snapshot, snapshot vs snapshot, and any mix in between.
+
+You can also point each side at a **different connection**: this is what makes "compare staging to production" a one-tab operation rather than a two-window juggle.
+
+## Matching rows
+
+Rows are matched on a **key**, a set of columns that uniquely identifies a row. QoreDB picks the key automatically:
+
+- If both sides come from a known table, the **primary key** is auto-detected via `describeTable()` and used as the key.
+- If both sides are queries, you can override the key from the toolbar.
+- If primary keys differ between the two sides, QoreDB uses their **intersection**.
+
+Override the key manually when:
+
+- The data has a natural identifier that isn't the declared PK (a business `external_id`, for example).
+- You're comparing two queries that don't have a PK at all.
+- You want to ignore certain rows (group by a coarser key).
+
+## Reading the results
+
+Each row in the comparison is tagged with one of four statuses:
+
+| Status        | Meaning                                                       |
+| ------------- | ------------------------------------------------------------- |
+| **Unchanged** | Same key, same values on both sides.                          |
+| **Added**     | Key exists on the right side only.                            |
+| **Removed**   | Key exists on the left side only.                             |
+| **Modified**  | Same key on both sides, but at least one column differs.      |
+
+The grid is virtualized, so a comparison of millions of rows still scrolls smoothly.
+
+A **stats bar** at the top of the results summarizes the counts (`+12 -3 ~7 =104500`) and lets you toggle the visibility of each status. Hide unchanged rows when you want to focus on the diff itself; hide everything except modified to do a code-review-style scan.
+
+## Cell-level highlighting
+
+For modified rows, only the cells that actually changed are highlighted, with the old value on the left and the new value on the right. The rest of the row stays neutral so the eye lands on the differences immediately.
+
+For added and removed rows, the whole row is colored (green for added, red for removed) so you can scan a long list quickly.
+
+## Toolbar actions
+
+The toolbar above the results offers:
+
+- **Swap**: switch the left and right sides. Useful if the polarity of "before" and "after" is wrong.
+- **Refresh**: re-run both sides and recompute the diff. Good when the underlying data has moved.
+- **Export**: dump the diff to **CSV** or **JSON**. The export includes the per-row status and (for modified rows) both the old and new values.
+
+## Using snapshots
+
+A **result snapshot** is a saved copy of a query or table at a point in time. Snapshots are first-class sources for the diff:
+
+- Create one from a query result via **Save as snapshot** in the results pane.
+- Browse, rename, and delete snapshots from the snapshot manager.
+- Use any snapshot as the left or right side of a diff.
+
+Snapshots make it easy to do "before / after" comparisons across changes that happen on a timeline: capture today, run your job, capture again, then diff.
+
+## Supported drivers
+
+The data diff works against every connection QoreDB supports for queries and tables: PostgreSQL (and Postgres-compatible like Supabase, Neon, TimescaleDB, CockroachDB), MySQL/MariaDB, SQL Server, SQLite, MongoDB, DuckDB, Redis. Because the comparison is on rows rather than DDL, the underlying engine doesn't change the workflow.
+
+## Where to go next
+
+- [Migration generation](/docs/diff-and-migrations/migration-generation) for the sandbox-driven equivalent on schema changes
+- [Results & exports](/docs/querying/results-and-exports) for the data grid features the diff reuses
+- [Pricing](/pricing) to see what's included in Pro

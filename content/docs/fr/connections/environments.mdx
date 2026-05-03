@@ -1,21 +1,119 @@
 ---
-title: Environnements (dev / staging / prod)
-description: Comment QoreDB tague chaque connexion en development, staging ou production, et ce qui change dans l'UI et les confirmations selon ce tag.
+title: Environnements
+description: Comment QoreDB marque chaque connexion comme de développement, staging ou production, et ce qui change dans l'interface utilisateur et les invites de sécurité en fonction de cette balise.
 premium: false
 ---
 
 # Environnements
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+Chaque connexion enregistrée dans QoreDB porte une étiquette d'**environnement**. Il y a trois valeurs et le choix affecte deux choses : la façon dont la connexion est **affichée dans l'interface utilisateur** (badge coloré) et la façon dont QoreDB **vous invite avant d'exécuter des requêtes destructives**. C'est l'un des principaux mécanismes de sécurité de QoreDB.
 
-## Aperçu
+## Les trois environnements
 
-Comment QoreDB tague chaque connexion en development, staging ou production, et ce qui change dans l'UI et les confirmations selon ce tag.
+| Valeur        | Par défaut ? | Couleur de l'UI | Libellé court |
+| ------------- | ------------ | --------------- | ------------- |
+| `development` | Oui          | Vert            | `DEV`         |
+| `staging`     | Non          | Ambre/Orange    | `STG`         |
+| `production`  | Non          | Rouge           | `PROD`        |
 
-## À venir
+L'environnement est défini sur la connexion elle-même, non sur l'espace de travail, et non globalement. Vous le choisissez (boutons radio) lorsque vous créez une connexion, et vous pouvez le modifier ultérieurement à partir des paramètres de la connexion.
 
-Une fois finalisée, cette page couvrira :
+## Où voyez-vous le badge
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+QoreDB affiche l'environnement à deux endroits :
+
+- **Barre d'état**, en bas de la zone principale, avec une icône de `Bouclier` (Shield) et le libellé court (`DEV`, `STG`, `PROD`). Le badge de production est rendu avec des couleurs pleines et une animation de pulsation subtile, de sorte qu'il est difficile à manquer.
+- **Barre latérale**, sur chaque puce de connexion. Le badge est **uniquement affiché pour le staging et la production** ; le développement est intentionnellement silencieux (votre choix par défaut de tous les jours n'a pas besoin d'encombrer la barre latérale).
+
+Les couleurs sont cohérentes partout : vert pour le développement, orange pour le staging, rouge pour la production.
+
+<Callout type="tip">
+Le badge est un rappel d'un seul coup d'œil de l'endroit où vous vous trouvez. Prenez l'habitude de vérifier la barre d'état avant d'exécuter quoi que ce soit qui mute des données.
+</Callout>
+
+## Ce qui change pour la production
+
+Deux boîtes de dialogue de confirmation encadrent le travail destructif sur les connexions de `production`.
+
+### Confirmation de requête dangereuse
+
+QoreDB reconnaît un ensemble de motifs comme "dangereux" :
+
+- `DROP TABLE`, `DROP DATABASE`, `DROP SCHEMA`, `DROP INDEX`, `DROP VIEW`, `DROP FUNCTION`, `DROP TRIGGER`
+- `TRUNCATE …`
+- `DELETE FROM …` **sans** clause `WHERE`
+- `UPDATE …` **sans** clause `WHERE`
+- `ALTER TABLE … DROP …`
+- Équivalents MongoDB : `.drop()`, `.dropDatabase()`, `.deleteMany()` sans filtre, etc.
+
+Sur une connexion de **production**, ces requêtes ouvrent une boîte de dialogue de confirmation qui vous oblige à **taper le nom de la cible** (table, base de données ou connexion) avant que la requête ne soit envoyée. Sur staging ou development, les mêmes requêtes s'exécutent sans invite.
+
+`DROP DATABASE …` est l'unique exception : elle requiert toujours la saisie, quel que soit l'environnement.
+
+`DELETE` et `UPDATE` **avec une clause `WHERE`** ne sont pas considérés comme dangereux par ce détecteur ; ils passent par la deuxième boîte de dialogue.
+
+### Confirmation de mutation en production
+
+Pour toute mutation qui n'est pas couverte par les règles de requêtes dangereuses (un `INSERT` classique, `UPDATE … WHERE …`, `DELETE … WHERE …`), une **boîte de dialogue de confirmation de production** plus légère vous demande tout de même de taper le nom de la connexion ou de la base de données avant que la requête ne s'exécute.
+
+Le résultat est que sur une connexion de production, chaque mutation nécessite une confirmation explicite. Les requêtes en lecture seule (`SELECT`, etc.) ne sont pas affectées.
+
+### Le Staging est silencieux
+
+Le Staging (pré-production) est **identique au développement** pour le comportement de confirmation : pas de boîte de dialogue, pas de saisie clavier, les requêtes s'exécutent dès que vous appuyez. Le badge est le seul signal.
+
+Il s'agit d'un choix délibéré : le coût de la friction en dev/staging est élevé, le coût d'un accident en production est beaucoup plus élevé, la friction est donc concentrée là où cela compte.
+
+## Environnement vs Lecture seule (read-only)
+
+L'étiquette d'environnement et l'option **lecture seule** (read-only) sont deux mécanismes différents :
+
+- **Environnement** : une étiquette qui détermine les boîtes de dialogue de confirmation et les indicateurs visuels. Il ne bloque rien complètement.
+- **Lecture seule** : un commutateur par connexion qui **rejette les instructions de mutation** avant qu'elles ne quittent le client.
+
+La lecture seule n'est *pas* automatiquement activée lorsque vous définissez l'environnement sur production. Vous devez basculer les deux si vous voulez les deux comportements. La combinaison est la configuration la plus forte pour un réplica de production que vous utilisez uniquement pour les lectures :
+
+- Environnement : `production` (badge rouge, invites de confirmation)
+- Lecture seule : `on` (mutations rejetées côté client quoiqu'il arrive)
+
+De plus, idéalement, un rôle de base de données avec des privilèges de lecture seule côté serveur, afin que ni la garde client ni la boîte de dialogue ne soient votre dernière ligne de défense.
+
+## Règles de sécurité intégrées
+
+QoreDB embarque un ensemble de règles intégrées dans son intercepteur de requêtes qui ciblent spécifiquement la production :
+
+- `builtin-no-drop-production` : affiche un avertissement lors d'un `DROP …` en production.
+- `builtin-no-truncate-production` : identique pour `TRUNCATE …`.
+- `builtin-confirm-delete-production` : intercepte `DELETE` en production.
+- `builtin-warn-alter-production` : avertit lors d'un `ALTER` en production.
+
+Ces règles font partie du mécanisme de sécurité/d'audit de QoreDB plutôt que des boîtes de dialogue de confirmation côté client, mais elles se basent toutes sur la même étiquette d'environnement.
+
+## Choisir l'environnement lors de la création d'une connexion
+
+Dans la boîte de dialogue **Nouvelle Connexion** (New Connection), l'environnement est présenté sous la forme d'une rangée de trois boutons radio (`development`, `staging`, `production`). Choisissez celui qui correspond à ce que la connexion pointe réellement.
+
+Un modèle utile lorsque vous avez une application avec plusieurs environnements :
+
+| Nom de la connexion  | Environnement  | Remarques                                    |
+| -------------------- | -------------- | -------------------------------------------- |
+| `myapp-dev`          | `development`  | Postgres local ou cluster de dev.            |
+| `myapp-staging`      | `staging`      | Réplica de pré-production.                   |
+| `myapp-prod`         | `production`   | Le vrai environnement. Optionnellement avec lecture seule. |
+| `myapp-prod-replica` | `production`   | Réplica en lecture seule, avec read-only activé. |
+
+Nommer clairement la connexion (`-prod`, `-staging`, etc.) en plus de l'étiquette d'environnement vous donne deux couches de "qu'est-ce que c'est ?" avant d'exécuter quoi que ce soit.
+
+## Modifier l'environnement ultérieurement
+
+Ouvrez les paramètres de la connexion (clic droit dans la barre latérale, ou "Modifier la connexion" depuis la palette de commandes) et modifiez le bouton radio. Le badge se met à jour immédiatement et toute nouvelle requête que vous exécutez prendra le nouveau comportement.
+
+<Callout type="warning">
+Le passage d'une connexion de `production` à `development` supprime les invites de confirmation. Ne faites cela que lorsque vous êtes sûr que la connexion ne pointe plus vers des données de production.
+</Callout>
+
+## Où aller ensuite
+
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) : comment QoreDB stocke les informations d'identification de connexion
+- [Exécuter des requêtes](/docs/querying/running-queries) : le flux d'exécution, y compris les boîtes de dialogue de confirmation en détail
+- [Tunneling SSH](/docs/connections/ssh-tunneling) : pour les bases de données de production derrière un bastion

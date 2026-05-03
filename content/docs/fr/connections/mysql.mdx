@@ -1,21 +1,101 @@
 ---
-title: MySQL
-description: Se connecter à une base MySQL ou MariaDB.
+title: MySQL & MariaDB
+description: Connectez QoreDB à MySQL, MariaDB et à tout service compatible MySQL. Même pilote, même format de DSN.
 premium: false
 ---
 
-# MySQL
+# MySQL & MariaDB
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB se connecte à MySQL et MariaDB via un seul pilote. Les deux moteurs parlent le même protocole filaire, le flux de connexion, le format du DSN et les options SSL sont donc identiques.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à une base MySQL ou MariaDB.
+Le moyen le plus rapide est de coller un DSN. QoreDB reconnaît le schéma `mysql://`.
 
-## À venir
+```
+mysql://UTILISATEUR:MOTDEPASSE@HOTE:3306/BASEDEDONNEES
+mysql://UTILISATEUR:MOTDEPASSE@HOTE:3306/BASEDEDONNEES?ssl-mode=REQUIRED
+```
 
-Une fois finalisée, cette page couvrira :
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **MySQL/MariaDB**, collez l'URL, cliquez sur **Tester la connexion** (Test connection), puis sur **Enregistrer** (Save).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Champs de connexion
+
+Si vous préférez le formulaire, remplissez directement ces champs :
+
+| Champ              | Requis   | Remarques                                                                        |
+| ------------------ | -------- | -------------------------------------------------------------------------------- |
+| **Hôte** (Host)    | Oui      | Nom d'hôte ou adresse IP.                                                        |
+| **Port**           | Oui      | Par défaut `3306`.                                                               |
+| **Utilisateur**    | Oui      | Utilisateur MySQL.                                                               |
+| **Mot de passe**   | Optionnel| Stocké chiffré dans le coffre-fort.                                              |
+| **Base de données**| Optionnel| Nom de la base de données. Facultatif si votre utilisateur a des privilèges sur plusieurs bases de données. |
+| **Mode SSL**       | Optionnel| L'un de `disabled`, `preferred`, `required`, `verify-ca`, `verify-identity`.     |
+
+La section **Tunnel SSH** (SSH tunnel) est disponible si votre base de données se trouve derrière un bastion. Voir [Tunneling SSH](/docs/connections/ssh-tunneling).
+
+## Modes SSL / TLS
+
+MySQL a sa propre dénomination pour les modes SSL ; le comportement sous-jacent correspond approximativement aux modes PostgreSQL équivalents.
+
+| Mode              | Chiffré ?   | Certificat serveur vérifié ? | Nom d'hôte serveur vérifié ? |
+| ----------------- | ----------- | ---------------------------- | ---------------------------- |
+| `disabled`        | Non         | Non                          | Non                          |
+| `preferred`       | Si offert   | Non                          | Non                          |
+| `required`        | Oui         | Non                          | Non                          |
+| `verify-ca`       | Oui         | Oui                          | Non                          |
+| `verify-identity` | Oui         | Oui                          | Oui                          |
+
+Pour le trafic de production sur l'Internet public, `verify-identity` est la valeur par défaut la plus sûre. `required` est acceptable sur un réseau privé de confiance.
+
+Vous pouvez transmettre le mode soit via le formulaire (liste déroulante du mode SSL) soit en tant que paramètre `?ssl-mode=…` sur l'URL.
+
+## MySQL vs MariaDB
+
+Le pilote est le même. Quelques différences pratiques à connaître :
+
+- **Plugins d'authentification** : MySQL 8 utilise par défaut `caching_sha2_password`, MariaDB utilise par défaut `mysql_native_password`. QoreDB gère les deux, mais si vos outils clients sont plus anciens et que vous voyez des erreurs d'authentification sur MySQL 8, vous devrez peut-être changer le plugin d'authentification de l'utilisateur côté serveur (`ALTER USER … IDENTIFIED WITH mysql_native_password BY …`) ou effectuer une mise à niveau.
+- **Type JSON** : les deux moteurs ont un type `JSON` mais avec des fonctions légèrement différentes (`JSON_EXTRACT` vs `JSON_VALUE` de MariaDB). Les requêtes qui reposent sur ces fonctions ne sont pas portables entre les deux.
+- **Jeu de caractères (Character set)** : MySQL 8 utilise par défaut `utf8mb4`. MariaDB jusqu'à 10.5 utilise par défaut `utf8mb3` ; à partir de 10.6+ également `utf8mb4`. Si vous voyez des caractères illisibles (mojibake) ou des erreurs "Incorrect string value", vérifiez le jeu de caractères de la connexion et le classement (collation) de la colonne.
+
+## Fournisseurs compatibles MySQL
+
+Les services suivants utilisent le protocole filaire MySQL et se connectent via ce pilote :
+
+- **PlanetScale** : collez la chaîne de connexion de votre tableau de bord. PlanetScale applique le protocole TLS, utilisez donc `?ssl-mode=REQUIRED` (ou supérieur).
+- **AWS RDS pour MySQL/MariaDB** : DSN standard `mysql://`. Les instances RDS accessibles depuis l'extérieur du VPC doivent avoir un accès public activé ou un tunnel. SSL est recommandé.
+- **Aiven, DigitalOcean Managed MySQL, Google Cloud SQL** : DSN MySQL standard. Tous exigent TLS par défaut.
+
+## Navigation dans les schémas
+
+Une fois connecté, développez la connexion dans la barre latérale :
+
+```
+Connexion → Base de données → Tables / Vues / Routines / Déclencheurs
+```
+
+MySQL n'a pas de schémas au sens de PostgreSQL ; dans MySQL, "schéma" et "base de données" sont synonymes. Choisissez la base de données dans laquelle vous souhaitez travailler à partir de l'arborescence.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"Access denied for user 'X'@'host'"** : Les droits d'accès MySQL sont liés à une paire `(utilisateur, hôte)`. Le même utilisateur peut avoir des privilèges différents selon l'endroit d'où il se connecte. Vérifiez `SHOW GRANTS FOR 'user'@'%';` et ajustez le modèle d'hôte si nécessaire.
+</Callout>
+
+<Callout type="warning">
+**"Authentication plugin 'caching_sha2_password' cannot be loaded"** : les anciens clients ne peuvent pas communiquer en authentification SHA-256 avec MySQL 8. Vous devez soit mettre à niveau, soit configurer l'utilisateur pour qu'il utilise `mysql_native_password`.
+</Callout>
+
+<Callout type="warning">
+**"Lost connection to MySQL server during query"** : généralement une requête longue atteignant le délai `wait_timeout` du serveur ou un réseau lent. Vérifiez `wait_timeout` et `interactive_timeout` côté serveur, et envisagez d'exécuter des requêtes lourdes depuis le même réseau que la base de données.
+</Callout>
+
+<Callout type="warning">
+**"Incorrect string value: '\xF0\x9F…' for column 'X'"** : emoji ou caractère UTF-8 de 4 octets sur une colonne `utf8mb3`. Migrez la colonne (ou toute la table) vers `utf8mb4` et relancez.
+</Callout>
+
+## Où aller ensuite
+
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les bases de données derrière un bastion
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser de nombreuses connexions
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour commencer à écrire du SQL

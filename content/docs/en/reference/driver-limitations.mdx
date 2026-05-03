@@ -1,21 +1,93 @@
 ---
 title: Driver limitations
-description: Known limitations per driver.
+description: Known limitations and quirks per driver. Things that work differently from one engine to the next, with the workarounds.
 premium: false
 ---
 
 # Driver limitations
 
-This page is a placeholder. Real content is being written.
+QoreDB tries to expose a consistent interface across every supported driver, but the underlying engines are different. This page catalogs the practical limitations and quirks per driver, so you know what to expect and where the workarounds are.
 
-## Overview
+This list reflects current behavior. Things that "should work" from a feature-list perspective but actually have a caveat go here.
 
-Known limitations per driver.
+## PostgreSQL
 
-## What's next
+- **Cancellation**: a running query is cancelled by issuing `pg_cancel_backend(pid)` on a separate connection. Your role needs `pg_signal_backend` or to be the owner of the cancelled query, or the cancellation silently fails.
+- **Cross-database browsing**: each connection is scoped to one database. To browse a different database on the same server, create a separate QoreDB connection.
 
-Once finalized, this page will cover:
+## MySQL & MariaDB
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+- **Cancellation**: implemented via `KILL QUERY <id>`, which requires the `PROCESS` privilege (and `SUPER` for queries owned by other users).
+- **Engine-dependent transactions**: transactional behavior assumes InnoDB. Tables on MyISAM or other non-transactional engines don't roll back on `ROLLBACK`; the driver doesn't catch this for you.
+- **System schemas hidden**: `information_schema`, `mysql`, `performance_schema`, and `sys` don't show in the schema tree by default. Query them directly if you need to.
+- **Authentication plugins**: MySQL 8 defaults to `caching_sha2_password`. Older clients may fail; switch the user to `mysql_native_password` server-side or upgrade.
+
+## SQL Server
+
+- **Server certificate is trusted by default**: with SSL on, QoreDB calls `trust_cert()` on the Tiberius config, which accepts the server's certificate without strict CA validation. Fine for managed services with public CAs, fine for trusted private networks; less safe on the public internet.
+- **Named instances**: QoreDB connects directly with host and port. Named instances (`HOST\SQLEXPRESS`) which require the SQL Server Browser service for port lookup are not supported. Find the static port your named instance listens on and use that.
+- **Authentication modes**: SQL authentication, Windows NTLM, and Windows Integrated (SSPI). The latter two require Windows.
+
+## SQLite
+
+- **Single writer**: SQLite serializes writes. Reads are concurrent; a write blocks all other writes until commit. Long write transactions can starve other writers.
+- **Type affinity, not strict types**: `INTEGER` columns happily store strings (and vice versa) unless `STRICT` mode is used. If type integrity matters, validate at the application layer or use `CHECK` constraints.
+- **No native regex**: the `REGEXP` operator requires a custom user-defined function before SQLite 3.45. Use `LIKE` or `GLOB` for portable pattern matching.
+- **FTS5**: full-text search works, but only against virtual tables created with `CREATE VIRTUAL TABLE … USING fts5(…)`, not against regular tables.
+
+## MongoDB
+
+- **Transactions need a replica set**: standalone MongoDB instances don't support multi-document transactions. Convert to a single-node replica set for development if you need them.
+- **Pipeline operators blocked for safety**: `$function`, `$accumulator`, and `$where` are rejected before the query is sent. They allow arbitrary JavaScript execution server-side and are blocked on principle. Run them through `mongosh` directly if you really need them.
+- **Aggregation pipeline depth capped at 50 stages**. Anything deeper is rejected client-side.
+- **Default `_id_` index**: cannot be dropped through the index management UI.
+- **TTL indexes**: only single-key, ascending or descending. Compound TTL indexes aren't supported by Mongo itself.
+- **`$out` and `$merge`**: must be the last stage of a pipeline (Mongo's own constraint, surfaced verbatim).
+
+## Redis
+
+- **Mutating writes from the UI**: the data grid for Redis is read-oriented. Editing keys and values inline isn't supported in the current UI; use the editor with raw Redis commands (`SET`, `HSET`, `LPUSH`, etc.) instead.
+- **`SCAN` is not atomic**: iterating keys with `SCAN` can return duplicates or miss newly-inserted keys. This is Redis's own behavior, not a QoreDB limitation. Don't rely on `SCAN` snapshots for exact counts.
+- **Database namespaces**: Redis databases are numbered 0 to 15 by default (configurable via the server's `databases` setting). Only non-empty databases are listed in the schema tree.
+- **No schema**: `describeTable` returns the type-specific shape (string, hash, list, set, sorted set, stream) rather than column metadata.
+- **Cluster mode**: not detected as a separate concept; the driver connects to one node. For Redis Cluster, point at the entry node and let the driver follow redirects.
+- **Lua scripting**: `EVAL`, `EVALSHA`, `FCALL` are classified as mutations. `SCRIPT LOAD` works; `SCRIPT FLUSH`, `SCRIPT KILL`, `SLEEP`, `FLUSHALL`, `FLUSHDB`, `SHUTDOWN`, `CONFIG` trigger dangerous-query warnings.
+- **Cancellation**: best-effort. Long-running blocking commands may not respond to cancellation immediately.
+
+## DuckDB
+
+- **File extensions**: only `.duckdb` and `.db` are accepted by the path validator. Rename files with other extensions before connecting.
+- **In-memory mode**: `:memory:` and `duckdb::memory:` both work. Data is lost when the connection closes.
+- **Synchronous API on top of an async runtime**: heavy queries can briefly block the event loop. The driver wraps execution with `spawn_blocking` to keep the UI responsive.
+
+## CockroachDB
+
+- **No materialized views**: CockroachDB intentionally doesn't support `MATERIALIZED VIEW`. The schema tree omits the section.
+- **Maintenance is `ANALYZE` only**: the typical Postgres maintenance commands (`VACUUM`, `REINDEX`, etc.) are no-ops or unsupported. CockroachDB handles those automatically.
+- **System catalogs filtered**: `crdb_internal` and `pg_extension` are hidden from the schema tree.
+- **Default database**: `defaultdb`, not `postgres`.
+- **Transaction retries**: CockroachDB asks the client to retry transactions on serialization conflicts more aggressively than Postgres. From the editor, simply re-run the failed statement.
+- **Default port**: `26257`, not `5432`. Easy to forget.
+
+## Postgres-compatible providers
+
+### Supabase
+
+Connects via standard `postgresql://`. Two connection strings are typically offered:
+
+- **Direct connection**: full feature support, but limited connection count.
+- **Pooled (PgBouncer)**: scales to more clients, but in transaction-pooling mode, prepared statements and `LISTEN/NOTIFY` are unsupported. For QoreDB's interactive use, the direct string is usually the right pick.
+
+### Neon
+
+Standard `postgresql://`. Endpoints can scale to zero, so the first query after a cold start takes a moment longer than usual.
+
+### TimescaleDB
+
+Same driver as Postgres. Hypertables and continuous aggregates appear as regular tables and views in the schema tree; queries work as standard SQL.
+
+## Where to go next
+
+- [Connections](/docs/connections/postgresql) for the per-driver setup pages
+- [Connection URLs](/docs/reference/connection-urls) for DSN formats
+- [Querying: editor and autocomplete](/docs/querying/editor) for the editor specifics that adapt per driver

@@ -1,21 +1,170 @@
 ---
-title: Tour de l'interface
-description: Familiarisez-vous avec l'espace de travail QoreDB.
+title: Visite de l'interface
+description: Une visite guidée de l'espace de travail de QoreDB, de la barre latérale et des onglets à l'éditeur, au panneau des résultats et aux modèles de navigation que vous utiliserez tous les jours.
 premium: false
 ---
 
-# Tour de l'interface
+# Visite de l'interface
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+<Screenshot
+  src="/images/docs/interface-tour.png"
+  alt="Fenêtre QoreDB avec chaque zone principale annotée"
+  todo="ANNOTATED hero shot: full app window (1600×1000), with overlay labels pointing to (1) the title bar at the top, (2) the sidebar on the left, (3) the tab bar above the editor, (4) the editor / content area in the middle, (5) the status bar at the bottom. Use simple colored arrows or numbered circles. Cornerstone screenshot of the docs."
+/>
 
-## Aperçu
+La fenêtre de QoreDB est organisée en trois zones horizontales : une fine **barre de titre** (title bar) en haut, une **barre latérale** (sidebar) redimensionnable à gauche, et une **zone principale** (main area) à droite qui contient la barre d'onglets, le contenu de l'onglet actif et une barre d'état. Cette page couvre chaque zone, ainsi que les modèles de navigation globaux (`Cmd/Ctrl + K`, fil d'Ariane, paramètres) qui les relient.
 
-Familiarisez-vous avec l'espace de travail QoreDB.
+## La barre de titre
 
-## À venir
+Une barre de titre personnalisée s'étend en haut de la fenêtre. De gauche à droite, elle contient généralement la marque QoreDB et des boutons d'accès rapide pour les éléments que vous utilisez le plus souvent : recherche globale, historique, paramètres.
 
-Une fois finalisée, cette page couvrira :
+La barre de titre est toujours visible, sauf si vous activez le **Mode Zen** (Zen Mode), qui masque la barre de titre, la barre latérale, la barre d'onglets et la barre d'état pour ne laisser que l'onglet actif. Utile pour les captures d'écran, les screencasts ou le travail concentré.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## La barre latérale
+
+La barre latérale est la bande à gauche et c'est votre base. C'est une simple liste verticale (pas un panneau à onglets). De haut en bas, elle contient :
+
+- **En-tête de marque**, avec le logo QoreDB et votre badge de licence actuel.
+- **Sélecteur d'espace de travail**, un menu déroulant pour changer l'espace de travail actif (voir ci-dessous).
+- **Liste des connexions**, défilante et interrogeable. Les favoris apparaissent en haut et le reste en dessous. Cliquez sur une connexion pour la développer ; une connexion développée montre ses bases de données, ses schémas et ses tables dans une arborescence.
+- **Actions de pied de page**, avec **Nouvelle Connexion** (New Connection) et un bouton d'accès rapide aux **Journaux d'Erreurs** (Error Logs).
+
+Vous ne pouvez pas réduire la barre latérale en icônes, mais vous pouvez :
+
+- **La redimensionner** en faisant glisser sa bordure droite pour la rendre plus large ou plus étroite.
+- **La masquer** complètement à partir du clavier ou via la palette de commandes.
+
+<Screenshot
+  alt="Barre latérale avec une connexion développée dans son arborescence"
+  todo="Crop on just the sidebar (around 300×900). Top to bottom: brand header with the license badge, the workspace switcher dropdown closed but visible, then the connections list with at least 4 connections (one favorited and pinned at top), one of which is expanded showing database → schema → tables. At the bottom show the 'New Connection' and 'Error Logs' footer buttons."
+/>
+
+<Callout type="tip">
+L'arborescence des connexions prend en charge la navigation au clavier. Utilisez les touches fléchées pour développer et réduire les nœuds, et `Entrée` pour ouvrir l'élément sélectionné.
+</Callout>
+
+## Les espaces de travail
+
+Un **espace de travail** (workspace) est un regroupement de connexions limité à un projet. Vous pouvez avoir un espace de travail pour votre projet personnel, un autre pour votre travail quotidien et un troisième pour un client en freelance. Changer d'espace de travail vous donne une page blanche (différentes connexions, différente bibliothèque de requêtes enregistrées, différent historique).
+
+Les espaces de travail sont gérés depuis le **sélecteur d'espace de travail** en haut de la barre latérale. Ouvrez-le pour voir :
+
+- **Default** (Par défaut), l'espace de travail que QoreDB utilise d'emblée.
+- **Espaces de travail récents**, les derniers que vous avez ouverts.
+- Des actions pour **créer**, **ouvrir** ou **renommer** un espace de travail.
+
+Un espace de travail n'est qu'un dossier sur le disque qui contient un petit manifeste `.qoredb/workspace.json`. Vous pouvez conserver les dossiers d'espace de travail sous contrôle de version ou les synchroniser avec votre outil préféré si vous le souhaitez.
+
+## La barre d'onglets
+
+Au-dessus de la zone principale, la barre d'onglets contient tout ce sur quoi vous travaillez actuellement : onglets de requête, vues de table, notebooks, paramètres, etc.
+
+Les onglets prennent en charge :
+
+- **La réorganisation par glisser-déposer**, à la fois à l'intérieur et à travers les groupes.
+- **Les onglets épinglés**, qui se placent avant les onglets réguliers et survivent à un "Fermer les autres" (Close Others).
+- **Le regroupement par connexion**, une disposition facultative où les onglets sont regroupés par la connexion à laquelle ils appartiennent, avec une barre colorée indiquant le groupe.
+- **Le menu déroulant de la liste des onglets**, utile lorsque vous avez trop d'onglets pour tous les voir dans la barre.
+
+Les onglets et leur état persistent lorsque vous quittez et relancez QoreDB. Vous retrouverez exactement là où vous vous étiez arrêté.
+
+<Screenshot
+  alt="Barre d'onglets avec plusieurs onglets et un groupe de connexions"
+  todo="Just the tab bar (full window width, ~80px tall). Show 5–6 tabs total: at least 1 pinned tab on the far left (with a pin icon), and 2 tabs from the same connection so the colored group bar is visible. The 'group by connection' toggle should be on."
+/>
+
+## Le panneau de l'éditeur
+
+La zone centrale affiche l'onglet actif. Selon ce que vous avez ouvert, ce peut être :
+
+- Un **éditeur SQL** (CodeMirror) avec coloration syntaxique, autocomplétion sur les mots-clés, extraits de code (snippets) et suggestions basées sur les schémas pour les tables et les colonnes. Exécutez avec `Cmd/Ctrl + Entrée`, exécutez uniquement la sélection avec `Cmd/Ctrl + Maj + Entrée`.
+- Un **éditeur MongoDB** avec autocomplétion des collections et des opérateurs et un linter JSON en temps réel qui signale les entrées non valides au fur et à mesure que vous tapez.
+- Un **navigateur de table** pour inspecter les lignes d'une table, avec des colonnes triables, des filtres par colonne, l'édition en ligne et la pagination.
+- Un **notebook**, mélangeant des cellules SQL et Markdown (et des cellules de graphique dans la version Pro).
+- Un **éditeur DDL** pour CREATE et ALTER TABLE, avec un aperçu SQL en direct spécifique au pilote.
+
+<Screenshot
+  alt="Éditeur SQL avec le menu déroulant de saisie semi-automatique ouvert"
+  todo="The editor pane with a partially-typed SQL query (e.g. 'SELECT * FROM us|') and the autocomplete dropdown open with matching tables (users, user_sessions, etc.). Make sure the dropdown is clearly visible against the editor background."
+/>
+
+Chaque onglet conserve son propre état (position de défilement, filtre actif, sélection), vous pouvez donc passer d'un endroit à l'autre sans perdre de contexte.
+
+## Le panneau des résultats
+
+Lorsqu'une requête renvoie des lignes, elles apparaissent dans une grille de résultats construite sur TanStack Table avec virtualisation des lignes, de sorte qu'un ensemble de résultats d'un million de lignes défile toujours en douceur. Vous obtenez :
+
+- **Des en-têtes de colonnes triables**.
+- **Des filtres par colonne** pour affiner la vue sans réexécuter la requête.
+- **Édition en ligne** : double-cliquez sur une cellule pour la modifier.
+- **Fenêtre modale de ligne** pour une vue en plein écran et l'édition d'une seule ligne.
+- **Pagination** avec des tailles de page sélectionnables (25, 50, 100, 250).
+- **Aperçu des clés étrangères** (Foreign key peek) pour voir les lignes associées à partir d'une table référencée sans quitter la grille.
+- **Exportation** de l'ensemble de résultats actuel vers CSV, JSON et d'autres formats.
+
+<Screenshot
+  alt="Grille de résultats avec filtres, pagination et une ligne active"
+  todo="A results grid filled with at least 50 rows. Show: a sortable column header with the sort indicator, an active per-column filter (e.g. 'contains' on a 'name' column), pagination controls at the bottom showing page size, and a row modal opened on top with a single row's full content."
+/>
+
+## Fil d'Ariane (Breadcrumbs)
+
+Lorsque vous ouvrez une table, un chemin de fil d'Ariane se trouve au-dessus des données : `Connexion > Base de données > Schéma > Table`. Chaque segment est cliquable afin que vous puissiez remonter dans la hiérarchie en un seul clic. C'est souvent plus rapide que de remonter dans l'arborescence de la barre latérale.
+
+## Recherche globale avec `Cmd / Ctrl + K`
+
+Appuyez sur <KeyboardShortcut shortcut="Cmd+K" /> pour ouvrir la palette de recherche globale. À partir d'une seule zone de recherche floue (fuzzy-search), vous pouvez trouver et accéder à :
+
+- **Commandes** (ouvrir les paramètres, basculer le thème, changer d'espace de travail, etc.).
+- **Fonctionnalités**, comme ouvrir un notebook, le bac à sable (sandbox), l'onglet de fédération, l'outil de diff.
+- **Connexions**, n'importe quelle connexion enregistrée à travers les espaces de travail.
+- **Historique des requêtes**, toutes les requêtes que vous avez exécutées.
+- **Bibliothèque de requêtes**, vos requêtes et dossiers enregistrés.
+- **Favoris**, les requêtes que vous avez étoilées.
+
+<Screenshot
+  alt="Palette de recherche globale ouverte avec résultats groupés"
+  todo="The Cmd+K palette open in the middle of the window (modal). Type something like 'use' in the search field, and show grouped results: 'Commands', 'Connections', 'Query history', 'Library'. Each group should be clearly labeled."
+/>
+
+C'est le moyen le plus rapide de naviguer dans QoreDB. Les utilisateurs habituels ne cliquent presque jamais dans la barre latérale ; ils vivent à l'intérieur de la palette de commandes.
+
+## Bibliothèque, historique et notebooks
+
+Trois surfaces fréquemment utilisées ne vivent pas dans la barre latérale mais sont accessibles via un raccourci :
+
+- **La bibliothèque de requêtes** s'ouvre avec `Cmd/Ctrl + Maj + L` (ou via la palette de commandes). C'est un magasin de vos requêtes enregistrées, interrogeable et organisé en dossiers, avec des balises et des favoris.
+- **L'historique des requêtes** s'ouvre depuis la barre de titre (ou via la palette de commandes). Il répertorie toutes les requêtes que vous avez exécutées, avec le texte complet et les horodatages. Vous pouvez réexécuter, copier ou mettre en favori une entrée.
+- **Les notebooks** sont un type d'onglet. Créez-en un avec `Cmd/Ctrl + N` depuis l'intérieur d'une connexion active, ou depuis la palette de commandes. Une fois ouvert, un notebook vit dans un onglet comme n'importe quel autre.
+
+## Thème
+
+QoreDB est livré avec un **thème clair**, un **thème sombre**, et un mode **auto** qui suit votre système d'exploitation. Vous pouvez changer de thème à partir des paramètres (section Général) ou via la palette de commandes (`Cmd/Ctrl + K`, puis "Toggle theme" / Basculer le thème). Votre choix persiste d'une session à l'autre.
+
+## Paramètres
+
+Ouvrez les paramètres avec <KeyboardShortcut shortcut="Cmd+," />, depuis la barre de titre, ou via la palette de commandes. Les paramètres sont organisés en sections :
+
+- **Général** : langue, thème, apparence, regroupement d'onglets, informations de version.
+- **Éditeur** : comportement de l'éditeur et du bac à sable, gestion des brouillons.
+- **Sécurité** : règles de sécurité, confirmations d'environnement de production, intercepteur de requêtes.
+- **Données** : historique des requêtes, journaux, sauvegardes, voyage dans le temps (time-travel), exportations et importations.
+- **Raccourcis** : une vue consultable de chaque raccourci clavier.
+- **Licence** : activation et informations sur le niveau (tier).
+- **IA** : configurez votre fournisseur d'IA (OpenAI, Anthropic, Mistral, et autres) avec vos propres clés (BYOK - Bring Your Own Key).
+
+## Notifications
+
+QoreDB affiche des notifications toast (transitoires) dans le coin inférieur droit de la fenêtre. Il existe quatre niveaux (succès, info, avertissement, erreur) avec des durées par défaut raisonnables. Les erreurs restent visibles plus longtemps afin que vous ayez le temps de les lire.
+
+## Barre d'état
+
+Une fine barre d'état au bas de la zone principale indique l'état actuel : la connexion active et son environnement (développement, staging, production), l'état de santé de la connexion et d'autres indicateurs contextuels. L'étiquette d'environnement est purement informative, mais d'autres fonctionnalités (comme les invites de confirmation de production) y réagissent.
+
+## Où aller ensuite
+
+Vous avez maintenant le modèle mental complet de l'interface utilisateur de QoreDB. Choisissez le sujet qui est le plus pertinent pour votre travail :
+
+- [Connexions PostgreSQL](/docs/connections/postgresql) et autres guides spécifiques aux pilotes
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor)
+- [Référence : raccourcis clavier](/docs/reference/keyboard-shortcuts)

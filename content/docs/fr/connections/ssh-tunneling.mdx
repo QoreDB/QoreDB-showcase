@@ -1,21 +1,123 @@
 ---
 title: Tunneling SSH
-description: Accédez à des bases derrière un bastion via SSH.
+description: Atteignez des bases de données derrière un bastion ou dans un réseau privé. QoreDB utilise le client natif OpenSSH de votre système en arrière-plan.
 premium: false
 ---
 
 # Tunneling SSH
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+Si votre base de données n'est pas accessible directement depuis votre machine (car elle se trouve dans un VPC, derrière un bastion ou accessible uniquement via un hôte de saut (jump host) d'entreprise), vous pouvez vous connecter via un tunnel SSH. QoreDB utilise le client **OpenSSH** natif de votre système, le comportement correspond donc à ce que vous obtiendriez de `ssh -L` sur la ligne de commande.
 
-## Aperçu
+## Quand vous avez besoin d'un tunnel
 
-Accédez à des bases derrière un bastion via SSH.
+Vous avez besoin d'un tunnel chaque fois que :
 
-## À venir
+- La base de données écoute sur une adresse IP privée qui n'est pas routable depuis votre ordinateur.
+- La base de données se trouve dans un VPC et seul le bastion a une adresse IP publique.
+- Un pare-feu bloque les connexions directes au port de la base de données depuis l'extérieur du réseau.
+- Les règles de conformité exigent que tout accès passe par un jump host audité.
 
-Une fois finalisée, cette page couvrira :
+Vous **n'avez pas** besoin d'un tunnel si votre base de données a un point de terminaison public (RDS public, Atlas public, etc.) et que votre adresse IP est sur liste blanche (allowlisted) ; une connexion standard fonctionnera.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Configuration rapide
+
+Dans la boîte de dialogue de connexion, développez la section **Tunnel SSH** (SSH tunnel) et remplissez les détails du bastion. QoreDB configure un transfert de port local et y connecte le pilote de la base de données de manière transparente.
+
+## Authentification
+
+Deux méthodes d'authentification sont prises en charge.
+
+### Fichier de clé (recommandé)
+
+Pointez QoreDB vers votre fichier de clé privée (généralement sous `~/.ssh/`). Si la clé est chiffrée avec une phrase secrète, fournissez-la ; QoreDB la stocke dans le coffre-fort chiffré, jamais en texte clair.
+
+| Champ                 | Remarques                                                                               |
+| --------------------- | --------------------------------------------------------------------------------------- |
+| **Type d'authentification** | `Key file`                                                                        |
+| **Chemin de la clé**  | Chemin absolu vers votre clé privée (ex: `~/.ssh/id_ed25519`). La clé publique est implicite. |
+| **Phrase secrète de la clé**| Optionnel. Requis si la clé est chiffrée.                                         |
+
+C'est la méthode recommandée, à la fois pour la sécurité et parce qu'elle correspond à votre flux de travail SSH normal.
+
+### Mot de passe
+
+| Champ                 | Remarques                              |
+| --------------------- | -------------------------------------- |
+| **Type d'authentification** | `Password`                       |
+| **Mot de passe**      | Le mot de passe SSH de l'utilisateur sur le bastion |
+
+Cela fonctionne pour les hôtes hérités qui ne prennent pas en charge l'authentification par clé. À éviter si possible ; les mots de passe sont plus faibles contre les attaques par force brute.
+
+## Vérification de la clé d'hôte (Host key)
+
+Chaque connexion SSH vérifie la clé d'hôte du bastion par rapport à votre fichier `~/.ssh/known_hosts`. QoreDB propose trois stratégies :
+
+- **`accept_new`** (par défaut pour les nouvelles connexions) : accepte et épingle une nouvelle clé d'hôte la première fois, génère une erreur si elle change plus tard. Cela correspond au `StrictHostKeyChecking=accept-new` d'OpenSSH.
+- **`strict`** : refuse de se connecter si l'hôte n'est pas déjà dans `known_hosts`. Le plus sécurisé ; utile dans les environnements avec une distribution gérée de `known_hosts`.
+- **`insecure_no_check`** : accepte n'importe quelle clé d'hôte sans vérification. Pratique pour les environnements de test éphémères, mais vulnérable aux attaques de type man-in-the-middle (MITM). À éviter pour tout ce qui est sensible.
+
+Le `accept_new` par défaut est un compromis sensé : protection contre le MITM après la première connexion, sans configuration manuelle.
+
+## Saut de proxy (Chaîne de bastions)
+
+Certains réseaux exigent de passer par plusieurs hôtes de saut (jump hosts) pour atteindre la base de données. QoreDB prend en charge cela via le champ **Proxy jump**, qui reflète l'indicateur `-J` d'OpenSSH.
+
+```
+user1@jump1.example.com:22,user2@jump2.example.com
+```
+
+Vous pouvez lister un ou plusieurs hôtes intermédiaires, séparés par des virgules. QoreDB passe par eux dans l'ordre avant d'atteindre l'hôte SSH final configuré dans la boîte de dialogue.
+
+<Callout type="tip">
+La chaîne de proxy partage les mêmes paramètres d'authentification que l'hôte SSH principal (chemin de la clé, phrase secrète). Si vos sauts ont besoin de clés différentes, configurez-les dans votre `~/.ssh/config` local et laissez OpenSSH gérer la sélection de la clé par nom d'hôte.
+</Callout>
+
+## Délais d'attente et keepalive
+
+Trois champs optionnels ajustent la résilience du tunnel :
+
+| Champ                       | Remarques                                                              |
+| --------------------------- | ---------------------------------------------------------------------- |
+| **Connect timeout**         | Secondes à attendre pour le handshake TCP initial avant d'abandonner.  |
+| **Keepalive interval**      | Secondes entre les sondes keepalive une fois le tunnel établi.         |
+| **Keepalive count max**     | Nombre de sondes échouées avant de considérer le tunnel mort et de le fermer. |
+
+Ils ont des valeurs par défaut raisonnables. Ajustez-les si vous avez un réseau instable ou un pare-feu strict qui supprime de manière agressive les connexions inactives.
+
+## Comportement en cas d'erreurs
+
+Si le processus SSH ne peut pas démarrer le tunnel (échec d'authentification, hôte injoignable, clé rejetée, etc.), QoreDB affiche directement l'erreur standard d'OpenSSH. La même erreur que vous verriez si vous aviez exécuté `ssh -v -L … …` sur la ligne de commande.
+
+Les modes d'échec les plus courants :
+
+<Callout type="warning">
+**"Permission denied (publickey)"** : votre clé n'est pas autorisée sur le bastion, ou la mauvaise clé est proposée. Vérifiez le `~/.ssh/authorized_keys` du bastion et le chemin local de la clé.
+</Callout>
+
+<Callout type="warning">
+**"Host key verification failed"** : la clé d'hôte du bastion a changé depuis votre première connexion. Soit l'hôte a été réinstallé, soit quelqu'un intercepte votre connexion. N'acceptez pas aveuglément ; vérifiez d'abord auprès de l'administrateur de l'hôte, puis mettez à jour votre `known_hosts`.
+</Callout>
+
+<Callout type="warning">
+**"channel 1: open failed: connect failed: Connection refused"** : la connexion SSH elle-même fonctionne, mais la base de données n'est pas accessible depuis le bastion. Vérifiez l'hôte/port de la base de données de l'intérieur du bastion (`telnet db.internal 5432` ou similaire).
+</Callout>
+
+<Callout type="warning">
+**"Operation timed out"** : le bastion est injoignable ou un pare-feu bloque silencieusement les paquets. Vérifiez que vous avez un accès réseau à l'adresse IP et au port du bastion.
+</Callout>
+
+## Vérification avec l'interface de ligne de commande OpenSSH
+
+Si un tunnel ne démarre pas depuis QoreDB, le moyen le plus rapide de déboguer est de le reproduire sur la ligne de commande. L'équivalent exact de ce que QoreDB configure est :
+
+```bash
+ssh -L 15432:HOTE_BD:5432 -i ~/.ssh/id_ed25519 user@BASTION
+# Connectez ensuite QoreDB directement à localhost:15432 (pas de section SSH activée)
+```
+
+Si `ssh -L` fonctionne mais que QoreDB ne fonctionne pas, le problème se situe dans la configuration du tunnel de QoreDB. Si `ssh -L` ne fonctionne pas non plus, le problème est en amont (réseau, configuration du bastion, clé, etc.).
+
+## Où aller ensuite
+
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser de nombreuses connexions, y compris celles qui partagent le même bastion
+- Guides spécifiques aux pilotes [PostgreSQL](/docs/connections/postgresql), [MySQL](/docs/connections/mysql), [MongoDB](/docs/connections/mongodb)

@@ -1,21 +1,96 @@
 ---
 title: Sandbox mode
-description: Run dangerous queries safely.
-premium: false
+description: Buffer your data edits locally instead of sending them straight to the database. Review, generate the SQL, then apply or discard.
+premium: true
 ---
 
 # Sandbox mode
 
-This page is a placeholder. Real content is being written.
+<Callout type="info">
+Sandbox mode is part of the QoreDB Pro tier.
+</Callout>
 
-## Overview
+The **sandbox** is a per-session toggle that intercepts every data edit you make through the UI (inline cell edits, bulk edits, inserts, deletes) and **stores them locally instead of executing them**. You review the captured changes, decide whether to convert them into a SQL migration script, and only then does anything hit the database.
 
-Run dangerous queries safely.
+Think of it as an "edit, but don't commit yet" mode. Useful when you're not 100% sure of what you want to do, when you want a teammate to review the SQL before it runs, or when you want a clean migration script as a deliverable.
 
-## What's next
+This page covers the mechanics from a security and safety perspective. For the migration-generation workflow itself, see [Migration generation](/docs/diff-and-migrations/migration-generation).
 
-Once finalized, this page will cover:
+## Turning it on
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+Toggle the sandbox from the title bar (Flask icon) or with <KeyboardShortcut shortcut="Ctrl+Shift+S" />. The sandbox is **per session**, meaning per active connection: turning it on for one connection doesn't affect the others.
+
+While on, the connection's UI shows a colored indicator (matching the [environment](/docs/connections/environments)) along with the count of pending changes. The data grid still works as normal; the difference is invisible until you save an edit.
+
+## What gets captured
+
+Three change types are captured into the buffer:
+
+- **Insert**: a new row created through the grid or row modal.
+- **Update**: a cell or set of cells modified through inline or bulk edit, recorded with the old and new values.
+- **Delete**: a row removed.
+
+For each entry, QoreDB stores the table name, namespace, primary key, the relevant old/new values, and a timestamp.
+
+QoreDB merges related changes intelligently before generating SQL: two consecutive updates on the same row coalesce, a delete that follows an insert of the same row cancels both. The buffer stays compact, and the generated SQL stays clean.
+
+## What does *not* get captured
+
+The sandbox only captures **edits made through the UI**. Direct SQL queries you run from the editor still execute against the database immediately, even when the sandbox is on.
+
+This means:
+
+- A `DELETE FROM users WHERE id = 1` typed in the SQL editor runs as usual; it isn't sandboxed.
+- An inline edit on the same row, on the other hand, lands in the sandbox.
+
+The sandbox is for **interactive, click-driven data edits**. It is not a transaction wrapper for arbitrary SQL.
+
+## Where the buffer lives
+
+The sandbox state is persisted to your browser's `localStorage` under a key namespaced per session, plus a backup namespaced per connection. This means:
+
+- Quitting and reopening QoreDB **keeps your pending changes**. You can pause work overnight without losing the buffer.
+- The state is **local to the machine**. Switching computers does not bring your sandbox state along.
+- Clearing localStorage (manually or via the OS dev tools) wipes the sandbox state along with everything else.
+
+The buffer is not encrypted by QoreDB beyond whatever localStorage protections the browser provides. If your sandbox contains pending edits with sensitive values, treat that local-storage entry as you would any other workspace data.
+
+## Production environment
+
+The sandbox doesn't bypass the [environment](/docs/connections/environments) safety net. When the active connection is tagged `production`:
+
+- A warning toast surfaces on activation, reminding you that you're sandboxing production edits.
+- Applying the buffer goes through the **Apply confirmation dialog** (you must type `APPLY` before the SQL runs).
+
+So sandboxing in production is not a way to "skip" the production prompts; it concentrates the prompt at the apply step rather than per-statement, but the typed confirmation is still required.
+
+## Read-only and the sandbox
+
+The sandbox is independent of the read-only flag on a connection:
+
+- A read-only connection rejects mutations at the editor level (typed SQL like `UPDATE …` is blocked outright).
+- The sandbox is for grid-driven edits. On a read-only connection, the data grid's edit affordances are typically disabled too.
+
+Combining read-only **on** with sandbox **on** is rarely useful: there's nothing to capture. The natural setup is one or the other depending on intent.
+
+## Apply, discard, regenerate
+
+From the sandbox panel:
+
+- **Apply**: runs the generated migration script against the live connection (typed-confirmation in production).
+- **Discard**: drops the buffer entirely. Local-only state, so nothing was sent to the database; nothing to undo on the server side.
+- **Regenerate**: re-runs the SQL generation step from the same buffer. Useful if you tweaked your sandbox preferences (for example, "treat NULL defaults differently") and want a fresh script.
+
+A confirm dialog before discard can be enabled in the sandbox preferences.
+
+## Limitations to keep in mind
+
+- **No automatic rollback**: the migration script is "up" only. The sandbox itself is reversible (discard does that), but once you apply, you're committed to whatever the script does on the server. Capture a [snapshot](/docs/diff-and-migrations/data-diff#using-snapshots) before applying if you need a "before" reference.
+- **No multi-connection sandbox**: each session has its own sandbox. You can't capture edits across two connections and apply them as a single script.
+- **No schema changes**: the sandbox is for data edits, not DDL. Schema changes (CREATE TABLE, ALTER, etc.) are not sandboxed; type them in the SQL editor as usual.
+
+## Where to go next
+
+- [Migration generation](/docs/diff-and-migrations/migration-generation) for the full apply / download / discard flow
+- [Environments](/docs/connections/environments) for the safety prompts that gate the apply step
+- [Data diff](/docs/diff-and-migrations/data-diff) for capturing before/after snapshots around a sandbox apply

@@ -59,6 +59,7 @@ const HIDE_DRAFTS = process.env.NODE_ENV === "production";
 
 function buildNode(
   dir: string,
+  labelDir: string | null,
   locale: DocsLocale,
   slug: string[],
 ): DocsTreeNode[] {
@@ -70,23 +71,30 @@ function buildNode(
     .filter((e) => e.isFile() && /\.mdx?$/.test(e.name) && !e.name.startsWith("_"))
     .map((e) => ({ name: e.name.replace(/\.mdx?$/, ""), isDir: false }));
 
+  // Ordering follows the locale-specific _meta.json when available, falling
+  // back to the structural source-of-truth (English) ordering.
+  const localizedMeta = labelDir ? readMeta(labelDir) : null;
   const meta = readMeta(dir);
-  const ordered = orderItems([...dirs, ...files], meta?.items);
+  const ordered = orderItems([...dirs, ...files], localizedMeta?.items ?? meta?.items);
 
   const children: DocsTreeNode[] = [];
   for (const entry of ordered) {
     const childSlug = [...slug, entry.name];
     if (entry.isDir) {
       const childDir = path.join(dir, entry.name);
+      const childLabelDir = labelDir ? path.join(labelDir, entry.name) : null;
       const childMeta = readMeta(childDir);
-      const childKids = buildNode(childDir, locale, childSlug);
+      const localizedChildMeta =
+        childLabelDir && fs.existsSync(childLabelDir) ? readMeta(childLabelDir) : null;
+      const childKids = buildNode(childDir, childLabelDir, locale, childSlug);
       const indexFile = ["index.mdx", "index.md"]
         .map((f) => path.join(childDir, f))
         .find((p) => fs.existsSync(p));
-      const label = childMeta?.label ?? humanize(entry.name);
+      const label =
+        localizedChildMeta?.label ?? childMeta?.label ?? humanize(entry.name);
       if (indexFile && childKids.length === 0) {
         if (HIDE_DRAFTS && isFileDraft(indexFile)) continue;
-        const fm = readFrontmatter(indexFile);
+        const fm = readLocalizedFrontmatter(indexFile, childLabelDir, "index");
         children.push({
           kind: "page",
           label: fm.title || label,
@@ -110,7 +118,7 @@ function buildNode(
         ? filePath
         : path.join(dir, `${entry.name}.md`);
       if (HIDE_DRAFTS && isFileDraft(realPath)) continue;
-      const fm = readFrontmatter(realPath);
+      const fm = readLocalizedFrontmatter(realPath, labelDir, entry.name);
       children.push({
         kind: "page",
         label: fm.title || humanize(entry.name),
@@ -123,13 +131,55 @@ function buildNode(
   return children;
 }
 
+/**
+ * Read a page's frontmatter, preferring the translated copy for human-facing
+ * fields (title) but keeping `premium` from the source-of-truth file so
+ * monetisation flags can't drift between locales.
+ */
+function readLocalizedFrontmatter(
+  sourcePath: string,
+  labelDir: string | null,
+  baseName: string,
+): DocFrontmatter {
+  const source = readFrontmatter(sourcePath);
+  if (!labelDir) return source;
+  const candidates = [
+    path.join(labelDir, `${baseName}.mdx`),
+    path.join(labelDir, `${baseName}.md`),
+  ];
+  const translatedPath = candidates.find((p) => fs.existsSync(p));
+  if (!translatedPath) return source;
+  const translated = readFrontmatter(translatedPath);
+  return {
+    ...source,
+    title: translated.title || source.title,
+    description: translated.description || source.description,
+  };
+}
+
+/**
+ * Build the docs tree.
+ *
+ * - `hrefLocale` controls the URL locale of generated hrefs and is also the
+ *   source for human-facing labels (titles, section names).
+ * - `contentLocale` controls the *structural* source of truth — i.e. which
+ *   locale's directory tree drives ordering and which pages exist. Defaults
+ *   to `hrefLocale`.
+ *
+ * When the two differ, the tree walks `contentLocale` (so missing
+ * translations don't disappear from the sidebar) but reads labels from
+ * `hrefLocale`, falling back to the source-of-truth when a translated
+ * frontmatter / `_meta.json` entry is missing.
+ */
 export function getDocsTree(
   hrefLocale: DocsLocale,
   contentLocale: DocsLocale = hrefLocale,
 ): DocsTreeNode[] {
   const root = getLocaleRoot(contentLocale);
   if (!fs.existsSync(root)) return [];
-  return buildNode(root, hrefLocale, []);
+  const labelRoot =
+    hrefLocale === contentLocale ? null : getLocaleRoot(hrefLocale);
+  return buildNode(root, labelRoot, hrefLocale, []);
 }
 
 export function flattenPages(

@@ -1,21 +1,96 @@
 ---
-title: Éditeur et autocomplétion
-description: Écrivez vos requêtes vite grâce à l'autocomplétion.
+title: Éditeur & autocomplétion
+description: L'éditeur QoreDB pour SQL et MongoDB. Basé sur CodeMirror avec une autocomplétion sensible au schéma, des extraits de code et un linter Mongo sensible à JSON.
 premium: false
 ---
 
-# Éditeur et autocomplétion
+# Éditeur & autocomplétion
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB dispose de deux éditeurs, un pour les pilotes SQL (Postgres, MySQL, SQL Server, SQLite, CockroachDB, DuckDB) et un pour MongoDB. Les deux sont basés sur CodeMirror 6 et partagent la même apparence et la même sensation de base ; la prise en charge du langage et les sources d'autocomplétion sont ce qui diffère.
 
-## Aperçu
+## L'éditeur SQL
 
-Écrivez vos requêtes vite grâce à l'autocomplétion.
+Lorsque vous ouvrez un onglet de requête sur une connexion SQL, vous obtenez un éditeur avec :
 
-## À venir
+- **Coloration syntaxique** pour le dialecte du pilote actif. Le dialecte (Postgres, MySQL, SQL Server, etc.) est sélectionné automatiquement en fonction de la connexion.
+- **Numéros de ligne** et **mise en évidence de la ligne active**, activés par défaut.
+- **Autocomplétion** qui se déclenche au fur et à mesure que vous tapez, combinant trois sources :
+  - **Mots-clés SQL** pour le dialecte actif.
+  - **Extraits personnalisés** (snippets, voir ci-dessous).
+  - **Suggestions sensibles au schéma** : noms de tables de la base de données active de la connexion, et noms de colonnes une fois que vous écrivez `<schema>.<table>` ou `<table>` et commencez à taper une colonne.
 
-Une fois finalisée, cette page couvrira :
+Il n'y a pas de linter SQL intégré (les erreurs proviennent du serveur lorsque vous exécutez la requête, pas au fur et à mesure que vous tapez).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+### Extraits (Snippets)
+
+Sept extraits SQL sont disponibles prêts à l'emploi. Tapez le préfixe et choisissez l'extrait dans le menu déroulant d'autocomplétion. Utilisez la touche Tab pour naviguer dans les espaces réservés et les remplir.
+
+| Préfixe         | S'étend en                                            |
+| --------------- | ----------------------------------------------------- |
+| `select`        | `SELECT … FROM …`                                     |
+| `select_where`  | `SELECT … FROM … WHERE …`                             |
+| `insert`        | `INSERT INTO … (…) VALUES (…)`                        |
+| `update`        | `UPDATE … SET … WHERE …`                              |
+| `delete`        | `DELETE FROM … WHERE …`                               |
+| `join`          | `SELECT … FROM a JOIN b ON …`                         |
+| `create_table`  | `CREATE TABLE … ( … )`                                |
+
+### Raccourcis clavier de l'éditeur
+
+| Raccourci                                      | Action                                          |
+| ---------------------------------------------- | ----------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+Enter" />      | Exécuter la requête courante, ou la sélection le cas échéant |
+| <KeyboardShortcut shortcut="Cmd+Shift+F" />    | Formater la requête                             |
+| <KeyboardShortcut shortcut="Shift+Alt+F" />    | Formater la requête (raccourci alternatif)      |
+
+Si du texte est sélectionné lorsque vous appuyez sur le raccourci d'exécution, seule la sélection est exécutée. Si rien n'est sélectionné, l'intégralité de l'onglet est exécutée.
+
+## L'éditeur MongoDB
+
+Lorsque vous ouvrez un onglet de requête sur une connexion MongoDB, vous obtenez un éditeur optimisé pour les idiomes du shell Mongo :
+
+- **Coloration syntaxique sensible à JSON**.
+- **Mise en évidence des opérateurs Mongo** : les jetons commençant par `$` (opérateurs comme `$match`, `$set`, `$sum`, etc.) sont visuellement distincts des clés régulières.
+- **Linter JSON en temps réel** qui signale les JSON invalides au fur et à mesure que vous tapez. Le linter est indulgent : il normalise les virgules de fin, les commentaires de ligne et les chaînes entre guillemets simples avant de valider, de sorte que la syntaxe assouplie que la plupart des développeurs écrivent réellement fonctionne.
+- **Autocomplétion** avec quatre sources :
+  - **Noms de collections** après avoir tapé `db.`
+  - **Méthodes CRUD Mongo** après avoir tapé `db.<collection>.` (18 méthodes, dont `find`, `findOne`, `aggregate`, `insertOne`, `updateMany`, `deleteOne`, `createIndex`, etc.)
+  - **Opérateurs Mongo** après avoir tapé `$` (74 opérateurs répartis dans les catégories requête, logique, mise à jour, étape d'agrégation et expression d'agrégation)
+  - **Noms de champs** déduits du schéma échantillonné de la collection ciblée
+
+Il n'y a pas d'extraits de code (snippets) intégrés pour MongoDB.
+
+### Pipelines d'agrégation
+
+L'éditeur met en évidence et autocomplète toutes les étapes d'agrégation standard (`$match`, `$project`, `$group`, `$sort`, `$limit`, `$lookup`, `$facet`, `$bucket`, `$graphLookup`, etc.). Le linter côté client valide uniquement la syntaxe JSON ; la validation sémantique a lieu côté serveur lors de l'exécution.
+
+<Callout type="warning">
+Quelques opérateurs d'exécution côté serveur sont bloqués par QoreDB pour des raisons de sécurité : `$function`, `$accumulator` et `$where`. Si vous en avez besoin, exécutez la requête directement via `mongosh`.
+</Callout>
+
+### Raccourcis clavier de l'éditeur
+
+| Raccourci                                 | Action                                          |
+| ----------------------------------------- | ----------------------------------------------- |
+| <KeyboardShortcut shortcut="Cmd+Enter" /> | Exécuter la requête courante, ou la sélection le cas échéant |
+
+## Comportement de l'autocomplétion
+
+L'autocomplétion s'active dès que vous commencez à taper (aucun déclencheur manuel nécessaire). Pour forcer l'apparition de la fenêtre contextuelle à tout moment, le raccourci standard CodeMirror est `Ctrl + Espace`.
+
+Les suggestions sensibles au schéma pour les connexions SQL proviennent des mêmes métadonnées que QoreDB utilise pour peupler l'arborescence de la barre latérale. Si une table ou une colonne est manquante dans l'autocomplétion, développer la connexion dans la barre latérale actualise généralement le cache.
+
+## Exécuter vs Exécuter la sélection
+
+Il n'y a qu'un seul raccourci d'exécution, <KeyboardShortcut shortcut="Cmd+Enter" />, mais il s'adapte au contexte :
+
+- **Aucune sélection** : exécute l'onglet entier.
+- **Texte sélectionné** : exécute uniquement la sélection.
+
+Cela signifie que vous pouvez conserver de nombreuses instructions dans un seul onglet et exécuter n'importe laquelle d'entre elles en la sélectionnant avant d'appuyer sur le raccourci d'exécution. Pour l'exécution de plusieurs instructions, voir [Exécuter des requêtes](/docs/querying/running-queries).
+
+## Où aller ensuite
+
+- [Exécuter des requêtes](/docs/querying/running-queries) : exécution de plusieurs instructions, transactions, annulation
+- [Résultats et exports](/docs/querying/results-and-exports) : la grille de données sous l'éditeur
+- [Requêtes enregistrées](/docs/querying/saved-queries) : la bibliothèque de requêtes et les dossiers

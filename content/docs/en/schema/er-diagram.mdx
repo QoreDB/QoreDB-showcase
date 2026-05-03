@@ -1,25 +1,72 @@
 ---
 title: ER diagram
-description: Visualise relations between tables.
-premium: true
+description: Interactive entity-relationship diagram. Visualize tables and foreign keys (including virtual relations), with isolate and focus workflows for navigating large schemas.
+premium: false
 ---
 
 # ER diagram
 
-<Callout type="info">
-  This module is part of the QoreDB Premium tier.
-</Callout>
+The **ER diagram** renders the schema of a connection as an interactive graph: each table is a node, each foreign key is an edge. It works on both real `FOREIGN KEY` constraints and on [virtual relations](/docs/schema/browser#foreign-keys-and-virtual-relations) you declare inside QoreDB, so it's useful even on schemas that lack proper FK constraints.
 
-This page is a placeholder. Real content is being written.
+## Opening the diagram
 
-## Overview
+Open the ER diagram tab on a connection from:
 
-Visualise relations between tables.
+- The connection's right-click menu, **Show ER diagram**.
+- The global command palette (<KeyboardShortcut shortcut="Cmd+K" />, then search "ER").
 
-## What's next
+The first render samples the connection's schema and lays out the tables. Subsequent opens reuse the cached layout.
 
-Once finalized, this page will cover:
+## Reading the diagram
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+Each **table** is a node showing its name and a list of column headers. The columns shown by default are the primary key and the foreign-key columns; click a node to expand it for the full column list.
+
+Each **foreign key** is an edge between two tables, drawn from the source column to the target column. Two visual styles distinguish the two flavors of FK:
+
+- **Real foreign keys** are drawn as solid colored lines.
+- **Virtual relations** (declared in QoreDB rather than in the schema) are drawn as **purple dashed lines**.
+
+Hovering an edge shows a tooltip with `source_table.column → target_table.column`, the constraint name (if any), and a `(virtual)` marker for virtual relations.
+
+## Navigating large schemas
+
+Two workflows make a schema with hundreds of tables manageable.
+
+### Isolate
+
+Click the **Isolate** button (filter icon) on a table to hide every other table that isn't connected to it. The diagram shrinks down to that table plus its direct neighbors (parents and children, recursively, depending on configuration). Useful for understanding the immediate context of one entity in a sprawling schema.
+
+While isolated, a **Show All** button appears at the top to reset the view.
+
+### Focus
+
+Click the **Focus** button (crosshair icon) on a table to pan the canvas so the table is centered, without changing the zoom level or hiding anything. This is the lighter weight of the two: you keep the full diagram in view but jump to a specific table.
+
+### Search
+
+A search field in the toolbar filters tables by name as you type. Press `Enter` to focus on the primary match. Useful for jumping straight to a table when you know its name but not where it lives on the canvas.
+
+### Zoom and pan
+
+- **Zoom**: hold `Ctrl` (or `Cmd`) and scroll, or use the zoom buttons in the toolbar. The zoom range is `0.4×` to `1.6×`.
+- **Pan**: drag any empty area of the canvas.
+- **Fit to view**: a button computes the right zoom level to show every visible table within the viewport, with a small padding margin.
+
+## What feeds the diagram
+
+The set of tables and edges comes from QoreDB's normalized schema metadata, which is the same data that powers the [sidebar tree](/docs/schema/browser) and the [foreign-key peek](/docs/querying/results-and-exports). Specifically:
+
+- **Tables**: every table (and view, for engines that distinguish them) in the active namespace.
+- **Edges**: every entry in the schema's `foreign_keys` list, whether real (`is_virtual: false`) or virtual (`is_virtual: true`).
+
+If a relation you expect is missing, check the schema browser first. If the FK isn't there either, declare a [virtual relation](/docs/schema/browser#declaring-a-virtual-relation) and the diagram will pick it up on the next reload.
+
+## Performance
+
+The diagram is rendered as SVG. For schemas with a few hundred tables, the layout is instantaneous and pan/zoom stay smooth. For very large schemas (thousands of tables), expect the initial layout to take a moment; Isolate and Search are the right tools to bring the working set down to a manageable size before doing anything else.
+
+## Where to go next
+
+- [Schema browser](/docs/schema/browser) for the tree-based, per-table inspection
+- [Vault and profiles](/docs/connections/vault-and-profiles) to organize many connections
+- [Querying: editor and autocomplete](/docs/querying/editor) to start querying the tables you discovered

@@ -1,21 +1,147 @@
 ---
 title: Installation
-description: Installer QoreDB sur macOS, Windows ou Linux.
+description: Installez QoreDB sur macOS, Windows ou Linux. Binaires précompilés, paquet Arch AUR, ou compilation à partir des sources.
 premium: false
 ---
 
 # Installation
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB est disponible sous forme d'application de bureau native pour macOS, Windows et Linux. L'installation prend environ une minute sur n'importe quelle plateforme.
 
-## Aperçu
+## Prérequis système
 
-Installer QoreDB sur macOS, Windows ou Linux.
+QoreDB est léger. Le binaire fait quelques dizaines de mégaoctets et l'application utilise une fraction de la mémoire des clients basés sur Electron.
 
-## À venir
+| Plateforme | Prérequis                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| **macOS**  | macOS 10.15 (Catalina) ou plus récent. Builds natifs pour Apple Silicon et Intel.                       |
+| **Windows**| Windows 10 ou plus récent (x64). Inclut WebView2, installé automatiquement s'il est manquant.           |
+| **Linux**  | Distribution moderne avec `webkit2gtk` 4.1, `glibc` 2.31+. Testé sur Ubuntu 22.04+, Debian 12+, Fedora 38+, Arch. |
 
-Une fois finalisée, cette page couvrira :
+## Télécharger une version précompilée
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+La façon la plus rapide d'installer QoreDB est de récupérer le programme d'installation pour votre plateforme sur la [page des Releases](https://github.com/raphplt/QoreDB/releases).
+
+| Plateforme | Format            | Remarques                                                                 |
+| ---------- | ----------------- | ------------------------------------------------------------------------- |
+| **macOS**  | `.dmg`            | Deux builds : ARM64 (Apple Silicon) et Intel (x64).                       |
+| **Windows**| `.msi` ou `.exe`  | Le programme d'installation `.msi` est recommandé pour les environnements gérés. |
+| **Linux**  | `.deb` ou `.AppImage` | `.deb` pour Ubuntu/Debian. `.AppImage` est portable, aucune installation requise. |
+
+### macOS
+
+<Steps>
+1. Téléchargez le `.dmg` correspondant à votre processeur. Apple Silicon nécessite ARM64, les anciens Macs nécessitent Intel.
+2. Ouvrez le `.dmg`, faites glisser **QoreDB** dans votre dossier **Applications**.
+3. Au premier lancement, faites un clic droit sur l'application et choisissez **Ouvrir** pour contourner l'avertissement de Gatekeeper. macOS mémorisera ce choix.
+</Steps>
+
+<Callout type="tip">
+Vous ne savez pas de quel build vous avez besoin ? Cliquez sur le menu Pomme, puis sur **À propos de ce Mac**. Si vous voyez "Apple M1/M2/M3/M4", téléchargez le `.dmg` ARM64. Si vous voyez "Intel", prenez le `.dmg` Intel.
+</Callout>
+
+### Windows
+
+<Steps>
+1. Téléchargez le programme d'installation `.msi`.
+2. Double-cliquez pour exécuter l'installateur et suivez les instructions.
+3. Lancez QoreDB depuis le menu Démarrer.
+</Steps>
+
+Si vous préférez l'exécutable autonome `.exe`, double-cliquez dessus directement. Aucune installation n'est requise, mais les mises à jour sont manuelles.
+
+### Linux
+
+**Debian / Ubuntu**, utilisez le paquet `.deb` :
+
+```bash
+sudo dpkg -i qoredb_*.deb
+sudo apt-get install -f   # résoudre les dépendances manquantes éventuelles
+```
+
+**N'importe quelle distribution**, utilisez l'`.AppImage` :
+
+```bash
+chmod +x QoreDB-*.AppImage
+./QoreDB-*.AppImage
+```
+
+**Arch Linux**, installez depuis l'AUR :
+
+```bash
+yay -S qoredb-bin
+```
+
+## Compiler à partir des sources
+
+Si vous voulez la toute dernière version, si vous souhaitez contribuer ou si vous êtes sur une plateforme sans binaire précompilé, compilez à partir des sources.
+
+**Prérequis :**
+
+- Node.js 18 ou plus récent
+- pnpm
+- Rust 1.70 ou plus récent (`rustup` est le moyen le plus simple de l'obtenir)
+- [Dépendances système Tauri](https://tauri.app/start/prerequisites/) pour votre plateforme
+
+<details>
+<summary>Paquets système Ubuntu / Debian</summary>
+
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+  pkg-config \
+  libglib2.0-dev \
+  libgtk-3-dev \
+  libwebkit2gtk-4.1-dev \
+  libayatana-appindicator3-dev \
+  librsvg2-dev
+```
+
+</details>
+
+Ensuite, clonez, installez et compilez :
+
+```bash
+git clone https://github.com/raphplt/QoreDB.git
+cd QoreDB
+pnpm install
+pnpm tauri dev      # mode développement avec rechargement à chaud (hot reload)
+pnpm tauri build    # build de production, sortie dans src-tauri/target/release/
+```
+
+Un build de production génère un programme d'installation natif pour votre plateforme (`.dmg`, `.msi`, `.deb`, `.AppImage`) sous `src-tauri/target/release/bundle/`.
+
+## Vérifier l'installation
+
+Lancez QoreDB. Vous devriez voir l'écran de bienvenue avec la barre latérale de connexion à gauche et une zone d'espace de travail vide au centre.
+
+<Screenshot
+src="/images/docs/welcome-screen.png"
+  alt="Écran d'accueil de QoreDB au premier lancement"
+  todo="First-launch state: no connections in the sidebar yet, the central workspace area showing the welcome / empty state with the '+ Add connection' call-to-action visible. Capture both a light-mode and dark-mode version if possible (we can pick the better one)."
+/>
+
+Vous pouvez confirmer la version installée via le menu **Général** (Paramètres → Général → À propos), ou dans le coin inférieur droit de la fenêtre.
+
+## Mise à jour
+
+QoreDB vérifie les mises à jour au démarrage. Lorsqu'une nouvelle version est disponible, vous verrez une bannière proposant de la télécharger et de l'installer. Les mises à jour conservent vos connexions, votre coffre-fort, l'historique de vos requêtes et vos notebooks.
+
+Si vous avez installé via l'AUR d'Arch ou à partir des sources, mettez à jour via votre flux habituel (`yay -Syu qoredb-bin` ou `git pull && pnpm tauri build`).
+
+## Désinstallation
+
+| Plateforme | Étapes                                                                                                 |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| **macOS**  | Déplacez QoreDB hors des Applications. Les données de l'application se trouvent dans `~/Library/Application Support/com.qoredb.*`. |
+| **Windows**| Utilisez Paramètres → Applications → QoreDB → Désinstaller. Les données de l'application se trouvent sous `%APPDATA%\com.qoredb.*`. |
+| **Linux**  | `.deb` : `sudo apt remove qoredb`. `.AppImage` : supprimez simplement le fichier. Les données de l'application se trouvent sous `~/.local/share/com.qoredb.*` et `~/.config/com.qoredb.*`. |
+
+<Callout type="warning">
+La suppression de l'application ne supprime pas automatiquement votre coffre-fort chiffré ni vos connexions enregistrées. Si vous souhaitez une désinstallation complète et propre, supprimez également les répertoires de données de l'application listés ci-dessus. **Cela supprimera définitivement vos identifiants enregistrés.**
+</Callout>
+
+## Où aller ensuite
+
+- [Votre première connexion](/docs/getting-started/first-connection) : connectez-vous à une base de données en moins d'une minute
+- [Visite de l'interface](/docs/getting-started/interface-tour) : familiarisez-vous avec l'interface utilisateur principale

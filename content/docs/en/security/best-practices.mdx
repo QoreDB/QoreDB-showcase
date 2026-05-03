@@ -1,21 +1,149 @@
 ---
 title: Best practices
-description: Recommendations for safe day-to-day use.
+description: How to combine QoreDB's safety features (environments, read-only, vault, SSH, audit log) into a coherent setup that's hard to break by accident.
 premium: false
 ---
 
 # Best practices
 
-This page is a placeholder. Real content is being written.
+QoreDB's security features are **layered**: each one catches a different kind of mistake, and the right combination is what gives you a setup that's hard to break by accident. This page is a checklist of practical patterns that get the most out of those layers.
 
-## Overview
+None of this replaces server-side safety (database roles, `pg_hba.conf`, network segmentation). Treat QoreDB as a "client-side seatbelt": it makes the easy mistakes hard, while the database itself remains the source of truth for permissions.
 
-Recommendations for safe day-to-day use.
+## The basics: tag, name, and double-check
 
-## What's next
+The cheapest layer is also the most effective.
 
-Once finalized, this page will cover:
+### Tag every connection with the right environment
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+Every saved connection should have its [environment](/docs/connections/environments) set correctly: `development`, `staging`, or `production`. Most of QoreDB's safety prompts key off this tag, so getting it right is the foundation.
+
+A common mistake: cloning a connection from staging to point at production but forgetting to change the tag. Build the habit of confirming the tag right after creating or duplicating a connection.
+
+### Name connections clearly
+
+Pair the environment tag with a clear name. The tag drives prompts; the name drives your eyes. `myapp-prod` and `myapp-prod-replica` are far less confusing than `myapp` and `myapp-2`.
+
+A typical pattern for a multi-environment app:
+
+| Connection name         | Environment    | Read-only? | Notes                                    |
+| ----------------------- | -------------- | ---------- | ---------------------------------------- |
+| `myapp-dev`             | `development`  | Off        | Local Postgres, free experimentation.    |
+| `myapp-staging`         | `staging`      | Off        | Pre-prod replica, regular testing.       |
+| `myapp-prod`            | `production`   | Off        | Last resort. Rarely opened.              |
+| `myapp-prod-replica`    | `production`   | **On**     | Read-only replica for everyday queries.  |
+
+### Check the status bar before destructive work
+
+The environment badge in the status bar pulses red when the active connection is production. Glance at it before running anything that mutates data. A two-second habit avoids most accidents.
+
+## Production setups
+
+When you absolutely must connect to production, layer everything you have.
+
+### Use a read-only replica when possible
+
+Most "I just need to look at production" tasks are reads. A read-only replica with a read-only database user solves the problem without putting the writable instance at risk. In QoreDB, set:
+
+- **Environment**: `production` (red badge, confirmation prompts).
+- **Read-only**: on (mutations rejected client-side regardless).
+
+Plus, server-side, a database role with `SELECT`-only privileges. Three layers.
+
+### Two separate connections for write access
+
+If you need write access to production, keep it separate from the read-only one. Two saved connections, different names, different roles. The write-capable connection stays closed unless you actually need it.
+
+This makes the dangerous case visibly distinct from the safe case in the sidebar.
+
+### Trust the typed-confirmation prompts
+
+The production prompts ask you to type a name (table, database, or connection) before running. Don't paste the name; type it. The friction is the feature.
+
+If the prompt feels excessive in development, check that you didn't accidentally tag a dev connection as production.
+
+## Securing credentials
+
+### Always use the vault, never plain `.env`
+
+The vault stores connection passwords in your OS keychain (Keychain on macOS, Credential Manager on Windows, Secret Service on Linux). Argon2 is the master-password layer above that. See [Vault encryption](/docs/security/vault-encryption) for the full model.
+
+Don't paste passwords into editors, scripts, or `.env` files committed to git just because it's convenient. The vault makes the right thing the easy thing.
+
+### Enable the master password on shared machines
+
+If you use QoreDB on a shared workstation, a kiosk, or a laptop you sometimes hand to others, enable the **master password (app lock)**. It adds an Argon2-protected gate between launch and your saved credentials.
+
+On a single-user laptop with full-disk encryption, the master password is optional; the OS user session already gates the keychain.
+
+### Use SSH key auth for tunnels, with passphrases
+
+For SSH tunnels, prefer key-based auth over password-based. Encrypt your private key with a passphrase, and let QoreDB store the passphrase in the vault. This pairs OS-level key safety with QoreDB's vault-level convenience.
+
+See [SSH tunneling](/docs/connections/ssh-tunneling) for the full options.
+
+## Reviewing destructive work
+
+### Use the sandbox for ad-hoc edits
+
+When you need to make a series of edits and want to review the SQL before it runs, turn on the [sandbox](/docs/security/sandbox-mode) for the session. Edits are buffered locally; you generate the migration script, review the SQL, and only then apply.
+
+This is far safer than typing UPDATEs directly, especially for changes that touch multiple rows.
+
+### Snapshot before, diff after
+
+Before applying a non-trivial change to production, capture a [snapshot](/docs/diff-and-migrations/data-diff#using-snapshots) of the affected table. After the change, run a [data diff](/docs/diff-and-migrations/data-diff) between the snapshot and the post-change state. Confirm visually that the change did exactly what you intended, no more.
+
+### Wrap multi-statement work in a transaction
+
+For SQL backends that support it, wrap multi-statement updates in `BEGIN … COMMIT;`. If something looks wrong before COMMIT, `ROLLBACK` brings you back. See [Running queries](/docs/querying/running-queries#transactions).
+
+The sandbox and explicit transactions are complementary: the sandbox lets you compose the work, the transaction makes the apply atomic.
+
+## Hardening the interceptor
+
+### Keep the built-in rules on
+
+QoreDB's interceptor ships six built-in rules that target production destruction. They are on by default; keep them on. The cost is essentially zero (a confirmation dialog you wave through 99% of the time, a hard block on the 1% that would be a disaster).
+
+See [SQL safety validation](/docs/security/sql-safety-validation) for the full list.
+
+### Add custom rules for your environment
+
+If your domain has specific dangers (a particular table that should never be truncated, a particular column whose values are append-only), encode that as a [custom safety rule](/docs/security/sql-safety-validation#layer-3-custom-safety-rules-pro). The custom rule fires before the query runs, which is exactly when you want to be reminded.
+
+### Tune governance limits to your machine
+
+The three governance limits (max query duration, max result rows, max concurrent queries) protect both the client and the server from accidents. On a laptop with limited RAM, set `max_result_rows` to something like `100000`. A `SELECT *` from a million-row table truncates rather than crashing the client.
+
+## Auditing
+
+### Use the audit log
+
+Every executed query is recorded with timestamp, environment, success/failure, blocked-by-rule status, and timing. Core gets the last 50 entries; Pro gets unlimited with filters and JSON export.
+
+For incident review or compliance, this is your trail. Open the audit log periodically just to see what the day's work looked like. Patterns become visible.
+
+### Redact sensitive history
+
+If your queries routinely contain literals with secrets or PII, switch the [history retention](/docs/querying/query-history#redaction-and-privacy) setting to **Redacted** or **Off**. Redaction normalizes string and numeric literals to placeholders before persistence. Off skips persistence entirely.
+
+This is a separate setting from the audit log; both can be tuned.
+
+## Things QoreDB does *not* do
+
+To stay honest about the boundary:
+
+- **Server-side enforcement**: QoreDB's safety rules live on the client. Anyone connecting via `psql`, `mongosh` or another tool bypasses them.
+- **Network restrictions**: QoreDB doesn't open or restrict ports. Your firewall and VPN remain your network controls.
+- **User access management**: there's no concept of "user accounts" inside QoreDB. The OS user session and the database role are your authorization layers.
+- **Backups**: QoreDB does not back up your databases. Use your provider's backup tooling.
+
+The right mental model: QoreDB makes a developer's daily workflow safer through layered prompts and a careful UI; the database, the OS, and your network are still the actual security perimeter.
+
+## Where to go next
+
+- [Environments](/docs/connections/environments) to set the per-connection foundation
+- [Vault encryption](/docs/security/vault-encryption) for credential protection
+- [SQL safety validation](/docs/security/sql-safety-validation) for the safety detector and the interceptor
+- [Sandbox mode](/docs/security/sandbox-mode) for review-before-apply workflows

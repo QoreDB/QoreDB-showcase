@@ -1,21 +1,123 @@
 ---
 title: MongoDB
-description: Se connecter à une base MongoDB.
+description: Connectez QoreDB à MongoDB, y compris aux instances autonomes, aux jeux de réplicas et aux clusters MongoDB Atlas via des enregistrements SRV.
 premium: false
 ---
 
 # MongoDB
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB se connecte à MongoDB via le pilote natif officiel. Les instances autonomes, les jeux de réplicas (replica sets) et les clusters MongoDB Atlas fonctionnent tous avec le même flux de connexion.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à une base MongoDB.
+Le moyen le plus rapide est de coller une URI de connexion. QoreDB reconnaît les schémas `mongodb://` et `mongodb+srv://`.
 
-## À venir
+```
+mongodb://UTILISATEUR:MOTDEPASSE@HOTE:27017/BASEDEDONNEES
+mongodb+srv://UTILISATEUR:MOTDEPASSE@CLUSTER.mongodb.net/BASEDEDONNEES?authSource=admin
+```
 
-Une fois finalisée, cette page couvrira :
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **MongoDB**, collez l'URI, cliquez sur **Tester la connexion** (Test connection), puis sur **Enregistrer** (Save).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Champs de connexion
+
+Si vous préférez le formulaire, remplissez directement ces champs :
+
+| Champ          | Requis   | Remarques                                                                              |
+| -------------- | -------- | -------------------------------------------------------------------------------------- |
+| **Hôte** (Host)| Oui      | Nom d'hôte pour `mongodb://`, ou nom d'hôte SRV (sans `_mongodb._tcp.`) pour `+srv`.   |
+| **Port**       | Optionnel| Par défaut `27017`. Ignoré par `mongodb+srv://` (résolu depuis les enregistrements SRV).|
+| **Utilisateur**| Optionnel| Si votre cluster nécessite une authentification.                                       |
+| **Mot de passe**| Optionnel| Stocké chiffré dans le coffre-fort.                                                    |
+| **Base de données**| Optionnel| La base de données à laquelle se connecter. L'utilisateur est authentifié avec `authSource`, pas ceci. |
+| **authSource** | Optionnel| Base de données où réside l'utilisateur. Par défaut `admin` pour les config gérées.    |
+| **replicaSet** | Optionnel| Nom du replica set lors de la connexion directe à un replica set sans SRV.             |
+| **TLS / SSL**  | Optionnel| Booléen. Activé implicitement pour `mongodb+srv://`.                                   |
+
+## `mongodb://` vs `mongodb+srv://`
+
+Les deux schémas font la même chose mais découvrent les hôtes différemment.
+
+- `mongodb://` se connecte directement à un ou plusieurs noms d'hôtes que vous spécifiez. Utilisez-le pour les instances auto-hébergées, les ReplicaSets où vous listez explicitement les membres, ou le développement local.
+- `mongodb+srv://` recherche les enregistrements SRV et TXT pour découvrir les hôtes et les options par défaut. Le TLS est activé par défaut. C'est ce que MongoDB Atlas vous donne, et ce que vous souhaitez généralement pour tout cluster géré dans le cloud.
+
+```
+# Autonome (standalone) auto-hébergé ou replica set avec des hôtes explicites
+mongodb://UTILISATEUR:MOTDEPASSE@host1:27017,host2:27017,host3:27017/myapp?replicaSet=rs0
+
+# Atlas (ou tout fournisseur avec une configuration SRV appropriée)
+mongodb+srv://UTILISATEUR:MOTDEPASSE@cluster0.abc12.mongodb.net/myapp
+```
+
+## Authentification
+
+L'authentification Mongo est liée à une base de données (appelée la **source d'authentification** ou authSource), qui n'est pas nécessairement la base de données où se trouvent vos données. Trois scénarios :
+
+- **Atlas** : l'utilisateur réside généralement dans `admin`, alors définissez `authSource=admin` (Atlas le fait pour vous dans la chaîne de connexion).
+- **Auto-hébergé avec les utilisateurs dans la base de données de données** : omettez `authSource`, ou définissez-le sur la même base de données que vous souhaitez utiliser.
+- **Aucune authentification** : fonctionne pour les configurations `localhost` non authentifiées ; omettez simplement l'utilisateur et le mot de passe.
+
+Si l'authentification échoue avec une URI qui fonctionne par ailleurs, la cause la plus courante est un mauvais `authSource`.
+
+## TLS
+
+`mongodb+srv://` active automatiquement le TLS. Pour `mongodb://`, activez explicitement le TLS via le formulaire (ou avec `?tls=true` sur l'URI). Pour les certificats auto-signés en développement, ajoutez `?tlsInsecure=true`, mais ne l'utilisez jamais pour le trafic de production.
+
+## Replica sets et transactions
+
+QoreDB prend en charge les transactions multi-documents, mais MongoDB nécessite un jeu de réplicas (replica set) pour les activer. **Un MongoDB autonome et à instance unique ne prend pas en charge les transactions**, quel que soit le client. Si vous essayez d'en démarrer une, le serveur la rejettera.
+
+Pour le développement local, le moyen le plus simple de faire fonctionner les transactions est d'exécuter un replica set à un seul nœud :
+
+```bash
+docker run -d --name mongo-rs -p 27017:27017 \
+  mongo:7 --replSet rs0 --bind_ip_all
+docker exec -it mongo-rs mongosh --eval 'rs.initiate()'
+```
+
+Ensuite, connectez-vous avec `mongodb://localhost:27017/myapp?replicaSet=rs0`.
+
+## L'éditeur MongoDB
+
+Lorsque vous ouvrez un onglet de requête sur une connexion MongoDB, vous obtenez un éditeur compatible JSON avec quelques extras :
+
+- **Mise en évidence des opérateurs** : les opérateurs MongoDB (`$match`, `$group`, `$lookup`, etc.) sont visuellement distincts des clés régulières.
+- **Autocomplétion sur les collections** : les noms de collection de la connexion active apparaissent comme des suggestions.
+- **Linting JSON en temps réel** : les JSON invalides sont signalés au fur et à mesure que vous tapez.
+- **Validation du pipeline d'agrégation** : certains opérateurs côté serveur considérés comme dangereux (`$function`, `$accumulator`, `$where`) sont rejetés avant d'être envoyés. La profondeur du pipeline est également plafonnée.
+
+Vous pouvez exécuter les méthodes CRUD standard (`find`, `insertOne`, `updateMany`, `deleteOne`, etc.) et les pipelines `aggregate`.
+
+## Navigation dans les schémas
+
+Une fois connecté, l'arborescence de la barre latérale affiche :
+
+```
+Connexion → Base de données → Collections → (Index)
+```
+
+Mongo n'a pas de schémas fixes, donc QoreDB échantillonne des documents pour inférer les champs lorsque vous ouvrez une collection. La vue des données est conçue pour les données non structurées : JSON réductible, filtres par champ, et édition en ligne.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"Authentication failed"** : presque toujours un mauvais `authSource`. Vérifiez où réside réellement votre utilisateur (souvent `admin`), et ajustez le paramètre de l'URI.
+</Callout>
+
+<Callout type="warning">
+**"server selection timed out"** avec `mongodb+srv://` : la recherche SRV échoue. Vérifiez la résolution DNS et assurez-vous que votre réseau autorise les requêtes DNS sortantes. Certains réseaux d'entreprise bloquent les requêtes SRV.
+</Callout>
+
+<Callout type="warning">
+**"Transaction numbers are only allowed on a replica set member or mongos"** : vous avez essayé de démarrer une transaction sur une instance autonome. Convertissez l'instance en un replica set à un seul nœud (voir ci-dessus) ou exécutez le travail multi-instructions en dehors d'une transaction.
+</Callout>
+
+<Callout type="warning">
+**"$function/$accumulator/$where is not allowed"** : QoreDB rejette par défaut ces opérateurs d'exécution côté serveur par mesure de sécurité. Si vous en avez vraiment besoin et que vous faites confiance à votre saisie, exécutez l'opération directement via `mongosh`.
+</Callout>
+
+## Où aller ensuite
+
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les clusters derrière un bastion
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser de nombreuses connexions
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour les spécificités de l'éditeur

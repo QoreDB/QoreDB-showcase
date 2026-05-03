@@ -1,21 +1,95 @@
 ---
 title: Modèle Open Core
-description: Comment se répartissent les modules gratuits et Premium.
+description: Comment QoreDB équilibre la liberté open source et le développement durable avec un noyau Apache 2.0 clair et un niveau Pro sous licence BSL.
 premium: false
 ---
 
-# Modèle Open Core
+# Qu'est-ce que l'Open Core ?
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB suit un modèle **Open Core**. La grande majorité de l'application est gratuite, open source et sous licence Apache 2.0. Un petit ensemble de fonctionnalités avancées, utiles dans les grandes équipes ou pour des flux de travail de niveau production, est sous licence Business Source License 1.1 (BSL).
 
-## Aperçu
+Cette page explique ce que couvre chaque licence, pourquoi nous avons choisi ce modèle et ce que cela signifie pour vous dans la pratique.
 
-Comment se répartissent les modules gratuits et Premium.
+## Les deux licences
 
-## À venir
+| Niveau       | Licence                                | Ce que cela signifie                                                                                                                                           |
+| ------------ | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core**     | Apache 2.0                             | Utilisation, modification, redistribution et intégration gratuites, y compris à des fins commerciales. Aucune restriction, aucune redevance.                 |
+| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | Source disponible. Gratuit pour un usage personnel et professionnel interne. Devient Apache 2.0 quatre ans après sa sortie.                                   |
 
-Une fois finalisée, cette page couvrira :
+Chaque fichier source dans le dépôt porte un en-tête SPDX déclarant sa licence, de sorte que vous pouvez toujours savoir d'un coup d'œil à quel niveau appartient un morceau de code donné.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Ce qui est inclus dans le Core (Apache 2.0)
+
+Le noyau couvre tout ce dont vous avez besoin pour un client de base de données complet et de qualité production :
+
+- **Tous les pilotes de base de données** : PostgreSQL, MySQL, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB (et d'autres à venir bientôt)
+- **Gestion des connexions** : coffre-fort (vault), profils, tunnel SSH, protections d'environnement
+- **Éditeur et exécution de requêtes** : éditeurs SQL et MongoDB, coloration syntaxique, autocomplétion, historique, bibliothèque de requêtes
+- **Grille de données et édition** : édition en ligne, virtualisation, filtres côté serveur, édition en masse (jusqu'à 5 lignes)
+- **Navigateur de schémas** : tables, vues, routines, déclencheurs (triggers), index
+- **Éditeur DDL visuel** : CREATE et ALTER TABLE complets
+- **Diagramme ER** : graphe de schéma interactif avec des flux de travail d'isolement/focalisation
+- **Notebooks** : moteur de notebook complet avec variables paramétrées, Run All, import/export
+- **Importation CSV**, **pipeline d'exportation** (CSV/JSON/SQL/HTML), **gestion des transactions**
+- **Mode bac à sable (sandbox)**, **journalisation d'audit**, **mode lecture seule**, **détection de requêtes dangereuses**
+- **Fédération inter-bases de données** via DuckDB
+- **Espaces de travail**, **système multi-onglets**, **recherche globale**, **internationalisation (i18n) en 9 langues**
+
+En d'autres termes, le noyau est suffisant pour faire du travail réel tous les jours. La version Pro n'est pas un mur de paiement (paywall) bloquant les fonctionnalités essentielles.
+
+## Ce qui est inclus dans Premium (BSL 1.1)
+
+<Screenshot
+  src="/images/docs/visual-diff-premium.png"
+  alt="Vue de diff visuel dans QoreDB avec le badge Premium visible"
+/>
+
+Les fonctionnalités Premium sont des flux de travail avancés qui ne deviennent généralement utiles qu'une fois que vous utilisez intensivement QoreDB ou dans un cadre d'équipe :
+
+- **Data Diff visuel** : comparaison côte à côte des tables et des résultats de requêtes
+- **Voyage dans le temps (Time Travel)** : historique complet des lignes avec chronologie visuelle, filtres de plage, diff point à point et aperçu SQL d'annulation (Rollback)
+- **Cellules de graphiques dans les notebooks** : barres, lignes, camembert (pie), nuage de points (scatter)
+- **Édition en masse au-delà de 5 lignes**
+- **Exportation XLSX et Parquet**
+- **Assistant IA (BYOK)** : génération contextuelle de requêtes, suggestions basées sur les schémas, correction d'erreurs
+- **Profilage et interception avancée des requêtes** pour l'optimisation des performances
+
+Vous pouvez lire chaque ligne de code source pour ces fonctionnalités dans le [dépôt ouvert](https://github.com/QoreDB/QoreDB). Vous pouvez construire l'application vous-même avec ces fonctionnalités incluses pour un usage personnel. La licence empêche simplement une tierce partie de renommer QoreDB en un produit commercial qui nous concurrence.
+
+## Pourquoi Open Core
+
+L'open source pur sous Apache 2.0 est excellent pour les bibliothèques et l'infrastructure, mais pour un produit final destiné aux utilisateurs, il présente un mode de défaillance connu : les fournisseurs de cloud et les concurrents peuvent reconditionner le projet, le vendre comme le leur et ne rien reverser en retour. Cela tue la capacité de financer le développement continu.
+
+Les logiciels propriétaires purs présentent le mode de défaillance inverse : vous ne pouvez pas les auditer, vous ne pouvez pas corriger les bugs vous-même, vous ne pouvez pas les étendre et vous êtes enfermé.
+
+L'Open Core est le juste milieu :
+
+- **Vous restez libre** : vous pouvez lire, modifier, forker et exécuter QoreDB sans jamais nous payer.
+- **Le noyau est ouvert pour toujours** : Apache 2.0 signifie que les 90 % les plus utiles de l'application vous appartiennent inconditionnellement.
+- **Les fonctionnalités Premium sont également à source ouverte** : vous pouvez lire et apprendre du code, même si vous ne pouvez pas le reconditionner commercialement.
+- **Le Premium devient Apache 2.0 après quatre ans** : chaque fonctionnalité BSL passe sous une licence permissive au fil du temps. Le Premium d'aujourd'hui est le Core de demain.
+
+C'est le même modèle utilisé par Terraform/Vault d'HashiCorp (BSL 1.1), Sentry (BSL 1.1), CockroachDB (BSL 1.1) et d'autres.
+
+## Ce que cela signifie pour vous en pratique
+
+<Callout type="info">
+**Pour les développeurs individuels utilisant QoreDB au travail** : vous pouvez tout utiliser, Core et Premium, avec une licence Pro. Pas de friction, pas de restrictions sur l'utilisation interne.
+
+**Pour les équipes et les entreprises** : une licence Pro débloque toutes les fonctionnalités Premium pour vos membres. Le noyau (Core) reste gratuit quoi qu'il en soit.
+
+**Pour les contributeurs et les forks** : contribuez à n'importe quoi. Les requêtes d'extraction (PRs) sont les bienvenues sur les fichiers Core et Premium. Les en-têtes SPDX rendent la limite de licence explicite pour que vous sachiez ce que vous touchez.
+</Callout>
+
+<Callout type="warning">
+**Pour les concurrents** : vous ne pouvez pas prendre le code sous licence BSL et livrer un produit commercial qui concurrence QoreDB. Après quatre ans, cette restriction est levée automatiquement.
+</Callout>
+
+Si vous souhaitez obtenir le texte juridique complet, consultez les fichiers [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) (Apache 2.0) et [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) dans le dépôt.
+
+## Où aller ensuite
+
+- [Tarification](/pricing) pour voir ce qui est inclus dans la version Pro
+- [Installation](/docs/getting-started/installation) pour commencer
+- [Contribuer](/docs/resources/contributing) si vous souhaitez envoyer une PR

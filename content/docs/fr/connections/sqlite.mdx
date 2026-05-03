@@ -1,21 +1,94 @@
 ---
 title: SQLite
-description: Ouvrir un fichier SQLite local.
+description: Ouvrez un fichier de base de données SQLite local ou une base de données en mémoire. Pas de serveur, pas de port, pas d'identifiants.
 premium: false
 ---
 
 # SQLite
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+SQLite est le moteur le plus simple auquel se connecter : il n'y a pas de serveur et pas de réseau. Vous pointez QoreDB vers un fichier sur le disque (ou une base de données en mémoire) et vous êtes connecté.
 
-## Aperçu
+## Connexion rapide
 
-Ouvrir un fichier SQLite local.
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **SQLite**, et parcourez pour trouver un fichier ou collez un chemin.
 
-## À venir
+Vous pouvez également utiliser une URI `sqlite://` :
 
-Une fois finalisée, cette page couvrira :
+```
+sqlite:///chemin/absolu/vers/base_de_donnees.db
+sqlite://./chemin/relatif/vers/base_de_donnees.db
+sqlite://:memory:
+```
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Champs de connexion
+
+| Champ         | Requis | Remarques                                                                              |
+| ------------- | ------ | -------------------------------------------------------------------------------------- |
+| **Chemin**    | Oui    | Chemin absolu ou relatif vers un fichier `.db` / `.sqlite` / `.sqlite3`. Ou `:memory:`.|
+
+Il n'y a pas d'hôte, de port, d'utilisateur ou de mot de passe pour SQLite. Le "coffre-fort" (vault) de QoreDB s'applique toujours si vous enregistrez la connexion (pour le nom, l'environnement, SSH, etc.), mais aucun secret n'est stocké pour SQLite lui-même.
+
+## Création de fichier et extensions
+
+QoreDB **crée le fichier automatiquement** s'il n'existe pas. Vous pouvez pointer vers un chemin qui n'a pas encore été utilisé, cliquer sur Connecter, et le fichier sera créé sur le disque lors de la première écriture.
+
+Le pilote valide l'extension du fichier. Les extensions prises en charge sont :
+
+- `.db`
+- `.sqlite`
+- `.sqlite3`
+- `.db3`
+- `.s3db`
+- `.sl3`
+
+Si vous souhaitez une extension différente, renommez le fichier ou utilisez la forme `:memory:`.
+
+## Bases de données en mémoire
+
+Utilisez `:memory:` pour créer une base de données qui ne vit que dans la RAM et disparaît lorsque la connexion se ferme. Idéal pour des expériences rapides, des tests jetables et des brouillons.
+
+```
+sqlite::memory:
+```
+
+Vous pouvez également écrire `sqlite::memory:` directement dans le champ de chemin. Il n'y a pas de persistance ; quitter l'application ou fermer la connexion efface tout.
+
+## Mode WAL
+
+QoreDB ouvre les bases de données SQLite en mode journal **Write-Ahead Logging** (WAL) par défaut. WAL est le mode journal recommandé pour la plupart des utilisations modernes : meilleure concurrence (les lecteurs ne bloquent pas les rédacteurs et vice versa), commits plus rapides, et aucune étape supplémentaire de votre part.
+
+Un effet secondaire de WAL est que deux fichiers supplémentaires apparaissent à côté de votre fichier de base de données : `myapp.db-wal` et `myapp.db-shm`. Ils font partie du fonctionnement normal ; ne les supprimez pas tant que la base de données est en cours d'utilisation.
+
+Si votre base de données doit être ouverte par un outil plus ancien qui ne prend pas en charge WAL, vous pouvez revenir au mode de journal d'annulation (rollback) dans cet outil en exécutant `PRAGMA journal_mode=DELETE;`.
+
+## Remarques sur la concurrence
+
+SQLite autorise de nombreux lecteurs simultanés mais un seul rédacteur à la fois. Avec WAL, les lecteurs ne bloquent pas le rédacteur et vice versa, ce qui donne une impression de concurrence pour la plupart des cas d'utilisation de bureau et embarqués. Mais :
+
+- Les longues transactions d'écriture peuvent affamer les autres rédacteurs.
+- Deux connexions QoreDB (ou QoreDB et un autre outil) ouvrant le même fichier simultanément sont correctes pour les lectures, correctes pour un rédacteur à la fois, et **incorrectes** si les deux essaient d'écrire au même instant ; le second obtiendra un `SQLITE_BUSY`.
+
+Si vous utilisez SQLite comme espace de stockage pour une application multi-utilisateurs, c'est probablement le mauvais outil. Pour les flux de travail de développement de bureau, embarqués et à un seul utilisateur, c'est excellent.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"unable to open database file"** : le chemin est incorrect, ou le répertoire n'existe pas, ou le processus n'a pas la permission d'y écrire. Vérifiez le chemin ; rappelez-vous que les chemins relatifs sont résolus par rapport au répertoire de travail de QoreDB, pas à l'endroit d'où vous l'avez lancé.
+</Callout>
+
+<Callout type="warning">
+**"file is not a database"** : le fichier que vous avez ouvert n'est pas un fichier SQLite valide. Soit il a été créé par un système différent, soit il est corrompu. Essayez de l'ouvrir avec l'outil CLI `sqlite3` pour voir s'il peut le lire.
+</Callout>
+
+<Callout type="warning">
+**"database is locked"** (`SQLITE_BUSY`) : une autre connexion ou processus est en train d'écrire dans la même base de données. Avec WAL activé, c'est rare, mais cela peut arriver lors de transactions longues ou avec des outils non compatibles WAL maintenant un verrou.
+</Callout>
+
+<Callout type="tip">
+SQLite ignore les définitions de type sur les déclarations de colonnes (il a un typage dynamique avec une "affinité" de type). Une colonne déclarée `INTEGER` stockera sans problème une chaîne de caractères. Si l'intégrité de vos données importe, validez-la au niveau de l'application ou utilisez des contraintes `CHECK`.
+</Callout>
+
+## Où aller ensuite
+
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour l'éditeur SQL
+- [Référence : URLs de connexion](/docs/reference/connection-urls) pour la grammaire complète des URI

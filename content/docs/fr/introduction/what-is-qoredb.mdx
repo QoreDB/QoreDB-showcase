@@ -1,21 +1,66 @@
 ---
 title: Qu'est-ce que QoreDB
-description: Aperçu de QoreDB et de ses objectifs.
+description: Un client de base de données de bureau moderne, rapide et intuitif conçu pour les développeurs. Une alternative légère à DBeaver et pgAdmin.
 premium: false
 ---
 
-# Qu'est-ce que QoreDB
+# Un client de base de données moderne pour les développeurs
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+<Screenshot
+  src="/images/docs/hero.png"
+  alt="Fenêtre principale de QoreDB avec la barre latérale, l'éditeur de requêtes et le panneau de résultats"
+  todo="Hero shot of the full app: dark theme, a connection expanded in the sidebar showing tables, an active SQL query tab in the editor, a results grid below with a few rows. Use a real-looking dataset (no Lorem Ipsum). Capture at 1600×1000 on macOS for the prettiest window chrome."
+/>
 
-## Aperçu
+QoreDB est un client de base de données de bureau pour les développeurs. À partir d'une seule application, vous pouvez vous connecter à PostgreSQL, MySQL, MongoDB, SQLite, SQL Server, Redis, DuckDB, CockroachDB et d'autres, parcourir les schémas, écrire des requêtes, éditer des données et exécuter des notebooks.
 
-Aperçu de QoreDB et de ses objectifs.
+Il est construit avec Tauri, React et Rust, ce qui signifie un binaire natif de petite taille, un démarrage rapide et une faible utilisation de la mémoire par rapport aux clients basés sur Electron.
 
-## À venir
+## À qui s'adresse-t-il
 
-Une fois finalisée, cette page couvrira :
+QoreDB est conçu pour les **développeurs** qui veulent un outil qui ne les gêne pas :
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+- **Ingénieurs backend et full-stack** qui basculent entre plusieurs bases de données par jour et ne veulent pas d'un client distinct par moteur.
+- **Data engineers** qui ont besoin d'inspecter, de fédérer et d'exporter des données sur des sources hétérogènes.
+- **Administrateurs de bases de données (DBA) et SRE** qui se soucient de la sécurité en production : mode lecture seule, protections d'environnement, journalisation d'audit.
+- **Enthousiastes open-source** qui préfèrent les outils transparents aux clients propriétaires fermés.
+
+Que vous vous connectiez à un Postgres local pour la première fois ou que vous gériez des dizaines de connexions de production, QoreDB s'adapte d'un "effort minimal" à un "flux de travail avancé" sans vous imposer de complexité.
+
+## Ce que vous pouvez faire avec QoreDB
+
+L'ensemble des fonctionnalités est vaste, mais s'articule autour de quatre piliers :
+
+**Connectez-vous à n'importe quoi.** PostgreSQL (et Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, MongoDB, Redis, DuckDB, CockroachDB. Détection automatique du pilote à partir de la chaîne de connexion : collez un DSN et QoreDB choisit automatiquement le bon pilote. Le tunneling SSH avec prise en charge du proxy jump est intégré.
+
+**Interrogez et explorez.** Un éditeur SQL soigné avec coloration syntaxique, saisie semi-automatique et extraits de code. Un éditeur MongoDB dédié avec autocomplétion des collections et des opérateurs ainsi que la validation du pipeline d'agrégation. Un générateur de requêtes multi-dialectes fortement typé (QoreQuery) pour des requêtes portables. Diagrammes ER interactifs et visualisation du plan d'exécution. Une grille de données virtualisée haute performance avec filtrage, tri et pagination côté serveur.
+
+**Éditez et gérez les données en toute sécurité.** Édition de lignes en ligne sur SQL et NoSQL, éditions en masse multi-lignes avec aperçu SQL en direct, importation CSV avec détection automatique, transactions avec validation/annulation (commit/rollback) explicite et un mode bac à sable (sandbox) qui isole vos modifications locales et génère des migrations.
+
+**Restez productif tous les jours.** Un concept d'espace de travail qui regroupe les connexions, les requêtes et les notebooks par projet. Éditeur multi-onglets avec réorganisation par glisser-déposer et groupes d'onglets. Notebooks de bases de données (`.qnb`) mélangeant des cellules SQL/Mongo et Markdown avec des variables paramétrées, parfaits pour les runbooks, les post-mortems et les analyses partageables. Recherche globale avec `Cmd/Ctrl + K`. Thèmes sombre et clair. Disponible en 9 langues.
+
+## Pourquoi QoreDB existe
+
+L'état des clients de bases de données sur le bureau est divisé entre deux extrêmes. D'un côté, des outils gratuits qui sont puissants mais lourds et datés (DBeaver, pgAdmin, MySQL Workbench). De l'autre, des outils propriétaires soignés bloqués derrière des abonnements coûteux.
+
+QoreDB se situe au milieu : un client moderne, natif et performant avec un noyau open-source généreux et un niveau Pro durable pour les fonctionnalités avancées. Le but est de créer un outil que vous aimez vraiment utiliser toute la journée, sans sacrifier les capacités ni vous demander de payer avant même de l'avoir essayé.
+
+## Comment il est construit
+
+<Callout type="tip">
+QoreDB est construit sur Tauri 2 (Rust + webview natif), et non sur Electron. Le résultat est un binaire environ 10× plus petit, avec une utilisation de la mémoire et du CPU considérablement plus faible, et un démarrage plus rapide.
+</Callout>
+
+Le frontend est en React 19 avec TypeScript et Tailwind. Le backend est en Rust, avec `sqlx` pour les pilotes SQL, des pilotes natifs pour MongoDB et Redis, DuckDB intégré pour l'analytique et la fédération inter-bases de données, et une couche de commandes Tauri qui fait le pont entre les deux. Les identifiants sont stockés dans le trousseau natif du système d'exploitation (keychain), chiffrés avec Argon2.
+
+Si les rouages internes vous intéressent, la page [Modèle Open Core](/docs/introduction/open-core-model) explique ce qui est open source et ce qui ne l'est pas, et pourquoi.
+
+## Où aller ensuite
+
+Si vous n'avez jamais utilisé QoreDB auparavant, commencez par [Installation](/docs/getting-started/installation), puis parcourez [Votre première connexion](/docs/getting-started/first-connection) et la [Visite de l'interface](/docs/getting-started/interface-tour). Vingt minutes au total et vous aurez un modèle mental complet du produit.
+
+Si vous êtes déjà familier avec les clients de bases de données et que vous voulez vous lancer :
+
+- [Raccourcis clavier](/docs/reference/keyboard-shortcuts) : l'aide-mémoire
+- [URLs de connexion](/docs/reference/connection-urls) : formats DSN par pilote
+- [Limitations des pilotes](/docs/reference/driver-limitations) : ce qui diffère entre les moteurs

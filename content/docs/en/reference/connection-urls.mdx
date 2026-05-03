@@ -1,21 +1,170 @@
 ---
 title: Connection URLs
-description: Supported connection string formats.
+description: All connection URL schemes QoreDB accepts, with the recognized query parameters and default ports per driver.
 premium: false
 ---
 
 # Connection URLs
 
-This page is a placeholder. Real content is being written.
+QoreDB parses connection URLs into normalized fields before storing them. This page lists every scheme the parser accepts, the query parameters it recognizes, and the defaults that apply when you omit something.
 
-## Overview
+The driver is auto-detected from the scheme: paste a URL and QoreDB picks the right engine. You don't need to set the driver manually if your URL is well-formed.
 
-Supported connection string formats.
+## Quick lookup
 
-## What's next
+| Driver               | Schemes                                  | Default port |
+| -------------------- | ---------------------------------------- | ------------ |
+| **PostgreSQL**       | `postgres://`, `postgresql://`           | 5432         |
+| **MySQL / MariaDB**  | `mysql://`                               | 3306         |
+| **SQL Server**       | `mssql://`, `sqlserver://`               | 1433         |
+| **CockroachDB**      | `cockroachdb://`, `cockroach://`         | 26257        |
+| **MongoDB**          | `mongodb://`, `mongodb+srv://`           | 27017        |
+| **Redis**            | `redis://` (TCP), `rediss://` (TLS)      | 6379         |
+| **SQLite**           | (file path, `:memory:`)                  | n/a          |
+| **DuckDB**           | (file path, `:memory:`)                  | n/a          |
 
-Once finalized, this page will cover:
+Postgres-compatible providers (Supabase, Neon, TimescaleDB) use the standard `postgresql://` scheme. Pick the dedicated driver in the New Connection dialog if you want provider-specific schema niceties; either way the URL format is the same.
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+## PostgreSQL
+
+```
+postgresql://USER:PASSWORD@HOST:PORT/DATABASE?param=value&...
+postgres://USER:PASSWORD@HOST:PORT/DATABASE?param=value&...
+```
+
+**Recognized query parameters**
+
+| Param                           | Notes                                                    |
+| ------------------------------- | -------------------------------------------------------- |
+| `sslmode`                       | One of `disable`, `allow`, `prefer`, `require`, `verify-ca`, `verify-full`. |
+| `ssl`                           | Boolean. Accepts `true`/`false`/`1`/`0`/`yes`/`no`/`on`/`off`. |
+| `sslrootcert`, `sslcert`, `sslkey` | File paths. Setting any of them implicitly enables SSL. |
+
+Anything else is preserved as-is in the connection options.
+
+**Behavior notes**
+
+- `sslmode=disable` overrides any SSL-related parameter; the connection is plain TCP.
+- IPv6 hosts work with bracket notation: `postgresql://user@[::1]:5432/mydb`.
+
+## MySQL & MariaDB
+
+```
+mysql://USER:PASSWORD@HOST:PORT/DATABASE?param=value&...
+```
+
+**Recognized query parameters**
+
+| Param                                    | Notes                                                    |
+| ---------------------------------------- | -------------------------------------------------------- |
+| `ssl-mode` or `sslmode`                  | One of `DISABLED`, `PREFERRED`, `REQUIRED`, `VERIFY_CA`, `VERIFY_IDENTITY`. |
+| `ssl` or `usessl`                        | Boolean.                                                 |
+| `ssl-ca`, `ssl-cert`, `ssl-key`, `ssl-cipher` | File paths. Implicitly enable SSL.                  |
+
+## SQL Server
+
+```
+mssql://USER:PASSWORD@HOST:PORT/DATABASE?param=value&...
+sqlserver://USER:PASSWORD@HOST:PORT/DATABASE?param=value&...
+```
+
+**Recognized query parameters**
+
+| Param      | Notes                                                    |
+| ---------- | -------------------------------------------------------- |
+| `encrypt`  | Boolean. Forces TLS encryption.                          |
+| `ssl`      | Boolean (alias).                                         |
+
+The Windows authentication modes (NTLM, Integrated) are configured through the form, not the URL.
+
+## CockroachDB
+
+```
+cockroachdb://USER:PASSWORD@HOST:26257/DATABASE?sslmode=verify-full
+cockroach://USER:PASSWORD@HOST:26257/DATABASE?sslmode=verify-full
+```
+
+CockroachDB uses the same parameters as PostgreSQL (it speaks the Postgres wire protocol). The default port is **26257**, not 5432. The default database is **`defaultdb`**.
+
+You can also paste a `postgresql://` URL pointing at a CockroachDB cluster and pick the CockroachDB engine in the dialog; both work.
+
+## MongoDB
+
+```
+mongodb://USER:PASSWORD@HOST:27017/DATABASE?param=value&...
+mongodb+srv://USER:PASSWORD@CLUSTER/DATABASE?param=value&...
+```
+
+**Recognized query parameters**
+
+| Param                                  | Notes                                                       |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `tls` or `ssl`                         | Boolean. Enables TLS.                                       |
+| `authSource`                           | Database where the user is authenticated (typically `admin`). |
+| `replicaSet`                           | Replica set name when connecting directly to members.       |
+| `tlsCAFile`, `tlsClientCertificateKeyFile`, `tlsCertificateKeyFilePassword` | TLS file paths. Implicitly enable TLS. |
+
+**`mongodb+srv://` specifics**
+
+- TLS is enabled implicitly.
+- Port is resolved from DNS SRV records; you don't include it in the URL.
+- Used by MongoDB Atlas and most managed Mongo offerings.
+
+## Redis
+
+```
+redis://[USER:PASSWORD@]HOST:PORT[/DB_INDEX]?param=value&...
+rediss://[USER:PASSWORD@]HOST:PORT[/DB_INDEX]?param=value&...
+```
+
+`rediss://` (with two `s`) enables TLS. Otherwise the schemes behave the same way.
+
+The path segment after the host is the **database index** (an integer between 0 and 15 by default; configurable server-side).
+
+## SQLite
+
+SQLite has no URL scheme in the strict sense. You point at a file path or `:memory:`:
+
+```
+/absolute/path/to/database.db
+./relative/path/to/database.db
+:memory:
+```
+
+Accepted file extensions: `.db`, `.sqlite`, `.sqlite3`, `.db3`, `.s3db`, `.sl3`. The file is created automatically on first write if it doesn't exist. WAL journal mode is enabled by default.
+
+## DuckDB
+
+DuckDB also takes a path or `:memory:`:
+
+```
+/absolute/path/to/database.duckdb
+:memory:
+duckdb::memory:
+```
+
+Accepted extensions: `.duckdb`, `.db`. The file is created automatically on first write.
+
+## Parser errors
+
+The URL parser returns one of these errors when the URL is invalid.
+
+| Error                  | Cause                                                  |
+| ---------------------- | ------------------------------------------------------ |
+| `MissingHost`          | The URL doesn't include a host (e.g. `postgres:///mydb`). |
+| `InvalidUrl`           | The URL is not well-formed.                            |
+| `UnsupportedScheme`    | The scheme is not in the list above. Recognized schemes: `postgres`, `postgresql`, `mysql`, `mongodb`, `mongodb+srv`, `redis`, `rediss`, `mssql`, `sqlserver`, `cockroachdb`, `cockroach`. |
+| `InvalidUtf8`          | Percent-encoded characters don't decode to valid UTF-8. |
+| `InvalidPort`          | The port segment isn't a valid integer.                |
+
+## What happens after parsing
+
+The parser produces a normalized record with host, port, user, password, database, plus the recognized SSL/TLS options. **The raw URL is never persisted**: only the normalized fields are saved (the password ends up in the encrypted vault, the rest in the workspace manifest).
+
+This means you can paste a one-off URL with secrets in it, save the connection, and the URL itself is discarded. If you need to share a connection without sharing the password, share the manifest entry; the recipient enters the password in their own vault.
+
+## Where to go next
+
+- [PostgreSQL](/docs/connections/postgresql), [MySQL](/docs/connections/mysql), [MongoDB](/docs/connections/mongodb), [SQLite](/docs/connections/sqlite), [SSH tunneling](/docs/connections/ssh-tunneling)
+- [Driver limitations](/docs/reference/driver-limitations) for per-engine quirks
+- [Vault and profiles](/docs/connections/vault-and-profiles) for how the parsed credentials are stored

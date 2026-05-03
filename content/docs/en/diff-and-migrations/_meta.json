@@ -1,4 +1,4 @@
 {
-  "label": "Diff & Migrations",
-  "items": ["schema-diff", "migration-generation"]
+  "label": "Diff & migrations",
+  "items": ["data-diff", "migration-generation"]
 }

@@ -1,25 +1,115 @@
 ---
 title: Migration generation
-description: Generate SQL migrations from a diff.
+description: Make data changes locally in the sandbox, review them, then export the equivalent SQL script. The safe loop for ad-hoc edits without touching the live database first.
 premium: true
 ---
 
 # Migration generation
 
 <Callout type="info">
-  This module is part of the QoreDB Premium tier.
+This feature is part of the QoreDB Pro tier.
 </Callout>
 
-This page is a placeholder. Real content is being written.
+QoreDB has a **sandbox mode** that intercepts your data edits and buffers them locally instead of sending them to the database. When you're happy with the result, the sandbox generates a single SQL migration script you can review, download, or apply through QoreDB.
 
-## Overview
+This is the safe replacement for "I'll just open a transaction and edit the table directly". The intermediate state lives entirely on your machine until you decide what to do with it.
 
-Generate SQL migrations from a diff.
+## The flow at a glance
 
-## What's next
+1. **Turn on the sandbox** for the connection's session.
+2. **Edit data** as usual: inline cell edits, bulk edits, row deletes, row inserts.
+3. **Review** the buffered changes in the sandbox panel.
+4. **Generate** the SQL migration script from those changes.
+5. **Apply** through QoreDB, **download** the script for someone else to run, or **discard** the whole sandbox if you change your mind.
 
-Once finalized, this page will cover:
+Nothing in steps 1 to 3 hits the database.
 
-- Step-by-step walkthrough
-- Common pitfalls and tips
-- Related references
+## Turning the sandbox on and off
+
+Toggle the sandbox from the title bar (Flask icon) or with <KeyboardShortcut shortcut="Ctrl+Shift+S" />. When on, the connection's UI shows a colored sandbox indicator (blue for development, orange for staging, red for production) and a count of pending changes.
+
+While the sandbox is on, every edit you make through the data grid (inline edit, bulk edit, row insert, row delete) is captured into the local buffer. Direct SQL queries you run from the editor still execute as normal.
+
+The sandbox state is **per session** (per connection) and **persisted in `localStorage`**, so closing and reopening the app keeps your pending changes around.
+
+## Reviewing pending changes
+
+The sandbox panel lists every captured change with its type (`insert`, `update`, `delete`), the table it touches, the primary key of the affected row, and the old/new values where relevant.
+
+QoreDB merges related changes intelligently:
+
+- Two consecutive updates on the same row coalesce into one.
+- A delete that follows an insert of the same row cancels both out.
+
+This keeps the buffer compact and avoids generating noisy SQL.
+
+A few user preferences let you tune the panel:
+
+| Preference                  | Effect                                                   |
+| --------------------------- | -------------------------------------------------------- |
+| **Delete display**          | Show deleted rows with strikethrough or hide them entirely. |
+| **Confirm on discard**      | Ask before wiping all sandbox changes.                   |
+| **Auto-collapse panel**     | Hide the panel when empty.                               |
+| **Page size**               | Number of rows shown per page in the buffer.             |
+
+## Generating the migration script
+
+When you're ready, click **Apply** in the sandbox. QoreDB:
+
+1. Sends the buffered changes to the backend.
+2. Receives back a `MigrationScript` object containing:
+   - The `sql` text (one or more statements separated by `;`).
+   - The `statement_count`.
+   - A list of `warnings` that the backend wants you to read before running anything.
+
+The script is a **single SQL file**, not a Knex/Flyway-style timestamped folder. Multi-statement, ready to execute as is.
+
+## Reviewing before applying
+
+Before anything runs, QoreDB shows a **migration preview** dialog with:
+
+- The full SQL text in a syntax-highlighted block.
+- The statement count and total character count.
+- Any warnings the backend produced (for example, if a primary key changed in a way that may need attention, or if the script contains operations the engine flags as risky).
+
+Read the SQL. Always.
+
+## Apply, download, or discard
+
+From the preview, you have three options:
+
+- **Apply**: QoreDB executes the script against the live connection. For production connections, this requires you to type **APPLY** in a confirmation field (the same pattern as the production-mutation dialog described in [Environments](/docs/connections/environments)).
+- **Download**: save the SQL as a file named `migration_YYYY-MM-DD.sql`. You can then send it to a teammate, commit it to a migrations folder, or run it through your own deployment pipeline.
+- **Discard**: drop the sandbox state entirely. Nothing was sent to the database, so there's nothing to undo on the server.
+
+Once a script has been applied successfully, the sandbox is cleared automatically.
+
+## What's not supported
+
+To stay honest about the current behavior:
+
+- **No automatic rollback / down migration**: the generated script is "up" only. If you need to revert, capture a snapshot before applying and use the [data diff](/docs/diff-and-migrations/data-diff) to compare back, or write a manual undo SQL.
+- **No timestamped multi-file output**: it's a single `.sql` file per session, not a structured migration folder. If your project uses a migration framework (Knex, Flyway, Alembic, etc.), copy the generated SQL into a new file in that framework's format yourself.
+- **No DDL diff between two databases**: this page covers data changes captured in the sandbox. To compare the *contents* of two tables side by side, see [Data diff](/docs/diff-and-migrations/data-diff). Comparing schemas (DDL) between two databases is not in QoreDB today.
+
+## When to use the sandbox vs a transaction
+
+A regular `BEGIN … COMMIT/ROLLBACK` transaction is fine when:
+
+- You know exactly what statements you'll run.
+- You want database-level guarantees (atomicity, isolation).
+- The work is short enough to fit in a single session.
+
+The sandbox is better when:
+
+- You want to **explore** edits in the UI before committing to a plan (try, undo, try again).
+- You want to **share the SQL** with someone else for review before it runs.
+- You want a **clean script** at the end without typing the SQL by hand.
+
+The two are not exclusive: capture changes in the sandbox, generate the script, then run that script inside an explicit transaction (`BEGIN … COMMIT;`) for atomicity. Best of both worlds.
+
+## Where to go next
+
+- [Data diff](/docs/diff-and-migrations/data-diff) to compare the result before and after a migration
+- [Environments](/docs/connections/environments) for the safety prompts when applying against production
+- [Pricing](/pricing) to see what's included in Pro

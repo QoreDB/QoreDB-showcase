@@ -1,21 +1,94 @@
 ---
 title: Historique des requêtes
-description: Retrouvez n'importe quelle requête passée.
+description: Chaque requête que vous avez exécutée, consultable, avec le temps et le nombre de lignes. Par espace de travail, limité à 100 entrées, avec anonymisation optionnelle.
 premium: false
 ---
 
 # Historique des requêtes
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+Chaque requête exécutée par QoreDB est enregistrée dans un historique local. Vous pouvez rechercher dans le journal, réexécuter une entrée, marquer des favoris et l'utiliser comme mémoire de ce que vous avez fait et sur quelle base de données. L'historique est stocké localement ; rien ne quitte votre machine.
 
-## Aperçu
+## Ce qui est stocké
 
-Retrouvez n'importe quelle requête passée.
+Chaque entrée enregistre :
 
-## À venir
+- Le **texte de la requête**.
+- La **session** sur laquelle elle s'est exécutée (quelle connexion / base de données).
+- Le **pilote** (driver) qui l'a gérée (PostgreSQL, MySQL, MongoDB, etc.).
+- La **base de données cible** (lorsque le pilote en expose une).
+- L'**horodatage** (timestamp) de l'exécution.
+- Le **temps d'exécution** et le **temps total**, en millisecondes.
+- Le **nombre de lignes** renvoyées (le cas échéant).
+- Le **message d'erreur**, si la requête a échoué.
 
-Une fois finalisée, cette page couvrira :
+Ensemble, c'est suffisant pour identifier une requête des semaines plus tard et la réexécuter telle quelle ou avec des modifications.
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Stockage et limites
+
+L'historique est conservé dans le `localStorage` de votre navigateur, sous une clé propre à l'espace de travail actif, de sorte que différents espaces de travail ont des historiques différents. Changer d'espace de travail change également la vue de l'historique.
+
+Le journal est limité à **100 entrées** par espace de travail. Une fois plein, l'entrée la plus ancienne est supprimée lorsqu'une nouvelle requête est ajoutée.
+
+Cela signifie que l'historique n'est pas un journal d'audit à long terme ; c'est un brouillon à court terme de l'activité récente. Pour des enregistrements permanents, enregistrez les requêtes qui vous intéressent dans la [bibliothèque](/docs/querying/saved-queries) ou utilisez la fonction de journal d'audit.
+
+## Ouvrir l'historique
+
+Le panneau d'historique s'ouvre depuis :
+
+- Le **bouton d'historique** dans la barre de titre.
+- La **palette de commandes** (<KeyboardShortcut shortcut="Cmd+K" />, puis recherchez "history").
+
+Le panneau affiche les entrées de la plus récente à la plus ancienne, avec le texte de la requête, l'horodatage, le statut (succès ou erreur), le pilote et le nombre de lignes.
+
+## Recherche
+
+Une zone de recherche en haut du panneau effectue une correspondance de sous-chaîne insensible à la casse sur le texte de la requête. Modèles utiles :
+
+- Recherchez un nom de table pour trouver toutes les requêtes qui l'ont touchée.
+- Recherchez un mot-clé d'erreur pour trouver les exécutions échouées.
+- Recherchez le début d'un `SELECT … FROM …` pour trouver une requête particulière que vous avez écrite hier.
+
+Il n'y a pas de syntaxe d'opérateur ; c'est une simple recherche de sous-chaîne.
+
+## Réexécuter une entrée
+
+Cliquez sur n'importe quelle entrée de l'historique pour charger sa requête dans un nouvel onglet d'éditeur sur la même connexion. À partir de là, vous pouvez la modifier et l'exécuter comme d'habitude. L'entrée de l'historique elle-même reste inchangée ; l'exécuter à nouveau crée une nouvelle entrée.
+
+## Favoris
+
+Marquez les requêtes fréquemment nécessaires comme favoris avec l'icône d'étoile. Les favoris :
+
+- Restent consultables à partir de la palette de commandes globale (<KeyboardShortcut shortcut="Cmd+K" />), de sorte que vous n'avez pas besoin d'ouvrir le panneau d'historique pour les trouver.
+- Peuvent être filtrés dans la vue de l'historique ("Favoris uniquement").
+
+Les favoris sont liés à l'espace de travail, comme le reste de l'historique.
+
+## Anonymisation (Redaction) et confidentialité
+
+Certains espaces de travail gèrent des requêtes contenant des secrets dans des littéraux (mots de passe, clés API, PII). Pour ceux-ci, le paramètre de **rétention de l'historique** contrôle ce qui est conservé :
+
+- **Historique complet** (par défaut) : le texte de la requête est stocké tel quel.
+- **Historique expurgé** (redacted history) : les requêtes sont stockées mais avec des littéraux anonymisés. Vous voyez la forme de la requête (`SELECT … WHERE password = '<REDACTED>'`) mais pas les valeurs réelles.
+- **Désactivé** (Off) : aucun historique n'est conservé. La session en cours a toujours un historique en mémoire, mais rien ne survit à un redémarrage.
+
+Le paramètre se trouve dans **Paramètres → Données → Rétention de l'historique** (Settings → Data → History retention).
+
+<Callout type="tip">
+L'anonymisation (redaction) normalise les chaînes et les littéraux numériques en espaces réservés (placeholders). C'est suffisant pour garder les informations d'identification et les PII hors du `localStorage`, mais ce n'est pas une garantie contre les fuites dans tous les cas particuliers (une forme de requête inhabituelle peut passer à travers). Lors de travaux sur des systèmes hautement sensibles, préférez le réglage "désactivé".
+</Callout>
+
+## Effacer l'historique
+
+Pour effacer l'historique de l'espace de travail actuel, utilisez l'icône de corbeille dans le panneau d'historique (une confirmation est demandée avant la suppression).
+
+Pour effacer l'historique globalement dans tous les espaces de travail, effacez le `localStorage` de QoreDB depuis les outils de développement au niveau du système d'exploitation. Il n'y a pas de bouton "tout effacer" dans l'application.
+
+## Exportation
+
+L'historique n'est pas exporté en tant que flux de travail de premier plan (étant donné que la limite de 100 entrées le rend à court terme). Si vous avez besoin de conserver une requête, enregistrez-la plutôt dans la [bibliothèque de requêtes](/docs/querying/saved-queries).
+
+## Où aller ensuite
+
+- [Requêtes enregistrées](/docs/querying/saved-queries) : l'équivalent durable et organisé de l'historique
+- [Exécuter des requêtes](/docs/querying/running-queries) : détails d'exécution et de chronométrage
+- [Référence : raccourcis clavier](/docs/reference/keyboard-shortcuts) : tous les raccourcis de QoreDB en un coup d'œil

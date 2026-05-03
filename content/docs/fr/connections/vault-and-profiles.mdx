@@ -1,21 +1,94 @@
 ---
-title: Vault & profils
-description: Chiffrer les identifiants et basculer entre profils.
+title: Coffre-fort et profils
+description: Comment QoreDB stocke les informations de connexion, le verrouillage d'application optionnel, et comment les environnements et les espaces de travail vous aident à organiser de nombreuses connexions.
 premium: false
 ---
 
-# Vault & profils
+# Coffre-fort et profils
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB stocke les détails de votre connexion à deux endroits : un manifeste JSON en clair pour les parties non sensibles (nom, hôte, port, environnement), et un **coffre-fort** (vault) chiffré pour tout ce qui l'est (mots de passe, phrases secrètes de clé SSH, mots de passe de proxy). Cette page explique où vit chaque pièce, comment fonctionne le chiffrement, et comment les environnements et les espaces de travail s'intègrent dans le tableau.
 
-## Aperçu
+## Ce qui est stocké où
 
-Chiffrer les identifiants et basculer entre profils.
+| Données                                          | Emplacement                                                                      |
+| ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Nom de la connexion, hôte, port, utilisateur, BD, environnement | Manifeste JSON en clair dans le dossier de votre espace de travail. |
+| Mot de passe BD, mot de passe SSH, phrase secrète SSH, mot de passe proxy | Chiffré, dans le trousseau de clés natif de votre système d'exploitation. |
+| Métadonnées de l'espace de travail               | `.qoredb/workspace.json` à l'intérieur du dossier de l'espace de travail. |
+| Hash du mot de passe maître de l'app lock        | Haché (Argon2), stocké dans le trousseau de clés.                                |
 
-## À venir
+Le manifeste en texte clair ne contient jamais de secrets. Vous pouvez placer en toute sécurité un dossier d'espace de travail sous contrôle de version ou le synchroniser entre machines ; les secrets ne suivront simplement pas tant que vous ne les aurez pas saisis à nouveau sur chaque machine.
 
-Une fois finalisée, cette page couvrira :
+## Le coffre-fort : où vivent réellement les secrets
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+QoreDB utilise le magasin d'informations d'identification natif de votre système d'exploitation comme backend pour les secrets, via la bibliothèque multiplateforme `keyring`. Cela signifie :
+
+- **macOS** : les secrets sont stockés dans le **Trousseau d'accès** (Keychain Access).
+- **Windows** : les secrets sont stockés dans le **Gestionnaire d'informations d'identification** (Credential Manager).
+- **Linux** : les secrets sont stockés via l'API **Secret Service** (GNOME Keyring, KWallet ou tout service compatible).
+
+Chaque connexion enregistrée correspond à une entrée d'informations d'identification dans le trousseau, avec un espace de noms (namespace) par projet afin que les différents espaces de travail n'entrent pas en collision. Vous pouvez ouvrir le gestionnaire de trousseau de clés de votre système d'exploitation à tout moment pour inspecter ou révoquer des entrées.
+
+<Callout type="tip">
+QoreDB ne persiste jamais les URL de connexion brutes. Lorsque vous collez un DSN, il est analysé en champs normalisés, et seule la composante mot de passe aboutit dans le coffre-fort ; le reste va dans le manifeste.
+</Callout>
+
+## Verrouillage de l'application (App lock)
+
+Par défaut, QoreDB déverrouille le coffre-fort dès que la session utilisateur de l'OS est authentifiée (pas d'invite supplémentaire). Pour les environnements où cela n'est pas suffisant, vous pouvez activer un **verrou d'application** (mot de passe maître) que QoreDB exigera avant d'ouvrir le coffre-fort.
+
+Le mot de passe maître n'est jamais stocké en texte clair. QoreDB le hache avec **Argon2** (un algorithme de hachage de mot de passe à coût mémoire important, conçu exactement pour ce cas d'utilisation) et stocke uniquement le hachage dans le trousseau de clés. Lors du déverrouillage, votre saisie est hachée et comparée.
+
+Si vous oubliez le mot de passe maître, la seule solution est de réinitialiser le coffre-fort, ce qui supprime tous les secrets stockés. Les métadonnées de connexion dans le manifeste survivent ; vous devrez simplement saisir à nouveau les mots de passe lors de la prochaine utilisation.
+
+## Environnements
+
+Chaque connexion enregistrée porte une étiquette d'**environnement** (`development`, `staging` ou `production`). L'étiquette détermine le badge coloré dans la barre d'état et la barre latérale, et protège les mutations en production derrière une boîte de dialogue de confirmation.
+
+Le comportement complet est documenté sur sa propre page : [Environnements](/docs/connections/environments).
+
+## Profils via les espaces de travail
+
+QoreDB n'a pas de concept de "profils" distinct. La façon dont vous organisez de nombreuses connexions se fait via des **espaces de travail** (workspaces) : chaque espace de travail possède son propre ensemble de connexions, sa propre bibliothèque de requêtes enregistrées et son propre historique.
+
+Modèles courants :
+
+- **Un espace de travail par client ou projet** : séparez le travail du client A du client B. Changer d'espace de travail se fait en un clic dans le sélecteur.
+- **Un espace de travail par échelle d'environnement** : un espace de travail "production" et un espace de travail "développement", chacun avec les connexions correspondantes. Combiné à l'étiquette d'environnement, cela offre une séparation nette.
+- **Un espace de travail partagé "brouillon" (scratch)** : pour des explorations ponctuelles et des connexions ad hoc qui n'ont pas leur place de manière permanente.
+
+Chaque espace de travail n'est qu'un dossier sur le disque avec un petit manifeste. Vous pouvez conserver les dossiers d'espace de travail dans git, les synchroniser avec Dropbox/iCloud, ou les copier d'une machine à l'autre ; le manifeste est portable, les secrets ne le sont pas (ils vivent dans le trousseau de clés de chaque machine).
+
+## Partager des connexions entre plusieurs machines
+
+Étant donné que les secrets sont stockés dans le trousseau natif de chaque OS, synchroniser simplement le dossier de l'espace de travail ne suffit pas pour faire fonctionner les connexions sur une deuxième machine ; vous devrez saisir à nouveau les mots de passe lors de la première utilisation. C'est fait exprès : les entrées du trousseau ne quittent pas l'appareil, ce qui vous protège si un dossier synchronisé fuite.
+
+Si vous avez besoin qu'une connexion fonctionne sur plusieurs machines :
+
+- Saisissez à nouveau les informations d'identification dans le coffre-fort de chaque machine la première fois que vous utilisez la connexion.
+- Ou, pour les comptes de service qui n'ont pas de propriétaire personnel, stockez le mot de passe dans un gestionnaire de mots de passe d'équipe et collez-le.
+- Ou, utilisez des clés SSH sur chaque machine ; référencez le chemin de la clé dans la section SSH de la connexion, et laissez le trousseau ne retenir que la phrase secrète (ou rien, si la clé n'est pas chiffrée).
+
+## Questions courantes
+
+<Callout type="info">
+**Puis-je exporter et réimporter des connexions ?** : oui pour les métadonnées (le manifeste est un fichier JSON normal que vous pouvez copier), non pour les secrets (ils vivent dans le trousseau de clés de l'OS). Les réimportations nécessitent de ressaisir les mots de passe sur la machine cible.
+</Callout>
+
+<Callout type="info">
+**Puis-je désactiver complètement le coffre-fort ?** : non. Même si vous n'utilisez pas de mot de passe maître, les secrets passent toujours par le trousseau de l'OS plutôt que d'être stockés sur le disque en texte clair.
+</Callout>
+
+<Callout type="info">
+**Que se passe-t-il si je supprime une connexion ?** : l'entrée du manifeste est supprimée et l'entrée correspondante du trousseau de clés est effacée. Le secret est définitivement perdu.
+</Callout>
+
+<Callout type="info">
+**Le coffre-fort se synchronise-t-il entre les machines ?** : pas de lui-même. Le manifeste peut être synchronisé ; les secrets restent en local sur l'appareil. Si vous avez besoin de synchroniser les secrets entre les appareils, utilisez un gestionnaire de mots de passe d'équipe et collez les identifiants sur chaque machine.
+</Callout>
+
+## Où aller ensuite
+
+- [Chiffrement du coffre-fort](/docs/security/vault-encryption) pour une plongée plus approfondie dans le modèle de sécurité
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les connexions derrière un bastion
+- Guides spécifiques aux pilotes [PostgreSQL](/docs/connections/postgresql), [MySQL](/docs/connections/mysql), [MongoDB](/docs/connections/mongodb)

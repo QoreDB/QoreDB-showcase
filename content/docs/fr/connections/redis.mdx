@@ -1,21 +1,87 @@
 ---
 title: Redis
-description: Se connecter à Redis.
+description: Connectez QoreDB à Redis (ou à des serveurs compatibles Redis) et parcourez les clés de tous les types de données natifs.
 premium: false
 ---
 
 # Redis
 
-Cette page est un brouillon. Le contenu définitif est en cours de rédaction.
+QoreDB se connecte à Redis via le pilote officiel `redis-rs`. Les instances autonomes et les services Redis gérés (AWS ElastiCache, Redis Cloud, Upstash, DigitalOcean Managed Redis, etc.) fonctionnent tous avec le même flux de connexion.
 
-## Aperçu
+## Connexion rapide
 
-Se connecter à Redis.
+Collez une URI de connexion. QoreDB reconnaît à la fois les schémas `redis://` (TCP en clair) et `rediss://` (TLS).
 
-## À venir
+```
+redis://[UTILISATEUR:MOTDEPASSE@]HOTE:6379[/INDEX_BD]
+rediss://[UTILISATEUR:MOTDEPASSE@]HOTE:6379[/INDEX_BD]
+```
 
-Une fois finalisée, cette page couvrira :
+Ouvrez **Nouvelle Connexion** (New Connection), choisissez **Redis**, collez l'URI, cliquez sur **Tester la connexion** (Test connection), puis sur **Enregistrer** (Save).
 
-- Guide pas à pas
-- Pièges courants et astuces
-- Références associées
+## Champs de connexion
+
+| Champ          | Requis   | Remarques                                                                          |
+| -------------- | -------- | ---------------------------------------------------------------------------------- |
+| **Hôte** (Host)| Oui      | Nom d'hôte ou adresse IP.                                                          |
+| **Port**       | Oui      | Par défaut `6379`.                                                                 |
+| **Utilisateur**| Optionnel| Pour Redis 6+ avec ACL. Laissez vide pour les configurations historiques utilisant uniquement `requirepass`. |
+| **Mot de passe**| Optionnel| Stocké chiffré dans le coffre-fort.                                                |
+| **Base de données**| Optionnel| Index de la base de données, un entier entre `0` et `15` (configurable côté serveur). |
+| **SSL/TLS**    | Optionnel| Active le mode `rediss://` pour les connexions chiffrées.                          |
+
+## Authentification
+
+Redis 6 a introduit les ACL (Access Control Lists). Deux modèles sont pris en charge :
+
+- **Mot de passe uniquement** (Redis 5 et antérieur, ou Redis 6 avec `requirepass`) : laissez **Utilisateur** vide, remplissez **Mot de passe**. S'authentifie en tant qu'utilisateur `default` implicite.
+- **Utilisateur ACL + mot de passe** (Redis 6+) : remplissez les deux champs. S'authentifie en tant qu'utilisateur nommé avec les permissions de commande et de clé qui lui ont été accordées.
+
+Si votre fournisseur ne documente qu'un mot de passe, vous êtes en mode "mot de passe uniquement". Les services gérés (Upstash, Redis Cloud) utilisent généralement l'ACL avec un utilisateur généré.
+
+## Index de base de données
+
+Une seule instance Redis peut contenir jusqu'à 16 bases de données logiques (numérotées de `0` à `15`), partitionnées par index. La valeur par défaut est `0`. Utilisez le champ **Base de données** (ou le segment `/N` final de l'URI) pour changer.
+
+Remarque : Redis Cluster et la plupart des services gérés n'utilisent que la base de données `0` ; la fonctionnalité multi-bases de données est rarement utilisée en production.
+
+## TLS
+
+Utilisez `rediss://` (avec deux `s`) ou activez le commutateur SSL/TLS pour chiffrer la connexion. C'est requis par :
+
+- AWS ElastiCache pour Redis lorsque le chiffrement en transit ("in-transit encryption") est activé
+- Redis Cloud
+- Upstash
+- La plupart des services Redis gérés accessibles via l'Internet public
+
+## Ce que vous pouvez faire une fois connecté
+
+QoreDB affiche l'instance Redis connectée dans la barre latérale. Vous pouvez :
+
+- **Parcourir les clés** dans tous les types natifs : STRING, HASH, LIST, SET, ZSET (ensemble trié) et STREAM.
+- **Inspecter les valeurs**, avec des visualiseurs tenant compte du type (un hash montre les champs et les valeurs, un ensemble trié montre les membres avec leurs scores, etc.).
+- **Exécuter des commandes** via l'éditeur pour du travail ad hoc.
+
+## Problèmes courants
+
+<Callout type="warning">
+**"NOAUTH Authentication required"** : le serveur a la configuration `requirepass` définie mais aucun mot de passe n'a été fourni. Remplissez le champ du mot de passe.
+</Callout>
+
+<Callout type="warning">
+**"WRONGPASS invalid username-password pair or user is disabled"** : les informations d'identification sont erronées, l'utilisateur ACL est désactivé, ou vous ciblez un Redis 6+ ACL avec l'ancien flux de "mot de passe uniquement". Vérifiez l'utilisateur avec `ACL WHOAMI` et `ACL LIST` depuis une session fonctionnelle.
+</Callout>
+
+<Callout type="warning">
+**"connection refused" avec `rediss://`** : le serveur n'écoute pas sur TLS. Soit c'est un Redis en clair (utilisez `redis://`), soit vous utilisez le mauvais port. Certains fournisseurs gérés exposent TLS sur un port différent.
+</Callout>
+
+<Callout type="warning">
+**"DB index is out of range"** : vous avez ciblé un index de base de données supérieur au paramètre `databases` du serveur (par défaut 16). Diminuez l'index ou augmentez la limite du serveur.
+</Callout>
+
+## Où aller ensuite
+
+- [Tunneling SSH](/docs/connections/ssh-tunneling) pour les instances derrière un bastion
+- [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour organiser de nombreuses connexions
+- [Interrogation : éditeur et autocomplétion](/docs/querying/editor) pour les spécificités de l'éditeur
