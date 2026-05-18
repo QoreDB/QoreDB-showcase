@@ -1,0 +1,1374 @@
+[
+  {
+    "_type": "block",
+    "_key": "b01",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s01a",
+        "text": "Un client de base de données est un canal direct vers des données sensibles. Identifiants de connexion, mots de passe applicatifs, jetons d'API, valeurs métier. Tout cela transite par QoreDB sous forme de requêtes, de réponses et de credentials. Le risque n'est pas seulement l'exécution des requêtes, c'est leur trace. Audit, profiling de requêtes lentes, exports de session, historique de l'éditeur. Chaque mécanisme qui persiste une chaîne sur disque ou en mémoire devient une fuite potentielle.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b02",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s02a",
+        "text": "La réponse de QoreDB tient en deux dispositifs cohabitant : un wrapper de type ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s02b",
+        "text": "Sensitive<T>",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s02c",
+        "text": " côté Rust pour les secrets en mémoire, et une fonction ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s02d",
+        "text": "redact_query",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s02e",
+        "text": " spécialisée par moteur pour les requêtes destinées aux journaux. Les deux sont déclenchés automatiquement, sans intervention du développeur, au plus près de la source.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "h1",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "sh1",
+        "text": "Sensitive<T>, la rédaction au niveau du type",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b03",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s03a",
+        "text": "La première ligne de défense est dans le système de types. Tout secret manipulé côté backend traverse ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03b",
+        "text": "Sensitive<T>",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03c",
+        "text": ", défini dans ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03d",
+        "text": "src-tauri/src/observability/sensitive.rs",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03e",
+        "text": ". Le wrapper implémente ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03f",
+        "text": "Debug",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03g",
+        "text": " et ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03h",
+        "text": "Display",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03i",
+        "text": " en émettant la chaîne ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03j",
+        "text": "[REDACTED]",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03k",
+        "text": ", et ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03l",
+        "text": "Serialize",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03m",
+        "text": " en émettant ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03n",
+        "text": "***",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03o",
+        "text": ". Toute trace produite par ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03p",
+        "text": "tracing",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03q",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03r",
+        "text": "println!",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03s",
+        "text": " ou ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03t",
+        "text": "serde_json::to_string",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03u",
+        "text": " est donc structurellement incapable d'exposer la valeur. Pour y accéder, il faut appeler ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03v",
+        "text": ".expose()",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03w",
+        "text": " ou ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s03x",
+        "text": ".into_inner()",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s03y",
+        "text": ". Deux gestes explicites, faciles à repérer en revue de code.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b04",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s04a",
+        "text": "Le vault l'utilise pour ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s04b",
+        "text": "db_password",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s04c",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s04d",
+        "text": "ssh_password",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s04e",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s04f",
+        "text": "ssh_key_passphrase",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s04g",
+        "text": " et ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s04h",
+        "text": "proxy_password",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s04i",
+        "text": ". Le coût est minimal, juste une struct tuple autour de la valeur. Le bénéfice est concret : aucune ligne de log accidentelle, aucun panic message, aucune sérialisation IPC ne peut leaker un identifiant. La protection est portée par le compilateur, pas par la discipline du contributeur.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "h2",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "sh2",
+        "text": "Trois stratégies de rédaction selon le moteur",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b05",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s05a",
+        "text": "La requête est une autre histoire. Une chaîne arbitraire avec littéraux, paramètres inline, parfois directement des secrets en clair. Une regex unique appliquée à tous les moteurs serait inefficace : la syntaxe Mongo ne ressemble pas à du SQL, et un script Lua envoyé à Redis n'a rien de commun avec un INSERT. QoreDB dispatche donc la rédaction selon le ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s05b",
+        "text": "driver_id",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s05c",
+        "text": " dans ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s05d",
+        "text": "src-tauri/src/interceptor/redaction.rs",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s05e",
+        "text": ".",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b06",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s06a",
+        "text": "Pour les drivers SQL (PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, CockroachDB), trois passes regex compilées en ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06b",
+        "text": "OnceLock",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06c",
+        "text": " s'appliquent dans l'ordre. La première neutralise les URI de connexion : ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06d",
+        "text": "postgres://user:pass@host",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06e",
+        "text": " devient ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06f",
+        "text": "postgres://***@host",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06g",
+        "text": ". La deuxième cible les assignations sensibles : ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06h",
+        "text": "password=",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06i",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06j",
+        "text": "passwd=",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06k",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06l",
+        "text": "secret=",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06m",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06n",
+        "text": "token=",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06o",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06p",
+        "text": "api_key=",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06q",
+        "text": ". La troisième remplace tout littéral entre quotes simples par ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06r",
+        "text": "'[REDACTED]'",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06s",
+        "text": ", avec gestion correcte des quotes doublées (le classique ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s06t",
+        "text": "'O''Brien'",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s06u",
+        "text": " reste un seul littéral). Cette dernière passe est volontairement large : il est plus sûr de masquer un nom de ville que de laisser passer un PAN.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b07",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s07a",
+        "text": "Pour MongoDB, la rédaction porte sur les clés sensibles dans le JSON ou la syntaxe shell. Les noms reconnus sont ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07b",
+        "text": "password",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07c",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07d",
+        "text": "passwd",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07e",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07f",
+        "text": "secret",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07g",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07h",
+        "text": "token",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07i",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07j",
+        "text": "api_key",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07k",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07l",
+        "text": "credentials",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07m",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07n",
+        "text": "authorization",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07o",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07p",
+        "text": "auth",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07q",
+        "text": ". Trois variantes de pattern couvrent les valeurs entre guillemets doubles, les valeurs entre guillemets simples, et les clés non quotées telles qu'on les trouve dans la syntaxe shell ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07r",
+        "text": "db.users.insertOne({ password: \"x\" })",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07s",
+        "text": ". Les URI ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07t",
+        "text": "mongodb://",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07u",
+        "text": " et ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s07v",
+        "text": "mongodb+srv://",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s07w",
+        "text": " sont traités comme en SQL.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b08",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s08a",
+        "text": "Pour Redis, la rédaction est ligne par ligne, parce qu'un script Redis est par nature un enchaînement de commandes. Le premier token détermine la stratégie. ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08b",
+        "text": "AUTH",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08c",
+        "text": " et tous ses arguments (qu'il y en ait un ou deux, format username + password ARC6) sont remplacés par ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08d",
+        "text": "***",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08e",
+        "text": ". ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08f",
+        "text": "CONFIG SET",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08g",
+        "text": " ne masque la valeur que si la clé est sensible : ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08h",
+        "text": "requirepass",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08i",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08j",
+        "text": "masterauth",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08k",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08l",
+        "text": "masteruser",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08m",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08n",
+        "text": "tls-key-file-pass",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08o",
+        "text": ". Un ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08p",
+        "text": "CONFIG SET maxmemory 256mb",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08q",
+        "text": " passe intact. ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08r",
+        "text": "EVAL",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08s",
+        "text": " et ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08t",
+        "text": "EVALSHA",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08u",
+        "text": " voient leur corps Lua collapsé en ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08v",
+        "text": "[REDACTED_SCRIPT]",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08w",
+        "text": ", tout en préservant ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08x",
+        "text": "numkeys",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08y",
+        "text": " et les arguments KEYS/ARGV. ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08z",
+        "text": "ACL SETUSER",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08aa",
+        "text": " masque les clauses d'identité préfixées ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08ab",
+        "text": ">",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08ac",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08ad",
+        "text": "<",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08ae",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08af",
+        "text": "#",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08ag",
+        "text": ", ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08ah",
+        "text": "!",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08ai",
+        "text": " mais conserve les flags ACL non sensibles comme ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08aj",
+        "text": "~*",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08ak",
+        "text": " ou ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s08al",
+        "text": "+@all",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s08am",
+        "text": ". Le tokenizer maison gère les segments quotés pour ne pas casser les commandes contenant des espaces dans des chaînes.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "h3",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "sh3",
+        "text": "Patterns custom et toggle global",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b09",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s09a",
+        "text": "La rédaction par défaut couvre les credentials standards. Mais chaque organisation a ses identifiants internes. Un format de jeton maison, un préfixe d'identifiant client, un schéma de clé d'API spécifique. Pour cela, ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s09b",
+        "text": "redaction.rs",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s09c",
+        "text": " expose ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s09d",
+        "text": "set_custom_patterns",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s09e",
+        "text": " qui accepte une liste d'expressions régulières. Elles sont compilées une fois et appliquées en post-traitement, après la rédaction par moteur. Les patterns invalides sont silencieusement ignorés : la validation est attendue à la configuration, pas dans le chemin chaud.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b10",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s10a",
+        "text": "La liste est persistée dans ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s10b",
+        "text": "interceptor.json",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s10c",
+        "text": " sous la clé ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s10d",
+        "text": "redaction_patterns",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s10e",
+        "text": ", aux côtés du toggle ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s10f",
+        "text": "redact_enabled",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s10g",
+        "text": " qui permet de désactiver entièrement le mécanisme. Le toggle existe pour des contextes contrôlés (tests sur dataset jouet, debug local). Par défaut il est actif, et le défaut compte pour un outil installé sur des dizaines de machines de développeurs.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "h4",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "sh4",
+        "text": "Au plus près de la persistance, jamais de l'exécution",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b11",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s11a",
+        "text": "Le point clé est qu'une requête rédigée n'est plus exécutable. La rédaction est donc appliquée aux frontières de persistance, pas avant l'envoi au moteur. Le ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s11b",
+        "text": "QueryContext",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s11c",
+        "text": " conserve la chaîne brute pour l'analyse de sécurité dans ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s11d",
+        "text": "sql_safety.rs",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s11e",
+        "text": " (détection de DROP, DELETE sans WHERE, etc.) et pour l'envoi effectif au driver. Avant d'écrire dans le journal d'audit, dans le store en mémoire des requêtes lentes, dans un export de session ou dans l'historique de l'éditeur, ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s11f",
+        "text": "redact_query",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s11g",
+        "text": " est appelée avec le ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s11h",
+        "text": "driver_id",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s11i",
+        "text": " du moteur d'origine, et c'est la version masquée qui part sur disque.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b12",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s12a",
+        "text": "Côté frontend, un module miroir ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s12b",
+        "text": "src/lib/redaction.ts",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s12c",
+        "text": " applique des règles équivalentes avant d'écrire l'historique d'éditeur dans le storage local. Les patterns y sont volontairement plus simples (URI, assignations sensibles, littéraux SQL et JSON), suffisants pour un nettoyage opportuniste avant persistance UI. La duplication est assumée : le frontend ne peut pas appeler du Rust pour une opération aussi triviale, et la cohérence des règles est testée des deux côtés.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "h5",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "sh5",
+        "text": "L'effet pratique pour le développeur",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b13",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s13a",
+        "text": "Le résultat est invisible la plupart du temps, ce qui est l'effet recherché. Un développeur qui écrit ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s13b",
+        "text": "INSERT INTO users (email, password) VALUES ('alice@x.com', 'hunter2')",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s13c",
+        "text": " voit sa requête s'exécuter normalement. S'il consulte ensuite le journal d'audit ou exporte sa session, la ligne y figure sous la forme ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s13d",
+        "text": "INSERT INTO users (email, password) VALUES ('[REDACTED]', '[REDACTED]')",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s13e",
+        "text": ". L'analyse a posteriori reste possible : on garde la forme, le verbe, les tables, les colonnes. On perd les valeurs, qui sont précisément ce qu'on ne veut pas archiver.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b14",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s14a",
+        "text": "La rédaction agit aussi sur le contexte le plus banal. Un copier-coller depuis une doc d'équipe contenant ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s14b",
+        "text": "psql postgres://admin:s3cret@db.host:5432/mydb",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s14c",
+        "text": " collé en commentaire SQL ne sortira jamais avec ses credentials. Une commande Redis ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s14d",
+        "text": "AUTH alice hunter2",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s14e",
+        "text": " devient ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s14f",
+        "text": "AUTH *** ***",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s14g",
+        "text": " dans l'historique. Un script Lua avec un mot de passe en dur perd son corps avant journalisation.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "h6",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "sh6",
+        "text": "Le pari technique",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "b15",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "s15a",
+        "text": "Le pari est de poser la rédaction là où elle est la moins visible et la plus utile : au niveau du type pour les secrets courts en mémoire, au plus près du driver pour les requêtes destinées à un journal. Le développeur n'a rien à activer, ni à se rappeler. Quand un mot de passe est dans une struct ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s15b",
+        "text": "Sensitive",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s15c",
+        "text": ", aucun chemin de log ne peut le sortir. Quand une requête est journalisée, elle passe par ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "s15d",
+        "text": "redact_query",
+        "marks": [
+          "code"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "s15e",
+        "text": " avec la stratégie qui correspond à son moteur. La séparation entre exécution et persistance permet d'analyser une requête en post-mortem sans payer le coût de la fuiter, et c'est exactement ce qu'un client de base de données desktop doit garantir par défaut.",
+        "marks": []
+      }
+    ]
+  }
+]

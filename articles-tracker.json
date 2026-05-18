@@ -175,54 +175,63 @@
       "title": "Le Sandbox Mode de QoreDB : tester des modifications sans toucher la base",
       "category": "Produit",
       "publishedAt": "2026-05-02"
+    },
+    {
+      "slug": "redaction-automatique-secrets-logs-historique",
+      "title": "La rédaction automatique des secrets dans QoreDB",
+      "category": "Security",
+      "publishedAt": "2026-05-06"
+    },
+    {
+      "slug": "pourquoi-qoredb-est-desktop-only-et-le-restera",
+      "title": "Pourquoi QoreDB est desktop-only et le restera",
+      "category": "Vision",
+      "publishedAt": "2026-05-08"
+    },
+    {
+      "slug": "modele-securite-qoredb-menaces-contre-mesures",
+      "title": "Le modèle de sécurité de QoreDB : menaces et contre-mesures",
+      "category": "Security",
+      "publishedAt": "2026-05-10"
+    },
+    {
+      "slug": "background-job-manager-exports-longs-taches-asynchrones",
+      "title": "Le Background Job Manager : exports longs et tâches asynchrones",
+      "category": "Architecture",
+      "publishedAt": "2026-05-12"
+    },
+    {
+      "slug": "driver-cockroachdb-compatibilite-postgresql",
+      "title": "Le driver CockroachDB dans QoreDB : compatibilité PostgreSQL maîtrisée",
+      "category": "Architecture",
+      "publishedAt": "2026-05-13"
+    },
+    {
+      "slug": "driver-sql-server-tiberius-pool-pagination",
+      "title": "Le driver SQL Server dans QoreDB : Tiberius, pool bb8 et pagination OFFSET/FETCH",
+      "category": "Architecture",
+      "publishedAt": "2026-05-14"
+    },
+    {
+      "slug": "query-library-organiser-requetes-dossiers-tags",
+      "title": "La Query Library de QoreDB : organiser ses requêtes avec dossiers et tags",
+      "category": "Produit",
+      "publishedAt": "2026-05-15"
+    },
+    {
+      "slug": "annulation-requetes-selon-moteur",
+      "title": "Comment QoreDB gère l'annulation des requêtes selon le moteur",
+      "category": "Architecture",
+      "publishedAt": "2026-05-17"
+    },
+    {
+      "slug": "virtual-relations-fk-cote-client",
+      "title": "Les Virtual Relations : définir des FK là où la base n'en a pas",
+      "category": "Produit",
+      "publishedAt": "2026-05-18"
     }
   ],
   "queue": [
-    {
-      "title": "Redaction automatique : pourquoi aucun secret ne sort dans les logs",
-      "category": "Security",
-      "topic_notes": "Patterns regex, masquage passwords, export propre, history nettoyé"
-    },
-    {
-      "title": "Le Background Job Manager : exports longs et tâches asynchrones",
-      "category": "Architecture",
-      "topic_notes": "Tokio tasks, reprise sur erreur, feedback UI, pas de blocking"
-    },
-    {
-      "title": "Le driver CockroachDB : compatibilité PostgreSQL et ses limites",
-      "category": "Architecture",
-      "topic_notes": "Wire-compatible PG, ce qui marche, ce qui diverge, tests spécifiques"
-    },
-    {
-      "title": "Le driver SQL Server : Tiberius, connection pooling et pagination",
-      "category": "Architecture",
-      "topic_notes": "Tiberius en Rust, bb8 pool, OFFSET/FETCH, différences avec PG/MySQL"
-    },
-    {
-      "title": "La Query Library : organiser ses requêtes avec dossiers et tags",
-      "category": "Produit",
-      "topic_notes": "Bibliothèque locale, export/import JSON, pas de cloud, partage manuel"
-    },
-    {
-      "title": "Comment QoreDB gère l'annulation des requêtes selon le moteur",
-      "category": "Architecture",
-      "topic_notes": "pg_cancel_backend, KILL QUERY MySQL, best effort MongoDB, timeouts"
-    },
-    {
-      "title": "Les Virtual Relations : définir des FK là où la base n'en a pas",
-      "category": "Produit",
-      "topic_notes": "FK virtuelles côté client, collections MongoDB, tables mal conçues"
-    },
-    {
-      "title": "Le modèle de sécurité de QoreDB : menaces et contre-mesures",
-      "category": "Security",
-      "topic_notes": "Threat model, surface d'attaque locale, IPC, vault, SQL injection prevention"
-    },
-    {
-      "title": "Pourquoi QoreDB est desktop-only et le restera",
-      "category": "Vision",
-      "topic_notes": "Pas de SaaS, pas de données en transit, latence locale, contrôle total"
-    },
     {
       "title": "L'auto-update dans une app Tauri : mécanisme et contraintes",
       "category": "Architecture",

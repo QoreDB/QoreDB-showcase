@@ -1,0 +1,195 @@
+{
+  "title": "Pourquoi QoreDB est desktop-only et le restera",
+  "slug": "pourquoi-qoredb-est-desktop-only-et-le-restera",
+  "excerpt": "QoreDB est un client de base de données desktop, et il le restera. Cet article explique pourquoi ce choix structure l'architecture du produit et pourquoi un SaaS aurait été un mauvais format pour cet usage.",
+  "category": "Vision",
+  "publishedAt": "2026-05-08T09:00:00.000Z",
+  "body": [
+    {
+      "_type": "block",
+      "_key": "b1",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s1a", "text": "QoreDB est un client de base de données desktop. Il s'installe sur la machine du développeur, lit ses fichiers, ouvre des connexions sortantes, et ne dépend d'aucun backend cloud pour fonctionner. Ce positionnement n'est pas une étape avant un produit web, c'est un choix de conception assumé qui structure tout le reste : l'architecture, le modèle de sécurité, l'expérience d'usage et même la roadmap.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b2",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s2a", "text": "Beaucoup d'outils SaaS modernes proposent une interface web pour gérer ses bases. C'est pratique pour démarrer, mais ça repose sur une hypothèse forte : faire transiter ses credentials, ses requêtes et parfois ses résultats par un service tiers. Pour un client de base de données, cette hypothèse n'est pas neutre. C'est en y réfléchissant qu'on arrive à la conclusion qu'un client de BDD doit vivre sur la machine de l'utilisateur, pas sur un serveur distant.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "h2-contrat",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "sh1", "text": "Ce que signifie vraiment desktop pour un client de BDD", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b3",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s3a", "text": "Desktop ne veut pas seulement dire \"installer un binaire\". Pour QoreDB, ça implique trois propriétés concrètes. Premièrement, les credentials de connexion ne quittent jamais la machine. Ils sont chiffrés via le keychain de l'OS et utilisés en local pour ouvrir une socket vers la base. Deuxièmement, les requêtes vont directement de la machine à la base, sans intermédiaire. Pas de proxy, pas de service de relais, pas de couche d'authentification supplémentaire. Troisièmement, les résultats restent en mémoire locale et ne transitent pas par un tiers, ce qui simplifie énormément le modèle de menaces.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b4",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s4a", "text": "Cette propriété change la nature du produit. Un SaaS de gestion de BDD a un secret partagé entre l'utilisateur et le fournisseur : les credentials. QoreDB n'a pas ce secret partagé. C'est l'utilisateur, et lui seul, qui détient ses identifiants de connexion.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "h2-saas",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "sh2", "text": "Pourquoi le SaaS est un mauvais format pour cet usage", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b5",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s5a", "text": "Un client de base de données, par nature, manipule de la donnée sensible. Pas \"sensible\" au sens marketing du terme : sensible au sens où on y trouve les emails des utilisateurs, les transactions, les tokens, les schémas business. Faire passer cette donnée par un service hébergé soulève une série de questions opérationnelles : où sont les serveurs, qui peut auditer leurs logs, que se passe-t-il si le fournisseur est compromis, comment configurer les firewalls quand la base est dans un VPC privé.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b6",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s6a", "text": "Un client desktop répond à toutes ces questions par défaut. Les serveurs n'existent pas, donc il n'y a pas de logs côté fournisseur. Le firewall de l'entreprise n'a pas besoin d'autoriser un service externe pour atteindre la base. Si la base est dans un VPC privé accessible uniquement via VPN, QoreDB fonctionne dès que le VPN est actif, sans configuration spécifique. C'est le poste de travail du développeur qui devient le point de connexion, ce qui correspond à la réalité opérationnelle de la plupart des équipes tech.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "h2-archi",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "sh3", "text": "Le local-first comme contrainte d'architecture", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b7",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s7a", "text": "Choisir desktop a forcé QoreDB à concevoir tout son fonctionnement autour de la machine de l'utilisateur. Le runtime est ", "marks": [] },
+        { "_type": "span", "_key": "s7b", "text": "Tauri 2", "marks": ["code"] },
+        { "_type": "span", "_key": "s7c", "text": ", qui produit un binaire natif léger avec un backend Rust et un frontend React. Les credentials sont stockés dans un vault local protégé par Argon2, pas dans une base centralisée. Les drivers sont natifs : ", "marks": [] },
+        { "_type": "span", "_key": "s7d", "text": "sqlx", "marks": ["code"] },
+        { "_type": "span", "_key": "s7e", "text": " pour PostgreSQL, MySQL et SQLite, le driver MongoDB officiel pour BSON, ", "marks": [] },
+        { "_type": "span", "_key": "s7f", "text": "tiberius", "marks": ["code"] },
+        { "_type": "span", "_key": "s7g", "text": " pour SQL Server. Aucun de ces drivers ne passe par un service de relais.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b8",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s8a", "text": "Cette contrainte a un effet vertueux : elle interdit toute paresse architecturale. Quand il n'y a pas de backend cloud, on ne peut pas planquer de la complexité dans un service distant. Le sandbox de prévisualisation des mutations, la fédération inter-bases via DuckDB, le diff de données entre environnements, la rédaction des secrets dans les logs : tout doit fonctionner sans réseau externe. C'est une contrainte qui simplifie autant qu'elle complique.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "h2-usage",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "sh4", "text": "Ce que ça change pour le développeur au quotidien", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b9",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s9a", "text": "Concrètement, un développeur qui ouvre QoreDB n'a pas de compte à créer. Il télécharge le binaire, le lance, et configure une connexion. Aucune information ne part vers un serveur tiers, sauf si l'utilisateur active explicitement la télémétrie anonyme ou un partage de requêtes via un endpoint qu'il configure lui-même. La latence est celle du réseau local entre la machine et la base, pas celle d'un aller-retour vers un serveur intermédiaire.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b10",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s10a", "text": "L'usage offline est une conséquence directe : sans connexion internet, on peut quand même travailler sur une base SQLite locale, ouvrir un fichier de requêtes, parcourir l'historique. Les fonctionnalités qui dépendent du réseau sont celles qui parlent à la base elle-même, pas celles qui parlent à QoreDB. Pour un développeur qui prend le train ou bosse depuis un endroit avec une connexion instable, c'est une garantie d'usage qui se sent immédiatement.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "h2-trade",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "sh5", "text": "Les trade-offs, en contexte", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b11",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s11a", "text": "Faire un client desktop signifie qu'il faut packager pour macOS, Windows et Linux, gérer les signatures de code, distribuer les mises à jour via un canal d'auto-update. Tauri rend ça raisonnable, mais c'est un travail qui n'existe pas pour un produit web. La collaboration multi-utilisateur n'est pas non plus native : si une équipe veut partager des requêtes ou des connexions, ça passe par un export JSON ou un futur service optionnel auto-hébergeable, pas par un workspace cloud par défaut.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b12",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s12a", "text": "Ces choix sont alignés avec la cible : un développeur backend, un SRE, une petite équipe tech qui veut un outil rapide et qui ne pose pas de questions sur ses données. Pour un workflow d'analyste BI multi-utilisateur avec dashboards partagés, QoreDB n'est pas le bon outil, et ce n'est pas son objectif.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "h2-fin",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "sh6", "text": "Un choix de cap, pas une étape transitoire", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b13",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s13a", "text": "Le desktop n'est pas une phase intermédiaire en attendant un SaaS. C'est le format final du produit. Tout ce qui est ajouté à QoreDB, des drivers à l'IA en passant par les exports, est conçu pour fonctionner sur la machine du développeur. Les services optionnels qui pourraient apparaître plus tard (sync entre machines, partage d'équipe, hébergement de bibliothèques de requêtes) seront construits autour de ce noyau local, jamais en remplacement.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "_key": "b14",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "_key": "s14a", "text": "Cette discipline rend le produit prévisible. Un développeur qui adopte QoreDB sait que dans deux ans, son outil fonctionnera toujours sans compte, sans abonnement obligatoire, sans dépendance à un serveur dont la disponibilité dépend d'un tiers. C'est un contrat technique simple, et c'est précisément ce qui justifie le choix desktop-only.", "marks": [] }
+      ]
+    }
+  ]
+}
