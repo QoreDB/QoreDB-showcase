@@ -229,14 +229,15 @@
       "title": "Les Virtual Relations : définir des FK là où la base n'en a pas",
       "category": "Produit",
       "publishedAt": "2026-05-18"
+    },
+    {
+      "slug": "auto-update-tauri-mecanisme-contraintes",
+      "title": "L'auto-update dans une app Tauri : mécanisme et contraintes",
+      "category": "Architecture",
+      "publishedAt": "2026-05-19"
     }
   ],
   "queue": [
-    {
-      "title": "L'auto-update dans une app Tauri : mécanisme et contraintes",
-      "category": "Architecture",
-      "topic_notes": "tauri-updater, signatures, rollback, canaux de distribution"
-    },
     {
       "title": "Le crash recovery : restaurer l'état de session après un plantage",
       "category": "Architecture",

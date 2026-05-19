@@ -4,7 +4,7 @@ import { ReleaseList } from "@/components/changelog/release-list";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { getReleases } from "@/lib/github";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, getAbsoluteUrl } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -14,12 +14,22 @@ export async function generateMetadata({
   const { locale } = await params;
   const { t } = await getTranslation(locale, "common");
 
-  return buildPageMetadata({
+  const base = buildPageMetadata({
     locale,
     pathname: "/changelog",
     title: t("metadata.changelog_title"),
     description: t("metadata.changelog_description"),
   });
+
+  return {
+    ...base,
+    alternates: {
+      ...base.alternates,
+      types: {
+        "application/rss+xml": getAbsoluteUrl("/changelog.rss"),
+      },
+    },
+  };
 }
 
 export default async function ChangelogPage({

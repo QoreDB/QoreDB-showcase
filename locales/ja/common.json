@@ -186,9 +186,9 @@
         "title": "クロス DB フェデレーション",
         "desc": "アクティブな接続間の結合を使用して、複数のデータベースにわたって SQL クエリを実行します。"
       },
-      "performance": {
-        "title": "25% 高速化",
-        "desc": "バッチ ストリーミング、MessagePack エンコーディング、列単位デコーダー、Profile-Guided Optimization。"
+      "instant_api": {
+        "title": "インスタント Data API",
+        "desc": "保存済みクエリをワンクリックで安全な REST エンドポイントに変換 — トークン認証、レート制限、OpenAPI ドキュメント自動生成。"
       },
       "export": {
         "title": "マルチフォーマットエクスポート",
@@ -258,11 +258,35 @@
   "database_strip": {
     "label": "1 つのインターフェイス、すべてのデータベース"
   },
-  "social_proof": {
+  "product_specs": {
     "databases": "12ドライバー",
     "binary_size": "~15 MB バイナリ",
     "startup": "1秒未満の起動",
     "license": "アパッチ2.0"
+  },
+  "social_proof": {
+    "aria_label": "プロジェクトの人気統計",
+    "downloads": "{{value}} ダウンロード",
+    "stars": "{{count}} スター",
+    "releases": "{{months}}ヶ月で {{count}} リリース"
+  },
+  "mini_faq": {
+    "privacy": {
+      "question": "私のデータはどこかに送信されますか？",
+      "answer": "いいえ、決して。100%ローカルファースト — データはお使いのマシンに留まります。"
+    },
+    "oss": {
+      "question": "オープンソースですか？",
+      "answer": "はい。コアは Apache 2.0 ライセンスのオープンソースです。"
+    },
+    "no_subscription": {
+      "question": "サブスクリプションや定期支払いはありますか？",
+      "answer": "サブスクリプションなし。Pro は一度の支払いで、生涯アップデート付き。"
+    }
+  },
+  "testimonials": {
+    "title": "開発者の声",
+    "subtitle": "QoreDB を日々使うユーザーからの実際のフィードバック。"
   },
   "comparison": {
     "title": "QoreDB との比較",
@@ -489,10 +513,7 @@
         "question": "プロジェクトに貢献できますか?",
         "answer": "はい、それは奨励されています。\n\n考えられる貢献:\n\n* ユーザーからのフィードバック、\n* GitHub の問題とディスカッション、\n* 改善提案、\n* コードとドキュメント。\n\nコミュニティ GitHub が構築されています。"
       },
-      "pro_version": {
-        "question": "「プロ」バージョンはありますか?",
-        "answer": "おそらくそうです。\n\n目標は、使用をブロックすることではなく、次のことを提供することです。\n\n* 高度な機能、\n* 共同使用または専門的な使用、\n* チームや企業向けのオプション。\n\nオープンソース バージョンは引き続き完全に使用可能です。"
-      },
+      
       "funding": {
         "question": "プロジェクトの資金はどのように調達されますか?",
         "answer": "対象となるモデルは次のとおりです。\n\n* 持続可能なオープンソース、\n* 自己資金で、\n* 必須の集中型クラウドに依存しません。\n\n詳細は製品の採用に応じて進化します。"
@@ -518,12 +539,13 @@
   "pricing_page": {
     "badge": "オープンコア",
     "title": "ワークフローに合ったプランをお選びください",
-    "subtitle": "コアは完全かつ無料のままです。 Pro は、必要なときに高度な機能を追加します。",
+    "subtitle": "ソロ作業や探索には無料、日々のプロの仕事には Pro。",
     "billing_note": "Pro の永久ライセンス、1 回限りの支払い",
     "checkout_error": "現在、Stripe Checkout を開始できません。",
     "faq_title": "よくある質問",
     "core": {
-      "title": "コア",
+      "title": "無料",
+      "tagline": "ソロ & 探索",
       "description": "QoreDB の完全なオープンソース基盤。",
       "price": "無料",
       "badge": "主な選択肢",
@@ -545,7 +567,8 @@
       }
     },
     "pro": {
-      "title": "プロ",
+      "title": "Pro",
+      "tagline": "プロの仕事用",
       "description": "要求の厳しい開発者にとって自然なアップグレード。",
       "price": "XXユーロ",
       "badge": "1回払い",
@@ -566,7 +589,8 @@
       }
     },
     "team": {
-      "title": "チーム",
+      "title": "Team",
+      "tagline": "チーム向け",
       "description": "チーム向けの高度なコラボレーション。",
       "price": "近日公開予定",
       "badge": "近日公開予定",
@@ -588,9 +612,9 @@
         "question": "私のデータはどこかに送信されていますか?",
         "answer": "いいえ、QoreDB は 100% ローカルファーストです。データがマシンから離れることはありません。 AI も独自の API キーを使用して実行されます。"
       },
-      "stop_paying": {
-        "question": "支払いをやめたらどうなりますか?",
-        "answer": "Pro は永久ライセンス (1 回限りの支払い) です。ロック解除された機能を維持できます。将来のメジャー アップグレードのみ、有料アップグレードが必要となる場合があります。"
+      "lifetime_updates": {
+        "question": "アップデートは生涯無料ですか？",
+        "answer": "はい。一度の支払いで生涯アップデート無料 — サブスクリプションなし、更新なし、将来のバージョンにも追加料金なし。"
       },
       "try_pro": {
         "question": "最初に Pro 機能を試してもいいですか?",
@@ -601,6 +625,62 @@
         "answer": "Pro の機能は BSL 1.1 の下にあり、4 年後に自動的に Apache 2.0 に変換されます。コードは読み取り可能ですが、その期間中の再配布は制限されます。"
       }
     }
+  },
+  "pricing_comparison": {
+    "title": "正直な価格比較",
+    "subtitle": "同じ日常的な利用、まったく異なる総コスト。3年後の状況を見てください。",
+    "year_label": "/年",
+    "perpetual_label": "一度きり",
+    "tco_label": "{{years}} 年間の合計",
+    "lifetime_perk": "その後は生涯 0 円",
+    "note": "競合他社の価格は公式サイトより、EUR 換算、2026 年 5 月時点。",
+    "tools": {
+      "dbeaver": {
+        "name": "DBeaver PRO",
+        "tagline": "サブスク"
+      },
+      "tableplus": {
+        "name": "TablePlus",
+        "tagline": "年間ライセンス"
+      },
+      "qoredb": {
+        "name": "QoreDB Pro",
+        "tagline": "永久"
+      }
+    }
+  },
+  "team_waitlist": {
+    "placeholder": "you@example.com",
+    "cta": "準備でき次第通知する",
+    "success": "ありがとうございます — ご連絡いたします。",
+    "error": "送信に失敗しました。再試行してください。"
+  },
+  "oss_program": {
+    "badge": "OSS プログラム",
+    "title": "OSS メンテナーには Pro を無料で",
+    "subtitle": "人気のオープンソースプロジェクトを運営しているなら、QoreDB Pro は私たちから。生涯ライセンス。",
+    "eligibility": {
+      "stars_title": "1,000+ スター",
+      "stars_body": "メイン リポジトリに 1,000 以上の GitHub スターがあります。",
+      "maintainer_title": "現役メンテナー",
+      "maintainer_body": "コミット、レビュー、リリースで積極的にリポジトリを維持しています。",
+      "spirit_title": "OSS スピリット",
+      "spirit_body": "還元する気持ち。私たちも同じです。"
+    },
+    "form_title": "無料 Pro ライセンスを申請する",
+    "fields": {
+      "email": "メール",
+      "github_username": "GitHub ユーザー名",
+      "repo": "メインリポジトリ",
+      "repo_hint": "形式: owner/repo (例: rust-lang/rust)",
+      "note": "他に何か?",
+      "note_hint": "任意 — プロジェクトについて教えてください。"
+    },
+    "submit": "申請を送信",
+    "success_title": "申請を受け付けました",
+    "success_body": "数日以内に確認してご連絡します。",
+    "error_generic": "送信に失敗しました。再試行してください。",
+    "review_note": "手動レビュー。通常 3 営業日以内。"
   },
   "license_management": {
     "title": "ライセンス管理",

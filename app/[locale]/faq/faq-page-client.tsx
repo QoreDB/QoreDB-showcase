@@ -32,7 +32,6 @@ export function FAQPageClient() {
     { key: "platforms", category: "general" },
     { key: "maintenance", category: "general" },
     { key: "contribute", category: "project" },
-    { key: "pro_version", category: "project" },
     { key: "funding", category: "project" },
     { key: "professional_use", category: "project" },
     { key: "follow_progress", category: "general" },

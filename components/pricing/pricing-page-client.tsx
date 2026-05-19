@@ -7,10 +7,15 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
+import { PricingComparison } from "@/components/pricing/pricing-comparison";
+import { TeamWaitlistForm } from "@/components/pricing/team-waitlist-form";
 import { getContactMailtoHref } from "@/lib/contact";
+
+type PlanFeature = { id?: string; label: string };
 
 function PlanCard({
   title,
+  tagline,
   description,
   price,
   originalPrice,
@@ -23,13 +28,15 @@ function PlanCard({
   highlighted,
   loading,
   footerNote,
+  customCta,
 }: {
   title: string;
+  tagline?: string;
   description: string;
   price: string;
   originalPrice?: string;
   badge?: string;
-  features: string[];
+  features: PlanFeature[];
   ctaLabel: string;
   onClick?: () => void;
   href?: string;
@@ -37,6 +44,7 @@ function PlanCard({
   highlighted?: boolean;
   loading?: boolean;
   footerNote?: React.ReactNode;
+  customCta?: React.ReactNode;
 }) {
   return (
     <div
@@ -53,6 +61,11 @@ function PlanCard({
           </span>
         ) : null}
         <h2 className="text-2xl font-bold text-(--q-text-0)">{title}</h2>
+        {tagline ? (
+          <p className="text-sm font-medium text-(--q-accent) mt-1">
+            {tagline}
+          </p>
+        ) : null}
         <p className="text-sm text-(--q-text-2) mt-2">{description}</p>
         <div className="mt-4 flex items-baseline gap-2 flex-wrap">
           {originalPrice ? (
@@ -78,18 +91,21 @@ function PlanCard({
       <ul className="space-y-2.5 mb-6 flex-1">
         {features.map((feature) => (
           <li
-            key={feature}
-            className="flex items-start gap-2.5 text-(--q-text-1)"
+            key={feature.id ?? feature.label}
+            id={feature.id}
+            className="flex items-start gap-2.5 text-(--q-text-1) scroll-mt-32 target:bg-(--q-accent)/10 target:rounded-md target:-mx-1 target:px-1 transition-colors"
           >
             <span className="mt-0.5 rounded-full bg-(--q-accent)/10 p-1 shrink-0">
               <Check className="h-3 w-3 text-(--q-accent)" />
             </span>
-            <span className="text-[13px] leading-snug">{feature}</span>
+            <span className="text-[13px] leading-snug">{feature.label}</span>
           </li>
         ))}
       </ul>
 
-      {href ? (
+      {customCta ? (
+        customCta
+      ) : href ? (
         <Link
           href={href}
           className={`inline-flex w-full items-center justify-center rounded-xl px-4 py-3 font-semibold transition ${
@@ -166,7 +182,7 @@ export default function PricingPageClient({
     }
   };
 
-  const coreFeatures = [
+  const coreFeatures: PlanFeature[] = [
     "drivers",
     "crud",
     "workspaces",
@@ -178,9 +194,12 @@ export default function PricingPageClient({
     "safety",
     "export_basic",
     "shortcuts",
-  ].map((key) => t(`pricing_page.core.features.${key}`));
+  ].map((key) => ({
+    id: `core-${key}`,
+    label: t(`pricing_page.core.features.${key}`),
+  }));
 
-  const proFeatures = [
+  const proFeatures: PlanFeature[] = [
     "everything_core",
     "sandbox",
     "time_travel",
@@ -192,20 +211,26 @@ export default function PricingPageClient({
     "security_rules",
     "library_advanced",
     "virtual_relations",
-  ].map((key) => t(`pricing_page.pro.features.${key}`));
+  ].map((key) => ({
+    id: key,
+    label: t(`pricing_page.pro.features.${key}`),
+  }));
 
-  const teamFeatures = [
+  const teamFeatures: PlanFeature[] = [
     "everything_pro",
     "sync",
     "shared_queries",
     "permissions",
     "managed_ai",
-  ].map((key) => t(`pricing_page.team.features.${key}`));
+  ].map((key) => ({
+    id: `team-${key}`,
+    label: t(`pricing_page.team.features.${key}`),
+  }));
 
   const faqItems = [
     "open_core_why",
     "data_sent",
-    "stop_paying",
+    "lifetime_updates",
     "try_pro",
     "pro_source_code",
   ].map((key) => ({
@@ -240,6 +265,7 @@ export default function PricingPageClient({
             >
               <PlanCard
                 title={t("pricing_page.core.title")}
+                tagline={t("pricing_page.core.tagline")}
                 description={t("pricing_page.core.description")}
                 price={t("pricing_page.core.price")}
                 badge={t("pricing_page.core.badge")}
@@ -257,6 +283,7 @@ export default function PricingPageClient({
             >
               <PlanCard
                 title={t("pricing_page.pro.title")}
+                tagline={t("pricing_page.pro.tagline")}
                 description={t("pricing_page.pro.description")}
                 price={initialProStripePrice ?? t("pricing_page.pro.price")}
                 originalPrice={initialProOriginalPrice ?? undefined}
@@ -286,12 +313,13 @@ export default function PricingPageClient({
             >
               <PlanCard
                 title={t("pricing_page.team.title")}
+                tagline={t("pricing_page.team.tagline")}
                 description={t("pricing_page.team.description")}
                 price={t("pricing_page.team.price")}
                 badge={t("pricing_page.team.badge")}
                 features={teamFeatures}
                 ctaLabel={t("pricing_page.team.cta")}
-                href={`/${locale}/#contact`}
+                customCta={<TeamWaitlistForm />}
               />
             </motion.div>
           </div>
@@ -300,6 +328,8 @@ export default function PricingPageClient({
             <p className="mt-4 text-sm text-red-500">{checkoutError}</p>
           ) : null}
         </section>
+
+        <PricingComparison qoredbPrice={initialProStripePrice ?? null} />
 
         <section className="max-w-4xl mx-auto mt-20">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">

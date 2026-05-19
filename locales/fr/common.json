@@ -198,9 +198,9 @@
         "title": "Fédération inter-bases",
         "desc": "Exécutez des requêtes SQL cross-database avec jointures entre connexions actives."
       },
-      "performance": {
-        "title": "25% plus rapide",
-        "desc": "Streaming par batch, encodage MessagePack, décodeurs par colonne et Profile-Guided Optimization."
+      "instant_api": {
+        "title": "API de données instantanée",
+        "desc": "Transformez n’importe quelle requête sauvegardée en endpoint REST sécurisé : auth par token, rate limit et OpenAPI auto-généré, en un clic."
       },
       "export": {
         "title": "Export multi-formats",
@@ -271,11 +271,35 @@
   "database_strip": {
     "label": "Une interface, toutes les bases"
   },
-  "social_proof": {
+  "product_specs": {
     "databases": "12 drivers natifs",
     "binary_size": "~15 Mo le binaire",
     "startup": "<1s au démarrage",
     "license": "Apache 2.0"
+  },
+  "social_proof": {
+    "aria_label": "Statistiques de popularité du projet",
+    "downloads": "{{value}} téléchargements",
+    "stars": "{{count}} étoiles",
+    "releases": "{{count}} versions en {{months}} mois"
+  },
+  "mini_faq": {
+    "privacy": {
+      "question": "Mes données sont-elles envoyées quelque part ?",
+      "answer": "Non, jamais. 100% local-first — vos données restent sur votre machine."
+    },
+    "oss": {
+      "question": "C’est open source ?",
+      "answer": "Oui. Le cœur est open source sous licence Apache 2.0."
+    },
+    "no_subscription": {
+      "question": "Abonnement ou frais récurrents ?",
+      "answer": "Pas d’abonnement. Pro est un achat unique avec mises à jour à vie."
+    }
+  },
+  "testimonials": {
+    "title": "Ce que disent les développeurs",
+    "subtitle": "Retours réels des utilisateurs quotidiens de QoreDB."
   },
   "comparison": {
     "title": "QoreDB face à la concurrence",
@@ -502,10 +526,7 @@
         "question": "Puis-je contribuer au projet ?",
         "answer": "Oui, et c’est encouragé.\n\nContributions possibles :\n\n* retours utilisateurs,\n* issues et discussions GitHub,\n* propositions d’amélioration,\n* code et documentation.\n\nUn GitHub communautaire est en cours de structuration."
       },
-      "pro_version": {
-        "question": "Y aura-t-il une version “Pro” ?",
-        "answer": "Probablement, oui.\n\nL’objectif n’est pas de bloquer l’usage, mais de proposer :\n\n* des fonctionnalités avancées,\n* des usages collaboratifs ou professionnels,\n* des options destinées aux équipes et aux entreprises.\n\nLa version open-source restera pleinement utilisable."
-      },
+      
       "funding": {
         "question": "Comment le projet sera-t-il financé ?",
         "answer": "Le modèle visé est :\n\n* open-source durable,\n* auto-financé,\n* sans dépendance à un cloud centralisé obligatoire.\n\nLes détails évolueront avec l’adoption du produit."
@@ -531,12 +552,13 @@
   "pricing_page": {
     "badge": "Open Core",
     "title": "Choisissez le plan qui vous correspond",
-    "subtitle": "Core reste complet et gratuit. Pro ajoute les fonctionnalités avancées pour aller plus loin.",
+    "subtitle": "Gratuit pour le solo et l’exploration. Pro pour votre travail professionnel au quotidien.",
     "billing_note": "Licence perpétuelle, paiement unique pour Pro",
     "checkout_error": "Impossible de démarrer Stripe Checkout pour le moment.",
     "faq_title": "Questions fréquentes",
     "core": {
-      "title": "Core",
+      "title": "Gratuit",
+      "tagline": "Solo & exploration",
       "description": "Le cœur de QoreDB, gratuit et open source.",
       "price": "Gratuit",
       "badge": "Plan principal",
@@ -559,6 +581,7 @@
     },
     "pro": {
       "title": "Pro",
+      "tagline": "Pour votre travail professionnel",
       "description": "L’upgrade naturel pour les développeurs exigeants.",
       "price": "XX€",
       "badge": "Paiement unique",
@@ -580,6 +603,7 @@
     },
     "team": {
       "title": "Team",
+      "tagline": "Pensé pour les équipes",
       "description": "Collaboration avancée pour les équipes.",
       "price": "Coming soon",
       "badge": "Bientôt",
@@ -601,9 +625,9 @@
         "question": "Mes données sont-elles envoyées quelque part ?",
         "answer": "Non. QoreDB est 100% local-first. Aucune donnée ne quitte votre machine. Même l’IA fonctionne avec vos propres clés API."
       },
-      "stop_paying": {
-        "question": "Que se passe-t-il si j’arrête de payer ?",
-        "answer": "La licence Pro est perpétuelle (paiement unique). Vous gardez l’accès aux features débloquées. Seules les futures mises à jour majeures pourraient nécessiter un upgrade."
+      "lifetime_updates": {
+        "question": "Les mises à jour sont-elles incluses à vie ?",
+        "answer": "Oui. Paiement unique, mises à jour à vie incluses — pas d’abonnement, pas de renouvellement, pas de paywall sur les futures versions."
       },
       "try_pro": {
         "question": "Puis-je essayer les features Pro ?",
@@ -614,6 +638,62 @@
         "answer": "Les features Pro sont sous licence BSL 1.1, qui se convertit automatiquement en Apache 2.0 après 4 ans. Le code est lisible mais pas redistribuable pendant cette période."
       }
     }
+  },
+  "pricing_comparison": {
+    "title": "Un comparatif tarifaire honnête",
+    "subtitle": "Même usage quotidien, coût total très différent. Voyez ce que ça donne après 3 ans.",
+    "year_label": "par an",
+    "perpetual_label": "paiement unique",
+    "tco_label": "Total sur {{years}} ans",
+    "lifetime_perk": "Puis 0 € à vie",
+    "note": "Prix concurrents tirés de leurs sites officiels, équivalent EUR, mai 2026.",
+    "tools": {
+      "dbeaver": {
+        "name": "DBeaver PRO",
+        "tagline": "Abonnement"
+      },
+      "tableplus": {
+        "name": "TablePlus",
+        "tagline": "Licence annuelle"
+      },
+      "qoredb": {
+        "name": "QoreDB Pro",
+        "tagline": "Perpétuelle"
+      }
+    }
+  },
+  "team_waitlist": {
+    "placeholder": "vous@entreprise.com",
+    "cta": "Prévenez-moi quand c’est prêt",
+    "success": "Merci — on revient vers vous.",
+    "error": "Envoi impossible. Réessayez."
+  },
+  "oss_program": {
+    "badge": "Programme OSS",
+    "title": "Pro gratuit pour les mainteneurs OSS",
+    "subtitle": "Si vous maintenez un projet open source populaire, QoreDB Pro est offert. Une licence, à vie.",
+    "eligibility": {
+      "stars_title": "1 000+ étoiles",
+      "stars_body": "Votre dépôt principal a au moins 1 000 étoiles GitHub.",
+      "maintainer_title": "Mainteneur actif",
+      "maintainer_body": "Vous maintenez activement le dépôt — commits, reviews, releases.",
+      "spirit_title": "Esprit open source",
+      "spirit_body": "Vous croyez à la contrib. Nous aussi."
+    },
+    "form_title": "Demander une licence Pro gratuite",
+    "fields": {
+      "email": "Email",
+      "github_username": "Identifiant GitHub",
+      "repo": "Dépôt principal",
+      "repo_hint": "Format : owner/repo (ex. rust-lang/rust)",
+      "note": "Autre chose ?",
+      "note_hint": "Optionnel — parlez-nous de votre projet."
+    },
+    "submit": "Envoyer la demande",
+    "success_title": "Demande reçue",
+    "success_body": "On revient vers vous sous quelques jours.",
+    "error_generic": "Envoi impossible. Réessayez.",
+    "review_note": "Revue manuelle. Réponse sous 3 jours ouvrés en général."
   },
   "license_management": {
     "title": "Gestion de licence",

@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Github, Monitor, Shield, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Github,
+  Monitor,
+  Shield,
+  Zap,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";

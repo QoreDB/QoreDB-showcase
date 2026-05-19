@@ -5,13 +5,68 @@ import { useTranslation } from "react-i18next";
 
 const lines = [
   { num: 1, type: "comment" },
-  { num: 2, content: <><span className="text-purple-400">SELECT</span> u.name, <span className="text-blue-400">COUNT</span>(o.id) <span className="text-purple-400">AS</span> orders</> },
-  { num: 3, content: <><span className="text-purple-400">FROM</span> users u</> },
-  { num: 4, content: <><span className="text-purple-400">JOIN</span> orders o <span className="text-purple-400">ON</span> o.user_id = u.id</> },
-  { num: 5, content: <><span className="text-purple-400">WHERE</span> o.created_at &gt;= <span className="text-emerald-400">&apos;2026-03-01&apos;</span></> },
-  { num: 6, content: <><span className="text-purple-400">GROUP BY</span> u.name</> },
-  { num: 7, content: <><span className="text-purple-400">ORDER BY</span> orders <span className="text-purple-400">DESC</span></> },
-  { num: 8, content: <><span className="text-purple-400">LIMIT</span> <span className="text-orange-400">10</span>;</> },
+  {
+    num: 2,
+    content: (
+      <>
+        <span className="text-purple-400">SELECT</span> u.name,{" "}
+        <span className="text-blue-400">COUNT</span>(o.id){" "}
+        <span className="text-purple-400">AS</span> orders
+      </>
+    ),
+  },
+  {
+    num: 3,
+    content: (
+      <>
+        <span className="text-purple-400">FROM</span> users u
+      </>
+    ),
+  },
+  {
+    num: 4,
+    content: (
+      <>
+        <span className="text-purple-400">JOIN</span> orders o{" "}
+        <span className="text-purple-400">ON</span> o.user_id = u.id
+      </>
+    ),
+  },
+  {
+    num: 5,
+    content: (
+      <>
+        <span className="text-purple-400">WHERE</span> o.created_at &gt;={" "}
+        <span className="text-emerald-400">&apos;2026-03-01&apos;</span>
+      </>
+    ),
+  },
+  {
+    num: 6,
+    content: (
+      <>
+        <span className="text-purple-400">GROUP BY</span> u.name
+      </>
+    ),
+  },
+  {
+    num: 7,
+    content: (
+      <>
+        <span className="text-purple-400">ORDER BY</span> orders{" "}
+        <span className="text-purple-400">DESC</span>
+      </>
+    ),
+  },
+  {
+    num: 8,
+    content: (
+      <>
+        <span className="text-purple-400">LIMIT</span>{" "}
+        <span className="text-orange-400">10</span>;
+      </>
+    ),
+  },
 ];
 
 export function CodeDemo() {

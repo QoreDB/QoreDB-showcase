@@ -8,6 +8,16 @@ import { Hero } from "@/components/landing/hero";
 import { normalizeLocale } from "@/lib/locale";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
 
+const SocialProofBar = dynamic(() =>
+  import("@/components/landing/social-proof-bar").then((m) => ({
+    default: m.SocialProofBar,
+  })),
+);
+const MiniFaq = dynamic(() =>
+  import("@/components/landing/mini-faq").then((m) => ({
+    default: m.MiniFaq,
+  })),
+);
 const DatabaseStrip = dynamic(() =>
   import("@/components/landing/database-strip").then((m) => ({
     default: m.DatabaseStrip,
@@ -26,6 +36,11 @@ const FeatureShowcase = dynamic(() =>
 const InlineCTA = dynamic(() =>
   import("@/components/landing/inline-cta").then((m) => ({
     default: m.InlineCTA,
+  })),
+);
+const Testimonials = dynamic(() =>
+  import("@/components/landing/testimonials").then((m) => ({
+    default: m.Testimonials,
   })),
 );
 const ComparisonTable = dynamic(() =>
@@ -115,21 +130,21 @@ export default async function HomePage({
 
   return (
     <>
-      <Script
-        id={`home-jsonld-${normalizedLocale}`}
-        type="application/ld+json"
-      >
+      <Script id={`home-jsonld-${normalizedLocale}`} type="application/ld+json">
         {JSON.stringify(structuredData)}
       </Script>
       <div className="min-h-screen overflow-hidden relative">
         <HeroBackgroundManager />
         <Header />
         <Hero />
+        <SocialProofBar />
         <DatabaseStrip />
         <FeaturesSection />
         <FeatureShowcase />
         <InlineCTA />
+        <Testimonials locale={normalizedLocale} />
         <ComparisonTable />
+        <MiniFaq />
         <PricingPreview />
         <CTASection />
         <Footer />

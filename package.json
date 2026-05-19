@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && tsx scripts/build-search-index.ts",
+    "build": "tsx scripts/fetch-stats.ts && next build && tsx scripts/build-search-index.ts",
     "build:next": "next build",
     "build:search": "tsx scripts/build-search-index.ts",
+    "build:stats": "tsx scripts/fetch-stats.ts",
     "start": "next start",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",

@@ -186,9 +186,9 @@
         "title": "跨数据库联邦",
         "desc": "通过活动连接之间的联接跨多个数据库运行 SQL 查询。"
       },
-      "performance": {
-        "title": "速度提升 25%",
-        "desc": "批量流式传输、MessagePack 编码、按列解码器和 Profile-Guided Optimization。"
+      "instant_api": {
+        "title": "即时数据 API",
+        "desc": "一键将任何已保存查询转换为安全的 REST 端点 — 令牌认证、速率限制、自动生成 OpenAPI 文档。"
       },
       "export": {
         "title": "多格式导出",
@@ -258,11 +258,35 @@
   "database_strip": {
     "label": "一个界面，每个数据库"
   },
-  "social_proof": {
+  "product_specs": {
     "databases": "12 个驱动",
     "binary_size": "~15 MB 二进制文件",
     "startup": "<1秒启动",
     "license": "阿帕奇2.0"
+  },
+  "social_proof": {
+    "aria_label": "项目热度统计",
+    "downloads": "{{value}} 次下载",
+    "stars": "{{count}} 颗星",
+    "releases": "{{months}} 个月内 {{count}} 次发布"
+  },
+  "mini_faq": {
+    "privacy": {
+      "question": "我的数据会被发送到任何地方吗？",
+      "answer": "不，从不。100% 本地优先 — 您的数据始终留在您的机器上。"
+    },
+    "oss": {
+      "question": "是开源的吗？",
+      "answer": "是的。核心采用 Apache 2.0 许可证开源。"
+    },
+    "no_subscription": {
+      "question": "需要订阅或定期付款吗？",
+      "answer": "无订阅。Pro 是一次性付款，终身免费更新。"
+    }
+  },
+  "testimonials": {
+    "title": "开发者怎么说",
+    "subtitle": "每天使用 QoreDB 的真实用户反馈。"
   },
   "comparison": {
     "title": "QoreDB 比较如何",
@@ -489,10 +513,7 @@
         "question": "我可以为该项目做出贡献吗？",
         "answer": "是的，而且是受到鼓励的。\n\n可能的贡献：\n\n* 用户反馈，\n* GitHub 问题和讨论，\n* 改进建议，\n* 代码和文档。\n\nGitHub 社区正在构建中。"
       },
-      "pro_version": {
-        "question": "会有“专业”版本吗？",
-        "answer": "可能是的。\n\n目标不是阻止使用，而是提供：\n\n* 先进的功能，\n* 协作或专业用途，\n* 供团队和公司使用的选项。\n\n开源版本将保持完全可用。"
-      },
+      
       "funding": {
         "question": "该项目将如何资助？",
         "answer": "目标模型是：\n\n* 可持续的开源，\n* 自筹资金，\n* 不依赖于强制性的集中式云。\n\n细节将随着产品的采用而演变。"
@@ -518,12 +539,13 @@
   "pricing_page": {
     "badge": "开放核心",
     "title": "选择适合您工作流程的计划",
-    "subtitle": "核心仍然完整且免费。 Pro 在您需要时添加高级功能。",
+    "subtitle": "免费版用于个人和探索，Pro 版面向您的日常专业工作。",
     "billing_note": "永久授权，Pro 一次性付费",
     "checkout_error": "现在无法启动 Stripe Checkout。",
     "faq_title": "常见问题",
     "core": {
-      "title": "核心",
+      "title": "免费",
+      "tagline": "个人 & 探索",
       "description": "QoreDB 的完整开源基础。",
       "price": "免费",
       "badge": "主要选择",
@@ -545,7 +567,8 @@
       }
     },
     "pro": {
-      "title": "专业版",
+      "title": "Pro",
+      "tagline": "为您的专业工作而设",
       "description": "对于要求苛刻的开发人员来说是自然的升级。",
       "price": "XX欧元",
       "badge": "一次性付款",
@@ -566,7 +589,8 @@
       }
     },
     "team": {
-      "title": "团队",
+      "title": "Team",
+      "tagline": "为团队打造",
       "description": "团队的高级协作。",
       "price": "即将推出",
       "badge": "即将推出",
@@ -588,9 +612,9 @@
         "question": "我的数据是否已发送到某处？",
         "answer": "QoreDB 是 100% 本地优先。您的数据永远不会离开您的机器。即使 AI 也使用您自己的 API 密钥运行。"
       },
-      "stop_paying": {
-        "question": "如果我停止付款会怎样？",
-        "answer": "Pro 是永久许可证（一次性付款）。您保留解锁的功能。只有未来的重大升级可能需要付费升级。"
+      "lifetime_updates": {
+        "question": "更新是终身免费的吗？",
+        "answer": "是的。一次性付款，终身免费更新 — 无订阅，无续费，未来版本也无需额外付费。"
       },
       "try_pro": {
         "question": "我可以先尝试专业版功能吗？",
@@ -601,6 +625,62 @@
         "answer": "Pro 功能基于 BSL 1.1，并在 4 年后自动转换为 Apache 2.0。代码是可读的，但在此期间重新分发受到限制。"
       }
     }
+  },
+  "pricing_comparison": {
+    "title": "诚实的价格对比",
+    "subtitle": "相同的日常使用，截然不同的总成本。看看 3 年后的对比。",
+    "year_label": "每年",
+    "perpetual_label": "一次性",
+    "tco_label": "{{years}} 年总计",
+    "lifetime_perk": "之后终身 0 元",
+    "note": "竞品价格来自其官方网站，欧元等值，2026 年 5 月。",
+    "tools": {
+      "dbeaver": {
+        "name": "DBeaver PRO",
+        "tagline": "订阅"
+      },
+      "tableplus": {
+        "name": "TablePlus",
+        "tagline": "年度授权"
+      },
+      "qoredb": {
+        "name": "QoreDB Pro",
+        "tagline": "永久"
+      }
+    }
+  },
+  "team_waitlist": {
+    "placeholder": "you@company.com",
+    "cta": "准备好后通知我",
+    "success": "谢谢 — 我们会联系您。",
+    "error": "提交失败，请重试。"
+  },
+  "oss_program": {
+    "badge": "OSS 计划",
+    "title": "OSS 维护者免费获得 Pro",
+    "subtitle": "如果您维护一个受欢迎的开源项目，QoreDB Pro 由我们买单。一张许可证，终身有效。",
+    "eligibility": {
+      "stars_title": "1,000+ 星",
+      "stars_body": "您的主仓库至少有 1,000 个 GitHub 星标。",
+      "maintainer_title": "活跃维护者",
+      "maintainer_body": "您积极维护仓库 — 提交、评审、发布。",
+      "spirit_title": "开源精神",
+      "spirit_body": "您相信回馈。我们也一样。"
+    },
+    "form_title": "申请免费 Pro 许可证",
+    "fields": {
+      "email": "邮箱",
+      "github_username": "GitHub 用户名",
+      "repo": "主仓库",
+      "repo_hint": "格式：owner/repo（如 rust-lang/rust）",
+      "note": "其他说明？",
+      "note_hint": "可选 — 介绍一下您的项目。"
+    },
+    "submit": "提交申请",
+    "success_title": "申请已收到",
+    "success_body": "我们将在几天内审核并回复。",
+    "error_generic": "提交失败，请重试。",
+    "review_note": "人工审核。通常在 3 个工作日内。"
   },
   "license_management": {
     "title": "许可证管理",

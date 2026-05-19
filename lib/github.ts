@@ -56,7 +56,7 @@ export interface GithubAsset {
   browser_download_url: string;
 }
 
-const GITHUB_REPO = "raphplt/QoreDB";
+const GITHUB_REPO = "QoreDB/QoreDB";
 
 export async function getReleases(): Promise<GithubRelease[]> {
   try {

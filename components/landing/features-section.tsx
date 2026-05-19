@@ -6,13 +6,13 @@ import {
   Combine,
   Database,
   FolderKanban,
-  Gauge,
   History,
   Layers,
   Lock,
   Shield,
   Table,
   Terminal,
+  Webhook,
   Zap,
 } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
@@ -29,7 +29,7 @@ const featureIcons = {
   grid: Zap,
   ai: Brain,
   federation: Combine,
-  performance: Gauge,
+  instant_api: Webhook,
 };
 
 export function FeaturesSection() {
@@ -89,15 +89,25 @@ export function FeaturesSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {features.map((feature, index) => (
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.04 } },
+          }}
+        >
+          {features.map((feature) => (
             <motion.div
               key={feature.key}
-              className="group relative p-6 rounded-2xl bg-(--q-bg-1) border border-(--q-border) hover:border-(--q-accent)/30 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="group relative p-6 rounded-2xl bg-(--q-bg-1) border border-(--q-border) hover:border-(--q-accent)/30 overflow-hidden transition-colors duration-300 hover:shadow-lg"
             >
               {/* Subtle accent glow on hover */}
               <div className="absolute -top-12 -right-12 w-24 h-24 bg-(--q-accent)/0 group-hover:bg-(--q-accent)/10 rounded-full blur-2xl transition-all duration-500" />
@@ -115,7 +125,7 @@ export function FeaturesSection() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
