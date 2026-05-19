@@ -38,7 +38,37 @@ export const POST_QUERY =
     slug,
     publishedAt,
     mainImage,
-    "author": author->{name}
   }
 }`);
+
+export const CATEGORIES_QUERY = defineQuery(
+  `*[_type == "category"] | order(title asc) { _id, title }`
+);
+
+export const getFilteredPostsQuery = (sort?: string) => {
+  let order = "publishedAt desc";
+  if (sort === "date-asc") order = "publishedAt asc";
+  else if (sort === "title-asc") order = "title asc";
+  else if (sort === "title-desc") order = "title desc";
+
+  const filter = `_type == "post" && defined(slug.current) && (!defined(language) && $language == 'fr' || language == $language) 
+    && (!defined($searchQuery) || $searchQuery == "" || title match $searchQuery || pt::text(body) match $searchQuery)
+    && (!defined($category) || $category == "" || $category in categories[]->title || $category == "all")`;
+
+  return defineQuery(`
+    {
+      "posts": *[${filter}] | order(${order})[$start...$end] {
+        _id,
+        title,
+        slug,
+        publishedAt,
+        mainImage,
+        "author": author->{name, image},
+        "categories": categories[]->{title}
+      },
+      "total": count(*[${filter}])
+    }
+  `);
+};
+
 
