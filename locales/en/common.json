@@ -76,7 +76,7 @@
     },
     "ph_badge": "Launching on Product Hunt",
     "title": "One app for <italic>all your databases</italic>",
-    "subtitle": "The fast, open-source database client built with Rust. Connect to <highlight>13 native drivers</highlight>, including the PostgreSQL family (Supabase, Neon, TimescaleDB), from a single, beautiful interface. Local-first: your data stays yours.",
+    "subtitle": "The fast, open-source database client built with Rust. Connect to <highlight>13 native drivers</highlight> from a single, beautiful interface. Local-first: your data stays yours.",
     "cta": {
       "join_beta": "Join Beta",
       "download_core": "Download Free",

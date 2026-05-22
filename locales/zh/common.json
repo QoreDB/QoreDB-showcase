@@ -65,7 +65,7 @@
     },
     "ph_badge": "启动产品搜寻",
     "title": "一款适用于<italic>所有数据库</italic>的应用程序",
-    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>13 个原生驱动</highlight>，包括 PostgreSQL 系列（Supabase、Neon、TimescaleDB）。本地优先：您的数据归您所有。",
+    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>13 个原生驱动</highlight>。本地优先：您的数据归您所有。",
     "cta": {
       "join_beta": "加入测试版",
       "download_core": "免费下载",

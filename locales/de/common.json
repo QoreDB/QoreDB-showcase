@@ -65,7 +65,7 @@
     },
     "ph_badge": "Start bei Product Hunt",
     "title": "Eine App für <italic>alle Ihre Datenbanken</italic>",
-    "subtitle": "Der schnelle Open-Source-Datenbank-Client, der mit Rust erstellt wurde. Verbinden Sie sich mit <highlight>13 nativen Treibern</highlight> – einschließlich der PostgreSQL-Familie (Supabase, Neon, TimescaleDB) – über eine einzige, schöne Oberfläche. Local-First – Ihre Daten bleiben Ihr Eigentum.",
+    "subtitle": "Der schnelle Open-Source-Datenbank-Client, der mit Rust erstellt wurde. Verbinden Sie sich mit <highlight>13 nativen Treibern</highlight> über eine einzige, schöne Oberfläche. Local-First – Ihre Daten bleiben Ihr Eigentum.",
     "cta": {
       "join_beta": "Treten Sie der Beta bei",
       "download_core": "Kostenlos herunterladen",

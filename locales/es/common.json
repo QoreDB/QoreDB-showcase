@@ -65,7 +65,7 @@
     },
     "ph_badge": "Lanzamiento de Product Hunt",
     "title": "Una aplicación para <italic>todas tus bases de datos</italic>",
-    "subtitle": "El cliente de base de datos rápido y de código abierto creado con Rust. Conéctese a <highlight>13 controladores nativos</highlight>, incluida la familia PostgreSQL (Supabase, Neon, TimescaleDB), desde una única y hermosa interfaz. Primero lo local: sus datos siguen siendo suyos.",
+    "subtitle": "El cliente de base de datos rápido y de código abierto creado con Rust. Conéctese a <highlight>13 controladores nativos</highlight> desde una única y hermosa interfaz. Primero lo local: sus datos siguen siendo suyos.",
     "cta": {
       "join_beta": "Unirse a la beta",
       "download_core": "Descargar gratis",

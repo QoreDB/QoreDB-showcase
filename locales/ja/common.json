@@ -65,7 +65,7 @@
     },
     "ph_badge": "Product Hunt での発売",
     "title": "<italic>すべてのデータベース</italic> に 1 つのアプリで対応",
-    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>13 個のネイティブ ドライバー</highlight>（PostgreSQL ファミリー：Supabase、Neon、TimescaleDB を含む）に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
+    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>13 個のネイティブ ドライバー</highlight>に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
     "cta": {
       "join_beta": "ベータ版に参加する",
       "download_core": "無料ダウンロード",

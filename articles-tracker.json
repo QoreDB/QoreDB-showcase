@@ -241,19 +241,21 @@
       "title": "Les meilleurs clients PostgreSQL desktop en 2026",
       "category": "Produit",
       "publishedAt": "2026-05-20"
+    },
+    {
+      "slug": "meilleurs-clients-mysql-desktop-2026",
+      "title": "Les meilleurs clients MySQL en 2026 : comparatif desktop",
+      "category": "Produit",
+      "publishedAt": "2026-05-21"
+    },
+    {
+      "slug": "meilleurs-clients-mongodb-2026-compass-alternatives",
+      "title": "Les meilleurs clients MongoDB en 2026 : Compass et ses alternatives",
+      "category": "Produit",
+      "publishedAt": "2026-05-22"
     }
   ],
   "queue": [
-    {
-      "title": "Les meilleurs clients MySQL en 2026 : comparatif desktop",
-      "category": "Produit",
-      "topic_notes": "SEO comparatif. MySQL Workbench, DBeaver, DataGrip, Sequel Ace, TablePlus, HeidiSQL, QoreDB. Critères : pool de connexions, support SSH, export, schémas. Ton neutre."
-    },
-    {
-      "title": "Les meilleurs clients MongoDB en 2026 : compass et alternatives",
-      "category": "Produit",
-      "topic_notes": "SEO comparatif. Compass, Studio 3T, Robo 3T (NoSQLBooster), DBeaver, QoreDB. Indiquer ce que chacun fait/ne fait pas (aggregation pipeline, schema inference, multi-cluster)."
-    },
     {
       "title": "Top des clients SQLite gratuits en 2026",
       "category": "Produit",

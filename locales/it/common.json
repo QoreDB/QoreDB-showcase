@@ -65,7 +65,7 @@
     },
     "ph_badge": "Lancio su Product Hunt",
     "title": "Un'unica app per <italic>tutti i tuoi database</italic>",
-    "subtitle": "Il client di database veloce e open source creato con Rust. Connettiti a <highlight>13 driver nativi</highlight>, inclusa la famiglia PostgreSQL (Supabase, Neon, TimescaleDB), da un'unica, bellissima interfaccia. Local-first: i tuoi dati rimangono tuoi.",
+    "subtitle": "Il client di database veloce e open source creato con Rust. Connettiti a <highlight>13 driver nativi</highlight> da un'unica, bellissima interfaccia. Local-first: i tuoi dati rimangono tuoi.",
     "cta": {
       "join_beta": "Unisciti alla Beta",
       "download_core": "Scarica gratis",
