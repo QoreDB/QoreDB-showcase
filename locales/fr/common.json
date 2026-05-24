@@ -9,7 +9,101 @@
     "changelog": "Changelog",
     "download": "Télécharger",
     "join_beta": "Rejoindre la beta",
-    "docs": "Docs"
+    "docs": "Docs",
+    "marketplace": "Marketplace"
+  },
+  "marketplace": {
+    "page_title": "Marketplace de plugins",
+    "page_subtitle": "Étendez QoreDB avec des plugins sandboxés — packs de snippets, thèmes, templates de connexion, et modules WASM qui s'accrochent au cycle de vie des requêtes.",
+    "section_title": "Plugins disponibles",
+    "section_subtitle": "Chaque plugin de cette liste a été relu par les mainteneurs et vit dans le registre public.",
+    "registry_link_label": "Parcourir le registre sur GitHub",
+    "submit_cta": "Soumettre un plugin",
+    "empty": "Aucun plugin pour le moment. Soyez le premier à en publier un.",
+    "search_placeholder": "Rechercher un plugin…",
+    "filter_all": "Tous",
+    "filter_declarative": "Déclaratifs",
+    "filter_executable": "Exécutables (WASM)",
+    "registry_unavailable": "Le registre est temporairement injoignable. Réessayez dans quelques minutes.",
+    "kind": {
+      "declarative": "Déclaratif",
+      "executable": "Exécutable (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "par {{author}}",
+      "view_details": "Voir le détail"
+    },
+    "detail": {
+      "back": "Retour à la marketplace",
+      "install_title": "Installer dans QoreDB",
+      "install_step_1": "Ouvrez QoreDB → Paramètres → Marketplace et cliquez sur Installer. L'application télécharge l'archive, vérifie son sha256 contre cette page, puis valide le manifeste avant tout déclenchement d'un hook.",
+      "install_step_2": "Ou téléchargez l'archive directement et installez-la via Paramètres → Plugins → Installer un plugin. L'hôte QoreDB re-valide le manifeste de la même manière.",
+      "download_archive": "Télécharger plugin.zip ({{size}})",
+      "view_manifest": "Voir plugin.json",
+      "manifest_heading": "Manifeste en un coup d'œil",
+      "manifest_id": "Identifiant du plugin",
+      "manifest_version": "Version",
+      "manifest_qoredb": "Compatibilité QoreDB",
+      "manifest_author": "Auteur",
+      "manifest_kind": "Type",
+      "manifest_archive_sha": "sha256 de l'archive",
+      "manifest_integrity": "Intégrité du WASM",
+      "manifest_no_integrity": "Non signé — QoreDB marquera ce plugin comme Non signé dans le panneau.",
+      "manifest_hooks": "Hooks du cycle de vie",
+      "manifest_no_hooks": "Aucun hook de cycle de vie (plugin déclaratif).",
+      "manifest_capabilities": "Capacités demandées",
+      "manifest_no_capabilities": "Aucune capacité demandée.",
+      "manifest_contributes": "Contributions",
+      "contributes_none": "Aucune contribution déclarative.",
+      "contributes_snippets": "{{count}} snippet",
+      "contributes_snippets_plural": "{{count}} snippets",
+      "contributes_templates": "{{count}} template de connexion",
+      "contributes_templates_plural": "{{count}} templates de connexion",
+      "contributes_themes": "{{count}} thème",
+      "contributes_themes_plural": "{{count}} thèmes",
+      "contributes_viewers": "{{count}} visualiseur de résultat",
+      "contributes_viewers_plural": "{{count}} visualiseurs de résultats",
+      "contributes_commands": "Commandes : {{commands}}",
+      "versions_heading": "Toutes les versions",
+      "version_label": "Version {{version}}",
+      "version_size": "Archive de {{size}}",
+      "not_found_title": "Plugin introuvable",
+      "not_found_subtitle": "Ce plugin n'est pas dans le registre. Il a peut-être été renommé ou retiré."
+    },
+    "submit": {
+      "title": "Soumettre un plugin",
+      "subtitle": "Les plugins sont relus par les mainteneurs de QoreDB avant d'apparaître dans la marketplace. La revue prend généralement quelques jours — nous regardons le manifeste, les capacités demandées, et la source du module WASM.",
+      "field_plugin_id": "Identifiant du plugin",
+      "field_plugin_id_hint": "DNS inversé, par ex. acme.linter. Doit correspondre à plugin.json#id.",
+      "field_name": "Nom affiché",
+      "field_version": "Version",
+      "field_kind": "Type de plugin",
+      "field_kind_declarative": "Déclaratif — snippets, thèmes, templates de connexion uniquement",
+      "field_kind_executable": "Exécutable — embarque un module WASM sandboxé",
+      "field_description": "Description courte",
+      "field_author": "Auteur / mainteneur",
+      "field_contact_email": "Email de contact",
+      "field_contact_email_hint": "Nous l'utilisons pour vous recontacter ou confirmer la validation. Jamais publié.",
+      "field_repository_url": "Dépôt source (optionnel)",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "Collez le manifeste tel quel. L'identifiant et la version doivent correspondre aux champs ci-dessus.",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "Archive plate contenant plugin.json et le module WASM (le cas échéant). Max 8 Mio — le même budget d'install que QoreDB applique.",
+      "submit_button": "Soumettre pour relecture",
+      "submitting": "Envoi…",
+      "success_title": "Soumission reçue",
+      "success_body": "Merci. Votre plugin est dans la file de relecture — nous écrirons à {{email}} dès qu'il aura été examiné.",
+      "error_title": "Échec de la soumission",
+      "checklist_title": "Avant de soumettre",
+      "checklist_items": [
+        "Le module WASM s'instancie sans erreur et exporte bien les hooks déclarés dans le manifeste.",
+        "Chaque capacité demandée dans le manifeste est réellement utilisée — les utilisateurs les verront dans la fenêtre de consentement.",
+        "Si le plugin fait des appels HTTP, allowedHosts est une liste précise, pas un joker.",
+        "runtime.integrity contient le sha256 des octets finaux du .wasm.",
+        "L'archive contient uniquement plugin.json + le module WASM à sa racine."
+      ]
+    }
   },
   "download": {
     "title": "Télécharger QoreDB",
@@ -201,6 +295,10 @@
       "instant_api": {
         "title": "API de données instantanée",
         "desc": "Transformez n’importe quelle requête sauvegardée en endpoint REST sécurisé."
+      },
+      "plugins": {
+        "title": "Système de plugins",
+        "desc": "Étendez QoreDB avec des packs déclaratifs (snippets, thèmes, templates) ou des modules WASM sandboxés qui s'accrochent au cycle de vie des requêtes. Chaque capacité est opt-in."
       },
       "export": {
         "title": "Export multi-formats",

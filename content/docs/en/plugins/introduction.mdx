@@ -1,0 +1,85 @@
+---
+title: Plugins introduction
+description: How QoreDB plugins extend the app — declarative contributions, executable WASM hooks, and the consent model in between.
+premium: false
+---
+
+# Introduction to QoreDB plugins
+
+QoreDB plugins are folders dropped into the host's plugin directory. Each folder ships a `plugin.json` manifest and, optionally, a sandboxed WebAssembly module. The host parses the manifest at install time, merges the plugin's contributions into the rest of QoreDB, and — for executable plugins — wires its WASM exports into the query lifecycle.
+
+This page covers what a plugin is, the two flavours the host recognises, and how the consent model decides what a plugin gets to do.
+
+## Two flavours
+
+The QoreDB host (`src-tauri/src/plugins/manifest.rs`) sees a plugin as one of:
+
+- **Declarative** — no `runtime` block in `plugin.json`. The plugin contributes static data: SQL snippets, connection templates, themes, result-viewer mappings. No code runs; nothing to sandbox.
+- **Executable** — a `runtime` block declaring a WASM module. The plugin can subscribe to lifecycle hooks (`preExecute`, `postExecute`) and contribute user-invocable `commands` that fire its WASM `command` export. Everything runs inside the host's sandbox.
+
+A single plugin can do both: ship snippets *and* a WASM module. Declarative-only plugins exist to make the common case (a snippet pack, a colour theme) reachable without any code.
+
+## What a plugin contributes
+
+The manifest's `contributes` block declares static data, regardless of whether the plugin is declarative or executable:
+
+| Contribution | What it adds |
+| --- | --- |
+| `snippets` | Labelled SQL templates in the snippets palette. |
+| `connectionTemplates` | Pre-filled connection presets, filtered by driver in the connection modal. |
+| `themes` | Colour themes mapping `--q-*` CSS variables, in light/dark pairs. Variables outside the `--q-*` namespace are rejected at install time. |
+| `resultViewers` | Cell renderers picked by column type or name pattern. The host owns the renderers (`json-tree`, `image`, `chart`, `map`); the plugin only opts a column in. |
+| `commands` | User-invocable actions. Clicking one fires the plugin's WASM `command` hook; requires a `runtime` block. |
+
+Every contributed id is namespaced by plugin id (`<plugin-id>::<local-id>`), so two plugins can ship `snippets[].id = "hello"` without colliding.
+
+## What an executable plugin can do
+
+An executable plugin's WASM module exports up to three hooks:
+
+- `pre_execute(ctx) -> Decision` runs **before** a query and may `allow`, `warn`, or `block` it. A `block` stops the query before it reaches the database; a `warn` lets it run and surfaces a toast.
+- `post_execute(envelope)` runs **after** a query — successful or not. Its return value is ignored.
+- `command(envelope) -> json` runs when the user clicks a contributed command. The host hands back the returned JSON to the UI.
+
+Hooks are stateless: every call gets a fresh WASM store (new linear memory, new fuel budget). State that survives between calls must go through the host's KV storage (the `storage` capability).
+
+## Capabilities, consent, and isolation
+
+A WASM module on its own can compute but cannot reach outside its sandbox. Anything that touches the host — logging, notifications, KV storage, query results, HTTP, the filesystem, secrets — goes through a host function, and every host function is gated by a **capability** the manifest declared *and* the user explicitly granted at install time.
+
+The capability set is fixed:
+
+`log`, `notify`, `storage`, `queryRead`, `http`, `fs`, `secrets`.
+
+Granted capabilities are stored alongside the plugin and revocable from the plugins panel. A revoked capability becomes `ERR_DENIED` at the next host-function call, no reload required.
+
+For the per-capability shapes and limits, see [Capabilities](/docs/plugins/capabilities).
+
+## Where plugins live on disk
+
+Installed plugins live under the QoreDB app's data directory:
+
+- macOS: `~/Library/Application Support/com.qoredb.app/plugins/<plugin-id>/`
+- Linux: `~/.config/com.qoredb.app/plugins/<plugin-id>/` (or `$XDG_CONFIG_HOME` equivalent)
+- Windows: `%APPDATA%\com.qoredb.app\plugins\<plugin-id>\`
+
+Each folder contains the manifest, the WASM module (if any), and a per-plugin `storage.json` if the plugin uses the `storage` capability. The host writes a small `<plugins-dir>/index.json` next to them that tracks which plugins are enabled.
+
+## What the host refuses to install
+
+`install_plugin` enforces these constraints on the source folder before anything lands on disk:
+
+- The folder must contain a `plugin.json` at its root.
+- The manifest must parse and pass validation (id pattern, runtime ABI version, capability shapes, theme variables prefixed `--q-`, etc.).
+- The total payload must fit within 8 MiB and 256 files.
+- No symbolic links are allowed inside the folder.
+- Build artefacts and VCS metadata are skipped silently (`target/`, `node_modules/`, `.git/`, `.cargo/`, `Cargo.lock`, `.DS_Store`).
+
+The install is atomic: the new version stages in `<plugin-id>.qoredb-staging/`, swaps in place via a rename, and on failure restores the previous version from `<plugin-id>.qoredb-backup/`.
+
+## What's next
+
+- The [Manifest](/docs/plugins/manifest) page documents every field, with the validation rules the host enforces.
+- [Capabilities](/docs/plugins/capabilities) covers the consent model, the per-capability shapes, and the limits applied at host-function call time.
+- [Hooks and ABI](/docs/plugins/hooks-and-abi) is the low-level reference: required exports, packed return values, fuel and wall-clock budgets, integrity checking.
+- The [Marketplace](/docs/plugins/marketplace) page covers the public registry, the submission workflow, and the in-app Marketplace tab.

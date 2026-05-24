@@ -1,0 +1,102 @@
+---
+title: Marketplace & registry
+description: How the public plugin marketplace works — the registry repo, the submission flow, and the in-app Marketplace tab.
+premium: false
+---
+
+# Marketplace & registry
+
+The QoreDB marketplace is the public catalog of plugins approved by the maintainers. It surfaces on the website at [`/marketplace`](/marketplace) and inside the QoreDB app under **Settings → Marketplace**.
+
+The marketplace has two halves:
+
+- **The registry** — a public GitHub repo, [`qoredb-plugins-registry`](https://github.com/qoredb/qoredb-plugins-registry), that holds the canonical bytes of every approved plugin version plus a machine-readable `index.json`.
+- **The submission queue** — a Sanity-backed admin queue behind [`/marketplace/submit`](/marketplace/submit), where third parties submit plugins for review.
+
+Approved submissions land in the registry repo; the marketplace UI reads from there.
+
+## Anatomy of a registry entry
+
+Every approved plugin lives at `plugins/<plugin-id>/<version>/` in the registry repo:
+
+```
+plugins/qoredb.danger-guard/1.0.0/
+├── plugin.json               # Verbatim copy of the plugin's manifest
+├── plugin.zip                # Flat archive: plugin.json + the WASM module
+├── plugin.zip.sha256         # sha256 of plugin.zip (sha256-<64 hex>)
+└── qoredb_danger_guard.wasm  # Mirrored next to the archive, for direct inspection
+```
+
+The top-level `index.json` summarises every entry — id, name, description, the list of versions, the manifest's hooks and capabilities, the archive's sha256 — so the marketplace UI never has to download a `.zip` just to render a card. The schema is at `schema/registry-entry.schema.json` in the same repo.
+
+The QoreDB app verifies the archive against `archive.sha256` end-to-end before parsing the manifest, so a hostile mirror cannot smuggle a different `plugin.zip` past the install path.
+
+## Installing from the marketplace
+
+There are two ways to install a marketplace plugin:
+
+1. **In-app, one-click.** Open QoreDB → Settings → Marketplace. Pick a plugin, click Install. The app fetches the archive, verifies its sha256, validates the manifest, asks you to grant the requested capabilities, and the plugin's hooks come online on the next query.
+2. **By hand.** From a plugin's detail page on the website, click Download `plugin.zip`. Unzip it into a folder, then open QoreDB → Settings → Plugins → Install plugin and pick the folder. The host re-checks the manifest the same way.
+
+Either path goes through the same `install_plugin` code in the QoreDB host, so a plugin that installs cleanly through the marketplace also installs cleanly from a local folder, and vice versa.
+
+## Submitting a plugin
+
+Anyone can submit a plugin through [`/marketplace/submit`](/marketplace/submit). The form asks for:
+
+- The plugin id, display name, version, and a short description.
+- The plugin's **kind** — declarative or executable.
+- The author / maintainer name and a **contact email** (used to follow up on the review, never published).
+- An optional link to the source repository.
+- The `plugin.json` manifest, pasted verbatim.
+- The `plugin.zip` archive (flat archive: `plugin.json` + the WASM module at the root, max 8 MiB).
+
+The server cross-checks the form fields against the manifest before accepting the submission — `plugin.id` must match the form's plugin id, `plugin.version` must match the form's version, and the presence of a `runtime` block must match the declared kind. Submissions that would fail to install in QoreDB never enter the review queue.
+
+### What the reviewers look at
+
+Each submission is reviewed by hand before it lands in the registry. The criteria:
+
+1. **The manifest validates.** It re-runs the host's parser; if there's a problem, the submitter gets an actionable error.
+2. **Capabilities are appropriate.** A snippet pack asking for `http` is suspicious; an audit plugin asking for `secrets` is reasonable.
+3. **`allowedHosts` is a tight list.** No wildcards, no fuzzy domains.
+4. **`runtime.integrity` is present** for executable plugins, and the digest matches the WASM bytes in the archive.
+5. **The source is auditable.** Plugins with a link to a public source repo go faster; opaque binaries get more scrutiny.
+6. **The plugin actually does what it claims.** The reviewers run it locally against a test database to confirm.
+
+Expect a turnaround of a few days. The reviewer emails the contact address with the result; on approval, the maintainers commit the plugin to the registry repo and it shows up on the marketplace within a few minutes (the API caches the registry index for five minutes).
+
+### Direct PRs to the registry repo
+
+Plugin authors with a GitHub workflow they prefer can also submit by opening a pull request directly against [`qoredb-plugins-registry`](https://github.com/qoredb/qoredb-plugins-registry). The repo's CI replays the archive build and refuses anything inconsistent with the manifest. The review criteria are the same.
+
+## Marketplace API
+
+The showcase exposes a small read-only API the QoreDB app and other tools can consume:
+
+| Endpoint | Returns |
+| --- | --- |
+| `GET /api/marketplace/plugins` | The full registry catalog, identical in shape to `index.json`. |
+| `GET /api/marketplace/plugins/<id>` | One plugin entry with all its versions. 404 if not in the catalog. |
+
+The API is cached at the edge for five minutes, with a ten-minute stale-while-revalidate window. Approved-plugin updates are not urgent — a five-minute lag between the registry commit and the marketplace listing is fine, and it keeps the API cheap to call.
+
+The archive bytes themselves are served straight from the registry's `raw.githubusercontent.com` URLs. The showcase doesn't proxy them — the QoreDB host downloads them directly and verifies the sha256 declared in `index.json`. The trust anchor is the catalog, not the transport.
+
+## The three reference plugins
+
+The marketplace ships with three small plugins authored by the QoreDB team. They double as worked examples for the topics covered elsewhere in this section.
+
+- **[Danger Guard](/marketplace/qoredb.danger-guard)** — a `preExecute` hook that blocks destructive DDL (`DROP`, `TRUNCATE`) and warns on `UPDATE`/`DELETE` without a `WHERE` clause. Asks for `log` only.
+- **[Query Stats](/marketplace/qoredb.query-stats)** — a `postExecute` hook that counts queries per driver and operation type. Contributes two `commands` (`show-stats`, `reset-stats`) that surface the counters. Asks for `log` and `storage`.
+- **[Slow Query Toast](/marketplace/qoredb.slow-query-toast)** — a `postExecute` hook that pops a toast when a query takes longer than a configurable threshold. Contributes two `commands` to inspect and adjust the threshold. Asks for `notify` and `storage`.
+
+Each one has a real `runtime.integrity` digest committed to the registry, so QoreDB refuses to load a tampered build.
+
+## What's not in the marketplace (yet)
+
+- **Updates.** The host doesn't auto-update plugins. When a new version lands in the registry, QoreDB surfaces it in the Marketplace tab as an upgrade button; the user opts in.
+- **Paid plugins.** The current marketplace is free-only. The QoreDB app's licensing system applies to its own Premium modules, not to third-party plugins.
+- **Revocations.** A plugin removed from the registry stays installed on existing machines — the marketplace can announce it as "deprecated" but the host won't uninstall on its own. The user is always in control of what runs on their machine.
+
+These are tracked in the QoreDB roadmap; expect them to land before v2.

@@ -1,0 +1,133 @@
+---
+title: Capacités et consentement
+description: Ce qu'un plugin exécutable peut demander, les limites imposées par l'hôte, et la façon dont l'utilisateur accorde ou révoque l'accès.
+premium: false
+---
+
+# Capacités et consentement
+
+Un module WebAssembly seul ne peut pas dépasser son sandbox. Dès qu'un plugin touche l'hôte — pour logger, stocker une valeur, contacter une URL, lire un secret — il passe par une **fonction hôte**, et chaque fonction hôte est filtrée par une **capacité**.
+
+Les capacités sont off par défaut. Le plugin les demande dans `plugin.json#runtime.capabilities` ; l'utilisateur les relit et les accorde à l'installation ; l'hôte filtre chaque appel contre l'ensemble accordé à la première instruction de la fonction hôte. Une capacité révoquée renvoie `ERR_DENIED` au prochain appel — aucun rechargement du plugin n'est nécessaire.
+
+C'est le même modèle que VS Code, les navigateurs et les OS desktop modernes : déclaré dans les métadonnées, accordé par l'utilisateur, appliqué à la frontière.
+
+## L'ensemble des capacités
+
+L'ensemble est figé par l'hôte. Un manifeste qui déclare une capacité inconnue est refusé à l'installation.
+
+| Capacité | Forme manifeste | Ce que le plugin peut faire |
+| --- | --- | --- |
+| `log` | `"log": true` | Écrire dans le log de tracing de QoreDB (`qoredb_log`). |
+| `notify` | `"notify": true` | Afficher un toast (`qoredb_notify`). |
+| `storage` | `"storage": true` | Lire/écrire un KV store par plugin. |
+| `queryRead` | `"queryRead": true` | Récupérer les lignes du résultat de la requête courante dans `postExecute`. |
+| `http` | `"http": { "allowedHosts": [...], "allowPrivateNetworks": false }` | Émettre du HTTPS sortant vers les hôtes nommés. |
+| `fs` | `"fs": { "scope": "pluginData" }` | Lire/écrire dans le dossier de données du plugin uniquement. |
+| `secrets` | `"secrets": ["api-token", ...]` | Récupérer des secrets nommés provisionnés par l'utilisateur. |
+
+Une ancienne capacité `queryExec` est refusée au parsing. Les manifestes qui la déclarent encore reçoivent une erreur explicite.
+
+## Cycle de vie d'une autorisation
+
+1. Le plugin déclare ses capacités dans le manifeste.
+2. L'utilisateur les relit dans la fenêtre de consentement à la première installation.
+3. L'hôte persiste l'ensemble accordé dans `<plugin-dir>/consent.json`, intersecté avec l'ensemble déclaré par le manifeste. Un fichier de consentement trafiqué ne peut jamais élargir ce que le plugin a demandé.
+4. Chaque fonction hôte vérifie l'ensemble accordé à sa première instruction. Un appel refusé pour défaut de capacité est en O(1) et n'a aucun effet de bord observable : pas de résolution DNS, pas d'accès disque, pas d'allocation côté guest.
+5. L'utilisateur peut révoquer n'importe quelle capacité depuis la fenêtre de détail du plugin. Le prochain appel renvoie `ERR_DENIED`.
+
+## Détails par capacité
+
+### `log`
+
+`qoredb_log(level, message)` écrit dans le log de tracing contre la cible `plugins`. Utile pour déboguer en développement (`RUST_LOG=plugins=warn`) et pour remonter des avertissements ponctuels en production. Sans effet de bord au-delà du log — le log n'est pas visible aux autres plugins.
+
+### `notify`
+
+`qoredb_notify(level, message)` affiche un toast dans l'UI de QoreDB. Niveaux : `Info`, `Success`, `Warning`, `Error`. Utile pour les plugins `postExecute` qui remontent un retour au niveau de la requête (toast « requête lente », toast « audit envoyé »).
+
+### `storage`
+
+Un KV store par plugin. Survit aux redémarrages de QoreDB ; isolé des autres plugins. Plafonds :
+
+- 256 octets par clé.
+- 64 Kio par valeur.
+- 1024 entrées au total.
+- 1 Mio cumulé.
+
+`qoredb_kv_set` renvoie `ERR_QUOTA` dès qu'un plafond est atteint. Les valeurs sont des séquences d'octets opaques — encodez du JSON vous-même si vous avez besoin de structure.
+
+### `queryRead`
+
+Disponible **uniquement** dans `postExecute`. Renvoie le `QueryResult` sérialisé en JSON pour la requête qui vient de tourner. Plafond à 1 Mio ; au-delà l'appel renvoie `0` (traité comme « pas de payload »). En dehors de `postExecute`, l'appel renvoie toujours `0`.
+
+C'est la capacité utilisée par les plugins qui alimentent un pipeline d'analytique ou d'audit avec les résultats de requêtes. À combiner avec `http` pour les expédier ailleurs.
+
+### `http`
+
+HTTPS sortant uniquement — `http://` et les autres schémas sont refusés. La liste `allowedHosts` est obligatoire :
+
+```json
+"http": { "allowedHosts": ["api.example.com", "audit.example.com"] }
+```
+
+Une `allowedHosts` vide est refusée à l'installation. Le plugin ne peut contacter que les hôtes de la liste — une requête vers un autre hôte renvoie `ERR_DENIED`.
+
+Par défaut, l'hôte refuse les requêtes qui résolvent vers des adresses **privées**, **loopback**, **link-local** ou de **métadonnées cloud**, *après DNS*. Un attaquant qui ferait pointer `api.example.com` vers `169.254.169.254` ou `10.0.0.1` ne peut pas utiliser le plugin comme rampe SSRF vers le réseau interne. Si un plugin a vraiment besoin d'atteindre un endpoint interne (un serveur de dev local, un intranet d'entreprise), il doit l'activer :
+
+```json
+"http": { "allowedHosts": ["dev.local"], "allowPrivateNetworks": true }
+```
+
+Les plugins qui demandent `allowPrivateNetworks: true` sont signalés dans l'UI de consentement.
+
+Autres limites :
+
+- Timeout wall-clock de 10 s par requête.
+- Corps de requête plafonné à 1 Mio.
+
+La fonction hôte renvoie un objet JSON : `{ "status": 200, "body": "..." }`.
+
+### `fs`
+
+Scopé à `<plugin-dir>/data/` uniquement. Le scope est obligatoire (et la seule valeur acceptée pour le moment est `pluginData`) :
+
+```json
+"fs": { "scope": "pluginData" }
+```
+
+Les chemins sont concaténés à la racine de données du plugin ; les chemins absolus et les composants `..` sont refusés. Le plugin peut lire, écrire et supprimer des fichiers dans ce scope. 4 Mio max par fichier.
+
+La capacité `fs` ne donne jamais accès en dehors du dossier de données du plugin — il n'y a pas d'échappatoire.
+
+### `secrets`
+
+Des secrets nommés que l'utilisateur provisionne depuis la fenêtre de détail du plugin. Le manifeste liste les noms :
+
+```json
+"secrets": ["api-token", "webhook-url"]
+```
+
+`qoredb_secret_get(name)` renvoie la valeur si (et seulement si) `name` est dans la liste du manifeste **et** que l'utilisateur a provisionné une valeur dans le trousseau de l'OS. Un fichier de consentement trafiqué ne peut jamais élargir l'ensemble — l'hôte filtre contre les noms déclarés dans le manifeste.
+
+Les valeurs vivent dans le trousseau de l'OS (crate `keyring`) ; elles n'apparaissent jamais dans `plugin.json`, le fichier de consentement, ni aucun log. Le plugin voit la valeur au moment de l'appel ; personne d'autre.
+
+## Bonnes pratiques pour les auteurs de plugins
+
+Quelques principes qui maintiennent la fenêtre de consentement honnête :
+
+1. **Demandez le minimum.** Chaque capacité est un point de friction à l'installation et une surface de plus pour la revue de sécurité. Si vous n'avez pas vraiment besoin de `http`, ne le demandez pas.
+2. **Listez des hôtes explicites.** Ne prétendez pas avoir besoin de `api.example.com` pour parler à « tout internet ». Plus la liste `allowedHosts` est courte, plus la revue est rapide.
+3. **Évitez `allowPrivateNetworks: true`.** C'est une surface SSRF. Ne le demandez qu'avec une raison concrète et nommée (« on se connecte à un serveur de dev local »).
+4. **Utilisez les secrets, pas les fichiers de configuration.** Les tokens d'API vont dans le bloc `secrets`. Les mettre dans `storage` ou `fs` est moins sûr et la fenêtre de consentement ne les signalera pas.
+5. **Échouez en douceur.** Une capacité révoquée renvoie `ERR_DENIED` à l'appel. Traitez-la comme « l'utilisateur a choisi de ne pas accorder cette capacité » — affichez un toast, écrivez un log, mais ne trappez pas.
+
+## Bonnes pratiques pour les utilisateurs de QoreDB
+
+Quelques principes qui maintiennent votre installation sûre :
+
+1. **Lisez la fenêtre de consentement.** L'hôte vous montre exactement ce que le plugin a demandé. Un pack de snippets n'a aucune raison de demander `http`.
+2. **Soyez prudent avec `allowPrivateNetworks: true`.** Cela élargit ce que `http` peut atteindre. Ne l'accordez qu'aux plugins d'auteurs de confiance et pour des endpoints internes connus.
+3. **Surveillez le tag `Unsigned`.** Un plugin sans `runtime.integrity` ne peut pas être vérifié contre ses octets source. Signez les vôtres ; attendez des plugins tiers qu'ils soient signés.
+4. **Révoquez agressivement.** Les capacités se révoquent depuis la fenêtre de détail. Si vous arrêtez d'utiliser l'intégration HTTP d'un plugin mais gardez le plugin, retirez l'autorisation `http`.
+5. **Supprimez les plugins inutilisés.** Désinstaller efface le fichier de consentement, tous les secrets, et le stockage du plugin. Pas de résidu.

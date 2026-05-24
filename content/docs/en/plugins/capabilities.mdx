@@ -1,0 +1,133 @@
+---
+title: Capabilities & consent
+description: What an executable plugin can ask for, the limits the host enforces, and how the user grants or revokes access.
+premium: false
+---
+
+# Capabilities & consent
+
+A WebAssembly module on its own cannot reach outside its sandbox. Every time a plugin touches the host — to log, store a value, fetch a URL, read a secret — it goes through a **host function**, and every host function is gated by a **capability**.
+
+Capabilities are off by default. A plugin asks for them in `plugin.json#runtime.capabilities`; the user reviews and grants them at install time; the host filters every call against the granted set at the first instruction of the host function. A revoked capability becomes `ERR_DENIED` on the next call — no plugin reload required.
+
+This is the same model VS Code, browsers and modern desktop OSes use: declared in metadata, granted by the user, enforced at the bridge.
+
+## The capability set
+
+The set is fixed by the host. A manifest declaring an unknown capability is rejected at install time.
+
+| Capability | Manifest shape | What the plugin can do |
+| --- | --- | --- |
+| `log` | `"log": true` | Write to QoreDB's tracing log (`qoredb_log`). |
+| `notify` | `"notify": true` | Surface a toast notification (`qoredb_notify`). |
+| `storage` | `"storage": true` | Read/write a per-plugin KV store. |
+| `queryRead` | `"queryRead": true` | Pull the rows of the current query result inside `postExecute`. |
+| `http` | `"http": { "allowedHosts": [...], "allowPrivateNetworks": false }` | Issue outbound HTTPS to the named hosts. |
+| `fs` | `"fs": { "scope": "pluginData" }` | Read/write under the plugin's own data folder. |
+| `secrets` | `"secrets": ["api-token", ...]` | Pull named secrets the user provisioned. |
+
+A retired `queryExec` capability is rejected at parse time. Manifests still declaring it get a clear error.
+
+## The lifecycle of a grant
+
+1. The plugin declares capabilities in its manifest.
+2. The user reviews them in QoreDB's consent dialog when the plugin is first installed.
+3. The host persists the granted set under `<plugin-dir>/consent.json`, intersected with the manifest's declared set. A tampered consent file can never widen what the plugin asked for.
+4. Every host function checks the granted set as its first instruction. Any capability-denied call is O(1) and observably free of side effects: no DNS lookup, no disk hit, no allocation in the guest.
+5. The user can revoke any capability from the plugin's detail dialog. The next call returns `ERR_DENIED`.
+
+## Per-capability details
+
+### `log`
+
+`qoredb_log(level, message)` writes to the tracing log against the `plugins` target. Useful for debugging during development (`RUST_LOG=plugins=warn`) and for surfacing one-off warnings in production. Free of side effects beyond the log — the log isn't visible to other plugins.
+
+### `notify`
+
+`qoredb_notify(level, message)` shows a toast in the QoreDB UI. Levels: `Info`, `Success`, `Warning`, `Error`. Useful for `postExecute` plugins that surface query-level feedback (a "slow query" toast, an "audit posted" toast).
+
+### `storage`
+
+A per-plugin KV store. Persists across QoreDB restarts; isolated from other plugins. Caps:
+
+- 256 bytes per key.
+- 64 KiB per value.
+- 1024 entries total.
+- 1 MiB cumulative.
+
+`qoredb_kv_set` returns `ERR_QUOTA` once you hit any cap. Values are opaque byte sequences — encode JSON yourself if you need structure.
+
+### `queryRead`
+
+Available **only** inside `postExecute`. Returns the JSON-serialised `QueryResult` of the query that just ran. Capped at 1 MiB; past that the call returns `0` (treated as "no payload"). Outside `postExecute` it always returns `0`.
+
+This capability is the one plugins use to feed query results into an analytics or audit pipeline. Pair it with `http` to ship them somewhere.
+
+### `http`
+
+Outbound HTTPS only — `http://` and other schemes are rejected. The `allowedHosts` list is mandatory:
+
+```json
+"http": { "allowedHosts": ["api.example.com", "audit.example.com"] }
+```
+
+An empty `allowedHosts` is rejected at install time. The plugin can only contact hosts in the list — a request to a different host returns `ERR_DENIED`.
+
+By default, the host refuses requests that resolve to **private**, **loopback**, **link-local**, or **cloud-metadata** addresses, *post-DNS*. An attacker who tricks DNS into pointing `api.example.com` at `169.254.169.254` or `10.0.0.1` cannot use the plugin as an SSRF jump host into the user's internal network. If a plugin needs to reach an internal endpoint (a local dev server, a corporate intranet) it must opt in:
+
+```json
+"http": { "allowedHosts": ["dev.local"], "allowPrivateNetworks": true }
+```
+
+Plugins requesting `allowPrivateNetworks: true` are flagged in the consent UI.
+
+Other limits:
+
+- 10 s wall-clock timeout per request.
+- 1 MiB request body cap.
+
+The host function returns a JSON object: `{ "status": 200, "body": "..." }`.
+
+### `fs`
+
+Scoped to `<plugin-dir>/data/` only. The scope is required (and currently the only accepted value is `pluginData`):
+
+```json
+"fs": { "scope": "pluginData" }
+```
+
+Paths are joined onto the plugin's data root; absolute paths and `..` components are rejected. The plugin can read, write, and delete files inside that scope. 4 MiB max per file.
+
+The `fs` capability never grants access outside the plugin's data folder — there is no escape hatch.
+
+### `secrets`
+
+Named secrets the user provisions through the plugin's detail dialog. The manifest lists the names:
+
+```json
+"secrets": ["api-token", "webhook-url"]
+```
+
+`qoredb_secret_get(name)` returns the value if (and only if) `name` is in the manifest list **and** the user has provisioned a value in the OS keyring. A tampered consent file can never widen the set — the host filters against the manifest's declared names.
+
+Values live in the OS keyring (`keyring` crate); they never appear in `plugin.json`, the consent file, or any log. The plugin sees the value at call time; nothing else does.
+
+## Best practices for plugin authors
+
+A few principles that keep the consent dialog honest:
+
+1. **Ask for the minimum.** Every capability is a friction point in the install flow and a piece of surface area for security review. If you don't truly need `http`, don't ask for it.
+2. **List explicit hosts.** Don't pretend you need `api.example.com` to talk to "the whole internet". The smaller the `allowedHosts` list, the easier the review.
+3. **Avoid `allowPrivateNetworks: true`.** It's an SSRF surface. Only request it when there's a concrete, named reason (e.g. "we connect to a local dev server").
+4. **Use secrets, not configuration files.** API tokens go in the `secrets` block. Putting them in `storage` or `fs` is observably less safe and the consent dialog won't flag them.
+5. **Fail soft.** A revoked capability returns `ERR_DENIED` at call time. Treat that as "the user chose not to grant this" — show a toast, write a log, but don't trap.
+
+## Best practices for QoreDB users
+
+A few principles that keep your install safe:
+
+1. **Read the consent dialog.** The host shows you exactly what the plugin asked for. A snippet pack has no reason to ask for `http`.
+2. **Be wary of `allowPrivateNetworks: true`.** It widens what `http` can hit. Grant it only for plugins from authors you trust and for known internal endpoints.
+3. **Watch for the `Unsigned` flag.** A plugin without `runtime.integrity` cannot be verified against its source bytes. Sign yours; expect signing in plugins you accept from others.
+4. **Revoke aggressively.** Capabilities are revocable from the plugin detail dialog. If you stop using a plugin's HTTP integration but keep the plugin, drop the `http` grant.
+5. **Remove plugins you don't use.** Uninstalling clears the consent file, all secrets, and the plugin's storage. No residue.

@@ -1,0 +1,85 @@
+---
+title: Introduction aux plugins
+description: Comment les plugins QoreDB étendent l'application — contributions déclaratives, hooks WASM exécutables, et le modèle de consentement entre les deux.
+premium: false
+---
+
+# Introduction aux plugins QoreDB
+
+Un plugin QoreDB, c'est un dossier déposé dans le répertoire de plugins de l'hôte. Chaque dossier embarque un manifeste `plugin.json` et, le cas échéant, un module WebAssembly sandboxé. À l'installation, l'hôte parse le manifeste, intègre les contributions du plugin dans le reste de QoreDB et — pour les plugins exécutables — branche ses exports WASM sur le cycle de vie des requêtes.
+
+Cette page couvre ce qu'est un plugin, les deux types reconnus par l'hôte, et comment le modèle de consentement décide de ce qu'un plugin a le droit de faire.
+
+## Deux types de plugins
+
+L'hôte QoreDB (`src-tauri/src/plugins/manifest.rs`) reconnaît un plugin comme :
+
+- **Déclaratif** — pas de bloc `runtime` dans `plugin.json`. Le plugin n'apporte que des données statiques : snippets SQL, templates de connexion, thèmes, mappings de visualiseurs de résultats. Aucun code ne tourne, rien à sandboxer.
+- **Exécutable** — un bloc `runtime` qui déclare un module WASM. Le plugin peut s'abonner aux hooks du cycle de vie (`preExecute`, `postExecute`) et contribuer des `commands` invocables qui déclenchent son export WASM `command`. Tout s'exécute dans le sandbox de l'hôte.
+
+Un même plugin peut faire les deux : embarquer des snippets *et* un module WASM. Les plugins purement déclaratifs existent pour rendre le cas commun (un pack de snippets, un thème) accessible sans une ligne de code.
+
+## Ce qu'un plugin contribue
+
+Le bloc `contributes` du manifeste déclare des données statiques, que le plugin soit déclaratif ou exécutable :
+
+| Contribution | Ce que ça ajoute |
+| --- | --- |
+| `snippets` | Templates SQL étiquetés dans la palette de snippets. |
+| `connectionTemplates` | Presets de connexion pré-remplis, filtrés par driver dans la modale de connexion. |
+| `themes` | Thèmes colorimétriques qui mappent les variables CSS `--q-*`, en paires light/dark. Les variables hors de l'espace de noms `--q-*` sont refusées à l'installation. |
+| `resultViewers` | Renderers de cellule choisis par type de colonne ou pattern de nom. L'hôte possède les renderers (`json-tree`, `image`, `chart`, `map`) ; le plugin choisit juste pour quelles colonnes ils s'appliquent. |
+| `commands` | Actions déclenchables par l'utilisateur. Un clic appelle le hook `command` du WASM ; nécessite un bloc `runtime`. |
+
+Chaque identifiant contribué est préfixé par l'identifiant du plugin (`<plugin-id>::<local-id>`) au runtime, donc deux plugins peuvent embarquer `snippets[].id = "hello"` sans collision.
+
+## Ce qu'un plugin exécutable peut faire
+
+Le module WASM d'un plugin exécutable expose jusqu'à trois hooks :
+
+- `pre_execute(ctx) -> Decision` tourne **avant** une requête et peut renvoyer `allow`, `warn` ou `block`. Un `block` arrête la requête avant qu'elle n'atteigne la base ; un `warn` la laisse partir et fait apparaître un toast.
+- `post_execute(envelope)` tourne **après** une requête — réussie ou non. Sa valeur de retour est ignorée.
+- `command(envelope) -> json` tourne quand l'utilisateur clique sur une commande contribuée. La valeur JSON retournée est remontée dans l'UI.
+
+Les hooks sont sans état : chaque appel obtient un store WASM neuf (nouvelle mémoire linéaire, nouveau budget de fuel). Tout état qui doit survivre entre les appels passe par le KV store de l'hôte (capacité `storage`).
+
+## Capacités, consentement et isolation
+
+Un module WASM seul peut calculer mais ne peut rien faire au-delà de son sandbox. Tout ce qui touche l'hôte — log, notification, KV, résultats de requêtes, HTTP, système de fichiers, secrets — passe par une fonction hôte, et chaque fonction hôte est filtrée par une **capacité** que le manifeste a déclarée *et* que l'utilisateur a explicitement accordée à l'installation.
+
+L'ensemble des capacités est figé :
+
+`log`, `notify`, `storage`, `queryRead`, `http`, `fs`, `secrets`.
+
+Les capacités accordées sont stockées à côté du plugin et révocables depuis le panneau des plugins. Une capacité révoquée renvoie `ERR_DENIED` au prochain appel — pas besoin de recharger le plugin.
+
+Pour les détails par capacité (formes acceptées, limites), voir [Capacités](/docs/plugins/capabilities).
+
+## Où vivent les plugins sur le disque
+
+Les plugins installés vivent dans le dossier de données de QoreDB :
+
+- macOS : `~/Library/Application Support/com.qoredb.app/plugins/<plugin-id>/`
+- Linux : `~/.config/com.qoredb.app/plugins/<plugin-id>/` (ou l'équivalent `$XDG_CONFIG_HOME`)
+- Windows : `%APPDATA%\com.qoredb.app\plugins\<plugin-id>\`
+
+Chaque dossier contient le manifeste, le module WASM (le cas échéant), et un `storage.json` par plugin si la capacité `storage` est utilisée. L'hôte écrit un petit fichier `<plugins-dir>/index.json` à côté qui suit quels plugins sont activés.
+
+## Ce que l'hôte refuse d'installer
+
+`install_plugin` applique ces contraintes sur le dossier source avant que quoi que ce soit n'atterrisse sur le disque :
+
+- Le dossier doit contenir un `plugin.json` à sa racine.
+- Le manifeste doit parser et passer la validation (pattern d'id, version d'ABI du runtime, formes des capacités, variables de thème préfixées `--q-`, etc.).
+- Le payload total doit tenir dans 8 Mio et 256 fichiers.
+- Pas de liens symboliques.
+- Les artefacts de build et les métadonnées VCS sont ignorés en silence (`target/`, `node_modules/`, `.git/`, `.cargo/`, `Cargo.lock`, `.DS_Store`).
+
+L'installation est atomique : la nouvelle version est mise en staging dans `<plugin-id>.qoredb-staging/`, swap en place par un rename, et en cas d'échec restaure la version précédente depuis `<plugin-id>.qoredb-backup/`.
+
+## La suite
+
+- La page [Manifeste](/docs/plugins/manifest) documente chaque champ avec les règles de validation appliquées par l'hôte.
+- [Capacités](/docs/plugins/capabilities) couvre le modèle de consentement, les formes par capacité, et les limites appliquées à l'appel.
+- [Hooks et ABI](/docs/plugins/hooks-and-abi) est la référence bas niveau : exports requis, valeurs de retour empaquetées, budgets de fuel et de temps, vérification d'intégrité.
+- [Marketplace](/docs/plugins/marketplace) couvre le registre public, le workflow de soumission, et l'onglet Marketplace intégré à l'app.

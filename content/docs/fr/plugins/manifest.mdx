@@ -1,0 +1,234 @@
+---
+title: Référence du manifeste
+description: Tous les champs de plugin.json, les règles de validation appliquées par l'hôte, et des exemples concrets.
+premium: false
+---
+
+# Référence du manifeste
+
+Le fichier `plugin.json` d'un plugin est la seule source de vérité sur ce qu'est un plugin, ce qu'il contribue, et ce qu'il demande à faire. L'hôte QoreDB le parse deux fois : une fois à l'installation (où un manifeste invalide est refusé avant que quoi que ce soit n'atterrisse sur le disque), et à chaque reload (un changement de manifeste prend effet en réactivant le plugin ou en redémarrant QoreDB).
+
+Chaque champ décrit ci-dessous reflète `src-tauri/src/plugins/mod.rs` et `manifest.rs`. Le schéma JSON correspondant est à la racine du dépôt QoreDB sous `plugin.schema.json` — référencez-le via `$schema` au début de votre `plugin.json` pour profiter de l'autocomplétion dans votre éditeur.
+
+## Champs racine
+
+```json
+{
+  "$schema": "../../plugin.schema.json",
+  "id": "acme.audit",
+  "name": "Audit Trail",
+  "version": "1.0.0",
+  "author": "Acme Corp",
+  "description": "POSTe chaque mutation exécutée sur un endpoint d'audit.",
+  "qoredb": ">=0.1.29",
+  "runtime": { /* voir plus bas */ },
+  "contributes": { /* voir plus bas */ }
+}
+```
+
+| Champ | Requis | Notes |
+| --- | --- | --- |
+| `id` | oui | Identifiant de type DNS inversé. Doit commencer par une lettre minuscule ou un chiffre ; le reste peut contenir `a-z`, `0-9`, `.`, `-`, `_`. Tout autre format est refusé au parsing. |
+| `name` | oui | Nom affiché dans le panneau des plugins. Non vide après trim. |
+| `version` | oui | Chaîne de version libre. L'hôte n'impose pas semver ; le registre, lui, trie numériquement. |
+| `author` | non | Auteur / mainteneur affiché. |
+| `description` | non | Phrase courte affichée dans le panneau des plugins et la marketplace. |
+| `qoredb` | non | Contrainte de version de QoreDB. Formes honorées : `">=X.Y.Z"` et `X.Y.Z` simple. Toute autre forme est traitée comme compatible — une coquille ne désactive pas un plugin en silence. |
+| `runtime` | non | Descripteur du runtime exécutable (voir plus bas). Absent pour les plugins purement déclaratifs. |
+| `contributes` | non | Données statiques exposées par le plugin (voir plus bas). |
+
+## `runtime` — plugins exécutables
+
+Un bloc `runtime` transforme un plugin déclaratif en plugin exécutable. Sans lui, l'hôte n'instancie jamais de module WASM pour le plugin.
+
+```json
+"runtime": {
+  "abiVersion": 1,
+  "entry": "plugin.wasm",
+  "integrity": "sha256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "hooks": ["preExecute", "postExecute"],
+  "capabilities": {
+    "log": true,
+    "notify": true,
+    "storage": true,
+    "queryRead": true,
+    "http": { "allowedHosts": ["api.example.com"], "allowPrivateNetworks": false },
+    "fs": { "scope": "pluginData" },
+    "secrets": ["api-token"]
+  }
+}
+```
+
+| Champ | Requis | Notes |
+| --- | --- | --- |
+| `abiVersion` | oui | Doit valoir `1`. L'hôte refuse toute autre valeur. |
+| `entry` | oui | Nom de fichier WASM nu, à côté de `plugin.json` (pas de `/`, pas de `..`, doit finir par `.wasm`). |
+| `integrity` | non | Empreinte `sha256-<64 hex minuscules>` des octets WASM. Si présente, l'hôte refuse de charger en cas de mismatch. La CLI `qoredb-plugin build` l'écrit pour vous. |
+| `hooks` | non | Hooks du cycle de vie auxquels le module s'abonne : `preExecute`, `postExecute`. Un module sans hook mais avec un export `command` fonctionne quand même (les commandes se déclenchent indépendamment). |
+| `capabilities` | non | Ce que le plugin demande à l'hôte. Tout est off par défaut — voir [Capacités](/docs/plugins/capabilities) pour la forme complète. |
+
+### À propos d'`integrity`
+
+L'hôte calcule le sha256 des octets `.wasm` chargés et refuse d'instancier quand le `integrity` du manifeste ne correspond pas. Cela arrive **avant** l'instanciation du module, donc un binaire trafiqué n'exécute pas une seule instruction. Le format est l'empreinte style subresource-integrity, **en hex minuscules uniquement**.
+
+Les plugins non signés (sans `integrity`) sont autorisés, mais le panneau des plugins les signale comme `Unsigned` — faites-en un choix délibéré pour vos propres plugins, jamais pour des plugins tiers.
+
+## `contributes` — données déclaratives
+
+Chaque champ vaut une liste vide par défaut. Les identifiants contribués sont préfixés par l'identifiant du plugin au runtime, donc deux plugins peuvent reprendre le même id local sans collision.
+
+```json
+"contributes": {
+  "snippets": [
+    {
+      "id": "find-by-id",
+      "label": "Trouver par id",
+      "description": "Sélectionne une ligne par clé primaire.",
+      "template": "SELECT * FROM ${1:table} WHERE id = ${2:42};"
+    }
+  ],
+  "connectionTemplates": [
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "description": "Connexion PostgreSQL pré-remplie pour bases Supabase.",
+      "driver": "postgres",
+      "defaults": { "host": "db.<project>.supabase.co", "port": 5432, "ssl": true }
+    }
+  ],
+  "themes": [
+    {
+      "id": "midnight",
+      "name": "Midnight",
+      "light": { "--q-bg-0": "#ffffff", "--q-accent": "#3b5bdb" },
+      "dark":  { "--q-bg-0": "#0a0e1a", "--q-accent": "#7c93ff" }
+    }
+  ],
+  "resultViewers": [
+    {
+      "id": "jsonb",
+      "match": { "columnType": "jsonb" },
+      "renderer": "json-tree"
+    }
+  ],
+  "commands": [
+    { "id": "ping", "label": "Pinger l'endpoint d'audit" }
+  ]
+}
+```
+
+### Snippets
+
+| Champ | Requis | Notes |
+| --- | --- | --- |
+| `id`, `label` | oui | Non vides après trim. |
+| `description` | non | Phrase d'une ligne à côté du label. |
+| `template` | oui | Corps du snippet. Non vide. |
+
+### Templates de connexion
+
+| Champ | Requis | Notes |
+| --- | --- | --- |
+| `id`, `name`, `driver` | oui | Non vides. `driver` est l'identifiant du driver QoreDB (`postgres`, `mysql`, `sqlite`, `mongo`…). |
+| `defaults` | non | Champs de connexion pré-remplis. Objet libre — le formulaire consomme ce qu'il connaît. |
+
+### Thèmes
+
+Les variables d'un thème **doivent** être des design tokens `--q-*`. L'hôte refuse les manifestes qui utilisent des propriétés CSS brutes (`background`, `color`, etc.).
+
+Les valeurs CSS sont assainies :
+
+- `url(...)`, `expression(...)`, `javascript:`, `@import` sont refusés — un thème n'est pas un canal de communication caché.
+- Les valeurs dépassant 256 caractères sont refusées.
+
+Pour la liste complète des variables `--q-*` que vous pouvez surcharger, regardez les devtools de l'app en cours d'exécution ou la page design-system du dépôt.
+
+### Visualiseurs de résultats
+
+Un visualiseur doit déclarer au moins un critère de match. Les renderers disponibles sont figés par l'hôte : `json-tree`, `image`, `chart`, `map`.
+
+| Champ | Requis | Notes |
+| --- | --- | --- |
+| `id` | oui | Non vide. |
+| `match.columnType` | au moins un des deux | Match insensible à la casse sur le type de colonne, par ex. `"jsonb"`. |
+| `match.namePattern` | au moins un des deux | Pattern glob-like ; `*` est le **seul** joker. Tout ce qui ressemble à une regex (`/`, `^`, `$`, `(`, `[`, `|`…) est refusé. |
+| `renderer` | oui | Un des quatre renderers intégrés. |
+| `options` | non | Objet libre transmis tel quel au renderer. |
+
+### Commandes
+
+Les commandes nécessitent le runtime exécutable : un clic déclenche l'export WASM `command`. Un manifeste qui déclare des commandes sans bloc `runtime` est refusé à l'installation.
+
+| Champ | Requis | Notes |
+| --- | --- | --- |
+| `id`, `label` | oui | Non vides après trim. |
+
+## Exemples concrets
+
+### Un pack de snippets purement déclaratif
+
+```json
+{
+  "$schema": "../../plugin.schema.json",
+  "id": "acme.postgres-snippets",
+  "name": "Postgres snippets",
+  "version": "1.0.0",
+  "author": "Acme",
+  "qoredb": ">=0.1.29",
+  "contributes": {
+    "snippets": [
+      { "id": "list-tables", "label": "Lister les tables", "template": "SELECT tablename FROM pg_tables WHERE schemaname = current_schema();" },
+      { "id": "locks", "label": "Verrous actifs", "template": "SELECT pid, relation::regclass, mode, granted FROM pg_locks JOIN pg_class ON pg_locks.relation = pg_class.oid;" }
+    ]
+  }
+}
+```
+
+### Un garde-fou de requêtes (exécutable)
+
+```json
+{
+  "$schema": "../../plugin.schema.json",
+  "id": "qoredb.danger-guard",
+  "name": "Danger Guard",
+  "version": "1.0.0",
+  "author": "QoreDB",
+  "description": "Bloque le DDL destructif (DROP, TRUNCATE) et alerte sur UPDATE/DELETE sans WHERE.",
+  "qoredb": ">=0.1.29",
+  "runtime": {
+    "abiVersion": 1,
+    "entry": "qoredb_danger_guard.wasm",
+    "integrity": "sha256-c3ca2dbc1fac9baa562788e47aa177e33b754e603eed39b434183e60ecd34ebd",
+    "hooks": ["preExecute"],
+    "capabilities": { "log": true }
+  }
+}
+```
+
+C'est l'un des trois plugins de référence de la marketplace — voir la [fiche du plugin danger-guard](/marketplace/qoredb.danger-guard).
+
+### Un plugin piloté par commandes
+
+```json
+{
+  "id": "qoredb.query-stats",
+  "name": "Query Stats",
+  "version": "1.0.0",
+  "qoredb": ">=0.1.29",
+  "runtime": {
+    "abiVersion": 1,
+    "entry": "qoredb_query_stats.wasm",
+    "integrity": "sha256-5ad72e54cc1ff4f4c3cc782f78903ca8c5e5f777bc5bca3e75e7f6cc9fb0fd83",
+    "hooks": ["postExecute"],
+    "capabilities": { "log": true, "storage": true }
+  },
+  "contributes": {
+    "commands": [
+      { "id": "show-stats", "label": "Afficher les stats de requêtes" },
+      { "id": "reset-stats", "label": "Réinitialiser les stats de requêtes" }
+    ]
+  }
+}
+```
+
+Le hook `postExecute` met à jour un compteur en KV ; les deux commandes l'affichent et le réinitialisent. Le plugin demande exactement deux capacités (`log`, `storage`) — l'UI de consentement de l'hôte reflète exactement cet ensemble.

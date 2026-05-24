@@ -9,7 +9,101 @@
     "changelog": "Changelog",
     "download": "Download",
     "join_beta": "Join Beta",
-    "docs": "Docs"
+    "docs": "Docs",
+    "marketplace": "Marketplace"
+  },
+  "marketplace": {
+    "page_title": "Plugin marketplace",
+    "page_subtitle": "Extend QoreDB with sandboxed plugins — snippet packs, themes, connection templates, and sandboxed WASM modules that hook the query lifecycle.",
+    "section_title": "Available plugins",
+    "section_subtitle": "Every plugin in this list passed maintainer review and lives in the public plugins registry.",
+    "registry_link_label": "Browse the registry on GitHub",
+    "submit_cta": "Submit a plugin",
+    "empty": "No plugins yet. Be the first to publish one.",
+    "search_placeholder": "Search plugins…",
+    "filter_all": "All",
+    "filter_declarative": "Declarative",
+    "filter_executable": "Executable (WASM)",
+    "registry_unavailable": "The registry is temporarily unreachable. Please try again in a few minutes.",
+    "kind": {
+      "declarative": "Declarative",
+      "executable": "Executable (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "by {{author}}",
+      "view_details": "View details"
+    },
+    "detail": {
+      "back": "Back to marketplace",
+      "install_title": "Install in QoreDB",
+      "install_step_1": "Open QoreDB → Settings → Marketplace and click Install. The app downloads the archive, verifies its sha256 against this page, then validates the manifest before any hook fires.",
+      "install_step_2": "Or download the archive directly and install it via Settings → Plugins → Install plugin. The QoreDB host re-checks the manifest the same way.",
+      "download_archive": "Download plugin.zip ({{size}})",
+      "view_manifest": "View plugin.json",
+      "manifest_heading": "Manifest at a glance",
+      "manifest_id": "Plugin id",
+      "manifest_version": "Version",
+      "manifest_qoredb": "QoreDB compatibility",
+      "manifest_author": "Author",
+      "manifest_kind": "Kind",
+      "manifest_archive_sha": "Archive sha256",
+      "manifest_integrity": "WASM integrity",
+      "manifest_no_integrity": "Unsigned — QoreDB will flag this plugin as Unsigned in the panel.",
+      "manifest_hooks": "Lifecycle hooks",
+      "manifest_no_hooks": "No lifecycle hooks (declarative plugin).",
+      "manifest_capabilities": "Requested capabilities",
+      "manifest_no_capabilities": "No capabilities requested.",
+      "manifest_contributes": "Contributes",
+      "contributes_none": "No declarative contributions.",
+      "contributes_snippets": "{{count}} snippet",
+      "contributes_snippets_plural": "{{count}} snippets",
+      "contributes_templates": "{{count}} connection template",
+      "contributes_templates_plural": "{{count}} connection templates",
+      "contributes_themes": "{{count}} theme",
+      "contributes_themes_plural": "{{count}} themes",
+      "contributes_viewers": "{{count}} result viewer",
+      "contributes_viewers_plural": "{{count}} result viewers",
+      "contributes_commands": "Commands: {{commands}}",
+      "versions_heading": "All versions",
+      "version_label": "Version {{version}}",
+      "version_size": "{{size}} archive",
+      "not_found_title": "Plugin not found",
+      "not_found_subtitle": "This plugin is not in the registry. It may have been renamed or removed."
+    },
+    "submit": {
+      "title": "Submit a plugin",
+      "subtitle": "Plugins are reviewed by the QoreDB maintainers before they appear in the marketplace. The review typically takes a few days — we look at the manifest, the requested capabilities, and the source of the WASM module.",
+      "field_plugin_id": "Plugin id",
+      "field_plugin_id_hint": "Reverse-DNS, e.g. acme.linter. Must match plugin.json#id.",
+      "field_name": "Display name",
+      "field_version": "Version",
+      "field_kind": "Plugin kind",
+      "field_kind_declarative": "Declarative — snippets, themes, connection templates only",
+      "field_kind_executable": "Executable — ships a sandboxed WASM module",
+      "field_description": "Short description",
+      "field_author": "Author / maintainer",
+      "field_contact_email": "Contact email",
+      "field_contact_email_hint": "We'll reach out for follow-up questions or to confirm approval. Not published.",
+      "field_repository_url": "Source repository (optional)",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "Paste the manifest verbatim. The plugin id and version must match the fields above.",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "Flat archive containing plugin.json and the WASM module (if any). Max 8 MiB — the same install budget QoreDB enforces.",
+      "submit_button": "Submit for review",
+      "submitting": "Submitting…",
+      "success_title": "Submission received",
+      "success_body": "Thanks. Your plugin is in the review queue — we'll email {{email}} once it's been looked at.",
+      "error_title": "Submission failed",
+      "checklist_title": "Before submitting",
+      "checklist_items": [
+        "The WASM module instantiates cleanly and exports the hooks declared in the manifest.",
+        "Every capability the manifest requests is genuinely needed — users see them in the consent dialog.",
+        "If the plugin makes HTTP calls, allowedHosts is a precise list, not a wildcard.",
+        "runtime.integrity carries the sha256 of the final .wasm bytes.",
+        "The archive contains only plugin.json + the WASM module at its root."
+      ]
+    }
   },
   "download": {
     "title": "Download QoreDB",
@@ -201,6 +295,10 @@
       "instant_api": {
         "title": "Instant Data API",
         "desc": "Turn any saved query into a secure REST endpoint — token auth, rate limiting, and auto-generated OpenAPI docs in one click."
+      },
+      "plugins": {
+        "title": "Plugin system",
+        "desc": "Extend QoreDB with declarative packs (snippets, themes, templates) or sandboxed WASM modules that hook the query lifecycle. Every capability is opt-in."
       },
       "export": {
         "title": "Multi-Format Export",

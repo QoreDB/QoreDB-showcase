@@ -1,0 +1,10 @@
+{
+  "label": "Plugins",
+  "items": [
+    "introduction",
+    "manifest",
+    "capabilities",
+    "hooks-and-abi",
+    "marketplace"
+  ]
+}

@@ -9,6 +9,7 @@ import {
   History,
   Layers,
   Lock,
+  Puzzle,
   Shield,
   Table,
   Terminal,
@@ -30,6 +31,7 @@ const featureIcons = {
   ai: Brain,
   federation: Combine,
   instant_api: Webhook,
+  plugins: Puzzle,
 };
 
 export function FeaturesSection() {

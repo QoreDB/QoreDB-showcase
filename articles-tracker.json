@@ -253,19 +253,34 @@
       "title": "Les meilleurs clients MongoDB en 2026 : Compass et ses alternatives",
       "category": "Produit",
       "publishedAt": "2026-05-22"
+    },
+    {
+      "slug": "meilleurs-clients-sqlite-gratuits-2026",
+      "title": "Les meilleurs clients SQLite gratuits en 2026",
+      "category": "Produit",
+      "publishedAt": "2026-05-23"
+    },
+    {
+      "slug": "dbeaver-vs-datagrip-vs-tableplus-comparatif-2026",
+      "title": "DBeaver vs DataGrip vs TablePlus : comparatif des clients SQL en 2026",
+      "category": "Produit",
+      "publishedAt": "2026-05-24"
+    },
+    {
+      "slug": "le-systeme-de-plugins-qoredb",
+      "title": "Le système de plugins QoreDB",
+      "category": "Updates",
+      "publishedAt": "2026-05-24"
+    },
+    {
+      "slug": "introducing-the-qoredb-plugin-system",
+      "title": "Introducing the QoreDB plugin system",
+      "category": "Updates",
+      "language": "en",
+      "publishedAt": "2026-05-24"
     }
   ],
   "queue": [
-    {
-      "title": "Top des clients SQLite gratuits en 2026",
-      "category": "Produit",
-      "topic_notes": "SEO comparatif. DB Browser for SQLite, SQLiteStudio, TablePlus, DBeaver, QoreDB. Préciser WAL, extensions, performances sur gros fichiers, mobile dev (Android/iOS DB inspection)."
-    },
-    {
-      "title": "DBeaver vs DataGrip vs TablePlus : comparatif des clients SQL en 2026",
-      "category": "Produit",
-      "topic_notes": "SEO comparatif head-to-head. Tableau récap, prix, plateformes, support des moteurs, UX, performance. QoreDB mentionné comme alternative pertinente sur certains axes (local-first, fédération)."
-    },
     {
       "title": "Quel client de base de données choisir en 2026 : guide complet",
       "category": "Produit",

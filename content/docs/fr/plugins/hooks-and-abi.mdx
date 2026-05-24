@@ -1,0 +1,259 @@
+---
+title: Hooks et ABI
+description: L'ABI v1 des plugins QoreDB — exports WASM requis, valeurs de retour empaquetées, budgets de fuel et de temps, vérification d'intégrité.
+premium: false
+---
+
+# Hooks et ABI
+
+Le runtime de plugins QoreDB est un hôte WebAssembly 32 bits. Les plugins sont des modules WASM qui :
+
+- **Exportent** au minimum `memory` et `qoredb_alloc` ; optionnellement `pre_execute`, `post_execute` et `command`.
+- **Importent** les fonctions hôtes correspondant aux capacités qu'ils comptent appeler. Importer une fonction non demandée dans le manifeste lie quand même — l'enforcement des capacités se fait à **l'appel**, pas au link.
+
+Cette page est la référence pour tout ce qui est sous le SDK Rust (`qoredb-plugin-sdk`). La plupart des auteurs n'en ont jamais besoin — le SDK cache tout ça derrière des appels typés. Vous voulez cette page si vous écrivez un plugin dans un autre langage que Rust, ou si vous déboguez un mismatch d'ABI.
+
+L'ABI actuelle est **`abiVersion: 1`**. Un manifeste déclarant autre chose est refusé au parsing.
+
+## Exports requis
+
+### `memory`
+
+La mémoire linéaire du plugin. L'hôte y lit les entrées et y écrit les payloads de retour via `qoredb_alloc`. La taille exportée peut croître jusqu'à un plafond strict de **256 pages (16 Mio)** ; `memory.grow` au-delà trappe.
+
+### `qoredb_alloc`
+
+```
+qoredb_alloc(len: i32) -> i32
+```
+
+Réserve `len` octets dans la mémoire linéaire guest et renvoie l'offset. L'hôte appelle cette fonction deux fois par invocation : une fois avant un hook (pour écrire le JSON d'entrée), et possiblement à l'intérieur d'une fonction hôte (par ex. `qoredb_kv_get`) pour placer le payload de retour.
+
+L'hôte **ne libère jamais** ce que `qoredb_alloc` a réservé. Chaque invocation tourne dans un **store neuf** (nouvelle mémoire, nouveau budget de fuel), donc le buffer est récupéré en bloc à la fin de l'appel. Un allocateur naïf qui « oublie » le buffer est correct et recommandé :
+
+```rust
+pub fn alloc(len: i32) -> i32 {
+    let mut buf: Vec<u8> = Vec::with_capacity(len.max(0) as usize);
+    let ptr = buf.as_mut_ptr();
+    std::mem::forget(buf);
+    ptr as i32
+}
+```
+
+Renvoyer `0` en cas d'échec d'allocation n'est **pas** acceptable : l'hôte traite `0` comme un offset valide. Trappez (`unreachable`) à la place — l'hôte le capture comme `PluginError::Trap` et le compte vers le disjoncteur (circuit breaker) du plugin.
+
+## Exports optionnels (hooks)
+
+### `pre_execute`
+
+```
+pre_execute(ptr: i32, len: i32) -> i64
+```
+
+L'hôte écrit un `HookContext` JSON à `[ptr, ptr+len)` et appelle l'export. Le plugin renvoie un **pointeur empaqueté** vers un JSON `Decision`. Un module qui n'exporte pas `pre_execute` est traité comme renvoyant `Decision::Allow` pour toute requête.
+
+`HookContext` :
+
+```json
+{
+  "query": "SELECT 1",
+  "driverId": "postgres",
+  "environment": "Development",
+  "operationType": "Select",
+  "isMutation": false,
+  "isDangerous": false,
+  "readOnly": true
+}
+```
+
+`Decision` (une des trois formes) :
+
+```json
+{"kind": "allow"}
+{"kind": "warn",  "message": "..."}
+{"kind": "block", "reason":  "..."}
+```
+
+Un `block` arrête la requête avant qu'elle n'atteigne la base ; un `warn` la laisse partir et fait apparaître un toast.
+
+### `post_execute`
+
+```
+post_execute(ptr: i32, len: i32)
+```
+
+Se déclenche après une requête — réussie ou non. Prend un envelope JSON à `[ptr, ptr+len)`, ne renvoie rien. L'hôte avale les traps et les erreurs (les deux comptent vers le disjoncteur).
+
+Envelope :
+
+```json
+{
+  "context": { /* même HookContext que pre_execute */ },
+  "result": {
+    "success": true,
+    "executionTimeMs": 12,
+    "rowCount": 42,
+    "error": null
+  }
+}
+```
+
+Le contenu des lignes n'est **pas** dans l'envelope — récupérez-le via `qoredb_query_read` si la capacité `queryRead` est accordée.
+
+### `command`
+
+```
+command(ptr: i32, len: i32) -> i64
+```
+
+Se déclenche quand l'utilisateur clique sur une commande contribuée dans l'UI. Le plugin reçoit un envelope JSON et renvoie un pointeur empaqueté vers la valeur JSON qu'il veut remonter. Renvoyer `0` est un raccourci pour `null`.
+
+Envelope :
+
+```json
+{ "id": "lint-current", "args": {} }
+```
+
+`id` est l'id de commande nu — la forme namespacée `<plugin>::<id>` est résolue par l'hôte avant la dispatche.
+
+## Forme de retour empaquetée
+
+Les retours de hook et la plupart des retours de fonctions hôtes utilisent un **`i64` empaqueté** qui encode une paire `(ptr, len)` :
+
+```
+packed = (ptr << 32) | (len & 0xFFFF_FFFF)
+```
+
+- Les 32 bits hauts contiennent l'offset dans la mémoire guest.
+- Les 32 bits bas contiennent la longueur en octets.
+- `0` est la sentinelle « pas de payload ».
+
+Lire ce que l'hôte a écrit en retour :
+
+```rust
+let packed = qoredb_kv_get(key_ptr, key_len);
+if packed == 0 {
+    return None; // clé absente
+}
+let ptr = (packed >> 32) as u32 as i32;
+let len = (packed & 0xFFFF_FFFF) as u32 as i32;
+let bytes = unsafe { std::slice::from_raw_parts(ptr as *const u8, len as usize) };
+```
+
+Le buffer que l'hôte a placé à `(ptr, len)` a été alloué via votre `qoredb_alloc`, donc sa durée de vie est la même que vos propres allocations : valide jusqu'à la fin de l'appel, disparu au reset du store.
+
+## Codes de statut
+
+Les fonctions hôtes qui renvoient `i32` suivent ces conventions :
+
+| Code | Constante | Sens |
+| --- | --- | --- |
+| `0` | `OK` | L'appel a réussi sans payload. |
+| `-1` | `ERR_DENIED` | Capacité non accordée, ou filtre secondaire (allow-list HTTP, scope FS) qui refuse. |
+| `-2` | `ERR_INVALID` | Arguments non parsables : pointer/length invalides, UTF-8 cassé, URL mal formée, etc. |
+| `-3` | `ERR_QUOTA` | Budget de ressource dépassé (plafond storage, écriture FS trop grosse, …). |
+
+Tout autre code négatif est réservé pour usage futur.
+
+## Fonctions hôtes
+
+Toutes les fonctions hôtes vivent dans l'espace de noms `env`. Tout argument `(ptr, len)` référence le `memory` exporté du plugin. Voir [Capacités](/docs/plugins/capabilities) pour la face utilisateur.
+
+### Diagnostics
+
+```
+qoredb_log(level: i32, ptr: i32, len: i32) -> i32
+qoredb_notify(level: i32, ptr: i32, len: i32) -> i32
+```
+
+- Niveaux `qoredb_log` : `0=Debug | 1=Info | 2=Warn | 3=Error`.
+- Niveaux `qoredb_notify` : `0=Info | 1=Success | 2=Warning | 3=Error`.
+
+### Stockage
+
+```
+qoredb_kv_get(key_ptr: i32, key_len: i32) -> i64
+qoredb_kv_set(key_ptr: i32, key_len: i32,
+              val_ptr: i32, val_len: i32) -> i32
+qoredb_kv_del(key_ptr: i32, key_len: i32) -> i32
+```
+
+Plafonds : 256 octets par clé, 64 Kio par valeur, 1024 entrées, 1 Mio cumulé.
+
+### Lecture du résultat (`postExecute` uniquement)
+
+```
+qoredb_query_read() -> i64
+```
+
+Renvoie le résultat de requête sérialisé en JSON. En dehors de `postExecute`, ou quand les données dépassent 1 Mio, l'appel renvoie `0`.
+
+### HTTP sortant
+
+```
+qoredb_http_request(method_ptr, method_len,
+                    url_ptr,    url_len,
+                    body_ptr,   body_len) -> i64
+```
+
+Renvoie un objet JSON empaqueté : `{ "status": 200, "body": "..." }`. Refusé si la capacité n'est pas accordée, si le schéma n'est pas `http`/`https`, si l'hôte n'est pas dans `allowedHosts`, si DNS résout vers une adresse privée/loopback/métadonnées (sauf `allowPrivateNetworks: true`), si le corps dépasse 1 Mio, ou si le timeout 10 s se déclenche.
+
+### Système de fichiers (scopé à `<plugin-dir>/data/`)
+
+```
+qoredb_fs_read(path_ptr, path_len) -> i64
+qoredb_fs_write(path_ptr, path_len, data_ptr, data_len) -> i32
+qoredb_fs_delete(path_ptr, path_len) -> i32
+```
+
+Les chemins sont concaténés à la racine des données du plugin ; les chemins absolus et `..` sont refusés. 4 Mio max par fichier.
+
+### Secrets
+
+```
+qoredb_secret_get(name_ptr, name_len) -> i64
+```
+
+Le nom doit apparaître dans `runtime.capabilities.secrets`. Les valeurs viennent du trousseau de l'OS ; seul le plugin voit les octets.
+
+## Budgets wall-clock et fuel
+
+Par invocation :
+
+- **Fuel** : ~50 millions d'instructions WASM. Une boucle infinie trappe comme `PluginError::BudgetExceeded` une fois le fuel épuisé.
+- **Mémoire** : 256 pages (16 Mio). `memory.grow` au-delà trappe.
+- **Wall-clock** : 500 ms pour `pre_execute`, 5 s pour `post_execute`. Un timeout compte comme un hook en échec.
+
+Chaque appel obtient son store frais, donc tout état qui doit persister entre invocations passe par `qoredb_kv_*`.
+
+## Vérification d'intégrité
+
+Quand le manifeste contient `runtime.integrity: "sha256-<64 hex>"`, l'hôte calcule le sha256 des octets `.wasm` chargés et refuse d'instancier en cas de mismatch. La vérification arrive **avant** l'instanciation du module, donc un binaire trafiqué n'exécute pas une seule instruction.
+
+Le format est l'empreinte style subresource-integrity — hex minuscules, jamais de base64.
+
+## Erreurs que l'hôte avale
+
+Les appels de hook tournent contre un harnais défensif. Aucune des situations suivantes ne remonte comme un échec de requête :
+
+- Un trap (panic, accès OOB, `unreachable`).
+- Une invocation à court de fuel.
+- Une erreur de marshalling ABI (JSON mal formé, pointeur empaqueté hors mémoire).
+- Un timeout wall-clock.
+
+Chacune est loggée et compte vers le **disjoncteur** du plugin : trois échecs consécutifs déchargent le plugin pour la session et émettent un toast d'avertissement. Un redémarrage ou un reload réarme le disjoncteur.
+
+## Construire un plugin en Rust
+
+Le crate [`qoredb-plugin-sdk`](https://github.com/QoreDB/QoreDB/tree/main/plugins-dev/sdk) cache tous les détails de cette ABI derrière des appels Rust typés. La CLI [`qoredb-plugin`](https://github.com/QoreDB/QoreDB/tree/main/plugins-dev/cli) génère un nouveau plugin, build le WASM, calcule le sha256, et le réécrit dans `runtime.integrity` :
+
+```sh
+rustup target add wasm32-unknown-unknown
+cargo install --path plugins-dev/cli
+qoredb-plugin new acme.hello
+cd acme.hello
+qoredb-plugin build
+qoredb-plugin install
+```
+
+Cela vous donne un plugin qui tourne en local. Pour le publier sur la marketplace, voir [Marketplace](/docs/plugins/marketplace).
