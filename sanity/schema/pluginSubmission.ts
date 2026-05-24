@@ -73,6 +73,24 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "category",
+      title: "Category",
+      type: "string",
+      description:
+        "Marketplace browsing category — picked by the submitter, refinable by the reviewer.",
+      options: {
+        list: [
+          { title: "Safety & guardrails", value: "safety" },
+          { title: "Observability", value: "observability" },
+          { title: "Productivity", value: "productivity" },
+          { title: "Themes & UI", value: "theming" },
+          { title: "Integrations", value: "integrations" },
+        ],
+        layout: "radio",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "archive",
       title: "plugin.zip",
       type: "file",

@@ -5,7 +5,7 @@ import {
   RegistryUnavailableError,
 } from "@/lib/marketplace/registry";
 
-// GET /api/marketplace/plugins/<plugin-id>
+// GET /api/plugins/<plugin-id>
 //
 // Returns a single registry entry (all versions). 404 if the id isn't in
 // the catalog, 400 if the id doesn't pass the same syntactic check the

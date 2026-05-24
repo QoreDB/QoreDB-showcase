@@ -150,10 +150,6 @@
         "title": "Time Travel",
         "desc": "任意の行の履歴を参照し、バージョンを並べて比較し、ロールバック SQL をワンクリックで生成します。"
       },
-      "ddl": {
-        "title": "DDL 管理",
-        "desc": "CREATE / ALTER TABLE、外部キー、インデックス、制約。ドライバー固有の SQL プレビューと警告付き。"
-      },
       "vault": {
         "title": "セキュリティとプライバシー",
         "desc": "暗号化された認証情報 (Argon2)、プロキシ サポート、および GDPR 準拠 (ゼロ テレメトリ)。"
@@ -197,6 +193,10 @@
       "opensource": {
         "title": "オープンソース",
         "desc": "監査可能なコードを GitHub で公開。Arch Linux 用の AUR パッケージあり。"
+      },
+      "plugins": {
+        "title": "プラグインシステム",
+        "desc": "宣言的パック（スニペット、テーマ、テンプレート）またはクエリのライフサイクルにフックするサンドボックス化された WASM モジュール。"
       }
     },
     "killer": {
@@ -303,6 +303,7 @@
       "er_diagram": "インタラクティブなER図",
       "federation": "クロスデータベースフェデレーション",
       "ai": "AIクエリアシスタント",
+      "plugins": "プラグインシステム",
       "ui": "モダンで高速な UI",
       "maturity": "成熟度/エコシステム",
       "price": "価格（個人利用）"
@@ -320,6 +321,7 @@
         "er_diagram": "はい",
         "federation": "プロ",
         "ai": "ビヨク",
+        "plugins": "はい",
         "ui": "はい",
         "maturity": "新しい",
         "price": "無料/プロ"
@@ -336,6 +338,7 @@
         "er_diagram": "はい",
         "federation": "いいえ",
         "ai": "いいえ",
+        "plugins": "はい",
         "ui": "日付付き",
         "maturity": "15年以上",
         "price": "無料 / 199ドル"
@@ -352,6 +355,7 @@
         "er_diagram": "いいえ",
         "federation": "いいえ",
         "ai": "いいえ",
+        "plugins": "いいえ",
         "ui": "はい",
         "maturity": "設立",
         "price": "$89"
@@ -368,6 +372,7 @@
         "er_diagram": "部分的",
         "federation": "いいえ",
         "ai": "いいえ",
+        "plugins": "いいえ",
         "ui": "いいえ",
         "maturity": "20年以上",
         "price": "無料"
@@ -1052,5 +1057,19 @@
     "not_found_body": "このドキュメントページは存在しないか、まだ執筆されていません。",
     "landing_title": "QoreDB ドキュメント",
     "landing_subtitle": "QoreDB のインストール、データベース接続、開発高速化に必要なすべて。"
+  },
+  "marketplace": {
+    "categories": {
+      "safety": "安全性とガードレール",
+      "observability": "オブザーバビリティ",
+      "productivity": "生産性",
+      "theming": "テーマと UI",
+      "integrations": "連携"
+    },
+    "submit": {
+      "field_category": "カテゴリ",
+      "field_category_hint": "最も近いものを選んでください。レビュー時に調整できます。"
+    },
+    "eyebrow": "プラグインライブラリ"
   }
 }

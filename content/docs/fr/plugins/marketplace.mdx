@@ -6,12 +6,12 @@ premium: false
 
 # Marketplace et registre
 
-La marketplace QoreDB est le catalogue public des plugins approuvés par les mainteneurs. Elle est accessible sur le site à [`/marketplace`](/marketplace) et dans l'app QoreDB sous **Paramètres → Marketplace**.
+La marketplace QoreDB est le catalogue public des plugins approuvés par les mainteneurs. Elle est accessible sur le site à [`/marketplace`](/plugins) et dans l'app QoreDB sous **Paramètres → Marketplace**.
 
 La marketplace a deux moitiés :
 
 - **Le registre** — un dépôt GitHub public, [`qoredb-plugins-registry`](https://github.com/qoredb/qoredb-plugins-registry), qui contient les octets canoniques de chaque version de plugin approuvée plus un `index.json` lisible par machine.
-- **La file de soumission** — une file d'attente côté admin appuyée par Sanity derrière [`/marketplace/submit`](/marketplace/submit), où des tiers soumettent des plugins à relecture.
+- **La file de soumission** — une file d'attente côté admin appuyée par Sanity derrière [`/marketplace/submit`](/plugins/submit), où des tiers soumettent des plugins à relecture.
 
 Les soumissions approuvées atterrissent dans le registre ; l'UI de la marketplace lit depuis là.
 
@@ -42,7 +42,7 @@ Les deux chemins passent par le même code `install_plugin` de l'hôte QoreDB, d
 
 ## Soumettre un plugin
 
-N'importe qui peut soumettre un plugin via [`/marketplace/submit`](/marketplace/submit). Le formulaire demande :
+N'importe qui peut soumettre un plugin via [`/marketplace/submit`](/plugins/submit). Le formulaire demande :
 
 - L'id du plugin, le nom affiché, la version, et une description courte.
 - Le **type** de plugin — déclaratif ou exécutable.
@@ -76,8 +76,8 @@ Le showcase expose une petite API en lecture seule que l'app QoreDB et d'autres 
 
 | Endpoint | Renvoie |
 | --- | --- |
-| `GET /api/marketplace/plugins` | Le catalogue complet, identique en forme à `index.json`. |
-| `GET /api/marketplace/plugins/<id>` | Une entrée plugin avec toutes ses versions. 404 si pas dans le catalogue. |
+| `GET /api/plugins` | Le catalogue complet, identique en forme à `index.json`. |
+| `GET /api/plugins/<id>` | Une entrée plugin avec toutes ses versions. 404 si pas dans le catalogue. |
 
 L'API est mise en cache au niveau du CDN pendant cinq minutes, avec une fenêtre stale-while-revalidate de dix minutes. Les mises à jour de plugins approuvés ne sont pas urgentes — un délai de cinq minutes entre le commit dans le registre et la liste de la marketplace est acceptable, et ça garde l'API peu coûteuse.
 
@@ -87,9 +87,9 @@ Les octets des archives elles-mêmes sont servis directement depuis les URLs `ra
 
 La marketplace embarque trois petits plugins écrits par l'équipe QoreDB. Ils servent aussi d'exemples concrets pour les sujets traités dans le reste de cette section.
 
-- **[Danger Guard](/marketplace/qoredb.danger-guard)** — un hook `preExecute` qui bloque le DDL destructif (`DROP`, `TRUNCATE`) et alerte sur les `UPDATE`/`DELETE` sans `WHERE`. Demande seulement `log`.
-- **[Query Stats](/marketplace/qoredb.query-stats)** — un hook `postExecute` qui compte les requêtes par driver et par type d'opération. Contribue deux `commands` (`show-stats`, `reset-stats`) qui exposent les compteurs. Demande `log` et `storage`.
-- **[Slow Query Toast](/marketplace/qoredb.slow-query-toast)** — un hook `postExecute` qui affiche un toast quand une requête dépasse un seuil configurable. Contribue deux `commands` pour inspecter et ajuster le seuil. Demande `notify` et `storage`.
+- **[Danger Guard](/plugins/qoredb.danger-guard)** — un hook `preExecute` qui bloque le DDL destructif (`DROP`, `TRUNCATE`) et alerte sur les `UPDATE`/`DELETE` sans `WHERE`. Demande seulement `log`.
+- **[Query Stats](/plugins/qoredb.query-stats)** — un hook `postExecute` qui compte les requêtes par driver et par type d'opération. Contribue deux `commands` (`show-stats`, `reset-stats`) qui exposent les compteurs. Demande `log` et `storage`.
+- **[Slow Query Toast](/plugins/qoredb.slow-query-toast)** — un hook `postExecute` qui affiche un toast quand une requête dépasse un seuil configurable. Contribue deux `commands` pour inspecter et ajuster le seuil. Demande `notify` et `storage`.
 
 Chacun a une empreinte `runtime.integrity` réelle commitée dans le registre, donc QoreDB refuse de charger un build trafiqué.
 

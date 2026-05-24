@@ -26,6 +26,7 @@ const rows = [
   "er_diagram",
   "federation",
   "ai",
+  "plugins",
   "ui",
   "maturity",
   "price",

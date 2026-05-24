@@ -8,6 +8,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type Kind = "declarative" | "executable";
+type Category =
+  | "safety"
+  | "observability"
+  | "productivity"
+  | "theming"
+  | "integrations";
+
+const CATEGORIES: Category[] = [
+  "safety",
+  "observability",
+  "productivity",
+  "theming",
+  "integrations",
+];
 
 interface SubmissionState {
   status: "idle" | "submitting" | "success" | "error";
@@ -18,6 +32,7 @@ interface SubmissionState {
 export function SubmissionForm() {
   const { t } = useTranslation();
   const [kind, setKind] = useState<Kind>("executable");
+  const [category, setCategory] = useState<Category>("productivity");
   const [state, setState] = useState<SubmissionState>({ status: "idle" });
   const checklist = (
     t("marketplace.submit.checklist_items", { returnObjects: true }) as unknown
@@ -30,7 +45,7 @@ export function SubmissionForm() {
     setState({ status: "submitting" });
 
     try {
-      const response = await fetch("/api/marketplace/submit", {
+      const response = await fetch("/api/plugins/submit", {
         method: "POST",
         body: data,
       });
@@ -129,6 +144,27 @@ export function SubmissionForm() {
               {t("marketplace.submit.field_kind_executable")}
             </label>
           </div>
+        </Field>
+        <Field
+          label={t("marketplace.submit.field_category")}
+          required
+          className="sm:col-span-2"
+        >
+          <div className="grid gap-1.5 text-sm sm:grid-cols-2">
+            {CATEGORIES.map((c) => (
+              <label key={c} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="category"
+                  value={c}
+                  checked={category === c}
+                  onChange={() => setCategory(c)}
+                />
+                {t(`marketplace.categories.${c}`)}
+              </label>
+            ))}
+          </div>
+          <Hint>{t("marketplace.submit.field_category_hint")}</Hint>
         </Field>
         <Field
           label={t("marketplace.submit.field_description")}

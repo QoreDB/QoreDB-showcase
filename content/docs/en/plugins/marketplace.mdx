@@ -6,12 +6,12 @@ premium: false
 
 # Marketplace & registry
 
-The QoreDB marketplace is the public catalog of plugins approved by the maintainers. It surfaces on the website at [`/marketplace`](/marketplace) and inside the QoreDB app under **Settings → Marketplace**.
+The QoreDB marketplace is the public catalog of plugins approved by the maintainers. It surfaces on the website at [`/marketplace`](/plugins) and inside the QoreDB app under **Settings → Marketplace**.
 
 The marketplace has two halves:
 
 - **The registry** — a public GitHub repo, [`qoredb-plugins-registry`](https://github.com/qoredb/qoredb-plugins-registry), that holds the canonical bytes of every approved plugin version plus a machine-readable `index.json`.
-- **The submission queue** — a Sanity-backed admin queue behind [`/marketplace/submit`](/marketplace/submit), where third parties submit plugins for review.
+- **The submission queue** — a Sanity-backed admin queue behind [`/marketplace/submit`](/plugins/submit), where third parties submit plugins for review.
 
 Approved submissions land in the registry repo; the marketplace UI reads from there.
 
@@ -42,7 +42,7 @@ Either path goes through the same `install_plugin` code in the QoreDB host, so a
 
 ## Submitting a plugin
 
-Anyone can submit a plugin through [`/marketplace/submit`](/marketplace/submit). The form asks for:
+Anyone can submit a plugin through [`/marketplace/submit`](/plugins/submit). The form asks for:
 
 - The plugin id, display name, version, and a short description.
 - The plugin's **kind** — declarative or executable.
@@ -76,8 +76,8 @@ The showcase exposes a small read-only API the QoreDB app and other tools can co
 
 | Endpoint | Returns |
 | --- | --- |
-| `GET /api/marketplace/plugins` | The full registry catalog, identical in shape to `index.json`. |
-| `GET /api/marketplace/plugins/<id>` | One plugin entry with all its versions. 404 if not in the catalog. |
+| `GET /api/plugins` | The full registry catalog, identical in shape to `index.json`. |
+| `GET /api/plugins/<id>` | One plugin entry with all its versions. 404 if not in the catalog. |
 
 The API is cached at the edge for five minutes, with a ten-minute stale-while-revalidate window. Approved-plugin updates are not urgent — a five-minute lag between the registry commit and the marketplace listing is fine, and it keeps the API cheap to call.
 
@@ -87,9 +87,9 @@ The archive bytes themselves are served straight from the registry's `raw.github
 
 The marketplace ships with three small plugins authored by the QoreDB team. They double as worked examples for the topics covered elsewhere in this section.
 
-- **[Danger Guard](/marketplace/qoredb.danger-guard)** — a `preExecute` hook that blocks destructive DDL (`DROP`, `TRUNCATE`) and warns on `UPDATE`/`DELETE` without a `WHERE` clause. Asks for `log` only.
-- **[Query Stats](/marketplace/qoredb.query-stats)** — a `postExecute` hook that counts queries per driver and operation type. Contributes two `commands` (`show-stats`, `reset-stats`) that surface the counters. Asks for `log` and `storage`.
-- **[Slow Query Toast](/marketplace/qoredb.slow-query-toast)** — a `postExecute` hook that pops a toast when a query takes longer than a configurable threshold. Contributes two `commands` to inspect and adjust the threshold. Asks for `notify` and `storage`.
+- **[Danger Guard](/plugins/qoredb.danger-guard)** — a `preExecute` hook that blocks destructive DDL (`DROP`, `TRUNCATE`) and warns on `UPDATE`/`DELETE` without a `WHERE` clause. Asks for `log` only.
+- **[Query Stats](/plugins/qoredb.query-stats)** — a `postExecute` hook that counts queries per driver and operation type. Contributes two `commands` (`show-stats`, `reset-stats`) that surface the counters. Asks for `log` and `storage`.
+- **[Slow Query Toast](/plugins/qoredb.slow-query-toast)** — a `postExecute` hook that pops a toast when a query takes longer than a configurable threshold. Contributes two `commands` to inspect and adjust the threshold. Asks for `notify` and `storage`.
 
 Each one has a real `runtime.integrity` digest committed to the registry, so QoreDB refuses to load a tampered build.
 

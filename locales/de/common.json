@@ -150,10 +150,6 @@
         "title": "Time Travel",
         "desc": "Durchstöbern Sie den Verlauf jeder Zeile, vergleichen Sie Versionen nebeneinander und generieren Sie Rollback-SQL mit einem Klick."
       },
-      "ddl": {
-        "title": "DDL-Management",
-        "desc": "CREATE / ALTER TABLE, Fremdschlüssel, Indizes und Constraints – mit treiberspezifischer SQL-Vorschau und Warnungen."
-      },
       "vault": {
         "title": "Sicherheit und Datenschutz",
         "desc": "Verschlüsselte Anmeldeinformationen (Argon2), Proxy-Unterstützung und DSGVO-konform (keine Telemetrie)."
@@ -197,6 +193,10 @@
       "opensource": {
         "title": "Open Source",
         "desc": "Überprüfbarer Code auf GitHub. AUR-Pakete für Arch Linux."
+      },
+      "plugins": {
+        "title": "Plugin-System",
+        "desc": "Deklarative Pakete (Snippets, Themes, Vorlagen) oder gesandboxte WASM-Module am Query-Lifecycle."
       }
     },
     "killer": {
@@ -303,6 +303,7 @@
       "er_diagram": "Interaktives ER-Diagramm",
       "federation": "Datenbankübergreifender Verbund",
       "ai": "KI-Abfrageassistent",
+      "plugins": "Plugin-System",
       "ui": "Moderne, schnelle Benutzeroberfläche",
       "maturity": "Reife / Ökosystem",
       "price": "Preis (persönliche Nutzung)"
@@ -320,6 +321,7 @@
         "er_diagram": "Ja",
         "federation": "Profi",
         "ai": "Na gut",
+        "plugins": "Ja",
         "ui": "Ja",
         "maturity": "Neu",
         "price": "Kostenlos / Pro"
@@ -336,6 +338,7 @@
         "er_diagram": "Ja",
         "federation": "Nein",
         "ai": "Nein",
+        "plugins": "Ja",
         "ui": "Datiert",
         "maturity": "15+ Jahre",
         "price": "Kostenlos / 199 $"
@@ -352,6 +355,7 @@
         "er_diagram": "Nein",
         "federation": "Nein",
         "ai": "Nein",
+        "plugins": "Nein",
         "ui": "Ja",
         "maturity": "Gegründet",
         "price": "89 $"
@@ -368,6 +372,7 @@
         "er_diagram": "Teilweise",
         "federation": "Nein",
         "ai": "Nein",
+        "plugins": "Nein",
         "ui": "Nein",
         "maturity": "20+ Jahre",
         "price": "Kostenlos"
@@ -1052,5 +1057,19 @@
     "not_found_body": "Diese Doku-Seite existiert nicht oder wurde noch nicht geschrieben.",
     "landing_title": "QoreDB Dokumentation",
     "landing_subtitle": "Alles, um QoreDB zu installieren, Datenbanken zu verbinden und schneller zu liefern."
+  },
+  "marketplace": {
+    "categories": {
+      "safety": "Sicherheit & Leitplanken",
+      "observability": "Observability",
+      "productivity": "Produktivität",
+      "theming": "Themes & UI",
+      "integrations": "Integrationen"
+    },
+    "submit": {
+      "field_category": "Kategorie",
+      "field_category_hint": "Wähle die passendste. Der Reviewer kann sie anpassen."
+    },
+    "eyebrow": "Plugin-Bibliothek"
   }
 }

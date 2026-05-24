@@ -10,13 +10,13 @@
     "download": "Download",
     "join_beta": "Join Beta",
     "docs": "Docs",
-    "marketplace": "Marketplace"
+    "marketplace": "Plugins"
   },
   "marketplace": {
-    "page_title": "Plugin marketplace",
+    "page_title": "Plugins",
     "page_subtitle": "Extend QoreDB with sandboxed plugins — snippet packs, themes, connection templates, and sandboxed WASM modules that hook the query lifecycle.",
     "section_title": "Available plugins",
-    "section_subtitle": "Every plugin in this list passed maintainer review and lives in the public plugins registry.",
+    "section_subtitle": "Every plugin in this list passed maintainer review and lives in the public registry on GitHub.",
     "registry_link_label": "Browse the registry on GitHub",
     "submit_cta": "Submit a plugin",
     "empty": "No plugins yet. Be the first to publish one.",
@@ -35,9 +35,9 @@
       "view_details": "View details"
     },
     "detail": {
-      "back": "Back to marketplace",
+      "back": "Back to plugins",
       "install_title": "Install in QoreDB",
-      "install_step_1": "Open QoreDB → Settings → Marketplace and click Install. The app downloads the archive, verifies its sha256 against this page, then validates the manifest before any hook fires.",
+      "install_step_1": "Open QoreDB → Settings → Browse and click Install. The app downloads the archive, verifies its sha256 against this page, then validates the manifest before any hook fires.",
       "install_step_2": "Or download the archive directly and install it via Settings → Plugins → Install plugin. The QoreDB host re-checks the manifest the same way.",
       "download_archive": "Download plugin.zip ({{size}})",
       "view_manifest": "View plugin.json",
@@ -102,8 +102,18 @@
         "If the plugin makes HTTP calls, allowedHosts is a precise list, not a wildcard.",
         "runtime.integrity carries the sha256 of the final .wasm bytes.",
         "The archive contains only plugin.json + the WASM module at its root."
-      ]
-    }
+      ],
+      "field_category": "Category",
+      "field_category_hint": "Pick the closest fit. The reviewer can adjust during review."
+    },
+    "categories": {
+      "safety": "Safety & guardrails",
+      "observability": "Observability",
+      "productivity": "Productivity",
+      "theming": "Themes & UI",
+      "integrations": "Integrations"
+    },
+    "eyebrow": "Plugin library"
   },
   "download": {
     "title": "Download QoreDB",
@@ -256,10 +266,6 @@
         "title": "Time Travel",
         "desc": "Browse the history of any row, compare versions side by side and generate rollback SQL in one click."
       },
-      "ddl": {
-        "title": "DDL Management",
-        "desc": "CREATE / ALTER TABLE, foreign keys, indexes and constraints, with driver-specific SQL preview and warnings."
-      },
       "vault": {
         "title": "Security & Privacy",
         "desc": "Encrypted credentials (Argon2), proxy support and GDPR compliant (zero telemetry)."
@@ -298,7 +304,7 @@
       },
       "plugins": {
         "title": "Plugin system",
-        "desc": "Extend QoreDB with declarative packs (snippets, themes, templates) or sandboxed WASM modules that hook the query lifecycle. Every capability is opt-in."
+        "desc": "Declarative packs (snippets, themes, templates) or sandboxed WASM modules that hook the query lifecycle."
       },
       "export": {
         "title": "Multi-Format Export",
@@ -414,6 +420,7 @@
       "er_diagram": "Interactive ER diagram",
       "federation": "Cross-database federation",
       "ai": "AI query assistant",
+      "plugins": "Plugin system",
       "ui": "Modern, fast UI",
       "maturity": "Maturity / ecosystem",
       "price": "Price (personal use)"
@@ -431,6 +438,7 @@
         "er_diagram": "Yes",
         "federation": "Pro",
         "ai": "BYOK",
+        "plugins": "Yes",
         "ui": "Yes",
         "maturity": "New",
         "price": "Free / Pro"
@@ -447,6 +455,7 @@
         "er_diagram": "Yes",
         "federation": "No",
         "ai": "No",
+        "plugins": "Yes",
         "ui": "Dated",
         "maturity": "15+ years",
         "price": "Free / $199"
@@ -463,6 +472,7 @@
         "er_diagram": "No",
         "federation": "No",
         "ai": "No",
+        "plugins": "No",
         "ui": "Yes",
         "maturity": "Established",
         "price": "$89"
@@ -479,6 +489,7 @@
         "er_diagram": "Partial",
         "federation": "No",
         "ai": "No",
+        "plugins": "No",
         "ui": "No",
         "maturity": "20+ years",
         "price": "Free"

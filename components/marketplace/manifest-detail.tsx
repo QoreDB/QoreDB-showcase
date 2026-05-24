@@ -1,7 +1,6 @@
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
-import { Badge } from "@/components/ui/badge";
 import type {
   RegistryPlugin,
   RegistryVersion,
@@ -18,9 +17,16 @@ function formatSize(bytes: number) {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-function plural(t: ReturnType<typeof useTranslation>["t"], key: string, count: number) {
+function plural(
+  t: ReturnType<typeof useTranslation>["t"],
+  key: string,
+  count: number,
+) {
   if (count === 0) return null;
-  const k = count === 1 ? `marketplace.detail.${key}` : `marketplace.detail.${key}_plural`;
+  const k =
+    count === 1
+      ? `marketplace.detail.${key}`
+      : `marketplace.detail.${key}_plural`;
   return t(k, { count });
 }
 
@@ -38,118 +44,130 @@ export function ManifestDetail({ plugin, version }: ManifestDetailProps) {
   ].filter(Boolean) as string[];
 
   return (
-    <div className="space-y-8">
-      <section className="grid gap-3 rounded-xl border border-(--q-border) bg-(--q-bg-1) p-6 sm:grid-cols-2">
-        <Field
-          label={t("marketplace.detail.manifest_id")}
-          value={<span className="font-mono">{plugin.id}</span>}
-        />
-        <Field
-          label={t("marketplace.detail.manifest_version")}
-          value={<span className="font-mono">{version.version}</span>}
-        />
-        <Field
-          label={t("marketplace.detail.manifest_qoredb")}
-          value={<span className="font-mono">{version.qoredb ?? "—"}</span>}
-        />
-        <Field
-          label={t("marketplace.detail.manifest_author")}
-          value={plugin.author ?? "—"}
-        />
-        <Field
-          label={t("marketplace.detail.manifest_kind")}
-          value={kindLabel}
-        />
-        <Field
-          label={t("marketplace.detail.manifest_archive_sha")}
-          value={
-            <span className="break-all font-mono text-xs">
-              {version.archive.sha256}
-            </span>
-          }
-        />
-      </section>
+    <div className="space-y-6">
+      {/* Identity card */}
+      <Card>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field
+            label={t("marketplace.detail.manifest_id")}
+            value={<span className="font-mono">{plugin.id}</span>}
+          />
+          <Field
+            label={t("marketplace.detail.manifest_version")}
+            value={<span className="font-mono">{version.version}</span>}
+          />
+          <Field
+            label={t("marketplace.detail.manifest_qoredb")}
+            value={<span className="font-mono">{version.qoredb ?? "—"}</span>}
+          />
+          <Field
+            label={t("marketplace.detail.manifest_author")}
+            value={plugin.author ?? "—"}
+          />
+          <Field
+            label={t("marketplace.detail.manifest_kind")}
+            value={kindLabel}
+          />
+          <Field
+            label={t("marketplace.detail.manifest_archive_sha")}
+            value={
+              <span className="break-all font-mono text-xs">
+                {version.archive.sha256}
+              </span>
+            }
+          />
+        </div>
+      </Card>
 
       {runtime ? (
-        <section className="space-y-3">
-          <h3 className="text-sm font-medium uppercase tracking-wide text-(--q-text-2)">
-            {t("marketplace.detail.manifest_hooks")}
-          </h3>
+        <Card>
+          <SectionLabel>{t("marketplace.detail.manifest_hooks")}</SectionLabel>
           {runtime.hooks.length === 0 ? (
-            <p className="text-sm text-(--q-text-2)">
+            <p className="mt-2 text-sm text-(--q-text-2)">
               {t("marketplace.detail.manifest_no_hooks")}
             </p>
           ) : (
-            <div className="flex flex-wrap gap-1.5">
+            <div className="mt-3 flex flex-wrap gap-1.5">
               {runtime.hooks.map((hook) => (
-                <Badge key={hook} className="font-mono">
+                <Chip key={hook} variant="accent">
                   {hook}
-                </Badge>
+                </Chip>
               ))}
             </div>
           )}
 
-          <h3 className="pt-3 text-sm font-medium uppercase tracking-wide text-(--q-text-2)">
+          <SectionLabel className="mt-6">
             {t("marketplace.detail.manifest_capabilities")}
-          </h3>
+          </SectionLabel>
           {runtime.capabilities.length === 0 ? (
-            <p className="text-sm text-(--q-text-2)">
+            <p className="mt-2 text-sm text-(--q-text-2)">
               {t("marketplace.detail.manifest_no_capabilities")}
             </p>
           ) : (
-            <div className="flex flex-wrap gap-1.5">
+            <div className="mt-3 flex flex-wrap gap-1.5">
               {runtime.capabilities.map((cap) => (
-                <Badge key={cap} variant="outline" className="font-mono">
-                  {cap}
-                </Badge>
+                <Chip key={cap}>{cap}</Chip>
               ))}
             </div>
           )}
 
-          <h3 className="pt-3 text-sm font-medium uppercase tracking-wide text-(--q-text-2)">
+          <SectionLabel className="mt-6">
             {t("marketplace.detail.manifest_integrity")}
-          </h3>
-          <p className="break-all font-mono text-xs text-(--q-text-1)">
-            {runtime.integrity ?? t("marketplace.detail.manifest_no_integrity")}
+          </SectionLabel>
+          <p className="mt-2 break-all font-mono text-xs text-(--q-text-1)">
+            {runtime.integrity ??
+              t("marketplace.detail.manifest_no_integrity")}
           </p>
-        </section>
+        </Card>
       ) : null}
 
-      <section className="space-y-3">
-        <h3 className="text-sm font-medium uppercase tracking-wide text-(--q-text-2)">
+      <Card>
+        <SectionLabel>
           {t("marketplace.detail.manifest_contributes")}
-        </h3>
-        {contributionSummaries.length === 0 && contributes.commands.length === 0 ? (
-          <p className="text-sm text-(--q-text-2)">
+        </SectionLabel>
+        {contributionSummaries.length === 0 &&
+        contributes.commands.length === 0 ? (
+          <p className="mt-2 text-sm text-(--q-text-2)">
             {t("marketplace.detail.contributes_none")}
           </p>
         ) : (
-          <ul className="space-y-1 text-sm text-(--q-text-1)">
+          <ul className="mt-3 space-y-1.5 text-sm text-(--q-text-1)">
             {contributionSummaries.map((s, i) => (
-              <li key={i}>{s}</li>
+              <li key={i} className="flex gap-2">
+                <span className="text-(--q-accent)">•</span>
+                <span>{s}</span>
+              </li>
             ))}
             {contributes.commands.length > 0 ? (
-              <li>
-                <Trans
-                  i18nKey="marketplace.detail.contributes_commands"
-                  values={{ commands: contributes.commands.join(", ") }}
-                />
+              <li className="flex gap-2">
+                <span className="text-(--q-accent)">•</span>
+                <span>
+                  <Trans
+                    i18nKey="marketplace.detail.contributes_commands"
+                    values={{ commands: contributes.commands.join(", ") }}
+                  />
+                </span>
               </li>
             ) : null}
           </ul>
         )}
-      </section>
+      </Card>
 
       {plugin.versions.length > 1 ? (
-        <section className="space-y-3">
-          <h3 className="text-sm font-medium uppercase tracking-wide text-(--q-text-2)">
+        <Card>
+          <SectionLabel>
             {t("marketplace.detail.versions_heading")}
-          </h3>
-          <ul className="divide-y divide-(--q-border) rounded-xl border border-(--q-border) bg-(--q-bg-1)">
+          </SectionLabel>
+          <ul className="mt-3 divide-y divide-(--q-border)/60">
             {[...plugin.versions].reverse().map((v) => (
-              <li key={v.version} className="flex items-center justify-between p-3 text-sm">
+              <li
+                key={v.version}
+                className="flex items-center justify-between py-2.5 text-sm"
+              >
                 <span className="font-mono text-(--q-text-0)">
-                  {t("marketplace.detail.version_label", { version: v.version })}
+                  {t("marketplace.detail.version_label", {
+                    version: v.version,
+                  })}
                 </span>
                 <span className="text-xs text-(--q-text-2)">
                   {t("marketplace.detail.version_size", {
@@ -159,17 +177,70 @@ export function ManifestDetail({ plugin, version }: ManifestDetailProps) {
               </li>
             ))}
           </ul>
-        </section>
+        </Card>
       ) : null}
     </div>
   );
 }
 
-function Field({ label, value }: { label: string; value: React.ReactNode }) {
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-(--q-border) bg-(--q-bg-1) p-6">
+      <div className="pointer-events-none absolute -top-12 -right-12 h-24 w-24 rounded-full bg-(--q-accent)/5 blur-2xl" />
+      <div className="relative">{children}</div>
+    </div>
+  );
+}
+
+function Field({
+  label,
+  value,
+}: {
+  label: string;
+  value: React.ReactNode;
+}) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-wide text-(--q-text-3)">{label}</p>
+      <p className="text-[10px] font-medium uppercase tracking-widest text-(--q-text-3)">
+        {label}
+      </p>
       <p className="mt-1 text-sm text-(--q-text-0)">{value}</p>
     </div>
+  );
+}
+
+function SectionLabel({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <p
+      className={`text-[10px] font-medium uppercase tracking-widest text-(--q-text-3) ${className}`}
+    >
+      {children}
+    </p>
+  );
+}
+
+function Chip({
+  children,
+  variant = "default",
+}: {
+  children: React.ReactNode;
+  variant?: "default" | "accent";
+}) {
+  const styles =
+    variant === "accent"
+      ? "bg-(--q-accent)/10 text-(--q-accent) ring-1 ring-(--q-accent)/20"
+      : "bg-(--q-bg-2) text-(--q-text-1) ring-1 ring-(--q-border)";
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-mono text-[11px] ${styles}`}
+    >
+      {children}
+    </span>
   );
 }

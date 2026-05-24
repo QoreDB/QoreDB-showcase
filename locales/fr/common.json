@@ -10,13 +10,13 @@
     "download": "Télécharger",
     "join_beta": "Rejoindre la beta",
     "docs": "Docs",
-    "marketplace": "Marketplace"
+    "marketplace": "Plugins"
   },
   "marketplace": {
-    "page_title": "Marketplace de plugins",
+    "page_title": "Plugins",
     "page_subtitle": "Étendez QoreDB avec des plugins sandboxés — packs de snippets, thèmes, templates de connexion, et modules WASM qui s'accrochent au cycle de vie des requêtes.",
     "section_title": "Plugins disponibles",
-    "section_subtitle": "Chaque plugin de cette liste a été relu par les mainteneurs et vit dans le registre public.",
+    "section_subtitle": "Chaque plugin de cette liste a été relu par les mainteneurs et vit dans le registre public sur GitHub.",
     "registry_link_label": "Parcourir le registre sur GitHub",
     "submit_cta": "Soumettre un plugin",
     "empty": "Aucun plugin pour le moment. Soyez le premier à en publier un.",
@@ -35,9 +35,9 @@
       "view_details": "Voir le détail"
     },
     "detail": {
-      "back": "Retour à la marketplace",
+      "back": "Retour aux plugins",
       "install_title": "Installer dans QoreDB",
-      "install_step_1": "Ouvrez QoreDB → Paramètres → Marketplace et cliquez sur Installer. L'application télécharge l'archive, vérifie son sha256 contre cette page, puis valide le manifeste avant tout déclenchement d'un hook.",
+      "install_step_1": "Ouvrez QoreDB → Paramètres → Parcourir et cliquez sur Installer. L'application télécharge l'archive, vérifie son sha256 contre cette page, puis valide le manifeste avant tout déclenchement d'un hook.",
       "install_step_2": "Ou téléchargez l'archive directement et installez-la via Paramètres → Plugins → Installer un plugin. L'hôte QoreDB re-valide le manifeste de la même manière.",
       "download_archive": "Télécharger plugin.zip ({{size}})",
       "view_manifest": "Voir plugin.json",
@@ -102,8 +102,18 @@
         "Si le plugin fait des appels HTTP, allowedHosts est une liste précise, pas un joker.",
         "runtime.integrity contient le sha256 des octets finaux du .wasm.",
         "L'archive contient uniquement plugin.json + le module WASM à sa racine."
-      ]
-    }
+      ],
+      "field_category": "Catégorie",
+      "field_category_hint": "Choisissez la plus proche. Le relecteur peut l'ajuster pendant la revue."
+    },
+    "categories": {
+      "safety": "Sécurité & garde-fous",
+      "observability": "Observabilité",
+      "productivity": "Productivité",
+      "theming": "Thèmes & UI",
+      "integrations": "Intégrations"
+    },
+    "eyebrow": "Bibliothèque de plugins"
   },
   "download": {
     "title": "Télécharger QoreDB",
@@ -246,7 +256,7 @@
     "items": {
       "unified": {
         "title": "13 drivers natifs",
-        "desc": "Famille PostgreSQL (dont Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB et ClickHouse."
+        "desc": "Famille PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB et ClickHouse."
       },
       "workspaces": {
         "title": "Workspaces",
@@ -255,10 +265,6 @@
       "time_travel": {
         "title": "Time Travel",
         "desc": "Parcourez l'historique d'une ligne, comparez les versions et générez le SQL de rollback en un clic."
-      },
-      "ddl": {
-        "title": "Gestion DDL",
-        "desc": "CREATE / ALTER TABLE, clés étrangères, index et contraintes, avec aperçu SQL spécifique au driver et alertes."
       },
       "vault": {
         "title": "Sécurité & Privée",
@@ -298,7 +304,7 @@
       },
       "plugins": {
         "title": "Système de plugins",
-        "desc": "Étendez QoreDB avec des packs déclaratifs (snippets, thèmes, templates) ou des modules WASM sandboxés qui s'accrochent au cycle de vie des requêtes. Chaque capacité est opt-in."
+        "desc": "Packs déclaratifs (snippets, thèmes, templates) ou modules WASM sandboxés branchés sur le cycle de vie des requêtes."
       },
       "export": {
         "title": "Export multi-formats",
@@ -414,6 +420,7 @@
       "er_diagram": "Diagramme ER interactif",
       "federation": "Fédération inter-bases",
       "ai": "Assistant IA",
+      "plugins": "Système de plugins",
       "ui": "UI moderne et rapide",
       "maturity": "Maturité / écosystème",
       "price": "Prix (usage personnel)"
@@ -431,6 +438,7 @@
         "er_diagram": "Oui",
         "federation": "Pro",
         "ai": "BYOK",
+        "plugins": "Oui",
         "ui": "Oui",
         "maturity": "Nouveau",
         "price": "Gratuit / Pro"
@@ -447,6 +455,7 @@
         "er_diagram": "Oui",
         "federation": "Non",
         "ai": "Non",
+        "plugins": "Oui",
         "ui": "Daté",
         "maturity": "15+ ans",
         "price": "Gratuit / 199$"
@@ -463,6 +472,7 @@
         "er_diagram": "Non",
         "federation": "Non",
         "ai": "Non",
+        "plugins": "Non",
         "ui": "Oui",
         "maturity": "Établi",
         "price": "89$"
@@ -479,6 +489,7 @@
         "er_diagram": "Partiel",
         "federation": "Non",
         "ai": "Non",
+        "plugins": "Non",
         "ui": "Non",
         "maturity": "20+ ans",
         "price": "Gratuit"

@@ -150,10 +150,6 @@
         "title": "Time Travel",
         "desc": "浏览任何行的历史记录，并排比较版本，并一键生成回滚 SQL。"
       },
-      "ddl": {
-        "title": "DDL 管理",
-        "desc": "CREATE / ALTER TABLE、外键、索引和约束。提供驱动特定的 SQL 预览和警告。"
-      },
       "vault": {
         "title": "安全与隐私",
         "desc": "加密凭证 (Argon2)、代理支持，且符合 GDPR（零遥测）。"
@@ -197,6 +193,10 @@
       "opensource": {
         "title": "开源",
         "desc": "GitHub 上提供可审核的代码。Arch Linux 提供 AUR 软件包。"
+      },
+      "plugins": {
+        "title": "插件系统",
+        "desc": "声明式包（代码片段、主题、模板）或挂接到查询生命周期的沙盒化 WASM 模块。"
       }
     },
     "killer": {
@@ -303,6 +303,7 @@
       "er_diagram": "交互式 ER 图",
       "federation": "跨数据库联合",
       "ai": "AI查询助手",
+      "plugins": "插件系统",
       "ui": "现代、快速的用户界面",
       "maturity": "成熟度/生态系统",
       "price": "价格（个人使用）"
@@ -320,6 +321,7 @@
         "er_diagram": "是的",
         "federation": "专业版",
         "ai": "自带设备",
+        "plugins": "是的",
         "ui": "是的",
         "maturity": "新",
         "price": "免费/专业版"
@@ -336,6 +338,7 @@
         "er_diagram": "是的",
         "federation": "否",
         "ai": "否",
+        "plugins": "是的",
         "ui": "已注明日期",
         "maturity": "15年以上",
         "price": "免费 / 199 美元"
@@ -352,6 +355,7 @@
         "er_diagram": "否",
         "federation": "否",
         "ai": "否",
+        "plugins": "否",
         "ui": "是的",
         "maturity": "成立",
         "price": "89 美元"
@@ -368,6 +372,7 @@
         "er_diagram": "部分",
         "federation": "否",
         "ai": "否",
+        "plugins": "否",
         "ui": "否",
         "maturity": "20+年",
         "price": "免费"
@@ -1052,5 +1057,19 @@
     "not_found_body": "此文档页面不存在或尚未撰写。",
     "landing_title": "QoreDB 文档",
     "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。"
+  },
+  "marketplace": {
+    "categories": {
+      "safety": "安全与防护",
+      "observability": "可观测性",
+      "productivity": "效率工具",
+      "theming": "主题与界面",
+      "integrations": "集成"
+    },
+    "submit": {
+      "field_category": "类别",
+      "field_category_hint": "请选择最接近的类别。审核时可以调整。"
+    },
+    "eyebrow": "插件库"
   }
 }

@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 
-// POST /api/marketplace/submit
+// POST /api/plugins/submit
 //
 // Public submission endpoint. Stages a pending plugin in Sanity for a
 // maintainer to review in the Studio. The bytes never become reachable from
@@ -30,6 +30,13 @@ import { apiVersion, dataset, projectId } from "@/sanity/env";
 const MAX_ARCHIVE_BYTES = 8 * 1024 * 1024;
 const PLUGIN_ID_PATTERN = /^[a-z0-9][a-z0-9._-]*$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CATEGORIES = new Set([
+  "safety",
+  "observability",
+  "productivity",
+  "theming",
+  "integrations",
+]);
 
 const writeClient = createClient({
   projectId,
@@ -73,6 +80,7 @@ export async function POST(request: NextRequest) {
   const contactEmail = (form.get("contactEmail") ?? "").toString().trim();
   const repositoryUrl = (form.get("repositoryUrl") ?? "").toString().trim();
   const kind = (form.get("kind") ?? "").toString().trim();
+  const category = (form.get("category") ?? "").toString().trim();
   const manifestRaw = (form.get("manifest") ?? "").toString();
   const archive = form.get("archive");
 
@@ -87,6 +95,11 @@ export async function POST(request: NextRequest) {
     return fail("A valid contact email is required");
   if (kind !== "declarative" && kind !== "executable") {
     return fail("Kind must be 'declarative' or 'executable'");
+  }
+  if (!CATEGORIES.has(category)) {
+    return fail(
+      "Category is required and must be one of: safety, observability, productivity, theming, integrations",
+    );
   }
   if (!(archive instanceof File))
     return fail("Missing plugin.zip in the 'archive' field");
@@ -158,6 +171,7 @@ export async function POST(request: NextRequest) {
       contactEmail,
       repositoryUrl: repositoryUrl || undefined,
       kind,
+      category,
       archive: {
         _type: "file",
         asset: { _type: "reference", _ref: assetRef },

@@ -4,7 +4,7 @@ import {
   RegistryUnavailableError,
 } from "@/lib/marketplace/registry";
 
-// GET /api/marketplace/plugins
+// GET /api/plugins
 //
 // Returns the full registry catalog. The QoreDB app's in-app marketplace
 // hits this endpoint, and the marketplace page on the showcase consumes it

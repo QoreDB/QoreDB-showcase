@@ -34,6 +34,23 @@ export type PluginCapability =
   | "fs"
   | "secrets";
 
+export const PLUGIN_CATEGORIES = [
+  "safety",
+  "observability",
+  "productivity",
+  "theming",
+  "integrations",
+] as const;
+
+export type PluginCategory = (typeof PLUGIN_CATEGORIES)[number];
+
+export function isPluginCategory(value: unknown): value is PluginCategory {
+  return (
+    typeof value === "string" &&
+    (PLUGIN_CATEGORIES as readonly string[]).includes(value)
+  );
+}
+
 export interface RegistryRuntimeSummary {
   abiVersion: 1;
   entry: string;
@@ -59,6 +76,7 @@ export interface RegistryArchive {
 export interface RegistryVersion {
   version: string;
   qoredb: string | null;
+  category: PluginCategory | null;
   kind: PluginKind;
   runtime: RegistryRuntimeSummary | null;
   contributes: RegistryContributionSummary;
@@ -71,6 +89,7 @@ export interface RegistryPlugin {
   name: string;
   author: string | null;
   description: string | null;
+  category: PluginCategory | null;
   latestVersion: string;
   kind: PluginKind;
   versions: RegistryVersion[];
