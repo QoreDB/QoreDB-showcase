@@ -116,6 +116,12 @@ Si votre domaine présente des dangers spécifiques (une table particulière qui
 
 Les trois limites de gouvernance (durée maximale de la requête, nombre maximal de lignes de résultat, requêtes simultanées maximales) protègent à la fois le client et le serveur contre les accidents. Sur un ordinateur portable avec une RAM limitée, définissez `max_result_rows` sur une valeur comme `100000`. Un `SELECT *` sur une table d'un million de lignes sera tronqué plutôt que de faire planter le client.
 
+### Comptez sur le limiteur anti-boucle
+
+QoreDB plafonne le débit de requêtes par session comme garde-fou anti-boucle : un script emballé qui spamme des requêtes atteint la limite, mais un humain ne l'atteint jamais. Le budget est volontairement généreux — 60 requêtes par fenêtre de 10 secondes par session, rechargé en continu (un token bucket). Il n'est pas persisté et se réinitialise au redémarrage.
+
+Il n'y a rien à configurer ; il est actif pour protéger le client et le serveur des boucles serrées accidentelles (une cellule de notebook défaillante, une boucle `while` autour d'une requête). Si vous avez un réel besoin d'un accès soutenu à haut débit, faites-le passer par un [rôle et une réplique en lecture seule](#utilisez-une-replique-en-lecture-seule-lorsque-cela-est-possible) plutôt que par le client interactif.
+
 ## Audit
 
 ### Utilisez le journal d'audit

@@ -32,6 +32,18 @@ Every executed query reports two timings:
 
 Both are measured in milliseconds and shown in the results pane. They are also persisted in the history.
 
+## Result cache
+
+Repeated table navigation is served from a local result cache, so going back to a table you just looked at is instant instead of re-running the read. The cache only covers read-only table-browse reads — it never caches mutations.
+
+It's safe by design:
+
+- **Self-invalidating.** When you change data through QoreDB, the cached entries for that connection are dropped, so you never see your own stale writes.
+- **Time-bounded.** Entries expire after a TTL (60 seconds by default), which bounds staleness from changes made outside QoreDB.
+- **Bounded in size.** The cache holds a capped number of entries (100 by default) with LRU eviction.
+
+You can tune the TTL and entry count, or turn the cache off entirely, in **Settings → Data**. Values are clamped to safe ranges (TTL 5–3600 s, 10–1000 entries).
+
 ## Cancelling a query
 
 Long-running queries can be cancelled. Click the **Cancel** button while a query is running. The driver sends a cancellation signal to the server (the underlying mechanism depends on the driver, e.g. PostgreSQL's `pg_cancel_backend`).

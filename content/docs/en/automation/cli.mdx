@@ -1,0 +1,61 @@
+---
+title: Command-line access
+description: Query your saved QoreDB connections from the terminal with the qore CLI. Reuses the same vault, drivers, and safety gates as the desktop app — ideal for scripts and CI.
+premium: false
+---
+
+# Command-line access
+
+The `qore` CLI gives you scriptable, headless access to the connections you already saved in the QoreDB desktop app. It runs the same engine, reads the same vault, and enforces the same safety gates — so a query that's safe in the app is safe from the terminal, and there's no separate credential setup.
+
+This makes QoreDB usable in places the desktop UI can't reach: CI pipelines, cron jobs, remote servers over SSH, and quick one-off checks without leaving your shell.
+
+## How it works
+
+- **Shared credentials.** Connections and their passwords come from the same OS keyring and config directory as the desktop app (the vault, project `default`). If the desktop can connect, so can the CLI — nothing to re-enter.
+- **Same safety engine.** Queries go through the existing safety layer (production-dangerous blocking, the anti-loop rate limiter, governance limits). A connection keeps its saved read-only flag.
+- **Machine-friendly output.** Results are printed as JSON on stdout. Errors go to stderr with a non-zero exit code, so scripts can branch on success.
+
+## Commands
+
+```bash
+qore connections                                      # list saved connections
+qore query <connection_id> "<sql>"                    # run a query, print rows as JSON
+qore tables <connection_id> <database> [--schema s]   # list tables/collections
+qore describe <connection_id> <database> <table> [--schema s]
+```
+
+A typical session starts by listing connections to get an id, then querying:
+
+```bash
+qore connections
+qore query prod-pg "SELECT count(*) FROM orders WHERE status = 'paid'"
+qore tables prod-pg analytics --schema public
+qore describe prod-pg analytics orders --schema public
+```
+
+## Pointing at a different config
+
+By default the CLI reads the desktop app's config directory. Set `QOREDB_CONFIG_DIR` to point it elsewhere — useful on a CI runner where you've staged a dedicated config:
+
+```bash
+QOREDB_CONFIG_DIR=/etc/qoredb qore query prod-pg "SELECT 1"
+```
+
+## Building it
+
+The CLI ships as a separate binary you build from the QoreDB workspace:
+
+```bash
+cargo build -p qore-cli --release   # produces target/release/qore
+```
+
+<Callout type="info">
+The CLI honours the connection's read-only flag and the standard safety gates, but it is still a real client with whatever privileges the saved credentials carry. For CI, point it at a read-only role and a read-only replica.
+</Callout>
+
+## Where to go next
+
+- [MCP server](/docs/automation/mcp-server) to expose the same connections to AI agents
+- [Vault & profiles](/docs/connections/vault-and-profiles) for how credentials are stored
+- [Best practices](/docs/security/best-practices) for safe production access

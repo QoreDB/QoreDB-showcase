@@ -278,83 +278,97 @@
       "category": "Updates",
       "language": "en",
       "publishedAt": "2026-05-24"
+    },
+    {
+      "slug": "quel-client-de-base-de-donnees-choisir-2026-guide-complet",
+      "title": "Quel client de base de données choisir en 2026 : guide complet",
+      "category": "Produit",
+      "publishedAt": "2026-05-25"
+    },
+    {
+      "slug": "comment-choisir-client-base-donnees-equipe",
+      "title": "Comment choisir un client de base de données pour son équipe",
+      "category": "Vision",
+      "publishedAt": "2026-05-26"
+    },
+    {
+      "slug": "client-local-first-ou-cloud-quel-modele-2026",
+      "title": "Client local-first ou cloud : quel modèle pour gérer ses bases en 2026",
+      "category": "Vision",
+      "publishedAt": "2026-05-27"
+    },
+    {
+      "slug": "open-source-proprietaire-client-base-donnees",
+      "title": "Open source ou propriétaire : quel client de base de données privilégier",
+      "category": "Vision",
+      "publishedAt": "2026-05-28"
+    },
+    {
+      "slug": "client-multi-bases-ou-specialise-criteres-techniques",
+      "title": "Client multi-bases ou spécialisé : critères techniques pour bien choisir",
+      "category": "Produit",
+      "publishedAt": "2026-05-29"
+    },
+    {
+      "slug": "comment-connecter-postgresql-tunnel-ssh-guide-complet",
+      "title": "Comment se connecter à PostgreSQL via un tunnel SSH : guide complet",
+      "category": "Produit",
+      "publishedAt": "2026-05-31"
+    },
+    {
+      "slug": "comment-executer-jointure-postgresql-mongodb",
+      "title": "Comment exécuter une jointure entre PostgreSQL et MongoDB",
+      "category": "Produit",
+      "publishedAt": "2026-06-01"
+    },
+    {
+      "slug": "comment-exporter-postgresql-csv-json-parquet",
+      "title": "Comment exporter une base PostgreSQL en CSV, JSON et Parquet",
+      "category": "Produit",
+      "publishedAt": "2026-06-02"
+    },
+    {
+      "slug": "comparer-bases-donnees-prod-staging",
+      "title": "Comment comparer deux bases de données Prod et Staging",
+      "category": "Produit",
+      "publishedAt": "2026-06-03"
+    },
+    {
+      "slug": "connecter-sql-server-macos-linux-2026",
+      "title": "Comment se connecter à SQL Server depuis macOS et Linux en 2026",
+      "category": "Produit",
+      "publishedAt": "2026-06-04"
+    },
+    {
+      "slug": "chiffrer-credentials-base-donnees-local",
+      "title": "Comment chiffrer ses credentials de base de données en local",
+      "category": "Security",
+      "publishedAt": "2026-06-06"
+    },
+    {
+      "slug": "visualiser-schema-postgresql-diagramme-er",
+      "title": "Comment visualiser le schéma d'une base PostgreSQL en diagramme ER",
+      "category": "Produit",
+      "publishedAt": "2026-06-07"
+    },
+    {
+      "slug": "auditer-requetes-lentes-postgresql",
+      "title": "Comment auditer les requêtes lentes d'une base PostgreSQL",
+      "category": "Produit",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "slug": "inspecter-instance-redis-client-desktop",
+      "title": "Comment inspecter une instance Redis depuis un client desktop",
+      "category": "Produit",
+      "publishedAt": "2026-06-09"
     }
   ],
   "queue": [
     {
-      "title": "Quel client de base de données choisir en 2026 : guide complet",
-      "category": "Produit",
-      "topic_notes": "Article pilier SEO. Critères de choix (open source / propriétaire, multi-bases vs spécialisé, prix, sécurité, équipe vs solo, web vs desktop). Recommandations par profil. QoreDB cité dans le segment local-first multi-bases."
-    },
-    {
-      "title": "Comment choisir un client de base de données pour son équipe",
-      "category": "Vision",
-      "topic_notes": "Guide de choix orienté équipe. Licensing per-seat, partage de connexions, audit, conformité GDPR, intégration SSO. Comparaison desktop / web. QoreDB positionné sur le créneau équipe technique soucieuse de souveraineté."
-    },
-    {
-      "title": "Client local-first ou cloud : quel modèle pour gérer ses bases en 2026",
-      "category": "Vision",
-      "topic_notes": "Article de fond SEO. Arguments local-first (latence, souveraineté, offline, sécurité credentials) vs cloud (collaboration, accès partagé, sync). Quand chaque modèle a du sens. QoreDB et autres clients locaux cités, comparés avec Retool, Mode, Hex."
-    },
-    {
-      "title": "Open source ou propriétaire : quel client de base de données privilégier",
-      "category": "Vision",
-      "topic_notes": "Comparatif modèles licensing. OSS pur (DBeaver CE, pgAdmin), propriétaire (DataGrip, TablePlus), open-core (QoreDB, Beekeeper). Implications : auditabilité, pérennité, support, prix long terme."
-    },
-    {
-      "title": "Client multi-bases ou spécialisé : critères techniques pour bien choisir",
-      "category": "Produit",
-      "topic_notes": "Guide de choix. Avantages multi-bases (DBeaver, DataGrip, QoreDB) vs clients spécialisés (pgAdmin, MongoDB Compass, Redis Insight). Compromis profondeur vs couverture."
-    },
-    {
-      "title": "Comment se connecter à PostgreSQL via un tunnel SSH : guide complet",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. Étapes ssh -L manuelle, fichier ~/.ssh/config, clients qui intègrent le tunnel (DBeaver, DataGrip, QoreDB), pièges (timeout, keepalive, ProxyJump). Plusieurs clients montrés."
-    },
-    {
-      "title": "Comment exécuter une jointure entre PostgreSQL et MongoDB",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. Approches : ETL custom, Foreign Data Wrappers Postgres, services type Trino/Presto, clients à fédération native (QoreDB via DuckDB). Cas d'usage concret, code minimal."
-    },
-    {
-      "title": "Comment exporter une base PostgreSQL en CSV, JSON et Parquet",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. COPY natif PG pour CSV, jq + psql pour JSON, pg_parquet / duckdb pour Parquet, clients GUI qui le font (QoreDB, DBeaver). Quand quel format choisir."
-    },
-    {
-      "title": "Comment comparer deux bases de données Prod et Staging",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. Diff de schéma (pg_dump + diff, Liquibase, Flyway), diff de données (custom SQL, outils dédiés type Datafold, GUI client comme QoreDB Visual Data Diff). Approches pour code et data."
-    },
-    {
-      "title": "Comment se connecter à SQL Server depuis macOS et Linux en 2026",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. sqlcmd via Docker, Azure Data Studio, DBeaver, DataGrip, QoreDB (driver Tiberius natif). Préciser AAD, Windows Auth, certificats."
-    },
-    {
-      "title": "Comment visualiser le schéma d'une base PostgreSQL en diagramme ER",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. pgAdmin ERD tool, DBeaver, DataGrip, dbdiagram.io, SchemaSpy, QoreDB. Préciser inférence vs schéma déclaré, manipulation tables, export."
-    },
-    {
-      "title": "Comment auditer les requêtes lentes d'une base PostgreSQL",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. pg_stat_statements, auto_explain, log_min_duration_statement, EXPLAIN ANALYZE. Outils GUI (pgBadger, pganalyze, QoreDB Universal Query Interceptor). Workflow d'audit."
-    },
-    {
       "title": "Comment exécuter une recherche full-text dans toutes les tables d'une base",
       "category": "Produit",
       "topic_notes": "Tutoriel SEO. Script SQL maison (information_schema + LIKE), pg_trgm, FTS Postgres (tsvector), clients qui le font automatiquement (QoreDB). Cas debug et exploration."
-    },
-    {
-      "title": "Comment chiffrer ses credentials de base de données en local",
-      "category": "Security",
-      "topic_notes": "Tutoriel SEO. Risques credentials en clair (.pgpass, env, fichiers config), OS keychain (macOS Keychain, gnome-keyring, Windows Credential Manager), gestionnaires (1Password CLI), vault d'app (QoreDB, DBeaver master password). Bonnes pratiques."
-    },
-    {
-      "title": "Comment inspecter une instance Redis depuis un client desktop",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. redis-cli, Redis Insight, RedisDesktopManager (Another Redis Desktop Manager), DBeaver Redis plugin, QoreDB. Navigation par type, SCAN vs KEYS, TTL, debugging memory."
     },
     {
       "title": "Le crash recovery : restaurer l'état de session après un plantage",

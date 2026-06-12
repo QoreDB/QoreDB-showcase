@@ -1,0 +1,61 @@
+---
+title: Accès en ligne de commande
+description: Interrogez vos connexions QoreDB enregistrées depuis le terminal avec la CLI qore. Réutilise le même coffre, les mêmes pilotes et les mêmes garde-fous que l'application desktop — idéal pour les scripts et la CI.
+premium: false
+---
+
+# Accès en ligne de commande
+
+La CLI `qore` offre un accès scriptable et headless aux connexions que vous avez déjà enregistrées dans l'application desktop QoreDB. Elle exécute le même moteur, lit le même coffre, et applique les mêmes garde-fous de sécurité — une requête sûre dans l'application l'est aussi depuis le terminal, et il n'y a aucune configuration de credentials séparée.
+
+QoreDB devient ainsi utilisable là où l'interface desktop ne va pas : pipelines CI, tâches cron, serveurs distants en SSH, et vérifications ponctuelles sans quitter votre shell.
+
+## Fonctionnement
+
+- **Credentials partagés.** Les connexions et leurs mots de passe proviennent du même keyring OS et du même répertoire de configuration que l'application desktop (le coffre, projet `default`). Si le desktop peut se connecter, la CLI aussi — rien à ressaisir.
+- **Même moteur de sécurité.** Les requêtes passent par la couche de sécurité existante (blocage des opérations dangereuses en production, limiteur anti-boucle, limites de gouvernance). Une connexion conserve son indicateur de lecture seule enregistré.
+- **Sortie exploitable par machine.** Les résultats sont affichés en JSON sur stdout. Les erreurs vont sur stderr avec un code de sortie non nul, pour que les scripts puissent brancher sur le succès.
+
+## Commandes
+
+```bash
+qore connections                                      # lister les connexions enregistrées
+qore query <connection_id> "<sql>"                    # exécuter une requête, afficher les lignes en JSON
+qore tables <connection_id> <database> [--schema s]   # lister tables/collections
+qore describe <connection_id> <database> <table> [--schema s]
+```
+
+Une session typique commence par lister les connexions pour obtenir un id, puis interroge :
+
+```bash
+qore connections
+qore query prod-pg "SELECT count(*) FROM orders WHERE status = 'paid'"
+qore tables prod-pg analytics --schema public
+qore describe prod-pg analytics orders --schema public
+```
+
+## Pointer vers une autre configuration
+
+Par défaut, la CLI lit le répertoire de configuration de l'application desktop. Définissez `QOREDB_CONFIG_DIR` pour la pointer ailleurs — utile sur un runner CI où vous avez préparé une configuration dédiée :
+
+```bash
+QOREDB_CONFIG_DIR=/etc/qoredb qore query prod-pg "SELECT 1"
+```
+
+## La compiler
+
+La CLI est un binaire séparé que vous compilez depuis le workspace QoreDB :
+
+```bash
+cargo build -p qore-cli --release   # produit target/release/qore
+```
+
+<Callout type="info">
+La CLI respecte l'indicateur de lecture seule de la connexion et les garde-fous de sécurité standard, mais elle reste un véritable client avec les privilèges que portent les credentials enregistrés. Pour la CI, pointez-la vers un rôle en lecture seule et un réplica en lecture seule.
+</Callout>
+
+## Où aller ensuite
+
+- [Serveur MCP](/docs/automation/mcp-server) pour exposer les mêmes connexions aux agents IA
+- [Coffre et profils](/docs/connections/vault-and-profiles) pour le stockage des credentials
+- [Bonnes pratiques](/docs/security/best-practices) pour un accès production sûr

@@ -1,0 +1,101 @@
+---
+title: Contrats de données
+description: Assertions déclaratives de qualité des données pour vos tables. Définissez des règles en YAML, exécutez-les à la demande, et soyez alerté lorsqu'une règle passante se met à échouer après une mutation.
+premium: true
+---
+
+# Contrats de données
+
+<Callout type="info">
+Cette fonctionnalité fait partie du niveau QoreDB Pro.
+</Callout>
+
+Un **contrat de données** est un ensemble d'assertions déclaratives sur une table : quelles colonnes ne peuvent pas être nulles, quelles valeurs sont autorisées, combien de lignes la table devrait contenir, quelles clés étrangères doivent se résoudre. Vous décrivez les attentes une fois, et QoreDB confronte les données réelles à celles-ci — transformant « les données ont l'air correctes » en une liste de règles qui passent ou échouent.
+
+Les contrats tiennent compte du dialecte mais sont agnostiques quant au pilote : le même contrat s'exécute sur PostgreSQL (et la famille Postgres), MySQL/MariaDB, SQLite, DuckDB, SQL Server et ClickHouse. Le moteur génère le SQL spécifique au dialecte pour chaque règle et l'exécute via le même moteur que le reste de QoreDB.
+
+## La forme d'un contrat
+
+Un contrat cible une table sur une connexion et porte une liste de règles :
+
+```yaml
+name: orders_quality
+version: 1
+description: Invariants pour la table orders
+target:
+  connection: prod-pg
+  schema: public
+  table: orders
+rules:
+  - id: id_present
+    type: not_empty
+    column: id
+  - id: email_format
+    type: regex_match
+    column: customer_email
+    pattern: "^[^@]+@[^@]+$"
+    severity: warning
+  - id: status_allowed
+    type: allowed_values
+    column: status
+    values: [pending, paid, shipped, cancelled]
+  - id: total_in_range
+    type: numeric_range
+    column: total_cents
+    min: 0
+```
+
+Chaque règle possède un `id`, un `type`, et des champs propres à la règle. Le `severity` optionnel (`error`, `warning` ou `info`) et l'indicateur `enabled` permettent d'ajuster la manière dont un échec est signalé sans supprimer la règle.
+
+## Types de règles
+
+QoreDB propose douze types de règles couvrant les contrôles de qualité courants :
+
+| Règle | Ce qu'elle vérifie |
+| --- | --- |
+| `not_null_pct` | Au moins `threshold_min_pct` % d'une colonne est non nul. |
+| `not_empty` | Une colonne n'a aucune valeur nulle (ou vide). |
+| `regex_match` | Chaque valeur d'une colonne correspond à une expression régulière. |
+| `length_range` | La longueur de texte d'une colonne reste entre `min` et `max`. |
+| `numeric_range` | Une colonne numérique reste entre `min` et `max` (bornes inclusives optionnelles). |
+| `date_range` | Une colonne date/heure reste entre `min` et `max`, ou dans un `max_age`. |
+| `allowed_values` | Une colonne ne contient que des valeurs d'une liste fixe. |
+| `unique` | Une colonne (ou combinaison de colonnes) n'a aucun doublon. |
+| `distinct_count` | Le nombre de valeurs distinctes reste entre `min` et `max`. |
+| `foreign_key_integrity` | Chaque valeur se résout vers une ligne d'une table/colonne référencée. |
+| `row_count` | Le nombre de lignes de la table reste entre `min` et `max`. |
+| `custom_sql` | Une requête que vous écrivez ne renvoie aucune ligne fautive. |
+
+`custom_sql` est la porte de sortie : écrivez n'importe quel `SELECT` qui renvoie les lignes que vous considérez comme des violations, et la règle échoue dès que cette requête renvoie quoi que ce soit.
+
+## Exécuter un contrat
+
+Ouvrez le panneau **Contrats**, choisissez un contrat, et exécutez-le sur une connexion active. Le moteur parcourt chaque règle activée, exécute le SQL généré, et agrège le résultat en une seule exécution :
+
+- Chaque règle rapporte un statut — **pass**, **fail**, **skipped** ou **error** — accompagné du nombre de violations, d'une métrique mesurée, et du temps écoulé.
+- Les règles en échec collectent un petit échantillon de lignes fautives pour que vous voyiez ce qui a déclenché le contrôle. L'échantillonnage peut être désactivé pour les tables très larges.
+- L'exécution se résume en nombres pass / fail / error pour l'ensemble du contrat.
+
+## Alertes de régression après une mutation
+
+Les contrats ne sont pas qu'un outil à la demande. Lorsque vous exécutez une mutation via QoreDB sur une table qui possède au moins un contrat activé, QoreDB réévalue les contrats correspondants en arrière-plan. Si une règle qui passait se met à échouer, une notification `contract.alert` est émise.
+
+C'est délibérément **best-effort** : cela ne bloque ni ne ralentit jamais la mutation, les échantillons sont ignorés pour éviter des allers-retours supplémentaires, et toute erreur du contrôle lui-même est journalisée puis ignorée. L'objectif est un filet de sécurité discret — vous êtes informé d'une régression à l'instant où votre propre modification l'introduit, pas des heures plus tard.
+
+## Où vivent les contrats
+
+Les contrats sont de simples fichiers dans l'[espace de travail](/docs/getting-started/interface-tour) actif :
+
+```text
+<espace-de-travail>/contracts/
+  ├── orders_quality.yml          ← le contrat (YAML, JSON également accepté)
+  └── .history/orders_quality.jsonl   ← historique des exécutions (ajout seul)
+```
+
+Comme ce sont des fichiers, les contrats sont versionnés naturellement avec le reste de votre projet — committez-les, relisez-les dans une pull request, partagez-les avec l'équipe. L'historique conserve environ les 200 dernières exécutions par contrat, ce qui permet au panneau d'afficher des tendances sans croissance illimitée. Les noms de fichiers dérivent du `name` validé du contrat (`[A-Za-z_][A-Za-z0-9_]*`), il n'y a donc aucun risque de path traversal.
+
+## Où aller ensuite
+
+- [Data diff](/docs/diff-and-migrations/data-diff) pour comparer deux états d'une table
+- [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour le filet de sécurité au niveau requête
+- [Modèle Open Core](/docs/introduction/open-core-model) pour ce que contient le niveau Pro

@@ -116,6 +116,12 @@ If your domain has specific dangers (a particular table that should never be tru
 
 The three governance limits (max query duration, max result rows, max concurrent queries) protect both the client and the server from accidents. On a laptop with limited RAM, set `max_result_rows` to something like `100000`. A `SELECT *` from a million-row table truncates rather than crashing the client.
 
+### Rely on the anti-loop rate limiter
+
+QoreDB caps the query rate per session as an anti-loop guardrail: a runaway script that spams queries hits the limit, but a human never does. The budget is deliberately generous — 60 queries per 10-second window per session, refilled continuously (a token bucket). It isn't persisted and resets on restart.
+
+There's nothing to configure; it's on to protect the client and server from accidental tight loops (a misbehaving notebook cell, a `while` loop wrapped around a query). If you have a legitimate need for sustained high-rate access, drive it through a [read-only role and replica](#use-a-read-only-replica-when-possible) rather than the interactive client.
+
 ## Auditing
 
 ### Use the audit log

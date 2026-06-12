@@ -1,0 +1,66 @@
+---
+title: API de données instantanée
+description: Transformez une requête enregistrée en un endpoint HTTP local en lecture seule, sans configuration. Authentification par jeton bearer, limitation de débit, et écoute uniquement sur localhost.
+premium: true
+---
+
+# API de données instantanée
+
+<Callout type="info">
+Cette fonctionnalité fait partie du niveau QoreDB Pro.
+</Callout>
+
+L'**API de données instantanée** transforme une requête en un petit endpoint HTTP que vous pouvez appeler depuis un script, un notebook, un tableau de bord ou un prototype local — sans monter de backend. Vous définissez la requête et ses paramètres une fois ; QoreDB la sert en HTTP sur votre machine, en lecture seule et authentifiée.
+
+Elle est pensée pour le développement local et l'automatisation personnelle, pas pour exposer une API publique. Le serveur écoute **strictement sur `127.0.0.1`** — jamais `0.0.0.0` — de sorte que les endpoints ne sont accessibles que depuis votre propre machine.
+
+## Ce qu'est un endpoint
+
+Un endpoint encapsule une requête en lecture seule et lui donne une forme stable :
+
+- Une **connexion** sur laquelle la requête s'exécute.
+- Une **forme** : `rows` (un tableau d'objets) ou `object` (un objet unique — pratique pour les recherches « get one »).
+- Des **paramètres** que l'appelant peut passer, chacun typé en `string`, `integer`, `float` ou `bool`, optionnellement requis ou avec une valeur par défaut.
+- Une **taille de page** pour les lectures paginées.
+
+Comme la requête est classée `Read`, un endpoint ne peut jamais muter les données — le même classificateur de sécurité utilisé partout dans QoreDB s'applique ici.
+
+## Modèle de sécurité
+
+L'API est verrouillée par défaut :
+
+- **Localhost uniquement.** Le serveur écoute sur `127.0.0.1` ; il n'est jamais exposé sur le réseau.
+- **Authentification par jeton bearer.** Chaque requête nécessite un en-tête `Authorization: Bearer <token>`. Les jetons sont hachés avec Argon2 au repos. Le jeton brut n'est affiché **qu'une seule fois** à la création — capturez-le à ce moment-là, car il ne peut pas être récupéré ensuite.
+- **Limitation de débit.** Les requêtes sont régulées par un token bucket en mémoire (10 requêtes/seconde par défaut).
+- **Lecture seule.** Chaque endpoint exécute une requête classée `Read` ; les mutations sont rejetées.
+- **HTTPS optionnel.** Le serveur peut servir en HTTPS avec un certificat auto-signé si vous préférez TLS même sur localhost.
+
+## Cycle de vie
+
+Le serveur est explicite et éphémère par conception :
+
+- Vous le **démarrez** depuis QoreDB quand vous en avez besoin.
+- Il **s'arrête** lorsque vous l'arrêtez explicitement, lorsque l'application est verrouillée, ou lorsque vous changez d'espace de travail.
+
+Vous pouvez consulter son statut à tout moment — s'il tourne, sur quel port, l'URL de base, combien d'endpoints sont enregistrés, la durée de fonctionnement, et si TLS est actif. Une description OpenAPI des endpoints en cours est disponible, ce qui permet de pointer un générateur de client ou un outil HTTP dessus.
+
+## Appeler un endpoint
+
+Une fois le serveur démarré et un endpoint créé, appelez-le comme n'importe quelle API HTTP :
+
+```bash
+curl -H "Authorization: Bearer $TOKEN" \
+  "http://127.0.0.1:PORT/ENDPOINT?status=paid&limit=50"
+```
+
+La réponse est du JSON dans la forme déclarée de l'endpoint — un tableau pour `rows`, un objet unique pour `object`.
+
+<Callout type="warning">
+Le jeton à usage unique est le seul secret protégeant un endpoint. Stockez-le comme n'importe quel credential (le coffre, un gestionnaire de secrets, une variable d'environnement) et ne le committez jamais. Si vous le perdez, recréez l'endpoint plutôt que d'essayer de récupérer le jeton.
+</Callout>
+
+## Où aller ensuite
+
+- [Accès en ligne de commande](/docs/automation/cli) pour un accès aux requêtes sans couche HTTP
+- [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour le classificateur lecture/mutation
+- [Modèle Open Core](/docs/introduction/open-core-model) pour ce que contient le niveau Pro

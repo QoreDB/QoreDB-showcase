@@ -1,0 +1,52 @@
+---
+title: Serveur MCP
+description: Exposez vos connexions QoreDB enregistrées aux agents IA via un serveur Model Context Protocol en lecture seule. Les mutations sont bloquées à la source.
+premium: false
+---
+
+# Serveur MCP
+
+`qore-mcp` est un serveur [Model Context Protocol](https://modelcontextprotocol.io) en lecture seule pour QoreDB. Il permet à un agent IA — Claude, ou tout client compatible MCP — de découvrir et d'interroger les connexions de base de données que vous avez déjà enregistrées dans l'application desktop, sans jamais pouvoir modifier vos données.
+
+Il réutilise le même moteur et le même coffre que l'application desktop : l'agent hérite donc de vos connexions enregistrées sans câblage de credentials supplémentaire. Chaque session est ouverte en lecture seule et les garde-fous de sécurité existants rejettent toute mutation — le pire qu'un agent puisse faire, c'est lire.
+
+## Fonctionnement
+
+- **Transport : stdio.** Le client MCP lance le binaire `qore-mcp` et dialogue en JSON-RPC via l'entrée/sortie standard. Aucun port réseau à ouvrir.
+- **Credentials partagés.** Les connexions et mots de passe sont lus depuis le même keyring OS et le même répertoire de configuration que l'application desktop (le coffre, projet `default`). Si le desktop peut se connecter, le serveur aussi.
+- **Lecture seule par construction.** Chaque session est ouverte avec `read_only = true`. Les mêmes contrôles préalables et d'exécution que ceux de l'application rejettent toute mutation avant qu'elle n'atteigne la base.
+
+## Outils exposés
+
+Le serveur annonce cinq outils à l'agent :
+
+| Outil | Ce qu'il fait |
+| --- | --- |
+| `list_connections` | Lister les connexions enregistrées (id, nom, pilote, hôte, base, environnement). |
+| `list_namespaces` | Lister les bases/schémas d'une connexion. |
+| `list_tables` | Lister les tables/collections d'un namespace. |
+| `describe_table` | Colonnes et clés d'une table/collection. |
+| `run_query` | Exécuter une requête en lecture seule et renvoyer les lignes. |
+
+Ensemble, ces outils permettent à un agent d'explorer un schéma et de répondre à des questions sur les données — « combien de commandes ont été expédiées la semaine dernière ? », « quelles colonnes a la table customers ? » — tout en rendant les mutations impossibles.
+
+## Compiler et enregistrer
+
+Compilez le binaire depuis le workspace QoreDB, puis enregistrez-le auprès de votre client MCP :
+
+```bash
+cargo build -p qore-mcp --release   # produit target/release/qore-mcp
+claude mcp add qoredb -- /chemin/absolu/vers/target/release/qore-mcp
+```
+
+Définissez `QOREDB_CONFIG_DIR` si votre configuration se trouve en dehors du répertoire par défaut de l'application desktop.
+
+<Callout type="warning">
+La lecture seule est appliquée au niveau de la session et des garde-fous, pas en faisant confiance à l'agent. Pour autant, le serveur peut lire tout ce que les credentials enregistrés peuvent voir. Si une connexion contient des données sensibles que vous ne voulez pas qu'un agent lise, n'exposez pas cette connexion — pointez le serveur vers un rôle restreint.
+</Callout>
+
+## Où aller ensuite
+
+- [Accès en ligne de commande](/docs/automation/cli) pour les mêmes connexions depuis scripts et CI
+- [Fonctionnalités IA](/docs/ai-features/overview) pour l'assistant IA intégré
+- [Bonnes pratiques](/docs/security/best-practices) pour des schémas d'accès sûrs

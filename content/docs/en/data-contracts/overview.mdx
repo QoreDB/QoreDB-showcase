@@ -1,0 +1,101 @@
+---
+title: Data contracts
+description: Declarative data-quality assertions for your tables. Define rules in YAML, run them on demand, and get alerted when a passing rule starts failing after a mutation.
+premium: true
+---
+
+# Data contracts
+
+<Callout type="info">
+This feature is part of the QoreDB Pro tier.
+</Callout>
+
+A **data contract** is a set of declarative assertions about a table: which columns may not be null, which values are allowed, how many rows the table should hold, which foreign keys must resolve. You describe the expectations once, and QoreDB checks the live data against them — turning "the data looks fine" into a list of rules that either pass or fail.
+
+Contracts are dialect-aware but driver-agnostic: the same contract runs against PostgreSQL (and the Postgres family), MySQL/MariaDB, SQLite, DuckDB, SQL Server, and ClickHouse. The runner generates the dialect-specific SQL for each rule and executes it through the same engine as the rest of QoreDB.
+
+## How a contract is shaped
+
+A contract targets one table on one connection and carries a list of rules:
+
+```yaml
+name: orders_quality
+version: 1
+description: Invariants for the orders table
+target:
+  connection: prod-pg
+  schema: public
+  table: orders
+rules:
+  - id: id_present
+    type: not_empty
+    column: id
+  - id: email_format
+    type: regex_match
+    column: customer_email
+    pattern: "^[^@]+@[^@]+$"
+    severity: warning
+  - id: status_allowed
+    type: allowed_values
+    column: status
+    values: [pending, paid, shipped, cancelled]
+  - id: total_in_range
+    type: numeric_range
+    column: total_cents
+    min: 0
+```
+
+Each rule has an `id`, a `type`, and rule-specific fields. The optional `severity` (`error`, `warning`, or `info`) and `enabled` flag let you tune how a failure is reported without deleting the rule.
+
+## Rule types
+
+QoreDB ships twelve rule types covering the common data-quality checks:
+
+| Rule | What it asserts |
+| --- | --- |
+| `not_null_pct` | At least `threshold_min_pct` % of a column is non-null. |
+| `not_empty` | A column has no null (or empty) values. |
+| `regex_match` | Every value in a column matches a regular expression. |
+| `length_range` | A column's text length stays within `min`/`max`. |
+| `numeric_range` | A numeric column stays within `min`/`max` (inclusive bounds optional). |
+| `date_range` | A date/time column stays within `min`/`max`, or within a `max_age`. |
+| `allowed_values` | A column only contains values from a fixed list. |
+| `unique` | A column (or combination of columns) has no duplicates. |
+| `distinct_count` | The number of distinct values stays within `min`/`max`. |
+| `foreign_key_integrity` | Every value resolves to a row in a referenced table/column. |
+| `row_count` | The table's row count stays within `min`/`max`. |
+| `custom_sql` | A query you write returns no offending rows. |
+
+`custom_sql` is the escape hatch: write any `SELECT` that returns the rows you consider violations, and the rule fails when that query returns anything.
+
+## Running a contract
+
+Open the **Contracts** panel, pick a contract, and run it against an active connection. The runner walks every enabled rule, executes the generated SQL, and aggregates the outcome into a single run:
+
+- Each rule reports a status — **pass**, **fail**, **skipped**, or **error** — along with the number of violations, a measured metric, and timing.
+- Failing rules collect a small sample of offending rows so you can see what tripped the check. Sampling can be turned off for very wide tables.
+- The run rolls up into pass / fail / error counts for the whole contract.
+
+## Regression alerts after a mutation
+
+Contracts aren't only an on-demand tool. When you run a mutation through QoreDB on a table that has at least one enabled contract, QoreDB re-evaluates the matching contracts in the background. If a rule that was passing starts failing, it fires a `contract.alert` notification.
+
+This is deliberately **best-effort**: it never blocks or slows the mutation, samples are skipped to avoid extra round-trips, and any failure in the check itself is logged and swallowed. The goal is a quiet safety net — you hear about a regression the moment your own edit introduces it, not hours later.
+
+## Where contracts live
+
+Contracts are plain files inside the active [workspace](/docs/getting-started/interface-tour):
+
+```text
+<workspace>/contracts/
+  ├── orders_quality.yml          ← the contract (YAML, JSON also accepted)
+  └── .history/orders_quality.jsonl   ← append-only run history
+```
+
+Because they're files, contracts version naturally with the rest of your project — commit them, review them in a pull request, share them with the team. The run history keeps roughly the last 200 runs per contract so the panel can show trends without growing unbounded. File names derive from the validated contract `name` (`[A-Za-z_][A-Za-z0-9_]*`), so there's no path traversal risk.
+
+## Where to go next
+
+- [Data diff](/docs/diff-and-migrations/data-diff) to compare two states of a table
+- [SQL safety validation](/docs/security/sql-safety-validation) for the query-level safety net
+- [Open Core model](/docs/introduction/open-core-model) for what's in the Pro tier

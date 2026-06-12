@@ -1,0 +1,66 @@
+---
+title: Instant Data API
+description: Turn a saved query into a local, read-only HTTP endpoint with zero configuration. Bearer-token auth, rate limiting, and a localhost-only bind.
+premium: true
+---
+
+# Instant Data API
+
+<Callout type="info">
+This feature is part of the QoreDB Pro tier.
+</Callout>
+
+The **Instant Data API** turns a query into a small HTTP endpoint you can call from a script, a notebook, a dashboard, or a local prototype — without standing up a backend. You define the query and its parameters once; QoreDB serves it over HTTP on your machine, read-only and authenticated.
+
+It's built for local development and personal automation, not for exposing a public API. The server binds **strictly to `127.0.0.1`** — never `0.0.0.0` — so endpoints are reachable only from your own machine.
+
+## What an endpoint is
+
+An endpoint wraps a read-only query and gives it a stable shape:
+
+- A **connection** the query runs against.
+- A **shape**: `rows` (an array of objects) or `object` (a single object — handy for "get one" lookups).
+- **Parameters** the caller can pass, each typed as `string`, `integer`, `float`, or `bool`, optionally required or with a default.
+- A **page size** for paginated reads.
+
+Because the query is classified `Read`, an endpoint can never mutate data — the same safety classifier used everywhere in QoreDB applies here.
+
+## Security model
+
+The API is locked down by default:
+
+- **Localhost only.** The server binds to `127.0.0.1`; it is never exposed on the network.
+- **Bearer-token auth.** Every request needs an `Authorization: Bearer <token>` header. Tokens are Argon2-hashed at rest. The raw token is shown **once** at creation — capture it then, because it can't be retrieved again.
+- **Rate limiting.** Requests are throttled by an in-memory token bucket (10 requests/second by default).
+- **Read-only.** Every endpoint executes a `Read`-classified query; mutations are rejected.
+- **Optional HTTPS.** The server can serve over HTTPS with a self-signed certificate if you prefer TLS even on localhost.
+
+## Lifecycle
+
+The server is explicit and short-lived by design:
+
+- You **start** it from QoreDB when you need it.
+- It **stops** when you stop it explicitly, when the app is locked, or when you switch workspaces.
+
+You can check its status at any time — whether it's running, on which port, the base URL, how many endpoints are registered, uptime, and whether TLS is on. An OpenAPI description of the running endpoints is available, so you can point a client generator or an HTTP tool at it.
+
+## Calling an endpoint
+
+Once the server is running and you've created an endpoint, call it like any HTTP API:
+
+```bash
+curl -H "Authorization: Bearer $TOKEN" \
+  "http://127.0.0.1:PORT/ENDPOINT?status=paid&limit=50"
+```
+
+The response is JSON in the endpoint's declared shape — an array for `rows`, a single object for `object`.
+
+<Callout type="warning">
+The one-shot token is the only secret protecting an endpoint. Store it like any credential (the vault, a secrets manager, an environment variable) and never commit it. If you lose it, rotate the endpoint rather than trying to recover the token.
+</Callout>
+
+## Where to go next
+
+- [Command-line access](/docs/automation/cli) for query access without an HTTP layer
+- [SQL safety validation](/docs/security/sql-safety-validation) for the read/mutation classifier
+- [Open Core model](/docs/introduction/open-core-model) for what's in the Pro tier

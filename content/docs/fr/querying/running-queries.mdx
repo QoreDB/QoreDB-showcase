@@ -32,6 +32,18 @@ Chaque requête exécutée rapporte deux temps :
 
 Les deux sont mesurés en millisecondes et affichés dans le panneau de résultats. Ils sont également conservés dans l'historique.
 
+## Cache des résultats
+
+La navigation répétée entre les tables est servie depuis un cache de résultats local : revenir sur une table que vous venez de consulter est instantané au lieu de relancer la lecture. Le cache ne couvre que les lectures de parcours de table en lecture seule — il ne met jamais en cache les mutations.
+
+Il est sûr par conception :
+
+- **Auto-invalidation.** Lorsque vous modifiez des données via QoreDB, les entrées en cache de cette connexion sont supprimées : vous ne voyez jamais vos propres écritures périmées.
+- **Borné dans le temps.** Les entrées expirent après un TTL (60 secondes par défaut), ce qui borne l'obsolescence due aux modifications faites en dehors de QoreDB.
+- **Borné en taille.** Le cache contient un nombre limité d'entrées (100 par défaut) avec éviction LRU.
+
+Vous pouvez ajuster le TTL et le nombre d'entrées, ou désactiver complètement le cache, dans **Paramètres → Données**. Les valeurs sont bornées à des plages sûres (TTL 5–3600 s, 10–1000 entrées).
+
 ## Annuler une requête
 
 Les requêtes longues peuvent être annulées. Cliquez sur le bouton **Annuler** (Cancel) pendant qu'une requête est en cours d'exécution. Le pilote envoie un signal d'annulation au serveur (le mécanisme sous-jacent dépend du pilote, par exemple `pg_cancel_backend` pour PostgreSQL).
