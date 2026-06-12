@@ -1,6 +1,6 @@
 ---
 title: Keyboard shortcuts
-description: Every keyboard shortcut in QoreDB, grouped by category, with the platform variant and the context it applies in.
+description: Every keyboard shortcut in QoreDB, grouped by category, with the platform variant and the context it applies in — and how to remap them from Settings.
 premium: false
 ---
 
@@ -73,9 +73,31 @@ A few shortcuts behave differently depending on what's focused:
 
 ## Customization
 
-QoreDB doesn't currently expose a UI to remap these bindings. They're hardcoded for consistency, with `Cmd`/`Ctrl` swapping based on the OS.
+Most of QoreDB's shortcuts can be remapped from **Settings → Keyboard Shortcuts**. The panel groups the customizable bindings into three categories — General, Navigation, and Editor — and lets you rebind, reset, and spot conflicts.
 
-If you need a different binding for a one-off, the command palette (<KeyboardShortcut shortcut="Cmd+K" />) lets you fire any command by name; you can build a habit on the search keyword instead of the shortcut.
+### Remapping a shortcut
+
+Click the binding next to a shortcut to put it into **recording** mode, then press the key combination you want — it's saved immediately. Press <KeyboardShortcut shortcut="Esc" /> while recording to cancel without changing anything.
+
+Bindings use a virtual `mod` modifier that resolves to `Cmd` on macOS and `Ctrl` on Windows/Linux, so one binding stays correct across platforms. You can also bind `Ctrl` explicitly when you want a Ctrl-based chord on macOS.
+
+### Conflicts
+
+If two shortcuts end up on the same combination, both are flagged with a warning marker in the panel. QoreDB doesn't stop you from creating a conflict — it makes it visible so you can resolve it.
+
+### Reserved combinations
+
+Combinations the operating system or window manager owns can't be assigned; QoreDB rejects them while recording. These include `Cmd/Ctrl+Tab`, `Cmd/Ctrl+Q`, `F11`/`F12`, a bare `Enter` or `Space`, and common Linux desktop bindings (`Alt+Tab`, `Alt+F4`, `Ctrl+Alt+T`, and similar).
+
+### Resetting
+
+Each remapped shortcut shows a reset control that reverts it to its default, and **Reset all** at the top of the panel clears every override at once. Your customizations are stored locally and persist across restarts.
+
+<Callout type="info">
+A few in-editor bindings aren't remappable yet: running a query (<KeyboardShortcut shortcut="Cmd+Enter" />), formatting, the autocomplete trigger (<KeyboardShortcut shortcut="Ctrl+Space" />), and the sandbox toggle (<KeyboardShortcut shortcut="Ctrl+Shift+S" />). Everything listed in the Settings → Keyboard Shortcuts panel is.
+</Callout>
+
+The command palette (<KeyboardShortcut shortcut="Cmd+K" />) remains a fast path regardless of bindings: search any command by name and run it without remembering its shortcut.
 
 ## Where to go next
 

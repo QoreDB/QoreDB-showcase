@@ -362,14 +362,15 @@
       "title": "Comment inspecter une instance Redis depuis un client desktop",
       "category": "Produit",
       "publishedAt": "2026-06-09"
+    },
+    {
+      "slug": "executer-recherche-fulltext-toutes-tables-base",
+      "title": "Comment exécuter une recherche full-text dans toutes les tables d'une base",
+      "category": "Produit",
+      "publishedAt": "2026-06-12"
     }
   ],
   "queue": [
-    {
-      "title": "Comment exécuter une recherche full-text dans toutes les tables d'une base",
-      "category": "Produit",
-      "topic_notes": "Tutoriel SEO. Script SQL maison (information_schema + LIKE), pg_trgm, FTS Postgres (tsvector), clients qui le font automatiquement (QoreDB). Cas debug et exploration."
-    },
     {
       "title": "Le crash recovery : restaurer l'état de session après un plantage",
       "category": "Architecture",

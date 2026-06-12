@@ -1,6 +1,6 @@
 ---
 title: Raccourcis clavier
-description: Tous les raccourcis clavier dans QoreDB, regroupés par catégorie, avec la variante de plateforme et le contexte dans lequel ils s'appliquent.
+description: Tous les raccourcis clavier dans QoreDB, regroupés par catégorie, avec la variante de plateforme et le contexte dans lequel ils s'appliquent — et comment les remapper depuis les Paramètres.
 premium: false
 ---
 
@@ -73,9 +73,31 @@ Quelques raccourcis se comportent différemment selon ce qui est ciblé (focus) 
 
 ## Personnalisation
 
-QoreDB n'expose actuellement pas d'interface utilisateur pour remapper ces raccourcis. Ils sont codés en dur pour des raisons de cohérence, avec un échange `Cmd`/`Ctrl` en fonction du système d'exploitation.
+La plupart des raccourcis de QoreDB peuvent être remappés depuis **Paramètres → Raccourcis clavier**. Le panneau regroupe les raccourcis personnalisables en trois catégories — Général, Navigation et Éditeur — et permet de les redéfinir, de les réinitialiser et de repérer les conflits.
 
-Si vous avez besoin d'un raccourci différent de manière ponctuelle, la palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />) vous permet de lancer n'importe quelle commande par son nom ; vous pouvez ainsi prendre l'habitude d'utiliser le mot-clé de recherche plutôt que le raccourci clavier.
+### Remapper un raccourci
+
+Cliquez sur la combinaison à côté d'un raccourci pour passer en mode **enregistrement**, puis appuyez sur la combinaison de touches souhaitée — elle est enregistrée immédiatement. Appuyez sur <KeyboardShortcut shortcut="Esc" /> pendant l'enregistrement pour annuler sans rien changer.
+
+Les raccourcis utilisent un modificateur virtuel `mod` qui se résout en `Cmd` sur macOS et en `Ctrl` sur Windows/Linux : une seule définition reste donc correcte sur toutes les plateformes. Vous pouvez aussi lier `Ctrl` explicitement lorsque vous voulez une combinaison basée sur Ctrl sur macOS.
+
+### Conflits
+
+Si deux raccourcis se retrouvent sur la même combinaison, les deux sont signalés par un marqueur d'avertissement dans le panneau. QoreDB ne vous empêche pas de créer un conflit — il le rend visible pour que vous puissiez le résoudre.
+
+### Combinaisons réservées
+
+Les combinaisons appartenant au système d'exploitation ou au gestionnaire de fenêtres ne peuvent pas être assignées ; QoreDB les rejette pendant l'enregistrement. Cela inclut `Cmd/Ctrl+Tab`, `Cmd/Ctrl+Q`, `F11`/`F12`, un `Entrée` ou `Espace` seul, ainsi que des raccourcis courants des bureaux Linux (`Alt+Tab`, `Alt+F4`, `Ctrl+Alt+T`, et similaires).
+
+### Réinitialiser
+
+Chaque raccourci remappé affiche un contrôle de réinitialisation qui le ramène à sa valeur par défaut, et **Tout réinitialiser** en haut du panneau efface toutes les personnalisations d'un coup. Vos personnalisations sont stockées localement et persistent entre les redémarrages.
+
+<Callout type="info">
+Quelques raccourcis internes à l'éditeur ne sont pas encore remappables : exécuter une requête (<KeyboardShortcut shortcut="Cmd+Enter" />), le formatage, le déclencheur d'autocomplétion (<KeyboardShortcut shortcut="Ctrl+Space" />), et la bascule du sandbox (<KeyboardShortcut shortcut="Ctrl+Shift+S" />). Tout ce qui figure dans le panneau Paramètres → Raccourcis clavier l'est.
+</Callout>
+
+La palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />) reste un accès rapide quelles que soient les associations : recherchez n'importe quelle commande par son nom et lancez-la sans avoir à mémoriser son raccourci.
 
 ## Où aller ensuite
 
