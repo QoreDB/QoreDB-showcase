@@ -78,6 +78,14 @@ This list reflects current behavior. Things that "should work" from a feature-li
 - **Backups not covered by the helpers**: the built-in backup helpers don't shell out to ClickHouse in v0.1.31. Use the native `BACKUP TO …` statement or your cluster's snapshot tooling.
 - **Unknown types fall back to text**: rare or exotic types not in the 28-type map render as text rather than failing the result set.
 
+## Elasticsearch & OpenSearch
+
+- **Transport is HTTP / HTTPS**: both drivers connect over `9200` (or the managed endpoint). There is no native binary protocol.
+- **Two query surfaces**: the search editor (Query DSL) and SQL mode cover different needs. SQL mode is constrained by the engine's own SQL API — joins, some functions and DDL aren't available there; use the search editor for anything the SQL layer can't express.
+- **Indices, not tables**: the schema browser lists indices and their mappings. Dynamic mapping means a field can appear in some documents and not others; the mapping reflects what the engine knows, not a strict schema.
+- **Writes and admin go through the safety net**: index creation/deletion, document writes, `_reindex` and cluster-settings calls are gated by read-only mode and environment guards, like every other engine.
+- **AWS OpenSearch Service**: domains that require SigV4 request signing rather than basic auth or tokens may need a proxy; use one of the supported authentication modes for direct connections.
+
 ## Postgres-compatible providers
 
 ### Supabase
