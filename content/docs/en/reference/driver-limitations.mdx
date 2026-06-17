@@ -75,7 +75,7 @@ This list reflects current behavior. Things that "should work" from a feature-li
 - **Dangerous commands are refused outright**: `OPTIMIZE … FINAL`, `KILL QUERY`, and every `SYSTEM …` operation hit the safety classifier and are rejected. Use `clickhouse-client` for these.
 - **Cancellation is best-effort**: `KILL QUERY WHERE query_id = …` marks the query for cancellation; ClickHouse stops the running fragment when it next checks.
 - **DDL Alter UI is MergeTree-family only**: distributed-table alterations and `ON CLUSTER` are not exposed in the visual editor in v1. Write them through the SQL editor.
-- **Backups not covered by the helpers**: the built-in backup helpers don't shell out to ClickHouse in v0.1.28. Use the native `BACKUP TO …` statement or your cluster's snapshot tooling.
+- **Backups not covered by the helpers**: the built-in backup helpers don't shell out to ClickHouse in v0.1.31. Use the native `BACKUP TO …` statement or your cluster's snapshot tooling.
 - **Unknown types fall back to text**: rare or exotic types not in the 28-type map render as text rather than failing the result set.
 
 ## Postgres-compatible providers

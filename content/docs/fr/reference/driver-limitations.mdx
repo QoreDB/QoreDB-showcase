@@ -75,7 +75,7 @@ Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionn
 - **Commandes dangereuses refusées** : `OPTIMIZE … FINAL`, `KILL QUERY` et toutes les opérations `SYSTEM …` sont rejetées par le classifieur de sûreté. Passez par `clickhouse-client` pour ces commandes.
 - **Annulation best-effort** : `KILL QUERY WHERE query_id = …` marque la requête à annuler ; ClickHouse stoppe le fragment courant à la prochaine vérification.
 - **Éditeur DDL Alter limité à la famille MergeTree** : les altérations de tables distribuées et `ON CLUSTER` ne sont pas exposées dans l'éditeur visuel en v1. Écrivez-les dans l'éditeur SQL.
-- **Sauvegardes non couvertes par les helpers** : les helpers de backup intégrés ne pilotent pas ClickHouse en v0.1.28. Utilisez l'instruction native `BACKUP TO …` ou l'outillage de snapshot de votre cluster.
+- **Sauvegardes non couvertes par les helpers** : les helpers de backup intégrés ne pilotent pas ClickHouse en v0.1.31. Utilisez l'instruction native `BACKUP TO …` ou l'outillage de snapshot de votre cluster.
 - **Types inconnus rétrogradés en texte** : les types rares ou exotiques hors du mapping des 28 types s'affichent en texte plutôt que de faire échouer le résultat.
 
 ## Fournisseurs compatibles Postgres
