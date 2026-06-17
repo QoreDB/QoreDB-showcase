@@ -65,7 +65,7 @@
     },
     "ph_badge": "Lancio su Product Hunt",
     "title": "Un'unica app per <italic>tutti i tuoi database</italic>",
-    "subtitle": "Il client di database veloce e open source creato con Rust. Connettiti a <highlight>13 driver nativi</highlight> da un'unica, bellissima interfaccia. Local-first: i tuoi dati rimangono tuoi.",
+    "subtitle": "Il client di database veloce e open source creato con Rust. Connettiti a <highlight>15 driver nativi</highlight> da un'unica, bellissima interfaccia. Local-first: i tuoi dati rimangono tuoi.",
     "cta": {
       "join_beta": "Unisciti alla Beta",
       "download_core": "Scarica gratis",
@@ -136,10 +136,10 @@
   "features": {
     "eyebrow": "Caratteristiche",
     "title": "Tutto ciò di cui hai bisogno, <accent>niente di più</accent>",
-    "subtitle": "13 driver, un'unica interfaccia. Nessun Electron, nessuna dipendenza dal cloud, nessun bloat.",
+    "subtitle": "15 driver, un'unica interfaccia. Nessun Electron, nessuna dipendenza dal cloud, nessun bloat.",
     "items": {
       "unified": {
-        "title": "13 driver nativi",
+        "title": "15 driver nativi",
         "desc": "Famiglia PostgreSQL (incl. Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB e ClickHouse."
       },
       "workspaces": {
@@ -259,7 +259,7 @@
     "label": "Un'interfaccia, ogni database"
   },
   "product_specs": {
-    "databases": "13 driver",
+    "databases": "15 driver",
     "binary_size": "~15 MB binario",
     "startup": "<1s avvio",
     "license": "Apache 2.0"
@@ -311,7 +311,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "13 driver",
+        "multidb": "15 driver",
         "native": "Ruggine/Tauri",
         "local": "Sì",
         "vault": "Argon2",
@@ -420,10 +420,10 @@
     "title": "QoreDB Tabella di marcia",
     "subtitle": "Scopri i passaggi successivi nello sviluppo di QoreDB.",
     "now": {
-      "title": "Appena rilasciato: v0.1.23 → v0.1.28",
+      "title": "Appena rilasciato: v0.1.23 → v0.1.31",
       "quote": "QoreDB è più veloce, più sicuro e pronto per un uso quotidiano serio.",
       "items": {
-        "1": "13 driver nativi: ClickHouse si aggiunge a Supabase, Neon e TimescaleDB",
+        "1": "15 driver nativi: Elasticsearch e OpenSearch si aggiungono a ClickHouse, Supabase, Neon e TimescaleDB",
         "2": "Data Contracts (Pro): regole dichiarative di qualità dei dati rivalutate dopo ogni mutazione",
         "3": "Instant Data API (Pro): trasforma qualsiasi query salvata in un endpoint REST autenticato con token",
         "4": "Helper di backup e restore, scorciatoie personalizzabili e fingerprinting delle query nell'audit",
@@ -500,7 +500,7 @@
       },
       "supported_databases": {
         "question": "Quali database sono supportati?",
-        "answer": "QoreDB attualmente supporta 13 driver nativi:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famiglia PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. autenticazione Windows: NTLM e Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (con autocompletamento dell'editor e linting di aggregazioni)\n* Redis (con gestione completa delle chiavi)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, classificazione di sicurezza AST)\n\nSono previsti più motori man mano che l'architettura si evolve."
+        "answer": "QoreDB attualmente supporta 15 driver nativi:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famiglia PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. autenticazione Windows: NTLM e Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (con autocompletamento dell'editor e linting di aggregazioni)\n* Redis (con gestione completa delle chiavi)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, classificazione di sicurezza AST)\n* Elasticsearch (diverse modalità di autenticazione, editor di ricerca dedicato, modalità SQL)\n* OpenSearch (diverse modalità di autenticazione, editor di ricerca dedicato, modalità SQL)\n\nSono previsti più motori man mano che l'architettura si evolve."
       },
       "remote_ssh": {
         "question": "Funziona con connessioni remote e SSH?",
@@ -555,7 +555,7 @@
       "badge": "Scelta principale",
       "cta": "Scarica gratuitamente",
       "features": {
-        "drivers": "13 driver nativi (famiglia PostgreSQL con Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB)",
+        "drivers": "15 driver nativi (famiglia PostgreSQL con Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch)",
         "crud": "CRUD completo + editor SQL/Mongo con autocompletamento e linting",
         "workspaces": "Workspaces:raggruppa connessioni, query e notebook per progetto",
         "grid": "Griglia dati ad alte prestazioni con bulk edit e filtri avanzati",
@@ -897,7 +897,7 @@
       },
       "connect": {
         "title": "2. Crea la tua prima connessione",
-        "content": "<p>Fai clic su <strong>+</strong> nella barra laterale per aggiungere un database. QoreDB include 13 driver nativi:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (autenticazione Windows supportata)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse</li></ul><p>Incolla una stringa di connessione per il rilevamento automatico del driver, oppure inserisci host, porta, database, utente e ambiente (sviluppo/staging/prod). Organizza tutto in <strong>Workspaces</strong> per mantenere puliti i tuoi progetti.</p>"
+        "content": "<p>Fai clic su <strong>+</strong> nella barra laterale per aggiungere un database. QoreDB include 15 driver nativi:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (autenticazione Windows supportata)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>Incolla una stringa di connessione per il rilevamento automatico del driver, oppure inserisci host, porta, database, utente e ambiente (sviluppo/staging/prod). Organizza tutto in <strong>Workspaces</strong> per mantenere puliti i tuoi progetti.</p>"
       },
       "explore": {
         "title": "3. Esplora i tuoi dati",
@@ -998,7 +998,7 @@
     "title": "Prezzi semplici e trasparenti",
     "subtitle": "Core è gratuito per sempre. Pro sblocca funzionalità per utenti esperti.",
     "core_price": "Gratuito",
-    "core_1": "13 driver nativi (incl. Supabase, Neon, TimescaleDB)",
+    "core_1": "15 driver nativi (incl. Supabase, Neon, TimescaleDB)",
     "core_2": "Workspaces, DDL, bulk edit e filtri avanzati",
     "core_3": "Deposito crittografato e tunneling SSH nativo",
     "core_4": "Protezioni di produzione e 9 lingue di interfaccia",

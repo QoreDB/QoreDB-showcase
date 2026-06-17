@@ -65,7 +65,7 @@
     },
     "ph_badge": "启动产品搜寻",
     "title": "一款适用于<italic>所有数据库</italic>的应用程序",
-    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>13 个原生驱动</highlight>。本地优先：您的数据归您所有。",
+    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>15 个原生驱动</highlight>。本地优先：您的数据归您所有。",
     "cta": {
       "join_beta": "加入测试版",
       "download_core": "免费下载",
@@ -136,10 +136,10 @@
   "features": {
     "eyebrow": "特点",
     "title": "您需要的一切，<accent>您不需要的一切</accent>",
-    "subtitle": "13 个驱动，1 个界面。没有 Electron，没有云依赖，没有膨胀。",
+    "subtitle": "15 个驱动，1 个界面。没有 Electron，没有云依赖，没有膨胀。",
     "items": {
       "unified": {
-        "title": "13 个原生驱动",
+        "title": "15 个原生驱动",
         "desc": "PostgreSQL 系列（含 Supabase、Neon、TimescaleDB）、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB 和 ClickHouse。"
       },
       "workspaces": {
@@ -259,7 +259,7 @@
     "label": "一个界面，每个数据库"
   },
   "product_specs": {
-    "databases": "13 个驱动",
+    "databases": "15 个驱动",
     "binary_size": "~15 MB 二进制文件",
     "startup": "<1秒启动",
     "license": "阿帕奇2.0"
@@ -311,7 +311,7 @@
     "values": {
       "qoredb": {
         "opensource": "阿帕奇2.0",
-        "multidb": "13 个驱动",
+        "multidb": "15 个驱动",
         "native": "铁锈/金牛座",
         "local": "是的",
         "vault": "氩气2",
@@ -420,10 +420,10 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "刚刚发布：v0.1.23 → v0.1.28",
+      "title": "刚刚发布：v0.1.23 → v0.1.31",
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
-        "1": "13 个原生驱动 — ClickHouse 加入 Supabase、Neon 和 TimescaleDB 行列",
+        "1": "15 个原生驱动 — Elasticsearch 和 OpenSearch 加入 ClickHouse、Supabase、Neon 和 TimescaleDB 行列",
         "2": "Data Contracts（Pro）：声明式数据质量规则，变更后自动重新评估",
         "3": "Instant Data API（Pro）：将任意保存的查询转为带令牌鉴权的 REST 端点",
         "4": "备份/恢复助手、可自定义快捷键，以及审计中的查询指纹",
@@ -500,7 +500,7 @@
       },
       "supported_databases": {
         "question": "支持哪些数据库？",
-        "answer": "QoreDB 目前支持 13 个原生驱动：\n\n* PostgreSQL\n* Supabase、Neon、TimescaleDB（PostgreSQL 系列）\n* MySQL / MariaDB\n* SQL Server（含 Windows 身份验证：NTLM 和 Kerberos）\n* SQLite\n* DuckDB\n* MongoDB（带编辑器自动补全和聚合 linting）\n* Redis（含完整键管理）\n* CockroachDB\n* ClickHouse（HTTP/HTTPS，AST 安全分类）\n\n随着架构的发展，计划推出更多引擎。"
+        "answer": "QoreDB 目前支持 15 个原生驱动：\n\n* PostgreSQL\n* Supabase、Neon、TimescaleDB（PostgreSQL 系列）\n* MySQL / MariaDB\n* SQL Server（含 Windows 身份验证：NTLM 和 Kerberos）\n* SQLite\n* DuckDB\n* MongoDB（带编辑器自动补全和聚合 linting）\n* Redis（含完整键管理）\n* CockroachDB\n* ClickHouse（HTTP/HTTPS，AST 安全分类）\n* Elasticsearch（多种认证模式、专用搜索编辑器、SQL 模式）\n* OpenSearch（多种认证模式、专用搜索编辑器、SQL 模式）\n\n随着架构的发展，计划推出更多引擎。"
       },
       "remote_ssh": {
         "question": "它可以与远程连接和 SSH 一起使用吗？",
@@ -555,7 +555,7 @@
       "badge": "主要选择",
       "cta": "免费下载",
       "features": {
-        "drivers": "13 个原生驱动（PostgreSQL 系列：含 Supabase、Neon、TimescaleDB；MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
+        "drivers": "15 个原生驱动（PostgreSQL 系列：含 Supabase、Neon、TimescaleDB；MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB、ClickHouse、Elasticsearch、OpenSearch）",
         "crud": "完整的 CRUD + 带自动补全和 linting 的 SQL/Mongo 编辑器",
         "workspaces": "Workspaces：按项目分组连接、查询和笔记本",
         "grid": "支持批量编辑和高级过滤的高性能数据网格",
@@ -897,7 +897,7 @@
       },
       "connect": {
         "title": "2. 创建您的第一个连接",
-        "content": "<p>点击侧边栏的 <strong>+</strong> 添加数据库。QoreDB 提供 13 个原生驱动：</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（支持 Windows 身份验证）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse</li></ul><p>粘贴连接字符串可自动检测驱动，或者输入主机、端口、数据库、用户和环境（dev/staging/prod）。将所有内容组织到 <strong>Workspaces</strong> 中以保持项目整洁。</p>"
+        "content": "<p>点击侧边栏的 <strong>+</strong> 添加数据库。QoreDB 提供 15 个原生驱动：</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（支持 Windows 身份验证）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>粘贴连接字符串可自动检测驱动，或者输入主机、端口、数据库、用户和环境（dev/staging/prod）。将所有内容组织到 <strong>Workspaces</strong> 中以保持项目整洁。</p>"
       },
       "explore": {
         "title": "3. 探索您的数据",
@@ -998,7 +998,7 @@
     "title": "简单、透明的定价",
     "subtitle": "核心永远免费。 Pro 解锁高级用户功能。",
     "core_price": "免费",
-    "core_1": "13 个原生驱动（含 Supabase、Neon、TimescaleDB）",
+    "core_1": "15 个原生驱动（含 Supabase、Neon、TimescaleDB）",
     "core_2": "Workspaces、DDL、批量编辑和高级过滤",
     "core_3": "加密保管库和原生 SSH 隧道",
     "core_4": "生产安全卫士和 9 种界面语言",

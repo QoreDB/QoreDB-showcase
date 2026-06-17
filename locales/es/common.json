@@ -65,7 +65,7 @@
     },
     "ph_badge": "Lanzamiento de Product Hunt",
     "title": "Una aplicación para <italic>todas tus bases de datos</italic>",
-    "subtitle": "El cliente de base de datos rápido y de código abierto creado con Rust. Conéctese a <highlight>13 controladores nativos</highlight> desde una única y hermosa interfaz. Primero lo local: sus datos siguen siendo suyos.",
+    "subtitle": "El cliente de base de datos rápido y de código abierto creado con Rust. Conéctese a <highlight>15 controladores nativos</highlight> desde una única y hermosa interfaz. Primero lo local: sus datos siguen siendo suyos.",
     "cta": {
       "join_beta": "Unirse a la beta",
       "download_core": "Descargar gratis",
@@ -136,10 +136,10 @@
   "features": {
     "eyebrow": "Características",
     "title": "Todo lo que necesitas, <accent>nada que no</accent>",
-    "subtitle": "13 controladores, una interfaz. Sin Electron, sin dependencia de la nube, sin hinchazón.",
+    "subtitle": "15 controladores, una interfaz. Sin Electron, sin dependencia de la nube, sin hinchazón.",
     "items": {
       "unified": {
-        "title": "13 controladores nativos",
+        "title": "15 controladores nativos",
         "desc": "Familia PostgreSQL (incl. Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB y ClickHouse."
       },
       "workspaces": {
@@ -259,7 +259,7 @@
     "label": "Una interfaz, cada base de datos"
   },
   "product_specs": {
-    "databases": "13 motores",
+    "databases": "15 motores",
     "binary_size": "~15 MB binarios",
     "startup": "<1s de inicio",
     "license": "apache 2.0"
@@ -311,7 +311,7 @@
     "values": {
       "qoredb": {
         "opensource": "apache 2.0",
-        "multidb": "13 motores",
+        "multidb": "15 motores",
         "native": "Óxido/Tauri",
         "local": "si",
         "vault": "Argón2",
@@ -420,10 +420,10 @@
     "title": "QoreDB Hoja de ruta",
     "subtitle": "Descubra los próximos pasos en el desarrollo de QoreDB.",
     "now": {
-      "title": "Recién lanzado: v0.1.23 → v0.1.28",
+      "title": "Recién lanzado: v0.1.23 → v0.1.31",
       "quote": "QoreDB es más rápido, más seguro y listo para uso diario serio.",
       "items": {
-        "1": "13 controladores nativos: ClickHouse se une a Supabase, Neon y TimescaleDB",
+        "1": "15 controladores nativos: Elasticsearch y OpenSearch se unen a ClickHouse, Supabase, Neon y TimescaleDB",
         "2": "Data Contracts (Pro): reglas declarativas de calidad de datos re-evaluadas tras cada mutación",
         "3": "Instant Data API (Pro): convierte cualquier consulta guardada en un endpoint REST autenticado por token",
         "4": "Helpers de backup y restore, atajos personalizables y fingerprinting de consultas en la auditoría",
@@ -500,7 +500,7 @@
       },
       "supported_databases": {
         "question": "¿Qué bases de datos son compatibles?",
-        "answer": "QoreDB admite actualmente 13 controladores nativos:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (familia PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. autenticación Windows: NTLM y Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (con autocompletado del editor y linting de agregaciones)\n* Redis (con gestión completa de claves)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, clasificación de seguridad AST)\n\nSe planean más motores a medida que evolucione la arquitectura."
+        "answer": "QoreDB admite actualmente 15 controladores nativos:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (familia PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. autenticación Windows: NTLM y Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (con autocompletado del editor y linting de agregaciones)\n* Redis (con gestión completa de claves)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, clasificación de seguridad AST)\n* Elasticsearch (varios modos de autenticación, editor de búsqueda dedicado, modo SQL)\n* OpenSearch (varios modos de autenticación, editor de búsqueda dedicado, modo SQL)\n\nSe planean más motores a medida que evolucione la arquitectura."
       },
       "remote_ssh": {
         "question": "¿Funciona con conexiones remotas y SSH?",
@@ -555,7 +555,7 @@
       "badge": "elección principal",
       "cta": "Descargar gratis",
       "features": {
-        "drivers": "13 controladores nativos (familia PostgreSQL con Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB)",
+        "drivers": "15 controladores nativos (familia PostgreSQL con Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch)",
         "crud": "CRUD completo + editor SQL/Mongo con autocompletado y linting",
         "workspaces": "Workspaces:agrupa conexiones, consultas y notebooks por proyecto",
         "grid": "Cuadrícula de alto rendimiento con edición masiva y filtros avanzados",
@@ -897,7 +897,7 @@
       },
       "connect": {
         "title": "2. Crea tu primera conexión",
-        "content": "<p>Haga clic en <strong>+</strong> en la barra lateral para agregar una base de datos. QoreDB incluye 13 controladores nativos:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (autenticación Windows compatible)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse</li></ul><p>Pegue una cadena de conexión para la detección automática del controlador, o ingrese host, puerto, base de datos, usuario y entorno (dev/staging/prod). Organícelo todo en <strong>Workspaces</strong> para mantener sus proyectos limpios.</p>"
+        "content": "<p>Haga clic en <strong>+</strong> en la barra lateral para agregar una base de datos. QoreDB incluye 15 controladores nativos:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (autenticación Windows compatible)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>Pegue una cadena de conexión para la detección automática del controlador, o ingrese host, puerto, base de datos, usuario y entorno (dev/staging/prod). Organícelo todo en <strong>Workspaces</strong> para mantener sus proyectos limpios.</p>"
       },
       "explore": {
         "title": "3. Explora tus datos",
@@ -998,7 +998,7 @@
     "title": "Precios simples y transparentes",
     "subtitle": "Core es gratis para siempre. Pro desbloquea funciones de usuario avanzado.",
     "core_price": "Gratis",
-    "core_1": "13 controladores nativos (incl. Supabase, Neon, TimescaleDB)",
+    "core_1": "15 controladores nativos (incl. Supabase, Neon, TimescaleDB)",
     "core_2": "Workspaces, DDL, edición masiva y filtros avanzados",
     "core_3": "Bóveda cifrada y túneles SSH nativos",
     "core_4": "Guardias de producción y 9 idiomas de interfaz",
