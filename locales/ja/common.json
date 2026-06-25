@@ -590,21 +590,28 @@
         "security_rules": "カスタム安全ルール",
         "library_advanced": "高度なクエリ ライブラリ",
         "virtual_relations": "仮想関係の自動提案"
-      }
+      },
+      "individual_use": "個人利用向けライセンス。"
     },
     "team": {
       "title": "Team",
-      "tagline": "チーム向け",
-      "description": "チーム向けの高度なコラボレーション。",
-      "price": "近日公開予定",
-      "badge": "近日公開予定",
-      "cta": "お問い合わせ",
+      "tagline": "チームのための Pro",
+      "description": "チーム全体に Pro 機能を、シート単位で管理。",
+      "price": "近日公開",
+      "badge": "シート単位",
+      "cta": "購入",
+      "per_seat_note": "1シート / 年",
+      "seats_label": "シート数",
+      "seats_decrease": "シートを減らす",
+      "seats_increase": "シートを追加",
+      "total_label": "合計",
+      "per_year": "/ 年",
+      "min_seats_note": "最低 {{min}} シート",
       "features": {
-        "everything_pro": "プロのすべて",
-        "sync": "マルチデバイス同期",
-        "shared_queries": "共有クエリライブラリ",
-        "permissions": "きめ細かな権限",
-        "managed_ai": "マネージドAI"
+        "everything_pro": "Pro のすべて",
+        "seat_management": "セルフサービスのシート管理",
+        "central_billing": "一括請求 + 法人向け請求書（EU VAT）",
+        "priority_support": "優先サポート"
       }
     },
     "faq": {
@@ -627,6 +634,20 @@
       "pro_source_code": {
         "question": "Pro のソースコードは利用可能ですか?",
         "answer": "Pro の機能は BSL 1.1 の下にあり、4 年後に自動的に Apache 2.0 に変換されます。コードは読み取り可能ですが、その期間中の再配布は制限されます。"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "大規模組織向け",
+      "description": "カスタム要件、専用のセキュリティと契約。",
+      "price": "個別見積もり",
+      "badge": "カスタム",
+      "cta": "お問い合わせ",
+      "features": {
+        "everything_team": "Team のすべて",
+        "sso": "SSO / SAML（近日公開）",
+        "managed_ai": "マネージド AI（近日公開）",
+        "custom_contract": "カスタム契約と請求"
       }
     }
   },

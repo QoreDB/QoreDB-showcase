@@ -148,17 +148,42 @@ type PricingPageClientProps = {
   locale: string;
   initialProStripePrice: string | null;
   initialProOriginalPrice: string | null;
+  initialTeamSeatPrice: string | null;
+  teamSeatUnitAmount: number | null;
+  teamCurrency: string | null;
+  teamMinSeats: number;
+  intlLocale: string;
 };
 
 export default function PricingPageClient({
   locale,
   initialProStripePrice,
   initialProOriginalPrice,
+  initialTeamSeatPrice,
+  teamSeatUnitAmount,
+  teamCurrency,
+  teamMinSeats,
+  intlLocale,
 }: PricingPageClientProps) {
   const { t } = useTranslation();
   const [loadingCheckout, setLoadingCheckout] = useState(false);
+  const [loadingTeamCheckout, setLoadingTeamCheckout] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [seats, setSeats] = useState(teamMinSeats);
+
+  const teamAvailable = teamSeatUnitAmount != null && teamCurrency != null;
+
+  const formatCurrency = (amountInCents: number) =>
+    new Intl.NumberFormat(intlLocale, {
+      style: "currency",
+      currency: teamCurrency ?? "EUR",
+    }).format(amountInCents / 100);
+
+  const teamTotalPrice =
+    teamSeatUnitAmount != null
+      ? formatCurrency(teamSeatUnitAmount * seats)
+      : null;
 
   const startCheckout = async () => {
     setCheckoutError(null);
@@ -179,6 +204,28 @@ export default function PricingPageClient({
       setCheckoutError(t("pricing_page.checkout_error"));
     } finally {
       setLoadingCheckout(false);
+    }
+  };
+
+  const startTeamCheckout = async () => {
+    setCheckoutError(null);
+    setLoadingTeamCheckout(true);
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locale, tier: "team", seats }),
+      });
+      const data = (await response.json()) as { url?: string; error?: string };
+      if (!response.ok || !data.url) {
+        throw new Error(data.error ?? "Checkout unavailable");
+      }
+      window.location.href = data.url;
+    } catch (error) {
+      console.error(error);
+      setCheckoutError(t("pricing_page.checkout_error"));
+    } finally {
+      setLoadingTeamCheckout(false);
     }
   };
 
@@ -218,13 +265,22 @@ export default function PricingPageClient({
 
   const teamFeatures: PlanFeature[] = [
     "everything_pro",
-    "sync",
-    "shared_queries",
-    "permissions",
-    "managed_ai",
+    "seat_management",
+    "central_billing",
+    "priority_support",
   ].map((key) => ({
     id: `team-${key}`,
     label: t(`pricing_page.team.features.${key}`),
+  }));
+
+  const enterpriseFeatures: PlanFeature[] = [
+    "everything_team",
+    "sso",
+    "managed_ai",
+    "custom_contract",
+  ].map((key) => ({
+    id: `enterprise-${key}`,
+    label: t(`pricing_page.enterprise.features.${key}`),
   }));
 
   const faqItems = [
@@ -258,7 +314,7 @@ export default function PricingPageClient({
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -293,15 +349,20 @@ export default function PricingPageClient({
                 onClick={startCheckout}
                 loading={loadingCheckout}
                 footerNote={
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.location.href = getContactMailtoHref();
-                    }}
-                    className="block w-full bg-transparent text-center text-xs text-(--q-text-2) mt-3 hover:text-(--q-accent) transition cursor-pointer"
-                  >
-                    {t("pricing_page.pro.student_note")}
-                  </button>
+                  <>
+                    <p className="text-center text-xs text-(--q-text-2) mt-3">
+                      {t("pricing_page.pro.individual_use")}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.location.href = getContactMailtoHref();
+                      }}
+                      className="block w-full bg-transparent text-center text-xs text-(--q-text-2) mt-1.5 hover:text-(--q-accent) transition cursor-pointer"
+                    >
+                      {t("pricing_page.pro.student_note")}
+                    </button>
+                  </>
                 }
               />
             </motion.div>
@@ -315,10 +376,101 @@ export default function PricingPageClient({
                 title={t("pricing_page.team.title")}
                 tagline={t("pricing_page.team.tagline")}
                 description={t("pricing_page.team.description")}
-                price={t("pricing_page.team.price")}
+                price={
+                  teamAvailable
+                    ? (initialTeamSeatPrice ?? t("pricing_page.team.price"))
+                    : t("pricing_page.team.price")
+                }
                 badge={t("pricing_page.team.badge")}
                 features={teamFeatures}
                 ctaLabel={t("pricing_page.team.cta")}
+                customCta={
+                  teamAvailable ? (
+                    <div className="space-y-3">
+                      <p className="text-xs text-(--q-text-2) -mt-3">
+                        {t("pricing_page.team.per_seat_note")}
+                      </p>
+                      <div className="flex items-center justify-between rounded-xl border border-(--q-border) bg-(--q-bg-0) px-3 py-2">
+                        <span className="text-sm text-(--q-text-1)">
+                          {t("pricing_page.team.seats_label")}
+                        </span>
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            aria-label={t("pricing_page.team.seats_decrease")}
+                            onClick={() =>
+                              setSeats((value) =>
+                                Math.max(teamMinSeats, value - 1),
+                              )
+                            }
+                            disabled={seats <= teamMinSeats}
+                            className="h-7 w-7 inline-flex items-center justify-center rounded-lg border border-(--q-border) text-(--q-text-0) disabled:opacity-40 disabled:cursor-not-allowed hover:border-(--q-accent)/40 transition"
+                          >
+                            −
+                          </button>
+                          <span className="w-6 text-center text-sm font-semibold text-(--q-text-0)">
+                            {seats}
+                          </span>
+                          <button
+                            type="button"
+                            aria-label={t("pricing_page.team.seats_increase")}
+                            onClick={() => setSeats((value) => value + 1)}
+                            className="h-7 w-7 inline-flex items-center justify-center rounded-lg border border-(--q-border) text-(--q-text-0) hover:border-(--q-accent)/40 transition"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-xs text-(--q-text-2)">
+                          {t("pricing_page.team.total_label")}
+                        </span>
+                        <span className="text-lg font-bold text-(--q-text-0)">
+                          {teamTotalPrice}
+                          <span className="text-xs font-normal text-(--q-text-2)">
+                            {" "}
+                            {t("pricing_page.team.per_year")}
+                          </span>
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={startTeamCheckout}
+                        disabled={loadingTeamCheckout}
+                        className="inline-flex w-full items-center justify-center rounded-xl bg-(--q-accent) text-white px-4 py-3 font-semibold transition hover:bg-(--q-accent-strong) disabled:opacity-60 disabled:cursor-not-allowed"
+                      >
+                        {loadingTeamCheckout ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          t("pricing_page.team.cta")
+                        )}
+                      </button>
+                      <p className="text-center text-[11px] text-(--q-text-2)">
+                        {t("pricing_page.team.min_seats_note", {
+                          min: teamMinSeats,
+                        })}
+                      </p>
+                    </div>
+                  ) : (
+                    <TeamWaitlistForm />
+                  )
+                }
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+            >
+              <PlanCard
+                title={t("pricing_page.enterprise.title")}
+                tagline={t("pricing_page.enterprise.tagline")}
+                description={t("pricing_page.enterprise.description")}
+                price={t("pricing_page.enterprise.price")}
+                badge={t("pricing_page.enterprise.badge")}
+                features={enterpriseFeatures}
+                ctaLabel={t("pricing_page.enterprise.cta")}
                 customCta={<TeamWaitlistForm />}
               />
             </motion.div>

@@ -707,21 +707,28 @@
         "security_rules": "Custom safety rules",
         "library_advanced": "Advanced query library",
         "virtual_relations": "Auto-suggest virtual relations"
-      }
+      },
+      "individual_use": "License for individual use."
     },
     "team": {
       "title": "Team",
-      "tagline": "Built for teams",
-      "description": "Advanced collaboration for teams.",
+      "tagline": "Pro for your teams",
+      "description": "Pro features for the whole team, managed per seat.",
       "price": "Coming soon",
-      "badge": "Coming Soon",
-      "cta": "Contact us",
+      "badge": "Per seat",
+      "cta": "Buy",
+      "per_seat_note": "per seat / year",
+      "seats_label": "Seats",
+      "seats_decrease": "Remove a seat",
+      "seats_increase": "Add a seat",
+      "total_label": "Total",
+      "per_year": "/ year",
+      "min_seats_note": "Minimum {{min}} seats",
       "features": {
         "everything_pro": "Everything in Pro",
-        "sync": "Multi-device sync",
-        "shared_queries": "Shared query libraries",
-        "permissions": "Granular permissions",
-        "managed_ai": "Managed AI"
+        "seat_management": "Self-service seat management",
+        "central_billing": "Central billing + company invoice (EU VAT)",
+        "priority_support": "Priority support"
       }
     },
     "faq": {
@@ -744,6 +751,20 @@
       "pro_source_code": {
         "question": "Is Pro source code available?",
         "answer": "Pro features are under BSL 1.1 and automatically convert to Apache 2.0 after 4 years. Code is readable but redistribution is restricted during that period."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "For large organizations",
+      "description": "Custom needs, dedicated security and contract.",
+      "price": "Custom quote",
+      "badge": "Tailored",
+      "cta": "Contact us",
+      "features": {
+        "everything_team": "Everything in Team",
+        "sso": "SSO / SAML (coming soon)",
+        "managed_ai": "Managed AI (coming soon)",
+        "custom_contract": "Custom contract and billing"
       }
     }
   },

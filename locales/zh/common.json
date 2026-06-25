@@ -590,21 +590,28 @@
         "security_rules": "自定义安全规则",
         "library_advanced": "高级查询库",
         "virtual_relations": "自动建议虚拟关系"
-      }
+      },
+      "individual_use": "个人使用许可证。"
     },
     "team": {
       "title": "Team",
-      "tagline": "为团队打造",
-      "description": "团队的高级协作。",
+      "tagline": "面向团队的 Pro",
+      "description": "为整个团队提供 Pro 功能，按席位管理。",
       "price": "即将推出",
-      "badge": "即将推出",
-      "cta": "联系我们",
+      "badge": "按席位",
+      "cta": "购买",
+      "per_seat_note": "每席位 / 年",
+      "seats_label": "席位",
+      "seats_decrease": "减少一个席位",
+      "seats_increase": "增加一个席位",
+      "total_label": "总计",
+      "per_year": "/ 年",
+      "min_seats_note": "最少 {{min}} 个席位",
       "features": {
-        "everything_pro": "专业版中的一切",
-        "sync": "多设备同步",
-        "shared_queries": "共享查询库",
-        "permissions": "细化权限",
-        "managed_ai": "托管人工智能"
+        "everything_pro": "包含 Pro 的全部功能",
+        "seat_management": "自助席位管理",
+        "central_billing": "集中计费 + 企业发票（欧盟增值税）",
+        "priority_support": "优先支持"
       }
     },
     "faq": {
@@ -627,6 +634,20 @@
       "pro_source_code": {
         "question": "Pro 源代码可用吗？",
         "answer": "Pro 功能基于 BSL 1.1，并在 4 年后自动转换为 Apache 2.0。代码是可读的，但在此期间重新分发受到限制。"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "面向大型组织",
+      "description": "定制需求、专属安全与合同。",
+      "price": "定制报价",
+      "badge": "定制",
+      "cta": "联系我们",
+      "features": {
+        "everything_team": "包含 Team 的全部功能",
+        "sso": "SSO / SAML（即将推出）",
+        "managed_ai": "托管 AI（即将推出）",
+        "custom_contract": "定制合同与计费"
       }
     }
   },

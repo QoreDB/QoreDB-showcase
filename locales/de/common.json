@@ -590,21 +590,28 @@
         "security_rules": "Benutzerdefinierte Sicherheitsregeln",
         "library_advanced": "Erweiterte Abfragebibliothek",
         "virtual_relations": "Virtuelle Beziehungen automatisch vorschlagen"
-      }
+      },
+      "individual_use": "Lizenz zur individuellen Nutzung."
     },
     "team": {
       "title": "Team",
-      "tagline": "Für Teams konzipiert",
-      "description": "Erweiterte Zusammenarbeit für Teams.",
-      "price": "Kommt bald",
-      "badge": "Demnächst verfügbar",
-      "cta": "Kontaktieren Sie uns",
+      "tagline": "Pro für Ihre Teams",
+      "description": "Pro-Funktionen für das ganze Team, verwaltet pro Platz.",
+      "price": "Demnächst",
+      "badge": "Pro Platz",
+      "cta": "Kaufen",
+      "per_seat_note": "pro Platz / Jahr",
+      "seats_label": "Plätze",
+      "seats_decrease": "Einen Platz entfernen",
+      "seats_increase": "Einen Platz hinzufügen",
+      "total_label": "Gesamt",
+      "per_year": "/ Jahr",
+      "min_seats_note": "Mindestens {{min}} Plätze",
       "features": {
-        "everything_pro": "Alles in Pro",
-        "sync": "Synchronisierung mehrerer Geräte",
-        "shared_queries": "Gemeinsam genutzte Abfragebibliotheken",
-        "permissions": "Detaillierte Berechtigungen",
-        "managed_ai": "Verwaltete KI"
+        "everything_pro": "Alles aus Pro",
+        "seat_management": "Self-Service-Platzverwaltung",
+        "central_billing": "Zentrale Abrechnung + Firmenrechnung (EU-USt.)",
+        "priority_support": "Priorisierter Support"
       }
     },
     "faq": {
@@ -627,6 +634,20 @@
       "pro_source_code": {
         "question": "Ist Pro-Quellcode verfügbar?",
         "answer": "Pro-Funktionen unterliegen BSL 1.1 und werden nach 4 Jahren automatisch auf Apache 2.0 konvertiert. Der Code ist lesbar, aber die Weiterverbreitung ist während dieses Zeitraums eingeschränkt."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "Für große Organisationen",
+      "description": "Maßgeschneiderte Anforderungen, dedizierte Sicherheit und Vertrag.",
+      "price": "Angebot auf Anfrage",
+      "badge": "Maßgeschneidert",
+      "cta": "Kontaktieren Sie uns",
+      "features": {
+        "everything_team": "Alles aus Team",
+        "sso": "SSO / SAML (demnächst)",
+        "managed_ai": "Verwaltete KI (demnächst)",
+        "custom_contract": "Individueller Vertrag und Abrechnung"
       }
     }
   },

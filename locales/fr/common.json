@@ -707,21 +707,28 @@
         "security_rules": "Règles de sécurité personnalisées",
         "library_advanced": "Bibliothèque de requêtes avancée",
         "virtual_relations": "Relations virtuelles auto-suggest"
-      }
+      },
+      "individual_use": "Licence à usage individuel."
     },
     "team": {
       "title": "Team",
-      "tagline": "Pensé pour les équipes",
-      "description": "Collaboration avancée pour les équipes.",
-      "price": "Coming soon",
-      "badge": "Bientôt",
-      "cta": "Nous contacter",
+      "tagline": "Pro pour vos équipes",
+      "description": "Les fonctionnalités Pro pour toute l’équipe, gérées par sièges.",
+      "price": "Bientôt",
+      "badge": "Par siège",
+      "cta": "Acheter",
+      "per_seat_note": "par siège / an",
+      "seats_label": "Sièges",
+      "seats_decrease": "Retirer un siège",
+      "seats_increase": "Ajouter un siège",
+      "total_label": "Total",
+      "per_year": "/ an",
+      "min_seats_note": "Minimum {{min}} sièges",
       "features": {
-        "everything_pro": "Toutes les features Pro",
-        "sync": "Sync multi-appareils",
-        "shared_queries": "Bibliothèques de requêtes partagées",
-        "permissions": "Permissions granulaires",
-        "managed_ai": "IA managée"
+        "everything_pro": "Toutes les fonctionnalités Pro",
+        "seat_management": "Gestion des sièges en self-service",
+        "central_billing": "Facturation centralisée + facture entreprise (TVA UE)",
+        "priority_support": "Support prioritaire"
       }
     },
     "faq": {
@@ -744,6 +751,20 @@
       "pro_source_code": {
         "question": "Le code source Pro est-il disponible ?",
         "answer": "Les features Pro sont sous licence BSL 1.1, qui se convertit automatiquement en Apache 2.0 après 4 ans. Le code est lisible mais pas redistribuable pendant cette période."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "Pour les grandes organisations",
+      "description": "Besoins sur mesure, sécurité et contrat dédiés.",
+      "price": "Sur devis",
+      "badge": "Sur mesure",
+      "cta": "Contactez-nous",
+      "features": {
+        "everything_team": "Tout ce qui est dans Team",
+        "sso": "SSO / SAML (à venir)",
+        "managed_ai": "IA managée (à venir)",
+        "custom_contract": "Contrat et facturation sur mesure"
       }
     }
   },

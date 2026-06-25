@@ -11,6 +11,7 @@ import {
   getStripeClient,
   readLicenseFromCheckoutSession,
   readLicenseFromPaymentIntent,
+  readLicenseFromSubscription,
 } from "@/lib/stripe/server";
 
 type PageProps = {
@@ -50,7 +51,32 @@ async function readPaymentIntent(
   return stripe.paymentIntents.retrieve(session.payment_intent);
 }
 
+async function readLicenseFromSubscriptionRef(
+  session: Stripe.Checkout.Session,
+): Promise<string | null> {
+  if (!session.subscription) {
+    return null;
+  }
+
+  if (typeof session.subscription !== "string") {
+    return readLicenseFromSubscription(session.subscription);
+  }
+
+  const stripe = getStripeClient();
+  const subscription = await stripe.subscriptions.retrieve(
+    session.subscription,
+  );
+  return readLicenseFromSubscription(subscription);
+}
+
 async function readLicenseKey(session: Stripe.Checkout.Session) {
+  // Team (mode subscription) : la clé est stockée sur l'abonnement par le
+  // webhook `customer.subscription.created`. Peut être brièvement absente le
+  // temps que le webhook s'exécute — l'email reste le canal de secours.
+  if (session.mode === "subscription") {
+    return readLicenseFromSubscriptionRef(session);
+  }
+
   const paymentIntent = await readPaymentIntent(session);
   if (paymentIntent) {
     return readLicenseFromPaymentIntent(paymentIntent);

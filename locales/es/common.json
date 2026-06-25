@@ -590,21 +590,28 @@
         "security_rules": "Reglas de seguridad personalizadas",
         "library_advanced": "Biblioteca de consultas avanzada",
         "virtual_relations": "Autosugerencia de relaciones virtuales"
-      }
+      },
+      "individual_use": "Licencia de uso individual."
     },
     "team": {
       "title": "Team",
-      "tagline": "Pensado para equipos",
-      "description": "Colaboración avanzada para equipos.",
+      "tagline": "Pro para tus equipos",
+      "description": "Las funciones Pro para todo el equipo, gestionadas por asientos.",
       "price": "Próximamente",
-      "badge": "Próximamente",
-      "cta": "Contáctenos",
+      "badge": "Por asiento",
+      "cta": "Comprar",
+      "per_seat_note": "por asiento / año",
+      "seats_label": "Asientos",
+      "seats_decrease": "Quitar un asiento",
+      "seats_increase": "Añadir un asiento",
+      "total_label": "Total",
+      "per_year": "/ año",
+      "min_seats_note": "Mínimo {{min}} asientos",
       "features": {
-        "everything_pro": "Todo en Pro",
-        "sync": "Sincronización multidispositivo",
-        "shared_queries": "Bibliotecas de consultas compartidas",
-        "permissions": "Permisos granulares",
-        "managed_ai": "IA gestionada"
+        "everything_pro": "Todo lo de Pro",
+        "seat_management": "Gestión de asientos en autoservicio",
+        "central_billing": "Facturación centralizada + factura de empresa (IVA UE)",
+        "priority_support": "Soporte prioritario"
       }
     },
     "faq": {
@@ -627,6 +634,20 @@
       "pro_source_code": {
         "question": "¿Está disponible el código fuente Pro?",
         "answer": "Las funciones Pro están bajo BSL 1.1 y se convierten automáticamente a Apache 2.0 después de 4 años. El código es legible pero la redistribución está restringida durante ese período."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "Para grandes organizaciones",
+      "description": "Necesidades a medida, seguridad y contrato dedicados.",
+      "price": "Presupuesto a medida",
+      "badge": "A medida",
+      "cta": "Contáctanos",
+      "features": {
+        "everything_team": "Todo lo de Team",
+        "sso": "SSO / SAML (próximamente)",
+        "managed_ai": "IA gestionada (próximamente)",
+        "custom_contract": "Contrato y facturación a medida"
       }
     }
   },
