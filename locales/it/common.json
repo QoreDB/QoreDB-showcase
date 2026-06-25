@@ -612,7 +612,11 @@
         "central_billing": "Fatturazione centralizzata + fattura aziendale (IVA UE)",
         "priority_support": "Supporto prioritario"
       },
-      "nominative_note": "Postazioni nominative: una licenza per persona."
+      "nominative_note": "Postazioni nominative: una licenza per persona.",
+      "from_price": "A partire da {{price}}",
+      "discover_cta": "Scopri Team",
+      "back": "Torna ai prezzi",
+      "page_subtitle": "Le funzioni Pro per tutto il team — postazioni nominative, fatturazione centralizzata, supporto prioritario."
     },
     "faq": {
       "open_core_why": {

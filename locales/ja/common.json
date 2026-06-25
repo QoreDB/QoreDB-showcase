@@ -612,7 +612,11 @@
         "central_billing": "一括請求 + 法人向け請求書（EU VAT）",
         "priority_support": "優先サポート"
       },
-      "nominative_note": "記名シート：1人につき1ライセンス。"
+      "nominative_note": "記名シート：1人につき1ライセンス。",
+      "from_price": "{{price}} から",
+      "discover_cta": "Team を見る",
+      "back": "料金に戻る",
+      "page_subtitle": "チーム全体に Pro 機能を——記名シート、一括請求、優先サポート。"
     },
     "faq": {
       "open_core_why": {

@@ -729,7 +729,11 @@
         "central_billing": "Central billing + company invoice (EU VAT)",
         "priority_support": "Priority support"
       },
-      "nominative_note": "Named seats: one license per person."
+      "nominative_note": "Named seats: one license per person.",
+      "from_price": "From {{price}}",
+      "discover_cta": "Explore Team",
+      "back": "Back to pricing",
+      "page_subtitle": "Pro features for the whole team — named seats, central billing, priority support."
     },
     "faq": {
       "open_core_why": {

@@ -612,7 +612,11 @@
         "central_billing": "Zentrale Abrechnung + Firmenrechnung (EU-USt.)",
         "priority_support": "Priorisierter Support"
       },
-      "nominative_note": "Namentliche Plätze: eine Lizenz pro Person."
+      "nominative_note": "Namentliche Plätze: eine Lizenz pro Person.",
+      "from_price": "Ab {{price}}",
+      "discover_cta": "Team entdecken",
+      "back": "Zurück zu den Preisen",
+      "page_subtitle": "Pro-Funktionen für das ganze Team — namentliche Plätze, zentrale Abrechnung, priorisierter Support."
     },
     "faq": {
       "open_core_why": {

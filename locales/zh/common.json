@@ -612,7 +612,11 @@
         "central_billing": "集中计费 + 企业发票（欧盟增值税）",
         "priority_support": "优先支持"
       },
-      "nominative_note": "实名席位：每人一个许可证。"
+      "nominative_note": "实名席位：每人一个许可证。",
+      "from_price": "{{price}} 起",
+      "discover_cta": "了解 Team",
+      "back": "返回价格",
+      "page_subtitle": "为整个团队提供 Pro 功能——实名席位、集中计费、优先支持。"
     },
     "faq": {
       "open_core_why": {

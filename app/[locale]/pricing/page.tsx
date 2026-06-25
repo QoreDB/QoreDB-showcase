@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import PricingPageClient from "@/components/pricing/pricing-page-client";
-import { getIntlLocale, normalizeLocale } from "@/lib/locale";
+import { normalizeLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
 import { getStripePricing, getStripeTeamPricing } from "@/lib/stripe/pricing";
-import { TEAM_MIN_SEATS } from "@/lib/stripe/server";
 
 export async function generateMetadata({
   params,
@@ -38,14 +37,12 @@ export default async function PricingPage({
     console.error("Failed to load Stripe price on pricing page", error);
   }
 
+  // Le teaser Team n'a besoin que du prix unitaire formaté (« À partir de … »).
+  // Le configurateur complet vit sur /pricing/team.
   let initialTeamSeatPrice: string | null = null;
-  let teamSeatUnitAmount: number | null = null;
-  let teamCurrency: string | null = null;
   try {
     const teamPricing = await getStripeTeamPricing(normalizedLocale);
     initialTeamSeatPrice = teamPricing.formattedPrice;
-    teamSeatUnitAmount = teamPricing.unitAmount;
-    teamCurrency = teamPricing.currency;
   } catch (error) {
     console.error("Failed to load Stripe Team price on pricing page", error);
   }
@@ -55,10 +52,6 @@ export default async function PricingPage({
       locale={normalizedLocale}
       initialProStripePrice={initialProStripePrice}
       initialTeamSeatPrice={initialTeamSeatPrice}
-      teamSeatUnitAmount={teamSeatUnitAmount}
-      teamCurrency={teamCurrency}
-      teamMinSeats={TEAM_MIN_SEATS}
-      intlLocale={getIntlLocale(normalizedLocale)}
     />
   );
 }
