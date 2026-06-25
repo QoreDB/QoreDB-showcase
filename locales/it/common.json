@@ -543,8 +543,7 @@
   "pricing_page": {
     "badge": "Nucleo aperto",
     "title": "Scegli il piano adatto al tuo flusso di lavoro",
-    "subtitle": "Gratis per il lavoro in solo e l’esplorazione. Pro per il tuo flusso professionale quotidiano.",
-    "billing_note": "Licenza perpetua, pagamento una tantum per Pro",
+    "subtitle": "Gratis per il lavoro in solo, Pro per il quotidiano.",
     "checkout_error": "Impossibile avviare Stripe Checkout in questo momento.",
     "faq_title": "Domande frequenti",
     "core": {

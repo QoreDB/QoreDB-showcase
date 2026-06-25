@@ -543,8 +543,7 @@
   "pricing_page": {
     "badge": "开放核心",
     "title": "选择适合您工作流程的计划",
-    "subtitle": "免费版用于个人和探索，Pro 版面向您的日常专业工作。",
-    "billing_note": "永久授权，Pro 一次性付费",
+    "subtitle": "个人使用免费，Pro 面向日常工作。",
     "checkout_error": "现在无法启动 Stripe Checkout。",
     "faq_title": "常见问题",
     "core": {

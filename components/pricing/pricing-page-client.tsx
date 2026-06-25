@@ -281,17 +281,11 @@ export default function PricingPageClient({
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12">
         <section className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto">
-            <p className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) px-3 py-1 text-xs font-semibold uppercase tracking-wide">
-              {t("pricing_page.badge")}
-            </p>
             <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">
               {t("pricing_page.title")}
             </h1>
             <p className="mt-4 text-(--q-text-1)">
               {t("pricing_page.subtitle")}
-            </p>
-            <p className="mt-3 text-sm text-(--q-text-2)">
-              {t("pricing_page.billing_note")}
             </p>
           </div>
 

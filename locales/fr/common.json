@@ -660,8 +660,7 @@
   "pricing_page": {
     "badge": "Open Core",
     "title": "Choisissez le plan qui vous correspond",
-    "subtitle": "Gratuit pour le solo et l’exploration. Pro pour votre travail professionnel au quotidien.",
-    "billing_note": "Licence perpétuelle, paiement unique pour Pro",
+    "subtitle": "Gratuit pour le solo, Pro pour le travail au quotidien.",
     "checkout_error": "Impossible de démarrer Stripe Checkout pour le moment.",
     "faq_title": "Questions fréquentes",
     "core": {

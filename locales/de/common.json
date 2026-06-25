@@ -543,8 +543,7 @@
   "pricing_page": {
     "badge": "Offener Kern",
     "title": "Wählen Sie den Plan, der zu Ihrem Arbeitsablauf passt",
-    "subtitle": "Kostenlos für Solo-Arbeit und Erkundung. Pro für Ihre tägliche professionelle Arbeit.",
-    "billing_note": "Unbefristete Lizenz, einmalige Zahlung für Pro",
+    "subtitle": "Kostenlos für Solo-Arbeit, Pro für den Alltag.",
     "checkout_error": "Stripe Checkout kann derzeit nicht gestartet werden.",
     "faq_title": "Häufig gestellte Fragen",
     "core": {

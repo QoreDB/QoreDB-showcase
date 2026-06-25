@@ -543,8 +543,7 @@
   "pricing_page": {
     "badge": "オープンコア",
     "title": "ワークフローに合ったプランをお選びください",
-    "subtitle": "ソロ作業や探索には無料、日々のプロの仕事には Pro。",
-    "billing_note": "Pro の永久ライセンス、1 回限りの支払い",
+    "subtitle": "個人利用は無料、日常の仕事には Pro。",
     "checkout_error": "現在、Stripe Checkout を開始できません。",
     "faq_title": "よくある質問",
     "core": {
