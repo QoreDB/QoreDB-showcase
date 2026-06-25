@@ -45,8 +45,6 @@ async function createTeamCheckout(
     cancel_url: `${baseUrl}/${locale}/pricing?checkout=cancelled`,
     allow_promotion_codes: true,
     billing_address_collection: "required",
-    tax_id_collection: { enabled: true },
-    automatic_tax: { enabled: true },
     metadata: {
       qoredb_tier: "team",
       qoredb_seats: String(seats),
