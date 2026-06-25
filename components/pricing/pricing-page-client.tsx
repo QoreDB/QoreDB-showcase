@@ -18,7 +18,6 @@ function PlanCard({
   tagline,
   description,
   price,
-  originalPrice,
   badge,
   features,
   ctaLabel,
@@ -34,7 +33,6 @@ function PlanCard({
   tagline?: string;
   description: string;
   price: string;
-  originalPrice?: string;
   badge?: string;
   features: PlanFeature[];
   ctaLabel: string;
@@ -68,23 +66,7 @@ function PlanCard({
         ) : null}
         <p className="text-sm text-(--q-text-2) mt-2">{description}</p>
         <div className="mt-4 flex items-baseline gap-2 flex-wrap">
-          {originalPrice ? (
-            <>
-              <span className="text-lg text-(--q-text-2) line-through">
-                {originalPrice}
-              </span>
-              <span className="text-3xl font-bold text-(--q-text-0)">
-                {price}
-              </span>
-              <span className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-semibold px-2 py-0.5">
-                -50%
-              </span>
-            </>
-          ) : (
-            <span className="text-3xl font-bold text-(--q-text-0)">
-              {price}
-            </span>
-          )}
+          <span className="text-3xl font-bold text-(--q-text-0)">{price}</span>
         </div>
       </div>
 
@@ -147,7 +129,6 @@ function PlanCard({
 type PricingPageClientProps = {
   locale: string;
   initialProStripePrice: string | null;
-  initialProOriginalPrice: string | null;
   initialTeamSeatPrice: string | null;
   teamSeatUnitAmount: number | null;
   teamCurrency: string | null;
@@ -158,7 +139,6 @@ type PricingPageClientProps = {
 export default function PricingPageClient({
   locale,
   initialProStripePrice,
-  initialProOriginalPrice,
   initialTeamSeatPrice,
   teamSeatUnitAmount,
   teamCurrency,
@@ -343,7 +323,6 @@ export default function PricingPageClient({
                 tagline={t("pricing_page.pro.tagline")}
                 description={t("pricing_page.pro.description")}
                 price={initialProStripePrice ?? t("pricing_page.pro.price")}
-                originalPrice={initialProOriginalPrice ?? undefined}
                 badge={t("pricing_page.pro.badge")}
                 features={proFeatures}
                 ctaLabel={t("pricing_page.pro.cta")}
