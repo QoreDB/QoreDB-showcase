@@ -54,7 +54,6 @@ export async function sendLicenseEmail({
   email,
   licenseKey,
   tier = "pro",
-  seats,
 }: SendLicenseEmailInput) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -62,9 +61,11 @@ export async function sendLicenseEmail({
   }
 
   const planLabel = tier === "team" ? "Team" : "Pro";
+  // Licence Team = sièges NOMINATIFS (une clé par personne). On n'invite jamais
+  // à partager une clé : ce serait contraire aux conditions d'utilisation.
   const seatsLine =
-    tier === "team" && seats
-      ? `<p style="margin: 0 0 18px; color: #4b5563;">Cette licence couvre <strong>${seats} sièges</strong>. Distribuez la même clé aux membres de votre équipe.</p>`
+    tier === "team"
+      ? `<p style="margin: 0 0 18px; color: #4b5563;">Licence <strong>Team nominative</strong> : cette clé est rattachée à votre adresse. <strong>Une clé par personne</strong> — le partage d'une clé ou l'usage au-delà des sièges souscrits sont interdits (<a href="https://www.qoredb.com/fr/terms">conditions d'utilisation</a>).</p>`
       : "";
 
   const resend = new Resend(apiKey);

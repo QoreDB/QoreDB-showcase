@@ -57,7 +57,8 @@ export async function sendTeamAdminWelcomeEmail({
   const html = shell(`
     <h1 style="margin: 0 0 12px; font-size: 24px;">Votre équipe QoreDB Team</h1>
     <p style="margin: 0 0 18px; color: #4b5563;">Bonjour ${escapeHtml(email)},</p>
-    <p style="margin: 0 0 18px; color: #4b5563;">Votre abonnement Team couvre <strong>${seats} sièges nominatifs</strong> (une licence par personne). Votre propre siège est déjà actif : sa clé vous est envoyée dans un email séparé.</p>
+    <p style="margin: 0 0 12px; color: #4b5563;">Votre abonnement Team couvre <strong>${seats} sièges nominatifs</strong> (une licence par personne). Votre propre siège est déjà actif : sa clé vous est envoyée dans un email séparé.</p>
+    <p style="margin: 0 0 18px; color: #6b7280; font-size: 13px;">Chaque siège est rattaché à une personne. Le partage d'une clé ou l'usage au-delà des sièges souscrits sont interdits (<a href="https://www.qoredb.com/fr/terms">conditions d'utilisation</a>).</p>
     <h2 style="margin: 18px 0 8px; font-size: 16px;">Inviter votre équipe</h2>
     <p style="margin: 0 0 12px; color: #4b5563;">Partagez ce lien à vos coéquipiers. Chacun saisit son email et reçoit sa propre clé (dans la limite des sièges payés).</p>
     ${button(joinUrl, "Lien d'invitation")}

@@ -752,6 +752,10 @@
       "pro_source_code": {
         "question": "Is Pro source code available?",
         "answer": "Pro features are under BSL 1.1 and automatically convert to Apache 2.0 after 4 years. Code is readable but redistribution is restricted during that period."
+      },
+      "team_sharing": {
+        "question": "Can I share one Team key with several people?",
+        "answer": "No. The Team licence is per seat: each member receives their own named key (one key per person). Sharing a key or using the software beyond the purchased seats is prohibited by the terms of use."
       }
     },
     "enterprise": {
@@ -997,36 +1001,40 @@
         "title": "4. Use of QoreDB Software",
         "content": "The QoreDB software is distributed under an **open-core** model:\n\n* a part of the code is published under an open-source license,\n* certain features, extensions, or services may be subject to a separate proprietary license.\n\nThe precise conditions for use, modification, and distribution of the software are defined in the **QoreDB License**, available on the site and in the official repositories."
       },
+      "team_licensing": {
+        "title": "5. Team licences (named seats)",
+        "content": "The **Team** licence is granted **per seat**. It grants as many **named seats** as the number of seats purchased, at the rate of **one (1) licence key per person**.\n\n* each seat key is tied to its holder's email address,\n* **sharing a key** among several people is **prohibited**,\n* using the software **beyond the number of purchased seats** is **prohibited**.\n\nThe subscription holder (administrator) assigns the seats and ensures compliance with these terms within their organisation. Any breach may result in the suspension or termination of the licence."
+      },
       "user_obligations": {
-        "title": "5. User Obligations",
+        "title": "6. User Obligations",
         "content": "The user agrees to:\n\n* use QoreDB in accordance with applicable laws and regulations,\n* not infringe on the security, integrity, or proper functioning of the site or the software,\n* not attempt unauthorized access to systems or data,\n* not use QoreDB for fraudulent, illegal, or abusive purposes.\n\nAny abusive use may result in the suspension of access to services."
       },
       "ip": {
-        "title": "6. Intellectual Property",
+        "title": "7. Intellectual Property",
         "content": "All elements of the QoreDB site (texts, documentation, graphics, logo, visual identity) are protected by intellectual property rights.\n\nUnless otherwise stated, any unauthorized reproduction, representation, or exploitation is prohibited.\n\nThe source code of the QoreDB software is subject to the terms of the applicable license, as defined in the **License** page."
       },
       "liability": {
-        "title": "7. Liability",
+        "title": "8. Liability",
         "content": "QoreDB is provided \"as is\", without warranty of any kind.\n\nQoreDB cannot be held liable for:\n\n* direct or indirect damages resulting from the use of the site or software,\n* data loss, business interruption, or commercial damages,\n* consequences related to improper configuration or use of the software.\n\nThe user is solely responsible for their use of QoreDB and the data they process."
       },
       "privacy": {
-        "title": "8. Personal Data",
+        "title": "9. Personal Data",
         "content": "Personal data processing is governed by the **Privacy Policy** accessible on the QoreDB site."
       },
       "external_links": {
-        "title": "9. External Links",
+        "title": "10. External Links",
         "content": "The QoreDB site may contain links to third-party sites or services. QoreDB exercises no control over these services and declines all responsibility regarding their content or functioning."
       },
       "updates": {
-        "title": "10. Changes to ToS",
+        "title": "11. Changes to ToS",
         "content": "QoreDB reserves the right to modify these ToS at any time.\n\nUsers are invited to regularly consult the current version. The date of the last update is indicated at the top of the page."
       },
       "law": {
-        "title": "11. Applicable Law",
+        "title": "12. Applicable Law",
         "content": "These ToS are governed by French law.\n\nIn the event of a dispute, and failing amicable resolution, the competent courts will be those of the applicable jurisdiction in accordance with the legislation in force."
       },
       "contact": {
-        "title": "12. Contact",
+        "title": "13. Contact",
         "content": "For any question relating to these Terms of Service, the user can contact the QoreDB team via the official channels indicated on the site."
       }
     }

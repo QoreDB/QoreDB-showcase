@@ -635,6 +635,10 @@
       "pro_source_code": {
         "question": "Ist Pro-Quellcode verfügbar?",
         "answer": "Pro-Funktionen unterliegen BSL 1.1 und werden nach 4 Jahren automatisch auf Apache 2.0 konvertiert. Der Code ist lesbar, aber die Weiterverbreitung ist während dieses Zeitraums eingeschränkt."
+      },
+      "team_sharing": {
+        "question": "Kann ich einen Team-Schlüssel mit mehreren Personen teilen?",
+        "answer": "Nein. Die Team-Lizenz gilt pro Platz: Jedes Mitglied erhält seinen eigenen namentlichen Schlüssel (ein Schlüssel pro Person). Das Teilen eines Schlüssels oder die Nutzung über die erworbenen Plätze hinaus ist durch die Nutzungsbedingungen untersagt."
       }
     },
     "enterprise": {
@@ -880,36 +884,40 @@
         "title": "4. Nutzung der QoreDB-Software",
         "content": "Die QoreDB-Software wird nach einem **Open-Core**-Modell vertrieben:\n\n* ein Teil des Codes wird unter einer Open-Source-Lizenz veröffentlicht,\n* Bestimmte Funktionen, Erweiterungen oder Dienste unterliegen möglicherweise einer separaten proprietären Lizenz.\n\nDie genauen Bedingungen für die Nutzung, Änderung und Verbreitung der Software sind in der **QoreDB-Lizenz** festgelegt, die auf der Website und in den offiziellen Repositories verfügbar ist."
       },
+      "team_licensing": {
+        "title": "5. Team-Lizenzen (namentliche Plätze)",
+        "content": "Die **Team**-Lizenz wird **pro Platz** gewährt. Sie berechtigt zu so vielen **namentlichen Plätzen** wie erworbene Plätze, zu je **einem (1) Lizenzschlüssel pro Person**.\n\n* jeder Platzschlüssel ist an die E-Mail-Adresse seines Inhabers gebunden,\n* die **Weitergabe eines Schlüssels** an mehrere Personen ist **untersagt**,\n* die Nutzung der Software **über die Anzahl der erworbenen Plätze hinaus** ist **untersagt**.\n\nDer Abonnementinhaber (Administrator) weist die Plätze zu und sorgt für die Einhaltung dieser Bedingungen in seiner Organisation. Jeder Verstoß kann zur Aussetzung oder Kündigung der Lizenz führen."
+      },
       "user_obligations": {
-        "title": "5. Pflichten des Nutzers",
+        "title": "6. Pflichten des Nutzers",
         "content": "Der Benutzer erklärt sich damit einverstanden:\n\n* QoreDB in Übereinstimmung mit den geltenden Gesetzen und Vorschriften verwenden,\n* die Sicherheit, Integrität oder ordnungsgemäße Funktion der Website oder der Software nicht beeinträchtigen,\n* keinen unbefugten Zugriff auf Systeme oder Daten versuchen,\n* Verwenden Sie QoreDB nicht für betrügerische, illegale oder missbräuchliche Zwecke.\n\nJede missbräuchliche Nutzung kann zur Sperrung des Zugangs zu den Diensten führen."
       },
       "ip": {
-        "title": "6. Geistiges Eigentum",
+        "title": "7. Geistiges Eigentum",
         "content": "Alle Elemente der QoreDB-Site (Texte, Dokumentation, Grafiken, Logo, visuelle Identität) sind durch geistige Eigentumsrechte geschützt.\n\nSofern nicht anders angegeben, ist jede unerlaubte Vervielfältigung, Darstellung oder Nutzung untersagt.\n\nDer Quellcode der QoreDB-Software unterliegt den Bedingungen der geltenden Lizenz, wie auf der Seite **Lizenz** definiert."
       },
       "liability": {
-        "title": "7. Haftung",
+        "title": "8. Haftung",
         "content": "QoreDB wird „wie besehen“ und ohne Gewährleistung jeglicher Art bereitgestellt.\n\nQoreDB kann nicht haftbar gemacht werden für:\n\n* direkte oder indirekte Schäden, die aus der Nutzung der Website oder Software resultieren,\n* Datenverlust, Betriebsunterbrechung oder kommerzielle Schäden,\n* Konsequenzen im Zusammenhang mit unsachgemäßer Konfiguration oder Verwendung der Software.\n\nDer Nutzer trägt die alleinige Verantwortung für die Nutzung von QoreDB und die von ihm verarbeiteten Daten."
       },
       "privacy": {
-        "title": "8. Persönliche Daten",
+        "title": "9. Persönliche Daten",
         "content": "Die Verarbeitung personenbezogener Daten unterliegt der **Datenschutzerklärung**, die auf der Website QoreDB verfügbar ist."
       },
       "external_links": {
-        "title": "9. Externe Links",
+        "title": "10. Externe Links",
         "content": "Die Website QoreDB kann Links zu Websites oder Diensten Dritter enthalten. QoreDB übt keine Kontrolle über diese Dienste aus und lehnt jegliche Verantwortung für deren Inhalt oder Funktionsweise ab."
       },
       "updates": {
-        "title": "10. Änderungen der AGB",
+        "title": "11. Änderungen der AGB",
         "content": "QoreDB behält sich das Recht vor, diese AGB jederzeit zu ändern.\n\nBenutzer werden gebeten, regelmäßig die aktuelle Version einzusehen. Das Datum der letzten Aktualisierung wird oben auf der Seite angezeigt."
       },
       "law": {
-        "title": "11. Anwendbares Recht",
+        "title": "12. Anwendbares Recht",
         "content": "Diese AGB unterliegen französischem Recht.\n\nIm Falle einer Streitigkeit und wenn keine gütliche Lösung zustande kommt, sind die zuständigen Gerichte die Gerichte der jeweiligen Gerichtsbarkeit gemäß den geltenden Rechtsvorschriften."
       },
       "contact": {
-        "title": "12. Kontakt",
+        "title": "13. Kontakt",
         "content": "Bei Fragen zu diesen Nutzungsbedingungen kann sich der Benutzer über die auf der Website angegebenen offiziellen Kanäle an das QoreDB-Team wenden."
       }
     }

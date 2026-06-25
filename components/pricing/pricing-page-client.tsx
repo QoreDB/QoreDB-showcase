@@ -288,6 +288,7 @@ export default function PricingPageClient({
     "data_sent",
     "lifetime_updates",
     "try_pro",
+    "team_sharing",
     "pro_source_code",
   ].map((key) => ({
     question: t(`pricing_page.faq.${key}.question`),
