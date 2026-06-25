@@ -729,7 +729,8 @@
         "seat_management": "Gestion des sièges en self-service",
         "central_billing": "Facturation centralisée + facture entreprise (TVA UE)",
         "priority_support": "Support prioritaire"
-      }
+      },
+      "nominative_note": "Sièges nominatifs : 1 licence par personne."
     },
     "faq": {
       "open_core_why": {
@@ -871,7 +872,12 @@
     "download_cta": "Télécharger QoreDB",
     "home_cta": "Retour à l’accueil",
     "copy": "Copier la clé",
-    "copied": "Copié"
+    "copied": "Copié",
+    "team": {
+      "heading": "Votre équipe Team est prête",
+      "body": "Chaque siège est nominatif (une licence par personne). Votre propre siège est déjà actif : la clé ci-dessus est la vôtre. Un email vous a été envoyé avec le lien d'invitation à partager à votre équipe.",
+      "manage_cta": "Gérer mon équipe"
+    }
   },
   "privacy_page": {
     "title": "Politique de confidentialité",
@@ -1197,5 +1203,40 @@
     "landing_subtitle": "Tout pour installer QoreDB, connecter vos bases de données et avancer plus vite.",
     "fallback_banner_title": "Version anglaise affichée",
     "fallback_banner_body": "Cette page n'est pas encore traduite. La version anglaise est affichée ci-dessous."
+  },
+  "team_seats": {
+    "join": {
+      "title": "Rejoindre l'équipe",
+      "subtitle": "Saisissez votre email pour recevoir votre licence QoreDB.",
+      "email_label": "Votre email",
+      "email_placeholder": "vous@entreprise.com",
+      "submit": "Recevoir ma licence",
+      "success_title": "C'est fait !",
+      "success_body": "Votre licence vous a été envoyée par email. Ouvrez QoreDB, allez dans Réglages › Licence, collez la clé et activez.",
+      "cap_reached": "Tous les sièges sont occupés. Demandez à votre administrateur de libérer un siège.",
+      "invalid_link": "Ce lien d'invitation est invalide ou a expiré.",
+      "missing_token": "Lien d'invitation manquant.",
+      "error": "Une erreur est survenue. Réessayez."
+    },
+    "admin": {
+      "title": "Gérer votre équipe",
+      "subtitle": "Sièges, invitations et révocations.",
+      "cap_label": "Sièges",
+      "used_label": "utilisés",
+      "seats_heading": "Membres de l'équipe",
+      "status_active": "Actif",
+      "status_removed": "Retiré",
+      "remove": "Retirer",
+      "rotate": "Régénérer le lien d'invitation",
+      "join_link_label": "Lien d'invitation à partager",
+      "copy": "Copier",
+      "copied": "Copié",
+      "empty": "Aucun siège n'a encore été réclamé.",
+      "unauthorized": "Ce lien de gestion est invalide ou a expiré.",
+      "rotated": "Nouveau lien généré. L'ancien ne fonctionne plus.",
+      "removed": "Siège retiré.",
+      "error": "Une erreur est survenue. Réessayez.",
+      "loading": "Chargement…"
+    }
   }
 }

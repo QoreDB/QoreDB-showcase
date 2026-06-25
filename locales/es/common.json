@@ -612,7 +612,8 @@
         "seat_management": "Gestión de asientos en autoservicio",
         "central_billing": "Facturación centralizada + factura de empresa (IVA UE)",
         "priority_support": "Soporte prioritario"
-      }
+      },
+      "nominative_note": "Asientos nominativos: una licencia por persona."
     },
     "faq": {
       "open_core_why": {
@@ -754,7 +755,12 @@
     "download_cta": "Descargar QoreDB",
     "home_cta": "Volver a la página de inicio",
     "copy": "Copiar clave",
-    "copied": "Copiado"
+    "copied": "Copiado",
+    "team": {
+      "heading": "Tu equipo Team está listo",
+      "body": "Cada asiento es nominativo (una licencia por persona). Tu propio asiento ya está activo: la clave de arriba es la tuya. Te hemos enviado por email el enlace de invitación para compartir con tu equipo.",
+      "manage_cta": "Gestionar mi equipo"
+    }
   },
   "privacy_page": {
     "title": "Política de privacidad",
@@ -1092,5 +1098,40 @@
       "field_category_hint": "Elige la más cercana. El revisor puede ajustarla."
     },
     "eyebrow": "Biblioteca de plugins"
+  },
+  "team_seats": {
+    "join": {
+      "title": "Unirse al equipo",
+      "subtitle": "Introduce tu email para recibir tu licencia QoreDB.",
+      "email_label": "Tu email",
+      "email_placeholder": "tu@empresa.com",
+      "submit": "Recibir mi licencia",
+      "success_title": "¡Listo!",
+      "success_body": "Tu licencia se ha enviado por email. Abre QoreDB, ve a Ajustes › Licencia, pega la clave y actívala.",
+      "cap_reached": "Todos los asientos están ocupados. Pide a tu administrador que libere uno.",
+      "invalid_link": "Este enlace de invitación no es válido o ha caducado.",
+      "missing_token": "Falta el enlace de invitación.",
+      "error": "Algo salió mal. Inténtalo de nuevo."
+    },
+    "admin": {
+      "title": "Gestionar tu equipo",
+      "subtitle": "Asientos, invitaciones y revocaciones.",
+      "cap_label": "Asientos",
+      "used_label": "usados",
+      "seats_heading": "Miembros del equipo",
+      "status_active": "Activo",
+      "status_removed": "Retirado",
+      "remove": "Retirar",
+      "rotate": "Regenerar enlace de invitación",
+      "join_link_label": "Enlace de invitación para compartir",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "empty": "Aún no se ha reclamado ningún asiento.",
+      "unauthorized": "Este enlace de gestión no es válido o ha caducado.",
+      "rotated": "Nuevo enlace generado. El anterior ya no funciona.",
+      "removed": "Asiento retirado.",
+      "error": "Algo salió mal. Inténtalo de nuevo.",
+      "loading": "Cargando…"
+    }
   }
 }

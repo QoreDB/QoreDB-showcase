@@ -612,7 +612,8 @@
         "seat_management": "Gestione delle postazioni in self-service",
         "central_billing": "Fatturazione centralizzata + fattura aziendale (IVA UE)",
         "priority_support": "Supporto prioritario"
-      }
+      },
+      "nominative_note": "Postazioni nominative: una licenza per persona."
     },
     "faq": {
       "open_core_why": {
@@ -754,7 +755,12 @@
     "download_cta": "Scarica QoreDB",
     "home_cta": "Torna alla home page",
     "copy": "Copia chiave",
-    "copied": "Copiato"
+    "copied": "Copiato",
+    "team": {
+      "heading": "Il tuo team è pronto",
+      "body": "Ogni postazione è nominativa (una licenza per persona). La tua postazione è già attiva: la chiave qui sopra è la tua. Ti abbiamo inviato per email il link di invito da condividere con il team.",
+      "manage_cta": "Gestisci il mio team"
+    }
   },
   "privacy_page": {
     "title": "Informativa sulla privacy",
@@ -1092,5 +1098,40 @@
       "field_category_hint": "Scegli la più vicina. Il revisore può aggiustarla."
     },
     "eyebrow": "Libreria di plugin"
+  },
+  "team_seats": {
+    "join": {
+      "title": "Unisciti al team",
+      "subtitle": "Inserisci la tua email per ricevere la licenza QoreDB.",
+      "email_label": "La tua email",
+      "email_placeholder": "tu@azienda.com",
+      "submit": "Ricevi la mia licenza",
+      "success_title": "Fatto!",
+      "success_body": "La licenza ti è stata inviata via email. Apri QoreDB, vai su Impostazioni › Licenza, incolla la chiave e attiva.",
+      "cap_reached": "Tutte le postazioni sono occupate. Chiedi al tuo amministratore di liberarne una.",
+      "invalid_link": "Questo link di invito non è valido o è scaduto.",
+      "missing_token": "Link di invito mancante.",
+      "error": "Qualcosa è andato storto. Riprova."
+    },
+    "admin": {
+      "title": "Gestisci il tuo team",
+      "subtitle": "Postazioni, inviti e revoche.",
+      "cap_label": "Postazioni",
+      "used_label": "usate",
+      "seats_heading": "Membri del team",
+      "status_active": "Attivo",
+      "status_removed": "Rimosso",
+      "remove": "Rimuovi",
+      "rotate": "Rigenera il link di invito",
+      "join_link_label": "Link di invito da condividere",
+      "copy": "Copia",
+      "copied": "Copiato",
+      "empty": "Nessuna postazione ancora richiesta.",
+      "unauthorized": "Questo link di gestione non è valido o è scaduto.",
+      "rotated": "Nuovo link generato. Quello vecchio non funziona più.",
+      "removed": "Postazione rimossa.",
+      "error": "Qualcosa è andato storto. Riprova.",
+      "loading": "Caricamento…"
+    }
   }
 }

@@ -729,7 +729,8 @@
         "seat_management": "Self-service seat management",
         "central_billing": "Central billing + company invoice (EU VAT)",
         "priority_support": "Priority support"
-      }
+      },
+      "nominative_note": "Named seats: one license per person."
     },
     "faq": {
       "open_core_why": {
@@ -871,7 +872,12 @@
     "download_cta": "Download QoreDB",
     "home_cta": "Back to homepage",
     "copy": "Copy key",
-    "copied": "Copied"
+    "copied": "Copied",
+    "team": {
+      "heading": "Your Team is ready",
+      "body": "Each seat is named (one license per person). Your own seat is already active: the key above is yours. We've emailed you the invite link to share with your team.",
+      "manage_cta": "Manage my team"
+    }
   },
   "privacy_page": {
     "title": "Privacy Policy",
@@ -1197,5 +1203,40 @@
     "landing_subtitle": "Everything you need to install QoreDB, connect your databases, and ship faster.",
     "fallback_banner_title": "Showing the English version",
     "fallback_banner_body": "This page hasn't been translated yet. The English version is shown below."
+  },
+  "team_seats": {
+    "join": {
+      "title": "Join the team",
+      "subtitle": "Enter your email to receive your QoreDB license.",
+      "email_label": "Your email",
+      "email_placeholder": "you@company.com",
+      "submit": "Get my license",
+      "success_title": "All set!",
+      "success_body": "Your license has been emailed to you. Open QoreDB, go to Settings › License, paste the key and activate.",
+      "cap_reached": "All seats are taken. Ask your admin to free up a seat.",
+      "invalid_link": "This invite link is invalid or has expired.",
+      "missing_token": "Missing invite link.",
+      "error": "Something went wrong. Please try again."
+    },
+    "admin": {
+      "title": "Manage your team",
+      "subtitle": "Seats, invitations and revocations.",
+      "cap_label": "Seats",
+      "used_label": "used",
+      "seats_heading": "Team members",
+      "status_active": "Active",
+      "status_removed": "Removed",
+      "remove": "Remove",
+      "rotate": "Regenerate invite link",
+      "join_link_label": "Invite link to share",
+      "copy": "Copy",
+      "copied": "Copied",
+      "empty": "No seat has been claimed yet.",
+      "unauthorized": "This management link is invalid or has expired.",
+      "rotated": "New link generated. The old one no longer works.",
+      "removed": "Seat removed.",
+      "error": "Something went wrong. Please try again.",
+      "loading": "Loading…"
+    }
   }
 }

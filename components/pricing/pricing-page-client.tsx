@@ -314,7 +314,7 @@ export default function PricingPageClient({
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -390,6 +390,9 @@ export default function PricingPageClient({
                       <p className="text-xs text-(--q-text-2) -mt-3">
                         {t("pricing_page.team.per_seat_note")}
                       </p>
+                      <p className="text-xs font-medium text-(--q-text-1)">
+                        {t("pricing_page.team.nominative_note")}
+                      </p>
                       <div className="flex items-center justify-between rounded-xl border border-(--q-border) bg-(--q-bg-0) px-3 py-2">
                         <span className="text-sm text-(--q-text-1)">
                           {t("pricing_page.team.seats_label")}
@@ -457,24 +460,51 @@ export default function PricingPageClient({
                 }
               />
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-            >
-              <PlanCard
-                title={t("pricing_page.enterprise.title")}
-                tagline={t("pricing_page.enterprise.tagline")}
-                description={t("pricing_page.enterprise.description")}
-                price={t("pricing_page.enterprise.price")}
-                badge={t("pricing_page.enterprise.badge")}
-                features={enterpriseFeatures}
-                ctaLabel={t("pricing_page.enterprise.cta")}
-                customCta={<TeamWaitlistForm />}
-              />
-            </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6"
+          >
+            <div className="rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-6 transition-colors hover:border-(--q-accent)/30">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 flex-wrap">
+                  {t("pricing_page.enterprise.badge") ? (
+                    <span className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-semibold px-2.5 py-1">
+                      {t("pricing_page.enterprise.badge")}
+                    </span>
+                  ) : null}
+                  <h2 className="text-2xl font-bold text-(--q-text-0)">
+                    {t("pricing_page.enterprise.title")}
+                  </h2>
+                  <span className="text-2xl font-bold text-(--q-text-0)">
+                    · {t("pricing_page.enterprise.price")}
+                  </span>
+                </div>
+                <p className="text-sm text-(--q-text-2) mt-2 max-w-2xl">
+                  {t("pricing_page.enterprise.description")}
+                </p>
+                <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                  {enterpriseFeatures.map((feature) => (
+                    <li
+                      key={feature.id ?? feature.label}
+                      className="flex items-center gap-2 text-sm text-(--q-text-1)"
+                    >
+                      <span className="rounded-full bg-(--q-accent)/10 p-1 shrink-0">
+                        <Check className="h-3 w-3 text-(--q-accent)" />
+                      </span>
+                      {feature.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="lg:w-72 shrink-0">
+                <TeamWaitlistForm />
+              </div>
+            </div>
+          </motion.div>
 
           {checkoutError ? (
             <p className="mt-4 text-sm text-red-500">{checkoutError}</p>

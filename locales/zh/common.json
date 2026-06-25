@@ -612,7 +612,8 @@
         "seat_management": "自助席位管理",
         "central_billing": "集中计费 + 企业发票（欧盟增值税）",
         "priority_support": "优先支持"
-      }
+      },
+      "nominative_note": "实名席位：每人一个许可证。"
     },
     "faq": {
       "open_core_why": {
@@ -754,7 +755,12 @@
     "download_cta": "下载QoreDB",
     "home_cta": "返回首页",
     "copy": "复制键",
-    "copied": "已复制"
+    "copied": "已复制",
+    "team": {
+      "heading": "您的团队已就绪",
+      "body": "每个席位均为实名（每人一个许可证）。您自己的席位已激活：上方的密钥即为您的。我们已通过邮件向您发送了邀请链接，供您分享给团队。",
+      "manage_cta": "管理我的团队"
+    }
   },
   "privacy_page": {
     "title": "隐私政策",
@@ -1092,5 +1098,40 @@
       "field_category_hint": "请选择最接近的类别。审核时可以调整。"
     },
     "eyebrow": "插件库"
+  },
+  "team_seats": {
+    "join": {
+      "title": "加入团队",
+      "subtitle": "输入您的邮箱以接收 QoreDB 许可证。",
+      "email_label": "您的邮箱",
+      "email_placeholder": "you@company.com",
+      "submit": "获取我的许可证",
+      "success_title": "完成！",
+      "success_body": "您的许可证已通过邮件发送。打开 QoreDB，进入 设置 › 许可证，粘贴密钥并激活。",
+      "cap_reached": "所有席位已被占用。请联系管理员释放一个席位。",
+      "invalid_link": "此邀请链接无效或已过期。",
+      "missing_token": "缺少邀请链接。",
+      "error": "出现错误，请重试。"
+    },
+    "admin": {
+      "title": "管理您的团队",
+      "subtitle": "席位、邀请与撤销。",
+      "cap_label": "席位",
+      "used_label": "已使用",
+      "seats_heading": "团队成员",
+      "status_active": "有效",
+      "status_removed": "已移除",
+      "remove": "移除",
+      "rotate": "重新生成邀请链接",
+      "join_link_label": "可分享的邀请链接",
+      "copy": "复制",
+      "copied": "已复制",
+      "empty": "尚无席位被认领。",
+      "unauthorized": "此管理链接无效或已过期。",
+      "rotated": "已生成新链接，旧链接已失效。",
+      "removed": "席位已移除。",
+      "error": "出现错误，请重试。",
+      "loading": "加载中…"
+    }
   }
 }

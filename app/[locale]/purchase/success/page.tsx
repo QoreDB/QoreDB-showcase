@@ -1,11 +1,14 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Users } from "lucide-react";
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
 import type Stripe from "stripe";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { CopyLicenseButton } from "@/components/license/copy-license-button";
+import { buildAdminUrl } from "@/lib/seats/links";
+import { makeAdminToken } from "@/lib/seats/token";
 import { buildPageMetadata } from "@/lib/seo";
 import {
   getStripeClient,
@@ -13,6 +16,22 @@ import {
   readLicenseFromPaymentIntent,
   readLicenseFromSubscription,
 } from "@/lib/stripe/server";
+
+function subscriptionIdOf(session: Stripe.Checkout.Session): string | null {
+  if (!session.subscription) {
+    return null;
+  }
+  return typeof session.subscription === "string"
+    ? session.subscription
+    : session.subscription.id;
+}
+
+async function baseUrlFromHeaders(): Promise<string> {
+  const h = await headers();
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  return host ? `${proto}://${host}` : "http://localhost:3000";
+}
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -95,6 +114,7 @@ export default async function PurchaseSuccessPage({
 
   let licenseKey: string | null = null;
   let error: string | null = null;
+  let teamAdminUrl: string | null = null;
 
   if (sessionId) {
     try {
@@ -103,6 +123,18 @@ export default async function PurchaseSuccessPage({
         expand: ["payment_intent"],
       });
       licenseKey = await readLicenseKey(session);
+
+      // Team : lien de gestion immédiat (token admin frais signé). L'acheteur
+      // vient de finaliser le paiement dans ce navigateur → accès direct.
+      if (session.mode === "subscription") {
+        const subId = subscriptionIdOf(session);
+        if (subId) {
+          teamAdminUrl = buildAdminUrl(
+            await baseUrlFromHeaders(),
+            makeAdminToken(subId),
+          );
+        }
+      }
     } catch (caught) {
       error = t("purchase_success.session_error");
       console.error("Failed to load Stripe session", caught);
@@ -142,6 +174,26 @@ export default async function PurchaseSuccessPage({
               {error ? error : t("purchase_success.pending_license")}
             </div>
           )}
+
+          {teamAdminUrl ? (
+            <div className="mt-8 rounded-2xl border border-(--q-accent)/30 bg-(--q-accent)/5 p-5 sm:p-6">
+              <div className="flex items-center gap-2 text-(--q-accent)">
+                <Users className="h-5 w-5" />
+                <h2 className="text-lg font-semibold text-(--q-text-0)">
+                  {t("purchase_success.team.heading")}
+                </h2>
+              </div>
+              <p className="mt-2 text-sm text-(--q-text-1)">
+                {t("purchase_success.team.body")}
+              </p>
+              <a
+                href={teamAdminUrl}
+                className="mt-4 inline-flex items-center justify-center rounded-xl bg-(--q-accent) text-white px-5 py-2.5 font-semibold transition hover:bg-(--q-accent-strong)"
+              >
+                {t("purchase_success.team.manage_cta")}
+              </a>
+            </div>
+          ) : null}
 
           <div className="mt-8">
             <h2 className="text-lg font-semibold">

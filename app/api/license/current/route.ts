@@ -2,10 +2,13 @@ import { NextResponse } from "next/server";
 
 import { generateLicenseKey } from "@/lib/license/generate";
 import { getClientIp, rateLimit } from "@/lib/rate-limit";
+import { issueSeatKey, seatExpiresAt } from "@/lib/seats/issue";
+import { findSubscriptionBySeatEmail } from "@/lib/seats/store";
 import {
   computeTeamExpiresAt,
   findCurrentSubscriptionForCustomer,
   findCustomerByEmail,
+  getStripeClient,
   getSubscriptionPeriodEnd,
   getSubscriptionSeats,
   LICENSE_METADATA_KEY,
@@ -21,14 +24,17 @@ type CurrentLicenseBody = {
   email?: string;
 };
 
-const NOT_FOUND = NextResponse.json(
-  { error: "No active subscription found" },
-  { status: 404 },
-);
+const notFound = () =>
+  NextResponse.json({ error: "No active subscription found" }, { status: 404 });
 
 /**
- * Renvoie la clé Team à jour pour un email d'abonné actif. Utilisé par l'app
- * (commande refresh) et une éventuelle page self-service après renouvellement.
+ * Renvoie la clé Team à jour pour un email donné. Deux cas :
+ *  1. l'email est un SIÈGE nominatif actif → renvoie SA clé (seats:1) ;
+ *  2. sinon, l'email est un contact de FACTURATION → renvoie la clé liée à
+ *     l'abonnement (rétro-compat clé d'org Stage 1).
+ *
+ * Utilisé par l'app (commande `refresh_license`) et une éventuelle page
+ * self-service après renouvellement.
  */
 export async function POST(request: Request) {
   try {
@@ -54,22 +60,38 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "email is required" }, { status: 400 });
     }
     const email = normalizeEmail(rawEmail);
+    const stripe = getStripeClient();
 
+    // 1) L'email est-il un siège nominatif actif ? → sa clé personnelle.
+    const seatSubscription = await findSubscriptionBySeatEmail(stripe, email);
+    if (seatSubscription) {
+      const licenseKey = await issueSeatKey(seatSubscription, email);
+      const status =
+        seatSubscription.metadata?.[LICENSE_STATUS_METADATA_KEY] ??
+        seatSubscription.status;
+      return NextResponse.json({
+        status,
+        tier: "team",
+        seats: 1,
+        expiresAt: seatExpiresAt(seatSubscription),
+        licenseKey,
+      });
+    }
+
+    // 2) Fallback : email de facturation (clé d'abonnement / org Stage 1).
     const customer = await findCustomerByEmail(email);
     if (!customer) {
-      return NOT_FOUND;
+      return notFound();
     }
 
     const subscription = await findCurrentSubscriptionForCustomer(customer.id);
     if (!subscription) {
-      return NOT_FOUND;
+      return notFound();
     }
 
     const seats = getSubscriptionSeats(subscription);
     const periodEnd = getSubscriptionPeriodEnd(subscription);
     const expiresAt = computeTeamExpiresAt(periodEnd);
-    // Pro est un paiement unique (pas d'abonnement) : tout abonnement est Team.
-    const tier = "team";
     const status =
       subscription.metadata?.[LICENSE_STATUS_METADATA_KEY] ??
       subscription.status;
@@ -93,7 +115,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       status,
-      tier,
+      tier: "team",
       seats: storedSeats ? Number(storedSeats) : seats,
       expiresAt,
       licenseKey,

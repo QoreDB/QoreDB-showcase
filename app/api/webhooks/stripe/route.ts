@@ -2,12 +2,23 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 
 import { sendLicenseEmail } from "@/actions/send-license-email";
-import { generateLicenseKey } from "@/lib/license/generate";
 import {
-  computeTeamExpiresAt,
+  sendSeatsRemovedEmail,
+  sendTeamAdminWelcomeEmail,
+} from "@/actions/send-team-emails";
+import { generateLicenseKey } from "@/lib/license/generate";
+import { claimSeat, issueSeatKey } from "@/lib/seats/issue";
+import { currentAdminLink, currentJoinLink } from "@/lib/seats/links";
+import {
+  computeTrimToCap,
+  getAssignments,
+  getCap,
+  setAssignments,
+} from "@/lib/seats/store";
+import {
+  getBaseUrl,
   getStripeClient,
   getSubscriptionPeriodEnd,
-  getSubscriptionSeats,
   LICENSE_EMAIL_METADATA_KEY,
   LICENSE_METADATA_KEY,
   LICENSE_PERIOD_METADATA_KEY,
@@ -170,90 +181,148 @@ function isTeamSubscription(subscription: Stripe.Subscription): boolean {
   );
 }
 
+/** Signature de période (idempotence) : la fin de période courante. */
+function teamPeriodSignature(subscription: Stripe.Subscription): string {
+  return String(getSubscriptionPeriodEnd(subscription) ?? "none");
+}
+
+/** Email best-effort de la clé nominative d'un siège. */
+async function emailSeatKey(email: string, licenseKey: string) {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("RESEND_API_KEY is missing, skip seat license email");
+    return;
+  }
+  try {
+    await sendLicenseEmail({ email, licenseKey, tier: "team", seats: 1 });
+  } catch (error) {
+    console.error("Seat license email failed, key remains valid", {
+      reason: error instanceof Error ? error.message : "unknown",
+    });
+  }
+}
+
 /**
- * Émet / réémet la clé Team pour un abonnement et la stocke dans ses metadata.
- * Idempotent : tant que la signature « période:sièges » est inchangée, la clé
- * n'est ni régénérée ni ré-envoyée par email (sauf `forceReEmail`). Ce garde
- * évite aussi les boucles : notre propre `subscriptions.update` déclenche un
- * nouvel évènement `subscription.updated` qui retombera ici sans rien faire.
+ * `customer.subscription.created` → initialise le ledger, auto-claim le siège
+ * ADMIN (email de facturation = siège 1, clé émise + emailée), puis email à
+ * l'admin le join-link + l'admin-link. Idempotent : si le ledger est déjà
+ * initialisé (created rejoué), on ne fait rien.
  */
-async function processTeamSubscription(
+async function handleSubscriptionCreated(
   subscription: Stripe.Subscription,
-  { forceReEmail = false }: { forceReEmail?: boolean } = {},
+  baseUrl: string,
 ) {
   if (!isTeamSubscription(subscription)) {
     return;
   }
-
-  const stripe = getStripeClient();
-  const email = await readSubscriptionEmail(subscription);
-  if (!email) {
-    console.warn("Team subscription without resolvable email", {
+  if (getAssignments(subscription).length > 0) {
+    console.info("Team subscription already initialized, skip", {
       subscriptionId: subscription.id,
     });
     return;
   }
 
-  const seats = getSubscriptionSeats(subscription);
-  const periodEnd = getSubscriptionPeriodEnd(subscription);
-  const expiresAt = computeTeamExpiresAt(periodEnd);
-  const periodSignature = `${periodEnd ?? "none"}:${seats}`;
-
-  const metadata = subscription.metadata ?? {};
-  const existingKey = metadata[LICENSE_METADATA_KEY];
-  const alreadyDelivered =
-    metadata[LICENSE_PERIOD_METADATA_KEY] === periodSignature;
-
-  if (alreadyDelivered && existingKey && !forceReEmail) {
+  const billingEmail = await readSubscriptionEmail(subscription);
+  if (!billingEmail) {
+    console.warn("Team subscription without resolvable billing email", {
+      subscriptionId: subscription.id,
+    });
     return;
   }
 
-  const licenseKey =
-    existingKey && alreadyDelivered
-      ? existingKey
-      : await generateLicenseKey({
-          email,
-          paymentId: subscription.id,
-          tier: "team",
-          seats,
-          expiresAt,
-        });
+  const stripe = getStripeClient();
+  const cap = getCap(subscription);
 
-  const nextMetadata: Stripe.MetadataParam = {
-    ...metadata,
-    [LICENSE_METADATA_KEY]: licenseKey,
-    [LICENSE_EMAIL_METADATA_KEY]: email,
-    [LICENSE_SEATS_METADATA_KEY]: String(seats),
-    [LICENSE_TIER_METADATA_KEY]: "team",
-    [LICENSE_STATUS_METADATA_KEY]: "active",
-    [LICENSE_PERIOD_METADATA_KEY]: periodSignature,
-  };
+  // Siège admin (siège 1) : claim + email de sa clé nominative.
+  const claim = await claimSeat(stripe, subscription, billingEmail);
+  if (claim.status !== "cap_reached") {
+    await emailSeatKey(claim.email, claim.licenseKey);
+  }
+
+  // Liens : invitation (join) + gestion (admin).
+  const joinUrl = await currentJoinLink(stripe, subscription, baseUrl);
+  const adminUrl = currentAdminLink(subscription, baseUrl);
+
+  // Metadata org-level : rétro-compat (success page lit LICENSE_METADATA_KEY),
+  // statut, compteur de sièges et garde d'idempotence de période.
+  const adminKey = claim.status === "cap_reached" ? "" : claim.licenseKey;
   await stripe.subscriptions.update(subscription.id, {
-    metadata: nextMetadata,
+    metadata: {
+      [LICENSE_METADATA_KEY]: adminKey,
+      [LICENSE_EMAIL_METADATA_KEY]: billingEmail,
+      [LICENSE_SEATS_METADATA_KEY]: String(cap),
+      [LICENSE_TIER_METADATA_KEY]: "team",
+      [LICENSE_STATUS_METADATA_KEY]: "active",
+      [LICENSE_PERIOD_METADATA_KEY]: teamPeriodSignature(subscription),
+    },
   });
 
-  const shouldEmail = forceReEmail || !alreadyDelivered;
-  if (shouldEmail) {
-    if (!process.env.RESEND_API_KEY) {
-      console.warn("RESEND_API_KEY is missing, skip team license email send");
-    } else {
-      try {
-        await sendLicenseEmail({ email, licenseKey, tier: "team", seats });
-      } catch (error) {
-        console.error("Team license email send failed, key remains stored", {
-          subscriptionId: subscription.id,
-          reason: error instanceof Error ? error.message : "unknown",
-        });
-      }
+  if (process.env.RESEND_API_KEY) {
+    try {
+      await sendTeamAdminWelcomeEmail({
+        email: billingEmail,
+        joinUrl,
+        adminUrl,
+        seats: cap,
+      });
+    } catch (error) {
+      console.error("Team admin welcome email failed", {
+        subscriptionId: subscription.id,
+        reason: error instanceof Error ? error.message : "unknown",
+      });
     }
   }
 
-  console.info("Team license delivered", {
+  console.info("Team subscription initialized", {
     subscriptionId: subscription.id,
-    email,
-    seats,
-    periodSignature,
-    emailed: shouldEmail,
+    billingEmail,
+    cap,
+  });
+}
+
+/**
+ * `customer.subscription.updated` → réconcilie le plafond. Si le nombre de
+ * sièges ACTIFS dépasse le nouveau cap (quantité baissée), on marque les sièges
+ * les plus RÉCENTS `removed` (révocation douce) et on notifie l'admin.
+ * No-op si le ledger est équilibré → évite toute boucle (nos propres writes
+ * redéclenchent `updated`).
+ */
+async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  if (!isTeamSubscription(subscription)) {
+    return;
+  }
+  const assignments = getAssignments(subscription);
+  if (assignments.length === 0) {
+    return; // pas encore initialisé (created s'en charge)
+  }
+
+  const cap = getCap(subscription);
+  const { next, removed } = computeTrimToCap(assignments, cap);
+  if (removed.length === 0) {
+    return; // équilibré → rien à faire (évite la boucle de re-write)
+  }
+
+  const stripe = getStripeClient();
+  await setAssignments(stripe, subscription.id, next);
+
+  const billingEmail = await readSubscriptionEmail(subscription);
+  if (billingEmail && process.env.RESEND_API_KEY) {
+    try {
+      await sendSeatsRemovedEmail({
+        email: billingEmail,
+        removedEmails: removed,
+      });
+    } catch (error) {
+      console.error("Seats removed notification failed", {
+        subscriptionId: subscription.id,
+        reason: error instanceof Error ? error.message : "unknown",
+      });
+    }
+  }
+
+  console.warn("Team seats trimmed to cap", {
+    subscriptionId: subscription.id,
+    removed,
+    cap,
   });
 }
 
@@ -298,17 +367,59 @@ async function getSubscriptionFromInvoice(
   return stripe.subscriptions.retrieve(subscriptionId);
 }
 
-async function handleSubscriptionLifecycle(subscription: Stripe.Subscription) {
-  await processTeamSubscription(subscription);
-}
-
+/**
+ * `invoice.paid` → renouvellement. Réémet la clé de CHAQUE siège actif avec un
+ * `expires_at` repoussé et l'email à son porteur. La facture de création
+ * (même période que celle initialisée par `created`) est ignorée via la garde
+ * d'idempotence de période.
+ */
 async function handleInvoicePaid(invoice: Stripe.Invoice) {
   const subscription = await getSubscriptionFromInvoice(invoice);
-  if (!subscription) {
+  if (!subscription || !isTeamSubscription(subscription)) {
     return;
   }
-  // Renouvellement : la période a avancé -> nouvelle clé avec expires_at repoussé.
-  await processTeamSubscription(subscription);
+
+  const stripe = getStripeClient();
+  const signature = teamPeriodSignature(subscription);
+  if (subscription.metadata?.[LICENSE_PERIOD_METADATA_KEY] === signature) {
+    return; // période déjà traitée (création ou évènement rejoué)
+  }
+
+  const active = getAssignments(subscription).filter(
+    (seat) => seat.status === "active",
+  );
+  if (active.length === 0) {
+    await stripe.subscriptions.update(subscription.id, {
+      metadata: {
+        [LICENSE_PERIOD_METADATA_KEY]: signature,
+        [LICENSE_STATUS_METADATA_KEY]: "active",
+      },
+    });
+    return;
+  }
+
+  const billingEmail = subscription.metadata?.[LICENSE_EMAIL_METADATA_KEY];
+  let adminKey = subscription.metadata?.[LICENSE_METADATA_KEY] ?? "";
+  for (const seat of active) {
+    const key = await issueSeatKey(subscription, seat.email);
+    await emailSeatKey(seat.email, key);
+    if (billingEmail && seat.email === billingEmail) {
+      adminKey = key;
+    }
+  }
+
+  await stripe.subscriptions.update(subscription.id, {
+    metadata: {
+      [LICENSE_METADATA_KEY]: adminKey,
+      [LICENSE_PERIOD_METADATA_KEY]: signature,
+      [LICENSE_STATUS_METADATA_KEY]: "active",
+    },
+  });
+
+  console.info("Team seats reissued at renewal", {
+    subscriptionId: subscription.id,
+    count: active.length,
+  });
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
@@ -426,8 +537,13 @@ export async function POST(request: Request) {
         );
         break;
       case "customer.subscription.created":
+        await handleSubscriptionCreated(
+          event.data.object as Stripe.Subscription,
+          getBaseUrl(request),
+        );
+        break;
       case "customer.subscription.updated":
-        await handleSubscriptionLifecycle(
+        await handleSubscriptionUpdated(
           event.data.object as Stripe.Subscription,
         );
         break;

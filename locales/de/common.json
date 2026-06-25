@@ -612,7 +612,8 @@
         "seat_management": "Self-Service-Platzverwaltung",
         "central_billing": "Zentrale Abrechnung + Firmenrechnung (EU-USt.)",
         "priority_support": "Priorisierter Support"
-      }
+      },
+      "nominative_note": "Namentliche Plätze: eine Lizenz pro Person."
     },
     "faq": {
       "open_core_why": {
@@ -754,7 +755,12 @@
     "download_cta": "QoreDB herunterladen",
     "home_cta": "Zurück zur Homepage",
     "copy": "Schlüssel kopieren",
-    "copied": "Kopiert"
+    "copied": "Kopiert",
+    "team": {
+      "heading": "Ihr Team ist bereit",
+      "body": "Jeder Platz ist namentlich (eine Lizenz pro Person). Ihr eigener Platz ist bereits aktiv: Der Schlüssel oben gehört Ihnen. Wir haben Ihnen den Einladungslink per E-Mail geschickt, den Sie mit Ihrem Team teilen können.",
+      "manage_cta": "Mein Team verwalten"
+    }
   },
   "privacy_page": {
     "title": "Datenschutzrichtlinie",
@@ -1092,5 +1098,40 @@
       "field_category_hint": "Wähle die passendste. Der Reviewer kann sie anpassen."
     },
     "eyebrow": "Plugin-Bibliothek"
+  },
+  "team_seats": {
+    "join": {
+      "title": "Dem Team beitreten",
+      "subtitle": "Geben Sie Ihre E-Mail ein, um Ihre QoreDB-Lizenz zu erhalten.",
+      "email_label": "Ihre E-Mail",
+      "email_placeholder": "sie@firma.de",
+      "submit": "Meine Lizenz erhalten",
+      "success_title": "Fertig!",
+      "success_body": "Ihre Lizenz wurde Ihnen per E-Mail zugesandt. Öffnen Sie QoreDB, gehen Sie zu Einstellungen › Lizenz, fügen Sie den Schlüssel ein und aktivieren Sie.",
+      "cap_reached": "Alle Plätze sind belegt. Bitten Sie Ihren Administrator, einen Platz freizugeben.",
+      "invalid_link": "Dieser Einladungslink ist ungültig oder abgelaufen.",
+      "missing_token": "Einladungslink fehlt.",
+      "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
+    },
+    "admin": {
+      "title": "Ihr Team verwalten",
+      "subtitle": "Plätze, Einladungen und Widerrufe.",
+      "cap_label": "Plätze",
+      "used_label": "belegt",
+      "seats_heading": "Teammitglieder",
+      "status_active": "Aktiv",
+      "status_removed": "Entfernt",
+      "remove": "Entfernen",
+      "rotate": "Einladungslink neu erzeugen",
+      "join_link_label": "Einladungslink zum Teilen",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "empty": "Noch kein Platz beansprucht.",
+      "unauthorized": "Dieser Verwaltungslink ist ungültig oder abgelaufen.",
+      "rotated": "Neuer Link erzeugt. Der alte funktioniert nicht mehr.",
+      "removed": "Platz entfernt.",
+      "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+      "loading": "Wird geladen…"
+    }
   }
 }

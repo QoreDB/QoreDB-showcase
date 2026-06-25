@@ -612,7 +612,8 @@
         "seat_management": "セルフサービスのシート管理",
         "central_billing": "一括請求 + 法人向け請求書（EU VAT）",
         "priority_support": "優先サポート"
-      }
+      },
+      "nominative_note": "記名シート：1人につき1ライセンス。"
     },
     "faq": {
       "open_core_why": {
@@ -754,7 +755,12 @@
     "download_cta": "QoreDB をダウンロード",
     "home_cta": "ホームページに戻る",
     "copy": "キーをコピーする",
-    "copied": "コピーされました"
+    "copied": "コピーされました",
+    "team": {
+      "heading": "チームの準備が整いました",
+      "body": "各シートは記名式です（1人につき1ライセンス）。あなた自身のシートはすでに有効で、上のキーがあなたのものです。チームに共有する招待リンクをメールでお送りしました。",
+      "manage_cta": "チームを管理"
+    }
   },
   "privacy_page": {
     "title": "プライバシーポリシー",
@@ -1092,5 +1098,40 @@
       "field_category_hint": "最も近いものを選んでください。レビュー時に調整できます。"
     },
     "eyebrow": "プラグインライブラリ"
+  },
+  "team_seats": {
+    "join": {
+      "title": "チームに参加",
+      "subtitle": "メールアドレスを入力して QoreDB ライセンスを受け取ります。",
+      "email_label": "メールアドレス",
+      "email_placeholder": "you@company.com",
+      "submit": "ライセンスを受け取る",
+      "success_title": "完了しました！",
+      "success_body": "ライセンスをメールでお送りしました。QoreDB を開き、設定 › ライセンス でキーを貼り付けて有効化してください。",
+      "cap_reached": "すべてのシートが使用中です。管理者にシートの解放を依頼してください。",
+      "invalid_link": "この招待リンクは無効か、有効期限が切れています。",
+      "missing_token": "招待リンクがありません。",
+      "error": "エラーが発生しました。もう一度お試しください。"
+    },
+    "admin": {
+      "title": "チームを管理",
+      "subtitle": "シート、招待、取り消し。",
+      "cap_label": "シート",
+      "used_label": "使用中",
+      "seats_heading": "チームメンバー",
+      "status_active": "有効",
+      "status_removed": "削除済み",
+      "remove": "削除",
+      "rotate": "招待リンクを再生成",
+      "join_link_label": "共有用の招待リンク",
+      "copy": "コピー",
+      "copied": "コピーしました",
+      "empty": "まだシートは取得されていません。",
+      "unauthorized": "この管理リンクは無効か、有効期限が切れています。",
+      "rotated": "新しいリンクを生成しました。古いリンクは使用できません。",
+      "removed": "シートを削除しました。",
+      "error": "エラーが発生しました。もう一度お試しください。",
+      "loading": "読み込み中…"
+    }
   }
 }
