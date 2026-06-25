@@ -1108,7 +1108,8 @@
       "field_category": "类别",
       "field_category_hint": "请选择最接近的类别。审核时可以调整。"
     },
-    "eyebrow": "插件库"
+    "eyebrow": "插件库",
+    "page_subtitle": "用插件扩展 QoreDB：代码片段、主题、连接模板和 WASM 模块。"
   },
   "team_seats": {
     "join": {

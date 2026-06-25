@@ -14,7 +14,7 @@
   },
   "marketplace": {
     "page_title": "Plugins",
-    "page_subtitle": "Étendez QoreDB avec des plugins sandboxés — packs de snippets, thèmes, templates de connexion, et modules WASM qui s'accrochent au cycle de vie des requêtes.",
+    "page_subtitle": "Étendez QoreDB avec des plugins : snippets, thèmes, templates de connexion et modules WASM.",
     "section_title": "Plugins disponibles",
     "section_subtitle": "Chaque plugin de cette liste a été relu par les mainteneurs et vit dans le registre public sur GitHub.",
     "registry_link_label": "Parcourir le registre sur GitHub",

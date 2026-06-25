@@ -1108,7 +1108,8 @@
       "field_category": "Categoría",
       "field_category_hint": "Elige la más cercana. El revisor puede ajustarla."
     },
-    "eyebrow": "Biblioteca de plugins"
+    "eyebrow": "Biblioteca de plugins",
+    "page_subtitle": "Amplía QoreDB con plugins: snippets, temas, plantillas de conexión y módulos WASM."
   },
   "team_seats": {
     "join": {

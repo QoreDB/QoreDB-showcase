@@ -1108,7 +1108,8 @@
       "field_category": "カテゴリ",
       "field_category_hint": "最も近いものを選んでください。レビュー時に調整できます。"
     },
-    "eyebrow": "プラグインライブラリ"
+    "eyebrow": "プラグインライブラリ",
+    "page_subtitle": "プラグインで QoreDB を拡張：スニペット、テーマ、接続テンプレート、WASM モジュール。"
   },
   "team_seats": {
     "join": {
