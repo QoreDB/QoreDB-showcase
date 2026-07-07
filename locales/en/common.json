@@ -180,7 +180,7 @@
     },
     "ph_badge": "Launching on Product Hunt",
     "title": "One app for <italic>all your databases</italic>",
-    "subtitle": "The fast, open-source database client built with Rust. Connect to <highlight>13 native drivers</highlight> from a single, beautiful interface. Local-first: your data stays yours.",
+    "subtitle": "The fast, open-source database client built with Rust. Connect to <highlight>15 native drivers</highlight> from a single, beautiful interface. Local-first: your data stays yours.",
     "cta": {
       "join_beta": "Join Beta",
       "download_core": "Download Free",
@@ -252,11 +252,11 @@
   "features": {
     "eyebrow": "Features",
     "title": "Everything you need, <accent>nothing you don't</accent>",
-    "subtitle": "13 drivers, one interface. No Electron, no cloud dependency, no bloat.",
+    "subtitle": "15 drivers, one interface. No Electron, no cloud dependency, no bloat.",
     "items": {
       "unified": {
-        "title": "13 Native Drivers",
-        "desc": "PostgreSQL family (incl. Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB and ClickHouse."
+        "title": "15 Native Drivers",
+        "desc": "PostgreSQL family (incl. Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, Elasticsearch, OpenSearch and ClickHouse."
       },
       "workspaces": {
         "title": "Workspaces",
@@ -376,7 +376,7 @@
     "label": "One interface, every database"
   },
   "product_specs": {
-    "databases": "13 drivers",
+    "databases": "15 drivers",
     "binary_size": "~15 MB binary",
     "startup": "<1s startup",
     "license": "Apache 2.0"
@@ -428,7 +428,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "13 drivers",
+        "multidb": "15 drivers",
         "native": "Rust/Tauri",
         "local": "Yes",
         "vault": "Argon2",
@@ -540,7 +540,7 @@
       "title": "Just shipped: v0.1.23 → v0.1.28",
       "quote": "QoreDB is faster, safer and ready for serious daily use.",
       "items": {
-        "1": "13 native drivers — ClickHouse joins the family alongside Supabase, Neon and TimescaleDB",
+        "1": "15 native drivers — ClickHouse joins the family alongside Supabase, Neon and TimescaleDB",
         "2": "Data Contracts (Pro): declarative data-quality rules with post-mutation re-evaluation",
         "3": "Instant Data API (Pro): turn any saved query into a token-authenticated REST endpoint",
         "4": "Backup & restore helpers, customizable shortcuts and audit query fingerprinting",
@@ -617,7 +617,7 @@
       },
       "supported_databases": {
         "question": "Which databases are supported?",
-        "answer": "QoreDB currently supports 13 native drivers:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (PostgreSQL family)\n* MySQL / MariaDB\n* SQL Server (incl. Windows authentication: NTLM and Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (with editor autocomplete and aggregation linting)\n* Redis (with full key management)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, AST safety classification)\n\nMore engines are planned as the architecture evolves."
+        "answer": "QoreDB currently supports 15 native drivers:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (PostgreSQL family)\n* MySQL / MariaDB\n* SQL Server (incl. Windows authentication: NTLM and Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (with editor autocomplete and aggregation linting)\n* Redis (with full key management)\n* CockroachDB\n* Elasticsearch\n* OpenSearch\n* ClickHouse (HTTP/HTTPS, AST safety classification)\n\nMore engines are planned as the architecture evolves."
       },
       "remote_ssh": {
         "question": "Does it work with remote connections and SSH?",
@@ -672,7 +672,7 @@
       "badge": "Main choice",
       "cta": "Download for free",
       "features": {
-        "drivers": "13 native drivers (PostgreSQL family with Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse)",
+        "drivers": "15 native drivers (PostgreSQL family with Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, Elasticsearch, OpenSearch, ClickHouse)",
         "crud": "Full CRUD + SQL/Mongo editor with autocomplete and linting",
         "workspaces": "Workspaces:group connections, queries and notebooks by project",
         "grid": "High-performance data grid with bulk edit and advanced filters",
@@ -1115,7 +1115,7 @@
     "title": "Simple, transparent pricing",
     "subtitle": "Core is free forever. Pro unlocks power-user features.",
     "core_price": "Free",
-    "core_1": "13 native drivers (incl. Supabase, Neon, TimescaleDB)",
+    "core_1": "15 native drivers (incl. Supabase, Neon, TimescaleDB)",
     "core_2": "Workspaces, DDL, bulk edit and advanced filters",
     "core_3": "Encrypted vault & native SSH tunneling",
     "core_4": "Production safety guards and 9 UI languages",
@@ -1176,5 +1176,176 @@
     "landing_subtitle": "Everything you need to install QoreDB, connect your databases, and ship faster.",
     "fallback_banner_title": "Showing the English version",
     "fallback_banner_body": "This page hasn't been translated yet. The English version is shown below."
+  },
+  "features_common": {
+    "tier_pro": "Pro",
+    "tier_core": "Core",
+    "back_to_index": "All features",
+    "learn_more": "Learn more",
+    "cta_download": "Download QoreDB",
+    "cta_pricing": "See pricing",
+    "not_found_title": "Feature not found",
+    "not_found_subtitle": "This feature page does not exist."
+  },
+  "features_index": {
+    "title": "Flagship features",
+    "subtitle": "What QoreDB does beyond a classic SQL client. For each feature: the mechanism, an example, its limits."
+  },
+  "features_pages": {
+    "federation": {
+      "eyebrow": "Data Tools · Cross-database federation",
+      "title": "Cross-database federation",
+      "subtitle": "Run one SQL query that JOINs tables across several databases — no CSV exports, no warehouse to stand up.",
+      "teaser": "A single SQL query to join tables from several active connections — PostgreSQL, MySQL, MongoDB and the rest.",
+      "problem": {
+        "title": "The problem",
+        "body": "Your data lives across several databases: PostgreSQL for the app, MySQL for billing, MongoDB for events. Answering one question that spans them means exporting CSVs, writing glue scripts, or standing up a warehouse. For a one-off check or a reconciliation between prod and billing, that is out of proportion."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "QoreDB detects table references that cross several connections and runs the join locally, in an in-memory, ephemeral DuckDB engine. You write standard SQL; the engine handles the rest.",
+        "steps": [
+          {
+            "title": "Reference the table by its full path",
+            "body": "A table from an active connection is named as connection.database.table (or connection.database.schema.table). The connection alias is the normalized name of your saved connection."
+          },
+          {
+            "title": "QoreDB plans the fetch",
+            "body": "Only the columns you use are read, and WHERE filters are pushed down to each source where possible, to keep the transferred volume small."
+          },
+          {
+            "title": "The join runs in memory",
+            "body": "Rows from each source are loaded into an in-memory DuckDB engine, then the query runs there. Nothing is persisted: the instance is destroyed once the query completes."
+          },
+          {
+            "title": "You get a single result",
+            "body": "The result comes back like any query, with per-source detail (rows read, duration) and any warnings."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "Here, prod_pg is a PostgreSQL connection and billing_mysql a MySQL connection. One query joins the app's users with the billing orders:",
+        "caption": "Two databases, two engines, one join — with no intermediate export. The query stays read-only: it never writes to your sources."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "Federation targets operational joins and reconciliation, not replacing an analytical warehouse. Its boundaries are explicit:",
+        "items": [
+          "Each source is capped at 100,000 rows by default (configurable per query); a warning is shown when the cap is hit.",
+          "Rows are materialized in memory in DuckDB: federation targets reasonable volumes, not unbounded analytical scans over very large tables.",
+          "A 30 s timeout per source, and a 60 s default timeout for the whole query.",
+          "SELECT queries only, a single statement: a federated query never writes to the underlying databases.",
+          "At least two active connections are required to build a cross-database join."
+        ]
+      },
+      "cta": {
+        "title": "Join your databases without a pipeline",
+        "body": "Cross-database federation is part of QoreDB Pro. Download the app and try it on your own connections."
+      }
+    },
+    "time-travel": {
+      "eyebrow": "Data Tools · Data Time-Travel",
+      "title": "Data Time-Travel",
+      "subtitle": "A “git blame” for your data: who changed what, when, and the SQL to undo it.",
+      "teaser": "Row-by-row history of the mutations made in QoreDB, with a temporal diff and rollback SQL.",
+      "problem": {
+        "title": "The problem",
+        "body": "A value is wrong in the database. Who changed it, when, and what was the previous value? Without a log, all you have is the current state. One UPDATE without a WHERE, one mistyped manual fix, and you are restoring a whole dump to recover a handful of rows."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "When you change data from QoreDB, the app records a before/after image of each affected row in a local log. You get a timeline, the history of a specific row, a diff between two points in time, and the SQL to undo.",
+        "steps": [
+          {
+            "title": "Before/after capture",
+            "body": "On every INSERT, UPDATE or DELETE performed in QoreDB, the app records the operation, the primary key, the changed columns, and the row state before and after."
+          },
+          {
+            "title": "Timeline and per-row history",
+            "body": "The timeline groups changes together; the history panel shows, for a given row, all of its successive versions — a blame at the data level."
+          },
+          {
+            "title": "Temporal diff",
+            "body": "Compare a table's state between two points in time, T1 and T2: rows added, modified, removed, with the changed columns spelled out."
+          },
+          {
+            "title": "Rollback SQL",
+            "body": "QoreDB generates the SQL that reverses a selection of changes (INSERT → DELETE, UPDATE → previous value, DELETE → re-insert), in reverse chronological order and wrapped in BEGIN/COMMIT. You review it in the editor before running it."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "After an overly broad UPDATE, QoreDB produces the undo SQL, with literal values to review:",
+        "caption": "The rollback is never applied automatically: it is generated for you to review and run yourself. Changes that cannot be fully reversed are flagged."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "Time-Travel is an application-level log, not a database-engine capability. Its boundaries:",
+        "items": [
+          "Only mutations made from QoreDB are captured. External writes — your application, psql, another tool — are not.",
+          "The row must have a primary key: it is what identifies the before/after image and makes rollback possible.",
+          "The “before” image is captured on a best-effort basis (a 2 s ceiling so it can't slow the mutation down); if it fails, the reversal may be partial and a warning says so.",
+          "The log is local, with configurable rotation and retention; sensitive columns can be redacted ([REDACTED]) before being written to disk.",
+          "The rollback SQL is generated for review, never executed automatically."
+        ]
+      },
+      "cta": {
+        "title": "Keep track of every change",
+        "body": "Data Time-Travel is part of QoreDB Pro. Download the app and enable capture on your own connections."
+      }
+    },
+    "data-contracts": {
+      "eyebrow": "Data Quality · Data Contracts",
+      "title": "Data Contracts",
+      "subtitle": "Declarative data-quality assertions, written in YAML and executed as SQL against your tables.",
+      "teaser": "12 rule types (presence, format, domain, uniqueness, referential, cardinality, custom SQL) in a versionable YAML contract.",
+      "problem": {
+        "title": "The problem",
+        "body": "Data quality erodes silently: a column filling up with NULLs, a status outside the expected set, an orphaned foreign key. You notice when a report is wrong. Writing check queries by hand every time, then remembering to re-run them, doesn't hold up over time."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "You describe your expectations in a YAML contract — a table, a list of rules. QoreDB translates each rule into engine-specific SQL, runs it, and aggregates the results into a health status. The contract lives in your repository, versioned with the rest.",
+        "steps": [
+          {
+            "title": "A declarative contract",
+            "body": "A YAML file targets a table and lists typed rules. Each rule carries an id, a severity (error, warning, info) and its parameters. The file is stored in .qoredb/contracts/, so it's versioned alongside your code."
+          },
+          {
+            "title": "12 rule types",
+            "body": "Presence (not_null_pct, not_empty), format (regex_match, length_range), domain (numeric_range, date_range, allowed_values), uniqueness (unique, distinct_count), referential integrity (foreign_key_integrity), volume (row_count) and custom SQL."
+          },
+          {
+            "title": "Executed as SQL, multi-engine",
+            "body": "The runner generates dialect-specific SQL and runs it through the active connection. Compatible with PostgreSQL and its derivatives, MySQL/MariaDB, SQLite, DuckDB, SQL Server and ClickHouse."
+          },
+          {
+            "title": "Health status and samples",
+            "body": "Each run produces a per-rule status (passed / failed) and a contract health badge. For failing rules, QoreDB collects a sample of the offending rows (configurable limit). A dedicated notebook cell lets you run a contract inside a report."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "A contract for an orders table: email present, status within a closed domain, foreign-key integrity, positive total.",
+        "caption": "The contract is a versioned file. It detects violations when it runs — it doesn't replace database constraints, it complements them where they're missing."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "Contracts are a detection tool, not a blocking mechanism. Their boundaries:",
+        "items": [
+          "SQL engines only: the runner relies on SQL execution (PostgreSQL and derivatives, MySQL/MariaDB, SQLite, DuckDB, SQL Server, ClickHouse). NoSQL databases are not covered.",
+          "Rules are evaluated when the contract is run (manually or via the notebook cell): they detect issues, they don't prevent bad writes the way a SQL constraint would.",
+          "The custom_sql rule is only as reliable as the SQL you write in it: its correctness is on you.",
+          "On large tables, the collection of offending-row samples is capped (configurable limit) and can be turned off."
+        ]
+      },
+      "cta": {
+        "title": "Formalize your expectations on the data",
+        "body": "Data Contracts are part of QoreDB Pro. Download the app and write your first contract."
+      }
+    }
   }
 }

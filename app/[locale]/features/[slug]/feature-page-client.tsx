@@ -1,0 +1,221 @@
+"use client";
+
+import { ArrowLeft, ArrowRight, Check, TriangleAlert } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { Footer } from "@/components/landing/footer";
+import { Header } from "@/components/landing/header";
+import { Button } from "@/components/ui/button";
+import { type FeaturePage, getFeaturePage } from "@/lib/features";
+
+// Exemples de code figés (indépendants de la langue) pour éviter toute dérive
+// de traduction sur le SQL lui-même.
+const CODE_EXAMPLES: Record<string, string> = {
+  federation: `SELECT u.email, o.total, o.created_at
+FROM prod_pg.app.users u
+JOIN billing_mysql.billing.orders o
+  ON o.user_id = u.id
+WHERE o.created_at >= '2026-01-01'
+ORDER BY o.created_at DESC;`,
+  "time-travel": `-- Rollback généré par QoreDB — à relire avant exécution
+BEGIN;
+UPDATE "users" SET "status" = 'active'
+  WHERE "id" = 4213;   -- annule l'UPDATE du 07/07 14:32
+UPDATE "users" SET "status" = 'active'
+  WHERE "id" = 4218;   -- annule l'UPDATE du 07/07 14:32
+COMMIT;`,
+  "data-contracts": `# .qoredb/contracts/orders.yml
+target:
+  connection: prod_pg
+  table: orders
+rules:
+  - type: not_null_pct
+    id: email-present
+    column: customer_email
+    threshold_min_pct: 99.5
+    severity: error
+  - type: allowed_values
+    id: status-domain
+    column: status
+    values: [pending, paid, shipped, refunded]
+  - type: foreign_key_integrity
+    id: customer-fk
+    column: customer_id
+    references: { table: customers, column: id }
+  - type: numeric_range
+    id: total-positive
+    column: total
+    min: 0
+    severity: warning`,
+};
+
+function TierBadge({ tier }: { tier: FeaturePage["tier"] }) {
+  const { t } = useTranslation();
+  const isPro = tier === "pro";
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase ${
+        isPro
+          ? "bg-(--q-accent)/10 text-(--q-accent) border border-(--q-accent)/30"
+          : "bg-(--q-bg-1) text-(--q-text-2) border border-(--q-border)"
+      }`}
+    >
+      {isPro ? t("features_common.tier_pro") : t("features_common.tier_core")}
+    </span>
+  );
+}
+
+export function FeaturePageClient({ slug }: { slug: string }) {
+  const { t } = useTranslation();
+  const params = useParams();
+  const locale = params.locale as string;
+  const feature = getFeaturePage(slug);
+
+  if (!feature) return null;
+
+  const Icon = feature.icon;
+  const base = `features_pages.${slug}`;
+  const rawSteps = t(`${base}.solution.steps`, { returnObjects: true });
+  const steps = Array.isArray(rawSteps)
+    ? (rawSteps as { title: string; body: string }[])
+    : [];
+  const rawLimits = t(`${base}.limits.items`, { returnObjects: true });
+  const limits = Array.isArray(rawLimits) ? (rawLimits as string[]) : [];
+  const code = CODE_EXAMPLES[slug];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
+      <Header />
+      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
+        <div className="mb-6">
+          <Link
+            href={`/${locale}/features`}
+            className="inline-flex items-center gap-1.5 text-sm text-(--q-text-2) hover:text-(--q-accent) transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            {t("features_common.back_to_index")}
+          </Link>
+        </div>
+
+        <header className="relative mb-16">
+          <div className="absolute -top-10 -left-10 w-[300px] h-[300px] bg-(--q-accent) opacity-5 blur-[100px] rounded-full pointer-events-none" />
+          <div className="relative flex items-center gap-3 mb-5">
+            <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-(--q-accent)/10 text-(--q-accent) shrink-0">
+              <Icon className="w-6 h-6" />
+            </span>
+            <TierBadge tier={feature.tier} />
+          </div>
+          <p className="relative text-sm font-medium text-(--q-accent) mb-3">
+            {t(`${base}.eyebrow`)}
+          </p>
+          <h1 className="relative text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-br from-(--q-text-0) to-(--q-text-1)">
+            {t(`${base}.title`)}
+          </h1>
+          <p className="relative text-lg text-(--q-text-2) max-w-2xl leading-relaxed">
+            {t(`${base}.subtitle`)}
+          </p>
+        </header>
+
+        <section className="mb-14">
+          <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">
+            {t(`${base}.problem.title`)}
+          </h2>
+          <p className="text-(--q-text-1) leading-relaxed whitespace-pre-line">
+            {t(`${base}.problem.body`)}
+          </p>
+        </section>
+
+        <section className="mb-14">
+          <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">
+            {t(`${base}.solution.title`)}
+          </h2>
+          <p className="text-(--q-text-1) leading-relaxed mb-8">
+            {t(`${base}.solution.intro`)}
+          </p>
+          <ol className="space-y-5">
+            {steps.map((step, index) => (
+              <li key={step.title} className="flex gap-4">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-(--q-accent)/10 text-(--q-accent) font-semibold text-sm shrink-0">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 className="font-semibold text-(--q-text-0) mb-1">
+                    {step.title}
+                  </h3>
+                  <p className="text-(--q-text-1) leading-relaxed">
+                    {step.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {code && (
+          <section className="mb-14">
+            <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">
+              {t(`${base}.example.title`)}
+            </h2>
+            <p className="text-(--q-text-1) leading-relaxed mb-5">
+              {t(`${base}.example.intro`)}
+            </p>
+            <div className="rounded-xl border border-(--q-border) bg-(--q-bg-1) overflow-hidden">
+              <pre className="p-5 overflow-x-auto text-sm leading-relaxed">
+                <code className="font-mono text-(--q-text-1)">{code}</code>
+              </pre>
+            </div>
+            <p className="mt-3 text-sm text-(--q-text-2) leading-relaxed">
+              {t(`${base}.example.caption`)}
+            </p>
+          </section>
+        )}
+
+        <section className="mb-14">
+          <div className="rounded-xl border border-(--q-border) bg-(--q-bg-1) p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <TriangleAlert className="w-5 h-5 text-(--q-text-2)" />
+              <h2 className="text-xl font-semibold text-(--q-text-0)">
+                {t(`${base}.limits.title`)}
+              </h2>
+            </div>
+            <p className="text-(--q-text-1) leading-relaxed mb-5">
+              {t(`${base}.limits.intro`)}
+            </p>
+            <ul className="space-y-3">
+              {limits.map((item) => (
+                <li key={item} className="flex gap-3 text-(--q-text-1)">
+                  <Check className="w-4 h-4 mt-1 text-(--q-accent) shrink-0" />
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-(--q-border) bg-linear-to-br from-(--q-accent)/10 to-transparent p-8 text-center">
+          <h2 className="text-2xl font-semibold mb-3 text-(--q-text-0)">
+            {t(`${base}.cta.title`)}
+          </h2>
+          <p className="text-(--q-text-1) leading-relaxed max-w-xl mx-auto mb-6">
+            {t(`${base}.cta.body`)}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Button asChild>
+              <Link href={`/${locale}/download`}>
+                {t("features_common.cta_download")}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={`/${locale}/pricing`}>
+                {t("features_common.cta_pricing")}
+              </Link>
+            </Button>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  );
+}

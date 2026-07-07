@@ -6,9 +6,18 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FEATURE_PAGES } from "@/lib/features";
 import { LanguageSwitcher } from "../language-switcher";
 import { ThemeToggle } from "../theme-toggle";
 import { Button } from "../ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "../ui/navigation-menu";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,7 +43,6 @@ export function Header() {
   };
 
   const navLinks = [
-    { href: `/${locale}/#features`, label: t("nav.features") },
     { href: `/${locale}/docs`, label: t("nav.docs") },
     { href: `/${locale}/plugins`, label: t("nav.marketplace") },
     { href: `/${locale}/pricing`, label: t("nav.pricing") },
@@ -72,19 +80,52 @@ export function Header() {
         <span className="text-(--q-text-0) font-semibold text-lg">QoreDB</span>
       </Link>
 
-      <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </nav>
+      <NavigationMenu className="hidden md:flex">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors data-[state=open]:text-(--q-text-0)">
+              {t("nav.features")}
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              {FEATURE_PAGES.map((feature) => (
+                <NavigationMenuLink key={feature.slug} asChild>
+                  <Link
+                    href={`/${locale}/features/${feature.slug}`}
+                    className="block rounded-md px-3 py-2 text-sm text-(--q-text-1) hover:bg-(--q-bg-2) hover:text-(--q-text-0)"
+                  >
+                    {t(`features_pages.${feature.slug}.title`)}
+                  </Link>
+                </NavigationMenuLink>
+              ))}
+              <div className="my-1 h-px bg-(--q-border)" />
+              <NavigationMenuLink asChild>
+                <Link
+                  href={`/${locale}/features`}
+                  className="block rounded-md px-3 py-2 text-sm text-(--q-text-2) hover:bg-(--q-bg-2) hover:text-(--q-text-0)"
+                >
+                  {t("features_common.back_to_index")}
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          {navLinks.map((link) => (
+            <NavigationMenuItem key={link.href}>
+              <NavigationMenuLink asChild>
+                <Link
+                  href={link.href}
+                  className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm"
+                >
+                  {link.label}
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
 
       <button
+        type="button"
         className={`md:hidden text-(--q-text-0) p-2 transition-transform duration-300 ease-in-out ${mobileMenuOpen ? "rotate-90" : "rotate-0"}`}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
@@ -114,6 +155,28 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-(--q-bg-0)/95 backdrop-blur-xl border-b border-(--q-border) z-20">
           <nav className="flex flex-col space-y-4 px-6 py-6">
+            <div className="flex flex-col gap-3">
+              <Link
+                href={`/${locale}/features`}
+                className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("nav.features")}
+              </Link>
+              <div className="flex flex-col gap-2 pl-3 border-l border-(--q-border)">
+                {FEATURE_PAGES.map((feature) => (
+                  <Link
+                    key={feature.slug}
+                    href={`/${locale}/features/${feature.slug}`}
+                    className="text-sm text-(--q-text-2) hover:text-(--q-accent) transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t(`features_pages.${feature.slug}.title`)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {navLinks.map((link) => (
               <Link
                 key={link.href}

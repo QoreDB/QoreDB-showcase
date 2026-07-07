@@ -1071,5 +1071,176 @@
       "field_category_hint": "Scegli la più vicina. Il revisore può aggiustarla."
     },
     "eyebrow": "Libreria di plugin"
+  },
+  "features_common": {
+    "tier_pro": "Pro",
+    "tier_core": "Core",
+    "back_to_index": "Tutte le funzionalità",
+    "learn_more": "Scopri di più",
+    "cta_download": "Scarica QoreDB",
+    "cta_pricing": "Vedi i prezzi",
+    "not_found_title": "Funzionalità non trovata",
+    "not_found_subtitle": "Questa pagina della funzionalità non esiste."
+  },
+  "features_index": {
+    "title": "Funzionalità di punta",
+    "subtitle": "Ciò che QoreDB fa oltre a un client SQL classico. Per ogni funzionalità: il meccanismo, un esempio, i suoi limiti."
+  },
+  "features_pages": {
+    "federation": {
+      "eyebrow": "Data Tools · Federazione tra database",
+      "title": "Federazione tra database",
+      "subtitle": "Esegui una query SQL con JOIN tra più database, senza esportare CSV né allestire un data warehouse.",
+      "teaser": "Un'unica query SQL per unire tabelle di più connessioni attive: PostgreSQL, MySQL, MongoDB e le altre.",
+      "problem": {
+        "title": "Il problema",
+        "body": "I tuoi dati vivono in più database: PostgreSQL per l'applicazione, MySQL per la fatturazione, MongoDB per gli eventi. Rispondere a una domanda che li incrocia impone di esportare CSV, scrivere uno script di collegamento o allestire un warehouse. Per una verifica occasionale o una riconciliazione tra produzione e fatturazione, è sproporzionato."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "QoreDB rileva i riferimenti a tabelle che attraversano più connessioni ed esegue il join localmente, in un motore DuckDB in memoria ed effimero. Tu scrivi SQL standard; al resto pensa il motore.",
+        "steps": [
+          {
+            "title": "Riferisci la tabella con il suo percorso completo",
+            "body": "Una tabella di una connessione attiva si indica come connessione.database.tabella (o connessione.database.schema.tabella). L'alias della connessione è il nome normalizzato della connessione salvata."
+          },
+          {
+            "title": "QoreDB pianifica il recupero",
+            "body": "Vengono lette solo le colonne usate e i filtri WHERE vengono spinti su ogni sorgente quando possibile, per ridurre il volume trasferito."
+          },
+          {
+            "title": "Il join viene eseguito in memoria",
+            "body": "Le righe di ogni sorgente vengono caricate in un motore DuckDB in memoria e la query viene eseguita lì. Nulla viene reso persistente: l'istanza viene distrutta al termine della query."
+          },
+          {
+            "title": "Ottieni un unico risultato",
+            "body": "Il risultato torna come qualsiasi query, con il dettaglio per sorgente (righe lette, durata) ed eventuali avvisi."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Qui prod_pg è una connessione PostgreSQL e billing_mysql una connessione MySQL. Un'unica query incrocia gli utenti dell'applicazione con gli ordini di fatturazione:",
+        "caption": "Due database, due motori, un join, senza esportazioni intermedie. La query resta in sola lettura: non scrive mai nelle tue sorgenti."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "La federazione punta ai join operativi e alle riconciliazioni, non a sostituire un warehouse analitico. I suoi confini sono espliciti:",
+        "items": [
+          "Ogni sorgente è limitata a 100.000 righe per impostazione predefinita (configurabile per query); viene mostrato un avviso al raggiungimento del limite.",
+          "Le righe vengono materializzate in memoria in DuckDB: la federazione punta a volumi ragionevoli, non a scansioni analitiche illimitate su tabelle molto grandi.",
+          "Timeout di 30 s per sorgente e di 60 s predefinito per l'intera query.",
+          "Solo query SELECT, una singola istruzione: una query federata non scrive mai nei database sottostanti.",
+          "Servono almeno due connessioni attive per comporre un join tra database."
+        ]
+      },
+      "cta": {
+        "title": "Incrocia i tuoi database senza pipeline",
+        "body": "La federazione tra database fa parte di QoreDB Pro. Scarica l'applicazione e provala sulle tue connessioni."
+      }
+    },
+    "time-travel": {
+      "eyebrow": "Data Tools · Data Time-Travel",
+      "title": "Data Time-Travel",
+      "subtitle": "Un «git blame» per i tuoi dati: chi ha cambiato cosa, quando, e l'SQL per tornare indietro.",
+      "teaser": "Lo storico riga per riga delle mutazioni fatte in QoreDB, con diff temporale e SQL di rollback.",
+      "problem": {
+        "title": "Il problema",
+        "body": "Un valore è sbagliato nel database. Chi l'ha cambiato, quando e qual era il valore precedente? Senza un registro hai solo lo stato attuale. Un UPDATE senza WHERE, una correzione manuale digitata male, e devi ripristinare un intero dump per recuperare una manciata di righe."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "Quando modifichi i dati da QoreDB, l'applicazione registra un'immagine prima/dopo di ogni riga toccata in un registro locale. Ottieni una timeline, lo storico di una riga specifica, un diff tra due istanti e l'SQL per annullare.",
+        "steps": [
+          {
+            "title": "Cattura prima/dopo",
+            "body": "A ogni INSERT, UPDATE o DELETE eseguito in QoreDB, l'applicazione registra l'operazione, la chiave primaria, le colonne modificate e lo stato della riga prima e dopo."
+          },
+          {
+            "title": "Timeline e storico per riga",
+            "body": "La timeline raggruppa i cambiamenti; il pannello dello storico mostra, per una data riga, tutte le sue versioni successive — un blame a livello del dato."
+          },
+          {
+            "title": "Diff temporale",
+            "body": "Confronta lo stato di una tabella tra due istanti T1 e T2: righe aggiunte, modificate, rimosse, con il dettaglio delle colonne."
+          },
+          {
+            "title": "SQL di rollback",
+            "body": "QoreDB genera l'SQL che inverte una selezione di cambiamenti (INSERT → DELETE, UPDATE → valore precedente, DELETE → reinserimento), in ordine cronologico inverso e racchiuso in BEGIN/COMMIT. Lo rivedi nell'editor prima di eseguirlo."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Dopo un UPDATE troppo ampio, QoreDB produce l'SQL per annullare, con valori letterali da rivedere:",
+        "caption": "Il rollback non viene mai applicato automaticamente: viene generato perché tu lo riveda e lo esegua. I cambiamenti che non possono essere invertiti del tutto vengono segnalati."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "Il Time-Travel è un registro a livello di applicazione, non una capacità del motore del database. I suoi confini:",
+        "items": [
+          "Vengono catturate solo le mutazioni fatte da QoreDB. Le scritture esterne — la tua applicazione, psql, un altro strumento — no.",
+          "La riga deve avere una chiave primaria: è ciò che identifica l'immagine prima/dopo e rende possibile il rollback.",
+          "L'immagine «prima» viene catturata al meglio (un limite di 2 s per non rallentare la mutazione); se fallisce, l'inversione può essere parziale e un avviso lo indica.",
+          "Il registro è locale, con rotazione e retention configurabili; le colonne sensibili possono essere mascherate ([REDACTED]) prima della scrittura su disco.",
+          "L'SQL di rollback viene generato per la revisione, mai eseguito automaticamente."
+        ]
+      },
+      "cta": {
+        "title": "Tieni traccia di ogni cambiamento",
+        "body": "Data Time-Travel fa parte di QoreDB Pro. Scarica l'applicazione e attiva la cattura sulle tue connessioni."
+      }
+    },
+    "data-contracts": {
+      "eyebrow": "Data Quality · Data Contracts",
+      "title": "Data Contracts",
+      "subtitle": "Asserzioni di qualità dei dati dichiarative, scritte in YAML ed eseguite come SQL sulle tue tabelle.",
+      "teaser": "12 tipi di regole (presenza, formato, dominio, unicità, referenziale, cardinalità, SQL personalizzato) in un contratto YAML versionabile.",
+      "problem": {
+        "title": "Il problema",
+        "body": "La qualità dei dati si degrada in silenzio: una colonna che si riempie di NULL, uno stato fuori dall'insieme atteso, una chiave esterna orfana. Te ne accorgi quando un report è sbagliato. Scrivere ogni volta query di controllo a mano, e poi ricordarsi di rieseguirle, non regge nel tempo."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "Descrivi le tue aspettative in un contratto YAML: una tabella, un elenco di regole. QoreDB traduce ogni regola in SQL adatto al motore, la esegue e aggrega i risultati in uno stato di salute. Il contratto vive nel tuo repository, versionato con il resto.",
+        "steps": [
+          {
+            "title": "Un contratto dichiarativo",
+            "body": "Un file YAML punta a una tabella ed elenca regole tipizzate. Ogni regola ha un id, una severità (error, warning, info) e i suoi parametri. Il file è salvato in .qoredb/contracts/, quindi versionato insieme al tuo codice."
+          },
+          {
+            "title": "12 tipi di regole",
+            "body": "Presenza (not_null_pct, not_empty), formato (regex_match, length_range), dominio (numeric_range, date_range, allowed_values), unicità (unique, distinct_count), integrità referenziale (foreign_key_integrity), volume (row_count) e SQL personalizzato."
+          },
+          {
+            "title": "Esecuzione come SQL, multi-motore",
+            "body": "Il runner genera l'SQL specifico di ogni dialetto e lo esegue tramite la connessione attiva. Compatibile con PostgreSQL e derivati, MySQL/MariaDB, SQLite, DuckDB, SQL Server e ClickHouse."
+          },
+          {
+            "title": "Stato di salute e campioni",
+            "body": "Ogni esecuzione produce uno stato per regola (superata / fallita) e un badge di salute del contratto. Per le regole fallite, QoreDB raccoglie un campione delle righe non conformi (limite configurabile). Una cella di notebook dedicata consente di eseguire un contratto in un report."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Un contratto per una tabella di ordini: presenza dell'email, stato entro un dominio chiuso, integrità della chiave esterna, totale positivo.",
+        "caption": "Il contratto è un file versionato. Rileva le violazioni quando viene eseguito: non sostituisce i vincoli del database, li completa dove mancano."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "I contratti sono uno strumento di rilevamento, non un meccanismo di blocco. I loro confini:",
+        "items": [
+          "Solo motori SQL: il runner si basa sull'esecuzione SQL (PostgreSQL e derivati, MySQL/MariaDB, SQLite, DuckDB, SQL Server, ClickHouse). I database NoSQL non sono coperti.",
+          "Le regole vengono valutate quando il contratto viene eseguito (manualmente o dalla cella di notebook): rilevano i problemi, non impediscono le scritture errate come farebbe un vincolo SQL.",
+          "La regola custom_sql è affidabile quanto l'SQL che ci scrivi: la sua correttezza dipende da te.",
+          "Su tabelle grandi, la raccolta di campioni di righe non conformi è limitata (limite configurabile) e può essere disattivata."
+        ]
+      },
+      "cta": {
+        "title": "Formalizza le tue aspettative sui dati",
+        "body": "I Data Contracts fanno parte di QoreDB Pro. Scarica l'applicazione e scrivi il tuo primo contratto."
+      }
+    }
   }
 }

@@ -1071,5 +1071,176 @@
       "field_category_hint": "请选择最接近的类别。审核时可以调整。"
     },
     "eyebrow": "插件库"
+  },
+  "features_common": {
+    "tier_pro": "Pro",
+    "tier_core": "Core",
+    "back_to_index": "全部功能",
+    "learn_more": "了解更多",
+    "cta_download": "下载 QoreDB",
+    "cta_pricing": "查看价格",
+    "not_found_title": "未找到该功能",
+    "not_found_subtitle": "该功能页面不存在。"
+  },
+  "features_index": {
+    "title": "核心功能",
+    "subtitle": "QoreDB 在传统 SQL 客户端之外能做的事。每个功能都附上：机制、一个示例、以及它的限制。"
+  },
+  "features_pages": {
+    "federation": {
+      "eyebrow": "Data Tools · 跨库联邦查询",
+      "title": "跨库联邦查询",
+      "subtitle": "用一条 SQL 查询在多个数据库之间执行 JOIN，无需导出 CSV，也无需搭建数据仓库。",
+      "teaser": "用一条 SQL 查询联接来自多个活动连接的表——PostgreSQL、MySQL、MongoDB 等。",
+      "problem": {
+        "title": "问题所在",
+        "body": "你的数据分散在多个数据库中：应用用 PostgreSQL，计费用 MySQL，事件用 MongoDB。要回答一个横跨它们的问题，就得导出 CSV、编写胶水脚本，或搭建数据仓库。对于一次性的核对，或生产与计费之间的对账，这样做代价过高。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "QoreDB 会识别横跨多个连接的表引用，并在本地一个内存中的、临时的 DuckDB 引擎里执行联接。你只需编写标准 SQL，其余交给引擎处理。",
+        "steps": [
+          {
+            "title": "用完整路径引用表",
+            "body": "来自活动连接的表以 连接.数据库.表 的形式命名（或 连接.数据库.模式.表）。连接别名即你已保存连接的规范化名称。"
+          },
+          {
+            "title": "QoreDB 规划数据拉取",
+            "body": "只读取你用到的列，并在可能时把 WHERE 过滤条件下推到每个数据源，以减少传输的数据量。"
+          },
+          {
+            "title": "联接在内存中执行",
+            "body": "每个数据源的行会被加载到内存中的 DuckDB 引擎，查询在那里执行。不会持久化任何内容：查询完成后该实例即被销毁。"
+          },
+          {
+            "title": "得到单一结果",
+            "body": "结果像普通查询一样返回，并附带各数据源的明细（读取行数、耗时）以及可能的警告。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "这里 prod_pg 是一个 PostgreSQL 连接，billing_mysql 是一个 MySQL 连接。一条查询即可将应用用户与计费订单关联起来：",
+        "caption": "两个数据库、两种引擎、一次联接——无需中间导出。查询保持只读：它绝不会写入你的数据源。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "联邦查询面向操作型联接与对账，而非替代分析型数据仓库。它的边界是明确的：",
+        "items": [
+          "每个数据源默认上限为 100000 行（可按查询配置）；达到上限时会显示警告。",
+          "行数据会在 DuckDB 中于内存里物化：联邦查询面向合理的数据量，而非对超大表的无限量分析扫描。",
+          "每个数据源超时 30 秒，整条查询默认超时 60 秒。",
+          "仅支持 SELECT 查询，且为单条语句：联邦查询绝不会写入底层数据库。",
+          "构建跨库联接至少需要两个活动连接。"
+        ]
+      },
+      "cta": {
+        "title": "无需管道即可关联你的数据库",
+        "body": "跨库联邦查询属于 QoreDB Pro。下载应用，在你自己的连接上试用。"
+      }
+    },
+    "time-travel": {
+      "eyebrow": "Data Tools · 数据时光机",
+      "title": "数据时光机（Time-Travel）",
+      "subtitle": "数据的“git blame”：谁在何时改了什么，以及用于回退的 SQL。",
+      "teaser": "在 QoreDB 中所做变更的逐行历史，附带时间点差异与回滚 SQL。",
+      "problem": {
+        "title": "问题所在",
+        "body": "数据库里某个值错了。是谁改的、什么时候改的、改之前是什么值？没有日志，你只能看到当前状态。一次漏写 WHERE 的 UPDATE、一次手误的人工修正，就得还原整个转储才能救回区区几行。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "当你从 QoreDB 修改数据时，应用会把每一行受影响记录的改前/改后镜像写入本地日志。你会得到一条时间线、某一行的历史、两个时间点之间的差异，以及用于撤销的 SQL。",
+        "steps": [
+          {
+            "title": "改前/改后捕获",
+            "body": "在 QoreDB 中执行的每一次 INSERT、UPDATE 或 DELETE，应用都会记录操作类型、主键、被修改的列，以及该行改前与改后的状态。"
+          },
+          {
+            "title": "时间线与逐行历史",
+            "body": "时间线把变更聚合在一起；历史面板则展示某一行的所有历次版本——数据层面的 blame。"
+          },
+          {
+            "title": "时间点差异",
+            "body": "比较一张表在两个时间点 T1 与 T2 之间的状态：新增、修改、删除的行，并列出发生变化的列。"
+          },
+          {
+            "title": "回滚 SQL",
+            "body": "QoreDB 会生成用于反向撤销所选变更的 SQL（INSERT → DELETE，UPDATE → 改前值，DELETE → 重新插入），按时间倒序排列并以 BEGIN/COMMIT 包裹。你先在编辑器中审阅，再决定执行。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "在一次范围过大的 UPDATE 之后，QoreDB 会生成撤销 SQL，并使用字面量值以便审阅：",
+        "caption": "回滚绝不会自动执行：它只是被生成出来，供你审阅并自行执行。无法被完全反向撤销的变更会被标记出来。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "Time-Travel 是应用层的日志，而非数据库引擎的能力。它的边界：",
+        "items": [
+          "只捕获从 QoreDB 发起的变更。外部写入——你的应用、psql、其他工具——不会被捕获。",
+          "该行必须有主键：正是主键标识改前/改后镜像，并使回滚成为可能。",
+          "“改前”镜像采用尽力而为的方式捕获（设有 2 秒上限，以免拖慢变更）；若失败，反向撤销可能不完整，并会给出警告。",
+          "日志保存在本地，轮转与保留期可配置；敏感列可在写入磁盘前被脱敏（[REDACTED]）。",
+          "回滚 SQL 仅为审阅而生成，绝不自动执行。"
+        ]
+      },
+      "cta": {
+        "title": "为每一次变更留痕",
+        "body": "数据时光机属于 QoreDB Pro。下载应用，在你自己的连接上启用捕获。"
+      }
+    },
+    "data-contracts": {
+      "eyebrow": "Data Quality · 数据契约",
+      "title": "数据契约（Data Contracts）",
+      "subtitle": "声明式的数据质量断言，用 YAML 编写，并以 SQL 在你的表上执行。",
+      "teaser": "12 种规则类型（存在性、格式、取值域、唯一性、引用完整性、基数、自定义 SQL），写入可版本化的 YAML 契约。",
+      "problem": {
+        "title": "问题所在",
+        "body": "数据质量会悄悄劣化：某一列渐渐塞满 NULL、某个状态跑出了预期集合、某个外键成了孤儿。等你发现时，报表已经错了。每次都手写检查查询、然后还要记得重新跑一遍，长期难以为继。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "你用一份 YAML 契约描述期望——一张表、一组规则。QoreDB 会把每条规则翻译成适配该引擎的 SQL 并执行，再把结果汇总成一个健康状态。契约存于你的代码仓库，与其余代码一同版本化。",
+        "steps": [
+          {
+            "title": "声明式契约",
+            "body": "一个 YAML 文件针对一张表，列出带类型的规则。每条规则都有 id、严重级别（error、warning、info）及其参数。文件存放在 .qoredb/contracts/ 下，因此可与代码一起版本化。"
+          },
+          {
+            "title": "12 种规则类型",
+            "body": "存在性（not_null_pct、not_empty）、格式（regex_match、length_range）、取值域（numeric_range、date_range、allowed_values）、唯一性（unique、distinct_count）、引用完整性（foreign_key_integrity）、数据量（row_count），以及自定义 SQL。"
+          },
+          {
+            "title": "以 SQL 执行，多引擎",
+            "body": "运行器会生成各方言专属的 SQL，并通过当前活动连接执行。兼容 PostgreSQL 及其衍生版、MySQL/MariaDB、SQLite、DuckDB、SQL Server 与 ClickHouse。"
+          },
+          {
+            "title": "健康状态与样本",
+            "body": "每次运行都会产生逐条规则的状态（通过／失败）以及契约的健康徽章。对失败的规则，QoreDB 会采集一批违规行样本（上限可配置）。还有专门的 notebook 单元，可在报告中运行契约。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "一份针对订单表的契约：邮箱存在、状态落在封闭取值域内、外键完整、总额为正。",
+        "caption": "契约是一个受版本管理的文件。它在运行时检测违规——并不替代数据库约束，而是在约束缺失之处对其加以补充。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "契约是检测工具，而非阻断机制。它的边界：",
+        "items": [
+          "仅限 SQL 引擎：运行器依赖 SQL 执行（PostgreSQL 及衍生版、MySQL/MariaDB、SQLite、DuckDB、SQL Server、ClickHouse）。不覆盖 NoSQL 数据库。",
+          "规则在契约被运行时求值（手动运行，或经由 notebook 单元）：它们检测问题，但不像 SQL 约束那样阻止错误写入。",
+          "custom_sql 规则的可靠程度取决于你写入其中的 SQL：其正确性由你负责。",
+          "在大表上，违规行样本的采集设有上限（可配置），并且可以关闭。"
+        ]
+      },
+      "cta": {
+        "title": "把你对数据的期望固化下来",
+        "body": "数据契约属于 QoreDB Pro。下载应用，编写你的第一份契约。"
+      }
+    }
   }
 }

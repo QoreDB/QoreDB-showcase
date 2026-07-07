@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPages } from "@/lib/docs/tree";
 import { DOCS_LOCALES } from "@/lib/docs/types";
+import { FEATURE_SLUGS } from "@/lib/features";
 import { SUPPORTED_LOCALES } from "@/lib/locale";
 import { client } from "@/lib/sanity/client";
 import { POSTS_QUERY } from "@/lib/sanity/queries";
@@ -71,5 +72,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [...staticRoutes, ...docsRoutes, ...blogRoutes];
+  const featureRoutes: MetadataRoute.Sitemap = FEATURE_SLUGS.flatMap((slug) =>
+    SUPPORTED_LOCALES.map((locale) => ({
+      url: getLocalizedUrl(locale, `/features/${slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: getLanguageAlternates(`/features/${slug}`),
+      },
+    })),
+  );
+
+  return [...staticRoutes, ...docsRoutes, ...blogRoutes, ...featureRoutes];
 }

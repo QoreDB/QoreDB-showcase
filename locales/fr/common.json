@@ -180,7 +180,7 @@
     },
     "ph_badge": "Lancement sur Product Hunt",
     "title": "Une app pour <italic>toutes vos bases</italic>",
-    "subtitle": "Le client de bases de données open-source, rapide, propulsé par Rust. Connectez-vous à <highlight>13 drivers natifs</highlight> depuis une seule interface. Local-first: vos données restent chez vous.",
+    "subtitle": "Le client de bases de données open-source, rapide, propulsé par Rust. Connectez-vous à <highlight>15 drivers natifs</highlight> depuis une seule interface. Local-first: vos données restent chez vous.",
     "cta": {
       "join_beta": "Rejoindre la beta",
       "download_core": "Télécharger gratuitement",
@@ -252,11 +252,11 @@
   "features": {
     "eyebrow": "Fonctionnalités",
     "title": "Tout ce qu'il faut, <accent>rien de superflu</accent>",
-    "subtitle": "13 drivers, une interface. Pas d'Electron, pas de cloud, pas de bloat.",
+    "subtitle": "15 drivers, une interface. Pas d'Electron, pas de cloud, pas de bloat.",
     "items": {
       "unified": {
-        "title": "13 drivers natifs",
-        "desc": "Famille PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB et ClickHouse."
+        "title": "15 drivers natifs",
+        "desc": "Famille PostgreSQL, MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, Elasticsearch, OpenSearch et ClickHouse."
       },
       "workspaces": {
         "title": "Workspaces",
@@ -376,7 +376,7 @@
     "label": "Une interface, toutes les bases"
   },
   "product_specs": {
-    "databases": "13 drivers natifs",
+    "databases": "15 drivers natifs",
     "binary_size": "~15 Mo le binaire",
     "startup": "<1s au démarrage",
     "license": "Apache 2.0"
@@ -428,7 +428,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "13 drivers",
+        "multidb": "15 drivers",
         "native": "Rust/Tauri",
         "local": "Oui",
         "vault": "Argon2",
@@ -540,7 +540,7 @@
       "title": "Tout juste livré: v0.1.23 → v0.1.28",
       "quote": "QoreDB est plus rapide, plus sûr, prêt pour un usage quotidien sérieux.",
       "items": {
-        "1": "13 drivers natifs — ClickHouse rejoint Supabase, Neon et TimescaleDB",
+        "1": "15 drivers natifs — ClickHouse rejoint Supabase, Neon et TimescaleDB",
         "2": "Data Contracts (Pro) : règles de qualité de données déclaratives, réévaluées après mutation",
         "3": "Instant Data API (Pro) : exposez n'importe quelle requête sauvegardée en endpoint REST authentifié",
         "4": "Helpers de backup/restore, raccourcis personnalisables et empreintes de requêtes dans l'audit",
@@ -617,7 +617,7 @@
       },
       "supported_databases": {
         "question": "Quelles bases de données sont supportées ?",
-        "answer": "QoreDB supporte actuellement 13 drivers natifs :\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famille PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. authentification Windows: NTLM et Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (avec autocomplétion d'éditeur et linting d'agrégations)\n* Redis (avec gestion complète des clés)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, classification de sûreté AST)\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
+        "answer": "QoreDB supporte actuellement 15 drivers natifs :\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famille PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. authentification Windows: NTLM et Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (avec autocomplétion d'éditeur et linting d'agrégations)\n* Redis (avec gestion complète des clés)\n* CockroachDB\n* Elasticsearch\n* OpenSearch\n* ClickHouse (HTTP/HTTPS, classification de sûreté AST)\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
       },
       "remote_ssh": {
         "question": "Fonctionne-t-il avec des connexions distantes et SSH ?",
@@ -672,7 +672,7 @@
       "badge": "Plan principal",
       "cta": "Télécharger gratuitement",
       "features": {
-        "drivers": "13 drivers natifs (famille PostgreSQL avec Supabase, Neon, TimescaleDB ; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse)",
+        "drivers": "15 drivers natifs (famille PostgreSQL avec Supabase, Neon, TimescaleDB ; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, Elasticsearch, OpenSearch, ClickHouse)",
         "crud": "CRUD complet + éditeur SQL/Mongo avec autocomplétion et linting",
         "workspaces": "Workspaces:regroupez connexions, requêtes et notebooks par projet",
         "grid": "Grille haute performance avec bulk edit et filtres avancés",
@@ -1176,5 +1176,176 @@
     "landing_subtitle": "Tout pour installer QoreDB, connecter vos bases de données et avancer plus vite.",
     "fallback_banner_title": "Version anglaise affichée",
     "fallback_banner_body": "Cette page n'est pas encore traduite. La version anglaise est affichée ci-dessous."
+  },
+  "features_common": {
+    "tier_pro": "Pro",
+    "tier_core": "Core",
+    "back_to_index": "Toutes les fonctionnalités",
+    "learn_more": "En savoir plus",
+    "cta_download": "Télécharger QoreDB",
+    "cta_pricing": "Voir les tarifs",
+    "not_found_title": "Fonctionnalité introuvable",
+    "not_found_subtitle": "Cette page de fonctionnalité n'existe pas."
+  },
+  "features_index": {
+    "title": "Fonctionnalités phares",
+    "subtitle": "Ce que QoreDB fait en plus d'un client SQL classique. Pour chaque fonctionnalité : le mécanisme, un exemple, ses limites."
+  },
+  "features_pages": {
+    "federation": {
+      "eyebrow": "Data Tools · Fédération inter-bases",
+      "title": "Fédération inter-bases",
+      "subtitle": "Exécutez une requête SQL avec des JOIN entre plusieurs bases de données, sans exporter de CSV ni monter un entrepôt.",
+      "teaser": "Une seule requête SQL pour joindre des tables issues de plusieurs connexions actives — PostgreSQL, MySQL, MongoDB et les autres.",
+      "problem": {
+        "title": "Le problème",
+        "body": "Vos données vivent dans plusieurs bases : PostgreSQL pour l'application, MySQL pour la facturation, MongoDB pour les événements. Répondre à une question qui les croise oblige à exporter des CSV, écrire un script de collage, ou monter un entrepôt. Pour une vérification ponctuelle ou un rapprochement entre prod et facturation, c'est disproportionné."
+      },
+      "solution": {
+        "title": "Comment QoreDB le résout",
+        "intro": "QoreDB détecte les références de tables qui traversent plusieurs connexions et exécute la jointure localement, dans un moteur DuckDB en mémoire et éphémère. Vous écrivez du SQL standard ; le moteur s'occupe du reste.",
+        "steps": [
+          {
+            "title": "Référencez la table par son chemin complet",
+            "body": "Une table d'une connexion active se nomme sous la forme connexion.base.table (ou connexion.base.schéma.table). L'alias de connexion est le nom normalisé de votre connexion enregistrée."
+          },
+          {
+            "title": "QoreDB planifie la récupération",
+            "body": "Seules les colonnes utilisées sont lues, et les filtres WHERE sont poussés vers chaque source quand c'est possible, pour limiter le volume transféré."
+          },
+          {
+            "title": "La jointure s'exécute en mémoire",
+            "body": "Les lignes de chaque source sont chargées dans un moteur DuckDB en mémoire, puis la requête s'exécute là. Rien n'est persisté : l'instance est détruite après la requête."
+          },
+          {
+            "title": "Vous récupérez un résultat unique",
+            "body": "Le résultat revient comme n'importe quelle requête, avec le détail par source (lignes lues, durée) et les avertissements éventuels."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un exemple concret",
+        "intro": "Ici, prod_pg est une connexion PostgreSQL et billing_mysql une connexion MySQL. Une seule requête croise les utilisateurs de l'application et les commandes de facturation :",
+        "caption": "Deux bases, deux moteurs, une jointure — sans export intermédiaire. La requête reste en lecture seule : elle n'écrit jamais dans vos sources."
+      },
+      "limits": {
+        "title": "Les limites, en toute transparence",
+        "intro": "La fédération vise les jointures opérationnelles et les rapprochements, pas le remplacement d'un entrepôt analytique. Ses bornes sont explicites :",
+        "items": [
+          "Chaque source est plafonnée à 100 000 lignes par défaut (configurable par requête) ; un avertissement s'affiche quand le plafond est atteint.",
+          "Les lignes sont matérialisées en mémoire dans DuckDB : la fédération vise des volumes raisonnables, pas des scans analytiques illimités sur de très grosses tables.",
+          "Délai d'attente de 30 s par source, et de 60 s par défaut pour l'ensemble de la requête.",
+          "Requêtes SELECT uniquement, une seule instruction : une requête fédérée n'écrit jamais dans les bases sous-jacentes.",
+          "Il faut au moins deux connexions actives pour composer une jointure inter-bases."
+        ]
+      },
+      "cta": {
+        "title": "Croisez vos bases sans pipeline",
+        "body": "La fédération inter-bases fait partie de QoreDB Pro. Téléchargez l'application et essayez-la sur vos connexions."
+      }
+    },
+    "time-travel": {
+      "eyebrow": "Data Tools · Data Time-Travel",
+      "title": "Data Time-Travel",
+      "subtitle": "Un « git blame » pour vos données : qui a changé quoi, quand, et le SQL pour revenir en arrière.",
+      "teaser": "L'historique ligne par ligne des mutations faites dans QoreDB, avec diff temporel et SQL de rollback.",
+      "problem": {
+        "title": "Le problème",
+        "body": "Une valeur est fausse en base. Qui l'a changée, quand, et quelle était la valeur d'avant ? Sans journal, vous n'avez que l'état actuel. Un UPDATE sans WHERE, une correction manuelle mal saisie, et il faut restaurer un dump entier pour récupérer une poignée de lignes."
+      },
+      "solution": {
+        "title": "Comment QoreDB le résout",
+        "intro": "Quand vous modifiez des données depuis QoreDB, l'application enregistre une image avant/après de chaque ligne touchée dans un journal local. Vous obtenez une frise chronologique, l'historique d'une ligne précise, un diff entre deux instants, et le SQL pour annuler.",
+        "steps": [
+          {
+            "title": "Capture avant/après",
+            "body": "À chaque INSERT, UPDATE ou DELETE effectué dans QoreDB, l'application enregistre l'opération, la clé primaire, les colonnes modifiées, et l'état de la ligne avant et après."
+          },
+          {
+            "title": "Frise et historique par ligne",
+            "body": "La frise chronologique regroupe les changements ; le panneau d'historique montre, pour une ligne donnée, toutes ses versions successives — un blame au niveau de la donnée."
+          },
+          {
+            "title": "Diff temporel",
+            "body": "Comparez l'état d'une table entre deux instants T1 et T2 : lignes ajoutées, modifiées, supprimées, avec le détail des colonnes."
+          },
+          {
+            "title": "SQL de rollback",
+            "body": "QoreDB génère le SQL qui inverse une sélection de changements (INSERT → DELETE, UPDATE → valeur d'avant, DELETE → réinsertion), en ordre anti-chronologique et encadré par BEGIN/COMMIT. Vous le relisez dans l'éditeur avant de l'exécuter."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un exemple concret",
+        "intro": "Après un UPDATE trop large, QoreDB produit le SQL d'annulation, avec des valeurs littérales à relire :",
+        "caption": "Le rollback n'est jamais appliqué automatiquement : il est généré pour que vous le relisiez et l'exécutiez vous-même. Les changements qui ne peuvent pas être entièrement inversés sont signalés."
+      },
+      "limits": {
+        "title": "Les limites, en toute transparence",
+        "intro": "Le Time-Travel est un journal applicatif, pas une capacité du moteur de base. Ses bornes :",
+        "items": [
+          "Seules les mutations effectuées depuis QoreDB sont capturées. Les écritures externes — votre application, psql, un autre outil — ne le sont pas.",
+          "La ligne doit avoir une clé primaire : c'est elle qui identifie l'image avant/après et rend le rollback possible.",
+          "L'image « avant » est capturée au mieux (plafond de 2 s pour ne pas ralentir la mutation) ; si elle échoue, l'inversion peut être partielle et un avertissement l'indique.",
+          "Le journal est local, avec rotation et rétention configurables ; les colonnes sensibles peuvent être masquées ([REDACTED]) avant écriture sur disque.",
+          "Le SQL de rollback est généré pour relecture, jamais exécuté automatiquement."
+        ]
+      },
+      "cta": {
+        "title": "Gardez la trace de chaque changement",
+        "body": "Le Data Time-Travel fait partie de QoreDB Pro. Téléchargez l'application et activez la capture sur vos connexions."
+      }
+    },
+    "data-contracts": {
+      "eyebrow": "Data Quality · Data Contracts",
+      "title": "Data Contracts",
+      "subtitle": "Des assertions de qualité déclaratives, écrites en YAML et exécutées en SQL sur vos tables.",
+      "teaser": "12 types de règles (présence, format, domaine, unicité, référentiel, cardinalité, SQL custom) dans un contrat YAML versionnable.",
+      "problem": {
+        "title": "Le problème",
+        "body": "La qualité des données se dégrade en silence : une colonne qui se remplit de NULL, un statut hors de la liste attendue, une clé étrangère orpheline. On s'en aperçoit quand un rapport est faux. Écrire à chaque fois des requêtes de contrôle à la main, puis se souvenir de les relancer, ne tient pas dans la durée."
+      },
+      "solution": {
+        "title": "Comment QoreDB le résout",
+        "intro": "Vous décrivez vos attentes dans un contrat YAML — une table, une liste de règles. QoreDB traduit chaque règle en SQL adapté au moteur, l'exécute, et agrège les résultats en un état de santé. Le contrat vit dans votre dépôt, versionné avec le reste.",
+        "steps": [
+          {
+            "title": "Un contrat déclaratif",
+            "body": "Un fichier YAML cible une table et liste des règles typées. Chaque règle porte un id, une sévérité (error, warning, info) et ses paramètres. Le fichier est stocké dans .qoredb/contracts/, donc versionnable avec votre code."
+          },
+          {
+            "title": "12 types de règles",
+            "body": "Présence (not_null_pct, not_empty), format (regex_match, length_range), domaine (numeric_range, date_range, allowed_values), unicité (unique, distinct_count), intégrité référentielle (foreign_key_integrity), volume (row_count) et SQL custom."
+          },
+          {
+            "title": "Exécution en SQL, multi-moteur",
+            "body": "Le runner génère le SQL propre à chaque dialecte et l'exécute via la connexion active. Compatible PostgreSQL et dérivés, MySQL/MariaDB, SQLite, DuckDB, SQL Server et ClickHouse."
+          },
+          {
+            "title": "État de santé et échantillons",
+            "body": "Chaque exécution produit un statut par règle (passée / échouée) et un badge de santé du contrat. Pour les règles en échec, QoreDB collecte un échantillon des lignes fautives (limite configurable). Une cellule de notebook dédiée permet d'exécuter un contrat dans un rapport."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un exemple concret",
+        "intro": "Un contrat pour une table de commandes : présence de l'email, statut dans un domaine fermé, intégrité de la clé étrangère, total positif.",
+        "caption": "Le contrat est un fichier versionné. Il détecte les violations lors de son exécution — il ne remplace pas les contraintes de la base, il les complète là où elles manquent."
+      },
+      "limits": {
+        "title": "Les limites, en toute transparence",
+        "intro": "Les contrats sont un outil de détection, pas un mécanisme de blocage. Ses bornes :",
+        "items": [
+          "Moteurs SQL uniquement : le runner s'appuie sur l'exécution SQL (PostgreSQL et dérivés, MySQL/MariaDB, SQLite, DuckDB, SQL Server, ClickHouse). Les bases NoSQL ne sont pas couvertes.",
+          "Les règles sont évaluées quand le contrat est exécuté (manuellement ou via la cellule notebook) : elles détectent les problèmes, elles n'empêchent pas les écritures fautives comme le ferait une contrainte SQL.",
+          "La règle custom_sql est aussi fiable que le SQL que vous y écrivez : c'est à vous d'en garantir l'exactitude.",
+          "Sur de grosses tables, la collecte d'échantillons de lignes fautives est plafonnée (limite configurable) et peut être désactivée."
+        ]
+      },
+      "cta": {
+        "title": "Formalisez vos attentes sur les données",
+        "body": "Les Data Contracts font partie de QoreDB Pro. Téléchargez l'application et écrivez votre premier contrat."
+      }
+    }
   }
 }

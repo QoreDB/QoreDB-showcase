@@ -13,6 +13,8 @@ const databases = [
   { name: "SQLite", image: "/images/databases/sqlite.webp" },
   { name: "DuckDB", image: "/images/databases/duckdb.png" },
   { name: "ClickHouse", image: "/images/databases/clickhouse.png" },
+  { name: "Elasticsearch", image: "/images/databases/elasticsearch.png" },
+  { name: "OpenSearch", image: "/images/databases/opensearch.png" },
   { name: "TimescaleDB", image: "/images/databases/timescaledb.png" },
   { name: "SQL Server", image: "/images/databases/sqlserver.png" },
   { name: "CockroachDB", image: "/images/databases/cockroachdb.png" },
