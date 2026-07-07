@@ -65,7 +65,7 @@
     },
     "ph_badge": "Product Hunt での発売",
     "title": "<italic>すべてのデータベース</italic> に 1 つのアプリで対応",
-    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>13 個のネイティブ ドライバー</highlight>に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
+    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>15 個のネイティブ ドライバー</highlight>に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
     "cta": {
       "join_beta": "ベータ版に参加する",
       "download_core": "無料ダウンロード",
@@ -136,10 +136,10 @@
   "features": {
     "eyebrow": "特長",
     "title": "必要なものはすべて揃っており、<accent>必要なものは何もありません</accent>",
-    "subtitle": "13 個のドライバー、1 つのインターフェイス。Electron もクラウド依存も bloat もありません。",
+    "subtitle": "15 個のドライバー、1 つのインターフェイス。Electron もクラウド依存も bloat もありません。",
     "items": {
       "unified": {
-        "title": "13 個のネイティブ ドライバー",
+        "title": "15 個のネイティブ ドライバー",
         "desc": "PostgreSQL ファミリー（Supabase、Neon、TimescaleDB を含む）、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB、ClickHouse。"
       },
       "workspaces": {
@@ -259,7 +259,7 @@
     "label": "1 つのインターフェイス、すべてのデータベース"
   },
   "product_specs": {
-    "databases": "13ドライバー",
+    "databases": "15ドライバー",
     "binary_size": "~15 MB バイナリ",
     "startup": "1秒未満の起動",
     "license": "アパッチ2.0"
@@ -311,7 +311,7 @@
     "values": {
       "qoredb": {
         "opensource": "アパッチ2.0",
-        "multidb": "13ドライバー",
+        "multidb": "15ドライバー",
         "native": "ラスト/タウリ",
         "local": "はい",
         "vault": "アルゴン2",
@@ -420,10 +420,10 @@
     "title": "QoreDB ロードマップ",
     "subtitle": "QoreDB 開発の次のステップをご覧ください。",
     "now": {
-      "title": "リリース済み：v0.1.23 → v0.1.28",
+      "title": "リリース済み：v0.1.23 → v0.1.31",
       "quote": "QoreDB はより速く、より安全になり、本格的な日常使用の準備が整いました。",
       "items": {
-        "1": "13 個のネイティブ ドライバー — ClickHouse が Supabase、Neon、TimescaleDB に加わりました",
+        "1": "15 個のネイティブ ドライバー — Elasticsearch と OpenSearch が ClickHouse、Supabase、Neon、TimescaleDB に加わりました",
         "2": "Data Contracts（Pro）：宣言的なデータ品質ルール、ミューテーション後に再評価",
         "3": "Instant Data API（Pro）：保存済みクエリをトークン認証付き REST エンドポイントとして公開",
         "4": "バックアップ／リストアのヘルパー、カスタマイズ可能なショートカット、監査でのクエリ フィンガープリント",
@@ -500,7 +500,7 @@
       },
       "supported_databases": {
         "question": "どのデータベースがサポートされていますか?",
-        "answer": "QoreDB は現在 13 個のネイティブ ドライバーをサポートしています:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB（PostgreSQL ファミリー）\n* MySQL / MariaDB\n* SQL Server（Windows 認証：NTLM および Kerberos を含む）\n* SQLite\n* DuckDB\n* MongoDB（エディタのオートコンプリートと集計の linting 付き）\n* Redis（フルキー管理付き）\n* CockroachDB\n* ClickHouse (HTTP/HTTPS、AST セーフティ分類)\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
+        "answer": "QoreDB は現在 15 個のネイティブ ドライバーをサポートしています:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB（PostgreSQL ファミリー）\n* MySQL / MariaDB\n* SQL Server（Windows 認証：NTLM および Kerberos を含む）\n* SQLite\n* DuckDB\n* MongoDB（エディタのオートコンプリートと集計の linting 付き）\n* Redis（フルキー管理付き）\n* CockroachDB\n* ClickHouse (HTTP/HTTPS、AST セーフティ分類)\n* Elasticsearch（複数の認証モード、専用の検索エディタ、SQL モード）\n* OpenSearch（複数の認証モード、専用の検索エディタ、SQL モード）\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
       },
       "remote_ssh": {
         "question": "リモート接続と SSH は機能しますか?",
@@ -543,8 +543,7 @@
   "pricing_page": {
     "badge": "オープンコア",
     "title": "ワークフローに合ったプランをお選びください",
-    "subtitle": "ソロ作業や探索には無料、日々のプロの仕事には Pro。",
-    "billing_note": "Pro の永久ライセンス、1 回限りの支払い",
+    "subtitle": "個人利用は無料、日常の仕事には Pro。",
     "checkout_error": "現在、Stripe Checkout を開始できません。",
     "faq_title": "よくある質問",
     "core": {
@@ -555,7 +554,7 @@
       "badge": "主な選択肢",
       "cta": "無料でダウンロード",
       "features": {
-        "drivers": "13 個のネイティブ ドライバー（PostgreSQL ファミリー：Supabase、Neon、TimescaleDB を含む。MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB）",
+        "drivers": "15 個のネイティブ ドライバー（PostgreSQL ファミリー：Supabase、Neon、TimescaleDB を含む。MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB、ClickHouse、Elasticsearch、OpenSearch）",
         "crud": "完全な CRUD + オートコンプリートと linting 付きの SQL/Mongo エディター",
         "workspaces": "Workspaces：接続、クエリ、ノートブックをプロジェクトごとにグループ化",
         "grid": "bulk edit と高度なフィルター付きの高性能データ グリッド",
@@ -590,22 +589,34 @@
         "security_rules": "カスタム安全ルール",
         "library_advanced": "高度なクエリ ライブラリ",
         "virtual_relations": "仮想関係の自動提案"
-      }
+      },
+      "individual_use": "個人利用向けライセンス。"
     },
     "team": {
       "title": "Team",
-      "tagline": "チーム向け",
-      "description": "チーム向けの高度なコラボレーション。",
-      "price": "近日公開予定",
-      "badge": "近日公開予定",
-      "cta": "お問い合わせ",
+      "tagline": "チームのための Pro",
+      "description": "チーム全体に Pro 機能を、シート単位で管理。",
+      "price": "近日公開",
+      "badge": "シート単位",
+      "cta": "購入",
       "features": {
-        "everything_pro": "プロのすべて",
-        "sync": "マルチデバイス同期",
-        "shared_queries": "共有クエリライブラリ",
-        "permissions": "きめ細かな権限",
-        "managed_ai": "マネージドAI"
-      }
+        "everything_pro": "Pro のすべて",
+        "seat_management": "セルフサービスのシート管理",
+        "central_billing": "一括請求 + 法人向け請求書（EU VAT）",
+        "priority_support": "優先サポート"
+      },
+      "per_seat_note": "1シート / 年",
+      "seats_label": "シート数",
+      "seats_decrease": "シートを減らす",
+      "seats_increase": "シートを追加",
+      "total_label": "合計",
+      "per_year": "/ 年",
+      "min_seats_note": "最低 {{min}} シート",
+      "nominative_note": "記名シート：1人につき1ライセンス。",
+      "from_price": "{{price}} から",
+      "discover_cta": "Team を見る",
+      "back": "料金に戻る",
+      "page_subtitle": "チーム全体に Pro 機能を——記名シート、一括請求、優先サポート。"
     },
     "faq": {
       "open_core_why": {
@@ -627,6 +638,24 @@
       "pro_source_code": {
         "question": "Pro のソースコードは利用可能ですか?",
         "answer": "Pro の機能は BSL 1.1 の下にあり、4 年後に自動的に Apache 2.0 に変換されます。コードは読み取り可能ですが、その期間中の再配布は制限されます。"
+      },
+      "team_sharing": {
+        "question": "1つの Team キーを複数人で共有できますか？",
+        "answer": "いいえ。Team ライセンスはシート単位です。各メンバーは自分専用の記名キー（1人につき1つ）を受け取ります。キーの共有や購入シート数を超える利用は利用規約で禁止されています。"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "大規模組織向け",
+      "description": "カスタム要件、専用のセキュリティと契約。",
+      "price": "個別見積もり",
+      "badge": "カスタム",
+      "cta": "お問い合わせ",
+      "features": {
+        "everything_team": "Team のすべて",
+        "sso": "SSO / SAML（近日公開）",
+        "managed_ai": "マネージド AI（近日公開）",
+        "custom_contract": "カスタム契約と請求"
       }
     }
   },
@@ -733,7 +762,12 @@
     "download_cta": "QoreDB をダウンロード",
     "home_cta": "ホームページに戻る",
     "copy": "キーをコピーする",
-    "copied": "コピーされました"
+    "copied": "コピーされました",
+    "team": {
+      "heading": "チームの準備が整いました",
+      "body": "各シートは記名式です（1人につき1ライセンス）。あなた自身のシートはすでに有効で、上のキーがあなたのものです。チームに共有する招待リンクをメールでお送りしました。",
+      "manage_cta": "チームを管理"
+    }
   },
   "privacy_page": {
     "title": "プライバシーポリシー",
@@ -854,36 +888,40 @@
         "content": "QoreDB ソフトウェアは **オープンコア** モデルで配布されています。\n\n※コードの一部はオープンソースライセンスに基づいて公開されており、\n* 特定の機能、拡張機能、またはサービスには、別の独自ライセンスが適用される場合があります。\n\nソフトウェアの使用、変更、配布に関する正確な条件は、**QoreDB ライセンス** で定義されており、サイトおよび公式リポジトリで入手できます。"
       },
       "user_obligations": {
-        "title": "5. ユーザーの義務",
+        "title": "6. ユーザーの義務",
         "content": "ユーザーは以下に同意します:\n\n* 適用される法律および規制に従って QoreDB を使用します。\n* サイトまたはソフトウェアのセキュリティ、完全性、または適切な機能を侵害しないこと。\n* システムまたはデータへの不正アクセスを試みないでください。\n* QoreDB を詐欺、違法、または悪用の目的で使用しないでください。\n\n不正使用があった場合、サービスへのアクセスが停止される場合があります。"
       },
       "ip": {
-        "title": "6. 知的財産",
+        "title": "7. 知的財産",
         "content": "QoreDB サイトのすべての要素 (テキスト、ドキュメント、グラフィック、ロゴ、ビジュアル アイデンティティ) は知的財産権によって保護されています。\n\n特に明記されていない限り、許可なく複製、表現、または悪用することは禁止されています。\n\nQoreDB ソフトウェアのソース コードには、**ライセンス** ページで定義されている、該当するライセンスの条件が適用されます。"
       },
       "liability": {
-        "title": "7. 責任",
+        "title": "8. 責任",
         "content": "QoreDB は「現状のまま」提供され、いかなる種類の保証もありません。\n\nQoreDB は以下について責任を負うことはできません。\n\n* サイトまたはソフトウェアの使用に起因する直接的または間接的な損害、\n* データの損失、事業の中断、商業上の損害、\n* 不適切な構成またはソフトウェアの使用に関連する結果。\n\nユーザーは、QoreDB の使用および処理するデータに対して単独で責任を負います。"
       },
       "privacy": {
-        "title": "8. 個人データ",
+        "title": "9. 個人データ",
         "content": "個人データの処理は、QoreDB サイトからアクセスできる **プライバシー ポリシー** によって管理されます。"
       },
       "external_links": {
-        "title": "9. 外部リンク",
+        "title": "10. 外部リンク",
         "content": "QoreDB サイトには、サードパーティのサイトまたはサービスへのリンクが含まれている場合があります。 QoreDB は、これらのサービスを管理することはなく、そのコンテンツや機能に関する一切の責任を負いません。"
       },
       "updates": {
-        "title": "10.利用規約の変更",
+        "title": "11.利用規約の変更",
         "content": "QoreDB は、これらの ToS をいつでも変更する権利を留保します。\n\nユーザーは定期的に現在のバージョンを参照するよう勧められます。最終更新日はページ上部に表示されます。"
       },
       "law": {
-        "title": "11. 準拠法",
+        "title": "12. 準拠法",
         "content": "これらの利用規約はフランスの法律に準拠します。\n\n紛争が発生し、友好的に解決できなかった場合、管轄裁判所は、現行の法律に従って該当する管轄裁判所となります。"
       },
       "contact": {
-        "title": "12. 連絡先",
+        "title": "13. 連絡先",
         "content": "これらの利用規約に関する質問がある場合、ユーザーはサイトに示されている公式チャネルを通じて QoreDB チームに問い合わせることができます。"
+      },
+      "team_licensing": {
+        "title": "5. Team ライセンス（記名シート）",
+        "content": "**Team** ライセンスは**シート単位**で付与され、購入したシート数と同数の**記名シート**（**1人につき1つのライセンスキー**）が与えられます。\n\n* 各シートのキーは保有者のメールアドレスに紐づきます、\n* 複数人での**キーの共有**は**禁止**されています、\n* 購入したシート数を**超える**ソフトウェアの利用は**禁止**されています。\n\nサブスクリプションの契約者（管理者）はシートを割り当て、組織内でこれらの条件の遵守を確保する責任を負います。違反があった場合、ライセンスが停止または解除されることがあります。"
       }
     }
   },
@@ -897,7 +935,7 @@
       },
       "connect": {
         "title": "2. 最初の接続を作成する",
-        "content": "<p>サイドバーの <strong>+</strong> をクリックしてデータベースを追加します。QoreDB には 13 個のネイティブ ドライバーが付属しています:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（Windows 認証対応）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse</li></ul><p>接続文字列を貼り付けるとドライバーが自動検出されます。または、ホスト、ポート、データベース、ユーザー、環境 (dev/staging/prod) を入力します。すべてを <strong>Workspaces</strong> にまとめて、プロジェクトをきれいに保ちましょう。</p>"
+        "content": "<p>サイドバーの <strong>+</strong> をクリックしてデータベースを追加します。QoreDB には 15 個のネイティブ ドライバーが付属しています:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（Windows 認証対応）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>接続文字列を貼り付けるとドライバーが自動検出されます。または、ホスト、ポート、データベース、ユーザー、環境 (dev/staging/prod) を入力します。すべてを <strong>Workspaces</strong> にまとめて、プロジェクトをきれいに保ちましょう。</p>"
       },
       "explore": {
         "title": "3. データを探索する",
@@ -998,7 +1036,7 @@
     "title": "シンプルで透明性のある価格設定",
     "subtitle": "コアは永久に無料です。 Pro ではパワーユーザー向けの機能が利用可能になります。",
     "core_price": "無料",
-    "core_1": "13 個のネイティブ ドライバー（Supabase、Neon、TimescaleDB を含む）",
+    "core_1": "15 個のネイティブ ドライバー（Supabase、Neon、TimescaleDB を含む）",
     "core_2": "Workspaces、DDL、bulk edit、高度なフィルター",
     "core_3": "暗号化されたボールトとネイティブ SSH トンネリング",
     "core_4": "実稼働安全装置と 9 つの UI 言語",
@@ -1070,7 +1108,8 @@
       "field_category": "カテゴリ",
       "field_category_hint": "最も近いものを選んでください。レビュー時に調整できます。"
     },
-    "eyebrow": "プラグインライブラリ"
+    "eyebrow": "プラグインライブラリ",
+    "page_subtitle": "プラグインで QoreDB を拡張：スニペット、テーマ、接続テンプレート、WASM モジュール。"
   },
   "features_common": {
     "tier_pro": "Pro",
@@ -1241,6 +1280,41 @@
         "title": "データへの期待を明文化する",
         "body": "データ契約は QoreDB Pro の一部です。アプリをダウンロードして、最初の契約を書いてみてください。"
       }
+    }
+  },
+  "team_seats": {
+    "join": {
+      "title": "チームに参加",
+      "subtitle": "メールアドレスを入力して QoreDB ライセンスを受け取ります。",
+      "email_label": "メールアドレス",
+      "email_placeholder": "you@company.com",
+      "submit": "ライセンスを受け取る",
+      "success_title": "完了しました！",
+      "success_body": "ライセンスをメールでお送りしました。QoreDB を開き、設定 › ライセンス でキーを貼り付けて有効化してください。",
+      "cap_reached": "すべてのシートが使用中です。管理者にシートの解放を依頼してください。",
+      "invalid_link": "この招待リンクは無効か、有効期限が切れています。",
+      "missing_token": "招待リンクがありません。",
+      "error": "エラーが発生しました。もう一度お試しください。"
+    },
+    "admin": {
+      "title": "チームを管理",
+      "subtitle": "シート、招待、取り消し。",
+      "cap_label": "シート",
+      "used_label": "使用中",
+      "seats_heading": "チームメンバー",
+      "status_active": "有効",
+      "status_removed": "削除済み",
+      "remove": "削除",
+      "rotate": "招待リンクを再生成",
+      "join_link_label": "共有用の招待リンク",
+      "copy": "コピー",
+      "copied": "コピーしました",
+      "empty": "まだシートは取得されていません。",
+      "unauthorized": "この管理リンクは無効か、有効期限が切れています。",
+      "rotated": "新しいリンクを生成しました。古いリンクは使用できません。",
+      "removed": "シートを削除しました。",
+      "error": "エラーが発生しました。もう一度お試しください。",
+      "loading": "読み込み中…"
     }
   }
 }

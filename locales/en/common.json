@@ -14,7 +14,7 @@
   },
   "marketplace": {
     "page_title": "Plugins",
-    "page_subtitle": "Extend QoreDB with sandboxed plugins — snippet packs, themes, connection templates, and sandboxed WASM modules that hook the query lifecycle.",
+    "page_subtitle": "Extend QoreDB with plugins: snippet packs, themes, connection templates and WASM modules.",
     "section_title": "Available plugins",
     "section_subtitle": "Every plugin in this list passed maintainer review and lives in the public registry on GitHub.",
     "registry_link_label": "Browse the registry on GitHub",
@@ -537,10 +537,10 @@
     "title": "QoreDB Roadmap",
     "subtitle": "Discover what just shipped and what's coming next.",
     "now": {
-      "title": "Just shipped: v0.1.23 → v0.1.28",
+      "title": "Just shipped: v0.1.23 → v0.1.31",
       "quote": "QoreDB is faster, safer and ready for serious daily use.",
       "items": {
-        "1": "15 native drivers — ClickHouse joins the family alongside Supabase, Neon and TimescaleDB",
+        "1": "15 native drivers — Elasticsearch and OpenSearch join the family alongside ClickHouse, Supabase, Neon and TimescaleDB",
         "2": "Data Contracts (Pro): declarative data-quality rules with post-mutation re-evaluation",
         "3": "Instant Data API (Pro): turn any saved query into a token-authenticated REST endpoint",
         "4": "Backup & restore helpers, customizable shortcuts and audit query fingerprinting",
@@ -617,7 +617,7 @@
       },
       "supported_databases": {
         "question": "Which databases are supported?",
-        "answer": "QoreDB currently supports 15 native drivers:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (PostgreSQL family)\n* MySQL / MariaDB\n* SQL Server (incl. Windows authentication: NTLM and Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (with editor autocomplete and aggregation linting)\n* Redis (with full key management)\n* CockroachDB\n* Elasticsearch\n* OpenSearch\n* ClickHouse (HTTP/HTTPS, AST safety classification)\n\nMore engines are planned as the architecture evolves."
+        "answer": "QoreDB currently supports 15 native drivers:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (PostgreSQL family)\n* MySQL / MariaDB\n* SQL Server (incl. Windows authentication: NTLM and Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (with editor autocomplete and aggregation linting)\n* Redis (with full key management)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, AST safety classification)\n* Elasticsearch (multiple auth modes, dedicated search editor, SQL mode)\n* OpenSearch (multiple auth modes, dedicated search editor, SQL mode)\n\nMore engines are planned as the architecture evolves."
       },
       "remote_ssh": {
         "question": "Does it work with remote connections and SSH?",
@@ -660,8 +660,7 @@
   "pricing_page": {
     "badge": "Open Core",
     "title": "Choose the plan that fits your workflow",
-    "subtitle": "Free for solo work and exploration. Pro for your daily professional flow.",
-    "billing_note": "Perpetual license, one-time payment for Pro",
+    "subtitle": "Free for solo work, Pro for the daily job.",
     "checkout_error": "Unable to start Stripe Checkout right now.",
     "faq_title": "Frequently asked questions",
     "core": {
@@ -672,7 +671,7 @@
       "badge": "Main choice",
       "cta": "Download for free",
       "features": {
-        "drivers": "15 native drivers (PostgreSQL family with Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, Elasticsearch, OpenSearch, ClickHouse)",
+        "drivers": "15 native drivers (PostgreSQL family with Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch)",
         "crud": "Full CRUD + SQL/Mongo editor with autocomplete and linting",
         "workspaces": "Workspaces:group connections, queries and notebooks by project",
         "grid": "High-performance data grid with bulk edit and advanced filters",
@@ -707,22 +706,34 @@
         "security_rules": "Custom safety rules",
         "library_advanced": "Advanced query library",
         "virtual_relations": "Auto-suggest virtual relations"
-      }
+      },
+      "individual_use": "License for individual use."
     },
     "team": {
       "title": "Team",
-      "tagline": "Built for teams",
-      "description": "Advanced collaboration for teams.",
+      "tagline": "Pro for your teams",
+      "description": "Pro features for the whole team, managed per seat.",
       "price": "Coming soon",
-      "badge": "Coming Soon",
-      "cta": "Contact us",
+      "badge": "Per seat",
+      "cta": "Buy",
       "features": {
         "everything_pro": "Everything in Pro",
-        "sync": "Multi-device sync",
-        "shared_queries": "Shared query libraries",
-        "permissions": "Granular permissions",
-        "managed_ai": "Managed AI"
-      }
+        "seat_management": "Self-service seat management",
+        "central_billing": "Central billing + company invoice (EU VAT)",
+        "priority_support": "Priority support"
+      },
+      "per_seat_note": "per seat / year",
+      "seats_label": "Seats",
+      "seats_decrease": "Remove a seat",
+      "seats_increase": "Add a seat",
+      "total_label": "Total",
+      "per_year": "/ year",
+      "min_seats_note": "Minimum {{min}} seats",
+      "nominative_note": "Named seats: one license per person.",
+      "from_price": "From {{price}}",
+      "discover_cta": "Explore Team",
+      "back": "Back to pricing",
+      "page_subtitle": "Pro features for the whole team — named seats, central billing, priority support."
     },
     "faq": {
       "open_core_why": {
@@ -744,6 +755,24 @@
       "pro_source_code": {
         "question": "Is Pro source code available?",
         "answer": "Pro features are under BSL 1.1 and automatically convert to Apache 2.0 after 4 years. Code is readable but redistribution is restricted during that period."
+      },
+      "team_sharing": {
+        "question": "Can I share one Team key with several people?",
+        "answer": "No. The Team licence is per seat: each member receives their own named key (one key per person). Sharing a key or using the software beyond the purchased seats is prohibited by the terms of use."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "For large organizations",
+      "description": "Custom needs, dedicated security and contract.",
+      "price": "Custom quote",
+      "badge": "Tailored",
+      "cta": "Contact us",
+      "features": {
+        "everything_team": "Everything in Team",
+        "sso": "SSO / SAML (coming soon)",
+        "managed_ai": "Managed AI (coming soon)",
+        "custom_contract": "Custom contract and billing"
       }
     }
   },
@@ -850,7 +879,12 @@
     "download_cta": "Download QoreDB",
     "home_cta": "Back to homepage",
     "copy": "Copy key",
-    "copied": "Copied"
+    "copied": "Copied",
+    "team": {
+      "heading": "Your Team is ready",
+      "body": "Each seat is named (one license per person). Your own seat is already active: the key above is yours. We've emailed you the invite link to share with your team.",
+      "manage_cta": "Manage my team"
+    }
   },
   "privacy_page": {
     "title": "Privacy Policy",
@@ -971,36 +1005,40 @@
         "content": "The QoreDB software is distributed under an **open-core** model:\n\n* a part of the code is published under an open-source license,\n* certain features, extensions, or services may be subject to a separate proprietary license.\n\nThe precise conditions for use, modification, and distribution of the software are defined in the **QoreDB License**, available on the site and in the official repositories."
       },
       "user_obligations": {
-        "title": "5. User Obligations",
+        "title": "6. User Obligations",
         "content": "The user agrees to:\n\n* use QoreDB in accordance with applicable laws and regulations,\n* not infringe on the security, integrity, or proper functioning of the site or the software,\n* not attempt unauthorized access to systems or data,\n* not use QoreDB for fraudulent, illegal, or abusive purposes.\n\nAny abusive use may result in the suspension of access to services."
       },
       "ip": {
-        "title": "6. Intellectual Property",
+        "title": "7. Intellectual Property",
         "content": "All elements of the QoreDB site (texts, documentation, graphics, logo, visual identity) are protected by intellectual property rights.\n\nUnless otherwise stated, any unauthorized reproduction, representation, or exploitation is prohibited.\n\nThe source code of the QoreDB software is subject to the terms of the applicable license, as defined in the **License** page."
       },
       "liability": {
-        "title": "7. Liability",
+        "title": "8. Liability",
         "content": "QoreDB is provided \"as is\", without warranty of any kind.\n\nQoreDB cannot be held liable for:\n\n* direct or indirect damages resulting from the use of the site or software,\n* data loss, business interruption, or commercial damages,\n* consequences related to improper configuration or use of the software.\n\nThe user is solely responsible for their use of QoreDB and the data they process."
       },
       "privacy": {
-        "title": "8. Personal Data",
+        "title": "9. Personal Data",
         "content": "Personal data processing is governed by the **Privacy Policy** accessible on the QoreDB site."
       },
       "external_links": {
-        "title": "9. External Links",
+        "title": "10. External Links",
         "content": "The QoreDB site may contain links to third-party sites or services. QoreDB exercises no control over these services and declines all responsibility regarding their content or functioning."
       },
       "updates": {
-        "title": "10. Changes to ToS",
+        "title": "11. Changes to ToS",
         "content": "QoreDB reserves the right to modify these ToS at any time.\n\nUsers are invited to regularly consult the current version. The date of the last update is indicated at the top of the page."
       },
       "law": {
-        "title": "11. Applicable Law",
+        "title": "12. Applicable Law",
         "content": "These ToS are governed by French law.\n\nIn the event of a dispute, and failing amicable resolution, the competent courts will be those of the applicable jurisdiction in accordance with the legislation in force."
       },
       "contact": {
-        "title": "12. Contact",
+        "title": "13. Contact",
         "content": "For any question relating to these Terms of Service, the user can contact the QoreDB team via the official channels indicated on the site."
+      },
+      "team_licensing": {
+        "title": "5. Team licences (named seats)",
+        "content": "The **Team** licence is granted **per seat**. It grants as many **named seats** as the number of seats purchased, at the rate of **one (1) licence key per person**.\n\n* each seat key is tied to its holder's email address,\n* **sharing a key** among several people is **prohibited**,\n* using the software **beyond the number of purchased seats** is **prohibited**.\n\nThe subscription holder (administrator) assigns the seats and ensures compliance with these terms within their organisation. Any breach may result in the suspension or termination of the licence."
       }
     }
   },
@@ -1014,7 +1052,7 @@
       },
       "connect": {
         "title": "2. Create Your First Connection",
-        "content": "<p>Click on <strong>+</strong> in the sidebar to add a database. QoreDB ships 13 native drivers:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (Windows auth supported)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse</li></ul><p>Paste a connection string for instant driver detection, or enter host, port, database, user and environment (dev/staging/prod). Group everything into <strong>Workspaces</strong> to keep projects clean.</p>"
+        "content": "<p>Click on <strong>+</strong> in the sidebar to add a database. QoreDB ships 15 native drivers:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (Windows auth supported)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>Paste a connection string for instant driver detection, or enter host, port, database, user and environment (dev/staging/prod). Group everything into <strong>Workspaces</strong> to keep projects clean.</p>"
       },
       "explore": {
         "title": "3. Explore Your Data",
@@ -1346,6 +1384,41 @@
         "title": "Formalize your expectations on the data",
         "body": "Data Contracts are part of QoreDB Pro. Download the app and write your first contract."
       }
+    }
+  },
+  "team_seats": {
+    "join": {
+      "title": "Join the team",
+      "subtitle": "Enter your email to receive your QoreDB license.",
+      "email_label": "Your email",
+      "email_placeholder": "you@company.com",
+      "submit": "Get my license",
+      "success_title": "All set!",
+      "success_body": "Your license has been emailed to you. Open QoreDB, go to Settings › License, paste the key and activate.",
+      "cap_reached": "All seats are taken. Ask your admin to free up a seat.",
+      "invalid_link": "This invite link is invalid or has expired.",
+      "missing_token": "Missing invite link.",
+      "error": "Something went wrong. Please try again."
+    },
+    "admin": {
+      "title": "Manage your team",
+      "subtitle": "Seats, invitations and revocations.",
+      "cap_label": "Seats",
+      "used_label": "used",
+      "seats_heading": "Team members",
+      "status_active": "Active",
+      "status_removed": "Removed",
+      "remove": "Remove",
+      "rotate": "Regenerate invite link",
+      "join_link_label": "Invite link to share",
+      "copy": "Copy",
+      "copied": "Copied",
+      "empty": "No seat has been claimed yet.",
+      "unauthorized": "This management link is invalid or has expired.",
+      "rotated": "New link generated. The old one no longer works.",
+      "removed": "Seat removed.",
+      "error": "Something went wrong. Please try again.",
+      "loading": "Loading…"
     }
   }
 }

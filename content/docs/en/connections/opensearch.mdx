@@ -1,0 +1,67 @@
+---
+title: OpenSearch
+description: Connect QoreDB to OpenSearch over HTTP or HTTPS. Multiple authentication modes, a dedicated search editor, SQL mode and result streaming.
+premium: false
+---
+
+# OpenSearch
+
+QoreDB ships a native OpenSearch driver that talks to the cluster over HTTP (port `9200`) or HTTPS. OpenSearch is the Apache 2.0 fork of Elasticsearch, and QoreDB treats it as a first-class engine: schema browser, results grid, exports and notebooks all work the same way, with a **search editor** for the Query DSL and a **SQL mode** for relational-style queries.
+
+## Quick connect
+
+Pick the **OpenSearch** engine and enter the cluster address. The default port is `9200`.
+
+```
+http://USER:PASSWORD@HOST:9200
+https://USER:PASSWORD@HOST:9200
+```
+
+Managed OpenSearch services (including AWS OpenSearch Service) are exposed over HTTPS. Paste the endpoint and choose the authentication mode that matches your deployment.
+
+## Connection fields
+
+| Field        | Required | Notes                                                                          |
+| ------------ | -------- | ------------------------------------------------------------------------------ |
+| **Host**     | Yes      | Hostname or IP. Domain endpoint for managed services.                          |
+| **Port**     | Yes      | `9200` by default.                                                             |
+| **TLS**      | Optional | Enable for HTTPS. Uses Rustls under the hood; no system OpenSSL required.       |
+| **CA cert**  | Optional | Custom CA certificate for clusters with a private or self-signed authority.    |
+
+## Authentication modes
+
+The driver supports several authentication modes, selectable in the connection modal:
+
+- **None** — for a local cluster started without the security plugin.
+- **Basic auth** — username and password (stored encrypted in the vault).
+- **API key** — sent as the `Authorization` header.
+- **Bearer token** — a bearer token for token-based or service-account auth.
+
+## Search editor and SQL mode
+
+OpenSearch exposes two query surfaces in QoreDB:
+
+- **Search editor** — write Query DSL against an index (`_search` requests), with results rendered in the grid. Best for full-text search and aggregations.
+- **SQL mode** — run `SELECT` statements through OpenSearch's SQL plugin. Convenient for tabular exploration and for reusing SQL across engines.
+
+Large result sets are streamed into the grid as they arrive rather than buffered whole, so a broad query starts rendering rows immediately.
+
+## Query safety
+
+Read operations (searches, SQL `SELECT`, `_cat` and index introspection) run freely. Operations that mutate or administer the cluster — index creation/deletion, document writes, `_reindex`, cluster settings — are gated by QoreDB's universal safety net: read-only mode and environment guards (dev/staging/prod) apply exactly as they do on PostgreSQL or MySQL.
+
+## Common issues
+
+<Callout type="warning">
+**TLS handshake fails**: managed and secured clusters require HTTPS. Make sure the URL starts with `https://`, and add your cluster's CA certificate if it uses a private or self-signed authority.
+</Callout>
+
+<Callout type="info">
+**AWS OpenSearch Service**: domains using SigV4 request signing instead of basic auth or tokens may need a proxy in front; use one of the supported authentication modes for direct connections.
+</Callout>
+
+## Where to go next
+
+- [Elasticsearch](/docs/connections/elasticsearch) for the original engine
+- [Driver limitations](/docs/reference/driver-limitations) for the per-engine quirks
+- [Connection URLs](/docs/reference/connection-urls) for the accepted URL schemes

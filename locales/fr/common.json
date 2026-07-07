@@ -14,7 +14,7 @@
   },
   "marketplace": {
     "page_title": "Plugins",
-    "page_subtitle": "Étendez QoreDB avec des plugins sandboxés — packs de snippets, thèmes, templates de connexion, et modules WASM qui s'accrochent au cycle de vie des requêtes.",
+    "page_subtitle": "Étendez QoreDB avec des plugins : snippets, thèmes, templates de connexion et modules WASM.",
     "section_title": "Plugins disponibles",
     "section_subtitle": "Chaque plugin de cette liste a été relu par les mainteneurs et vit dans le registre public sur GitHub.",
     "registry_link_label": "Parcourir le registre sur GitHub",
@@ -537,10 +537,10 @@
     "title": "Roadmap QoreDB",
     "subtitle": "Ce qui vient d'être livré, et ce qui arrive ensuite.",
     "now": {
-      "title": "Tout juste livré: v0.1.23 → v0.1.28",
+      "title": "Tout juste livré: v0.1.23 → v0.1.31",
       "quote": "QoreDB est plus rapide, plus sûr, prêt pour un usage quotidien sérieux.",
       "items": {
-        "1": "15 drivers natifs — ClickHouse rejoint Supabase, Neon et TimescaleDB",
+        "1": "15 drivers natifs — Elasticsearch et OpenSearch rejoignent ClickHouse, Supabase, Neon et TimescaleDB",
         "2": "Data Contracts (Pro) : règles de qualité de données déclaratives, réévaluées après mutation",
         "3": "Instant Data API (Pro) : exposez n'importe quelle requête sauvegardée en endpoint REST authentifié",
         "4": "Helpers de backup/restore, raccourcis personnalisables et empreintes de requêtes dans l'audit",
@@ -617,7 +617,7 @@
       },
       "supported_databases": {
         "question": "Quelles bases de données sont supportées ?",
-        "answer": "QoreDB supporte actuellement 15 drivers natifs :\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famille PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. authentification Windows: NTLM et Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (avec autocomplétion d'éditeur et linting d'agrégations)\n* Redis (avec gestion complète des clés)\n* CockroachDB\n* Elasticsearch\n* OpenSearch\n* ClickHouse (HTTP/HTTPS, classification de sûreté AST)\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
+        "answer": "QoreDB supporte actuellement 15 drivers natifs :\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famille PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. authentification Windows: NTLM et Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (avec autocomplétion d'éditeur et linting d'agrégations)\n* Redis (avec gestion complète des clés)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, classification de sûreté AST)\n* Elasticsearch (plusieurs modes d'authentification, éditeur de recherche dédié, mode SQL)\n* OpenSearch (plusieurs modes d'authentification, éditeur de recherche dédié, mode SQL)\n\nD’autres moteurs sont prévus à mesure que l’architecture évolue."
       },
       "remote_ssh": {
         "question": "Fonctionne-t-il avec des connexions distantes et SSH ?",
@@ -660,8 +660,7 @@
   "pricing_page": {
     "badge": "Open Core",
     "title": "Choisissez le plan qui vous correspond",
-    "subtitle": "Gratuit pour le solo et l’exploration. Pro pour votre travail professionnel au quotidien.",
-    "billing_note": "Licence perpétuelle, paiement unique pour Pro",
+    "subtitle": "Gratuit pour le solo, Pro pour le travail au quotidien.",
     "checkout_error": "Impossible de démarrer Stripe Checkout pour le moment.",
     "faq_title": "Questions fréquentes",
     "core": {
@@ -672,7 +671,7 @@
       "badge": "Plan principal",
       "cta": "Télécharger gratuitement",
       "features": {
-        "drivers": "15 drivers natifs (famille PostgreSQL avec Supabase, Neon, TimescaleDB ; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, Elasticsearch, OpenSearch, ClickHouse)",
+        "drivers": "15 drivers natifs (famille PostgreSQL avec Supabase, Neon, TimescaleDB ; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch)",
         "crud": "CRUD complet + éditeur SQL/Mongo avec autocomplétion et linting",
         "workspaces": "Workspaces:regroupez connexions, requêtes et notebooks par projet",
         "grid": "Grille haute performance avec bulk edit et filtres avancés",
@@ -707,22 +706,34 @@
         "security_rules": "Règles de sécurité personnalisées",
         "library_advanced": "Bibliothèque de requêtes avancée",
         "virtual_relations": "Relations virtuelles auto-suggest"
-      }
+      },
+      "individual_use": "Licence à usage individuel."
     },
     "team": {
       "title": "Team",
-      "tagline": "Pensé pour les équipes",
-      "description": "Collaboration avancée pour les équipes.",
-      "price": "Coming soon",
-      "badge": "Bientôt",
-      "cta": "Nous contacter",
+      "tagline": "Pro pour vos équipes",
+      "description": "Les fonctionnalités Pro pour toute l’équipe, gérées par sièges.",
+      "price": "Bientôt",
+      "badge": "Par siège",
+      "cta": "Acheter",
       "features": {
-        "everything_pro": "Toutes les features Pro",
-        "sync": "Sync multi-appareils",
-        "shared_queries": "Bibliothèques de requêtes partagées",
-        "permissions": "Permissions granulaires",
-        "managed_ai": "IA managée"
-      }
+        "everything_pro": "Toutes les fonctionnalités Pro",
+        "seat_management": "Gestion des sièges en self-service",
+        "central_billing": "Facturation centralisée + facture entreprise (TVA UE)",
+        "priority_support": "Support prioritaire"
+      },
+      "per_seat_note": "par siège / an",
+      "seats_label": "Sièges",
+      "seats_decrease": "Retirer un siège",
+      "seats_increase": "Ajouter un siège",
+      "total_label": "Total",
+      "per_year": "/ an",
+      "min_seats_note": "Minimum {{min}} sièges",
+      "nominative_note": "Sièges nominatifs : 1 licence par personne.",
+      "from_price": "À partir de {{price}}",
+      "discover_cta": "Découvrir l'offre Team",
+      "back": "Retour aux tarifs",
+      "page_subtitle": "Les fonctionnalités Pro pour toute l'équipe — sièges nominatifs, facturation centralisée, support prioritaire."
     },
     "faq": {
       "open_core_why": {
@@ -744,6 +755,24 @@
       "pro_source_code": {
         "question": "Le code source Pro est-il disponible ?",
         "answer": "Les features Pro sont sous licence BSL 1.1, qui se convertit automatiquement en Apache 2.0 après 4 ans. Le code est lisible mais pas redistribuable pendant cette période."
+      },
+      "team_sharing": {
+        "question": "Puis-je partager une clé Team avec plusieurs personnes ?",
+        "answer": "Non. La licence Team est par siège : chaque membre reçoit sa propre clé nominative (une clé par personne). Le partage d'une clé ou l'usage au-delà des sièges souscrits sont interdits par les conditions d'utilisation."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "tagline": "Pour les grandes organisations",
+      "description": "Besoins sur mesure, sécurité et contrat dédiés.",
+      "price": "Sur devis",
+      "badge": "Sur mesure",
+      "cta": "Contactez-nous",
+      "features": {
+        "everything_team": "Tout ce qui est dans Team",
+        "sso": "SSO / SAML (à venir)",
+        "managed_ai": "IA managée (à venir)",
+        "custom_contract": "Contrat et facturation sur mesure"
       }
     }
   },
@@ -850,7 +879,12 @@
     "download_cta": "Télécharger QoreDB",
     "home_cta": "Retour à l’accueil",
     "copy": "Copier la clé",
-    "copied": "Copié"
+    "copied": "Copié",
+    "team": {
+      "heading": "Votre équipe Team est prête",
+      "body": "Chaque siège est nominatif (une licence par personne). Votre propre siège est déjà actif : la clé ci-dessus est la vôtre. Un email vous a été envoyé avec le lien d'invitation à partager à votre équipe.",
+      "manage_cta": "Gérer mon équipe"
+    }
   },
   "privacy_page": {
     "title": "Politique de confidentialité",
@@ -971,36 +1005,40 @@
         "content": "Le logiciel QoreDB est distribué selon un modèle **open-core** :\n\n* une partie du code est publiée sous une licence open-source,\n* certaines fonctionnalités, extensions ou services peuvent être soumis à une licence propriétaire distincte.\n\nLes conditions précises d’utilisation, de modification et de distribution du logiciel sont définies dans la **Licence QoreDB**, accessible sur le site et dans les dépôts officiels."
       },
       "user_obligations": {
-        "title": "5. Obligations de l’utilisateur",
+        "title": "6. Obligations de l’utilisateur",
         "content": "L’utilisateur s’engage à :\n\n* utiliser QoreDB conformément aux lois et réglementations en vigueur,\n* ne pas porter atteinte à la sécurité, à l’intégrité ou au bon fonctionnement du site ou du logiciel,\n* ne pas tenter d’accéder de manière non autorisée aux systèmes ou données,\n* ne pas utiliser QoreDB à des fins frauduleuses, illégales ou abusives.\n\nToute utilisation abusive pourra entraîner la suspension de l’accès aux services."
       },
       "ip": {
-        "title": "6. Propriété intellectuelle",
+        "title": "7. Propriété intellectuelle",
         "content": "L’ensemble des éléments du site QoreDB (textes, documentation, graphismes, logo, identité visuelle) est protégé par le droit de la propriété intellectuelle.\n\nSauf mention contraire, toute reproduction, représentation ou exploitation non autorisée est interdite.\n\nLe code source du logiciel QoreDB est soumis aux termes de la licence applicable, telle que définie dans la page **Licence**."
       },
       "liability": {
-        "title": "7. Responsabilité",
+        "title": "8. Responsabilité",
         "content": "QoreDB est fourni « en l’état », sans garantie d’aucune sorte.\n\nQoreDB ne saurait être tenu responsable :\n\n* des dommages directs ou indirects résultant de l’utilisation du site ou du logiciel,\n* des pertes de données, interruptions d’activité ou préjudices commerciaux,\n* des conséquences liées à une mauvaise configuration ou utilisation du logiciel.\n\nL’utilisateur est seul responsable de l’usage qu’il fait de QoreDB et des données qu’il traite."
       },
       "privacy": {
-        "title": "8. Données personnelles",
+        "title": "9. Données personnelles",
         "content": "Le traitement des données personnelles est régi par la **Politique de confidentialité** accessible sur le site QoreDB."
       },
       "external_links": {
-        "title": "9. Liens externes",
+        "title": "10. Liens externes",
         "content": "Le site QoreDB peut contenir des liens vers des sites ou services tiers. QoreDB n’exerce aucun contrôle sur ces services et décline toute responsabilité quant à leur contenu ou fonctionnement."
       },
       "updates": {
-        "title": "10. Évolution des CGU",
+        "title": "11. Évolution des CGU",
         "content": "QoreDB se réserve le droit de modifier les présentes CGU à tout moment.\n\nLes utilisateurs sont invités à consulter régulièrement la version en vigueur. La date de dernière mise à jour est indiquée en haut de la page."
       },
       "law": {
-        "title": "11. Droit applicable",
+        "title": "12. Droit applicable",
         "content": "Les présentes CGU sont régies par le droit français.\n\nEn cas de litige, et à défaut de résolution amiable, les tribunaux compétents seront ceux du ressort applicable conformément à la législation en vigueur."
       },
       "contact": {
-        "title": "12. Contact",
+        "title": "13. Contact",
         "content": "Pour toute question relative aux présentes Conditions Générales d’Utilisation, l’utilisateur peut contacter l’équipe QoreDB via les canaux officiels indiqués sur le site."
+      },
+      "team_licensing": {
+        "title": "5. Licences Team (sièges nominatifs)",
+        "content": "La licence **Team** est concédée **par siège**. Elle ouvre droit à autant de **sièges nominatifs** que de sièges souscrits, à raison d'**une (1) clé de licence par personne**.\n\n* chaque clé de siège est rattachée à l'adresse e-mail de son titulaire,\n* le **partage d'une clé** entre plusieurs personnes est **interdit**,\n* l'usage du logiciel **au-delà du nombre de sièges souscrits** est **interdit**.\n\nLe titulaire de l'abonnement (administrateur) attribue les sièges et veille au respect de ces conditions au sein de son organisation. Tout manquement peut entraîner la suspension ou la résiliation de la licence."
       }
     }
   },
@@ -1014,7 +1052,7 @@
       },
       "connect": {
         "title": "2. Créer votre première connexion",
-        "content": "<p>Cliquez sur <strong>+</strong> dans la barre latérale pour ajouter une base. QoreDB embarque 13 drivers natifs :</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (auth Windows supportée)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse</li></ul><p>Collez une chaîne de connexion pour la détection automatique du driver, ou renseignez l’hôte, le port, la base, l’utilisateur et l’environnement (dev/staging/prod). Organisez le tout en <strong>Workspaces</strong> pour garder vos projets propres.</p>"
+        "content": "<p>Cliquez sur <strong>+</strong> dans la barre latérale pour ajouter une base. QoreDB embarque 15 drivers natifs :</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (auth Windows supportée)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>Collez une chaîne de connexion pour la détection automatique du driver, ou renseignez l’hôte, le port, la base, l’utilisateur et l’environnement (dev/staging/prod). Organisez le tout en <strong>Workspaces</strong> pour garder vos projets propres.</p>"
       },
       "explore": {
         "title": "3. Explorer vos données",
@@ -1115,7 +1153,7 @@
     "title": "Tarification simple et transparente",
     "subtitle": "Core est gratuit pour toujours. Pro débloque les fonctionnalités avancées.",
     "core_price": "Gratuit",
-    "core_1": "13 drivers natifs (dont Supabase, Neon, TimescaleDB)",
+    "core_1": "15 drivers natifs (dont Supabase, Neon, TimescaleDB)",
     "core_2": "Workspaces, DDL, bulk edit et filtres avancés",
     "core_3": "Coffre-fort chiffré & tunnels SSH natifs",
     "core_4": "Protection production et 9 langues d'interface",
@@ -1346,6 +1384,41 @@
         "title": "Formalisez vos attentes sur les données",
         "body": "Les Data Contracts font partie de QoreDB Pro. Téléchargez l'application et écrivez votre premier contrat."
       }
+    }
+  },
+  "team_seats": {
+    "join": {
+      "title": "Rejoindre l'équipe",
+      "subtitle": "Saisissez votre email pour recevoir votre licence QoreDB.",
+      "email_label": "Votre email",
+      "email_placeholder": "vous@entreprise.com",
+      "submit": "Recevoir ma licence",
+      "success_title": "C'est fait !",
+      "success_body": "Votre licence vous a été envoyée par email. Ouvrez QoreDB, allez dans Réglages › Licence, collez la clé et activez.",
+      "cap_reached": "Tous les sièges sont occupés. Demandez à votre administrateur de libérer un siège.",
+      "invalid_link": "Ce lien d'invitation est invalide ou a expiré.",
+      "missing_token": "Lien d'invitation manquant.",
+      "error": "Une erreur est survenue. Réessayez."
+    },
+    "admin": {
+      "title": "Gérer votre équipe",
+      "subtitle": "Sièges, invitations et révocations.",
+      "cap_label": "Sièges",
+      "used_label": "utilisés",
+      "seats_heading": "Membres de l'équipe",
+      "status_active": "Actif",
+      "status_removed": "Retiré",
+      "remove": "Retirer",
+      "rotate": "Régénérer le lien d'invitation",
+      "join_link_label": "Lien d'invitation à partager",
+      "copy": "Copier",
+      "copied": "Copié",
+      "empty": "Aucun siège n'a encore été réclamé.",
+      "unauthorized": "Ce lien de gestion est invalide ou a expiré.",
+      "rotated": "Nouveau lien généré. L'ancien ne fonctionne plus.",
+      "removed": "Siège retiré.",
+      "error": "Une erreur est survenue. Réessayez.",
+      "loading": "Chargement…"
     }
   }
 }

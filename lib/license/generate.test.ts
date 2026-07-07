@@ -30,4 +30,35 @@ test("generate + verify license key", async () => {
   const verification = await verifyLicenseKey(licenseKey, publicKeyBase64);
   assert.equal(verification.valid, true);
   assert.equal(verification.payload?.tier, "pro");
+  // Une clé Pro ne porte jamais de champ seats.
+  assert.equal(verification.payload?.seats, undefined);
+  assert.equal(decoded.payload.expires_at, null);
+});
+
+test("generate + verify team license key with seats", async () => {
+  const { secretKey } = await keygenAsync();
+  const privateKeyBase64 = toBase64(secretKey);
+  const publicKeyBase64 = await getPublicKeyFromPrivateKey(privateKeyBase64);
+
+  const licenseKey = await generateLicenseKey({
+    email: "Admin@Acme.com",
+    paymentId: "sub_test_123",
+    tier: "team",
+    seats: 5,
+    expiresAt: "2027-06-15T00:00:00.000Z",
+    privateKeyBase64,
+    issuedAt: "2026-06-01T00:00:00.000Z",
+  });
+
+  const decoded = decodeLicenseKey(licenseKey);
+  assert.equal(decoded.payload.email, "admin@acme.com");
+  assert.equal(decoded.payload.tier, "team");
+  assert.equal(decoded.payload.seats, 5);
+  assert.equal(decoded.payload.expires_at, "2027-06-15T00:00:00.000Z");
+  assert.equal(decoded.payload.payment_id, "sub_test_123");
+
+  const verification = await verifyLicenseKey(licenseKey, publicKeyBase64);
+  assert.equal(verification.valid, true);
+  assert.equal(verification.payload?.tier, "team");
+  assert.equal(verification.payload?.seats, 5);
 });

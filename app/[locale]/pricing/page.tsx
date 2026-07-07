@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import PricingPageClient from "@/components/pricing/pricing-page-client";
-import { getIntlLocale, normalizeLocale } from "@/lib/locale";
+import { normalizeLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
-import { getStripePricing } from "@/lib/stripe/pricing";
+import { getStripePricing, getStripeTeamPricing } from "@/lib/stripe/pricing";
 
 export async function generateMetadata({
   params,
@@ -30,24 +30,28 @@ export default async function PricingPage({
   const normalizedLocale = normalizeLocale(locale);
 
   let initialProStripePrice: string | null = null;
-  let initialProOriginalPrice: string | null = null;
   try {
     const pricing = await getStripePricing(normalizedLocale);
     initialProStripePrice = pricing.formattedPrice;
-    const doubled = new Intl.NumberFormat(getIntlLocale(normalizedLocale), {
-      style: "currency",
-      currency: pricing.currency,
-    }).format((pricing.unitAmount * 2) / 100);
-    initialProOriginalPrice = doubled;
   } catch (error) {
     console.error("Failed to load Stripe price on pricing page", error);
+  }
+
+  // Le teaser Team n'a besoin que du prix unitaire formaté (« À partir de … »).
+  // Le configurateur complet vit sur /pricing/team.
+  let initialTeamSeatPrice: string | null = null;
+  try {
+    const teamPricing = await getStripeTeamPricing(normalizedLocale);
+    initialTeamSeatPrice = teamPricing.formattedPrice;
+  } catch (error) {
+    console.error("Failed to load Stripe Team price on pricing page", error);
   }
 
   return (
     <PricingPageClient
       locale={normalizedLocale}
       initialProStripePrice={initialProStripePrice}
-      initialProOriginalPrice={initialProOriginalPrice}
+      initialTeamSeatPrice={initialTeamSeatPrice}
     />
   );
 }

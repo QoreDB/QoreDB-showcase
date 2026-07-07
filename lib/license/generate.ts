@@ -3,7 +3,7 @@ import { getPublicKeyAsync, signAsync, verifyAsync } from "@noble/ed25519";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-export type LicenseTier = "pro";
+export type LicenseTier = "pro" | "team";
 
 export type LicensePayload = {
   email: string;
@@ -11,6 +11,10 @@ export type LicensePayload = {
   issued_at: string;
   expires_at: string | null;
   payment_id: string;
+  // Optionnel : présent uniquement pour les licences Team (nombre de sièges
+  // facturés). Absent pour Pro afin de préserver la signature byte-exacte des
+  // clés Pro déjà émises. Toujours ajouté en DERNIER champ du payload.
+  seats?: number;
 };
 
 export type LicenseEnvelope = {
@@ -24,6 +28,8 @@ export type GenerateLicenseInput = {
   tier?: LicenseTier;
   issuedAt?: string;
   expiresAt?: string | null;
+  /** Nombre de sièges facturés (Team uniquement). Ignoré pour Pro. */
+  seats?: number;
   privateKeyBase64?: string;
 };
 
@@ -77,6 +83,13 @@ export async function generateLicenseKey(
     expires_at: input.expiresAt ?? null,
     payment_id: input.paymentId,
   };
+
+  // `seats` est ajouté en dernier, de façon déterministe, et uniquement
+  // lorsqu'il est fourni (typiquement pour Team). On préserve ainsi l'ordre
+  // des champs existants : les clés Pro restent byte-identiques à avant.
+  if (input.seats != null) {
+    payload.seats = input.seats;
+  }
 
   const signature = await signAsync(toJsonBytes(payload), privateKey);
   const envelope: LicenseEnvelope = {

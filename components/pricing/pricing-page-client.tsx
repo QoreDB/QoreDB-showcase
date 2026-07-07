@@ -18,7 +18,6 @@ function PlanCard({
   tagline,
   description,
   price,
-  originalPrice,
   badge,
   features,
   ctaLabel,
@@ -34,7 +33,6 @@ function PlanCard({
   tagline?: string;
   description: string;
   price: string;
-  originalPrice?: string;
   badge?: string;
   features: PlanFeature[];
   ctaLabel: string;
@@ -68,23 +66,7 @@ function PlanCard({
         ) : null}
         <p className="text-sm text-(--q-text-2) mt-2">{description}</p>
         <div className="mt-4 flex items-baseline gap-2 flex-wrap">
-          {originalPrice ? (
-            <>
-              <span className="text-lg text-(--q-text-2) line-through">
-                {originalPrice}
-              </span>
-              <span className="text-3xl font-bold text-(--q-text-0)">
-                {price}
-              </span>
-              <span className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-semibold px-2 py-0.5">
-                -50%
-              </span>
-            </>
-          ) : (
-            <span className="text-3xl font-bold text-(--q-text-0)">
-              {price}
-            </span>
-          )}
+          <span className="text-3xl font-bold text-(--q-text-0)">{price}</span>
         </div>
       </div>
 
@@ -102,6 +84,10 @@ function PlanCard({
           </li>
         ))}
       </ul>
+
+      {/* Note optionnelle AU-DESSUS du CTA : le bouton reste le dernier élément
+          de la carte, donc aligné en bas sur toutes les cartes. */}
+      {footerNote ? <div className="mb-3">{footerNote}</div> : null}
 
       {customCta ? (
         customCta
@@ -139,7 +125,6 @@ function PlanCard({
           )}
         </button>
       )}
-      {footerNote}
     </div>
   );
 }
@@ -147,18 +132,22 @@ function PlanCard({
 type PricingPageClientProps = {
   locale: string;
   initialProStripePrice: string | null;
-  initialProOriginalPrice: string | null;
+  initialTeamSeatPrice: string | null;
 };
 
 export default function PricingPageClient({
   locale,
   initialProStripePrice,
-  initialProOriginalPrice,
+  initialTeamSeatPrice,
 }: PricingPageClientProps) {
   const { t } = useTranslation();
   const [loadingCheckout, setLoadingCheckout] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Team est « disponible » dès que son prix Stripe est chargé ; sinon on
+  // retombe sur le formulaire de liste d'attente.
+  const teamAvailable = initialTeamSeatPrice != null;
 
   const startCheckout = async () => {
     setCheckoutError(null);
@@ -216,15 +205,24 @@ export default function PricingPageClient({
     label: t(`pricing_page.pro.features.${key}`),
   }));
 
-  const teamFeatures: PlanFeature[] = [
+  // Teaser : 3 puces clés (le détail complet est sur /pricing/team).
+  const teamTeaserFeatures: PlanFeature[] = [
     "everything_pro",
-    "sync",
-    "shared_queries",
-    "permissions",
-    "managed_ai",
+    "seat_management",
+    "central_billing",
   ].map((key) => ({
     id: `team-${key}`,
     label: t(`pricing_page.team.features.${key}`),
+  }));
+
+  const enterpriseFeatures: PlanFeature[] = [
+    "everything_team",
+    "sso",
+    "managed_ai",
+    "custom_contract",
+  ].map((key) => ({
+    id: `enterprise-${key}`,
+    label: t(`pricing_page.enterprise.features.${key}`),
   }));
 
   const faqItems = [
@@ -232,6 +230,7 @@ export default function PricingPageClient({
     "data_sent",
     "lifetime_updates",
     "try_pro",
+    "team_sharing",
     "pro_source_code",
   ].map((key) => ({
     question: t(`pricing_page.faq.${key}.question`),
@@ -244,22 +243,17 @@ export default function PricingPageClient({
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12">
         <section className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto">
-            <p className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) px-3 py-1 text-xs font-semibold uppercase tracking-wide">
-              {t("pricing_page.badge")}
-            </p>
             <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">
               {t("pricing_page.title")}
             </h1>
             <p className="mt-4 text-(--q-text-1)">
               {t("pricing_page.subtitle")}
             </p>
-            <p className="mt-3 text-sm text-(--q-text-2)">
-              {t("pricing_page.billing_note")}
-            </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <motion.div
+              className="h-full"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -277,6 +271,7 @@ export default function PricingPageClient({
             </motion.div>
 
             <motion.div
+              className="h-full"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 }}
@@ -286,27 +281,32 @@ export default function PricingPageClient({
                 tagline={t("pricing_page.pro.tagline")}
                 description={t("pricing_page.pro.description")}
                 price={initialProStripePrice ?? t("pricing_page.pro.price")}
-                originalPrice={initialProOriginalPrice ?? undefined}
                 badge={t("pricing_page.pro.badge")}
                 features={proFeatures}
                 ctaLabel={t("pricing_page.pro.cta")}
                 onClick={startCheckout}
                 loading={loadingCheckout}
                 footerNote={
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.location.href = getContactMailtoHref();
-                    }}
-                    className="block w-full bg-transparent text-center text-xs text-(--q-text-2) mt-3 hover:text-(--q-accent) transition cursor-pointer"
-                  >
-                    {t("pricing_page.pro.student_note")}
-                  </button>
+                  <>
+                    <p className="text-center text-xs text-(--q-text-2) mt-3">
+                      {t("pricing_page.pro.individual_use")}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.location.href = getContactMailtoHref();
+                      }}
+                      className="block w-full bg-transparent text-center text-xs text-(--q-text-2) mt-1.5 hover:text-(--q-accent) transition cursor-pointer"
+                    >
+                      {t("pricing_page.pro.student_note")}
+                    </button>
+                  </>
                 }
               />
             </motion.div>
 
             <motion.div
+              className="h-full"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -315,14 +315,69 @@ export default function PricingPageClient({
                 title={t("pricing_page.team.title")}
                 tagline={t("pricing_page.team.tagline")}
                 description={t("pricing_page.team.description")}
-                price={t("pricing_page.team.price")}
+                price={
+                  teamAvailable && initialTeamSeatPrice
+                    ? t("pricing_page.team.from_price", {
+                        price: initialTeamSeatPrice,
+                      })
+                    : t("pricing_page.team.price")
+                }
                 badge={t("pricing_page.team.badge")}
-                features={teamFeatures}
-                ctaLabel={t("pricing_page.team.cta")}
-                customCta={<TeamWaitlistForm />}
+                features={teamTeaserFeatures}
+                ctaLabel={
+                  teamAvailable
+                    ? t("pricing_page.team.discover_cta")
+                    : t("pricing_page.team.cta")
+                }
+                href={teamAvailable ? `/${locale}/pricing/team` : undefined}
+                customCta={teamAvailable ? undefined : <TeamWaitlistForm />}
               />
             </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6"
+          >
+            <div className="rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center gap-6 transition-colors hover:border-(--q-accent)/30">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 flex-wrap">
+                  {t("pricing_page.enterprise.badge") ? (
+                    <span className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-semibold px-2.5 py-1">
+                      {t("pricing_page.enterprise.badge")}
+                    </span>
+                  ) : null}
+                  <h2 className="text-2xl font-bold text-(--q-text-0)">
+                    {t("pricing_page.enterprise.title")}
+                  </h2>
+                  <span className="text-2xl font-bold text-(--q-text-0)">
+                    · {t("pricing_page.enterprise.price")}
+                  </span>
+                </div>
+                <p className="text-sm text-(--q-text-2) mt-2 max-w-2xl">
+                  {t("pricing_page.enterprise.description")}
+                </p>
+                <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                  {enterpriseFeatures.map((feature) => (
+                    <li
+                      key={feature.id ?? feature.label}
+                      className="flex items-center gap-2 text-sm text-(--q-text-1)"
+                    >
+                      <span className="rounded-full bg-(--q-accent)/10 p-1 shrink-0">
+                        <Check className="h-3 w-3 text-(--q-accent)" />
+                      </span>
+                      {feature.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="lg:w-72 shrink-0">
+                <TeamWaitlistForm />
+              </div>
+            </div>
+          </motion.div>
 
           {checkoutError ? (
             <p className="mt-4 text-sm text-red-500">{checkoutError}</p>

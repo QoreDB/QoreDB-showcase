@@ -1,0 +1,67 @@
+---
+title: Elasticsearch
+description: Connectez QoreDB à Elasticsearch en HTTP ou HTTPS. Plusieurs modes d'authentification, un éditeur de recherche dédié, un mode SQL et le streaming des résultats.
+premium: false
+---
+
+# Elasticsearch
+
+QoreDB embarque un driver Elasticsearch natif qui dialogue avec le cluster en HTTP (port `9200`) ou HTTPS. Comme tous les autres moteurs, il s'enregistre dans le `DriverRegistry` standard : l'explorateur de schéma, la grille de résultats, les exports et les notebooks fonctionnent de la même manière — avec deux surfaces de requête adaptées à Elasticsearch : un **éditeur de recherche** pour la Query DSL et un **mode SQL** pour des requêtes de type relationnel.
+
+## Connexion rapide
+
+Choisissez le moteur **Elasticsearch** et saisissez l'adresse du cluster. Le port par défaut est `9200`.
+
+```
+http://USER:PASSWORD@HOST:9200
+https://USER:PASSWORD@HOST:9200
+```
+
+Les déploiements Elastic Cloud sont exposés en HTTPS. Collez l'URL du point d'accès depuis la console Elastic Cloud et choisissez le mode d'authentification correspondant à votre déploiement.
+
+## Champs de connexion
+
+| Champ           | Requis   | Notes                                                                            |
+| --------------- | -------- | -------------------------------------------------------------------------------- |
+| **Hôte**        | Oui      | Nom d'hôte ou IP. Point d'accès cloud pour Elastic Cloud.                        |
+| **Port**        | Oui      | `9200` par défaut.                                                               |
+| **TLS**         | Optionnel| À activer pour HTTPS. S'appuie sur Rustls ; aucun OpenSSL système requis.        |
+| **Certif. CA**  | Optionnel| Certificat CA personnalisé pour les clusters à autorité privée ou auto-signée.   |
+
+## Modes d'authentification
+
+Le driver prend en charge plusieurs modes d'authentification, sélectionnables dans la fenêtre de connexion :
+
+- **Aucun** — pour un cluster local démarré sans sécurité.
+- **Basic auth** — nom d'utilisateur et mot de passe (chiffrés dans le vault).
+- **Clé API** — une clé API Elasticsearch, envoyée via l'en-tête `Authorization: ApiKey …`.
+- **Jeton Bearer** — un jeton bearer pour l'authentification par token ou par compte de service.
+
+## Éditeur de recherche et mode SQL
+
+Elasticsearch propose deux surfaces de requête dans QoreDB :
+
+- **Éditeur de recherche** — écrivez de la Query DSL sur un index (requêtes `_search`), les résultats s'affichent dans la grille. Idéal pour la recherche plein texte, les agrégations et tout ce qui s'exprime mal en SQL.
+- **Mode SQL** — exécutez des instructions `SELECT` via l'API SQL d'Elasticsearch. Pratique pour l'exploration tabulaire et pour réutiliser vos réflexes SQL d'un moteur à l'autre.
+
+Les grands jeux de résultats sont streamés dans la grille au fur et à mesure plutôt que mis en tampon en entier : une requête large commence à afficher des lignes immédiatement.
+
+## Sûreté des requêtes
+
+Les opérations de lecture (recherches, `SELECT` SQL, `_cat` et introspection d'index) s'exécutent librement. Les opérations qui modifient ou administrent le cluster — création/suppression d'index, écritures de documents, `_reindex`, paramètres du cluster — passent par le filet de sécurité universel de QoreDB : le mode lecture seule et les garde-fous d'environnement (dev/staging/prod) s'appliquent exactement comme sur PostgreSQL ou MySQL.
+
+## Problèmes courants
+
+<Callout type="warning">
+**Échec du handshake TLS** : Elastic Cloud et les clusters sécurisés exigent HTTPS. Vérifiez que l'URL commence par `https://`, et ajoutez le certificat CA de votre cluster s'il utilise une autorité privée ou auto-signée.
+</Callout>
+
+<Callout type="warning">
+**`401 Unauthorized`** : vérifiez le mode d'authentification. Les clés API et les jetons bearer ne sont pas interchangeables avec la basic auth — choisissez celui pour lequel votre déploiement est configuré.
+</Callout>
+
+## Pour aller plus loin
+
+- [OpenSearch](/docs/connections/opensearch) pour le fork compatible API
+- [Limitations des drivers](/docs/reference/driver-limitations) pour les spécificités par moteur
+- [URLs de connexion](/docs/reference/connection-urls) pour les schémas d'URL acceptés

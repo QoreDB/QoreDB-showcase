@@ -75,8 +75,16 @@ Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionn
 - **Commandes dangereuses refusées** : `OPTIMIZE … FINAL`, `KILL QUERY` et toutes les opérations `SYSTEM …` sont rejetées par le classifieur de sûreté. Passez par `clickhouse-client` pour ces commandes.
 - **Annulation best-effort** : `KILL QUERY WHERE query_id = …` marque la requête à annuler ; ClickHouse stoppe le fragment courant à la prochaine vérification.
 - **Éditeur DDL Alter limité à la famille MergeTree** : les altérations de tables distribuées et `ON CLUSTER` ne sont pas exposées dans l'éditeur visuel en v1. Écrivez-les dans l'éditeur SQL.
-- **Sauvegardes non couvertes par les helpers** : les helpers de backup intégrés ne pilotent pas ClickHouse en v0.1.28. Utilisez l'instruction native `BACKUP TO …` ou l'outillage de snapshot de votre cluster.
+- **Sauvegardes non couvertes par les helpers** : les helpers de backup intégrés ne pilotent pas ClickHouse en v0.1.31. Utilisez l'instruction native `BACKUP TO …` ou l'outillage de snapshot de votre cluster.
 - **Types inconnus rétrogradés en texte** : les types rares ou exotiques hors du mapping des 28 types s'affichent en texte plutôt que de faire échouer le résultat.
+
+## Elasticsearch & OpenSearch
+
+- **Transport HTTP / HTTPS** : les deux pilotes se connectent via `9200` (ou le point d'accès managé). Il n'y a pas de protocole binaire natif.
+- **Deux surfaces de requête** : l'éditeur de recherche (Query DSL) et le mode SQL couvrent des besoins différents. Le mode SQL est contraint par l'API SQL du moteur lui-même — les jointures, certaines fonctions et le DDL n'y sont pas disponibles ; utilisez l'éditeur de recherche pour tout ce que la couche SQL ne sait pas exprimer.
+- **Des index, pas des tables** : l'explorateur de schéma liste les index et leurs mappings. Le mapping dynamique fait qu'un champ peut apparaître dans certains documents et pas d'autres ; le mapping reflète ce que le moteur connaît, pas un schéma strict.
+- **Écritures et administration via le filet de sécurité** : la création/suppression d'index, les écritures de documents, `_reindex` et les appels aux paramètres du cluster passent par le mode lecture seule et les garde-fous d'environnement, comme tous les autres moteurs.
+- **AWS OpenSearch Service** : les domaines qui exigent la signature de requêtes SigV4 plutôt que la basic auth ou des jetons peuvent nécessiter un proxy ; utilisez l'un des modes d'authentification pris en charge pour les connexions directes.
 
 ## Fournisseurs compatibles Postgres
 
