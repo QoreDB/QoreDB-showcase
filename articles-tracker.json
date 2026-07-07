@@ -368,54 +368,63 @@
       "title": "Comment exécuter une recherche full-text dans toutes les tables d'une base",
       "category": "Produit",
       "publishedAt": "2026-06-12"
+    },
+    {
+      "slug": "crash-recovery-restaurer-etat-session-plantage",
+      "title": "Le crash recovery dans QoreDB : restaurer l'état de session après un plantage",
+      "category": "Architecture",
+      "publishedAt": "2026-06-14"
+    },
+    {
+      "slug": "detecter-prevenir-requetes-destructrices",
+      "title": "Comment QoreDB détecte et prévient les requêtes destructrices",
+      "category": "Security",
+      "publishedAt": "2026-06-16"
+    },
+    {
+      "slug": "snapshots-resultats-figer-etat-comparer-plus-tard",
+      "title": "Les snapshots de résultats dans QoreDB : figer un état pour le comparer plus tard",
+      "category": "Produit",
+      "publishedAt": "2026-06-30"
+    },
+    {
+      "slug": "inline-edit-data-grid-modifier-cellule-directement",
+      "title": "L'Inline Edit dans le Data Grid : modifier une cellule directement",
+      "category": "Produit",
+      "publishedAt": "2026-07-01"
+    },
+    {
+      "slug": "systeme-i18n-qoredb-internationalisation-sans-framework-lourd",
+      "title": "Le système i18n de QoreDB : internationalisation sans framework lourd",
+      "category": "Produit",
+      "publishedAt": "2026-07-02"
+    },
+    {
+      "slug": "foreign-key-peek-relations-survol-cellule",
+      "title": "Le Foreign Key Peek : voir les relations au survol d'une cellule",
+      "category": "Produit",
+      "publishedAt": "2026-07-03"
+    },
+    {
+      "slug": "procedures-stockees-lister-inspecter-supprimer-multi-driver",
+      "title": "Les procédures stockées dans QoreDB : lister, inspecter et supprimer sans réinventer les moteurs",
+      "category": "Produit",
+      "publishedAt": "2026-07-04"
+    },
+    {
+      "slug": "global-search-cmd-k-navigation-universelle-qoredb",
+      "title": "Le Global Search (Cmd+K) : navigation universelle dans QoreDB",
+      "category": "Produit",
+      "publishedAt": "2026-07-05"
+    },
+    {
+      "slug": "triggers-evenements-gestion-multi-driver-qoredb",
+      "title": "Triggers et événements : gestion multi-driver dans QoreDB",
+      "category": "Produit",
+      "publishedAt": "2026-07-07"
     }
   ],
   "queue": [
-    {
-      "title": "Le crash recovery : restaurer l'état de session après un plantage",
-      "category": "Architecture",
-      "topic_notes": "Persistance onglets, reconnexion auto, state recovery, limitations"
-    },
-    {
-      "title": "Les snapshots de résultats : figer un état pour le comparer plus tard",
-      "category": "Produit",
-      "topic_notes": "Sauvegarde locale, métadonnées, restauration, comparaison temporelle"
-    },
-    {
-      "title": "Inline Edit dans le Data Grid : modifier une cellule directement",
-      "category": "Produit",
-      "topic_notes": "UPDATE/NoSQL généré, validation types, contraintes FK, UX de l'édition"
-    },
-    {
-      "title": "Le système i18n de QoreDB : internationalisation sans framework lourd",
-      "category": "Produit",
-      "topic_notes": "i18n maison, FR/EN, clés typées, pas de runtime lourd"
-    },
-    {
-      "title": "Comment QoreDB détecte et prévient les requêtes destructrices",
-      "category": "Security",
-      "topic_notes": "Regex DROP/DELETE sans WHERE, validation backend, pas juste un warning UI"
-    },
-    {
-      "title": "Le Foreign Key Peek : voir les relations au survol d'une cellule",
-      "category": "Produit",
-      "topic_notes": "Tooltip FK, requête à la demande, pas de preload, UX légère"
-    },
-    {
-      "title": "Routines et procédures stockées : lister, créer, éditer",
-      "category": "Produit",
-      "topic_notes": "Interface dédiée, multi-driver, context menu, limitations par moteur"
-    },
-    {
-      "title": "Le Global Search (Cmd+K) : navigation universelle dans QoreDB",
-      "category": "Produit",
-      "topic_notes": "Spotlight-like, connexions, historique, commandes, bibliothèque"
-    },
-    {
-      "title": "Triggers et événements : gestion multi-driver dans QoreDB",
-      "category": "Produit",
-      "topic_notes": "Vue liste, édition, support variable par moteur, MySQL Events"
-    },
     {
       "title": "Les opérations de maintenance : VACUUM, ANALYZE, OPTIMIZE, REPAIR",
       "category": "Produit",
