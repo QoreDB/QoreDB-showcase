@@ -3,12 +3,8 @@ import { SUPPORTED_LOCALES } from "./lib/locale";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
-    ],
+    loader: "custom",
+    loaderFile: "./lib/sanity/imageLoader.ts",
   },
   async redirects() {
     return SUPPORTED_LOCALES.map((locale) => ({

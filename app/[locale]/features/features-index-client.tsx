@@ -36,6 +36,7 @@ export function FeaturesIndexClient() {
               <Link
                 key={feature.slug}
                 href={`/${locale}/features/${feature.slug}`}
+                prefetch={false}
                 className="group relative flex flex-col rounded-2xl border border-(--q-border) bg-(--q-bg-1) p-6 transition-colors hover:border-(--q-accent)/50"
               >
                 <div className="flex items-center justify-between mb-4">

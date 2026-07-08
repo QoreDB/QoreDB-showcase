@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 const features = [
   {
     key: "sandbox",
-    image: "/images/features/sandbox.png",
+    image: "/images/features/sandbox.webp",
     icon: GitBranch,
     color: "text-(--q-accent)",
     colorBg: "bg-(--q-accent)/10",
@@ -24,7 +24,7 @@ const features = [
   },
   {
     key: "er_diagram",
-    image: "/images/features/er-diagram.png",
+    image: "/images/features/er-diagram.webp",
     icon: Network,
     color: "text-blue-500",
     colorBg: "bg-blue-500/10",
@@ -40,7 +40,7 @@ const features = [
   },
   {
     key: "safety_net",
-    image: "/images/features/query-safety.png",
+    image: "/images/features/query-safety.webp",
     icon: LifeBuoy,
     color: "text-emerald-500",
     colorBg: "bg-emerald-500/10",

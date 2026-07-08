@@ -148,7 +148,7 @@ export function Hero() {
         <div className="relative rounded-2xl border border-(--q-border) overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] bg-(--q-bg-1)">
           <div className="relative aspect-16/10">
             <Image
-              src="/images/screenshots/query-screen.png"
+              src="/images/screenshots/query-screen.webp"
               alt="QoreDB SQL Editor"
               fill
               className="object-cover object-top"

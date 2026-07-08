@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await client.fetch<PostDocument[]>(
     POSTS_QUERY,
     { language: "fr" },
-    { next: { revalidate: 300 } },
+    { next: { revalidate: 3600 } },
   );
   const blogRoutes: MetadataRoute.Sitemap = posts.flatMap((post) =>
     SUPPORTED_LOCALES.map((locale) => ({

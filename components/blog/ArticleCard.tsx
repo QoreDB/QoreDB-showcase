@@ -18,6 +18,7 @@ export function ArticleCard({ post, locale }: ArticleCardProps) {
   return (
     <Link
       href={`${basePath}/blog/${slug}`}
+      prefetch={false}
       className="group relative flex flex-col space-y-3"
     >
       <div className="relative aspect-video overflow-hidden rounded-xl border border-(--q-border) bg-(--q-bg-1) transition-colors">

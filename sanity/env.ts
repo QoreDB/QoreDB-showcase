@@ -11,7 +11,10 @@ export const projectId = assertValue(
   "Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID",
 );
 
-export const useCdn = false;
+// Serve public reads from Sanity's cached API CDN (apicdn.sanity.io) instead of
+// hitting the uncached API on every request. Cheaper and faster for a public
+// marketing site; content is at most a few seconds stale.
+export const useCdn = true;
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {

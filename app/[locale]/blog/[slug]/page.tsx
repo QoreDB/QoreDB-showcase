@@ -84,7 +84,7 @@ export default async function BlogPostPage({
   const post = await client.fetch<PostDocument | null>(
     POST_QUERY,
     { slug, language: locale },
-    { next: { revalidate: 60 } },
+    { next: { revalidate: 3600 } },
   );
 
   if (!post) {

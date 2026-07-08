@@ -22,37 +22,37 @@ function cn(...inputs: ClassValue[]) {
 const TABS = [
   {
     id: "home",
-    image: "/images/screenshots/home-screen.png",
+    image: "/images/screenshots/home-screen.webp",
     icon: Home,
   },
   {
     id: "connection",
-    image: "/images/screenshots/new-connection-screen.png",
+    image: "/images/screenshots/new-connection-screen.webp",
     icon: PlusCircle,
   },
   {
     id: "database",
-    image: "/images/screenshots/database-screen.png",
+    image: "/images/screenshots/database-screen.webp",
     icon: Activity,
   },
   {
     id: "table",
-    image: "/images/screenshots/table-screen.png",
+    image: "/images/screenshots/table-screen.webp",
     icon: Table,
   },
   {
     id: "query",
-    image: "/images/screenshots/query-screen.png",
+    image: "/images/screenshots/query-screen.webp",
     icon: Table,
   },
   {
     id: "schema",
-    image: "/images/screenshots/er-diagram-screen.png",
+    image: "/images/screenshots/er-diagram-screen.webp",
     icon: GitGraph,
   },
   {
     id: "security",
-    image: "/images/screenshots/settings-screen.png",
+    image: "/images/screenshots/settings-screen.webp",
     icon: ShieldCheck,
   },
 ];

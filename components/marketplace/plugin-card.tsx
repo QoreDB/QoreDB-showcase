@@ -50,6 +50,7 @@ export function PluginCard({ plugin, locale, t, index = 0 }: PluginCardProps) {
     >
       <Link
         href={`/${locale}/plugins/${plugin.id}`}
+        prefetch={false}
         className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-(--q-border) bg-(--q-bg-1) p-6 transition-colors duration-300 hover:border-(--q-accent)/30 hover:shadow-lg"
       >
         {/* Subtle accent glow on hover, same grammar as features-section */}

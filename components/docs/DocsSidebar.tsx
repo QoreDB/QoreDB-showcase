@@ -22,6 +22,7 @@ function NodeLink({
     return (
       <Link
         href={node.href}
+        prefetch={false}
         className={cn(
           "group flex items-center justify-between rounded-md px-2 py-1.5 text-sm transition-colors",
           active

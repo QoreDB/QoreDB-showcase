@@ -14,7 +14,7 @@ import { buildPageMetadata } from "@/lib/seo";
 
 const i18nNamespaces = ["common"];
 
-export const revalidate = 300;
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
