@@ -1,1 +1,75 @@
-[]
+[
+  {
+    "id": "stefan",
+    "name": "Stefan",
+    "role": "1K Users",
+    "roles": {
+      "fr": "sur 1K Users",
+      "en": "on 1K Users",
+      "de": "auf 1K Users",
+      "es": "en 1K Users",
+      "it": "su 1K Users",
+      "zh": "在 1K Users",
+      "ja": "1K Usersにて"
+    },
+    "quote": "The product website contains a lot of information in different languages, which is great. Language \"VON\" for German is strange. The tool itself is helpful and will replace my old DB Browser for SQLite.",
+    "quotes": {
+      "en": "The product website contains a lot of information in different languages, which is great. Language \"VON\" for German is strange. The tool itself is helpful and will replace my old DB Browser for SQLite.",
+      "fr": "Le site web du produit contient beaucoup d'informations dans différentes langues, ce qui est excellent. La langue « VON » pour l'allemand est étrange. L'outil lui-même est utile et remplacera mon ancien DB Browser pour SQLite.",
+      "de": "Die Produkt-Website enthält viele Informationen in verschiedenen Sprachen, was großartig ist. Die Sprache „VON“ für Deutsch ist seltsam. Das Tool selbst ist hilfreich und wird meinen alten DB Browser für SQLite ersetzen.",
+      "es": "El sitio web del producto contiene mucha información en diferentes idiomas, lo cual es genial. El idioma «VON» para el alemán es extraño. La herramienta en sí es útil y reemplazará mi antiguo DB Browser para SQLite.",
+      "it": "Il sito web del prodotto contiene molte informazioni in diverse lingue, il che è fantastico. La lingua «VON» per il tedesco è strana. Lo strumento in sé è utile e sostituirà il mio vecchio DB Browser per SQLite.",
+      "zh": "该产品网站包含许多不同语言的信息，这非常好。德语的“VON”语言代码很奇怪。该工具本身非常有用，将取代我旧的 DB Browser for SQLite。",
+      "ja": "製品のウェブサイトにはさまざまな言語で多くの情報が含まれており、素晴らしいです。ドイツ語の「VON」という表記は奇妙です。ツール自体は便利で、古い DB Browser for SQLite に代わるものになるでしょう。"
+    }
+  },
+  {
+    "id": "cat",
+    "name": "Cat",
+    "role": "Discord",
+    "roles": {
+      "fr": "sur Discord",
+      "en": "on Discord",
+      "de": "auf Discord",
+      "es": "en Discord",
+      "it": "su Discord",
+      "zh": "在 Discord",
+      "ja": "Discordにて"
+    },
+    "quote": "Une interface clean, moderne, simple d'utilisation. Je recherchais une application comme celle ci depuis des années. C'est bien différent des applications avec un style des années 2000. Stable, offrant un support avec plusieurs type de database, je recommande à 100%",
+    "quotes": {
+      "en": "A clean, modern, easy-to-use interface. I've been looking for an application like this for years. It's very different from applications with a 2000s style. Stable, offering support for multiple database types, I recommend it 100%.",
+      "fr": "Une interface clean, moderne, simple d'utilisation. Je recherchais une application comme celle ci depuis des années. C'est bien différent des applications avec un style des années 2000. Stable, offrant un support avec plusieurs type de database, je recommande à 100%",
+      "de": "Eine saubere, moderne und einfach zu bedienende Benutzeroberfläche. Ich habe seit Jahren nach einer solchen Anwendung gesucht. Sie unterscheidet sich deutlich von Anwendungen im Stil der 2000er Jahre. Stabil, mit Unterstützung für mehrere Datenbanktypen, ich empfehle sie zu 100 %.",
+      "es": "Una interfaz limpia, moderna y fácil de usar. Llevaba años buscando una aplicación como esta. Es muy diferente de las aplicaciones con estilo de los años 2000. Estable, ofrece soporte para múltiples tipos de bases de datos, la recomiendo al 100%.",
+      "it": "Un'interfaccia pulita, moderna e facile da usare. Cercavo un'applicazione come questa da anni. È molto diversa dalle applicazioni in stile anni 2000. Stabile, offre supporto per diversi tipi di database, la consiglio al 100%.",
+      "zh": "一个干净、现代、易于使用的界面。多年来我一直在寻找这样的应用程序。它与2000年代风格的应用程序截然不同。稳定，支持多种数据库类型，我100%推荐。",
+      "ja": "クリーンでモダン、使いやすいインターフェースです。何年もこのようなアプリケーションを探していました。2000年代スタイルのアプリケーションとは大きく異なります。安定しており、複数のデータベースタイプをサポートしているので、100%お勧めします。"
+    }
+  },
+  {
+    "id": "antonfeoktistov",
+    "name": "AntonFeoktistov",
+    "role": "GitHub",
+    "roles": {
+      "fr": "sur GitHub",
+      "en": "on GitHub",
+      "de": "auf GitHub",
+      "es": "en GitHub",
+      "it": "su GitHub",
+      "zh": "在 GitHub",
+      "ja": "GitHubにて"
+    },
+    "quote": "As of now, the application is really well-designed and impressive, thank you! I've deleted DBeaver.",
+    "handle": "https://github.com/AntonFeoktistov",
+    "quotes": {
+      "en": "As of now, the application is really well-designed and impressive, thank you! I've deleted DBeaver.",
+      "fr": "Pour l'instant, l'application est vraiment bien conçue et impressionnante, merci ! J'ai supprimé DBeaver.",
+      "de": "Bisher ist die Anwendung wirklich gut gestaltet und beeindruckend, danke! Ich habe DBeaver gelöscht.",
+      "es": "Por ahora, la aplicación está muy bien diseñada y es impresionante, ¡gracias! He eliminado DBeaver.",
+      "it": "Per ora, l'applicazione è davvero ben progettata e impressionante, grazie! Ho cancellato DBeaver.",
+      "zh": "目前来看，这个应用程序设计得非常好，令人印象深刻，谢谢！我已经卸载了 DBeaver。",
+      "ja": "今のところ、アプリケーションは本当によくデザインされていて印象的です、ありがとう！DBeaverを削除しました。"
+    }
+  }
+]
