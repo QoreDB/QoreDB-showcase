@@ -1316,5 +1316,14 @@
       "error": "Algo salió mal. Inténtalo de nuevo.",
       "loading": "Cargando…"
     }
+  },
+  "newsletter_page": {
+    "title": "Suscríbase a nuestro boletín",
+    "subtitle": "Reciba las últimas novedades, tutoriales y consejos directamente en su bandeja de entrada.",
+    "placeholder": "Introduzca su dirección de correo electrónico",
+    "cta": "Suscribirse",
+    "success_title": "¡Gracias!",
+    "success": "Se ha suscrito correctamente a nuestro boletín.",
+    "error": "Error al suscribirse. Inténtelo de nuevo."
   }
 }

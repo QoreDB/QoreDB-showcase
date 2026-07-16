@@ -1316,5 +1316,14 @@
       "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
       "loading": "Wird geladen…"
     }
+  },
+  "newsletter_page": {
+    "title": "Abonnieren Sie unseren Newsletter",
+    "subtitle": "Erhalten Sie die neuesten Updates, Anleitungen und Tipps direkt in Ihren Posteingang.",
+    "placeholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "cta": "Abonnieren",
+    "success_title": "Vielen Dank!",
+    "success": "Sie haben unseren Newsletter erfolgreich abonniert.",
+    "error": "Abonnement fehlgeschlagen. Bitte versuchen Sie es erneut."
   }
 }

@@ -1316,5 +1316,14 @@
       "error": "出现错误，请重试。",
       "loading": "加载中…"
     }
+  },
+  "newsletter_page": {
+    "title": "订阅我们的新闻邮件",
+    "subtitle": "获取最新动态、教程和技巧，直接发送到您的收件箱。",
+    "placeholder": "输入您的电子邮件地址",
+    "cta": "订阅",
+    "success_title": "谢谢！",
+    "success": "您已成功订阅我们的新闻邮件。",
+    "error": "订阅失败。请重试。"
   }
 }

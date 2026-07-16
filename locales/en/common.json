@@ -1420,5 +1420,14 @@
       "error": "Something went wrong. Please try again.",
       "loading": "Loading…"
     }
+  },
+  "newsletter_page": {
+    "title": "Subscribe to our Newsletter",
+    "subtitle": "Get the latest updates, tutorials, and tips delivered straight to your inbox.",
+    "placeholder": "Enter your email address",
+    "cta": "Subscribe",
+    "success_title": "Thank you!",
+    "success": "You have successfully subscribed to our newsletter.",
+    "error": "Failed to subscribe. Please try again."
   }
 }

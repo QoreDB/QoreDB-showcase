@@ -1316,5 +1316,14 @@
       "error": "Qualcosa è andato storto. Riprova.",
       "loading": "Caricamento…"
     }
+  },
+  "newsletter_page": {
+    "title": "Iscriviti alla nostra Newsletter",
+    "subtitle": "Ricevi gli ultimi aggiornamenti, tutorial e consigli direttamente nella tua casella di posta.",
+    "placeholder": "Inserisci il tuo indirizzo e-mail",
+    "cta": "Iscriviti",
+    "success_title": "Grazie!",
+    "success": "Ti sei iscritto con successo alla nostra newsletter.",
+    "error": "Iscrizione fallita. Riprova."
   }
 }

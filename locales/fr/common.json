@@ -1420,5 +1420,14 @@
       "error": "Une erreur est survenue. Réessayez.",
       "loading": "Chargement…"
     }
+  },
+  "newsletter_page": {
+    "title": "S'abonner à notre newsletter",
+    "subtitle": "Recevez les dernières nouveautés, tutoriels et astuces directement dans votre boîte de réception.",
+    "placeholder": "Entrez votre adresse e-mail",
+    "cta": "S'abonner",
+    "success_title": "Merci !",
+    "success": "Vous vous êtes abonné avec succès à notre newsletter.",
+    "error": "Échec de l'abonnement. Veuillez réessayer."
   }
 }

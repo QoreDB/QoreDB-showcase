@@ -40,3 +40,12 @@ export const ossProgramSchema = z.object({
 });
 
 export type OssProgramFormData = z.infer<typeof ossProgramSchema>;
+
+export const newsletterSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  source: z.string().max(80).optional(),
+  /** Honeypot. */
+  address: z.string().optional(),
+});
+
+export type NewsletterFormData = z.infer<typeof newsletterSchema>;
