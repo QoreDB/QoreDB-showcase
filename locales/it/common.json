@@ -1280,6 +1280,174 @@
         "title": "Formalizza le tue aspettative sui dati",
         "body": "I Data Contracts fanno parte di QoreDB Pro. Scarica l'applicazione e scrivi il tuo primo contratto."
       }
+    },
+    "instant-api": {
+      "eyebrow": "Integration · Instant Data API",
+      "title": "Instant Data API",
+      "subtitle": "Trasforma una query SQL parametrizzata in un endpoint REST in sola lettura sulla tua macchina, in circa un minuto.",
+      "teaser": "Un endpoint GET in sola lettura su 127.0.0.1, autenticato con un token Bearer, documentato da un file OpenAPI 3.1 generato dai tuoi endpoint attivi.",
+      "problem": {
+        "title": "Il problema",
+        "body": "Un collega ha bisogno di un numero che sta nel tuo database. Uno script deve leggere una tabella. Una dashboard locale ha bisogno di una query. Ogni volta la risposta è la stessa: allestire un piccolo backend, collegare una connessione, esporre una route, gestire l'autenticazione. Ore di lavoro infrastrutturale per una query che avevi già scritto."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "QoreDB integra un server HTTP che serve le tue query come endpoint GET. Tu dichiari la query e i suoi parametri; QoreDB si occupa di routing, tipizzazione, autenticazione e documentazione. Il server si lega a 127.0.0.1 e a nient'altro: non esiste un'impostazione per esporlo sulla rete.",
+        "steps": [
+          {
+            "title": "Dichiara l'endpoint",
+            "body": "Gli dai un nome, scegli una connessione e scrivi la query SQL con i parametri indicati come {{country}}. Ogni parametro è dichiarato con un tipo (string, integer, float, boolean), un flag di obbligatorietà e un valore predefinito opzionale."
+          },
+          {
+            "title": "Avvia il server",
+            "body": "Resta in ascolto su 127.0.0.1:4787. L'HTTPS è disponibile tramite un certificato autofirmato generato in memoria all'avvio e mai scritto su disco. L'avvio è un'azione deliberata: non è un servizio in background che gira alle tue spalle."
+          },
+          {
+            "title": "Chiamalo con un token",
+            "body": "Ogni endpoint ha il proprio token Bearer, mostrato una sola volta alla creazione. Su disco viene salvato solo un hash Argon2id, mai il token stesso. Rigenerare un token richiede un clic e revoca subito il precedente."
+          },
+          {
+            "title": "Leggi il documento OpenAPI",
+            "body": "GET /openapi.json restituisce un documento OpenAPI 3.1 generato dal registro attivo: un path per endpoint, parametri tipizzati e lo schema di sicurezza bearer. Passalo al tuo generatore di client."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Un endpoint chiamato orders_top, su una connessione PostgreSQL, con un parametro string obbligatorio:",
+        "caption": "I valori non vengono mai concatenati grezzi: ogni parametro viene sottoposto a escaping per il dialetto di destinazione e l'SQL finale viene analizzato di nuovo prima dell'esecuzione. Tutto ciò che viene classificato come mutazione viene rifiutato."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "L'Instant Data API punta a script locali, notebook e integrazioni occasionali. Non è un backend applicativo, e i suoi confini sono espliciti:",
+        "items": [
+          "Solo loopback. Il server si lega a 127.0.0.1; non c'è alcuna opzione per esporlo sulla rete.",
+          "Nessun header CORS, quindi una pagina web non può chiamare questi endpoint da un browser. I destinatari sono curl, script, backend locali e notebook.",
+          "Solo GET, in sola lettura. L'SQL finale viene analizzato a ogni richiesta e rifiutato se viene classificato come mutazione. Il controllo avviene al momento della richiesta, non quando salvi l'endpoint.",
+          "Limite di 10 richieste al secondo per endpoint, burst di 10, non configurabile.",
+          "Il tetto di righe (100 per impostazione predefinita) taglia la risposta dopo che la query è già stata eseguita. Per una tabella grande, scrivi tu stesso un LIMIT nella query.",
+          "Nessuna paginazione e nessun timeout di query: una query lenta blocca finché il driver non risponde.",
+          "Sono supportati quattordici ID di driver: la famiglia PostgreSQL, MySQL/MariaDB, SQLite, DuckDB, SQL Server e ClickHouse. MongoDB, Redis e gli altri vengono rifiutati.",
+          "Il server non si avvia da solo; lo avvii tu a ogni sessione. Le definizioni degli endpoint, invece, restano.",
+          "Un endpoint non è modificabile. Cambiare una query significa eliminarlo e ricrearlo, il che genera un nuovo token."
+        ]
+      },
+      "cta": {
+        "title": "Esponi una query, non un backend",
+        "body": "L'Instant Data API fa parte di QoreDB Pro. Scarica l'applicazione e trasforma la tua prima query in un endpoint."
+      }
+    },
+    "sandbox": {
+      "eyebrow": "Data Tools · Modalità Sandbox",
+      "title": "Modalità Sandbox",
+      "subtitle": "Trattieni localmente le modifiche fatte nella griglia, leggi l'SQL che producono, poi applicale — oppure scartale e vai avanti.",
+      "teaser": "Le modifiche fatte nella griglia dati vengono trattenute localmente invece di essere scritte. Leggi l'SQL prima che qualcosa raggiunga il database.",
+      "problem": {
+        "title": "Il problema",
+        "body": "In una griglia dati, una modifica è una scrittura. Cambi una cella ed è già confermata. Su una tabella di produzione, un valore digitato male o un'eliminazione sulla riga sbagliata non lasciano alcuno spazio per ripensarci. E quando dieci cambiamenti vanno insieme, non c'è un momento in cui li vedi come un insieme, prima che arrivino a destinazione."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "La modalità Sandbox intercetta le modifiche che fai attraverso la griglia. Nulla viene inviato al database: i cambiamenti sono trattenuti localmente, la griglia ti mostra il risultato previsto e un pannello elenca tutto ciò che è in sospeso. Quando sei pronto, QoreDB ti mostra l'SQL e decidi tu.",
+        "steps": [
+          {
+            "title": "Attivala",
+            "body": "Un pulsante, oppure Cmd/Ctrl+Shift+S. Un bordo colorato attorno all'area di lavoro e un badge rendono lo stato impossibile da ignorare, perché una sandbox in cui hai dimenticato di essere è peggio di nessuna sandbox."
+          },
+          {
+            "title": "Modifica come al solito",
+            "body": "La modifica inline nella griglia, la finestra di riga, le eliminazioni, la modifica in blocco e il generatore di dati alimentano tutti la sandbox invece del database. La griglia mostra il risultato che otterresti, così puoi continuare a lavorare sopra i tuoi cambiamenti in sospeso."
+          },
+          {
+            "title": "Rivedi l'insieme completo",
+            "body": "Un pannello Pending Changes raggruppa tutto per tabella con i conteggi per operazione. Le modifiche ridondanti vengono accorpate: cinque modifiche sulla stessa riga nuova sono un solo insert, ed eliminare una riga appena inserita la toglie del tutto dall'insieme."
+          },
+          {
+            "title": "Leggi l'SQL, poi decidi",
+            "body": "Generate SQL apre le istruzioni corrispondenti ai tuoi cambiamenti, pronte da copiare o scaricare. Apply le scrive; su una connessione di produzione devi digitare APPLY per confermare. Oppure scarti tutto, e non è mai successo nulla."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Dopo aver modificato una riga e averne eliminata un'altra in una tabella PostgreSQL, lo script generato è questo:",
+        "caption": "Questo script è ciò che rivedi e puoi esportare. L'applicazione riesegue ogni cambiamento attraverso il driver invece di eseguire lo script stesso, quindi ciò che leggi e ciò che viene eseguito sono equivalenti, non identici."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "La modalità Sandbox copre le modifiche che fai attraverso la griglia. È un confine reale, e vale la pena essere precisi su dove si ferma:",
+        "items": [
+          "Copre i dati, non lo schema. CREATE, ALTER e DROP vengono eseguiti subito sul database, sandbox o no.",
+          "Copre la griglia, non l'editor SQL. Un DELETE digitato nell'editor viene eseguito immediatamente: la sandbox non è un intercettore di query.",
+          "Nulla viene riservato nel database. Se qualcuno cambia una riga mentre la trattieni nella sandbox, l'applicazione sovrascrive il suo cambiamento.",
+          "I cambiamenti in sospeso sono salvati localmente da QoreDB e sopravvivono a un riavvio. Non sono una transazione del database e non trattengono alcun lock.",
+          "La generazione dell'SQL riguarda PostgreSQL, MySQL/MariaDB, SQLite e SQL Server. I motori compatibili con PostgreSQL ricadono sulla sintassi PostgreSQL con un avviso.",
+          "Che l'applicazione avvenga o meno all'interno di un'unica transazione dipende dal driver. Dove non è così, un errore a metà lascia applicati i cambiamenti precedenti.",
+          "Aggiornamenti ed eliminazioni richiedono che le colonne della chiave primaria siano presenti nel risultato per poter essere tracciati."
+        ]
+      },
+      "cta": {
+        "title": "Leggi prima di scrivere",
+        "body": "La modalità Sandbox fa parte di QoreDB Pro. Scarica l'applicazione e metti un passaggio tra le tue modifiche e le tue tabelle di produzione."
+      }
+    },
+    "migrations": {
+      "eyebrow": "Schema · Migrations Manager",
+      "title": "Migrations Manager",
+      "subtitle": "Migrazioni .sql versionate nel tuo repository, applicate e annullate dal client, con lo stato applicato tracciato nel database stesso.",
+      "teaser": "Semplici file .sql con sezioni up e down, committati insieme al tuo codice, e una tabella di storico che ti dice cosa è stato davvero eseguito.",
+      "problem": {
+        "title": "Il problema",
+        "body": "I cambiamenti di schema viaggiano male. Una migrazione applicata su un portatile e dimenticata su staging. Un ALTER eseguito a mano in una console, senza traccia. Un rollback che nessuno ha scritto. O introduci un framework di migrazione completo con il suo runtime, oppure tieni una cartella di file SQL e un foglio di calcolo, e speri."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "QoreDB legge semplici file .sql da una cartella del tuo progetto, li applica alla connessione che scegli e registra ciò che ha fatto in una tabella dentro il database stesso. Nessun agente, nessuna dipendenza a runtime nella tua applicazione: i file sono artefatti Git, lo stato vive dove vive lo schema.",
+        "steps": [
+          {
+            "title": "Un file per migrazione",
+            "body": "I file stanno in .qoredb/migrations/, con nome version_slug.sql, con una sezione -- migrate:up e una sezione -- migrate:down. SQL puro, versionato con il tuo codice, leggibile senza avere QoreDB installato."
+          },
+          {
+            "title": "Lo stato nel database",
+            "body": "Una tabella qoredb_migrations registra la versione, il checksum dello script up, quando è stato eseguito, quanto è durato e attraverso quale connessione. Viene creata fuori dalla transazione, così sopravvive al rollback della migrazione che sta tracciando."
+          },
+          {
+            "title": "Ogni istruzione è verificata prima che parta la prima",
+            "body": "Lo script viene suddiviso in istruzioni preservandone il testo esatto, e ciascuna viene classificata e controllata rispetto alle tue regole di sicurezza prima che l'esecuzione inizi. Su una connessione di produzione, le istruzioni pericolose vengono bloccate dalla policy invece di essere scoperte a metà strada."
+          },
+          {
+            "title": "Stati che non mentono",
+            "body": "Applicata, annullata, fallita. Una migrazione che si è rotta a metà è segnata come fallita, non in sospeso, perché «in sospeso» suggerirebbe che non è successo nulla. E se modifichi uno script up già applicato, QoreDB si rifiuta di rieseguirlo: il checksum non corrisponde più allo schema che descriveva. Scrivere una nuova migrazione è l'unica riparazione sicura."
+          },
+          {
+            "title": "Genera il diff (Pro)",
+            "body": "Cattura una baseline del tuo schema e QoreDB scrive la migrazione per la differenza: tabelle aggiunte e modificate nella sezione up, l'inverso nella down, con le istruzioni irreversibili commentate invece che indovinate. Check drift confronta lo schema attivo con la tua baseline, e una vista Prod↔Staging mette a confronto due connessioni dello stesso driver, affiancate."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Una migrazione che aggiunge una colonna e il suo indice. Questo è il file completo:",
+        "caption": "Un file, due direzioni, nessun framework. Si legge allo stesso modo in una code review e in QoreDB."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "Il Migrations Manager è un runner per file SQL, non un framework di migrazione. Ciò che non fa conta quanto ciò che fa:",
+        "items": [
+          "Undici driver: la famiglia PostgreSQL, MySQL/MariaDB, SQLite, DuckDB/MotherDuck e SQL Server. MongoDB, Redis, Elasticsearch e ClickHouse sono fuori portata.",
+          "Su MySQL e MariaDB, il DDL non è transazionale. Qualsiasi migrazione che contiene DDL viene eseguita fuori da una transazione: se fallisce a metà, nulla viene annullato e la migrazione viene segnata come fallita perché tu la esamini. MySQL richiede inoltre un database di destinazione esplicito.",
+          "Non c'è alcuna garanzia di ordinamento né un pulsante per applicare tutto. Ogni migrazione viene applicata da sola; nulla ti impedisce di eseguire la terza prima della prima.",
+          "Il rollback è l'SQL che hai scritto nella sezione down. Quando il diff dello schema non può invertire un'istruzione senza inventare dati, la commenta invece di indovinare.",
+          "Il diff dello schema copre tabelle, colonne, indici, chiavi esterne a colonna singola e chiavi primarie. Viste, sequenze, trigger, procedure, vincoli CHECK e chiavi esterne composite non vengono introspezionati.",
+          "Il rilevamento del drift è un confronto che avvii tu, rispetto a una baseline che hai catturato. Non è un monitoraggio continuo, e la baseline resta sulla tua macchina: deliberatamente non viene committata.",
+          "I conflitti Git non sono gestiti. Due branch che creano la stessa versione vengono intercettati quando applichi, non quando fai il merge."
+        ]
+      },
+      "cta": {
+        "title": "Distribuisci il tuo schema come il tuo codice",
+        "body": "Il Migrations Manager è incluso nel core gratuito di QoreDB. La generazione del diff dello schema, il rilevamento del drift e il confronto Prod↔Staging sono Pro."
+      }
     }
   },
   "team_seats": {

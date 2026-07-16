@@ -1384,6 +1384,174 @@
         "title": "Formalize your expectations on the data",
         "body": "Data Contracts are part of QoreDB Pro. Download the app and write your first contract."
       }
+    },
+    "instant-api": {
+      "eyebrow": "Integration · Instant Data API",
+      "title": "Instant Data API",
+      "subtitle": "Turn a parameterized SQL query into a read-only REST endpoint on your machine, in about a minute.",
+      "teaser": "A read-only GET endpoint on 127.0.0.1, authenticated with a Bearer token, documented by an OpenAPI 3.1 file generated from your live endpoints.",
+      "problem": {
+        "title": "The problem",
+        "body": "A colleague needs a number that lives in your database. A script needs to read one table. A local dashboard needs one query. Each time the answer is the same: stand up a small backend, wire a connection, expose a route, handle authentication. Hours of plumbing for a query you had already written."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "QoreDB embeds an HTTP server that serves your queries as GET endpoints. You declare the query and its parameters; QoreDB handles routing, typing, authentication and documentation. The server binds to 127.0.0.1 and nothing else — there is no setting to expose it on the network.",
+        "steps": [
+          {
+            "title": "Declare the endpoint",
+            "body": "You give it a name, pick a connection, and write the SQL query with its parameters marked as {{country}}. Each parameter is declared with a type (string, integer, float, boolean), a required flag and an optional default."
+          },
+          {
+            "title": "Start the server",
+            "body": "It listens on 127.0.0.1:4787. HTTPS is available through a self-signed certificate generated in memory at startup and never written to disk. Starting is a deliberate action: this is not a background service that runs behind your back."
+          },
+          {
+            "title": "Call it with a token",
+            "body": "Each endpoint carries its own Bearer token, shown once at creation. Only an Argon2id hash is stored on disk, never the token itself. Regenerating a token takes one click and revokes the previous one immediately."
+          },
+          {
+            "title": "Read the OpenAPI document",
+            "body": "GET /openapi.json returns an OpenAPI 3.1 document generated from the live registry: one path per endpoint, typed parameters and the bearer security scheme. Feed it to your client generator."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "An endpoint named orders_top, on a PostgreSQL connection, with one required string parameter:",
+        "caption": "Values are never concatenated raw: each parameter is escaped for the target dialect, and the final SQL is parsed again before execution. Anything classified as a mutation is rejected."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "The Instant Data API targets local scripts, notebooks and one-off integrations. It is not an application backend, and its boundaries are explicit:",
+        "items": [
+          "Loopback only. The server binds to 127.0.0.1; there is no option to expose it on the network.",
+          "No CORS headers, so a web page cannot call these endpoints from a browser. The targets are curl, scripts, local backends and notebooks.",
+          "GET only, read-only. The final SQL is analyzed on every request and rejected if it is classified as a mutation. That check runs at request time, not when you save the endpoint.",
+          "Rate limit of 10 requests per second per endpoint, burst of 10, not configurable.",
+          "The row cap (100 by default) trims the response after the query has already run. For a large table, write your own LIMIT in the query.",
+          "No pagination and no query timeout: a slow query blocks until the driver returns.",
+          "Fourteen driver IDs are supported — the PostgreSQL family, MySQL/MariaDB, SQLite, DuckDB, SQL Server and ClickHouse. MongoDB, Redis and the others are rejected.",
+          "The server does not start on its own; you start it each session. Your endpoint definitions do persist.",
+          "An endpoint cannot be edited. Changing a query means deleting and recreating it, which issues a new token."
+        ]
+      },
+      "cta": {
+        "title": "Expose a query, not a backend",
+        "body": "The Instant Data API is part of QoreDB Pro. Download the app and turn your first query into an endpoint."
+      }
+    },
+    "sandbox": {
+      "eyebrow": "Data Tools · Sandbox mode",
+      "title": "Sandbox mode",
+      "subtitle": "Hold your grid edits locally, read the SQL they produce, then apply them — or drop them and move on.",
+      "teaser": "Edits made in the data grid are held locally instead of being written. You read the SQL before anything reaches the database.",
+      "problem": {
+        "title": "The problem",
+        "body": "In a data grid, an edit is a write. You change a cell and it is already committed. On a production table, a mistyped value or a delete on the wrong row leaves no window to reconsider. And when ten changes belong together, there is no moment where you see them as a set, before they land."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "Sandbox mode intercepts the edits you make through the grid. Nothing is sent to the database: changes are held locally, the grid shows you the projected result, and a panel lists everything pending. When you are ready, QoreDB shows you the SQL and you decide.",
+        "steps": [
+          {
+            "title": "Turn it on",
+            "body": "One button, or Cmd/Ctrl+Shift+S. A colored border around the workspace and a badge make the state impossible to miss, because a sandbox you forgot you were in is worse than no sandbox at all."
+          },
+          {
+            "title": "Edit as usual",
+            "body": "Inline grid editing, the row modal, deletes, bulk edit and the data generator all feed the sandbox instead of the database. The grid renders the result you would get, so you can keep working on top of your own pending changes."
+          },
+          {
+            "title": "Review the whole set",
+            "body": "A Pending Changes panel groups everything by table with per-operation counts. Redundant edits are folded together: five edits on the same new row are one insert, and deleting a row you just inserted removes it from the set entirely."
+          },
+          {
+            "title": "Read the SQL, then decide",
+            "body": "Generate SQL opens the statements matching your changes, ready to copy or download. Apply writes them; on a production connection you have to type APPLY to confirm. Or you discard everything, and nothing ever happened."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "After editing one row and deleting another in a PostgreSQL table, the generated script reads:",
+        "caption": "This script is what you review and can export. Applying replays each change through the driver rather than running the script itself, so what you read and what runs are equivalent, not identical."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "Sandbox mode covers the edits you make through the grid. That is a real boundary, and it is worth being precise about where it stops:",
+        "items": [
+          "It covers data, not schema. CREATE, ALTER and DROP run against the database immediately, sandbox or not.",
+          "It covers the grid, not the SQL editor. A DELETE typed in the editor executes right away: the sandbox is not a query interceptor.",
+          "Nothing is reserved in the database. If someone changes a row while you hold it in the sandbox, applying overwrites their change.",
+          "Pending changes are stored locally by QoreDB and survive a restart. They are not a database transaction and they hold no lock.",
+          "SQL generation targets PostgreSQL, MySQL/MariaDB, SQLite and SQL Server. PostgreSQL-compatible engines fall back to PostgreSQL syntax with a warning.",
+          "Whether the apply runs inside a single transaction depends on the driver. Where it does not, a failure halfway leaves the earlier changes applied.",
+          "Updates and deletes need the primary key columns present in the result to be tracked."
+        ]
+      },
+      "cta": {
+        "title": "Read before you write",
+        "body": "Sandbox mode is part of QoreDB Pro. Download the app and put a step between your edits and your production tables."
+      }
+    },
+    "migrations": {
+      "eyebrow": "Schema · Migrations Manager",
+      "title": "Migrations Manager",
+      "subtitle": "Versioned .sql migrations in your repository, applied and rolled back from the client, with the applied state tracked in the database itself.",
+      "teaser": "Plain .sql files with up and down sections, committed alongside your code, and a history table that tells you what actually ran.",
+      "problem": {
+        "title": "The problem",
+        "body": "Schema changes travel badly. A migration applied on a laptop and forgotten on staging. An ALTER run by hand in a console, with no trace. A rollback nobody wrote. Either you bring in a full migration framework and its runtime, or you keep a folder of SQL files and a spreadsheet, and hope."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "QoreDB reads plain .sql files from a folder in your project, applies them to the connection you choose, and records what it did in a table inside the database itself. No agent, no runtime dependency in your application: the files are Git artifacts, the state lives where the schema lives.",
+        "steps": [
+          {
+            "title": "One file per migration",
+            "body": "Files live in .qoredb/migrations/, named version_slug.sql, with a -- migrate:up section and a -- migrate:down section. Plain SQL, versioned with your code, readable without QoreDB installed."
+          },
+          {
+            "title": "State in the database",
+            "body": "A qoredb_migrations table records the version, the checksum of the up script, when it ran, how long it took and through which connection. It is created outside the transaction, so it survives the rollback of the migration it is tracking."
+          },
+          {
+            "title": "Every statement is vetted before the first one runs",
+            "body": "The script is split into statements while preserving the exact text, and each one is classified and checked against your safety rules before execution begins. On a production connection, dangerous statements are held back by policy rather than discovered halfway through."
+          },
+          {
+            "title": "States that do not lie",
+            "body": "Applied, rolled back, failed. A migration that broke halfway is marked failed, not pending, because pending would suggest nothing happened. And if you edit an up script that is already applied, QoreDB refuses to re-run it: the checksum no longer matches the schema it described. Writing a new migration is the only safe repair."
+          },
+          {
+            "title": "Generate the diff (Pro)",
+            "body": "Capture a baseline of your schema and QoreDB writes the migration for the difference: added and modified tables in the up section, the inverse in the down, with irreversible statements commented out rather than guessed. Check drift compares the live schema against your baseline, and a Prod↔Staging view diffs two connections of the same driver side by side."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "A migration adding a column and its index. This is the whole file:",
+        "caption": "One file, two directions, no framework. It reads the same in a code review as it does in QoreDB."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "The Migrations Manager is a runner for SQL files, not a migration framework. What it does not do matters as much as what it does:",
+        "items": [
+          "Eleven drivers: the PostgreSQL family, MySQL/MariaDB, SQLite, DuckDB/MotherDuck and SQL Server. MongoDB, Redis, Elasticsearch and ClickHouse are out of scope.",
+          "On MySQL and MariaDB, DDL is not transactional. Any migration containing DDL runs outside a transaction: if it fails halfway, nothing is undone and the migration is marked failed for you to inspect. MySQL also requires an explicit target database.",
+          "There is no ordering guarantee and no apply-all button. Each migration is applied on its own; nothing stops you from running the third before the first.",
+          "The rollback is the SQL you wrote in the down section. When the schema diff cannot invert a statement without inventing data, it comments it out rather than guessing.",
+          "Schema diff covers tables, columns, indexes, single-column foreign keys and primary keys. Views, sequences, triggers, procedures, CHECK constraints and composite foreign keys are not introspected.",
+          "Drift detection is a comparison you trigger, against a baseline you captured. It is not continuous monitoring, and the baseline stays on your machine: it is deliberately not committed.",
+          "Git conflicts are not handled. Two branches creating the same version are caught when you apply, not when you merge."
+        ]
+      },
+      "cta": {
+        "title": "Ship your schema like your code",
+        "body": "The Migrations Manager ships in the free QoreDB core. Schema diff generation, drift detection and Prod↔Staging comparison are Pro."
+      }
     }
   },
   "team_seats": {
