@@ -144,15 +144,13 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[50%] bg-(--q-accent)/10 blur-[100px] rounded-full pointer-events-none" />
-
-        <div className="relative rounded-2xl border border-(--q-border) overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] bg-(--q-bg-1)">
+        <div className="relative ">
           <div className="relative aspect-16/10">
             <Image
-              src="/images/screenshots/query-screen.webp"
+              src="/images/screenshots/landing.webp"
               alt="QoreDB SQL Editor"
               fill
-              className="object-cover object-top"
-              sizes="(max-width: 1024px) 100vw, 960px"
+              // sizes="(max-width: 1024px) 100vw, 960px"
               preload
               fetchPriority="high"
             />
