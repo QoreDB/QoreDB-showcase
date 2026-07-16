@@ -69,8 +69,8 @@ export function NewsletterCard({
             <FileText className="size-3.5" />
             <span>
               {locale === "fr"
-                ? "🎁 Bonus : Recevez notre fiche mémo d'optimisation SQL & SQLite (PDF) !"
-                : "🎁 Bonus: Get our free SQL & SQLite Optimization Cheat Sheet (PDF)!"}
+                ? "🎁 Bonus : Recevez notre fiche mémo d'optimisation SQL — 8 pages, PostgreSQL / MySQL / SQLite (PDF) !"
+                : "🎁 Bonus: Get our free SQL Performance Cheat Sheet — 8 pages, PostgreSQL / MySQL / SQLite (PDF)!"}
             </span>
           </div>
         </div>
