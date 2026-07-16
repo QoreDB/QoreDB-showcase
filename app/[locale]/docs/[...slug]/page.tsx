@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { notFound } from "next/navigation";
 import path from "node:path";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
@@ -15,6 +15,7 @@ import { docsMdxComponents } from "@/components/docs/mdx";
 import { PremiumBadge } from "@/components/docs/PremiumBadge";
 import { PrevNextNav } from "@/components/docs/PrevNextNav";
 import { TableOfContents } from "@/components/docs/TableOfContents";
+import { NewsletterCard } from "@/components/newsletter-card";
 import { getLastUpdated } from "@/lib/docs/git";
 import { loadDoc } from "@/lib/docs/mdx";
 import { humanize, readMeta } from "@/lib/docs/meta";
@@ -25,9 +26,9 @@ import {
   getDocsTree,
 } from "@/lib/docs/tree";
 import {
-  type DocsLocale,
   DEFAULT_DOCS_LOCALE,
   DOCS_LOCALES,
+  type DocsLocale,
 } from "@/lib/docs/types";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -176,7 +177,11 @@ export default async function DocPage({
                   rehypeAutolinkHeadings,
                   {
                     behavior: "append",
-                    properties: { className: ["docs-anchor"], ariaHidden: true, tabIndex: -1 },
+                    properties: {
+                      className: ["docs-anchor"],
+                      ariaHidden: true,
+                      tabIndex: -1,
+                    },
                   },
                 ],
               ],
@@ -187,6 +192,8 @@ export default async function DocPage({
         <div className="mt-10 flex items-center justify-end">
           <EditOnGithub relativePath={repoRelPath} />
         </div>
+
+        <NewsletterCard locale={locale} source="docs-page" />
 
         <PrevNextNav
           prev={

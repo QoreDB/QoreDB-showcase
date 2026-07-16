@@ -7,6 +7,7 @@ import Script from "next/script";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
+import { NewsletterCard } from "@/components/newsletter-card";
 import { getIntlLocale } from "@/lib/locale";
 import { estimateReadingTime } from "@/lib/reading-time";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
@@ -44,7 +45,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug, locale } = await params;
   const { t } = await getTranslation(locale, "common");
-  const post = await client.fetch<PostDocument | null>(POST_QUERY, { slug, language: locale });
+  const post = await client.fetch<PostDocument | null>(POST_QUERY, {
+    slug,
+    language: locale,
+  });
   if (!post) {
     return buildPageMetadata({
       locale,
@@ -201,6 +205,8 @@ export default async function BlogPostPage({
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <RichTextRenderer content={post.body ?? []} />
           </div>
+
+          <NewsletterCard locale={locale} source="blog-post" />
 
           {/* Share buttons */}
           <div className="border-t border-(--q-border) pt-8">

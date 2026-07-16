@@ -14,6 +14,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
+import { NewsletterCard } from "@/components/newsletter-card";
 import { getDocsTree } from "@/lib/docs/tree";
 import {
   DEFAULT_DOCS_LOCALE,
@@ -217,6 +218,7 @@ export default async function DocsLandingPage({
           );
         })}
       </div>
+      <NewsletterCard locale={locale} source="docs-landing" />
     </article>
   );
 }
