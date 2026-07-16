@@ -26,6 +26,7 @@ export const getFooterLinks = (t: Translate) => ({
     { label: t("nav.marketplace"), href: "/marketplace" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
+    { label: "Newsletter", href: "/newsletter" },
   ],
   community: [
     {

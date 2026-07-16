@@ -1,10 +1,20 @@
 "use client";
 
-import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Loader2,
+  Mail,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
+import { subscribeNewsletter } from "@/actions/subscribe-newsletter";
 import { getContactMailtoHref } from "@/lib/contact";
 import { getFooterLinks } from "@/lib/footer-links";
 import { localizeInternalHref } from "@/lib/seo";
@@ -16,11 +26,30 @@ export function Footer() {
 
   const footerLinks = getFooterLinks(t);
 
+  const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    startTransition(async () => {
+      const res = await subscribeNewsletter(
+        { email, address: honeypot, source: "footer" },
+        locale,
+      );
+      if (res.success) {
+        setSubmitted(true);
+        setEmail("");
+      }
+    });
+  };
+
   return (
     <footer className="relative z-10 border-t border-(--q-border) bg-(--q-bg-0)">
       {/* Main footer content */}
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             <Link
@@ -174,6 +203,60 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Newsletter subscription form */}
+          <div className="col-span-2 md:col-span-1">
+            <h3 className="font-heading text-(--q-text-0) font-semibold text-sm mb-4">
+              Newsletter
+            </h3>
+            <p className="text-xs text-(--q-text-2) leading-relaxed mb-4">
+              {locale === "fr"
+                ? "Recevez les nouveautés et tutoriels de QoreDB."
+                : "Get the latest QoreDB news and guides."}
+            </p>
+            {submitted ? (
+              <div className="flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2 text-xs font-medium text-emerald-500">
+                <Check className="h-3.5 w-3.5" />
+                <span>{t("newsletter_page.success_title") || "Merci !"}</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="space-y-2">
+                <div className="relative">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t("newsletter_page.placeholder") || "Email"}
+                    className="w-full rounded-lg border border-(--q-border) bg-(--q-bg-0) pl-3 pr-8 py-2 text-xs text-(--q-text-0) placeholder:text-(--q-text-2) focus:border-(--q-accent) focus:outline-none transition-colors"
+                  />
+                  {/* Honeypot */}
+                  <input
+                    type="text"
+                    name="address"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isPending}
+                    className="absolute right-1 top-1/2 -translate-y-1/2 text-(--q-text-1) hover:text-(--q-accent) transition-colors p-1"
+                    aria-label={t("newsletter_page.cta")}
+                  >
+                    {isPending ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </div>
