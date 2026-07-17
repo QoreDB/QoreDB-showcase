@@ -107,23 +107,56 @@ export function Footer() {
                 <Mail className="w-5 h-5" />
               </button>
             </div>
-            <a
-              href="https://www.producthunt.com/products/qoredb?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-qoredb"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1107973&theme=light&t=1774948589240"
-                alt="QoreDB - The fast, open-source database client built with Rust | Product Hunt"
-                width={250}
-                height={54}
-                loading="lazy"
-                decoding="async"
-                fetchPriority="low"
-              />
-            </a>
+            <div className="mt-4 flex flex-col items-start gap-3">
+              <a
+                href="https://www.producthunt.com/products/qoredb?utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-qoredb-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1197632&theme=light&t=1784298260312"
+                  alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
+                  width={250}
+                  height={54}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                />
+              </a>
+              <a
+                href="https://www.producthunt.com/products/qoredb/reviews/new?utm_source=badge-product_review&utm_medium=badge"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1190478&theme=light"
+                  alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
+                  width={250}
+                  height={54}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                />
+              </a>
+              <a
+                href="https://www.producthunt.com/products/qoredb?utm_source=badge-follow&utm_medium=badge"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1190478&theme=light&size=small"
+                  alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
+                  width={86}
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Product links */}
