@@ -1,10 +1,13 @@
 import type { LucideIcon } from "lucide-react";
 import {
+  Blocks,
   FileCheck,
   FlaskConical,
   History,
   Layers,
   Network,
+  NotebookPen,
+  ShieldCheck,
   Webhook,
 } from "lucide-react";
 
@@ -26,6 +29,9 @@ export const FEATURE_PAGES: FeaturePage[] = [
   { slug: "instant-api", icon: Webhook, tier: "pro" },
   { slug: "sandbox", icon: FlaskConical, tier: "pro" },
   { slug: "migrations", icon: Layers, tier: "core" },
+  { slug: "notebooks", icon: NotebookPen, tier: "core" },
+  { slug: "production-safety", icon: ShieldCheck, tier: "core" },
+  { slug: "plugins", icon: Blocks, tier: "core" },
 ];
 
 export const FEATURE_SLUGS = FEATURE_PAGES.map((feature) => feature.slug);

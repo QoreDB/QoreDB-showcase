@@ -1356,7 +1356,7 @@
           },
           {
             "title": "Modifica come al solito",
-            "body": "La modifica inline nella griglia, la finestra di riga, le eliminazioni, la modifica in blocco e il generatore di dati alimentano tutti la sandbox invece del database. La griglia mostra il risultato che otterresti, così puoi continuare a lavorare sopra i tuoi cambiamenti in sospeso."
+            "body": "La modifica inline nella griglia, la finestra di riga, le eliminazioni e la modifica in blocco alimentano tutti la sandbox invece del database. La griglia mostra il risultato che otterresti, così puoi continuare a lavorare sopra i tuoi cambiamenti in sospeso."
           },
           {
             "title": "Rivedi l'insieme completo",
@@ -1378,7 +1378,7 @@
         "intro": "La modalità Sandbox copre le modifiche che fai attraverso la griglia. È un confine reale, e vale la pena essere precisi su dove si ferma:",
         "items": [
           "Copre i dati, non lo schema. CREATE, ALTER e DROP vengono eseguiti subito sul database, sandbox o no.",
-          "Copre la griglia, non l'editor SQL. Un DELETE digitato nell'editor viene eseguito immediatamente: la sandbox non è un intercettore di query.",
+          "Copre le modifiche della griglia, non l'editor SQL né il generatore di dati. Un DELETE digitato nell'editor, o un lotto di righe generate, viene eseguito immediatamente: la sandbox non è un intercettore di query.",
           "Nulla viene riservato nel database. Se qualcuno cambia una riga mentre la trattieni nella sandbox, l'applicazione sovrascrive il suo cambiamento.",
           "I cambiamenti in sospeso sono salvati localmente da QoreDB e sopravvivono a un riavvio. Non sono una transazione del database e non trattengono alcun lock.",
           "La generazione dell'SQL riguarda PostgreSQL, MySQL/MariaDB, SQLite e SQL Server. I motori compatibili con PostgreSQL ricadono sulla sintassi PostgreSQL con un avviso.",
@@ -1447,6 +1447,185 @@
       "cta": {
         "title": "Distribuisci il tuo schema come il tuo codice",
         "body": "Il Migrations Manager è incluso nel core gratuito di QoreDB. La generazione del diff dello schema, il rilevamento del drift e il confronto Prod↔Staging sono Pro."
+      }
+    },
+    "notebooks": {
+      "eyebrow": "Analysis · Notebooks",
+      "title": "Notebook per database",
+      "subtitle": "Documenti eseguibili che mescolano SQL e Markdown su una connessione attiva, salvati come un semplice file che il tuo team può rivedere in una pull request.",
+      "teaser": "Celle SQL e Markdown, parametri tipizzati, Run All o Run From Here: in un file JSON il cui diff resta pulito in Git.",
+      "problem": {
+        "title": "Il problema",
+        "body": "Una query che risponde a una domanda vera non è mai solo una query. Ha bisogno del contesto attorno: perché quel filtro, cosa significa davvero quel numero, cosa controllare dopo. Quel contesto finisce in un thread Slack, in una pagina wiki, o da nessuna parte. Sei mesi dopo la query è ancora nell'editor di qualcuno e nessuno ricorda a cosa servisse. Gli strumenti che risolvono la cosa per bene — Jupyter, i notebook ospitati — significano un runtime Python, un altro driver da configurare e le tue credenziali in un secondo posto."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "I notebook di QoreDB sono documenti fatti di celle: SQL sulla tua connessione attiva, Markdown per tutto ciò che l'SQL non può dire. Girano nel client che hai già connesso e si salvano in un file che committi accanto al tuo codice.",
+        "steps": [
+          {
+            "title": "Celle su una connessione attiva",
+            "body": "Una cella SQL viene eseguita sulla connessione e sul namespace del notebook e mostra il risultato lì sotto. Una cella Markdown contiene il ragionamento. Funziona con ogni database supportato da QoreDB, perché la cella passa il proprio sorgente alla sessione senza modificarlo: su una connessione MongoDB scrivi MQL nella stessa cella e il driver la interpreta."
+          },
+          {
+            "title": "Parametri, tipizzati e dichiarati una volta sola",
+            "body": "Dichiara una variabile e usala come $customer_id o {{date_from}} ovunque nel notebook. Quattro tipi — testo, numero, data, selezione — ciascuno con il proprio campo di input. Cambi il valore in cima, riesegui, e l'intero documento si adegua."
+          },
+          {
+            "title": "Run All, oppure Run From Here",
+            "body": "L'esecuzione è sequenziale e si ferma al primo errore, così una cella rotta non si propaga in dieci risultati fuorvianti più sotto. Un'esecuzione può essere annullata a metà corsa, e l'annullamento arriva al database, non solo all'interfaccia."
+          },
+          {
+            "title": "Un file, non un documento nel cloud di qualcun altro",
+            "body": "Il formato .qnb è JSON indentato. Risultati e stato di esecuzione vengono rimossi al salvataggio, così un diff mostra cosa hai cambiato e non cosa hai eseguito per ultimo. Si rivede come codice perché è un file del tuo repository."
+          },
+          {
+            "title": "Celle AI (Pro)",
+            "body": "Descrivi ciò che vuoi in linguaggio naturale; la cella scrive SQL in una nuova cella subito sotto, che leggi prima di eseguirla. Bring your own key: OpenAI, Anthropic, Mistral, Gemini, DeepSeek oppure Ollama per un modello che non lascia mai la tua macchina. Le chiavi restano nel portachiavi del tuo sistema operativo."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Una cella SQL che usa due variabili dichiarate in cima al notebook:",
+        "caption": "Le variabili sono sostituite come literal tra virgolette, non come parametri associati. I numeri devono risultare finiti al parsing, le date devono corrispondere a una forma ISO e il testo viene sottoposto a escape prima di raggiungere la query. Stanno al posto di valori, non di identificatori: una variabile in una clausola FROM non farà quello che speri."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "Un notebook è un documento, non uno scheduler né uno strumento BI. Dove si ferma:",
+        "items": [
+          "Le celle sono SQL e Markdown, più le celle AI e contract su Pro. Le celle grafico e i riferimenti tra celle esistono nel formato del file ma non hanno ancora un'interfaccia: considerale come non disponibili.",
+          "Le variabili sostituiscono valori, non identificatori né frammenti di SQL. Una variabile in una clausola FROM o nella posizione di una colonna non funzionerà.",
+          "L'esecuzione è sequenziale e si ferma al primo errore. Non c'è un interruttore continue-on-error, né esecuzione parallela, né pianificazione.",
+          "I risultati sono tenuti in memoria. Un SELECT senza LIMIT carica tutte le righe nell'app prima che la cella tronchi ciò che mostra.",
+          "Il notebook non imposta alcun timeout di query proprio: eredita quello definito dalla tua policy di governance, e non ne definisce nessuno se la policy non lo fa.",
+          "L'esportazione in Markdown conserva le celle SQL e Markdown. L'esportazione HTML autonoma mostra il Markdown come testo semplice invece di formattarlo, e nessuna delle due include i risultati.",
+          "Una bozza locale viene salvata automaticamente ogni 30 secondi. È una rete contro i crash, non uno storico delle versioni: il file su disco è la fonte di verità.",
+          "Le celle AI richiedono una chiave che fornisci tu, e lo schema delle tabelle coinvolte viene inviato al provider che scegli, con i nomi di colonna sensibili oscurati. Le tue righe non vengono inviate. Solo Ollama tiene tutto in locale."
+        ]
+      },
+      "cta": {
+        "title": "Una query che vale la pena tenere vale la pena spiegarla",
+        "body": "I notebook sono inclusi nel core gratuito di QoreDB. Le celle AI e le celle contract sono Pro."
+      }
+    },
+    "production-safety": {
+      "eyebrow": "Safety · Barriere di produzione",
+      "title": "Barriere di produzione",
+      "subtitle": "Contrassegna una connessione come produzione e QoreDB legge ogni istruzione prima che venga eseguita, con un vero parser SQL e non con un confronto di pattern.",
+      "teaser": "Le connessioni di sviluppo, staging e produzione si comportano in modo diverso. Le istruzioni pericolose vengono classificate a partire dall'AST analizzato, non con una regex sulla prima parola.",
+      "problem": {
+        "title": "Il problema",
+        "body": "Ogni sviluppatore con accesso alla produzione ha la stessa storia: la scheda sbagliata, un DELETE destinato a un database locale, una clausola WHERE che non è mai arrivata nella query. Lo strumento ha fatto esattamente ciò che gli era stato detto, all'istante, e in mezzo non c'è stato alcun momento. La maggior parte dei client tratta una connessione di produzione esattamente come un database usa e getta, perché per loro è solo un altro host e un'altra porta."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "Una connessione porta con sé un ambiente: sviluppo, staging o produzione. Su una connessione di produzione, QoreDB analizza la tua istruzione prima di inviarla, classifica ciò che fa davvero e applica le regole che hai configurato. Il parser è il punto: un client che cerca DROP con una grep si perde metà di ciò che conta e segnala cose che non contano.",
+        "steps": [
+          {
+            "title": "Classificazione a partire dall'istruzione analizzata",
+            "body": "Il tuo SQL viene analizzato con il dialetto del driver a cui sei connesso, e la classificazione nasce dall'albero sintattico che ne risulta. DROP, TRUNCATE, ALTER nelle sue molte forme, un UPDATE senza WHERE, un DELETE senza WHERE e un EXPLAIN ANALYZE che ne avvolga uno qualsiasi. Una CTE che modifica dati — WITH x AS (DELETE ...) SELECT — viene intercettata come mutazione, cosa che un confronto di pattern sulla prima parola chiave non vede mai."
+          },
+          {
+            "title": "Fail closed in produzione",
+            "body": "Se il parser non riesce a leggere la tua istruzione su una connessione di produzione, l'istruzione non viene eseguita. QoreDB si rifiuta di tirare a indovinare su una query che non ha capito, proprio sul database dove indovinare costa di più."
+          },
+          {
+            "title": "Regole che puoi leggere e cambiare",
+            "body": "Le regole integrate bloccano DROP e TRUNCATE in produzione, chiedono conferma su DELETE e avvisano su ALTER. Ciascuna dichiara il proprio nome quando scatta, così un rifiuto ti dice quale regola ha rifiutato e perché. Su Pro aggiungi le tue: un ambiente, un'operazione, un pattern facoltativo e una di tre azioni — bloccare, avvisare o chiedere."
+          },
+          {
+            "title": "Irrobustimento specifico per motore",
+            "body": "Le istruzioni rischiose non sono le stesse su ogni motore. Su DuckDB vengono segnalate INSTALL, LOAD, ATTACH e COPY TO perché raggiungono la rete o il filesystem. Su SQLite vengono segnalate ATTACH e i PRAGMA che disattivano le chiavi esterne o il journaling. Su ClickHouse, tutto ciò che il classificatore non riesce a collocare viene trattato come una mutazione invece di essere lasciato passare."
+          },
+          {
+            "title": "Una traccia di ciò che è successo",
+            "body": "Ogni query viene registrata con il suo esito, la sua durata, la regola che l'ha bloccata se c'è stata e un'impronta SHA-256 della sua forma normalizzata, così le query ripetute si raggruppano. I literal vengono oscurati prima che venga scritto qualunque cosa. Il log si esporta in JSONL o CSV."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Un DROP TABLE su una connessione contrassegnata come produzione, con le regole predefinite:",
+        "caption": "L'istruzione non raggiunge mai il database. Il rifiuto nomina la regola, perché una barriera che blocca senza dire quale è una barriera che finirai per disattivare."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "Questa è una barriera contro gli incidenti, non un controllo di sicurezza. La distinzione conta, quindi eccola per intero:",
+        "items": [
+          "Nulla viene applicato lato database, a parte DuckDB dove la sola lettura è impostata sul motore stesso. La sola lettura e ogni regola sono decisioni che QoreDB prende prima di inviare la query. Le tue credenziali hanno ancora esattamente i diritti che hanno sempre avuto, e qualsiasi altro client che le usi non ne è toccato.",
+          "Se quello che ti serve è una barriera vera, la versione duratura è un ruolo di database con i diritti che vuoi. QoreDB ti protegge dalla tua stessa distrazione; non protegge un database dai suoi utenti.",
+          "Di serie, la produzione chiede conferma sulle istruzioni pericolose ma non le blocca in modo netto tramite policy. Il blocco è un'impostazione, ed è disattivato per impostazione predefinita. Le regole integrate bloccano sì DROP e TRUNCATE, e quelle regole si possono disattivare.",
+          "La conferma è guidata dal client. Il backend si fida della ricevuta che gli viene inviata, quindi la conferma è una protezione contro la fretta, non contro un aggiramento deliberato. Solo il blocco a livello di policy è incondizionato.",
+          "Staging ottiene due regole integrate ma non i controlli esclusivi della produzione: nessun fail closed su un errore di analisi, nessun blocco da policy. Sta più vicino allo sviluppo di quanto il nome suggerisca.",
+          "In sviluppo e staging, un'istruzione che il parser non riesce a leggere viene eseguita senza analisi.",
+          "Un valore di ambiente che QoreDB non riconosce ricade sullo sviluppo, in silenzio.",
+          "Il limite di frequenza è di 60 query di burst per connessione, con ricarica a 6 al secondo. Ferma un ciclo fuori controllo; non è regolabile e si azzera quando l'app riparte.",
+          "Il registro di audit conserva le 10.000 voci più recenti per impostazione predefinita e scarta le più vecchie oltre quella soglia, senza archiviarle. È un semplice file locale: leggibile, modificabile ed eliminabile da qualsiasi cosa giri con il tuo utente. È una registrazione per te, non una prova a prova di manomissione per qualcun altro.",
+          "L'oscuramento sostituisce per intero i literal di stringa tra virgolette, più le forme note di credenziali. I numeri non vengono oscurati: un valore come un numero di conto in una clausola WHERE resta leggibile nel log."
+        ]
+      },
+      "cta": {
+        "title": "Il database non sa che intendevi staging",
+        "body": "Le barriere di produzione sono incluse nel core gratuito di QoreDB. Le regole di sicurezza personalizzate sono Pro."
+      }
+    },
+    "plugins": {
+      "eyebrow": "Extensibility · Sistema di plugin",
+      "title": "Plugin",
+      "subtitle": "Estendi QoreDB con plugin che girano come WebAssembly in un sandbox, con capacità che concedi una a una e puoi revocare senza riavviare.",
+      "teaser": "Moduli WebAssembly con carburante misurato, memoria limitata e tempo circoscritto, più plugin puramente dichiarativi che non eseguono alcun codice.",
+      "problem": {
+        "title": "Il problema",
+        "body": "Un client di database non può portarsi dietro ogni flusso di lavoro del tuo team. La risposta abituale è un'API per plugin, e il costo abituale è che un plugin diventa codice con i tuoi privilegi: le tue connessioni, le tue credenziali, il tuo filesystem. Ne installi uno per formattare una colonna JSON e può leggere tutto ciò che interroghi. È il motivo per cui la maggior parte delle persone non ne installa nessuno."
+      },
+      "solution": {
+        "title": "Come lo risolve QoreDB",
+        "intro": "I plugin di QoreDB esistono in due forme. Quelli semplici sono dati puri: un manifest che contribuisce snippets, template di connessione o temi, senza codice da eseguire. Gli altri vengono compilati in WebAssembly ed eseguiti dentro un interprete privo di autorità ambientale: nulla è raggiungibile se il manifest non lo chiede e tu non lo concedi.",
+        "steps": [
+          {
+            "title": "Un manifest e, facoltativamente, un modulo",
+            "body": "Ogni plugin è una cartella con un plugin.json. Può contribuire snippets, template di connessione, temi, visualizzatori di risultati e comandi. Se si ferma lì, non viene eseguito alcun codice e non c'è nulla da isolare in un sandbox. Se include un modulo .wasm, il manifest dichiara quali hook implementa e quali capacità gli servono."
+          },
+          {
+            "title": "Sette capacità, concesse una per una",
+            "body": "Log, notifiche, storage, lettura dei risultati delle query, HTTP, filesystem, segreti. Ognuna è disattivata per impostazione predefinita. Ciò che concedi viene intersecato con ciò che il manifest ha chiesto, così modificare a mano il file di consenso non può allargare la portata di un plugin oltre la sua stessa dichiarazione. I controlli avvengono al momento della chiamata, il che significa che una revoca ha effetto subito e non al riavvio successivo."
+          },
+          {
+            "title": "Circoscritto, non fidato",
+            "body": "Ogni invocazione riceve uno store nuovo, 50 milioni di unità di carburante e 16 MB di memoria. Un hook sul percorso della query ha 500 ms; il lavoro in background riceve 5 secondi e un comando 10. Un modulo che fallisce tre volte di seguito viene scaricato. Non c'è modo di bloccare l'app: il budget si esaurisce prima."
+          },
+          {
+            "title": "La rete è una lista di host consentiti",
+            "body": "Un plugin che vuole HTTP indica nel proprio manifest gli host esatti che chiamerà, senza caratteri jolly. Le richieste risolvono prima il DNS e rifiutano loopback, intervalli privati e indirizzi di metadati cloud, a meno che il manifest non chieda esplicitamente le reti private. I segreti stanno nel portachiavi del tuo sistema operativo, sotto un servizio separato da quello delle credenziali dei database, e un modulo legge solo i nomi che ha dichiarato."
+          },
+          {
+            "title": "Cosa un plugin non può raggiungere",
+            "body": "Non può eseguire SQL: quella capacità è stata rimossa, non solo messa sotto permesso. Non può leggere le credenziali delle tue connessioni né il tuo vault. Non può alterare il risultato di una query. Non può uscire dalla propria cartella dati. Oltre a quella non c'è filesystem, né socket, né sottoprocessi."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un esempio concreto",
+        "intro": "Un manifest per un plugin che invia le mutazioni eseguite a un endpoint di audit e contribuisce uno snippet:",
+        "caption": "Tutto ciò che il plugin può fare sta in questa pagina, nel file, prima che tu lo installi. La finestra di consenso ti mostra la stessa lista."
+      },
+      "limits": {
+        "title": "I limiti, in piena trasparenza",
+        "intro": "Un sandbox è un insieme di garanzie precise, non una promessa generica. Ecco cosa sono e cosa non sono queste:",
+        "items": [
+          "L'integrità viene verificata, la paternità no. Non ci sono firme. Il marketplace verifica che un archivio corrisponda allo SHA-256 annotato dal registry, il che prova che i byte non sono stati alterati in transito, non chi li ha scritti. Chi controlla il registry controlla quel digest.",
+          "L'hash del modulo in un manifest è facoltativo. Un plugin che non ce l'ha si installa comunque; l'interfaccia lo etichetta come non firmato.",
+          "Leggere i risultati delle query ed effettuare chiamate HTTP sono capacità separate, ma un plugin a cui concedi entrambe può inviare ogni riga che interroghi al proprio host consentito. È esattamente il senso di un plugin di audit, ed è anche la via di esfiltrazione. Concedile insieme di proposito.",
+          "La finestra di consenso preseleziona tutto ciò che il manifest ha chiesto. Il modello sottostante è opt-in; la finestra no. Leggila invece di confermarla.",
+          "Un plugin con un hook sul percorso della query può rifiutare qualsiasi query con la motivazione che preferisce. È la cosa più potente che un plugin possa fare, e si concede installandolo, non tramite una capacità.",
+          "Puoi installare da qualsiasi URL, non solo dal marketplace. All'installazione non c'è alcuna lista di host consentiti.",
+          "I limiti sono per invocazione, non per plugin: carburante e memoria si azzerano a ogni chiamata. Un plugin non può bloccare l'app, ma può essere chiamato spesso.",
+          "La revisione del marketplace è una persona che legge una pull request nel repository del registry. Non è un audit automatizzato e non è una certificazione di sicurezza."
+        ]
+      },
+      "cta": {
+        "title": "Estendi il client, non la tua superficie d'attacco",
+        "body": "Il sistema di plugin, runtime WebAssembly incluso, fa parte del core gratuito di QoreDB."
       }
     }
   },

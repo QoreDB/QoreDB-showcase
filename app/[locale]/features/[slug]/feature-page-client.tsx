@@ -84,6 +84,64 @@ CREATE INDEX idx_orders_status ON orders (status);
 -- migrate:down
 DROP INDEX idx_orders_status;
 ALTER TABLE orders DROP COLUMN status;`,
+  notebooks: `-- Cell 2 · SQL · connection: prod_pg
+SELECT
+  date_trunc('day', o.created_at) AS day,
+  count(*)                        AS orders,
+  sum(o.total)                    AS revenue
+FROM orders o
+WHERE o.created_at >= {{date_from}}
+  AND o.country     = {{country}}
+GROUP BY 1
+ORDER BY 1 DESC;
+
+-- Variables declared once, at the top of the notebook:
+--   date_from   date   2026-01-01
+--   country     text   FR`,
+  "production-safety": `-- Connection: prod_pg   ·   Environment: production
+DROP TABLE users;
+
+-- Query blocked by safety rule: Block DROP in Production:
+--   Prevents DROP statements in production environments
+--
+-- Audit entry written locally:
+--   { "blocked": true,
+--     "safety_rule": "builtin-no-drop-production",
+--     "operation_type": "drop",
+--     "environment": "production",
+--     "execution_time_ms": 0.0,
+--     "fingerprint": "9f2b1c7d4e0a8365" }`,
+  plugins: `{
+  "id": "acme.audit",
+  "name": "Audit Trail",
+  "version": "1.0.0",
+  "description": "POSTs every executed mutation to an audit endpoint.",
+  "qoredb": ">=0.1.29",
+  "runtime": {
+    "abiVersion": 1,
+    "entry": "plugin.wasm",
+    "integrity": "sha256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "hooks": ["preExecute", "postExecute"],
+    "capabilities": {
+      "log": true,
+      "queryRead": true,
+      "http": {
+        "allowedHosts": ["api.example.com"],
+        "allowPrivateNetworks": false
+      },
+      "secrets": ["api-token"]
+    }
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "id": "find-by-id",
+        "label": "Find by id",
+        "template": "SELECT * FROM \${1:table} WHERE id = \${2:42};"
+      }
+    ]
+  }
+}`,
 };
 
 function TierBadge({ tier }: { tier: FeaturePage["tier"] }) {
