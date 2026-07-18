@@ -1,10 +1,36 @@
 ---
 title: Différence de schéma
-description: Non disponible actuellement dans QoreDB.
+description: Générez des migrations à partir d'une référence capturée, détectez la dérive par rapport au schéma en direct, et comparez deux connexions côte à côte. Une fonctionnalité QoreDB Pro.
 premium: true
-draft: true
+draft: false
 ---
 
-Cette page est un espace réservé. Le vrai contenu est en cours de rédaction.
+# Différence de schéma
 
-QoreDB n'a pas de fonctionnalité de différence DDL/schéma aujourd'hui. Pour comparer les données ligne par ligne entre les tables ou les requêtes, consultez la page [Différence de données](/docs/diff-and-migrations/data-diff).
+<Callout type="info">
+La différence de schéma fait partie du niveau QoreDB Pro.
+</Callout>
+
+QoreDB Pro compare les schémas de bases de données et transforme les différences en migrations. Cela fonctionne de trois façons : générer une migration à partir d'une référence enregistrée, détecter la dérive par rapport à cette référence, et comparer deux connexions côte à côte.
+
+La fonctionnalité est protégée par `isFeatureEnabled('schema_diff')` ; sans licence Pro, les points d'entrée affichent une invite de mise à niveau au lieu de s'exécuter.
+
+## Migration à partir d'une référence
+
+Capturez une **référence** (baseline) — un instantané du schéma d'une connexion — puis laissez QoreDB comparer le schéma en direct à celle-ci et produire une migration. Un script **montant** (up) et un script **descendant** (down) sont générés par les constructeurs DDL. Les opérations qui ne peuvent pas être inversées (une colonne ou une table supprimée, par exemple) sont signalées comme irréversibles plutôt que devinées.
+
+QoreDB refuse d'émettre une migration qu'il ne peut pas produire fidèlement : une capture incomplète, ou un changement que le dialecte cible ne peut pas exprimer (par exemple un changement de type de colonne en place sur SQLite), est signalé au lieu d'être écrit sous forme de demi-migration.
+
+## Détection de dérive
+
+La détection de dérive compare le **schéma en direct** à la référence conservée sur le disque. Les références se trouvent dans `.qoredb/baselines/`, une entrée par connexion, et le dossier est ignoré par git — c'est un état local, pas quelque chose que vous versionnez. Si le schéma en direct s'est éloigné de la référence, la dérive est mise en évidence afin que vous puissiez régénérer une migration ou mettre à jour la référence.
+
+## Comparer deux connexions
+
+Depuis le menu contextuel d'une table, vous pouvez comparer le schéma de deux connexions en un clic — le cas Prod↔Staging. La comparaison couvre les tables, les colonnes, les index, les clés étrangères et la clé primaire, en listant ce qui diffère entre les deux.
+
+## Où aller ensuite
+
+- [Génération de migration](/docs/diff-and-migrations/migration-generation) pour les migrations de modifications de données capturées dans la sandbox
+- [Différence de données](/docs/diff-and-migrations/data-diff) pour comparer le contenu des lignes plutôt que la structure
+- [Tarification](/pricing) pour voir ce qui est inclus dans l'offre Pro

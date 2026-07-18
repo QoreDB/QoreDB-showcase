@@ -9,7 +9,8 @@
     "changelog": "Änderungsprotokoll",
     "download": "Herunterladen",
     "join_beta": "Treten Sie der Beta bei",
-    "docs": "Docs"
+    "docs": "Docs",
+    "marketplace": "Plugins"
   },
   "download": {
     "title": "QoreDB herunterladen",
@@ -29,7 +30,18 @@
     "linux_appimage": "AppImage (Universal)",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
-    "view_all_releases": "Alle Veröffentlichungen auf GitHub anzeigen"
+    "view_all_releases": "Alle Veröffentlichungen auf GitHub anzeigen",
+    "next_steps": {
+      "eyebrow": "Nach der Installation",
+      "title": "Jetzt richten wir Ihre Verbindung ein",
+      "description": "Drei kurze Seiten und Sie beherrschen QoreDB vollständig.",
+      "first_connection_title": "Ihre erste Verbindung",
+      "first_connection_description": "Fügen Sie einen DSN ein oder füllen Sie das Formular aus. In unter einer Minute verbunden.",
+      "interface_tour_title": "Rundgang durch die Oberfläche",
+      "interface_tour_description": "Seitenleiste, Tabs, Editor, Ergebnisbereich: das vollständige mentale Modell.",
+      "full_docs_title": "Die vollständige Dokumentation durchsuchen",
+      "full_docs_description": "Treiber, Abfragen, Sicherheit, Tastenkürzel und mehr."
+    }
   },
   "changelog": {
     "title": "Änderungsprotokoll",
@@ -72,7 +84,8 @@
       "discover_pro": "Auf GitHub ansehen",
       "view_project": "Projekt anzeigen",
       "participate": "Mitmachen",
-      "community": "Discord beitreten"
+      "community": "Discord beitreten",
+      "read_docs": "Dokumentation lesen"
     },
     "social_proof": "Schließen Sie sich <highlight>100+</highlight> Entwicklern an, die auf die Beta warten",
     "meta": {
@@ -253,7 +266,8 @@
     "title": "Hören Sie auf, gegen Ihr Datenbanktool anzukämpfen",
     "description": "Laden Sie QoreDB herunter und sehen Sie den Unterschied in 30 Sekunden.",
     "download_button": "Kostenlos herunterladen",
-    "github_button": "Stern auf GitHub"
+    "github_button": "Stern auf GitHub",
+    "docs_link": "Oder lesen Sie zuerst die Dokumentation"
   },
   "database_strip": {
     "label": "Eine Schnittstelle, jede Datenbank"
@@ -320,7 +334,7 @@
         "fulltext": "Ja",
         "er_diagram": "Ja",
         "federation": "Profi",
-        "ai": "Na gut",
+        "ai": "BYOK",
         "plugins": "Ja",
         "ui": "Ja",
         "maturity": "Neu",
@@ -420,13 +434,13 @@
     "title": "QoreDB Roadmap",
     "subtitle": "Entdecken Sie die nächsten Schritte in der QoreDB-Entwicklung.",
     "now": {
-      "title": "Gerade veröffentlicht – v0.1.23 → v0.1.31",
+      "title": "Gerade veröffentlicht – v0.1.23 → v0.1.34",
       "quote": "QoreDB ist schneller, sicherer und bereit für den ernsthaften täglichen Einsatz.",
       "items": {
         "1": "15 native Treiber – Elasticsearch und OpenSearch gesellen sich zu ClickHouse, Supabase, Neon und TimescaleDB",
         "2": "Data Contracts (Pro): deklarative Datenqualitätsregeln mit Re-Evaluierung nach Mutationen",
         "3": "Instant Data API (Pro): jede gespeicherte Abfrage als token-authentifizierten REST-Endpoint bereitstellen",
-        "4": "Backup- & Restore-Helfer, anpassbare Tastenkürzel und Query-Fingerprinting im Audit",
+        "4": "Migrations Manager mit Schema-Diff und Drift-Erkennung, Index-Vorschläge, dazu Backup/Restore und anpassbare Tastenkürzel",
         "5": "Workspaces, Time Travel, DDL-Editor, Bulk Edit und Tab Groups in allen 9 UI-Sprachen"
       },
       "goal": "Ziel: ein Tool, das Entwickler bereits mit Zuversicht verwenden und empfehlen."
@@ -436,7 +450,7 @@
       "quote": "Gehen Sie über herkömmliche Datenbank-Clients hinaus.",
       "items": {
         "1": "Tieferes MongoDB-Tooling und reichhaltigere Aggregationsworkflows",
-        "2": "Visuelle Schema-Migrationen und Refactor-Vorschauen",
+        "2": "Database Agent: agentischer Chat, der Ihr Schema erkundet und mit echten Daten antwortet",
         "3": "Ausgereiftere Notebooks für Datenexploration und Reporting",
         "4": "Intelligentere KI-gestützte Erklärungen, Korrekturen und Reviews",
         "5": "Erste Bausteine der lokal-first Zusammenarbeit und Synchronisation"
@@ -564,7 +578,7 @@
         "vault": "Verschlüsselter Tresor (Argon2) + Proxy- und ssh-agent-Unterstützung",
         "ssh": "Natives SSH-Tunneling (OpenSSH, Proxy Jump)",
         "safety": "Produktionssicherheitsregeln (Umgebungslabels, schreibgeschützter Modus) + grundlegendes Audit-Protokoll mit Redaction",
-        "audit_basic": "Grundlegendes Audit-Protokoll (50 Einträge) mit Abfrage-Redaction",
+        "audit_basic": "Grundlegendes Audit-Protokoll (10.000 Einträge) mit Abfrage-Redaction",
         "export_basic": "CSV-/JSON-/SQL-Export und teilbare Ergebnis-Links",
         "shortcuts": "Verlauf, Favoriten, Tab Groups, Tastaturkürzel und 9 UI-Sprachen"
       }
@@ -1094,7 +1108,9 @@
     "not_found_title": "Seite nicht gefunden",
     "not_found_body": "Diese Doku-Seite existiert nicht oder wurde noch nicht geschrieben.",
     "landing_title": "QoreDB Dokumentation",
-    "landing_subtitle": "Alles, um QoreDB zu installieren, Datenbanken zu verbinden und schneller zu liefern."
+    "landing_subtitle": "Alles, um QoreDB zu installieren, Datenbanken zu verbinden und schneller zu liefern.",
+    "fallback_banner_title": "Englische Version wird angezeigt",
+    "fallback_banner_body": "Diese Seite wurde noch nicht übersetzt. Unten wird die englische Version angezeigt."
   },
   "marketplace": {
     "categories": {
@@ -1105,11 +1121,99 @@
       "integrations": "Integrationen"
     },
     "submit": {
+      "title": "Plugin einreichen",
+      "subtitle": "Plugins werden von den QoreDB-Maintainern geprüft, bevor sie im Marketplace erscheinen. Die Prüfung dauert in der Regel einige Tage — wir sehen uns das Manifest, die angeforderten Berechtigungen und die Quelle des WASM-Moduls an.",
+      "field_plugin_id": "Plugin-ID",
+      "field_plugin_id_hint": "Reverse-DNS, z. B. acme.linter. Muss mit plugin.json#id übereinstimmen.",
+      "field_name": "Anzeigename",
+      "field_version": "Version",
+      "field_kind": "Plugin-Art",
+      "field_kind_declarative": "Deklarativ — nur Snippets, Themes und Verbindungsvorlagen",
+      "field_kind_executable": "Ausführbar — liefert ein WASM-Modul in einer Sandbox",
+      "field_description": "Kurzbeschreibung",
+      "field_author": "Autor / Maintainer",
+      "field_contact_email": "Kontakt-E-Mail",
+      "field_contact_email_hint": "Wir melden uns bei Rückfragen oder um die Freigabe zu bestätigen. Wird nicht veröffentlicht.",
+      "field_repository_url": "Quell-Repository (optional)",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "Fügen Sie das Manifest wortgetreu ein. Plugin-ID und Version müssen mit den Feldern oben übereinstimmen.",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "Flaches Archiv mit plugin.json und dem WASM-Modul (falls vorhanden). Max. 8 MiB — das gleiche Installationsbudget, das QoreDB durchsetzt.",
+      "submit_button": "Zur Prüfung einreichen",
+      "submitting": "Wird eingereicht…",
+      "success_title": "Einreichung erhalten",
+      "success_body": "Danke. Ihr Plugin ist in der Prüfungswarteschlange — wir senden eine E-Mail an {{email}}, sobald es geprüft wurde.",
+      "error_title": "Einreichung fehlgeschlagen",
+      "checklist_title": "Vor dem Einreichen",
+      "checklist_items": [
+        "Das WASM-Modul instanziiert sauber und exportiert die im Manifest deklarierten Hooks.",
+        "Jede vom Manifest angeforderte Berechtigung wird tatsächlich benötigt — Nutzer sehen sie im Zustimmungsdialog.",
+        "Wenn das Plugin HTTP-Aufrufe macht, ist allowedHosts eine präzise Liste, kein Platzhalter.",
+        "runtime.integrity enthält den sha256 der finalen .wasm-Bytes.",
+        "Das Archiv enthält nur plugin.json + das WASM-Modul im Wurzelverzeichnis."
+      ],
       "field_category": "Kategorie",
       "field_category_hint": "Wähle die passendste. Der Reviewer kann sie anpassen."
     },
     "eyebrow": "Plugin-Bibliothek",
-    "page_subtitle": "Erweitern Sie QoreDB mit Plugins: Snippets, Themes, Verbindungsvorlagen und WASM-Module."
+    "page_title": "Plugins",
+    "page_subtitle": "Erweitern Sie QoreDB mit Plugins: Snippets, Themes, Verbindungsvorlagen und WASM-Module.",
+    "section_title": "Verfügbare Plugins",
+    "section_subtitle": "Jedes Plugin in dieser Liste hat die Prüfung durch die Maintainer bestanden und liegt in der öffentlichen Registry auf GitHub.",
+    "registry_link_label": "Registry auf GitHub durchsuchen",
+    "submit_cta": "Plugin einreichen",
+    "empty": "Noch keine Plugins. Seien Sie der Erste, der eines veröffentlicht.",
+    "search_placeholder": "Plugins suchen…",
+    "filter_all": "Alle",
+    "filter_declarative": "Deklarativ",
+    "filter_executable": "Ausführbar (WASM)",
+    "registry_unavailable": "Die Registry ist vorübergehend nicht erreichbar. Bitte versuchen Sie es in ein paar Minuten erneut.",
+    "kind": {
+      "declarative": "Deklarativ",
+      "executable": "Ausführbar (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "von {{author}}",
+      "view_details": "Details ansehen"
+    },
+    "detail": {
+      "back": "Zurück zu den Plugins",
+      "install_title": "In QoreDB installieren",
+      "install_step_1": "Öffnen Sie QoreDB → Einstellungen → Durchsuchen und klicken Sie auf Installieren. Die App lädt das Archiv herunter, prüft dessen sha256 gegen diese Seite und validiert dann das Manifest, bevor ein Hook ausgelöst wird.",
+      "install_step_2": "Oder laden Sie das Archiv direkt herunter und installieren Sie es über Einstellungen → Plugins → Plugin installieren. Der QoreDB-Host prüft das Manifest auf die gleiche Weise erneut.",
+      "download_archive": "plugin.zip herunterladen ({{size}})",
+      "view_manifest": "plugin.json ansehen",
+      "manifest_heading": "Manifest auf einen Blick",
+      "manifest_id": "Plugin-ID",
+      "manifest_version": "Version",
+      "manifest_qoredb": "QoreDB-Kompatibilität",
+      "manifest_author": "Autor",
+      "manifest_kind": "Art",
+      "manifest_archive_sha": "Archiv-sha256",
+      "manifest_integrity": "WASM-Integrität",
+      "manifest_no_integrity": "Unsigniert — QoreDB kennzeichnet dieses Plugin im Panel als Unsigniert.",
+      "manifest_hooks": "Lifecycle-Hooks",
+      "manifest_no_hooks": "Keine Lifecycle-Hooks (deklaratives Plugin).",
+      "manifest_capabilities": "Angeforderte Berechtigungen",
+      "manifest_no_capabilities": "Keine Berechtigungen angefordert.",
+      "manifest_contributes": "Beiträge",
+      "contributes_none": "Keine deklarativen Beiträge.",
+      "contributes_snippets": "{{count}} Snippet",
+      "contributes_snippets_plural": "{{count}} Snippets",
+      "contributes_templates": "{{count}} Verbindungsvorlage",
+      "contributes_templates_plural": "{{count}} Verbindungsvorlagen",
+      "contributes_themes": "{{count}} Theme",
+      "contributes_themes_plural": "{{count}} Themes",
+      "contributes_viewers": "{{count}} Ergebnis-Viewer",
+      "contributes_viewers_plural": "{{count}} Ergebnis-Viewer",
+      "contributes_commands": "Befehle: {{commands}}",
+      "versions_heading": "Alle Versionen",
+      "version_label": "Version {{version}}",
+      "version_size": "{{size}} Archiv",
+      "not_found_title": "Plugin nicht gefunden",
+      "not_found_subtitle": "Dieses Plugin ist nicht in der Registry. Möglicherweise wurde es umbenannt oder entfernt."
+    }
   },
   "features_common": {
     "tier_pro": "Pro",

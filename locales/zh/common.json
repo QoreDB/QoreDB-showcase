@@ -9,7 +9,8 @@
     "changelog": "变更日志",
     "download": "下载",
     "join_beta": "加入测试版",
-    "docs": "文档"
+    "docs": "文档",
+    "marketplace": "插件"
   },
   "download": {
     "title": "下载QoreDB",
@@ -29,7 +30,18 @@
     "linux_appimage": "应用程序图像（通用）",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
-    "view_all_releases": "查看 GitHub 上的所有版本"
+    "view_all_releases": "查看 GitHub 上的所有版本",
+    "next_steps": {
+      "eyebrow": "安装之后",
+      "title": "现在来连接吧",
+      "description": "三个简短的页面，让您完全掌握 QoreDB。",
+      "first_connection_title": "您的第一个连接",
+      "first_connection_description": "粘贴 DSN 或填写表单。不到一分钟即可连接。",
+      "interface_tour_title": "界面导览",
+      "interface_tour_description": "侧边栏、标签页、编辑器、结果面板：完整的心智模型。",
+      "full_docs_title": "浏览完整文档",
+      "full_docs_description": "驱动、查询、安全、键盘快捷键等等。"
+    }
   },
   "changelog": {
     "title": "变更日志",
@@ -72,7 +84,8 @@
       "discover_pro": "在 GitHub 上查看",
       "view_project": "查看项目",
       "participate": "参与",
-      "community": "加入 Discord"
+      "community": "加入 Discord",
+      "read_docs": "阅读文档"
     },
     "social_proof": "与 <highlight>100+</highlight> 开发者一起等待 Beta 版",
     "meta": {
@@ -253,7 +266,8 @@
     "title": "停止与数据库工具对抗",
     "description": "下载 QoreDB 并在 30 秒内查看差异。",
     "download_button": "免费下载",
-    "github_button": "在 GitHub 上加星标"
+    "github_button": "在 GitHub 上加星标",
+    "docs_link": "或先阅读文档"
   },
   "database_strip": {
     "label": "一个界面，每个数据库"
@@ -310,17 +324,17 @@
     },
     "values": {
       "qoredb": {
-        "opensource": "阿帕奇2.0",
+        "opensource": "Apache 2.0",
         "multidb": "15 个驱动",
-        "native": "铁锈/金牛座",
+        "native": "Rust/Tauri",
         "local": "是的",
-        "vault": "氩气2",
+        "vault": "Argon2",
         "safety": "是的",
         "sandbox": "专业版",
         "fulltext": "是的",
         "er_diagram": "是的",
         "federation": "专业版",
-        "ai": "自带设备",
+        "ai": "BYOK",
         "plugins": "是的",
         "ui": "是的",
         "maturity": "新",
@@ -345,8 +359,8 @@
       },
       "tableplus": {
         "opensource": "否",
-        "multidb": "有限公司",
-        "native": "本地人",
+        "multidb": "有限",
+        "native": "原生",
         "local": "是的",
         "vault": "钥匙扣",
         "safety": "部分",
@@ -420,13 +434,13 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "刚刚发布：v0.1.23 → v0.1.31",
+      "title": "刚刚发布：v0.1.23 → v0.1.34",
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
         "1": "15 个原生驱动 — Elasticsearch 和 OpenSearch 加入 ClickHouse、Supabase、Neon 和 TimescaleDB 行列",
         "2": "Data Contracts（Pro）：声明式数据质量规则，变更后自动重新评估",
         "3": "Instant Data API（Pro）：将任意保存的查询转为带令牌鉴权的 REST 端点",
-        "4": "备份/恢复助手、可自定义快捷键，以及审计中的查询指纹",
+        "4": "带模式差异与漂移检测的 Migrations Manager、索引建议，以及备份/恢复和可自定义快捷键",
         "5": "Workspaces、Time Travel、DDL 编辑器、批量编辑和 tab groups 已覆盖全部 9 种界面语言"
       },
       "goal": "目标：开发者已经放心使用和推荐的工具。"
@@ -436,7 +450,7 @@
       "quote": "超越传统的数据库客户端。",
       "items": {
         "1": "更深入的 MongoDB 工具和更丰富的聚合工作流",
-        "2": "可视化模式迁移和重构预览",
+        "2": "Database Agent：自主探索数据库模式并用真实数据回答的智能对话",
         "3": "更完善的笔记本，用于数据探索和报告",
         "4": "更智能的 AI 辅助解释、修复和审查",
         "5": "本地优先协作和同步的第一块砖"
@@ -564,7 +578,7 @@
         "vault": "加密凭证库 (Argon2) + 代理和 ssh-agent 支持",
         "ssh": "原生 SSH 隧道（OpenSSH、proxy jump）",
         "safety": "生产安全规则（环境标签、只读模式）+ 含 redaction 的基本审核日志",
-        "audit_basic": "基本审核日志（50 条）含查询 redaction",
+        "audit_basic": "基本审核日志（10,000 条）含查询 redaction",
         "export_basic": "CSV/JSON/SQL 导出和可分享的结果链接",
         "shortcuts": "历史记录、收藏夹、tab groups、键盘快捷键和 9 种界面语言"
       }
@@ -665,7 +679,7 @@
     "year_label": "每年",
     "perpetual_label": "一次性",
     "tco_label": "{{years}} 年总计",
-    "lifetime_perk": "之后终身 0 元",
+    "lifetime_perk": "之后终身 0 €",
     "note": "竞品价格来自其官方网站，欧元等值，2026 年 5 月。",
     "tools": {
       "dbeaver": {
@@ -896,7 +910,7 @@
         "content": "QoreDB 网站的所有元素（文本、文档、图形、徽标、视觉标识）均受知识产权保护。\n\n除非另有说明，否则禁止任何未经授权的复制、陈述或利用。\n\nQoreDB 软件的源代码受适用许可证条款的约束，如 **许可证** 页面中所定义。"
       },
       "liability": {
-        "title": "七、责任",
+        "title": "8. 责任",
         "content": "QoreDB 按“原样”提供，不提供任何形式的保证。\n\nQoreDB 不承担以下责任：\n\n* 由于使用本网站或软件而造成的直接或间接损害，\n* 数据丢失、业务中断或商业损失，\n* 与软件配置或使用不当相关的后果。\n\n用户对其使用 QoreDB 及其处理的数据承担全部责任。"
       },
       "privacy": {
@@ -1094,7 +1108,9 @@
     "not_found_title": "页面未找到",
     "not_found_body": "此文档页面不存在或尚未撰写。",
     "landing_title": "QoreDB 文档",
-    "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。"
+    "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。",
+    "fallback_banner_title": "正在显示英文版本",
+    "fallback_banner_body": "此页面尚未翻译。下面显示的是英文版本。"
   },
   "marketplace": {
     "categories": {
@@ -1105,11 +1121,99 @@
       "integrations": "集成"
     },
     "submit": {
+      "title": "提交插件",
+      "subtitle": "插件在出现在市场之前会由 QoreDB 维护者审核。审核通常需要几天时间——我们会查看清单、请求的权限以及 WASM 模块的来源。",
+      "field_plugin_id": "插件 ID",
+      "field_plugin_id_hint": "反向 DNS，例如 acme.linter。必须与 plugin.json#id 匹配。",
+      "field_name": "显示名称",
+      "field_version": "版本",
+      "field_kind": "插件类型",
+      "field_kind_declarative": "声明式 — 仅代码片段、主题和连接模板",
+      "field_kind_executable": "可执行 — 附带沙箱化的 WASM 模块",
+      "field_description": "简短描述",
+      "field_author": "作者 / 维护者",
+      "field_contact_email": "联系邮箱",
+      "field_contact_email_hint": "我们会就后续问题或确认批准与您联系。不会公开。",
+      "field_repository_url": "源代码仓库（可选）",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "原样粘贴清单。插件 ID 和版本必须与上面的字段匹配。",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "包含 plugin.json 和 WASM 模块（如有）的扁平归档包。最大 8 MiB — 与 QoreDB 强制执行的安装上限相同。",
+      "submit_button": "提交审核",
+      "submitting": "提交中…",
+      "success_title": "已收到提交",
+      "success_body": "谢谢。您的插件已进入审核队列——审核完成后我们会发送邮件至 {{email}}。",
+      "error_title": "提交失败",
+      "checklist_title": "提交前",
+      "checklist_items": [
+        "WASM 模块能够顺利实例化，并导出清单中声明的钩子。",
+        "清单请求的每项权限都确实需要——用户会在同意对话框中看到它们。",
+        "如果插件进行 HTTP 调用，allowedHosts 是精确的列表，而非通配符。",
+        "runtime.integrity 包含最终 .wasm 字节的 sha256。",
+        "归档包根目录只包含 plugin.json 和 WASM 模块。"
+      ],
       "field_category": "类别",
       "field_category_hint": "请选择最接近的类别。审核时可以调整。"
     },
     "eyebrow": "插件库",
-    "page_subtitle": "用插件扩展 QoreDB：代码片段、主题、连接模板和 WASM 模块。"
+    "page_title": "插件",
+    "page_subtitle": "用插件扩展 QoreDB：代码片段、主题、连接模板和 WASM 模块。",
+    "section_title": "可用插件",
+    "section_subtitle": "此列表中的每个插件都通过了维护者审核，并收录在 GitHub 上的公共注册表中。",
+    "registry_link_label": "在 GitHub 上浏览注册表",
+    "submit_cta": "提交插件",
+    "empty": "还没有插件。成为第一个发布的人吧。",
+    "search_placeholder": "搜索插件…",
+    "filter_all": "全部",
+    "filter_declarative": "声明式",
+    "filter_executable": "可执行 (WASM)",
+    "registry_unavailable": "注册表暂时无法访问。请几分钟后重试。",
+    "kind": {
+      "declarative": "声明式",
+      "executable": "可执行 (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "作者：{{author}}",
+      "view_details": "查看详情"
+    },
+    "detail": {
+      "back": "返回插件列表",
+      "install_title": "在 QoreDB 中安装",
+      "install_step_1": "打开 QoreDB → 设置 → 浏览，然后点击「安装」。应用会下载归档包，对照此页面校验其 sha256，然后在任何钩子触发之前验证清单。",
+      "install_step_2": "或者直接下载归档包，通过 设置 → 插件 → 安装插件 进行安装。QoreDB 主机会以相同方式重新校验清单。",
+      "download_archive": "下载 plugin.zip（{{size}}）",
+      "view_manifest": "查看 plugin.json",
+      "manifest_heading": "清单概览",
+      "manifest_id": "插件 ID",
+      "manifest_version": "版本",
+      "manifest_qoredb": "QoreDB 兼容性",
+      "manifest_author": "作者",
+      "manifest_kind": "类型",
+      "manifest_archive_sha": "归档包 sha256",
+      "manifest_integrity": "WASM 完整性",
+      "manifest_no_integrity": "未签名 — QoreDB 会在面板中将此插件标记为「未签名」。",
+      "manifest_hooks": "生命周期钩子",
+      "manifest_no_hooks": "没有生命周期钩子（声明式插件）。",
+      "manifest_capabilities": "请求的权限",
+      "manifest_no_capabilities": "未请求任何权限。",
+      "manifest_contributes": "贡献内容",
+      "contributes_none": "没有声明式贡献。",
+      "contributes_snippets": "{{count}} 个代码片段",
+      "contributes_snippets_plural": "{{count}} 个代码片段",
+      "contributes_templates": "{{count}} 个连接模板",
+      "contributes_templates_plural": "{{count}} 个连接模板",
+      "contributes_themes": "{{count}} 个主题",
+      "contributes_themes_plural": "{{count}} 个主题",
+      "contributes_viewers": "{{count}} 个结果查看器",
+      "contributes_viewers_plural": "{{count}} 个结果查看器",
+      "contributes_commands": "命令：{{commands}}",
+      "versions_heading": "所有版本",
+      "version_label": "版本 {{version}}",
+      "version_size": "{{size}} 归档包",
+      "not_found_title": "未找到插件",
+      "not_found_subtitle": "此插件不在注册表中。它可能已被重命名或移除。"
+    }
   },
   "features_common": {
     "tier_pro": "Pro",

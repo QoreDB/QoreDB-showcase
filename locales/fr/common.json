@@ -537,13 +537,13 @@
     "title": "Roadmap QoreDB",
     "subtitle": "Ce qui vient d'être livré, et ce qui arrive ensuite.",
     "now": {
-      "title": "Tout juste livré: v0.1.23 → v0.1.31",
+      "title": "Tout juste livré: v0.1.23 → v0.1.34",
       "quote": "QoreDB est plus rapide, plus sûr, prêt pour un usage quotidien sérieux.",
       "items": {
         "1": "15 drivers natifs — Elasticsearch et OpenSearch rejoignent ClickHouse, Supabase, Neon et TimescaleDB",
         "2": "Data Contracts (Pro) : règles de qualité de données déclaratives, réévaluées après mutation",
         "3": "Instant Data API (Pro) : exposez n'importe quelle requête sauvegardée en endpoint REST authentifié",
-        "4": "Helpers de backup/restore, raccourcis personnalisables et empreintes de requêtes dans l'audit",
+        "4": "Migrations Manager avec schema-diff et détection de dérive, suggestions d'index, plus backup/restore et raccourcis personnalisables",
         "5": "Workspaces, Time Travel, éditeur DDL, bulk edit et tab groups dans les 9 langues d'interface"
       },
       "goal": "Objectif : un outil que les développeurs utilisent et recommandent déjà en confiance."
@@ -553,7 +553,7 @@
       "quote": "Aller au-delà des clients de bases de données traditionnels.",
       "items": {
         "1": "Outillage MongoDB plus poussé et workflows d'agrégation enrichis",
-        "2": "Migrations de schéma visuelles et aperçus de refactor",
+        "2": "Database Agent : chat agentique qui explore votre schéma et répond avec de vraies données",
         "3": "Notebooks plus aboutis pour l'exploration et le reporting",
         "4": "Assistance IA plus fine pour explications, fixes et reviews",
         "5": "Premières briques de collaboration et sync local-first"
@@ -681,7 +681,7 @@
         "vault": "Vault chiffré (Argon2) + support proxy et ssh-agent",
         "ssh": "Tunneling SSH natif (OpenSSH, proxy jump)",
         "safety": "Règles de sécurité production (labels environnement, read-only) + audit log basique avec redaction",
-        "audit_basic": "Audit log basique (50 entrées) avec redaction des requêtes",
+        "audit_basic": "Audit log basique (10 000 entrées) avec redaction des requêtes",
         "export_basic": "Export CSV / JSON / SQL et liens de partage de résultats",
         "shortcuts": "Historique, favoris, tab groups, raccourcis clavier et 9 langues d'interface"
       }

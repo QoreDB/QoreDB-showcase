@@ -9,7 +9,8 @@
     "changelog": "Registro de cambios",
     "download": "Descargar",
     "join_beta": "Unirse a la beta",
-    "docs": "Docs"
+    "docs": "Docs",
+    "marketplace": "Plugins"
   },
   "download": {
     "title": "Descargar QoreDB",
@@ -21,7 +22,7 @@
     "detected_platform": "Detectamos que estás en {{platform}}",
     "other_platforms": "Otras plataformas",
     "recommended": "Recomendado",
-    "apple_silicon": "Silicona de Apple (M1/M2/M3/M4)",
+    "apple_silicon": "Apple Silicon (M1/M2/M3/M4)",
     "intel_mac": "Mac Intel",
     "windows_installer": "Instalador (.exe)",
     "windows_msi": "Instalador MSI",
@@ -29,7 +30,18 @@
     "linux_appimage": "Imagen de aplicación (universal)",
     "linux_deb": "Debian/Ubuntu (.deb)",
     "linux_rpm": "Fedora/RHEL (.rpm)",
-    "view_all_releases": "Ver todos los lanzamientos en GitHub"
+    "view_all_releases": "Ver todos los lanzamientos en GitHub",
+    "next_steps": {
+      "eyebrow": "Después de instalar",
+      "title": "Ahora vamos a conectarte",
+      "description": "Tres páginas cortas y tendrás un dominio completo de QoreDB.",
+      "first_connection_title": "Tu primera conexión",
+      "first_connection_description": "Pega un DSN o rellena el formulario. Conéctate en menos de un minuto.",
+      "interface_tour_title": "Recorrido por la interfaz",
+      "interface_tour_description": "Barra lateral, pestañas, editor, panel de resultados: el modelo mental completo.",
+      "full_docs_title": "Explorar la documentación completa",
+      "full_docs_description": "Drivers, consultas, seguridad, atajos de teclado y más."
+    }
   },
   "changelog": {
     "title": "Registro de cambios",
@@ -72,7 +84,8 @@
       "discover_pro": "Ver en GitHub",
       "view_project": "Ver proyecto",
       "participate": "participar",
-      "community": "Unirse a Discord"
+      "community": "Unirse a Discord",
+      "read_docs": "Leer la documentación"
     },
     "social_proof": "Únase a <highlight>100+</highlight> desarrolladores que esperan la versión beta",
     "meta": {
@@ -253,7 +266,8 @@
     "title": "Deja de luchar contra tu herramienta de base de datos",
     "description": "Descarga QoreDB y ve la diferencia en 30 segundos.",
     "download_button": "Descargar gratis",
-    "github_button": "Estrella en GitHub"
+    "github_button": "Estrella en GitHub",
+    "docs_link": "O lee primero la documentación"
   },
   "database_strip": {
     "label": "Una interfaz, cada base de datos"
@@ -262,7 +276,7 @@
     "databases": "15 motores",
     "binary_size": "~15 MB binarios",
     "startup": "<1s de inicio",
-    "license": "apache 2.0"
+    "license": "Apache 2.0"
   },
   "social_proof": {
     "aria_label": "Estadísticas de popularidad del proyecto",
@@ -310,17 +324,17 @@
     },
     "values": {
       "qoredb": {
-        "opensource": "apache 2.0",
+        "opensource": "Apache 2.0",
         "multidb": "15 motores",
-        "native": "Óxido/Tauri",
+        "native": "Rust/Tauri",
         "local": "si",
-        "vault": "Argón2",
+        "vault": "Argon2",
         "safety": "si",
         "sandbox": "profesional",
         "fulltext": "si",
         "er_diagram": "si",
         "federation": "profesional",
-        "ai": "BIOK",
+        "ai": "BYOK",
         "plugins": "si",
         "ui": "si",
         "maturity": "Nuevo",
@@ -329,7 +343,7 @@
       "dbeaver": {
         "opensource": "Comunidad",
         "multidb": "si",
-        "native": "Java/Columpio",
+        "native": "Java/Swing",
         "local": "si",
         "vault": "Básico",
         "safety": "No",
@@ -420,13 +434,13 @@
     "title": "QoreDB Hoja de ruta",
     "subtitle": "Descubra los próximos pasos en el desarrollo de QoreDB.",
     "now": {
-      "title": "Recién lanzado: v0.1.23 → v0.1.31",
+      "title": "Recién lanzado: v0.1.23 → v0.1.34",
       "quote": "QoreDB es más rápido, más seguro y listo para uso diario serio.",
       "items": {
         "1": "15 controladores nativos: Elasticsearch y OpenSearch se unen a ClickHouse, Supabase, Neon y TimescaleDB",
         "2": "Data Contracts (Pro): reglas declarativas de calidad de datos re-evaluadas tras cada mutación",
         "3": "Instant Data API (Pro): convierte cualquier consulta guardada en un endpoint REST autenticado por token",
-        "4": "Helpers de backup y restore, atajos personalizables y fingerprinting de consultas en la auditoría",
+        "4": "Migrations Manager con schema-diff y detección de drift, sugerencias de índices, además de backup/restore y atajos personalizables",
         "5": "Workspaces, Time Travel, editor DDL, edición masiva y tab groups en los 9 idiomas de interfaz"
       },
       "goal": "Objetivo: una herramienta que los desarrolladores ya utilizan y recomiendan con confianza."
@@ -436,7 +450,7 @@
       "quote": "Vaya más allá de los clientes de bases de datos tradicionales.",
       "items": {
         "1": "Herramientas MongoDB más profundas y workflows de agregación enriquecidos",
-        "2": "Migraciones de esquema visuales y vistas previas de refactor",
+        "2": "Database Agent: chat agéntico que explora tu esquema y responde con datos reales",
         "3": "Notebooks más completos para exploración de datos y reporting",
         "4": "IA más inteligente para explicaciones, correcciones y revisiones",
         "5": "Primeros ladrillos de colaboración y sincronización local-first"
@@ -564,7 +578,7 @@
         "vault": "Bóveda cifrada (Argon2) + soporte de proxy y ssh-agent",
         "ssh": "Túnel SSH nativo (OpenSSH, proxy jump)",
         "safety": "Reglas de seguridad de producción (etiquetas de entorno, modo solo lectura) + registro de auditoría básico con redacción",
-        "audit_basic": "Registro de auditoría básico (50 entradas) con redacción de consultas",
+        "audit_basic": "Registro de auditoría básico (10 000 entradas) con redacción de consultas",
         "export_basic": "Exportación CSV / JSON / SQL y enlaces para compartir resultados",
         "shortcuts": "Historial, favoritos, tab groups, atajos de teclado y 9 idiomas de interfaz"
       }
@@ -1094,7 +1108,9 @@
     "not_found_title": "Página no encontrada",
     "not_found_body": "Esta página de documentación no existe o aún no se ha escrito.",
     "landing_title": "Documentación de QoreDB",
-    "landing_subtitle": "Todo lo necesario para instalar QoreDB, conectar tus bases de datos y avanzar más rápido."
+    "landing_subtitle": "Todo lo necesario para instalar QoreDB, conectar tus bases de datos y avanzar más rápido.",
+    "fallback_banner_title": "Mostrando la versión en inglés",
+    "fallback_banner_body": "Esta página aún no se ha traducido. A continuación se muestra la versión en inglés."
   },
   "marketplace": {
     "categories": {
@@ -1105,11 +1121,99 @@
       "integrations": "Integraciones"
     },
     "submit": {
+      "title": "Enviar un plugin",
+      "subtitle": "Los plugins son revisados por los mantenedores de QoreDB antes de aparecer en el marketplace. La revisión suele tardar unos días: revisamos el manifiesto, las capacidades solicitadas y el origen del módulo WASM.",
+      "field_plugin_id": "ID del plugin",
+      "field_plugin_id_hint": "DNS inverso, p. ej. acme.linter. Debe coincidir con plugin.json#id.",
+      "field_name": "Nombre visible",
+      "field_version": "Versión",
+      "field_kind": "Tipo de plugin",
+      "field_kind_declarative": "Declarativo — solo snippets, temas y plantillas de conexión",
+      "field_kind_executable": "Ejecutable — incluye un módulo WASM aislado en un sandbox",
+      "field_description": "Descripción breve",
+      "field_author": "Autor / mantenedor",
+      "field_contact_email": "Correo de contacto",
+      "field_contact_email_hint": "Nos pondremos en contacto para preguntas de seguimiento o para confirmar la aprobación. No se publica.",
+      "field_repository_url": "Repositorio de código (opcional)",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "Pega el manifiesto tal cual. El ID y la versión del plugin deben coincidir con los campos de arriba.",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "Archivo plano que contiene plugin.json y el módulo WASM (si lo hay). Máximo 8 MiB, el mismo presupuesto de instalación que aplica QoreDB.",
+      "submit_button": "Enviar para revisión",
+      "submitting": "Enviando…",
+      "success_title": "Envío recibido",
+      "success_body": "Gracias. Tu plugin está en la cola de revisión: te enviaremos un correo a {{email}} en cuanto lo revisemos.",
+      "error_title": "Error en el envío",
+      "checklist_title": "Antes de enviar",
+      "checklist_items": [
+        "El módulo WASM se instancia sin problemas y exporta los hooks declarados en el manifiesto.",
+        "Cada capacidad que solicita el manifiesto es realmente necesaria: los usuarios las ven en el diálogo de consentimiento.",
+        "Si el plugin hace llamadas HTTP, allowedHosts es una lista precisa, no un comodín.",
+        "runtime.integrity contiene el sha256 de los bytes .wasm finales.",
+        "El archivo contiene solo plugin.json + el módulo WASM en su raíz."
+      ],
       "field_category": "Categoría",
       "field_category_hint": "Elige la más cercana. El revisor puede ajustarla."
     },
     "eyebrow": "Biblioteca de plugins",
-    "page_subtitle": "Amplía QoreDB con plugins: snippets, temas, plantillas de conexión y módulos WASM."
+    "page_title": "Plugins",
+    "page_subtitle": "Amplía QoreDB con plugins: snippets, temas, plantillas de conexión y módulos WASM.",
+    "section_title": "Plugins disponibles",
+    "section_subtitle": "Todos los plugins de esta lista superaron la revisión de los mantenedores y están en el registro público en GitHub.",
+    "registry_link_label": "Explorar el registro en GitHub",
+    "submit_cta": "Enviar un plugin",
+    "empty": "Aún no hay plugins. Sé el primero en publicar uno.",
+    "search_placeholder": "Buscar plugins…",
+    "filter_all": "Todos",
+    "filter_declarative": "Declarativo",
+    "filter_executable": "Ejecutable (WASM)",
+    "registry_unavailable": "El registro no está disponible temporalmente. Inténtalo de nuevo en unos minutos.",
+    "kind": {
+      "declarative": "Declarativo",
+      "executable": "Ejecutable (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "por {{author}}",
+      "view_details": "Ver detalles"
+    },
+    "detail": {
+      "back": "Volver a los plugins",
+      "install_title": "Instalar en QoreDB",
+      "install_step_1": "Abre QoreDB → Ajustes → Explorar y haz clic en Instalar. La app descarga el archivo, verifica su sha256 contra esta página y luego valida el manifiesto antes de que se active ningún hook.",
+      "install_step_2": "O descarga el archivo directamente e instálalo desde Ajustes → Plugins → Instalar plugin. El host de QoreDB vuelve a comprobar el manifiesto de la misma manera.",
+      "download_archive": "Descargar plugin.zip ({{size}})",
+      "view_manifest": "Ver plugin.json",
+      "manifest_heading": "El manifiesto de un vistazo",
+      "manifest_id": "ID del plugin",
+      "manifest_version": "Versión",
+      "manifest_qoredb": "Compatibilidad con QoreDB",
+      "manifest_author": "Autor",
+      "manifest_kind": "Tipo",
+      "manifest_archive_sha": "sha256 del archivo",
+      "manifest_integrity": "Integridad del WASM",
+      "manifest_no_integrity": "Sin firmar — QoreDB marcará este plugin como Sin firmar en el panel.",
+      "manifest_hooks": "Hooks del ciclo de vida",
+      "manifest_no_hooks": "Sin hooks del ciclo de vida (plugin declarativo).",
+      "manifest_capabilities": "Capacidades solicitadas",
+      "manifest_no_capabilities": "No se solicitan capacidades.",
+      "manifest_contributes": "Aporta",
+      "contributes_none": "Sin aportaciones declarativas.",
+      "contributes_snippets": "{{count}} snippet",
+      "contributes_snippets_plural": "{{count}} snippets",
+      "contributes_templates": "{{count}} plantilla de conexión",
+      "contributes_templates_plural": "{{count}} plantillas de conexión",
+      "contributes_themes": "{{count}} tema",
+      "contributes_themes_plural": "{{count}} temas",
+      "contributes_viewers": "{{count}} visor de resultados",
+      "contributes_viewers_plural": "{{count}} visores de resultados",
+      "contributes_commands": "Comandos: {{commands}}",
+      "versions_heading": "Todas las versiones",
+      "version_label": "Versión {{version}}",
+      "version_size": "archivo de {{size}}",
+      "not_found_title": "Plugin no encontrado",
+      "not_found_subtitle": "Este plugin no está en el registro. Puede que se haya renombrado o eliminado."
+    }
   },
   "features_common": {
     "tier_pro": "Pro",

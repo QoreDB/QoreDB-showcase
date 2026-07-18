@@ -12,8 +12,8 @@ QoreDB est sous licence avec un modèle **Open Core**. Le cœur (core) de l'appl
 
 | Niveau       | Licence                                | Où la lire                                               |
 | ------------ | -------------------------------------- | -------------------------------------------------------- |
-| **Core**     | Apache 2.0                             | [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) |
-| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) |
+| **Core**     | Apache 2.0                             | [LICENSE](https://github.com/QoreDB/QoreDB/blob/main/LICENSE) |
+| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | [LICENSE-BSL](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL) |
 
 Les deux fichiers de licence se trouvent à la racine du dépôt. Lisez-les toujours comme la source de vérité ; cette page est un résumé.
 
@@ -35,13 +35,21 @@ C'est le même modèle utilisé par Terraform et Vault de HashiCorp, Sentry, Coc
 
 ### Ce qui est en BSL aujourd'hui
 
-Fichiers actuellement marqués Premium :
+La surface Premium (BSL) est regroupée en modules :
 
-- `src/components/Diff/*` (Différence de données visuelle)
-- `src/lib/diffUtils.ts` (Utilitaires de différence)
-- `src-tauri/src/interceptor/profiling.rs` (Profilage des requêtes)
+- **Assistant IA**
+- **Contrats de données (Data Contracts)**
+- **Fédération inter-bases de données**
+- **Voyage dans le temps (Time Travel)**
+- **Notebook avancé** (cellules graphique, IA et contrat)
+- **Exportation avancée** (XLSX et Parquet)
+- **Profilage**
+- **Suggestions d'index**
+- **Différence de schéma et génération de migration**
+- **Data Diff visuel**
+- **Source du diagramme ER**
 
-La liste ci-dessus est l'état actuel. Les nouvelles fonctionnalités Pro atterrissent sous BSL au fil du temps ; les nouvelles fonctionnalités sous Apache restent dans le Core.
+Consultez les en-têtes SPDX de chaque fichier source (et CLAUDE.md) pour la liste faisant autorité, toujours à jour. Les nouvelles fonctionnalités Pro atterrissent sous BSL au fil du temps ; les nouvelles fonctionnalités sous Apache restent dans le Core.
 
 ## Convention d'en-tête SPDX
 
@@ -77,7 +85,7 @@ L'en-tête est un contrat : lorsque vous lisez un fichier, l'en-tête vous indiq
 | Soumettre une PR sur un fichier Core                               | Apache 2.0      | Oui, avec plaisir  |
 | Utiliser les exports SQL/exports de données générés pour tout usage | n/a             | Oui (vos données, votre choix) |
 
-En cas de doute sur un cas spécifique, les fichiers [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) et [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) contiennent le texte légal.
+En cas de doute sur un cas spécifique, les fichiers [LICENSE](https://github.com/QoreDB/QoreDB/blob/main/LICENSE) et [LICENSE-BSL](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL) contiennent le texte légal.
 
 ## Activation de la licence pour Pro
 

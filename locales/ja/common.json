@@ -9,7 +9,8 @@
     "changelog": "変更履歴",
     "download": "ダウンロード",
     "join_beta": "ベータ版に参加する",
-    "docs": "ドキュメント"
+    "docs": "ドキュメント",
+    "marketplace": "プラグイン"
   },
   "download": {
     "title": "QoreDB をダウンロード",
@@ -29,7 +30,18 @@
     "linux_appimage": "AppImage (ユニバーサル)",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
-    "view_all_releases": "GitHub ですべてのリリースを表示する"
+    "view_all_releases": "GitHub ですべてのリリースを表示する",
+    "next_steps": {
+      "eyebrow": "インストール後",
+      "title": "次は接続してみましょう",
+      "description": "短い 3 ページで QoreDB を完全に理解できます。",
+      "first_connection_title": "最初の接続",
+      "first_connection_description": "DSN を貼り付けるかフォームに入力します。1 分もかからず接続できます。",
+      "interface_tour_title": "インターフェースツアー",
+      "interface_tour_description": "サイドバー、タブ、エディタ、結果ペイン：全体像を把握できます。",
+      "full_docs_title": "完全なドキュメントを見る",
+      "full_docs_description": "ドライバー、クエリ、セキュリティ、キーボードショートカットなど。"
+    }
   },
   "changelog": {
     "title": "変更履歴",
@@ -72,7 +84,8 @@
       "discover_pro": "GitHub で見る",
       "view_project": "プロジェクトを見る",
       "participate": "参加する",
-      "community": "Discord に参加"
+      "community": "Discord に参加",
+      "read_docs": "ドキュメントを読む"
     },
     "social_proof": "ベータ版を待っている <highlight>100+</highlight> 人の開発者に参加しましょう",
     "meta": {
@@ -253,7 +266,8 @@
     "title": "データベースツールとの戦いをやめる",
     "description": "QoreDB をダウンロードして、30 秒で違いを確認してください。",
     "download_button": "無料でダウンロード",
-    "github_button": "GitHub でスターを付ける"
+    "github_button": "GitHub でスターを付ける",
+    "docs_link": "またはまずドキュメントを読む"
   },
   "database_strip": {
     "label": "1 つのインターフェイス、すべてのデータベース"
@@ -310,17 +324,17 @@
     },
     "values": {
       "qoredb": {
-        "opensource": "アパッチ2.0",
+        "opensource": "Apache 2.0",
         "multidb": "15ドライバー",
-        "native": "ラスト/タウリ",
+        "native": "Rust/Tauri",
         "local": "はい",
-        "vault": "アルゴン2",
+        "vault": "Argon2",
         "safety": "はい",
         "sandbox": "プロ",
         "fulltext": "はい",
         "er_diagram": "はい",
         "federation": "プロ",
-        "ai": "ビヨク",
+        "ai": "BYOK",
         "plugins": "はい",
         "ui": "はい",
         "maturity": "新しい",
@@ -329,7 +343,7 @@
       "dbeaver": {
         "opensource": "コミュニティ",
         "multidb": "はい",
-        "native": "Java/スイング",
+        "native": "Java/Swing",
         "local": "はい",
         "vault": "基本",
         "safety": "いいえ",
@@ -420,13 +434,13 @@
     "title": "QoreDB ロードマップ",
     "subtitle": "QoreDB 開発の次のステップをご覧ください。",
     "now": {
-      "title": "リリース済み：v0.1.23 → v0.1.31",
+      "title": "リリース済み：v0.1.23 → v0.1.34",
       "quote": "QoreDB はより速く、より安全になり、本格的な日常使用の準備が整いました。",
       "items": {
         "1": "15 個のネイティブ ドライバー — Elasticsearch と OpenSearch が ClickHouse、Supabase、Neon、TimescaleDB に加わりました",
         "2": "Data Contracts（Pro）：宣言的なデータ品質ルール、ミューテーション後に再評価",
         "3": "Instant Data API（Pro）：保存済みクエリをトークン認証付き REST エンドポイントとして公開",
-        "4": "バックアップ／リストアのヘルパー、カスタマイズ可能なショートカット、監査でのクエリ フィンガープリント",
+        "4": "スキーマ差分とドリフト検出を備えた Migrations Manager、インデックス提案、さらにバックアップ／リストアとカスタマイズ可能なショートカット",
         "5": "Workspaces、Time Travel、DDL エディター、bulk edit、tab groups を 9 言語すべてで提供"
       },
       "goal": "目標: 開発者がすでに自信を持って使用し、推奨しているツール。"
@@ -436,7 +450,7 @@
       "quote": "従来のデータベース クライアントを超えてください。",
       "items": {
         "1": "より深い MongoDB ツールとよりリッチな集計ワークフロー",
-        "2": "視覚的なスキーマ移行と refactor プレビュー",
+        "2": "Database Agent：スキーマを探索し、実データで回答するエージェント型チャット",
         "3": "データ探索とレポート作成のためのより充実したノートブック",
         "4": "より賢い AI 支援による説明、修正、レビュー",
         "5": "ローカルファーストのコラボレーションと同期の最初のブロック"
@@ -564,7 +578,7 @@
         "vault": "暗号化された資格情報ボールト (Argon2) + プロキシと ssh-agent サポート",
         "ssh": "ネイティブ SSH トンネリング（OpenSSH、proxy jump）",
         "safety": "実稼働安全ルール（環境ラベル、読み取り専用モード）＋ redaction 付き基本監査ログ",
-        "audit_basic": "基本監査ログ (50 エントリ) およびクエリ redaction",
+        "audit_basic": "基本監査ログ (10,000 エントリ) およびクエリ redaction",
         "export_basic": "CSV / JSON / SQL エクスポートと共有可能な結果リンク",
         "shortcuts": "履歴、お気に入り、tab groups、キーボード ショートカット、9 つの UI 言語"
       }
@@ -665,7 +679,7 @@
     "year_label": "/年",
     "perpetual_label": "一度きり",
     "tco_label": "{{years}} 年間の合計",
-    "lifetime_perk": "その後は生涯 0 円",
+    "lifetime_perk": "その後は生涯 0 €",
     "note": "競合他社の価格は公式サイトより、EUR 換算、2026 年 5 月時点。",
     "tools": {
       "dbeaver": {
@@ -1094,7 +1108,9 @@
     "not_found_title": "ページが見つかりません",
     "not_found_body": "このドキュメントページは存在しないか、まだ執筆されていません。",
     "landing_title": "QoreDB ドキュメント",
-    "landing_subtitle": "QoreDB のインストール、データベース接続、開発高速化に必要なすべて。"
+    "landing_subtitle": "QoreDB のインストール、データベース接続、開発高速化に必要なすべて。",
+    "fallback_banner_title": "英語版を表示しています",
+    "fallback_banner_body": "このページはまだ翻訳されていません。以下に英語版を表示します。"
   },
   "marketplace": {
     "categories": {
@@ -1105,11 +1121,99 @@
       "integrations": "連携"
     },
     "submit": {
+      "title": "プラグインを提出する",
+      "subtitle": "プラグインは、マーケットプレイスに表示される前に QoreDB のメンテナーによってレビューされます。レビューには通常数日かかります。マニフェスト、要求される権限、WASM モジュールのソースを確認します。",
+      "field_plugin_id": "プラグイン ID",
+      "field_plugin_id_hint": "逆引き DNS 形式（例: acme.linter）。plugin.json#id と一致する必要があります。",
+      "field_name": "表示名",
+      "field_version": "バージョン",
+      "field_kind": "プラグインの種類",
+      "field_kind_declarative": "宣言型 — スニペット、テーマ、接続テンプレートのみ",
+      "field_kind_executable": "実行可能 — サンドボックス化された WASM モジュールを含む",
+      "field_description": "簡単な説明",
+      "field_author": "作成者 / メンテナー",
+      "field_contact_email": "連絡先メールアドレス",
+      "field_contact_email_hint": "追加の質問や承認の確認のためにご連絡します。公開されません。",
+      "field_repository_url": "ソースリポジトリ（任意）",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "マニフェストをそのまま貼り付けてください。プラグイン ID とバージョンは上のフィールドと一致する必要があります。",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "plugin.json と（あれば）WASM モジュールを含むフラットなアーカイブ。最大 8 MiB — QoreDB が適用するインストール上限と同じです。",
+      "submit_button": "レビューに提出",
+      "submitting": "送信中…",
+      "success_title": "提出を受け付けました",
+      "success_body": "ありがとうございます。あなたのプラグインはレビュー待ちの状態です。確認が完了しましたら {{email}} 宛にメールでお知らせします。",
+      "error_title": "提出に失敗しました",
+      "checklist_title": "提出前に",
+      "checklist_items": [
+        "WASM モジュールが正常にインスタンス化され、マニフェストで宣言されたフックをエクスポートしている。",
+        "マニフェストが要求する各権限が本当に必要である — ユーザーは同意ダイアログでそれらを確認します。",
+        "プラグインが HTTP 呼び出しを行う場合、allowedHosts はワイルドカードではなく正確なリストである。",
+        "runtime.integrity に最終的な .wasm バイトの sha256 が含まれている。",
+        "アーカイブのルートには plugin.json と WASM モジュールのみが含まれている。"
+      ],
       "field_category": "カテゴリ",
       "field_category_hint": "最も近いものを選んでください。レビュー時に調整できます。"
     },
     "eyebrow": "プラグインライブラリ",
-    "page_subtitle": "プラグインで QoreDB を拡張：スニペット、テーマ、接続テンプレート、WASM モジュール。"
+    "page_title": "プラグイン",
+    "page_subtitle": "プラグインで QoreDB を拡張：スニペット、テーマ、接続テンプレート、WASM モジュール。",
+    "section_title": "利用可能なプラグイン",
+    "section_subtitle": "このリストのすべてのプラグインはメンテナーのレビューを通過し、GitHub の公開レジストリに登録されています。",
+    "registry_link_label": "GitHub でレジストリを見る",
+    "submit_cta": "プラグインを提出する",
+    "empty": "まだプラグインがありません。最初の公開者になりましょう。",
+    "search_placeholder": "プラグインを検索…",
+    "filter_all": "すべて",
+    "filter_declarative": "宣言型",
+    "filter_executable": "実行可能 (WASM)",
+    "registry_unavailable": "レジストリに一時的に接続できません。数分後にもう一度お試しください。",
+    "kind": {
+      "declarative": "宣言型",
+      "executable": "実行可能 (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "作成者: {{author}}",
+      "view_details": "詳細を見る"
+    },
+    "detail": {
+      "back": "プラグイン一覧に戻る",
+      "install_title": "QoreDB にインストール",
+      "install_step_1": "QoreDB → 設定 → 参照 を開き、「インストール」をクリックします。アプリはアーカイブをダウンロードし、その sha256 をこのページと照合してから、フックが実行される前にマニフェストを検証します。",
+      "install_step_2": "または、アーカイブを直接ダウンロードし、設定 → プラグイン → プラグインをインストール から導入します。QoreDB ホストは同じ方法でマニフェストを再チェックします。",
+      "download_archive": "plugin.zip をダウンロード ({{size}})",
+      "view_manifest": "plugin.json を表示",
+      "manifest_heading": "マニフェストの概要",
+      "manifest_id": "プラグイン ID",
+      "manifest_version": "バージョン",
+      "manifest_qoredb": "QoreDB 互換性",
+      "manifest_author": "作成者",
+      "manifest_kind": "種類",
+      "manifest_archive_sha": "アーカイブの sha256",
+      "manifest_integrity": "WASM の整合性",
+      "manifest_no_integrity": "署名なし — QoreDB はこのプラグインをパネルで「署名なし」として表示します。",
+      "manifest_hooks": "ライフサイクルフック",
+      "manifest_no_hooks": "ライフサイクルフックなし（宣言型プラグイン）。",
+      "manifest_capabilities": "要求される権限",
+      "manifest_no_capabilities": "要求される権限はありません。",
+      "manifest_contributes": "提供内容",
+      "contributes_none": "宣言的な提供はありません。",
+      "contributes_snippets": "{{count}} 個のスニペット",
+      "contributes_snippets_plural": "{{count}} 個のスニペット",
+      "contributes_templates": "{{count}} 個の接続テンプレート",
+      "contributes_templates_plural": "{{count}} 個の接続テンプレート",
+      "contributes_themes": "{{count}} 個のテーマ",
+      "contributes_themes_plural": "{{count}} 個のテーマ",
+      "contributes_viewers": "{{count}} 個の結果ビューア",
+      "contributes_viewers_plural": "{{count}} 個の結果ビューア",
+      "contributes_commands": "コマンド: {{commands}}",
+      "versions_heading": "すべてのバージョン",
+      "version_label": "バージョン {{version}}",
+      "version_size": "{{size}} のアーカイブ",
+      "not_found_title": "プラグインが見つかりません",
+      "not_found_subtitle": "このプラグインはレジストリに存在しません。名前が変更されたか、削除された可能性があります。"
+    }
   },
   "features_common": {
     "tier_pro": "Pro",

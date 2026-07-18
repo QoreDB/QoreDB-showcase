@@ -60,8 +60,8 @@ Pour les détails par capacité (formes acceptées, limites), voir [Capacités](
 Les plugins installés vivent dans le dossier de données de QoreDB :
 
 - macOS : `~/Library/Application Support/com.qoredb.app/plugins/<plugin-id>/`
-- Linux : `~/.config/com.qoredb.app/plugins/<plugin-id>/` (ou l'équivalent `$XDG_CONFIG_HOME`)
-- Windows : `%APPDATA%\com.qoredb.app\plugins\<plugin-id>\`
+- Linux : `~/.local/share/com.qoredb.app/plugins/<plugin-id>/` (ou l'équivalent `$XDG_DATA_HOME`)
+- Windows : `%LOCALAPPDATA%\com.qoredb.app\plugins\<plugin-id>\`
 
 Chaque dossier contient le manifeste, le module WASM (le cas échéant), et un `storage.json` par plugin si la capacité `storage` est utilisée. L'hôte écrit un petit fichier `<plugins-dir>/index.json` à côté qui suit quels plugins sont activés.
 

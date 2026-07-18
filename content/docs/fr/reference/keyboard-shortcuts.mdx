@@ -20,6 +20,7 @@ Ces raccourcis fonctionnent partout dans QoreDB.
 | <KeyboardShortcut shortcut="Cmd+," />                     | Ouvrir les paramètres.                                   |
 | <KeyboardShortcut shortcut="Esc" />                       | Fermer la superposition active (modale, palette, boîte de dialogue). |
 | <KeyboardShortcut shortcut="?" />                         | Afficher l'antisèche des raccourcis clavier.             |
+| <KeyboardShortcut shortcut="Cmd+R" />                     | Actualiser la table active.                              |
 
 La palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />) est également un chemin rapide vers n'importe quel autre raccourci : recherchez la commande et exécutez-la sans avoir à retenir le raccourci.
 
@@ -58,15 +59,15 @@ Le même `Cmd+Enter` exécute soit l'onglet entier, soit la sélection : avec du
 
 | Raccourci                                                 | Action                                                   |
 | --------------------------------------------------------- | -------------------------------------------------------- |
-| <KeyboardShortcut shortcut="Ctrl+Shift+S" />              | Activer/désactiver la sandbox pour la session active.    |
+| <KeyboardShortcut shortcut="Cmd+Shift+S" />               | Activer/désactiver la sandbox pour la session active.    |
 
-Le raccourci de la sandbox est `Ctrl+Shift+S` sur toutes les plateformes (et non `Cmd+Shift+S` sur macOS).
+Le raccourci de la sandbox est `Cmd/Ctrl+Maj+S` (⌘⇧S sur macOS, Ctrl+Maj+S sur Windows/Linux).
 
 ## Comportement sensible au contexte
 
 Quelques raccourcis se comportent différemment selon ce qui est ciblé (focus) :
 
-- **À l'intérieur d'un champ de texte** : la plupart des raccourcis sont transmis à l'entrée (saisie, sélection, etc.). Les exceptions sont <KeyboardShortcut shortcut="Cmd+K" /> et <KeyboardShortcut shortcut="Cmd+Shift+N" />, qui interceptent toujours de manière globale.
+- **À l'intérieur d'un champ de texte** : la plupart des raccourcis sont transmis à l'entrée (saisie, sélection, etc.). Les exceptions sont <KeyboardShortcut shortcut="Cmd+K" />, <KeyboardShortcut shortcut="Cmd+R" />, <KeyboardShortcut shortcut="Cmd+Shift+S" /> et <KeyboardShortcut shortcut="Cmd+Shift+N" />, qui interceptent toujours de manière globale.
 - **Avec une superposition ouverte** : seul <KeyboardShortcut shortcut="Esc" /> est lié ; il ferme la superposition.
 - **Sans session active** : les raccourcis liés à la connexion (<KeyboardShortcut shortcut="Cmd+T" />, <KeyboardShortcut shortcut="Cmd+Shift+F" />) ne font rien.
 - **Sans onglet actif** : <KeyboardShortcut shortcut="Cmd+W" /> ne fait rien.
@@ -94,7 +95,7 @@ Les combinaisons appartenant au système d'exploitation ou au gestionnaire de fe
 Chaque raccourci remappé affiche un contrôle de réinitialisation qui le ramène à sa valeur par défaut, et **Tout réinitialiser** en haut du panneau efface toutes les personnalisations d'un coup. Vos personnalisations sont stockées localement et persistent entre les redémarrages.
 
 <Callout type="info">
-Quelques raccourcis internes à l'éditeur ne sont pas encore remappables : exécuter une requête (<KeyboardShortcut shortcut="Cmd+Enter" />), le formatage, le déclencheur d'autocomplétion (<KeyboardShortcut shortcut="Ctrl+Space" />), et la bascule du sandbox (<KeyboardShortcut shortcut="Ctrl+Shift+S" />). Tout ce qui figure dans le panneau Paramètres → Raccourcis clavier l'est.
+Quelques raccourcis internes à l'éditeur ne sont pas encore remappables : exécuter une requête (<KeyboardShortcut shortcut="Cmd+Enter" />), le formatage, et le déclencheur d'autocomplétion (<KeyboardShortcut shortcut="Ctrl+Space" />). Tout ce qui figure dans le panneau Paramètres → Raccourcis clavier l'est.
 </Callout>
 
 La palette de commandes (<KeyboardShortcut shortcut="Cmd+K" />) reste un accès rapide quelles que soient les associations : recherchez n'importe quelle commande par son nom et lancez-la sans avoir à mémoriser son raccourci.

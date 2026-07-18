@@ -60,8 +60,8 @@ For the per-capability shapes and limits, see [Capabilities](/docs/plugins/capab
 Installed plugins live under the QoreDB app's data directory:
 
 - macOS: `~/Library/Application Support/com.qoredb.app/plugins/<plugin-id>/`
-- Linux: `~/.config/com.qoredb.app/plugins/<plugin-id>/` (or `$XDG_CONFIG_HOME` equivalent)
-- Windows: `%APPDATA%\com.qoredb.app\plugins\<plugin-id>\`
+- Linux: `~/.local/share/com.qoredb.app/plugins/<plugin-id>/` (or `$XDG_DATA_HOME` equivalent)
+- Windows: `%LOCALAPPDATA%\com.qoredb.app\plugins\<plugin-id>\`
 
 Each folder contains the manifest, the WASM module (if any), and a per-plugin `storage.json` if the plugin uses the `storage` capability. The host writes a small `<plugins-dir>/index.json` next to them that tracks which plugins are enabled.
 

@@ -26,7 +26,7 @@ Rien des étapes 1 à 3 ne touche la base de données.
 
 ## Activer et désactiver la sandbox
 
-Basculez la sandbox depuis la barre de titre (icône Fiole) ou avec <KeyboardShortcut shortcut="Ctrl+Shift+S" />. Lorsqu'elle est activée, l'interface utilisateur de la connexion affiche un indicateur de sandbox coloré (bleu pour le développement, orange pour le staging, rouge pour la production) et un décompte des modifications en attente.
+Basculez la sandbox depuis la barre de titre (icône Fiole) ou avec <KeyboardShortcut shortcut="Cmd+Shift+S" /> (⌘⇧S sur macOS, Ctrl+Maj+S sur Windows/Linux). Lorsqu'elle est activée, l'interface utilisateur de la connexion affiche un indicateur de sandbox coloré (bleu pour le développement, orange pour le staging, rouge pour la production) et un décompte des modifications en attente.
 
 Tant que la sandbox est activée, chaque modification que vous effectuez via la grille de données (modification en ligne, modification en masse, insertion de ligne, suppression de ligne) est capturée dans la mémoire tampon locale. Les requêtes SQL directes que vous exécutez depuis l'éditeur s'exécutent toujours normalement.
 
@@ -90,7 +90,7 @@ Pour être honnête quant au comportement actuel :
 
 - **Pas d'annulation automatique / migration vers le bas (down migration)** : le script généré est uniquement "vers le haut" (up). Si vous devez revenir en arrière, capturez un snapshot avant d'appliquer et utilisez le [diff de données](/docs/diff-and-migrations/data-diff) pour comparer, ou écrivez un SQL d'annulation (undo) manuel.
 - **Pas de sortie multi-fichiers horodatée** : il s'agit d'un seul fichier `.sql` par session, pas d'un dossier de migration structuré. Si votre projet utilise un framework de migration (Knex, Flyway, Alembic, etc.), copiez vous-même le SQL généré dans un nouveau fichier au format de ce framework.
-- **Pas de diff DDL entre deux bases de données** : cette page couvre les modifications de données capturées dans la sandbox. Pour comparer le *contenu* de deux tables côte à côte, voir [Différence de données](/docs/diff-and-migrations/data-diff). Comparer des schémas (DDL) entre deux bases de données n'est pas possible dans QoreDB aujourd'hui.
+- **Pas de diff DDL dans la sandbox** : la sandbox capture les modifications de données, pas les modifications de schéma. Pour comparer le *contenu* de deux tables côte à côte, voir [Différence de données](/docs/diff-and-migrations/data-diff). Pour comparer les schémas (DDL) entre bases de données et générer la migration, utilisez [Différence de schéma](/docs/diff-and-migrations/schema-diff), une fonctionnalité Pro.
 
 ## Quand utiliser la sandbox par rapport à une transaction
 
