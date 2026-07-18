@@ -133,6 +133,7 @@
     "linux_appimage": "AppImage (Universal)",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
+    "linux_aur": "Arch Linux (AUR)",
     "view_all_releases": "View all releases on GitHub",
     "next_steps": {
       "eyebrow": "After installing",
@@ -334,6 +335,16 @@
           "canvas": "Interactive canvas with table clustering",
           "nav": "Zoom, pan, and search tables",
           "peek": "Hover relations to see details"
+        }
+      },
+      "federation": {
+        "title": "Cross-Database Federation",
+        "desc": "Run one SQL query that JOINs tables across several live connections — Postgres, MySQL and more — with no CSV exports and no warehouse to stand up.",
+        "badge": "One query, every DB",
+        "list": {
+          "join": "JOIN across active connections in a single query",
+          "engine": "DuckDB-powered federation, entirely local",
+          "nowarehouse": "No exports, no ETL, no warehouse to maintain"
         }
       },
       "safety_net": {
@@ -690,7 +701,7 @@
       "title": "Pro",
       "tagline": "For your professional work",
       "description": "The natural upgrade for demanding developers.",
-      "price": "XX€",
+      "price": "€49",
       "badge": "One-time payment",
       "cta": "Buy QoreDB Pro",
       "student_note": "Student? Get in touch.",
@@ -713,7 +724,7 @@
       "title": "Team",
       "tagline": "Pro for your teams",
       "description": "Pro features for the whole team, managed per seat.",
-      "price": "Coming soon",
+      "price": "€99",
       "badge": "Per seat",
       "cta": "Buy",
       "features": {

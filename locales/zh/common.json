@@ -30,6 +30,7 @@
     "linux_appimage": "应用程序图像（通用）",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
+    "linux_aur": "Arch Linux (AUR)",
     "view_all_releases": "查看 GitHub 上的所有版本",
     "next_steps": {
       "eyebrow": "安装之后",
@@ -231,6 +232,16 @@
           "canvas": "具有表格集群的交互式画布",
           "nav": "缩放、平移和搜索表格",
           "peek": "将鼠标悬停关系可查看详细信息"
+        }
+      },
+      "federation": {
+        "title": "跨数据库联邦查询",
+        "desc": "用一条 SQL 查询即可在多个活动连接（Postgres、MySQL 等）之间进行 JOIN —— 无需导出 CSV，也无需搭建数据仓库。",
+        "badge": "一条查询，覆盖所有数据库",
+        "list": {
+          "join": "在一条查询中跨活动连接进行 JOIN",
+          "engine": "由 DuckDB 驱动的联邦查询，完全本地",
+          "nowarehouse": "无需导出、无需 ETL、无需维护数据仓库"
         }
       },
       "safety_net": {
@@ -587,7 +598,7 @@
       "title": "Pro",
       "tagline": "为您的专业工作而设",
       "description": "对于要求苛刻的开发人员来说是自然的升级。",
-      "price": "XX欧元",
+      "price": "€49",
       "badge": "一次性付款",
       "cta": "购买 QoreDB 专业版",
       "student_note": "学生？联系我们。",
@@ -610,7 +621,7 @@
       "title": "Team",
       "tagline": "面向团队的 Pro",
       "description": "为整个团队提供 Pro 功能，按席位管理。",
-      "price": "即将推出",
+      "price": "€99",
       "badge": "按席位",
       "cta": "购买",
       "features": {

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Check, TriangleAlert } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -210,6 +211,19 @@ export function FeaturePageClient({ slug }: { slug: string }) {
             {t(`${base}.subtitle`)}
           </p>
         </header>
+
+        {feature.image && (
+          <figure className="mb-16">
+            <Image
+              src={feature.image}
+              alt={t(`${base}.title`)}
+              width={1600}
+              height={1000}
+              className="w-full h-auto rounded-xl border border-(--q-border)"
+              sizes="(max-width: 896px) 100vw, 896px"
+            />
+          </figure>
+        )}
 
         <section className="mb-14">
           <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">

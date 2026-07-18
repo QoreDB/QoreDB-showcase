@@ -109,6 +109,11 @@ export function DownloadSection() {
             url: release.platforms["linux-x86_64-rpm"]?.url,
             recommended: false,
           },
+          {
+            label: t("download.linux_aur", "Arch Linux (AUR)"),
+            url: "https://aur.archlinux.org/packages/qoredb-bin",
+            recommended: false,
+          },
         ];
       default:
         return [];

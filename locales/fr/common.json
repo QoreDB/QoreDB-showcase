@@ -133,6 +133,7 @@
     "linux_appimage": "AppImage (Universel)",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
+    "linux_aur": "Arch Linux (AUR)",
     "view_all_releases": "Voir toutes les versions sur GitHub",
     "next_steps": {
       "eyebrow": "Après l'installation",
@@ -334,6 +335,16 @@
           "canvas": "Canvas interactif avec clustering visuel",
           "nav": "Zoom, pan et recherche de tables",
           "peek": "Survol des relations pour les détails"
+        }
+      },
+      "federation": {
+        "title": "Fédération cross-bases",
+        "desc": "Exécutez une seule requête SQL qui fait des JOIN entre plusieurs connexions actives — Postgres, MySQL et plus — sans export CSV ni entrepôt à monter.",
+        "badge": "Une requête, toutes les bases",
+        "list": {
+          "join": "JOIN entre connexions actives en une seule requête",
+          "engine": "Fédération propulsée par DuckDB, entièrement locale",
+          "nowarehouse": "Aucun export, aucun ETL, aucun entrepôt à maintenir"
         }
       },
       "safety_net": {
@@ -690,7 +701,7 @@
       "title": "Pro",
       "tagline": "Pour votre travail professionnel",
       "description": "L’upgrade naturel pour les développeurs exigeants.",
-      "price": "XX€",
+      "price": "49 €",
       "badge": "Paiement unique",
       "cta": "Acheter QoreDB Pro",
       "student_note": "Étudiant ? Écris-moi.",
@@ -713,7 +724,7 @@
       "title": "Team",
       "tagline": "Pro pour vos équipes",
       "description": "Les fonctionnalités Pro pour toute l’équipe, gérées par sièges.",
-      "price": "Bientôt",
+      "price": "99 €",
       "badge": "Par siège",
       "cta": "Acheter",
       "features": {

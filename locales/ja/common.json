@@ -30,6 +30,7 @@
     "linux_appimage": "AppImage (ユニバーサル)",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
+    "linux_aur": "Arch Linux (AUR)",
     "view_all_releases": "GitHub ですべてのリリースを表示する",
     "next_steps": {
       "eyebrow": "インストール後",
@@ -231,6 +232,16 @@
           "canvas": "テーブルクラスタリングを備えたインタラクティブなキャンバス",
           "nav": "テーブルのズーム、パン、検索",
           "peek": "関係にカーソルを合わせると詳細が表示されます"
+        }
+      },
+      "federation": {
+        "title": "データベース横断フェデレーション",
+        "desc": "複数のアクティブな接続（Postgres、MySQL など）をまたいで JOIN する 1 つの SQL クエリを実行 — CSV エクスポートもデータウェアハウスの構築も不要です。",
+        "badge": "1 つのクエリで全 DB",
+        "list": {
+          "join": "1 つのクエリでアクティブな接続をまたいで JOIN",
+          "engine": "DuckDB による完全ローカルなフェデレーション",
+          "nowarehouse": "エクスポート不要、ETL 不要、維持するウェアハウス不要"
         }
       },
       "safety_net": {
@@ -587,7 +598,7 @@
       "title": "Pro",
       "tagline": "プロの仕事用",
       "description": "要求の厳しい開発者にとって自然なアップグレード。",
-      "price": "XXユーロ",
+      "price": "€49",
       "badge": "1回払い",
       "cta": "QoreDB プロを購入する",
       "student_note": "学生？連絡してください。",
@@ -610,7 +621,7 @@
       "title": "Team",
       "tagline": "チームのための Pro",
       "description": "チーム全体に Pro 機能を、シート単位で管理。",
-      "price": "近日公開",
+      "price": "€99",
       "badge": "シート単位",
       "cta": "購入",
       "features": {
