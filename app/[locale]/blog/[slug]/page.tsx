@@ -1,41 +1,35 @@
-import { ArrowLeft, CalendarIcon, Clock } from "lucide-react";
+import { ArrowLeft, CalendarIcon, Clock3, RefreshCw } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
+import { ArticleCard } from "@/components/blog/ArticleCard";
+import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ReadingProgress } from "@/components/blog/ReadingProgress";
+import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
+import { TableOfContents } from "@/components/blog/TableOfContents";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { NewsletterCard } from "@/components/newsletter-card";
+import {
+  formatReadingTime,
+  getArticleHeadings,
+  getPostExcerpt,
+  getPostReadingTime,
+} from "@/lib/blog-content";
 import { getIntlLocale } from "@/lib/locale";
-import { estimateReadingTime } from "@/lib/reading-time";
+import { resolveBlogLocale } from "@/lib/sanity/blog";
+import { client } from "@/lib/sanity/client";
+import { urlForImage } from "@/lib/sanity/image";
+import { ADJACENT_POSTS_QUERY, POST_QUERY } from "@/lib/sanity/queries";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
 import type { PostDocument } from "@/types/posts";
-import { ArticleCard } from "../../../../components/blog/ArticleCard";
-import { RichTextRenderer } from "../../../../components/blog/RichTextRenderer";
-import { client } from "../../../../lib/sanity/client";
-import { urlForImage } from "../../../../lib/sanity/image";
-import { POST_QUERY } from "../../../../lib/sanity/queries";
 import { ShareButtons } from "./share-buttons";
 
 function getPostDescription(post: PostDocument) {
-  const plainText = (post.body ?? [])
-    .filter((block) => block._type === "block")
-    .flatMap((block) =>
-      "children" in block && block.children
-        ? block.children.map((span) => span.text)
-        : [],
-    )
-    .join(" ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  if (!plainText) {
-    return post.title ?? "QoreDB blog";
-  }
-
-  return plainText.slice(0, 180);
+  return getPostExcerpt(post, 180) || post.title || "QoreDB blog";
 }
 
 export async function generateMetadata({
@@ -45,10 +39,21 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug, locale } = await params;
   const { t } = await getTranslation(locale, "common");
-  const post = await client.fetch<PostDocument | null>(POST_QUERY, {
+  const blogLocale = await resolveBlogLocale(locale);
+  let contentLanguage = blogLocale;
+  let post = await client.fetch<PostDocument | null>(POST_QUERY, {
     slug,
-    language: locale,
+    language: blogLocale,
   });
+
+  if (!post && blogLocale !== "en") {
+    post = await client.fetch<PostDocument | null>(POST_QUERY, {
+      slug,
+      language: "en",
+    });
+    contentLanguage = "en";
+  }
+
   if (!post) {
     return buildPageMetadata({
       locale,
@@ -70,11 +75,12 @@ export async function generateMetadata({
     imageAlt: post.title ?? "QoreDB blog post",
     type: "article",
     publishedTime: post.publishedAt ?? undefined,
-    modifiedTime: post.publishedAt ?? undefined,
+    modifiedTime: post._updatedAt ?? post.publishedAt ?? undefined,
     authors:
       post.author && "name" in post.author && post.author.name
         ? [post.author.name]
         : undefined,
+    noIndex: contentLanguage !== locale,
   });
 }
 
@@ -85,18 +91,51 @@ export default async function BlogPostPage({
 }) {
   const { slug, locale } = await params;
   const { t } = await getTranslation(locale, "common");
-  const post = await client.fetch<PostDocument | null>(
+  const blogLocale = await resolveBlogLocale(locale);
+  let contentLanguage = blogLocale;
+  let post = await client.fetch<PostDocument | null>(
     POST_QUERY,
-    { slug, language: locale },
+    { slug, language: blogLocale },
     { next: { revalidate: 3600 } },
   );
 
-  if (!post) {
-    notFound();
+  if (!post && blogLocale !== "en") {
+    post = await client.fetch<PostDocument | null>(
+      POST_QUERY,
+      { slug, language: "en" },
+      { next: { revalidate: 3600 } },
+    );
+    contentLanguage = "en";
   }
 
-  const readingTime = estimateReadingTime(post.body);
+  if (!post) notFound();
+
+  const adjacent = post.publishedAt
+    ? await client.fetch<{
+        previous: PostDocument | null;
+        next: PostDocument | null;
+      }>(ADJACENT_POSTS_QUERY, {
+        publishedAt: post.publishedAt,
+        language: contentLanguage,
+      })
+    : { previous: null, next: null };
+
+  const readingTime = getPostReadingTime(post);
+  const headings = getArticleHeadings(post.body);
   const articleUrl = getLocalizedUrl(locale, `/blog/${slug}`);
+  const category =
+    post.categories?.[0] && "title" in post.categories[0]
+      ? post.categories[0].title
+      : undefined;
+  const author = post.author && "name" in post.author ? post.author : undefined;
+  const wasUpdated = Boolean(
+    post._updatedAt &&
+      post.publishedAt &&
+      new Date(post._updatedAt).getTime() -
+        new Date(post.publishedAt).getTime() >
+        24 * 60 * 60 * 1000,
+  );
+
   const articleStructuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -107,14 +146,8 @@ export default async function BlogPostPage({
       ? [urlForImage(post.mainImage).width(1600).height(900).url()]
       : [getAbsoluteUrl("/images/screenshots/query-screen.png")],
     datePublished: post.publishedAt ?? undefined,
-    dateModified: post.publishedAt ?? undefined,
-    author:
-      post.author && "name" in post.author && post.author.name
-        ? {
-            "@type": "Person",
-            name: post.author.name,
-          }
-        : undefined,
+    dateModified: post._updatedAt ?? post.publishedAt ?? undefined,
+    author: author?.name ? { "@type": "Person", name: author.name } : undefined,
     publisher: {
       "@type": "Organization",
       name: "QoreDB",
@@ -126,112 +159,164 @@ export default async function BlogPostPage({
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-(--q-bg-0) text-(--q-text-0)">
       <Script
         id={`blog-article-jsonld-${locale}-${slug}`}
         type="application/ld+json"
       >
         {JSON.stringify(articleStructuredData)}
       </Script>
+      <ReadingProgress
+        targetId="article-body"
+        label={t("blog_post.reading_progress")}
+      />
       <Header />
-      <main className="flex-1 pt-20">
-        <article className="container py-24 max-w-4xl mx-auto space-y-12">
-          <div className="space-y-6 text-center">
+
+      <main className="flex-1 pb-20 pt-24 sm:pt-28">
+        <article>
+          <header className="container mx-auto max-w-5xl px-5 pb-10 pt-10 sm:px-6 sm:pb-14 sm:pt-14">
             <Link
               href={`/${locale}/blog`}
-              className="inline-flex items-center text-sm text-(--q-text-2) hover:text-(--q-text-0) transition-colors mb-4"
+              className="mb-9 inline-flex items-center gap-2 text-sm font-medium text-(--q-text-2) transition-colors hover:text-(--q-text-0)"
             >
-              <ArrowLeft className="w-4 h-4 mr-1" />
+              <ArrowLeft className="size-4" />
               {t("blog_post.back_to_blog")}
             </Link>
-            <div className="flex items-center justify-center gap-4 text-sm text-(--q-text-2)">
+
+            <div className="mb-6 flex flex-wrap items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.14em]">
+              {category && (
+                <span className="rounded-md bg-(--q-accent-soft) px-2.5 py-1.5 text-(--q-accent-strong)">
+                  {category}
+                </span>
+              )}
+              <span className="text-(--q-text-2)">
+                {t("blog_page.eyebrow")}
+              </span>
+            </div>
+
+            <h1 className="max-w-4xl text-4xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+              {post.title}
+            </h1>
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-(--q-text-1) sm:text-xl">
+              {getPostExcerpt(post, 280)}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4 border-t border-(--q-border) pt-6 text-sm text-(--q-text-2)">
+              {author?.name && (
+                <div className="flex items-center gap-3 font-medium text-(--q-text-0)">
+                  {author.image && (
+                    <span className="relative size-9 overflow-hidden rounded-full border border-(--q-border)">
+                      <Image
+                        src={urlForImage(author.image).url()}
+                        alt={author.name}
+                        fill
+                        sizes="36px"
+                        className="object-cover"
+                      />
+                    </span>
+                  )}
+                  <span>{author.name}</span>
+                </div>
+              )}
+
               {post.publishedAt && (
-                <span className="flex items-center gap-1.5">
-                  <CalendarIcon className="w-4 h-4" />
+                <span className="inline-flex items-center gap-1.5">
+                  <CalendarIcon className="size-4" />
                   <time dateTime={post.publishedAt}>
                     {new Date(post.publishedAt).toLocaleDateString(
                       getIntlLocale(locale),
-                      {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      },
+                      { day: "numeric", month: "long", year: "numeric" },
                     )}
                   </time>
                 </span>
               )}
-              <span className="w-1 h-1 rounded-full bg-(--q-text-2)/50" />
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" />
-                {t("blog_post.reading_time", { minutes: readingTime })}
+              <span className="inline-flex items-center gap-1.5">
+                <Clock3 className="size-4" />
+                {formatReadingTime(readingTime, locale)}
               </span>
+              {wasUpdated && post._updatedAt && (
+                <span className="inline-flex items-center gap-1.5">
+                  <RefreshCw className="size-3.5" />
+                  {t("blog_post.updated", {
+                    date: new Date(post._updatedAt).toLocaleDateString(
+                      getIntlLocale(locale),
+                      { day: "numeric", month: "short", year: "numeric" },
+                    ),
+                  })}
+                </span>
+              )}
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl leading-tight">
-              {post.title}
-            </h1>
-            {post.author && "name" in post.author && (
-              <div className="flex items-center justify-center gap-3 pt-4">
-                {post.author.image && (
-                  <div className="relative h-10 w-10 overflow-hidden rounded-full border border-(--q-border)">
-                    <Image
-                      src={urlForImage(post.author.image).url()}
-                      alt={post.author.name || "Author Image"}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
-                <div className="text-left">
-                  <p className="text-sm font-medium">{post.author.name}</p>
-                </div>
-              </div>
-            )}
-          </div>
+          </header>
 
           {post.mainImage && (
-            <div className="relative aspect-2/1 w-full overflow-hidden rounded-xl border border-(--q-border) bg-(--q-bg-1)">
-              <Image
-                src={urlForImage(post.mainImage).url()}
-                alt={post.title || "Post Main Image"}
-                fill
-                className="object-cover"
-                preload
-                fetchPriority="high"
-                sizes="(max-width: 1024px) 100vw, 1024px"
-              />
-            </div>
-          )}
-
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <RichTextRenderer content={post.body ?? []} />
-          </div>
-
-          <NewsletterCard locale={locale} source="blog-post" />
-
-          {/* Share buttons */}
-          <div className="border-t border-(--q-border) pt-8">
-            <ShareButtons title={post.title ?? "QoreDB"} />
-          </div>
-
-          {post.related && post.related.length > 0 && (
-            <div className="space-y-8">
-              <h3 className="text-3xl font-bold">
-                {t("blog_post.related_articles")}
-              </h3>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {post.related
-                  .filter((relatedPost) => relatedPost && "slug" in relatedPost)
-                  .map((relatedPost) => (
-                    <ArticleCard
-                      key={relatedPost._id}
-                      post={relatedPost}
-                      locale={locale}
-                    />
-                  ))}
+            <div className="container mx-auto max-w-6xl px-5 sm:px-6">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-(--q-border) bg-(--q-bg-1)">
+                <Image
+                  src={urlForImage(post.mainImage).url()}
+                  alt={post.title || "Article QoreDB"}
+                  fill
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 1200px) 100vw, 1152px"
+                  className="object-cover"
+                />
               </div>
             </div>
           )}
+
+          <div className="container mx-auto mt-14 grid max-w-6xl gap-10 px-5 sm:px-6 lg:grid-cols-[220px_minmax(0,760px)] lg:justify-center lg:gap-14">
+            <TableOfContents
+              headings={headings}
+              label={t("blog_post.table_of_contents")}
+            />
+
+            <div id="article-body" className="min-w-0">
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <RichTextRenderer content={post.body ?? []} />
+              </div>
+
+              <NewsletterCard locale={locale} source="blog-post" />
+
+              <div className="border-t border-(--q-border) py-8">
+                <ShareButtons title={post.title ?? "QoreDB"} />
+              </div>
+
+              <ArticleNavigation
+                previous={adjacent.previous}
+                next={adjacent.next}
+                locale={locale}
+                previousLabel={t("blog_post.previous_article")}
+                nextLabel={t("blog_post.next_article")}
+              />
+            </div>
+          </div>
         </article>
+
+        {post.related && post.related.length > 0 && (
+          <section className="container mx-auto mt-20 max-w-6xl border-t border-(--q-border) px-5 pt-12 sm:px-6">
+            <div className="mb-7 flex items-end justify-between gap-6">
+              <div>
+                <p className="mb-2 font-mono text-xs uppercase tracking-[0.16em] text-(--q-text-2)">
+                  {t("blog_page.archive")}
+                </p>
+                <h2 className="text-3xl font-bold tracking-tight">
+                  {t("blog_post.related_articles")}
+                </h2>
+              </div>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {post.related
+                .filter((relatedPost) => relatedPost && "slug" in relatedPost)
+                .map((relatedPost) => (
+                  <ArticleCard
+                    key={relatedPost._id}
+                    post={relatedPost}
+                    locale={locale}
+                  />
+                ))}
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
