@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { Agentation } from "agentation";
 import { dir } from "i18next";
 import { ThemeProvider } from "next-themes";
@@ -116,8 +115,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <DownloadProvider>{children}</DownloadProvider>
-            <Analytics />
-            <SpeedInsights />
+            <SiteAnalytics />
           </ThemeProvider>
         </TranslationsProvider>
         {process.env.NODE_ENV === "development" && <Agentation />}

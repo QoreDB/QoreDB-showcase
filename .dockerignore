@@ -1,0 +1,27 @@
+# Dépendances et artefacts de build (reconstruits dans l'image)
+node_modules
+.next
+out
+build
+
+# Git / IDE / OS
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+
+# Secrets — NE JAMAIS embarquer dans l'image (fournis via Coolify env)
+.env
+.env.*
+!.env.production.template
+
+# Divers
+coverage
+*.tsbuildinfo
+npm-debug.log*
+.vercel
+scripts/pending-articles
+scripts/pending-uploads
+linkedin-posts
+articles-tracker.json
