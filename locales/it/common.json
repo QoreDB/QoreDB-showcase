@@ -743,6 +743,13 @@
   "license_management": {
     "title": "Gestione delle licenze",
     "subtitle": "Controlla lo stato della tua licenza QoreDB Pro e invia nuovamente la chiave via email.",
+    "licensing": {
+      "title": "Licenze del software",
+      "description": "QoreDB segue un modello open core con doppia licenza: il cuore del software è pubblicato con licenza Apache 2.0, mentre le funzionalità Premium sono pubblicate con Business Source License 1.1, che passa automaticamente ad Apache 2.0 quattro anni dopo la pubblicazione di ogni versione.",
+      "apache": "Apache 2.0 (cuore)",
+      "bsl": "BSL 1.1 (Premium)",
+      "docs": "Modello open core"
+    },
     "fields": {
       "email": "E-mail",
       "payment_id": "ID pagamento con striping"
@@ -796,15 +803,15 @@
   },
   "privacy_page": {
     "title": "Informativa sulla privacy",
-    "last_updated": "Ultimo aggiornamento: 24 gennaio 2026",
+    "last_updated": "Ultimo aggiornamento: 21 luglio 2026",
     "sections": {
       "intro": {
         "title": "1. Titolare del trattamento",
-        "content": "<p>Il titolare del trattamento è l'editore del progetto <strong>QoreDB</strong>.</p><p>L'informativa completa relativa alla persona giuridica sarà specificata non appena la struttura giuridica sarà finalizzata.</p>"
+        "content": "<p>Il titolare del trattamento è <strong>Raphaël Plassart</strong>, imprenditore individuale (microimpresa francese), editore e gestore di <strong>QoreDB</strong>.</p><ul><li>SIREN: 942 906 157</li><li>SIRET (sede): 942 906 157 00014</li><li>Codice attività (APE): 62.01Z — Programmazione informatica</li><li>Contatto: <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>L'indirizzo postale della sede viene comunicato su semplice richiesta scritta a questo indirizzo di contatto.</p>"
       },
       "data_collection": {
         "title": "2. Raccolta dati",
-        "content": "<p>QoreDB limita strettamente la raccolta di dati personali.</p><h3>2.1 Dati di navigazione (Sito)</h3><p>Durante la consultazione del sito possono essere raccolti dati tecnici anonimizzati per fini statistici, tra cui:</p><ul><li>pagine visitate,</li><li>tipo di dispositivo e browser,</li><li>sistema operativo,</li><li>paese o area geografica approssimativa,</li><li>tempi di caricamento e prestazioni.</li></ul><p>Questi dati <strong>non consentono l'identificazione personale di un user</strong>.</p><p>QoreDB utilizza <strong>Vercel Analytics</strong>, una soluzione di analisi che rispetta la privacy:</p><ul><li>nessun cookie,</li><li>nessun monitoraggio tra siti,</li><li>no profilazione pubblicitaria.</li></ul><h3>2.2 Dati forniti volontariamente</h3><p>Alcuni dati possono essere forniti volontariamente dall'utente, ad esempio:</p><ul><li>durante il contatto,</li><li>durante la registrazione ad un newsletter,</li><li>durante l'utilizzo di futuri servizi che richiedono l'autenticazione.</li></ul><p>I dati raccolti possono includere:</p><ul><li>indirizzo email,</li><li>nome o pseudonimo,</li><li>messaggio contenuto.</li></ul>"
+        "content": "<p>QoreDB limita strettamente la raccolta di dati personali.</p><h3>2.1 Dati di navigazione (Sito)</h3><p>Durante la consultazione del sito possono essere raccolti dati tecnici anonimizzati per fini statistici, tra cui:</p><ul><li>pagine visitate,</li><li>tipo di dispositivo e browser,</li><li>sistema operativo,</li><li>paese o area geografica approssimativa,</li><li>tempi di caricamento e prestazioni.</li></ul><p>Questi dati <strong>non consentono l'identificazione personale di un user</strong>.</p><p>QoreDB utilizza <strong>Vercel Analytics</strong>, una soluzione di analisi che rispetta la privacy:</p><ul><li>nessun cookie,</li><li>nessun monitoraggio tra siti,</li><li>no profilazione pubblicitaria.</li></ul><h3>2.2 Dati forniti volontariamente</h3><p>Alcuni dati possono essere forniti volontariamente dall'utente, ad esempio:</p><ul><li>durante il contatto,</li><li>durante la registrazione ad un newsletter,</li><li>durante l'utilizzo di futuri servizi che richiedono l'autenticazione.</li></ul><p>I dati raccolti possono includere:</p><ul><li>indirizzo email,</li><li>nome o pseudonimo,</li><li>messaggio contenuto.</li></ul><h3>2.3 Dati relativi agli acquisti e alle licenze</h3><p>Al momento dell'acquisto di una licenza, il pagamento è gestito da <strong>Stripe</strong>. I dati della carta di pagamento vengono inseriti direttamente sull'infrastruttura di Stripe: non transitano mai dai server di QoreDB e non vi vengono mai memorizzati.</p><p>QoreDB conserva soltanto le informazioni necessarie al rilascio e alla gestione delle licenze:</p><ul><li>l'indirizzo e-mail di acquisto,</li><li>l'identificativo di pagamento o di abbonamento Stripe,</li><li>la chiave di licenza associata e, se del caso, le postazioni assegnate.</li></ul>"
       },
       "purposes": {
         "title": "3. Finalità del trattamento",
@@ -820,7 +827,7 @@
       },
       "hosting": {
         "title": "6. Hosting e sub-responsabili del trattamento",
-        "content": "<p>Il sito e i servizi QoreDB sono ospitati da fornitori che rispettano elevati standard di sicurezza e conformità.</p><p>I dati potrebbero essere trattati su server ubicati nell'Unione Europea o in paesi che offrono un adeguato livello di protezione in conformità al GDPR.</p>"
+        "content": "<p>Il sito e i servizi QoreDB si avvalgono dei seguenti responsabili del trattamento:</p><ul><li><strong>Vercel Inc.</strong> — hosting del sito e misurazione del pubblico senza cookie;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagamenti, fatturazione e gestione degli abbonamenti;</li><li><strong>Resend</strong> — invio delle e-mail transazionali e della newsletter;</li><li><strong>Sanity</strong> — gestione dei contenuti editoriali (blog).</li></ul><p>I dati possono essere trattati su server situati nell'Unione europea o in Paesi che offrono un livello di protezione adeguato, sulla base di garanzie conformi al GDPR.</p>"
       },
       "security": {
         "title": "7. Sicurezza dei dati",
@@ -850,19 +857,23 @@
   },
   "legal_page": {
     "title": "Avviso legale",
-    "last_updated": "Ultimo aggiornamento: 24 gennaio 2026",
+    "last_updated": "Ultimo aggiornamento: 21 luglio 2026",
     "sections": {
       "editor": {
         "title": "Redattore del sito",
-        "content": "**Nome progetto/Prodotto:** QoreDB\n**Direttore della pubblicazione:** Raphaël Plassart\n**Stato:** Progetto software (open-core)\n\n> Le informazioni relative alla persona giuridica (ragione sociale, forma giuridica, indirizzo, numero di registrazione) saranno specificate non appena la struttura giuridica sarà finalizzata."
+        "content": "**Editore del sito e del software:** Raphaël Plassart, imprenditore individuale (*micro-entreprise* francese)\n**Direttore della pubblicazione:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (sede):** 942 906 157 00014\n**Codice attività (APE):** 62.01Z — Programmazione informatica\n**Registrazione:** impresa registrata in Francia, attiva dal 4 aprile 2025\n**IVA:** IVA non applicabile, articolo 293 B del Codice generale delle imposte francese\n**Contatto:** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB è un prodotto software edito e gestito da questa microimpresa, che assume tutti i rapporti contrattuali con utenti e clienti.\n\n> L'indirizzo postale della sede viene comunicato su semplice richiesta scritta all'indirizzo di contatto sopra indicato."
       },
       "hosting": {
         "title": "Ospitare",
         "content": "Il sito web QoreDB è ospitato da **Vercel Inc.**, con sede a 340 S Lemon Ave #4133 Walnut, CA 91789, USA.\n\nI dati potrebbero essere ospitati su infrastrutture ubicate all'interno dell'Unione Europea o in paesi che offrono un livello di protezione dei dati conforme alla normativa vigente."
       },
+      "payments": {
+        "title": "Pagamenti e fatturazione",
+        "content": "I pagamenti relativi alle licenze QoreDB (Pro, Team) sono interamente gestiti da **Stripe**, prestatore di servizi di pagamento operato in Europa da **Stripe Payments Europe, Limited** (Irlanda).\n\n* nessun dato di carta di pagamento transita o viene conservato sui server di QoreDB,\n* la procedura di pagamento, la fatturazione e la gestione degli abbonamenti sono affidate a Stripe (Stripe Checkout e Stripe Billing),\n* le fatture sono emesse per conto della microimpresa Raphaël Plassart e messe a disposizione da Stripe.\n\nPoiché l'impresa rientra nel regime francese di franchigia IVA, i prezzi indicati non includono l'IVA (articolo 293 B del Codice generale delle imposte francese)."
+      },
       "ip": {
         "title": "Proprietà intellettuale",
-        "content": "Tutti i contenuti presenti sul sito QoreDB, tra cui in particolare:\n\n* testi,\n* documentazione,\n* post del blog,\n*elementi grafici,\n* identità visiva,\n* il nome, il logo e il marchio QoreDB,\n\nè protetto dal diritto d'autore e dalle leggi relative alla proprietà intellettuale.\n\nSe non diversamente specificato, il codice sorgente QoreDB è distribuito secondo un modello **open-core**:\n\n*una parte è pubblicata con licenza open source,\n*alcune funzionalità avanzate potrebbero essere soggette a una licenza proprietaria.\n\nQualsiasi riproduzione, rappresentazione, modifica o sfruttamento non autorizzato dei contenuti o degli elementi protetti è severamente vietato."
+        "content": "Tutti i contenuti presenti sul sito QoreDB, in particolare:\n\n* i testi,\n* la documentazione,\n* gli articoli del blog,\n* gli elementi grafici,\n* l'identità visiva,\n* il nome, il logo e il marchio QoreDB,\n\nsono protetti dal diritto d'autore e dalle leggi sulla proprietà intellettuale.\n\nIl codice sorgente di QoreDB è distribuito secondo un modello **open core**, con **doppia licenza**:\n\n* il cuore del software è pubblicato con licenza **Apache 2.0**,\n* alcune funzionalità avanzate (Premium) sono pubblicate con **Business Source License 1.1**.\n\nIl dettaglio è riportato nella sezione Licenza qui sotto. È severamente vietata qualsiasi riproduzione, rappresentazione, modifica o sfruttamento non autorizzato dei contenuti protetti, al di fuori dei diritti concessi da tali licenze."
       },
       "liability": {
         "title": "Accesso al sito e responsabilità",
@@ -878,11 +889,11 @@
       },
       "terms": {
         "title": "Condizioni d'uso",
-        "content": "L'utilizzo del sito QoreDB, della documentazione e del software implica la piena accettazione di:\n\n➡️ [Condizioni d'uso](#)"
+        "content": "L'utilizzo del sito QoreDB, della documentazione e del software implica la piena accettazione di:\n\n➡️ [Condizioni d'uso](/terms)"
       },
       "license": {
         "title": "Licenza",
-        "content": "Le condizioni di licenza applicabili al software QoreDB sono dettagliate nella pagina dedicata:\n\n➡️ [Licenza](#)"
+        "content": "QoreDB è distribuito secondo un modello **open core**, con **doppia licenza**:\n\n* **Cuore — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: uso, modifica, ridistribuzione e uso commerciale liberi, senza royalty, nel rispetto degli obblighi di attribuzione.\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: codice sorgente consultabile, uso personale e interno all'azienda gratuito, vietata la commercializzazione di un'offerta concorrente. Ogni versione passa automaticamente alla licenza Apache 2.0 quattro anni dopo la sua pubblicazione.\n\nOgni file sorgente del repository riporta un'intestazione SPDX che indica la licenza applicabile. Fanno fede unicamente i file di licenza presenti nella radice del repository ufficiale.\n\n➡️ [Modello open core e licenze](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "Contatto",
@@ -892,13 +903,13 @@
   },
   "terms_page": {
     "title": "Termini di servizio",
-    "last_updated": "Ultimo aggiornamento: 24 gennaio 2026",
+    "last_updated": "Ultimo aggiornamento: 21 luglio 2026",
     "intro": "I presenti Termini di servizio (di seguito \"ToS\") regolano l'accesso e l'utilizzo del sito web **QoreDB**, della sua documentazione, dei suoi servizi online e del software QoreDB.\n\nAccedendo al sito o utilizzando il software QoreDB, l'utente dichiara di aver letto le presenti Condizioni Generali e di accettarle senza riserve.",
     "copyright": "© QoreDB – Tutti i diritti riservati.",
     "sections": {
       "definitions": {
         "title": "1. Definizioni",
-        "content": "* **QoreDB**: si riferisce al progetto software, al sito web, alla documentazione, agli strumenti e servizi associati.\n* **Utente**: qualsiasi persona che accede al sito o utilizza il software QoreDB.\n* **Software**: il software QoreDB, distribuito secondo un modello open-core.\n* **Sito**: il sito web ufficiale QoreDB."
+        "content": "* **QoreDB**: si riferisce al progetto software, al sito web, alla documentazione, agli strumenti e servizi associati.\n* **Utente**: qualsiasi persona che accede al sito o utilizza il software QoreDB.\n* **Software**: il software QoreDB, distribuito secondo un modello open-core.\n* **Sito**: il sito web ufficiale QoreDB.\n* **Editore**: Raphaël Plassart, imprenditore individuale (*micro-entreprise* francese), SIRET 942 906 157 00014, editore e gestore del sito e del software QoreDB."
       },
       "object": {
         "title": "2. Oggetto",
@@ -910,43 +921,47 @@
       },
       "software_use": {
         "title": "4. Utilizzo del software QoreDB",
-        "content": "Il software QoreDB è distribuito secondo un modello **open-core**:\n\n*una parte del codice è pubblicata con licenza open source,\n*alcune funzionalità, estensioni o servizi potrebbero essere soggetti a una licenza proprietaria separata.\n\nLe condizioni precise per l'utilizzo, la modifica e la distribuzione del software sono definite nella **QoreDB Licenza**, disponibile sul sito e nei repository ufficiali."
-      },
-      "user_obligations": {
-        "title": "6. Obblighi dell'utente",
-        "content": "L'utente si impegna a:\n\n* utilizzare QoreDB in conformità con le leggi e i regolamenti applicabili,\n* non violare la sicurezza, l'integrità o il corretto funzionamento del sito o del software,\n* non tentare l'accesso non autorizzato a sistemi o dati,\n* non utilizzare QoreDB per scopi fraudolenti, illegali o abusivi.\n\nQualsiasi utilizzo abusivo potrà comportare la sospensione dell'accesso ai servizi."
-      },
-      "ip": {
-        "title": "7. Proprietà intellettuale",
-        "content": "Tutti gli elementi del sito QoreDB (testi, documentazione, grafica, logo, identità visiva) sono protetti dai diritti di proprietà intellettuale.\n\nSalvo diversa indicazione, è vietata qualsiasi riproduzione, rappresentazione o sfruttamento non autorizzato.\n\nIl codice sorgente del software QoreDB è soggetto ai termini della licenza applicabile, come definito nella pagina **Licenza**."
-      },
-      "liability": {
-        "title": "8. Responsabilità",
-        "content": "QoreDB viene fornito \"così com'è\", senza garanzie di alcun tipo.\n\nQoreDB non può essere ritenuto responsabile per:\n\n* danni diretti o indiretti derivanti dall'uso del sito o del software,\n* perdita di dati, interruzione dell'attività o danni commerciali,\n*conseguenze legate alla configurazione o all'utilizzo improprio del software.\n\nL'utente è l'unico responsabile del proprio utilizzo di QoreDB e dei dati elaborati."
-      },
-      "privacy": {
-        "title": "9. Dati personali",
-        "content": "Il trattamento dei dati personali è regolato dalla **Privacy Policy** accessibile sul sito QoreDB."
-      },
-      "external_links": {
-        "title": "10. Collegamenti esterni",
-        "content": "Il sito QoreDB può contenere collegamenti a siti o servizi di terze parti. QoreDB non esercita alcun controllo su questi servizi e declina ogni responsabilità in merito al loro contenuto o funzionamento."
-      },
-      "updates": {
-        "title": "11. Modifiche ai Termini di servizio",
-        "content": "QoreDB si riserva il diritto di modificare i presenti Termini di servizio in qualsiasi momento.\n\nGli utenti sono invitati a consultare con regolarità la versione attuale. La data dell'ultimo aggiornamento è indicata nella parte superiore della pagina."
-      },
-      "law": {
-        "title": "12. Legge applicabile",
-        "content": "I presenti Termini di servizio sono regolati dalla legge francese.\n\nIn caso di controversia, e in mancanza di risoluzione amichevole, i tribunali competenti saranno quelli della giurisdizione applicabile in conformità con la legislazione in vigore."
-      },
-      "contact": {
-        "title": "13. Contatto",
-        "content": "Per qualsiasi domanda relativa ai presenti Termini di Servizio, l'utente può contattare il team di QoreDB tramite i canali ufficiali indicati sul sito."
+        "content": "Il software QoreDB è distribuito secondo un modello **open core**, con **doppia licenza**:\n\n* il cuore del software è pubblicato con **[licenza Apache 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: uso, modifica, ridistribuzione e uso commerciale liberi, senza royalty;\n* alcune funzionalità avanzate (Premium) sono pubblicate con **[Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: codice sorgente consultabile, uso personale e interno all'azienda gratuito, vietata la commercializzazione di un'offerta concorrente, con passaggio automatico alla licenza Apache 2.0 quattro anni dopo la pubblicazione di ogni versione.\n\nOgni file sorgente riporta un'intestazione SPDX che indica la licenza applicabile. In caso di discordanza tra la presente sintesi e i file di licenza pubblicati nei repository ufficiali, prevalgono questi ultimi."
       },
       "team_licensing": {
         "title": "5. Licenze Team (postazioni nominative)",
         "content": "La licenza **Team** è concessa **per postazione**. Dà diritto a tante **postazioni nominative** quante sono le postazioni sottoscritte, in ragione di **una (1) chiave di licenza per persona**.\n\n* ogni chiave di postazione è associata all'indirizzo e-mail del suo titolare,\n* la **condivisione di una chiave** tra più persone è **vietata**,\n* l'uso del software **oltre il numero di postazioni sottoscritte** è **vietato**.\n\nL'intestatario dell'abbonamento (amministratore) assegna le postazioni e vigila sul rispetto di queste condizioni all'interno della propria organizzazione. Qualsiasi violazione può comportare la sospensione o la risoluzione della licenza."
+      },
+      "payments": {
+        "title": "6. Acquisti, pagamento e fatturazione",
+        "content": "Le licenze a pagamento (Pro, Team) sono commercializzate dalla microimpresa Raphaël Plassart.\n\n* i pagamenti sono gestiti esclusivamente da **Stripe** (Stripe Payments Europe, Limited); QoreDB non ha accesso ad alcun dato di carta di pagamento,\n* i prezzi sono indicati in euro, senza IVA — IVA non applicabile, articolo 293 B del Codice generale delle imposte francese,\n* la fattura è emessa e messa a disposizione da Stripe al termine del pagamento,\n* la chiave di licenza viene consegnata via e-mail dopo la conferma del pagamento,\n* gli abbonamenti si rinnovano automaticamente secondo la periodicità sottoscritta e possono essere disdetti in qualsiasi momento dal portale clienti Stripe; la disdetta ha effetto al termine del periodo in corso.\n\nAi sensi dell'articolo L221-28 del Codice del consumo francese, il consumatore che richiede la fornitura immediata della propria chiave di licenza rinuncia al diritto di recesso una volta eseguita integralmente la prestazione. Qualsiasi richiesta relativa a un pagamento o a un rimborso può essere inviata all'indirizzo di contatto indicato sul sito."
+      },
+      "user_obligations": {
+        "title": "7. Obblighi dell'utente",
+        "content": "L'utente si impegna a:\n\n* utilizzare QoreDB in conformità con le leggi e i regolamenti applicabili,\n* non violare la sicurezza, l'integrità o il corretto funzionamento del sito o del software,\n* non tentare l'accesso non autorizzato a sistemi o dati,\n* non utilizzare QoreDB per scopi fraudolenti, illegali o abusivi.\n\nQualsiasi utilizzo abusivo potrà comportare la sospensione dell'accesso ai servizi."
+      },
+      "ip": {
+        "title": "8. Proprietà intellettuale",
+        "content": "Tutti gli elementi del sito QoreDB (testi, documentazione, grafica, logo, identità visiva) sono protetti dai diritti di proprietà intellettuale.\n\nSalvo diversa indicazione, è vietata qualsiasi riproduzione, rappresentazione o sfruttamento non autorizzato.\n\nIl codice sorgente del software QoreDB è soggetto ai termini della licenza applicabile, come definito nella pagina **Licenza**."
+      },
+      "liability": {
+        "title": "9. Responsabilità",
+        "content": "QoreDB viene fornito \"così com'è\", senza garanzie di alcun tipo.\n\nQoreDB non può essere ritenuto responsabile per:\n\n* danni diretti o indiretti derivanti dall'uso del sito o del software,\n* perdita di dati, interruzione dell'attività o danni commerciali,\n*conseguenze legate alla configurazione o all'utilizzo improprio del software.\n\nL'utente è l'unico responsabile del proprio utilizzo di QoreDB e dei dati elaborati."
+      },
+      "privacy": {
+        "title": "10. Dati personali",
+        "content": "Il trattamento dei dati personali è regolato dalla **Privacy Policy** accessibile sul sito QoreDB."
+      },
+      "external_links": {
+        "title": "11. Collegamenti esterni",
+        "content": "Il sito QoreDB può contenere collegamenti a siti o servizi di terze parti. QoreDB non esercita alcun controllo su questi servizi e declina ogni responsabilità in merito al loro contenuto o funzionamento."
+      },
+      "updates": {
+        "title": "12. Modifiche ai Termini di servizio",
+        "content": "QoreDB si riserva il diritto di modificare i presenti Termini di servizio in qualsiasi momento.\n\nGli utenti sono invitati a consultare con regolarità la versione attuale. La data dell'ultimo aggiornamento è indicata nella parte superiore della pagina."
+      },
+      "law": {
+        "title": "13. Legge applicabile",
+        "content": "I presenti Termini di servizio sono regolati dalla legge francese.\n\nIn caso di controversia, e in mancanza di risoluzione amichevole, i tribunali competenti saranno quelli della giurisdizione applicabile in conformità con la legislazione in vigore."
+      },
+      "contact": {
+        "title": "14. Contatto",
+        "content": "Per qualsiasi domanda relativa ai presenti Termini di Servizio, l'utente può contattare il team di QoreDB tramite i canali ufficiali indicati sul sito."
       }
     }
   },

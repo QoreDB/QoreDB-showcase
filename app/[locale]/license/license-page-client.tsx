@@ -97,6 +97,39 @@ export function LicensePageClient() {
             </p>
           </div>
 
+          <section className="rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-6">
+            <h2 className="text-xl font-semibold">
+              {t("license_management.licensing.title")}
+            </h2>
+            <p className="text-sm text-(--q-text-2) mt-2">
+              {t("license_management.licensing.description")}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3 text-sm">
+              <a
+                href="https://github.com/QoreDB/QoreDB/blob/main/LICENSE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl border border-(--q-border) px-3 py-1.5 text-(--q-text-1) hover:text-(--q-accent) hover:border-(--q-accent) transition-colors"
+              >
+                {t("license_management.licensing.apache")}
+              </a>
+              <a
+                href="https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl border border-(--q-border) px-3 py-1.5 text-(--q-text-1) hover:text-(--q-accent) hover:border-(--q-accent) transition-colors"
+              >
+                {t("license_management.licensing.bsl")}
+              </a>
+              <a
+                href="/docs/introduction/open-core-model"
+                className="rounded-xl border border-(--q-border) px-3 py-1.5 text-(--q-text-1) hover:text-(--q-accent) hover:border-(--q-accent) transition-colors"
+              >
+                {t("license_management.licensing.docs")}
+              </a>
+            </div>
+          </section>
+
           <div className="grid gap-6 lg:grid-cols-2">
             <section className="rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-6">
               <h2 className="text-xl font-semibold">

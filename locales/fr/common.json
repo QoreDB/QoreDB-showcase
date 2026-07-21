@@ -846,6 +846,13 @@
   "license_management": {
     "title": "Gestion de licence",
     "subtitle": "Vérifiez l’état de votre licence QoreDB Pro et renvoyez votre clé par email.",
+    "licensing": {
+      "title": "Licences du logiciel",
+      "description": "QoreDB suit un modèle open core, sous double licence : le cœur du logiciel est publié sous licence Apache 2.0, tandis que les fonctionnalités Premium sont publiées sous Business Source License 1.1, qui bascule automatiquement sous licence Apache 2.0 quatre ans après la publication de chaque version.",
+      "apache": "Apache 2.0 (cœur)",
+      "bsl": "BSL 1.1 (Premium)",
+      "docs": "Modèle open core"
+    },
     "fields": {
       "email": "Email",
       "payment_id": "ID de paiement Stripe"
@@ -899,15 +906,15 @@
   },
   "privacy_page": {
     "title": "Politique de confidentialité",
-    "last_updated": "Dernière mise à jour : 24 janvier 2026",
+    "last_updated": "Dernière mise à jour : 21 juillet 2026",
     "sections": {
       "intro": {
         "title": "1. Responsable du traitement",
-        "content": "<p>Le responsable du traitement des données est l’éditeur du projet <strong>QoreDB</strong>.</p><p>Les informations complètes relatives à l’entité juridique seront précisées dès la finalisation de la structure légale.</p>"
+        "content": "<p>Le responsable du traitement est <strong>Raphaël Plassart</strong>, entrepreneur individuel (micro-entreprise), éditeur et exploitant de <strong>QoreDB</strong>.</p><ul><li>SIREN : 942 906 157</li><li>SIRET (siège) : 942 906 157 00014</li><li>Code APE : 62.01Z — Programmation informatique</li><li>Contact : <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>L'adresse postale du siège est communiquée sur simple demande écrite adressée à cette adresse de contact.</p>"
       },
       "data_collection": {
         "title": "2. Données collectées",
-        "content": "<p>QoreDB limite strictement la collecte de données personnelles.</p><h3>2.1 Données de navigation (site web)</h3><p>Lors de la consultation du site, des données techniques anonymisées peuvent être collectées à des fins statistiques, notamment :</p><ul><li>pages consultées,</li><li>type d’appareil et de navigateur,</li><li>système d’exploitation,</li><li>pays ou zone géographique approximative,</li><li>temps de chargement et performances.</li></ul><p>Ces données <strong>ne permettent pas d’identifier personnellement un utilisateur</strong>.</p><p>QoreDB utilise <strong>Vercel Analytics</strong>, une solution d’analyse respectueuse de la vie privée :</p><ul><li>sans cookies,</li><li>sans traçage inter‑sites,</li><li>sans profilage publicitaire.</li></ul><h3>2.2 Données fournies volontairement</h3><p>Certaines données peuvent être fournies volontairement par l’utilisateur, par exemple :</p><ul><li>lors d’une prise de contact,</li><li>lors d’une inscription à une liste d’information,</li><li>lors de l’utilisation de services futurs nécessitant une authentification.</li></ul><p>Les données collectées peuvent inclure :</p><ul><li>adresse e‑mail,</li><li>nom ou pseudonyme,</li><li>contenu du message.</li></ul>"
+        "content": "<p>QoreDB limite strictement la collecte de données personnelles.</p><h3>2.1 Données de navigation (site web)</h3><p>Lors de la consultation du site, des données techniques anonymisées peuvent être collectées à des fins statistiques, notamment :</p><ul><li>pages consultées,</li><li>type d’appareil et de navigateur,</li><li>système d’exploitation,</li><li>pays ou zone géographique approximative,</li><li>temps de chargement et performances.</li></ul><p>Ces données <strong>ne permettent pas d’identifier personnellement un utilisateur</strong>.</p><p>QoreDB utilise <strong>Vercel Analytics</strong>, une solution d’analyse respectueuse de la vie privée :</p><ul><li>sans cookies,</li><li>sans traçage inter‑sites,</li><li>sans profilage publicitaire.</li></ul><h3>2.2 Données fournies volontairement</h3><p>Certaines données peuvent être fournies volontairement par l’utilisateur, par exemple :</p><ul><li>lors d’une prise de contact,</li><li>lors d’une inscription à une liste d’information,</li><li>lors de l’utilisation de services futurs nécessitant une authentification.</li></ul><p>Les données collectées peuvent inclure :</p><ul><li>adresse e‑mail,</li><li>nom ou pseudonyme,</li><li>contenu du message.</li></ul><h3>2.3 Données liées aux achats et aux licences</h3><p>Lors de l'achat d'une licence, le paiement est traité par <strong>Stripe</strong>. Les données de carte bancaire sont saisies directement sur l'infrastructure de Stripe : elles ne transitent jamais par les serveurs de QoreDB et n'y sont jamais stockées.</p><p>QoreDB ne conserve que les informations nécessaires à la délivrance et à la gestion des licences :</p><ul><li>l'adresse e-mail d'achat,</li><li>l'identifiant de paiement ou d'abonnement Stripe,</li><li>la clé de licence associée et, le cas échéant, les sièges attribués.</li></ul>"
       },
       "purposes": {
         "title": "3. Finalités du traitement",
@@ -923,7 +930,7 @@
       },
       "hosting": {
         "title": "6. Hébergement et sous‑traitants",
-        "content": "<p>Le site et les services QoreDB sont hébergés par des prestataires respectant des standards élevés de sécurité et de conformité.</p><p>Les données peuvent être traitées sur des serveurs situés dans l’Union européenne ou dans des pays offrant un niveau de protection adéquat conformément au RGPD.</p>"
+        "content": "<p>Le site et les services QoreDB s'appuient sur les sous-traitants suivants :</p><ul><li><strong>Vercel Inc.</strong> — hébergement du site et mesure d'audience sans cookies ;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlande) — paiements, facturation et gestion des abonnements ;</li><li><strong>Resend</strong> — envoi des e-mails transactionnels et de la newsletter ;</li><li><strong>Sanity</strong> — gestion du contenu éditorial (blog).</li></ul><p>Les données peuvent être traitées sur des serveurs situés dans l'Union européenne ou dans des pays offrant un niveau de protection adéquat, sur la base de garanties conformes au RGPD.</p>"
       },
       "security": {
         "title": "7. Sécurité des données",
@@ -953,19 +960,23 @@
   },
   "legal_page": {
     "title": "Mentions légales",
-    "last_updated": "Dernière mise à jour : 24 janvier 2026",
+    "last_updated": "Dernière mise à jour : 21 juillet 2026",
     "sections": {
       "editor": {
         "title": "Éditeur du site",
-        "content": "**Nom du projet / Produit :** QoreDB\n**Responsable de la publication :** Raphaël Plassart\n**Statut :** Projet logiciel (open-core)\n\n> Les informations relatives à l’entité juridique (raison sociale, forme juridique, adresse, numéro d’immatriculation) seront précisées dès la finalisation de la structure légale."
+        "content": "**Éditeur du site et du logiciel :** Raphaël Plassart, entrepreneur individuel (micro-entreprise)\n**Directeur de la publication :** Raphaël Plassart\n**SIREN :** 942 906 157\n**SIRET (siège) :** 942 906 157 00014\n**Code APE :** 62.01Z — Programmation informatique\n**Immatriculation :** entreprise immatriculée en France, active depuis le 4 avril 2025\n**TVA :** TVA non applicable, article 293 B du Code général des impôts\n**Contact :** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB est un produit logiciel édité et exploité par cette micro-entreprise, qui assure l'ensemble des relations contractuelles avec les utilisateurs et les clients.\n\n> L'adresse postale du siège est communiquée sur simple demande écrite adressée à l'adresse de contact ci-dessus."
       },
       "hosting": {
         "title": "Hébergement",
         "content": "Le site web QoreDB est hébergé par **Vercel Inc.**, situé au 340 S Lemon Ave #4133 Walnut, CA 91789, USA.\n\nLes données peuvent être hébergées sur des infrastructures situées dans l’Union européenne ou dans des pays offrant un niveau de protection des données conforme à la réglementation en vigueur."
       },
+      "payments": {
+        "title": "Paiements et facturation",
+        "content": "Les paiements liés aux licences QoreDB (Pro, Team) sont intégralement traités par **Stripe**, prestataire de services de paiement, opéré pour l'Europe par **Stripe Payments Europe, Limited** (Irlande).\n\n* aucune donnée de carte bancaire ne transite ni n'est conservée sur les serveurs de QoreDB,\n* le tunnel de paiement, la facturation et la gestion des abonnements sont assurés par Stripe (Stripe Checkout et Stripe Billing),\n* les factures sont émises pour le compte de la micro-entreprise Raphaël Plassart et mises à disposition par Stripe.\n\nLa micro-entreprise relevant de la franchise en base de TVA, les prix affichés ne comportent pas de TVA (article 293 B du Code général des impôts)."
+      },
       "ip": {
         "title": "Propriété intellectuelle",
-        "content": "L’ensemble du contenu présent sur le site QoreDB, incluant notamment :\n\n* les textes,\n* la documentation,\n* les articles de blog,\n* les éléments graphiques,\n* l’identité visuelle,\n* le nom, le logo et la marque QoreDB,\n\nest protégé par le droit d’auteur et les lois relatives à la propriété intellectuelle.\n\nSauf mention contraire, le code source de QoreDB est distribué selon un modèle **open-core** :\n\n* une partie est publiée sous licence open-source,\n* certaines fonctionnalités avancées peuvent être soumises à une licence propriétaire.\n\nToute reproduction, représentation, modification ou exploitation non autorisée du contenu ou des éléments protégés est strictement interdite."
+        "content": "L'ensemble du contenu présent sur le site QoreDB, incluant notamment :\n\n* les textes,\n* la documentation,\n* les articles de blog,\n* les éléments graphiques,\n* l'identité visuelle,\n* le nom, le logo et la marque QoreDB,\n\nest protégé par le droit d'auteur et les lois relatives à la propriété intellectuelle.\n\nLe code source de QoreDB est distribué selon un modèle **open core**, sous **double licence** :\n\n* le cœur du logiciel est publié sous licence **Apache 2.0**,\n* certaines fonctionnalités avancées (Premium) sont publiées sous **Business Source License 1.1**.\n\nLe détail figure dans la section Licence ci-dessous. Toute reproduction, représentation, modification ou exploitation non autorisée du contenu ou des éléments protégés, en dehors des droits concédés par ces licences, est strictement interdite."
       },
       "liability": {
         "title": "Accès au site et responsabilité",
@@ -981,11 +992,11 @@
       },
       "terms": {
         "title": "Conditions d’utilisation",
-        "content": "L’utilisation du site, de la documentation et du logiciel QoreDB implique l’acceptation pleine et entière des :\n\n➡️ [Conditions générales d’utilisation](#)"
+        "content": "L’utilisation du site, de la documentation et du logiciel QoreDB implique l’acceptation pleine et entière des :\n\n➡️ [Conditions générales d’utilisation](/terms)"
       },
       "license": {
         "title": "Licence",
-        "content": "Les conditions de licence applicables au logiciel QoreDB sont détaillées dans la page dédiée :\n\n➡️ [Licence](#)"
+        "content": "QoreDB est distribué selon un modèle **open core**, sous **double licence** :\n\n* **Cœur — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)** : usage, modification, redistribution et usage commercial libres, sans redevance, dans le respect des obligations d'attribution.\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)** : code source consultable, usage personnel et interne à l'entreprise gratuit, commercialisation d'une offre concurrente interdite. Chaque version bascule automatiquement sous licence Apache 2.0 quatre ans après sa publication.\n\nChaque fichier source du dépôt porte un en-tête SPDX indiquant la licence qui lui est applicable. Les fichiers de licence présents à la racine du dépôt officiel font seuls foi.\n\n➡️ [Modèle open core et licences](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "Contact",
@@ -995,13 +1006,13 @@
   },
   "terms_page": {
     "title": "Conditions Générales d’Utilisation (CGU)",
-    "last_updated": "Dernière mise à jour : 24 janvier 2026",
+    "last_updated": "Dernière mise à jour : 21 juillet 2026",
     "intro": "Les présentes Conditions Générales d’Utilisation (ci-après « CGU ») régissent l’accès et l’utilisation du site web **QoreDB**, de sa documentation, de ses services en ligne et du logiciel QoreDB.\n\nEn accédant au site ou en utilisant le logiciel QoreDB, l’utilisateur reconnaît avoir pris connaissance des présentes CGU et les accepter sans réserve.",
     "copyright": "© QoreDB – Tous droits réservés.",
     "sections": {
       "definitions": {
         "title": "1. Définitions",
-        "content": "* **QoreDB** : désigne le projet logiciel, le site web, la documentation, les outils et services associés.\n* **Utilisateur** : toute personne accédant au site ou utilisant le logiciel QoreDB.\n* **Logiciel** : le logiciel QoreDB, distribué sous un modèle open-core.\n* **Site** : le site web officiel de QoreDB."
+        "content": "* **QoreDB** : désigne le projet logiciel, le site web, la documentation, les outils et services associés.\n* **Utilisateur** : toute personne accédant au site ou utilisant le logiciel QoreDB.\n* **Logiciel** : le logiciel QoreDB, distribué sous un modèle open-core.\n* **Site** : le site web officiel de QoreDB.\n* **Éditeur** : Raphaël Plassart, entrepreneur individuel (micro-entreprise), SIRET 942 906 157 00014, éditeur et exploitant du site et du logiciel QoreDB."
       },
       "object": {
         "title": "2. Objet",
@@ -1013,43 +1024,47 @@
       },
       "software_use": {
         "title": "4. Utilisation du logiciel QoreDB",
-        "content": "Le logiciel QoreDB est distribué selon un modèle **open-core** :\n\n* une partie du code est publiée sous une licence open-source,\n* certaines fonctionnalités, extensions ou services peuvent être soumis à une licence propriétaire distincte.\n\nLes conditions précises d’utilisation, de modification et de distribution du logiciel sont définies dans la **Licence QoreDB**, accessible sur le site et dans les dépôts officiels."
-      },
-      "user_obligations": {
-        "title": "6. Obligations de l’utilisateur",
-        "content": "L’utilisateur s’engage à :\n\n* utiliser QoreDB conformément aux lois et réglementations en vigueur,\n* ne pas porter atteinte à la sécurité, à l’intégrité ou au bon fonctionnement du site ou du logiciel,\n* ne pas tenter d’accéder de manière non autorisée aux systèmes ou données,\n* ne pas utiliser QoreDB à des fins frauduleuses, illégales ou abusives.\n\nToute utilisation abusive pourra entraîner la suspension de l’accès aux services."
-      },
-      "ip": {
-        "title": "7. Propriété intellectuelle",
-        "content": "L’ensemble des éléments du site QoreDB (textes, documentation, graphismes, logo, identité visuelle) est protégé par le droit de la propriété intellectuelle.\n\nSauf mention contraire, toute reproduction, représentation ou exploitation non autorisée est interdite.\n\nLe code source du logiciel QoreDB est soumis aux termes de la licence applicable, telle que définie dans la page **Licence**."
-      },
-      "liability": {
-        "title": "8. Responsabilité",
-        "content": "QoreDB est fourni « en l’état », sans garantie d’aucune sorte.\n\nQoreDB ne saurait être tenu responsable :\n\n* des dommages directs ou indirects résultant de l’utilisation du site ou du logiciel,\n* des pertes de données, interruptions d’activité ou préjudices commerciaux,\n* des conséquences liées à une mauvaise configuration ou utilisation du logiciel.\n\nL’utilisateur est seul responsable de l’usage qu’il fait de QoreDB et des données qu’il traite."
-      },
-      "privacy": {
-        "title": "9. Données personnelles",
-        "content": "Le traitement des données personnelles est régi par la **Politique de confidentialité** accessible sur le site QoreDB."
-      },
-      "external_links": {
-        "title": "10. Liens externes",
-        "content": "Le site QoreDB peut contenir des liens vers des sites ou services tiers. QoreDB n’exerce aucun contrôle sur ces services et décline toute responsabilité quant à leur contenu ou fonctionnement."
-      },
-      "updates": {
-        "title": "11. Évolution des CGU",
-        "content": "QoreDB se réserve le droit de modifier les présentes CGU à tout moment.\n\nLes utilisateurs sont invités à consulter régulièrement la version en vigueur. La date de dernière mise à jour est indiquée en haut de la page."
-      },
-      "law": {
-        "title": "12. Droit applicable",
-        "content": "Les présentes CGU sont régies par le droit français.\n\nEn cas de litige, et à défaut de résolution amiable, les tribunaux compétents seront ceux du ressort applicable conformément à la législation en vigueur."
-      },
-      "contact": {
-        "title": "13. Contact",
-        "content": "Pour toute question relative aux présentes Conditions Générales d’Utilisation, l’utilisateur peut contacter l’équipe QoreDB via les canaux officiels indiqués sur le site."
+        "content": "Le logiciel QoreDB est distribué selon un modèle **open core**, sous **double licence** :\n\n* le cœur du logiciel est publié sous **[licence Apache 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)** : usage, modification, redistribution et usage commercial libres, sans redevance ;\n* certaines fonctionnalités avancées (Premium) sont publiées sous **[Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)** : code source consultable, usage personnel et interne à l'entreprise gratuit, commercialisation d'une offre concurrente interdite, bascule automatique sous licence Apache 2.0 quatre ans après la publication de chaque version.\n\nChaque fichier source porte un en-tête SPDX indiquant la licence applicable. En cas de divergence entre la présente synthèse et les fichiers de licence publiés dans les dépôts officiels, ces derniers prévalent."
       },
       "team_licensing": {
         "title": "5. Licences Team (sièges nominatifs)",
         "content": "La licence **Team** est concédée **par siège**. Elle ouvre droit à autant de **sièges nominatifs** que de sièges souscrits, à raison d'**une (1) clé de licence par personne**.\n\n* chaque clé de siège est rattachée à l'adresse e-mail de son titulaire,\n* le **partage d'une clé** entre plusieurs personnes est **interdit**,\n* l'usage du logiciel **au-delà du nombre de sièges souscrits** est **interdit**.\n\nLe titulaire de l'abonnement (administrateur) attribue les sièges et veille au respect de ces conditions au sein de son organisation. Tout manquement peut entraîner la suspension ou la résiliation de la licence."
+      },
+      "payments": {
+        "title": "6. Achats, paiement et facturation",
+        "content": "Les licences payantes (Pro, Team) sont commercialisées par la micro-entreprise Raphaël Plassart.\n\n* les paiements sont traités exclusivement par **Stripe** (Stripe Payments Europe, Limited) ; QoreDB n'a accès à aucune donnée de carte bancaire,\n* les prix sont indiqués en euros, sans TVA — TVA non applicable, article 293 B du Code général des impôts,\n* la facture est émise et mise à disposition par Stripe à l'issue du paiement,\n* la clé de licence est délivrée par e-mail après confirmation du paiement,\n* les abonnements sont reconduits automatiquement selon la périodicité souscrite et peuvent être résiliés à tout moment depuis le portail client Stripe, la résiliation prenant effet à la fin de la période en cours.\n\nConformément à l'article L221-28 du Code de la consommation, l'utilisateur consommateur qui demande la fourniture immédiate de sa clé de licence renonce à son droit de rétractation dès l'exécution complète de la prestation. Toute demande relative à un paiement ou à un remboursement peut être adressée à l'adresse de contact indiquée sur le site."
+      },
+      "user_obligations": {
+        "title": "7. Obligations de l’utilisateur",
+        "content": "L’utilisateur s’engage à :\n\n* utiliser QoreDB conformément aux lois et réglementations en vigueur,\n* ne pas porter atteinte à la sécurité, à l’intégrité ou au bon fonctionnement du site ou du logiciel,\n* ne pas tenter d’accéder de manière non autorisée aux systèmes ou données,\n* ne pas utiliser QoreDB à des fins frauduleuses, illégales ou abusives.\n\nToute utilisation abusive pourra entraîner la suspension de l’accès aux services."
+      },
+      "ip": {
+        "title": "8. Propriété intellectuelle",
+        "content": "L’ensemble des éléments du site QoreDB (textes, documentation, graphismes, logo, identité visuelle) est protégé par le droit de la propriété intellectuelle.\n\nSauf mention contraire, toute reproduction, représentation ou exploitation non autorisée est interdite.\n\nLe code source du logiciel QoreDB est soumis aux termes de la licence applicable, telle que définie dans la page **Licence**."
+      },
+      "liability": {
+        "title": "9. Responsabilité",
+        "content": "QoreDB est fourni « en l’état », sans garantie d’aucune sorte.\n\nQoreDB ne saurait être tenu responsable :\n\n* des dommages directs ou indirects résultant de l’utilisation du site ou du logiciel,\n* des pertes de données, interruptions d’activité ou préjudices commerciaux,\n* des conséquences liées à une mauvaise configuration ou utilisation du logiciel.\n\nL’utilisateur est seul responsable de l’usage qu’il fait de QoreDB et des données qu’il traite."
+      },
+      "privacy": {
+        "title": "10. Données personnelles",
+        "content": "Le traitement des données personnelles est régi par la **Politique de confidentialité** accessible sur le site QoreDB."
+      },
+      "external_links": {
+        "title": "11. Liens externes",
+        "content": "Le site QoreDB peut contenir des liens vers des sites ou services tiers. QoreDB n’exerce aucun contrôle sur ces services et décline toute responsabilité quant à leur contenu ou fonctionnement."
+      },
+      "updates": {
+        "title": "12. Évolution des CGU",
+        "content": "QoreDB se réserve le droit de modifier les présentes CGU à tout moment.\n\nLes utilisateurs sont invités à consulter régulièrement la version en vigueur. La date de dernière mise à jour est indiquée en haut de la page."
+      },
+      "law": {
+        "title": "13. Droit applicable",
+        "content": "Les présentes CGU sont régies par le droit français.\n\nEn cas de litige, et à défaut de résolution amiable, les tribunaux compétents seront ceux du ressort applicable conformément à la législation en vigueur."
+      },
+      "contact": {
+        "title": "14. Contact",
+        "content": "Pour toute question relative aux présentes Conditions Générales d’Utilisation, l’utilisateur peut contacter l’équipe QoreDB via les canaux officiels indiqués sur le site."
       }
     }
   },

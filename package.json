@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "build:search": "tsx scripts/build-search-index.ts",
     "build:stats": "tsx scripts/fetch-stats.ts",
+    "export:subscribers": "tsx scripts/export-subscribers.ts",
     "start": "next start",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",

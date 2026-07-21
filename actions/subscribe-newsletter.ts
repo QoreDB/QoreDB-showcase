@@ -62,42 +62,44 @@ export async function subscribeNewsletter(
   }
 
   const resend = new Resend(apiKey);
-  const audienceId = process.env.RESEND_NEWSLETTER_AUDIENCE_ID;
+  const fromEmail =
+    process.env.NEWSLETTER_FROM_EMAIL ?? "QoreDB <newsletter@mail.qoredb.com>";
 
+  // 1. Store the contact in the Resend contact book — the durable subscriber
+  //    list, exported with `npm run export:subscribers`. Best-effort: an
+  //    already-subscribed email must not surface an error to the visitor.
   try {
-    // 1. Add contact to Resend Audience if configured
-    if (audienceId) {
-      await resend.contacts.create({
-        email,
-        audienceId,
-        unsubscribed: false,
-      });
-    }
+    await resend.contacts.create({ email, unsubscribed: false });
+  } catch (error) {
+    console.warn("[newsletter] contact create failed", error);
+  }
 
-    // 2. Send notification to admin
-    await resend.emails.send({
-      from: "QoreDB Newsletter <onboarding@resend.dev>",
-      to: [NOTIFY_TO],
-      subject: `[Newsletter Signup] ${email}`,
-      text: `New newsletter signup.\n\nEmail: ${email}\nSource: ${source ?? "newsletter-page"}\nLocale: ${locale}\n`,
-    });
-
-    // 3. Send welcome email to subscriber
+  // 2. Send welcome email to subscriber — the only step whose failure the
+  //    visitor should see.
+  try {
     const welcomeMail = WELCOME_MAILS[locale] || WELCOME_MAILS.en;
-    const fromEmail =
-      process.env.NEWSLETTER_FROM_EMAIL ??
-      "QoreDB <newsletter@mail.qoredb.com>";
-
     await resend.emails.send({
       from: fromEmail,
       to: [email],
       subject: welcomeMail.subject,
       text: welcomeMail.body,
     });
-
-    return { success: true as const };
   } catch (error) {
     console.error("[newsletter] failed", error);
     return { success: false as const, error: "Submission failed" };
   }
+
+  // 3. Notify admin, best-effort
+  try {
+    await resend.emails.send({
+      from: fromEmail,
+      to: [NOTIFY_TO],
+      subject: `[Newsletter Signup] ${email}`,
+      text: `New newsletter signup.\n\nEmail: ${email}\nSource: ${source ?? "newsletter-page"}\nLocale: ${locale}\n`,
+    });
+  } catch (error) {
+    console.error("[newsletter] admin notification failed", error);
+  }
+
+  return { success: true as const };
 }

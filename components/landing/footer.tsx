@@ -47,9 +47,75 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 border-t border-(--q-border) bg-(--q-bg-0)">
+      {/* Newsletter band */}
+      <div className="border-b border-(--q-border)">
+        <div className="max-w-6xl mx-auto px-6 py-14 sm:py-16 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-16">
+          <div className="lg:flex-1 space-y-3">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-(--q-accent-soft) px-3 py-1 text-xs font-semibold text-(--q-accent-strong)">
+              <Mail className="w-3.5 h-3.5" />
+              Newsletter
+            </div>
+            <h3 className="font-heading text-(--q-text-0) text-2xl sm:text-3xl font-bold">
+              {t("newsletter_page.title")}
+            </h3>
+            <p className="text-(--q-text-2) text-sm sm:text-base leading-relaxed max-w-xl">
+              {t("newsletter_page.subtitle")}
+            </p>
+          </div>
+
+          <div className="w-full lg:w-auto lg:min-w-[24rem]">
+            {submitted ? (
+              <div className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/5 px-4 py-3 text-sm font-medium text-emerald-500">
+                <Check className="h-4 w-4 shrink-0" />
+                <span>{t("newsletter_page.success")}</span>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubscribe}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t("newsletter_page.placeholder")}
+                  className="flex-1 rounded-xl border border-(--q-border) bg-(--q-bg-0) px-4 py-3 text-sm text-(--q-text-0) placeholder:text-(--q-text-2) focus:border-(--q-accent) focus:outline-none transition-colors"
+                />
+                {/* Honeypot */}
+                <input
+                  type="text"
+                  name="address"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  className="hidden"
+                  aria-hidden="true"
+                />
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-(--q-text-0) text-(--q-bg-0) px-5 py-3 text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed shrink-0"
+                >
+                  {isPending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      {t("newsletter_page.cta")}
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Main footer content */}
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             <Link
@@ -119,38 +185,6 @@ export function Footer() {
                   alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
                   width={250}
                   height={54}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
-              </a>
-              <a
-                href="https://www.producthunt.com/products/qoredb/reviews/new?utm_source=badge-product_review&utm_medium=badge"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1190478&theme=light"
-                  alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
-                  width={250}
-                  height={54}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
-              </a>
-              <a
-                href="https://www.producthunt.com/products/qoredb?utm_source=badge-follow&utm_medium=badge"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1190478&theme=light&size=small"
-                  alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
-                  width={86}
-                  height={32}
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
@@ -236,60 +270,6 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Newsletter subscription form */}
-          <div className="col-span-2 md:col-span-1">
-            <h3 className="font-heading text-(--q-text-0) font-semibold text-sm mb-4">
-              Newsletter
-            </h3>
-            <p className="text-xs text-(--q-text-2) leading-relaxed mb-4">
-              {locale === "fr"
-                ? "Recevez les nouveautés et tutoriels de QoreDB."
-                : "Get the latest QoreDB news and guides."}
-            </p>
-            {submitted ? (
-              <div className="flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2 text-xs font-medium text-emerald-500">
-                <Check className="h-3.5 w-3.5" />
-                <span>{t("newsletter_page.success_title") || "Merci !"}</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
-                <div className="relative">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t("newsletter_page.placeholder") || "Email"}
-                    className="w-full rounded-lg border border-(--q-border) bg-(--q-bg-0) pl-3 pr-8 py-2 text-xs text-(--q-text-0) placeholder:text-(--q-text-2) focus:border-(--q-accent) focus:outline-none transition-colors"
-                  />
-                  {/* Honeypot */}
-                  <input
-                    type="text"
-                    name="address"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={honeypot}
-                    onChange={(e) => setHoneypot(e.target.value)}
-                    className="hidden"
-                    aria-hidden="true"
-                  />
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="absolute right-1 top-1/2 -translate-y-1/2 text-(--q-text-1) hover:text-(--q-accent) transition-colors p-1"
-                    aria-label={t("newsletter_page.cta")}
-                  >
-                    {isPending ? (
-                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                    ) : (
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
           </div>
         </div>
       </div>

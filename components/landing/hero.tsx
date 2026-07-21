@@ -24,28 +24,6 @@ export function Hero() {
 
   return (
     <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-12 pt-32 pb-20 overflow-hidden w-full">
-      <motion.a
-        href="https://www.producthunt.com/products/qoredb?utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-qoredb-2"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t("hero.ph_badge")}
-        className="mb-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        whileHover={{ scale: 1.03 }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1197632&theme=light&t=1784298260312"
-          alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
-          width={250}
-          height={54}
-          fetchPriority="high"
-          decoding="async"
-        />
-      </motion.a>
-
       <motion.h1
         className="font-heading text-(--q-text-0) text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight text-center max-w-5xl"
         initial={{ opacity: 0, y: 30 }}

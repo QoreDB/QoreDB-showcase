@@ -743,6 +743,13 @@
   "license_management": {
     "title": "许可证管理",
     "subtitle": "检查您的 QoreDB Pro 许可证状态并通过电子邮件重新发送您的密钥。",
+    "licensing": {
+      "title": "软件许可证",
+      "description": "QoreDB 采用开放核心（open core）模式与双重许可：软件核心部分基于 Apache 2.0 许可证发布，Premium 功能基于 Business Source License 1.1 发布，并在每个版本发布四年后自动转为 Apache 2.0 许可证。",
+      "apache": "Apache 2.0（核心）",
+      "bsl": "BSL 1.1（Premium）",
+      "docs": "开放核心模式"
+    },
     "fields": {
       "email": "电子邮件",
       "payment_id": "条纹支付ID"
@@ -796,15 +803,15 @@
   },
   "privacy_page": {
     "title": "隐私政策",
-    "last_updated": "最后更新时间：2026 年 1 月 24 日",
+    "last_updated": "最后更新时间：2026 年 7 月 21 日",
     "sections": {
       "intro": {
         "title": "1. 数据控制者",
-        "content": "<p>数据控制者是 <strong>QoreDB</strong> 项目的编辑者。</p><p>法律结构最终确定后，将立即指定有关法律实体的完整信息。</p>"
+        "content": "<p>数据控制者为 <strong>Raphaël Plassart</strong>，法国个体经营者（微型企业），<strong>QoreDB</strong> 的出版和运营方。</p><ul><li>SIREN：942 906 157</li><li>SIRET（主要经营场所）：942 906 157 00014</li><li>经营活动代码（APE）：62.01Z — 计算机编程</li><li>联系方式：<a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>注册经营场所的通信地址可应书面请求，通过该联系邮箱提供。</p>"
       },
       "data_collection": {
         "title": "2. 数据收集",
-        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB使用<strong>Vercel Analytics</strong>，一种尊重隐私的分析解决方案：</p><ul><li>无 cookies，</li><li>无跨站点跟踪，</li><li>无广告分析。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul>"
+        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB使用<strong>Vercel Analytics</strong>，一种尊重隐私的分析解决方案：</p><ul><li>无 cookies，</li><li>无跨站点跟踪，</li><li>无广告分析。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul><h3>2.3 购买与许可证相关数据</h3><p>购买许可证时，支付由 <strong>Stripe</strong> 处理。银行卡信息直接在 Stripe 的基础设施上输入：绝不会经过 QoreDB 的服务器，也不会存储在其中。</p><p>QoreDB 仅保留签发和管理许可证所必需的信息：</p><ul><li>购买时使用的电子邮件地址，</li><li>Stripe 的支付或订阅标识符，</li><li>关联的许可证密钥，以及（如适用）已分配的席位。</li></ul>"
       },
       "purposes": {
         "title": "3. 处理目的",
@@ -820,7 +827,7 @@
       },
       "hosting": {
         "title": "6. 托管和子处理者",
-        "content": "<p>QoreDB 网站和服务由尊重高安全性和合规性标准的提供商托管。</p><p>数据可能在位于欧盟或根据 GDPR 提供足够保护级别的国家/地区的服务器上进行处理。</p>"
+        "content": "<p>QoreDB 网站及服务依托以下受托处理方：</p><ul><li><strong>Vercel Inc.</strong> — 网站托管及无 Cookie 的访问统计；</li><li><strong>Stripe Payments Europe, Limited</strong>（爱尔兰） — 支付、开票及订阅管理；</li><li><strong>Resend</strong> — 发送事务性邮件和新闻通讯；</li><li><strong>Sanity</strong> — 编辑内容（博客）管理。</li></ul><p>数据可能在欧盟境内或提供充分保护水平的国家的服务器上处理，并以符合 GDPR 的保障措施为基础。</p>"
       },
       "security": {
         "title": "7. 数据安全",
@@ -850,19 +857,23 @@
   },
   "legal_page": {
     "title": "法律声明",
-    "last_updated": "最后更新时间：2026 年 1 月 24 日",
+    "last_updated": "最后更新时间：2026 年 7 月 21 日",
     "sections": {
       "editor": {
         "title": "网站编辑",
-        "content": "**项目名称/产品：** QoreDB\n**出版总监：** Raphaël Plassart\n**状态：** 软件项目（开放核心）\n\n> 法律结构最终确定后，将立即指定有关法人实体的信息（公司名称、法律形式、地址、注册号）。"
+        "content": "**网站及软件运营方：** Raphaël Plassart，法国个体经营者（*micro-entreprise* 微型企业）\n**出版负责人：** Raphaël Plassart\n**SIREN：** 942 906 157\n**SIRET（主要经营场所）：** 942 906 157 00014\n**经营活动代码（APE）：** 62.01Z — 计算机编程\n**注册信息：** 于法国注册，自 2025 年 4 月 4 日起营业\n**增值税：** 根据法国《税法典》第 293 B 条（小规模企业免税制度），不适用增值税\n**联系方式：** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB 是由该微型企业出版和运营的软件产品，与所有用户和客户的合同关系均由该企业承担。\n\n> 注册经营场所的通信地址可应书面请求，通过上述联系邮箱提供。"
       },
       "hosting": {
         "title": "托管",
         "content": "QoreDB 网站由 **Vercel Inc.** 托管，地址为 340 S Lemon Ave #4133 Walnut, CA 91789, USA。\n\n数据可能托管在欧盟境内或提供符合现行法规的数据保护级别的国家/地区的基础设施上。"
       },
+      "payments": {
+        "title": "支付与开票",
+        "content": "QoreDB 许可证（Pro、Team）的支付全部由 **Stripe** 处理，在欧洲由 **Stripe Payments Europe, Limited**（爱尔兰）运营。\n\n* 银行卡数据不会经过 QoreDB 的服务器，也不会存储在其中；\n* 支付流程、开票和订阅管理均由 Stripe 负责（Stripe Checkout 与 Stripe Billing）；\n* 发票以微型企业 Raphaël Plassart 的名义开具，并由 Stripe 提供。\n\n由于该企业适用法国小规模企业增值税免税制度，所显示价格不含增值税（法国《税法典》第 293 B 条）。"
+      },
       "ip": {
         "title": "知识产权",
-        "content": "QoreDB 网站上的所有内容，特别包括：\n\n* 文字，\n* 文档，\n* 博客文章，\n*图形元素，\n* 视觉识别，\n* QoreDB 名称、徽标和品牌，\n\n受版权和知识产权相关法律的保护。\n\n除非另有说明，QoreDB 源代码在 **开放核心** 模型下分发：\n\n* 一部分是根据开源许可证发布的，\n* 某些高级功能可能需要专有许可。\n\n严禁对受保护内容或元素进行任何未经授权的复制、呈现、修改或利用。"
+        "content": "QoreDB 网站上的全部内容，特别包括：\n\n* 文本，\n* 文档，\n* 博客文章，\n* 图形元素，\n* 视觉标识，\n* QoreDB 的名称、徽标和商标，\n\n均受著作权法和知识产权法保护。\n\nQoreDB 的源代码采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* 软件核心部分基于 **Apache 2.0** 许可证发布，\n* 部分高级功能（Premium）基于 **Business Source License 1.1** 发布。\n\n详情请见下方的许可证部分。除上述许可证所授予的权利外，未经授权复制、传播、修改或利用受保护内容均被严格禁止。"
       },
       "liability": {
         "title": "网站访问和责任",
@@ -878,11 +889,11 @@
       },
       "terms": {
         "title": "使用条款",
-        "content": "使用 QoreDB 网站、文档和软件意味着完全接受：\n\n➡️ [使用条款](#)"
+        "content": "使用 QoreDB 网站、文档和软件意味着完全接受：\n\n➡️ [使用条款](/terms)"
       },
       "license": {
         "title": "许可证",
-        "content": "适用于 QoreDB 软件的许可条件在专用页面中有详细说明：\n\n➡️ [许可证](#)"
+        "content": "QoreDB 采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* **核心 — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**：在遵守署名义务的前提下，可自由使用、修改、再分发并用于商业用途，无需支付使用费。\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**：源代码可供查阅，个人使用和企业内部使用免费，禁止以此提供与之竞争的商业产品。每个版本在发布四年后自动转为 Apache 2.0 许可证。\n\n仓库中的每个源文件都带有 SPDX 头部，标明其适用许可证。仅以官方仓库根目录下的许可证文件为准。\n\n➡️ [开放核心模式与许可证](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "联系方式",
@@ -892,13 +903,13 @@
   },
   "terms_page": {
     "title": "服务条款",
-    "last_updated": "最后更新时间：2026 年 1 月 24 日",
+    "last_updated": "最后更新时间：2026 年 7 月 21 日",
     "intro": "这些服务条款（以下简称“ToS”）管辖对 **QoreDB** 网站、其文档、在线服务和 QoreDB 软件的访问和使用。\n\n通过访问该网站或使用QoreDB软件，用户承认已阅读这些服务条款并毫无保留地接受它们。",
     "copyright": "© QoreDB – 保留所有权利。",
     "sections": {
       "definitions": {
         "title": "1. 定义",
-        "content": "* **QoreDB**：指软件项目、网站、文档、相关工具和服务。\n* **用户**：访问该网站或使用 QoreDB 软件的任何人。\n* **软件**：QoreDB 软件，在开放核心模型下分发。\n* **网站**：官方 QoreDB 网站。"
+        "content": "* **QoreDB**：指软件项目、网站、文档、相关工具和服务。\n* **用户**：访问该网站或使用 QoreDB 软件的任何人。\n* **软件**：QoreDB 软件，在开放核心模型下分发。\n* **网站**：官方 QoreDB 网站。\n* **运营方**：Raphaël Plassart，法国个体经营者（*micro-entreprise*），SIRET 942 906 157 00014，QoreDB 网站及软件的出版和运营方。"
       },
       "object": {
         "title": "2. 对象",
@@ -910,43 +921,47 @@
       },
       "software_use": {
         "title": "4. QoreDB 软件的使用",
-        "content": "QoreDB 软件在 **开放核心** 模型下分发：\n\n* 部分代码是在开源许可证下发布的，\n* 某些功能、扩展或服务可能需要单独的专有许可。\n\n该软件的使用、修改和分发的精确条件在 **QoreDB 许可证** 中定义，可在网站和官方存储库中获取。"
-      },
-      "user_obligations": {
-        "title": "6. 用户义务",
-        "content": "用户同意：\n\n* 根据适用的法律法规使用 QoreDB，\n* 不侵犯网站或软件的安全性、完整性或正常运行，\n* 不尝试未经授权访问系统或数据，\n* 不得将 QoreDB 用于欺诈、非法或滥用目的。\n\n任何滥用行为都可能导致服务访问被暂停。"
-      },
-      "ip": {
-        "title": "7. 知识产权",
-        "content": "QoreDB 网站的所有元素（文本、文档、图形、徽标、视觉标识）均受知识产权保护。\n\n除非另有说明，否则禁止任何未经授权的复制、陈述或利用。\n\nQoreDB 软件的源代码受适用许可证条款的约束，如 **许可证** 页面中所定义。"
-      },
-      "liability": {
-        "title": "8. 责任",
-        "content": "QoreDB 按“原样”提供，不提供任何形式的保证。\n\nQoreDB 不承担以下责任：\n\n* 由于使用本网站或软件而造成的直接或间接损害，\n* 数据丢失、业务中断或商业损失，\n* 与软件配置或使用不当相关的后果。\n\n用户对其使用 QoreDB 及其处理的数据承担全部责任。"
-      },
-      "privacy": {
-        "title": "9. 个人资料",
-        "content": "个人数据处理受 QoreDB 网站上的 **隐私政策** 管辖。"
-      },
-      "external_links": {
-        "title": "10. 外部链接",
-        "content": "QoreDB 网站可能包含第三方网站或服务的链接。 QoreDB 对这些服务没有控制权，并且不承担与其内容或功能有关的所有责任。"
-      },
-      "updates": {
-        "title": "11. 服务条款的变更",
-        "content": "QoreDB 保留随时修改这些服务条款的权利。\n\n欢迎用户定期查阅当前版本。上次更新日期显示在页面顶部。"
-      },
-      "law": {
-        "title": "12. 适用法律",
-        "content": "这些服务条款受法国法律管辖。\n\n如果发生争议且未能友好解决，则将根据现行法律，由具有适用管辖权的法院管辖。"
-      },
-      "contact": {
-        "title": "13. 联系方式",
-        "content": "对于与本服务条款相关的任何问题，用户可以通过网站上指定的官方渠道联系QoreDB团队。"
+        "content": "QoreDB 软件采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* 软件核心部分基于 **[Apache 2.0 许可证](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)** 发布：可自由使用、修改、再分发并用于商业用途，无需支付使用费；\n* 部分高级功能（Premium）基于 **[Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)** 发布：源代码可供查阅，个人使用和企业内部使用免费，禁止提供与之竞争的商业产品；每个版本在发布四年后自动转为 Apache 2.0 许可证。\n\n每个源文件均带有标明适用许可证的 SPDX 头部。若本摘要与官方仓库中发布的许可证文件存在差异，以后者为准。"
       },
       "team_licensing": {
         "title": "5. Team 许可证（实名席位）",
         "content": "**Team** 许可证按**席位**授予，可获得与所购席位数量相同的**实名席位**，且**每人一个（1）许可证密钥**。\n\n* 每个席位密钥均与其持有人的电子邮件地址绑定，\n* **禁止**在多人之间**共享密钥**，\n* **禁止**在所购席位数量**之外**使用本软件。\n\n订阅持有人（管理员）负责分配席位，并确保其组织内遵守这些条款。任何违规行为均可能导致许可证被暂停或终止。"
+      },
+      "payments": {
+        "title": "6. 购买、支付与开票",
+        "content": "付费许可证（Pro、Team）由微型企业 Raphaël Plassart 销售。\n\n* 支付仅由 **Stripe**（Stripe Payments Europe, Limited）处理；QoreDB 无法访问任何银行卡数据；\n* 价格以欧元标示且不含增值税 — 根据法国《税法典》第 293 B 条不适用增值税；\n* 发票在支付完成后由 Stripe 开具并提供；\n* 许可证密钥在支付确认后通过电子邮件发送；\n* 订阅按所选周期自动续订，可随时在 Stripe 客户门户中取消，取消将于当前周期结束时生效。\n\n根据法国《消费法典》第 L221-28 条，要求立即交付许可证密钥的消费者在服务完全履行后即放弃其撤回权。有关支付或退款的任何问题，可发送至网站上标明的联系邮箱。"
+      },
+      "user_obligations": {
+        "title": "7. 用户义务",
+        "content": "用户同意：\n\n* 根据适用的法律法规使用 QoreDB，\n* 不侵犯网站或软件的安全性、完整性或正常运行，\n* 不尝试未经授权访问系统或数据，\n* 不得将 QoreDB 用于欺诈、非法或滥用目的。\n\n任何滥用行为都可能导致服务访问被暂停。"
+      },
+      "ip": {
+        "title": "8. 知识产权",
+        "content": "QoreDB 网站的所有元素（文本、文档、图形、徽标、视觉标识）均受知识产权保护。\n\n除非另有说明，否则禁止任何未经授权的复制、陈述或利用。\n\nQoreDB 软件的源代码受适用许可证条款的约束，如 **许可证** 页面中所定义。"
+      },
+      "liability": {
+        "title": "9. 责任",
+        "content": "QoreDB 按“原样”提供，不提供任何形式的保证。\n\nQoreDB 不承担以下责任：\n\n* 由于使用本网站或软件而造成的直接或间接损害，\n* 数据丢失、业务中断或商业损失，\n* 与软件配置或使用不当相关的后果。\n\n用户对其使用 QoreDB 及其处理的数据承担全部责任。"
+      },
+      "privacy": {
+        "title": "10. 个人资料",
+        "content": "个人数据处理受 QoreDB 网站上的 **隐私政策** 管辖。"
+      },
+      "external_links": {
+        "title": "11. 外部链接",
+        "content": "QoreDB 网站可能包含第三方网站或服务的链接。 QoreDB 对这些服务没有控制权，并且不承担与其内容或功能有关的所有责任。"
+      },
+      "updates": {
+        "title": "12. 服务条款的变更",
+        "content": "QoreDB 保留随时修改这些服务条款的权利。\n\n欢迎用户定期查阅当前版本。上次更新日期显示在页面顶部。"
+      },
+      "law": {
+        "title": "13. 适用法律",
+        "content": "这些服务条款受法国法律管辖。\n\n如果发生争议且未能友好解决，则将根据现行法律，由具有适用管辖权的法院管辖。"
+      },
+      "contact": {
+        "title": "14. 联系方式",
+        "content": "对于与本服务条款相关的任何问题，用户可以通过网站上指定的官方渠道联系QoreDB团队。"
       }
     }
   },
