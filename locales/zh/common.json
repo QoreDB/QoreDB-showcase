@@ -803,7 +803,7 @@
   },
   "privacy_page": {
     "title": "隐私政策",
-    "last_updated": "最后更新时间：2026 年 7 月 21 日",
+    "last_updated": "最后更新时间：2026 年 7 月 22 日",
     "sections": {
       "intro": {
         "title": "1. 数据控制者",
@@ -811,7 +811,7 @@
       },
       "data_collection": {
         "title": "2. 数据收集",
-        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB使用<strong>Vercel Analytics</strong>，一种尊重隐私的分析解决方案：</p><ul><li>无 cookies，</li><li>无跨站点跟踪，</li><li>无广告分析。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul><h3>2.3 购买与许可证相关数据</h3><p>购买许可证时，支付由 <strong>Stripe</strong> 处理。银行卡信息直接在 Stripe 的基础设施上输入：绝不会经过 QoreDB 的服务器，也不会存储在其中。</p><p>QoreDB 仅保留签发和管理许可证所必需的信息：</p><ul><li>购买时使用的电子邮件地址，</li><li>Stripe 的支付或订阅标识符，</li><li>关联的许可证密钥，以及（如适用）已分配的席位。</li></ul>"
+        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB 使用 <strong>Umami</strong>——一款自托管于自有服务器（Hetzner，德国）的开源访问统计方案：</p><ul><li>无 Cookie，</li><li>无跨站点跟踪，</li><li>无广告画像，</li><li>统计数据不会传输给任何第三方服务商。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul><h3>2.3 购买与许可证相关数据</h3><p>购买许可证时，支付由 <strong>Stripe</strong> 处理。银行卡信息直接在 Stripe 的基础设施上输入：绝不会经过 QoreDB 的服务器，也不会存储在其中。</p><p>QoreDB 仅保留签发和管理许可证所必需的信息：</p><ul><li>购买时使用的电子邮件地址，</li><li>Stripe 的支付或订阅标识符，</li><li>关联的许可证密钥，以及（如适用）已分配的席位。</li></ul>"
       },
       "purposes": {
         "title": "3. 处理目的",
@@ -823,11 +823,11 @@
       },
       "cookies": {
         "title": "5. Cookie 和跟踪器",
-        "content": "<p>QoreDB <strong>不使用广告或行为跟踪cookie</strong>.</p><p>根据适用法规，所使用的分析工具不需要事先同意。</p><p>如果将来使用cookie，我们将更新本政策并实施同意机制。</p>"
+        "content": "<p>QoreDB <strong>不使用广告或行为跟踪 Cookie</strong>。</p><p>唯一存放的 Cookie 是严格功能性的 <code>NEXT_LOCALE</code>，用于记住所选的显示语言。它无需征得同意，也不用于任何跟踪。</p><p>访问统计（自托管的 Umami）不使用 Cookie 或持久标识符，因此无需任何同意横幅。</p><p>如果将来使用需要征得同意的 Cookie，我们将更新本政策并实施同意机制。</p>"
       },
       "hosting": {
         "title": "6. 托管和子处理者",
-        "content": "<p>QoreDB 网站及服务依托以下受托处理方：</p><ul><li><strong>Vercel Inc.</strong> — 网站托管及无 Cookie 的访问统计；</li><li><strong>Stripe Payments Europe, Limited</strong>（爱尔兰） — 支付、开票及订阅管理；</li><li><strong>Resend</strong> — 发送事务性邮件和新闻通讯；</li><li><strong>Sanity</strong> — 编辑内容（博客）管理。</li></ul><p>数据可能在欧盟境内或提供充分保护水平的国家的服务器上处理，并以符合 GDPR 的保障措施为基础。</p>"
+        "content": "<p>QoreDB 网站及服务依托以下受托处理方：</p><ul><li><strong>Hetzner Online GmbH</strong>（德国） — 网站及服务的托管，服务器位于欧盟境内的纽伦堡；</li><li><strong>Cloudflare, Inc.</strong>（美国） — 域名 DNS 管理、内容分发及攻击防护；</li><li><strong>Stripe Payments Europe, Limited</strong>（爱尔兰） — 支付、开票及订阅管理；</li><li><strong>Resend</strong> — 发送事务性邮件和新闻通讯；</li><li><strong>Sanity</strong> — 编辑内容（博客）管理。</li></ul><p>访问统计由 <strong>Umami</strong> 提供，自托管于 QoreDB 的 Hetzner 服务器：访问数据不会传输给任何第三方服务商。</p><p>本网站数据托管于欧盟境内。在欧盟境外进行的技术处理（尤其是 Cloudflare 和 Stripe）依据符合 GDPR 的保障措施，特别是欧盟委员会的标准合同条款。</p>"
       },
       "security": {
         "title": "7. 数据安全",
@@ -857,7 +857,7 @@
   },
   "legal_page": {
     "title": "法律声明",
-    "last_updated": "最后更新时间：2026 年 7 月 21 日",
+    "last_updated": "最后更新时间：2026 年 7 月 22 日",
     "sections": {
       "editor": {
         "title": "网站编辑",
@@ -865,7 +865,7 @@
       },
       "hosting": {
         "title": "托管",
-        "content": "QoreDB 网站由 **Vercel Inc.** 托管，地址为 340 S Lemon Ave #4133 Walnut, CA 91789, USA。\n\n数据可能托管在欧盟境内或提供符合现行法规的数据保护级别的国家/地区的基础设施上。"
+        "content": "QoreDB 网站由 **Hetzner Online GmbH**（Industriestr. 25, 91710 Gunzenhausen, 德国，[hetzner.com](https://www.hetzner.com)）托管。\n\n所使用的服务器位于**纽伦堡数据中心（德国，欧盟）**。\n\n域名（DNS）管理、内容分发网络及攻击防护由 **Cloudflare, Inc.**（101 Townsend Street, San Francisco, CA 94107, 美国，[cloudflare.com](https://www.cloudflare.com)）提供。\n\n因此，本网站的数据托管于欧盟境内。Cloudflare 在欧盟境外进行的技术处理依据欧盟委员会的标准合同条款。"
       },
       "payments": {
         "title": "支付与开票",

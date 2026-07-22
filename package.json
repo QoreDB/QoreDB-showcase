@@ -26,8 +26,6 @@
     "@sanity/image-url": "^2.0.3",
     "@sanity/language-filter": "^5.0.11",
     "@sanity/vision": "^5.31.1",
-    "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
     "agentation": "^2.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

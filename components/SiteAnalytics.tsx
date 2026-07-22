@@ -1,10 +1,10 @@
 import Script from "next/script";
 
 /**
- * Umami analytics — remplace @vercel/analytics + @vercel/speed-insights.
+ * Umami analytics.
  *
  * Auto-hébergé, RGPD-friendly (pas de cookies → pas de bandeau de consentement),
- * données 100 % chez toi sur le VPS.
+ * données 100 % chez toi sur le VPS Hetzner.
  *
  * Configuré via deux variables publiques (inlinées au build) :
  *   NEXT_PUBLIC_UMAMI_SRC        → ex. https://analytics.qoredb.com/script.js

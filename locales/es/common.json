@@ -803,7 +803,7 @@
   },
   "privacy_page": {
     "title": "Política de privacidad",
-    "last_updated": "Última actualización: 21 de julio de 2026",
+    "last_updated": "Última actualización: 22 de julio de 2026",
     "sections": {
       "intro": {
         "title": "1. Responsable del tratamiento de datos",
@@ -811,7 +811,7 @@
       },
       "data_collection": {
         "title": "2. Recopilación de datos",
-        "content": "<p>QoreDB limita estrictamente la recopilación de datos personales.</p><h3>2.1 Datos de navegación (sitio web)</h3><p>Al consultar el sitio, se pueden recopilar datos técnicos anonimizados con fines estadísticos, incluidos:</p><ul><li>páginas visitadas,</li><li>tipo de dispositivo y navegador,</li><li>sistema operativo,</li><li>país o área geográfica aproximada,</li><li>tiempos de carga y rendimiento.</li></ul><p>Estos datos <strong>no permiten la identificación personal de un usuario</strong>.</p><p>QoreDB utiliza <strong>Vercel Analytics</strong>, una solución de análisis que respeta la privacidad:</p><ul><li>sin cookies,</li><li>sin seguimiento entre sitios,</li><li>sin perfiles publicitarios.</li></ul><h3>2.2 Proporcionado voluntariamente Datos</h3><p>Ciertos datos pueden ser proporcionados voluntariamente por el usuario, por ejemplo:</p><ul><li>durante el contacto,</li><li>durante el registro para recibir un boletín informativo,</li><li>durante el uso de servicios futuros que requieran autenticación.</li></ul><p>Los datos recopilados pueden incluya:</p><ul><li>dirección de correo electrónico,</li><li>nombre o seudónimo,</li><li>contenido del mensaje.</li></ul><h3>2.3 Datos relativos a las compras y licencias</h3><p>Al comprar una licencia, el pago es tratado por <strong>Stripe</strong>. Los datos de la tarjeta bancaria se introducen directamente en la infraestructura de Stripe: nunca transitan por los servidores de QoreDB ni se almacenan en ellos.</p><p>QoreDB solo conserva la información necesaria para emitir y gestionar las licencias:</p><ul><li>la dirección de correo electrónico de compra,</li><li>el identificador de pago o de suscripción de Stripe,</li><li>la clave de licencia asociada y, en su caso, los asientos asignados.</li></ul>"
+        "content": "<p>QoreDB limita estrictamente la recopilación de datos personales.</p><h3>2.1 Datos de navegación (sitio web)</h3><p>Al consultar el sitio, se pueden recopilar datos técnicos anonimizados con fines estadísticos, incluidos:</p><ul><li>páginas visitadas,</li><li>tipo de dispositivo y navegador,</li><li>sistema operativo,</li><li>país o área geográfica aproximada,</li><li>tiempos de carga y rendimiento.</li></ul><p>Estos datos <strong>no permiten la identificación personal de un usuario</strong>.</p><p>QoreDB utiliza <strong>Umami</strong>, una solución de analítica de código abierto autoalojada en su propio servidor (Hetzner, Alemania):</p><ul><li>sin cookies,</li><li>sin seguimiento entre sitios,</li><li>sin perfiles publicitarios,</li><li>sin transferencia de las estadísticas a un proveedor externo.</li></ul><h3>2.2 Proporcionado voluntariamente Datos</h3><p>Ciertos datos pueden ser proporcionados voluntariamente por el usuario, por ejemplo:</p><ul><li>durante el contacto,</li><li>durante el registro para recibir un boletín informativo,</li><li>durante el uso de servicios futuros que requieran autenticación.</li></ul><p>Los datos recopilados pueden incluya:</p><ul><li>dirección de correo electrónico,</li><li>nombre o seudónimo,</li><li>contenido del mensaje.</li></ul><h3>2.3 Datos relativos a las compras y licencias</h3><p>Al comprar una licencia, el pago es tratado por <strong>Stripe</strong>. Los datos de la tarjeta bancaria se introducen directamente en la infraestructura de Stripe: nunca transitan por los servidores de QoreDB ni se almacenan en ellos.</p><p>QoreDB solo conserva la información necesaria para emitir y gestionar las licencias:</p><ul><li>la dirección de correo electrónico de compra,</li><li>el identificador de pago o de suscripción de Stripe,</li><li>la clave de licencia asociada y, en su caso, los asientos asignados.</li></ul>"
       },
       "purposes": {
         "title": "3. Finalidades del Tratamiento",
@@ -823,11 +823,11 @@
       },
       "cookies": {
         "title": "5. Cookies y rastreadores",
-        "content": "<p>QoreDB <strong>no utiliza cookies publicitarias ni de seguimiento del comportamiento</strong>.</p><p>Las herramientas analíticas utilizadas no requieren consentimiento previo de acuerdo con la normativa aplicable.</p><p>Si se utilizaran cookies en el futuro, esta política se actualizaría y se implementaría un mecanismo de consentimiento.</p>"
+        "content": "<p>QoreDB <strong>no utiliza cookies publicitarias ni de seguimiento del comportamiento</strong>.</p><p>La única cookie que se deposita es estrictamente funcional (<code>NEXT_LOCALE</code>) y memoriza el idioma de visualización elegido. Está exenta de consentimiento y no permite ningún seguimiento.</p><p>La medición de audiencia (Umami, autoalojado) funciona sin cookies ni identificadores persistentes, por lo que no se requiere ningún banner de consentimiento.</p><p>Si en el futuro se utilizaran cookies sujetas a consentimiento, esta política se actualizaría y se implementaría un mecanismo de consentimiento.</p>"
       },
       "hosting": {
         "title": "6. Alojamiento y Subprocesadores",
-        "content": "<p>El sitio y los servicios de QoreDB se apoyan en los siguientes encargados del tratamiento:</p><ul><li><strong>Vercel Inc.</strong> — alojamiento del sitio y medición de audiencia sin cookies;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagos, facturación y gestión de suscripciones;</li><li><strong>Resend</strong> — envío de correos transaccionales y de la newsletter;</li><li><strong>Sanity</strong> — gestión del contenido editorial (blog).</li></ul><p>Los datos pueden tratarse en servidores situados en la Unión Europea o en países que ofrezcan un nivel de protección adecuado, sobre la base de garantías conformes al RGPD.</p>"
+        "content": "<p>El sitio y los servicios de QoreDB se apoyan en los siguientes encargados del tratamiento:</p><ul><li><strong>Hetzner Online GmbH</strong> (Alemania) — alojamiento del sitio y de los servicios, en servidores situados en Núremberg, dentro de la Unión Europea;</li><li><strong>Cloudflare, Inc.</strong> (Estados Unidos) — gestión DNS del dominio, distribución de contenidos y protección frente a ataques;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagos, facturación y gestión de suscripciones;</li><li><strong>Resend</strong> — envío de correos transaccionales y de la newsletter;</li><li><strong>Sanity</strong> — gestión del contenido editorial (blog).</li></ul><p>La medición de audiencia se realiza con <strong>Umami</strong>, autoalojado en el servidor Hetzner de QoreDB: las estadísticas de visita no se transmiten a ningún proveedor externo.</p><p>Los datos del sitio se alojan en la Unión Europea. Los tratamientos técnicos realizados fuera de la Unión Europea (en particular por Cloudflare y Stripe) se basan en garantías conformes al RGPD, en especial las cláusulas contractuales tipo de la Comisión Europea.</p>"
       },
       "security": {
         "title": "7. Seguridad de los datos",
@@ -857,7 +857,7 @@
   },
   "legal_page": {
     "title": "Aviso Legal",
-    "last_updated": "Última actualización: 21 de julio de 2026",
+    "last_updated": "Última actualización: 22 de julio de 2026",
     "sections": {
       "editor": {
         "title": "Editor del sitio",
@@ -865,7 +865,7 @@
       },
       "hosting": {
         "title": "Alojamiento",
-        "content": "El sitio web QoreDB está alojado en **Vercel Inc.**, ubicado en 340 S Lemon Ave #4133 Walnut, CA 91789, EE. UU.\n\nLos datos podrán estar alojados en infraestructuras ubicadas dentro de la Unión Europea o en países que ofrezcan un nivel de protección de datos conforme a la normativa vigente."
+        "content": "El sitio web QoreDB está alojado por **Hetzner Online GmbH**, Industriestr. 25, 91710 Gunzenhausen, Alemania ([hetzner.com](https://www.hetzner.com)).\n\nEl servidor utilizado se encuentra en el **centro de datos de Núremberg (Alemania, Unión Europea)**.\n\nLa gestión del nombre de dominio (DNS), la red de distribución de contenidos y la protección frente a ataques corren a cargo de **Cloudflare, Inc.**, 101 Townsend Street, San Francisco, CA 94107, EE. UU. ([cloudflare.com](https://www.cloudflare.com)).\n\nLos datos del sitio se alojan, por tanto, dentro de la Unión Europea. Los tratamientos técnicos realizados por Cloudflare fuera de la Unión Europea se basan en las cláusulas contractuales tipo de la Comisión Europea."
       },
       "payments": {
         "title": "Pagos y facturación",

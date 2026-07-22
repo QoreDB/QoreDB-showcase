@@ -11,7 +11,7 @@ build
 .idea
 .DS_Store
 
-# Secrets — NE JAMAIS embarquer dans l'image (fournis via Coolify env)
+# Secrets
 .env
 .env.*
 !.env.production.template

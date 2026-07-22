@@ -1,12 +1,11 @@
 // Custom next/image loader.
 //
-// Goal: stop routing images through Vercel's Image Optimization, which is a
-// major source of "Fast Origin Transfer" usage. Instead:
+// Goal: keep image bytes off the app server (Hetzner VPS), whose CPU and
+// bandwidth are the scarce resources. Instead:
 //   - Sanity images (cdn.sanity.io) are served directly from Sanity's CDN,
 //     which already resizes/optimizes on the fly (w, q, auto=format).
 //   - Any other image (local /public assets, etc.) is returned untouched and
-//     served as a plain static asset (counts as roomy Fast Data Transfer,
-//     not the capped Fast Origin Transfer).
+//     served as a plain static asset.
 export default function customImageLoader({
   src,
   width,

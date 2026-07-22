@@ -803,7 +803,7 @@
   },
   "privacy_page": {
     "title": "Informativa sulla privacy",
-    "last_updated": "Ultimo aggiornamento: 21 luglio 2026",
+    "last_updated": "Ultimo aggiornamento: 22 luglio 2026",
     "sections": {
       "intro": {
         "title": "1. Titolare del trattamento",
@@ -811,7 +811,7 @@
       },
       "data_collection": {
         "title": "2. Raccolta dati",
-        "content": "<p>QoreDB limita strettamente la raccolta di dati personali.</p><h3>2.1 Dati di navigazione (Sito)</h3><p>Durante la consultazione del sito possono essere raccolti dati tecnici anonimizzati per fini statistici, tra cui:</p><ul><li>pagine visitate,</li><li>tipo di dispositivo e browser,</li><li>sistema operativo,</li><li>paese o area geografica approssimativa,</li><li>tempi di caricamento e prestazioni.</li></ul><p>Questi dati <strong>non consentono l'identificazione personale di un user</strong>.</p><p>QoreDB utilizza <strong>Vercel Analytics</strong>, una soluzione di analisi che rispetta la privacy:</p><ul><li>nessun cookie,</li><li>nessun monitoraggio tra siti,</li><li>no profilazione pubblicitaria.</li></ul><h3>2.2 Dati forniti volontariamente</h3><p>Alcuni dati possono essere forniti volontariamente dall'utente, ad esempio:</p><ul><li>durante il contatto,</li><li>durante la registrazione ad un newsletter,</li><li>durante l'utilizzo di futuri servizi che richiedono l'autenticazione.</li></ul><p>I dati raccolti possono includere:</p><ul><li>indirizzo email,</li><li>nome o pseudonimo,</li><li>messaggio contenuto.</li></ul><h3>2.3 Dati relativi agli acquisti e alle licenze</h3><p>Al momento dell'acquisto di una licenza, il pagamento è gestito da <strong>Stripe</strong>. I dati della carta di pagamento vengono inseriti direttamente sull'infrastruttura di Stripe: non transitano mai dai server di QoreDB e non vi vengono mai memorizzati.</p><p>QoreDB conserva soltanto le informazioni necessarie al rilascio e alla gestione delle licenze:</p><ul><li>l'indirizzo e-mail di acquisto,</li><li>l'identificativo di pagamento o di abbonamento Stripe,</li><li>la chiave di licenza associata e, se del caso, le postazioni assegnate.</li></ul>"
+        "content": "<p>QoreDB limita strettamente la raccolta di dati personali.</p><h3>2.1 Dati di navigazione (Sito)</h3><p>Durante la consultazione del sito possono essere raccolti dati tecnici anonimizzati per fini statistici, tra cui:</p><ul><li>pagine visitate,</li><li>tipo di dispositivo e browser,</li><li>sistema operativo,</li><li>paese o area geografica approssimativa,</li><li>tempi di caricamento e prestazioni.</li></ul><p>Questi dati <strong>non consentono l'identificazione personale di un user</strong>.</p><p>QoreDB utilizza <strong>Umami</strong>, una soluzione di analisi open source auto-ospitata sul proprio server (Hetzner, Germania):</p><ul><li>nessun cookie,</li><li>nessun monitoraggio tra siti,</li><li>nessuna profilazione pubblicitaria,</li><li>nessun trasferimento delle statistiche a fornitori terzi.</li></ul><h3>2.2 Dati forniti volontariamente</h3><p>Alcuni dati possono essere forniti volontariamente dall'utente, ad esempio:</p><ul><li>durante il contatto,</li><li>durante la registrazione ad un newsletter,</li><li>durante l'utilizzo di futuri servizi che richiedono l'autenticazione.</li></ul><p>I dati raccolti possono includere:</p><ul><li>indirizzo email,</li><li>nome o pseudonimo,</li><li>messaggio contenuto.</li></ul><h3>2.3 Dati relativi agli acquisti e alle licenze</h3><p>Al momento dell'acquisto di una licenza, il pagamento è gestito da <strong>Stripe</strong>. I dati della carta di pagamento vengono inseriti direttamente sull'infrastruttura di Stripe: non transitano mai dai server di QoreDB e non vi vengono mai memorizzati.</p><p>QoreDB conserva soltanto le informazioni necessarie al rilascio e alla gestione delle licenze:</p><ul><li>l'indirizzo e-mail di acquisto,</li><li>l'identificativo di pagamento o di abbonamento Stripe,</li><li>la chiave di licenza associata e, se del caso, le postazioni assegnate.</li></ul>"
       },
       "purposes": {
         "title": "3. Finalità del trattamento",
@@ -823,11 +823,11 @@
       },
       "cookies": {
         "title": "5. Cookie e tracker",
-        "content": "<p>QoreDB <strong>non utilizza cookie pubblicitari o di tracciamento comportamentale</strong>.</p><p>Gli strumenti analitici utilizzati non richiedono il consenso preventivo in conformità con la normativa applicabile.</p><p>Se i cookie dovessero essere utilizzati in futuro, questa policy verrà aggiornata e verrà implementato un meccanismo di consenso.</p>"
+        "content": "<p>QoreDB <strong>non utilizza cookie pubblicitari o di tracciamento comportamentale</strong>.</p><p>L'unico cookie depositato è strettamente funzionale (<code>NEXT_LOCALE</code>) e memorizza la lingua di visualizzazione scelta. È esente da consenso e non consente alcun tracciamento.</p><p>La misurazione del pubblico (Umami, auto-ospitato) funziona senza cookie né identificatori persistenti: non è quindi necessario alcun banner di consenso.</p><p>Se in futuro venissero utilizzati cookie soggetti a consenso, questa policy verrà aggiornata e verrà implementato un meccanismo di consenso.</p>"
       },
       "hosting": {
         "title": "6. Hosting e sub-responsabili del trattamento",
-        "content": "<p>Il sito e i servizi QoreDB si avvalgono dei seguenti responsabili del trattamento:</p><ul><li><strong>Vercel Inc.</strong> — hosting del sito e misurazione del pubblico senza cookie;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagamenti, fatturazione e gestione degli abbonamenti;</li><li><strong>Resend</strong> — invio delle e-mail transazionali e della newsletter;</li><li><strong>Sanity</strong> — gestione dei contenuti editoriali (blog).</li></ul><p>I dati possono essere trattati su server situati nell'Unione europea o in Paesi che offrono un livello di protezione adeguato, sulla base di garanzie conformi al GDPR.</p>"
+        "content": "<p>Il sito e i servizi QoreDB si avvalgono dei seguenti responsabili del trattamento:</p><ul><li><strong>Hetzner Online GmbH</strong> (Germania) — hosting del sito e dei servizi, su server situati a Norimberga, nell'Unione europea;</li><li><strong>Cloudflare, Inc.</strong> (Stati Uniti) — gestione DNS del dominio, distribuzione dei contenuti e protezione dagli attacchi;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagamenti, fatturazione e gestione degli abbonamenti;</li><li><strong>Resend</strong> — invio delle e-mail transazionali e della newsletter;</li><li><strong>Sanity</strong> — gestione dei contenuti editoriali (blog).</li></ul><p>La misurazione del pubblico è affidata a <strong>Umami</strong>, auto-ospitato sul server Hetzner di QoreDB: le statistiche di visita non vengono trasmesse ad alcun fornitore terzo.</p><p>I dati del sito sono ospitati nell'Unione europea. I trattamenti tecnici effettuati al di fuori dell'Unione europea (in particolare da Cloudflare e Stripe) si basano su garanzie conformi al GDPR, in particolare le clausole contrattuali tipo della Commissione europea.</p>"
       },
       "security": {
         "title": "7. Sicurezza dei dati",
@@ -857,15 +857,15 @@
   },
   "legal_page": {
     "title": "Avviso legale",
-    "last_updated": "Ultimo aggiornamento: 21 luglio 2026",
+    "last_updated": "Ultimo aggiornamento: 22 luglio 2026",
     "sections": {
       "editor": {
         "title": "Redattore del sito",
         "content": "**Editore del sito e del software:** Raphaël Plassart, imprenditore individuale (*micro-entreprise* francese)\n**Direttore della pubblicazione:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (sede):** 942 906 157 00014\n**Codice attività (APE):** 62.01Z — Programmazione informatica\n**Registrazione:** impresa registrata in Francia, attiva dal 4 aprile 2025\n**IVA:** IVA non applicabile, articolo 293 B del Codice generale delle imposte francese\n**Contatto:** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB è un prodotto software edito e gestito da questa microimpresa, che assume tutti i rapporti contrattuali con utenti e clienti.\n\n> L'indirizzo postale della sede viene comunicato su semplice richiesta scritta all'indirizzo di contatto sopra indicato."
       },
       "hosting": {
-        "title": "Ospitare",
-        "content": "Il sito web QoreDB è ospitato da **Vercel Inc.**, con sede a 340 S Lemon Ave #4133 Walnut, CA 91789, USA.\n\nI dati potrebbero essere ospitati su infrastrutture ubicate all'interno dell'Unione Europea o in paesi che offrono un livello di protezione dei dati conforme alla normativa vigente."
+        "title": "Hosting",
+        "content": "Il sito web QoreDB è ospitato da **Hetzner Online GmbH**, Industriestr. 25, 91710 Gunzenhausen, Germania ([hetzner.com](https://www.hetzner.com)).\n\nIl server utilizzato si trova nel **data center di Norimberga (Germania, Unione europea)**.\n\nLa gestione del nome di dominio (DNS), la rete di distribuzione dei contenuti e la protezione dagli attacchi sono forniti da **Cloudflare, Inc.**, 101 Townsend Street, San Francisco, CA 94107, USA ([cloudflare.com](https://www.cloudflare.com)).\n\nI dati del sito sono quindi ospitati all'interno dell'Unione europea. I trattamenti tecnici effettuati da Cloudflare al di fuori dell'Unione europea si basano sulle clausole contrattuali tipo della Commissione europea."
       },
       "payments": {
         "title": "Pagamenti e fatturazione",
