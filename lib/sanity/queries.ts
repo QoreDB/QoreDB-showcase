@@ -53,6 +53,25 @@ export const CATEGORIES_QUERY = defineQuery(
   `*[_type == "category"] | order(title asc) { _id, title }`,
 );
 
+export const SITEMAP_POSTS_QUERY =
+  defineQuery(`*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+  "slug": slug.current,
+  "language": coalesce(language, "fr"),
+  publishedAt,
+  _updatedAt,
+  "hasImage": defined(mainImage),
+  "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{
+    "language": coalesce(value->language, "fr"),
+    "slug": value->slug.current
+  }
+}`);
+
+export const POST_TRANSLATIONS_QUERY =
+  defineQuery(`*[_type == "translation.metadata" && count(translations[value->slug.current == $slug]) > 0][0].translations[]{
+  "language": coalesce(value->language, "fr"),
+  "slug": value->slug.current
+}`);
+
 export const getFilteredPostsQuery = (sort?: string) => {
   let order = "publishedAt desc";
   if (sort === "date-asc") order = "publishedAt asc";
@@ -60,7 +79,7 @@ export const getFilteredPostsQuery = (sort?: string) => {
   else if (sort === "title-desc") order = "title desc";
   else if (sort === "relevance") order = "_score desc, publishedAt desc";
 
-  const filter = `_type == "post" && defined(slug.current) && (!defined(language) && $language == 'fr' || language == $language) 
+  const filter = `_type == "post" && defined(slug.current) && (!defined(language) && $language == 'fr' || language == $language)
     && (!defined($searchQuery) || $searchQuery == "" || title match $searchQuery || pt::text(body) match $searchQuery)
     && (!defined($category) || $category == "" || $category in categories[]->title || $category == "all")`;
 

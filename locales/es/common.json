@@ -1138,7 +1138,9 @@
     "reading_progress": "Progreso de lectura",
     "share": "Compartir",
     "copied": "¡Copiado!",
-    "copy_link": "Copiar enlace"
+    "copy_link": "Copiar enlace",
+    "copy_code": "Copiar el código",
+    "code_copied": "Código copiado"
   },
   "docs": {
     "search_label": "Buscar en la documentación",
@@ -1154,7 +1156,12 @@
     "landing_title": "Documentación de QoreDB",
     "landing_subtitle": "Todo lo necesario para instalar QoreDB, conectar tus bases de datos y avanzar más rápido.",
     "fallback_banner_title": "Mostrando la versión en inglés",
-    "fallback_banner_body": "Esta página aún no se ha traducido. A continuación se muestra la versión en inglés."
+    "fallback_banner_body": "Esta página aún no se ha traducido. A continuación se muestra la versión en inglés.",
+    "learning_hub": "Centro de aprendizaje",
+    "quick_start_cta": "Empezar rápido",
+    "databases_cta": "Bases de datos",
+    "more_pages": "+ {{remaining}} más",
+    "explore_section": "Explorar la sección"
   },
   "marketplace": {
     "categories": {
@@ -1819,6 +1826,9 @@
     "cta": "Suscribirse",
     "success_title": "¡Gracias!",
     "success": "Se ha suscrito correctamente a nuestro boletín.",
-    "error": "Error al suscribirse. Inténtelo de nuevo."
+    "error": "Error al suscribirse. Inténtelo de nuevo.",
+    "card_title": "Mantente al día de las novedades",
+    "card_subtitle": "Suscríbete para recibir los lanzamientos, los nuevos controladores y nuestros tutoriales técnicos.",
+    "card_bonus": "🎁 Bonus: recibe nuestra hoja de referencia de rendimiento SQL — 9 páginas, PostgreSQL / MySQL / SQLite (PDF)."
   }
 }

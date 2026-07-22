@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FAQ_FILTERS, FAQ_ITEMS } from "@/lib/faq";
 import { cn } from "@/lib/utils";
 
 export function FAQPageClient() {
@@ -19,27 +20,8 @@ export function FAQPageClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const faqItems = [
-    { key: "what_is_qoredb", category: "general" },
-    { key: "difference_dbeaver", category: "general" },
-    { key: "is_opensource", category: "project" },
-    { key: "is_free", category: "project" },
-    { key: "data_privacy", category: "tech" },
-    { key: "analytics", category: "tech" },
-    { key: "production_ready", category: "tech" },
-    { key: "supported_databases", category: "tech" },
-    { key: "remote_ssh", category: "tech" },
-    { key: "platforms", category: "general" },
-    { key: "maintenance", category: "general" },
-    { key: "contribute", category: "project" },
-    { key: "funding", category: "project" },
-    { key: "professional_use", category: "project" },
-    { key: "follow_progress", category: "general" },
-    { key: "join_beta", category: "general" },
-    { key: "long_term", category: "general" },
-  ];
-
-  const filters = ["all", "general", "tech", "project"];
+  const faqItems = FAQ_ITEMS;
+  const filters = FAQ_FILTERS;
 
   const filteredItems = faqItems.filter((item) => {
     const matchesFilter =

@@ -1138,7 +1138,9 @@
     "reading_progress": "阅读进度",
     "share": "分享",
     "copied": "已复制！",
-    "copy_link": "复制链接"
+    "copy_link": "复制链接",
+    "copy_code": "复制代码",
+    "code_copied": "代码已复制"
   },
   "docs": {
     "search_label": "搜索文档",
@@ -1154,7 +1156,12 @@
     "landing_title": "QoreDB 文档",
     "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。",
     "fallback_banner_title": "正在显示英文版本",
-    "fallback_banner_body": "此页面尚未翻译。下面显示的是英文版本。"
+    "fallback_banner_body": "此页面尚未翻译。下面显示的是英文版本。",
+    "learning_hub": "学习中心",
+    "quick_start_cta": "快速开始",
+    "databases_cta": "数据库",
+    "more_pages": "+ 另外 {{remaining}} 个",
+    "explore_section": "浏览此章节"
   },
   "marketplace": {
     "categories": {
@@ -1819,6 +1826,9 @@
     "cta": "订阅",
     "success_title": "谢谢！",
     "success": "您已成功订阅我们的新闻邮件。",
-    "error": "订阅失败。请重试。"
+    "error": "订阅失败。请重试。",
+    "card_title": "及时了解最新动态",
+    "card_subtitle": "订阅我们的通讯，获取版本发布、新驱动通知和技术教程。",
+    "card_bonus": "🎁 福利：领取我们的 SQL 性能速查表 —— 共 9 页，涵盖 PostgreSQL / MySQL / SQLite（PDF）！"
   }
 }

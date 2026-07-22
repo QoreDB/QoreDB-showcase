@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { SiteAnalytics } from "@/components/SiteAnalytics";
 import { Agentation } from "agentation";
 import { dir } from "i18next";
 import { ThemeProvider } from "next-themes";
 import { useTranslation as initTranslations } from "@/app/[locale]/i18n";
+import { SiteAnalytics } from "@/components/SiteAnalytics";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import { DownloadProvider } from "@/contexts/DownloadProvider";
+import { SUPPORTED_LOCALES } from "@/lib/locale";
 import {
   DEFAULT_OG_IMAGE_PATH,
   ensureSiteName,
@@ -25,6 +26,10 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
+
+export function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,

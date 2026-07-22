@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import Script from "next/script";
+import { JsonLd } from "@/components/JsonLd";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { HeroBackgroundManager } from "@/components/hero-background-manager";
 import { Header } from "@/components/landing/header";
@@ -130,9 +130,7 @@ export default async function HomePage({
 
   return (
     <>
-      <Script id={`home-jsonld-${normalizedLocale}`} type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </Script>
+      <JsonLd id={`home-jsonld-${normalizedLocale}`} data={structuredData} />
       <div className="min-h-screen overflow-hidden relative">
         <HeroBackgroundManager />
         <Header />

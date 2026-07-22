@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
+import { JsonLd } from "@/components/JsonLd";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
@@ -19,17 +19,41 @@ import {
   getPostExcerpt,
   getPostReadingTime,
 } from "@/lib/blog-content";
-import { getIntlLocale } from "@/lib/locale";
+import { type AppLocale, getIntlLocale, isSupportedLocale } from "@/lib/locale";
 import { resolveBlogLocale } from "@/lib/sanity/blog";
 import { client } from "@/lib/sanity/client";
 import { urlForImage } from "@/lib/sanity/image";
-import { ADJACENT_POSTS_QUERY, POST_QUERY } from "@/lib/sanity/queries";
+import {
+  ADJACENT_POSTS_QUERY,
+  POST_QUERY,
+  POST_TRANSLATIONS_QUERY,
+} from "@/lib/sanity/queries";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
-import type { PostDocument } from "@/types/posts";
+import type { PostDocument, PostTranslation } from "@/types/posts";
 import { ShareButtons } from "./share-buttons";
+
+export const revalidate = 3600;
 
 function getPostDescription(post: PostDocument) {
   return getPostExcerpt(post, 180) || post.title || "QoreDB blog";
+}
+
+async function getAlternatePaths(slug: string) {
+  const translations = await client.fetch<PostTranslation[] | null>(
+    POST_TRANSLATIONS_QUERY,
+    { slug },
+    { next: { revalidate: 3600 } },
+  );
+
+  const entries = (translations ?? []).flatMap((translation) =>
+    translation.slug && isSupportedLocale(translation.language)
+      ? [[translation.language, `/blog/${translation.slug}`] as const]
+      : [],
+  );
+
+  return entries.length > 0
+    ? (Object.fromEntries(entries) as Partial<Record<AppLocale, string>>)
+    : undefined;
 }
 
 export async function generateMetadata({
@@ -67,6 +91,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     pathname: `/blog/${slug}`,
+    alternatePaths: await getAlternatePaths(slug),
     title: `${post.title} - ${t("metadata.blog_title")}`,
     description: getPostDescription(post),
     imagePath: post.mainImage
@@ -160,12 +185,10 @@ export default async function BlogPostPage({
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden bg-(--q-bg-0) text-(--q-text-0)">
-      <Script
+      <JsonLd
         id={`blog-article-jsonld-${locale}-${slug}`}
-        type="application/ld+json"
-      >
-        {JSON.stringify(articleStructuredData)}
-      </Script>
+        data={articleStructuredData}
+      />
       <ReadingProgress
         targetId="article-body"
         label={t("blog_post.reading_progress")}

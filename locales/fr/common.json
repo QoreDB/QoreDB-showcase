@@ -1241,7 +1241,9 @@
     "reading_progress": "Progression de la lecture",
     "share": "Partager",
     "copied": "Copié !",
-    "copy_link": "Copier le lien"
+    "copy_link": "Copier le lien",
+    "copy_code": "Copier le code",
+    "code_copied": "Code copié"
   },
   "docs": {
     "search_label": "Chercher dans la doc",
@@ -1257,7 +1259,12 @@
     "landing_title": "Documentation QoreDB",
     "landing_subtitle": "Tout pour installer QoreDB, connecter vos bases de données et avancer plus vite.",
     "fallback_banner_title": "Version anglaise affichée",
-    "fallback_banner_body": "Cette page n'est pas encore traduite. La version anglaise est affichée ci-dessous."
+    "fallback_banner_body": "Cette page n'est pas encore traduite. La version anglaise est affichée ci-dessous.",
+    "learning_hub": "Centre d'apprentissage",
+    "quick_start_cta": "Démarrer rapidement",
+    "databases_cta": "Bases de données",
+    "more_pages": "+ {{remaining}} autres",
+    "explore_section": "Explorer la section"
   },
   "features_common": {
     "tier_pro": "Pro",
@@ -1819,6 +1826,9 @@
     "cta": "S'abonner",
     "success_title": "Merci !",
     "success": "Vous vous êtes abonné avec succès à notre newsletter.",
-    "error": "Échec de l'abonnement. Veuillez réessayer."
+    "error": "Échec de l'abonnement. Veuillez réessayer.",
+    "card_title": "Restez informé des nouveautés",
+    "card_subtitle": "Rejoignez notre newsletter pour recevoir les mises à jour majeures, les nouveaux drivers et nos coulisses techniques.",
+    "card_bonus": "🎁 Bonus : Recevez notre fiche mémo d'optimisation SQL — 9 pages, PostgreSQL / MySQL / SQLite (PDF) !"
   }
 }

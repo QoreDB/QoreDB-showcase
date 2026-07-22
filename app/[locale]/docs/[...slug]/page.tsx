@@ -12,6 +12,7 @@ import { EditOnGithub } from "@/components/docs/EditOnGithub";
 import { FallbackBanner } from "@/components/docs/FallbackBanner";
 import { LastUpdated } from "@/components/docs/LastUpdated";
 import { docsMdxComponents } from "@/components/docs/mdx";
+import { JsonLd } from "@/components/JsonLd";
 import { PremiumBadge } from "@/components/docs/PremiumBadge";
 import { PrevNextNav } from "@/components/docs/PrevNextNav";
 import { TableOfContents } from "@/components/docs/TableOfContents";
@@ -29,8 +30,10 @@ import {
   DEFAULT_DOCS_LOCALE,
   DOCS_LOCALES,
   type DocsLocale,
+  getDocsAlternates,
+  isDocsLocale,
 } from "@/lib/docs/types";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, getAbsoluteUrl } from "@/lib/seo";
 
 const PRETTY_CODE_OPTIONS = {
   theme: { dark: "github-dark", light: "github-light" },
@@ -62,11 +65,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const docsLocale = resolveDocsLocale(locale);
+  const pathname = `/docs/${slug.join("/")}`;
   const { page } = findPageWithFallback(docsLocale, slug);
   if (!page) {
     return buildPageMetadata({
       locale,
-      pathname: `/docs/${slug.join("/")}`,
+      pathname,
       title: "Not found",
       description: "Documentation page not found.",
       noIndex: true,
@@ -74,9 +78,11 @@ export async function generateMetadata({
   }
   return buildPageMetadata({
     locale,
-    pathname: `/docs/${slug.join("/")}`,
+    pathname,
+    ...getDocsAlternates(pathname),
     title: page.frontmatter.title,
     description: page.frontmatter.description,
+    noIndex: !isDocsLocale(locale),
   });
 }
 
@@ -124,13 +130,9 @@ export default async function DocPage({
 
   const { source, frontmatter, headings } = loadDoc(page.filePath);
   const lastUpdated = getLastUpdated(page.filePath);
-  // Hrefs in URL locale, sibling list built from English (the source of truth).
   const adjacent = getAdjacentPages(docsLocale, slug, DEFAULT_DOCS_LOCALE);
-  // Touch tree to ensure caching consistency on incremental builds
   getDocsTree(docsLocale, DEFAULT_DOCS_LOCALE);
 
-  // Breadcrumb section labels come from the locale we actually rendered from,
-  // so they stay in sync with the rendered content.
   const breadcrumbs = buildBreadcrumbs(
     locale,
     page.locale,
@@ -143,8 +145,23 @@ export default async function DocPage({
     .relative(process.cwd(), page.filePath)
     .replace(/\\/g, "/");
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbs.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href ? { item: getAbsoluteUrl(item.href) } : {}),
+    })),
+  };
+
   return (
     <div className="grid gap-10 xl:grid-cols-[1fr_14rem]">
+      <JsonLd
+        id={`docs-breadcrumbs-jsonld-${locale}-${slug.join("-")}`}
+        data={breadcrumbStructuredData}
+      />
       <article className="docs-prose min-w-0">
         <Breadcrumbs items={breadcrumbs} />
         <header className="not-prose mb-8">

@@ -1138,7 +1138,9 @@
     "reading_progress": "読書の進捗",
     "share": "シェアする",
     "copied": "コピーしました！",
-    "copy_link": "リンクをコピー"
+    "copy_link": "リンクをコピー",
+    "copy_code": "コードをコピー",
+    "code_copied": "コードをコピーしました"
   },
   "docs": {
     "search_label": "ドキュメントを検索",
@@ -1154,7 +1156,12 @@
     "landing_title": "QoreDB ドキュメント",
     "landing_subtitle": "QoreDB のインストール、データベース接続、開発高速化に必要なすべて。",
     "fallback_banner_title": "英語版を表示しています",
-    "fallback_banner_body": "このページはまだ翻訳されていません。以下に英語版を表示します。"
+    "fallback_banner_body": "このページはまだ翻訳されていません。以下に英語版を表示します。",
+    "learning_hub": "ラーニングハブ",
+    "quick_start_cta": "クイックスタート",
+    "databases_cta": "データベース",
+    "more_pages": "他 {{remaining}} 件",
+    "explore_section": "セクションを見る"
   },
   "marketplace": {
     "categories": {
@@ -1819,6 +1826,9 @@
     "cta": "購読する",
     "success_title": "ありがとうございます！",
     "success": "ニュースレターの購読が完了しました。",
-    "error": "購読に失敗しました。もう一度お試しください。"
+    "error": "購読に失敗しました。もう一度お試しください。",
+    "card_title": "最新情報をお届けします",
+    "card_subtitle": "ニュースレターに登録して、リリース情報、新しいドライバー、技術チュートリアルを受け取りましょう。",
+    "card_bonus": "🎁 特典：SQL パフォーマンス チートシートを進呈 — 全 9 ページ、PostgreSQL / MySQL / SQLite（PDF）！"
   }
 }

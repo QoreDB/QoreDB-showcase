@@ -8,7 +8,7 @@ import { FeaturedArticle } from "@/components/blog/FeaturedArticle";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { NewsletterCard } from "@/components/newsletter-card";
-import { resolveBlogLocale } from "@/lib/sanity/blog";
+import { getLocalesWithOwnPosts, resolveBlogLocale } from "@/lib/sanity/blog";
 import { client } from "@/lib/sanity/client";
 import { CATEGORIES_QUERY, getFilteredPostsQuery } from "@/lib/sanity/queries";
 import { buildPageMetadata } from "@/lib/seo";
@@ -21,14 +21,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { t } = await getTranslation(locale, "common");
-  const blogLocale = await resolveBlogLocale(locale);
+  const [blogLocale, localesWithPosts] = await Promise.all([
+    resolveBlogLocale(locale),
+    getLocalesWithOwnPosts(),
+  ]);
 
   return buildPageMetadata({
     locale,
     pathname: "/blog",
+    alternatePaths: Object.fromEntries(
+      localesWithPosts.map((localeWithPosts) => [localeWithPosts, "/blog"]),
+    ),
     title: t("metadata.blog_title"),
     description: t("metadata.blog_description"),
-    // Locales served English fallback content are not indexed (avoids duplicate content).
     noIndex: blogLocale !== locale,
   });
 }

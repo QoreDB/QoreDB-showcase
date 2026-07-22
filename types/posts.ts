@@ -111,6 +111,20 @@ export interface CategoryDocument {
 export type AuthorRef = SanityReference | AuthorDocument;
 export type CategoryRef = SanityReference | CategoryDocument;
 
+export interface PostTranslation {
+  language: string;
+  slug: string | null;
+}
+
+export interface SitemapPost {
+  slug: string;
+  language: string;
+  publishedAt?: string | null;
+  _updatedAt?: string;
+  hasImage?: boolean;
+  translations?: PostTranslation[] | null;
+}
+
 export interface PostDocument {
   _type: "post";
   _id?: string;

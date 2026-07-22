@@ -54,24 +54,16 @@ export function NewsletterCard({
             Newsletter
           </div>
           <h4 className="font-heading text-xl font-bold text-(--q-text-0) !m-0">
-            {locale === "fr"
-              ? "Restez informé des nouveautés"
-              : "Stay updated on new releases"}
+            {t("newsletter_page.card_title")}
           </h4>
           <p className="text-sm text-(--q-text-1) leading-relaxed !m-0">
-            {locale === "fr"
-              ? "Rejoignez notre newsletter pour recevoir les mises à jour majeures, les nouveaux drivers et nos coulisses techniques."
-              : "Subscribe to get product releases, new drivers notifications, and technical tutorials."}
+            {t("newsletter_page.card_subtitle")}
           </p>
 
           {/* Lead Magnet Banner */}
           <div className="inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-500 border border-emerald-500/20">
             <FileText className="size-3.5" />
-            <span>
-              {locale === "fr"
-                ? "🎁 Bonus : Recevez notre fiche mémo d'optimisation SQL — 9 pages, PostgreSQL / MySQL / SQLite (PDF) !"
-                : "🎁 Bonus: Get our free SQL Performance Cheat Sheet — 9 pages, PostgreSQL / MySQL / SQLite (PDF)!"}
-            </span>
+            <span>{t("newsletter_page.card_bonus")}</span>
           </div>
         </div>
 
