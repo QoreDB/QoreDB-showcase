@@ -10,7 +10,9 @@
     "download": "Descargar",
     "join_beta": "Unirse a la beta",
     "docs": "Docs",
-    "marketplace": "Plugins"
+    "marketplace": "Plugins",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú"
   },
   "download": {
     "title": "Descargar QoreDB",

@@ -10,7 +10,9 @@
     "download": "Herunterladen",
     "join_beta": "Treten Sie der Beta bei",
     "docs": "Docs",
-    "marketplace": "Plugins"
+    "marketplace": "Plugins",
+    "open_menu": "Menü öffnen",
+    "close_menu": "Menü schließen"
   },
   "download": {
     "title": "QoreDB herunterladen",

@@ -10,7 +10,9 @@
     "download": "下载",
     "join_beta": "加入测试版",
     "docs": "文档",
-    "marketplace": "插件"
+    "marketplace": "插件",
+    "open_menu": "打开菜单",
+    "close_menu": "关闭菜单"
   },
   "download": {
     "title": "下载QoreDB",

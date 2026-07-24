@@ -10,7 +10,9 @@
     "download": "Télécharger",
     "join_beta": "Rejoindre la beta",
     "docs": "Docs",
-    "marketplace": "Plugins"
+    "marketplace": "Plugins",
+    "open_menu": "Ouvrir le menu",
+    "close_menu": "Fermer le menu"
   },
   "marketplace": {
     "page_title": "Plugins",

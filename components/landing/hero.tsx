@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   ArrowRight,
   BookOpen,
@@ -24,12 +23,9 @@ export function Hero() {
 
   return (
     <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-12 pt-32 pb-20 overflow-hidden w-full">
-      <motion.h1
-        className="font-heading text-(--q-text-0) text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight text-center max-w-5xl"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
+      {/* h1 : élément FCP/LCP texte — rendu visible immédiatement, aucune
+          animation pilotée par JS qui retarderait le premier rendu. */}
+      <h1 className="font-heading text-(--q-text-0) text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight text-center max-w-5xl">
         <Trans
           i18nKey="hero.title"
           components={{
@@ -42,13 +38,13 @@ export function Hero() {
             ),
           }}
         />
-      </motion.h1>
+      </h1>
 
-      <motion.p
-        className="text-(--q-text-1) text-base sm:text-lg md:text-xl mb-12 max-w-2xl leading-relaxed text-center"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+      {/* Éléments secondaires : entrée en CSS pur (tourne au premier paint,
+          sans attendre l'hydratation) → n'impacte ni le FCP ni le LCP. */}
+      <p
+        className="q-fade-up text-(--q-text-1) text-base sm:text-lg md:text-xl mb-12 max-w-2xl leading-relaxed text-center"
+        style={{ animationDelay: "80ms" }}
       >
         <Trans
           i18nKey="hero.subtitle"
@@ -56,17 +52,14 @@ export function Hero() {
             highlight: <span className="text-(--q-text-0) font-medium" />,
           }}
         />
-      </motion.p>
+      </p>
 
-      <motion.div
-        className="flex flex-col sm:flex-row gap-4 mb-8"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+      <div
+        className="q-fade-up flex flex-col sm:flex-row gap-4 mb-8"
+        style={{ animationDelay: "160ms" }}
       >
-        <motion.button
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.98 }}
+        <button
+          type="button"
           onClick={() => router.push(`/${locale}/download`)}
           className="group relative flex items-center justify-center gap-3 px-8 py-3 rounded-xl
             bg-linear-to-br from-(--q-accent) to-(--q-accent-strong)
@@ -74,7 +67,8 @@ export function Hero() {
             shadow-[0_20px_40px_-15px_color-mix(in_srgb,var(--q-accent)_50%,transparent)]
             hover:shadow-[0_30px_60px_-12px_color-mix(in_srgb,var(--q-accent)_70%,transparent)]
             border border-white/10 backdrop-blur-sm
-            overflow-hidden transition-all duration-300"
+            overflow-hidden transition-all duration-300
+            hover:scale-105 hover:-translate-y-0.5 active:scale-[0.98]"
         >
           <div
             className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent animate-shimmer"
@@ -84,7 +78,7 @@ export function Hero() {
           <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/30 to-transparent" />
           <span className="relative z-10">{t("hero.cta.download_core")}</span>
           <ArrowRight className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-        </motion.button>
+        </button>
         <Button
           variant="outline"
           size="lg"
@@ -98,14 +92,9 @@ export function Hero() {
           <Github className="w-5 h-5" />
           {t("hero.cta.discover_pro")}
         </Button>
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="mb-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.35 }}
-      >
+      <div className="q-fade-up mb-12" style={{ animationDelay: "220ms" }}>
         <Link
           href={`/${locale}/docs`}
           className="group inline-flex items-center gap-2 text-sm font-medium text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
@@ -114,13 +103,11 @@ export function Hero() {
           {t("hero.cta.read_docs")}
           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
         </Link>
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="flex flex-wrap gap-6 justify-center mb-16 text-sm text-(--q-text-2)"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+      <div
+        className="q-fade-up flex flex-wrap gap-6 justify-center mb-16 text-sm text-(--q-text-2)"
+        style={{ animationDelay: "280ms" }}
       >
         <span className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-(--q-accent)" />
@@ -134,29 +121,28 @@ export function Hero() {
           <Monitor className="w-4 h-4 text-(--q-accent)" />
           {t("hero.meta.platforms")}
         </span>
-      </motion.div>
+      </div>
 
-      {/* Single hero screenshot */}
-      <motion.div
-        className="relative w-full max-w-5xl"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      >
+      {/* Single hero screenshot — élément LCP. Animation d'entrée en CSS pur
+          (démarre au premier paint, sans attendre l'hydratation) et SANS delay
+          → le LCP n'est quasiment pas impacté, contrairement à l'ancienne
+          animation framer-motion qui gardait l'image en opacity:0 jusqu'au JS. */}
+      <div className="q-fade-up relative w-full max-w-5xl">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[50%] bg-(--q-accent)/10 blur-[100px] rounded-full pointer-events-none" />
-        <div className="relative ">
-          <div className="relative aspect-16/10">
+        <div className="relative">
+          <div className="relative aspect-[2782/1838]">
             <Image
               src="/images/screenshots/landing.webp"
               alt="QoreDB SQL Editor"
               fill
-              // sizes="(max-width: 1024px) 100vw, 960px"
-              preload
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              priority
               fetchPriority="high"
+              className="object-cover"
             />
           </div>
         </div>
-      </motion.div>
+      </div>
     </main>
   );
 }
