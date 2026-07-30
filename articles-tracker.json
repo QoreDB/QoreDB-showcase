@@ -422,59 +422,69 @@
       "title": "Triggers et événements : gestion multi-driver dans QoreDB",
       "category": "Produit",
       "publishedAt": "2026-07-07"
+    },
+    {
+      "slug": "operations-maintenance-vacuum-analyze-optimize-repair",
+      "title": "Les opérations de maintenance dans QoreDB : VACUUM, ANALYZE, OPTIMIZE, REPAIR",
+      "category": "Produit",
+      "publishedAt": "2026-07-08"
+    },
+    {
+      "slug": "estimation-nombre-lignes-pourquoi-count-etoile",
+      "title": "L'estimation du nombre de lignes : pourquoi COUNT(*) n'est pas la réponse",
+      "category": "Architecture",
+      "publishedAt": "2026-07-09"
+    },
+    {
+      "slug": "modele-donnees-universel-namespace-collection-row",
+      "title": "Le modèle de données universel de QoreDB : Namespace, Collection, Row",
+      "category": "Architecture",
+      "publishedAt": "2026-07-10"
+    },
+    {
+      "slug": "pourquoi-rust-backend-client-base-donnees",
+      "title": "Pourquoi choisir Rust pour le backend d'un client de base de données",
+      "category": "Architecture",
+      "publishedAt": "2026-07-11"
+    },
+    {
+      "slug": "sqlx-qoredb-pool-async-requetes-runtime",
+      "title": "SQLx dans QoreDB : pool async et requêtes runtime pour un client généraliste",
+      "category": "Architecture",
+      "publishedAt": "2026-07-25"
+    },
+    {
+      "slug": "driver-mongodb-bson-collections-aggregation-pipeline",
+      "title": "Le driver MongoDB dans QoreDB : BSON, collections et aggregation pipeline",
+      "category": "Architecture",
+      "publishedAt": "2026-07-26"
+    },
+    {
+      "slug": "driver-redis-navigation-type-cle-scan",
+      "title": "Le driver Redis dans QoreDB : navigation par type de clé et SCAN",
+      "category": "Architecture",
+      "publishedAt": "2026-07-27"
+    },
+    {
+      "slug": "gestion-connexions-ssl-tls-selon-moteur",
+      "title": "Comment QoreDB gère les connexions SSL/TLS selon le moteur",
+      "category": "Security",
+      "publishedAt": "2026-07-28"
+    },
+    {
+      "slug": "export-html-self-contained-partager-donnees-sans-outil",
+      "title": "L'export HTML self-contained de QoreDB : partager des données sans outil",
+      "category": "Produit",
+      "publishedAt": "2026-07-29"
+    },
+    {
+      "slug": "pourquoi-qoredb-ne-sera-jamais-saas",
+      "title": "Pourquoi QoreDB ne sera jamais un SaaS",
+      "category": "Vision",
+      "publishedAt": "2026-07-30"
     }
   ],
   "queue": [
-    {
-      "title": "Les opérations de maintenance : VACUUM, ANALYZE, OPTIMIZE, REPAIR",
-      "category": "Produit",
-      "topic_notes": "Dialog dédié, feedback, différences par driver, quand les utiliser"
-    },
-    {
-      "title": "L'estimation du nombre de lignes : pourquoi COUNT(*) n'est pas la réponse",
-      "category": "Architecture",
-      "topic_notes": "pg_class, information_schema, estimation vs exact, coût réel"
-    },
-    {
-      "title": "Le modèle de données universel : Namespace, Collection, Record",
-      "category": "Architecture",
-      "topic_notes": "Abstraction minimale, mapping SQL/NoSQL, ce qui est unifié et ce qui ne l'est pas"
-    },
-    {
-      "title": "Pourquoi choisir Rust pour le backend d'un client de base de données",
-      "category": "Architecture",
-      "topic_notes": "Sécurité mémoire, async tokio, FFI, performance, courbe d'apprentissage"
-    },
-    {
-      "title": "SQLx dans QoreDB : requêtes compilées et pool de connexions",
-      "category": "Architecture",
-      "topic_notes": "Compile-time checking, pool async, migrations, limites avec drivers custom"
-    },
-    {
-      "title": "Le driver MongoDB dans QoreDB : BSON, collections et ce qui manque",
-      "category": "Architecture",
-      "topic_notes": "Driver natif, pas d'ORM, aggregation pipeline, limitations transactions"
-    },
-    {
-      "title": "Le driver Redis : navigation par type de clé et SCAN",
-      "category": "Architecture",
-      "topic_notes": "Key-value natif, SCAN vs KEYS, inspection par type, pas de requêtes SQL"
-    },
-    {
-      "title": "Comment QoreDB gère les connexions SSL/TLS selon le moteur",
-      "category": "Security",
-      "topic_notes": "CA certs, client certs, verify mode, différences PG/MySQL/Mongo"
-    },
-    {
-      "title": "L'export HTML self-contained : partager des données sans outil",
-      "category": "Produit",
-      "topic_notes": "HTML unique, CSS/JS embarqués, tri/filtrage intégré, zéro dépendance"
-    },
-    {
-      "title": "Pourquoi QoreDB ne sera jamais un SaaS",
-      "category": "Vision",
-      "topic_notes": "Données locales, pas de compte obligatoire, collaboration optionnelle"
-    },
     {
       "title": "Le multi-statement execution : exécuter un script SQL complet",
       "category": "Produit",

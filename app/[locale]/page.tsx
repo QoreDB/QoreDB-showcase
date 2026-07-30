@@ -64,6 +64,22 @@ const Footer = dynamic(() =>
   })),
 );
 
+const OFFER_COUNTRIES = [
+  "FR",
+  "BE",
+  "CH",
+  "LU",
+  "CA",
+  "US",
+  "GB",
+  "ES",
+  "IT",
+  "DE",
+  "AT",
+  "CN",
+  "JP",
+];
+
 export async function generateMetadata({
   params,
 }: {
@@ -123,6 +139,40 @@ export default async function HomePage({
           price: "0",
           priceCurrency: "EUR",
           availability: "https://schema.org/InStock",
+          url: getLocalizedUrl(normalizedLocale, "/download"),
+          shippingDetails: {
+            "@type": "OfferShippingDetails",
+            shippingRate: {
+              "@type": "MonetaryAmount",
+              value: "0",
+              currency: "EUR",
+            },
+            shippingDestination: {
+              "@type": "DefinedRegion",
+              addressCountry: OFFER_COUNTRIES,
+            },
+            deliveryTime: {
+              "@type": "ShippingDeliveryTime",
+              handlingTime: {
+                "@type": "QuantitativeValue",
+                minValue: 0,
+                maxValue: 0,
+                unitCode: "DAY",
+              },
+              transitTime: {
+                "@type": "QuantitativeValue",
+                minValue: 0,
+                maxValue: 0,
+                unitCode: "DAY",
+              },
+            },
+          },
+          hasMerchantReturnPolicy: {
+            "@type": "MerchantReturnPolicy",
+            applicableCountry: OFFER_COUNTRIES,
+            returnPolicyCategory:
+              "https://schema.org/MerchantReturnNotPermitted",
+          },
         },
       },
     ],
