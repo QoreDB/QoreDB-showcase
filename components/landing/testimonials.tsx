@@ -9,8 +9,10 @@ import testimonials from "@/lib/data/testimonials.json";
 export type Testimonial = {
   id: string;
   quote: string;
+  quotes?: Record<string, string>;
   name: string;
   role: string;
+  roles?: Record<string, string>;
   avatar?: string;
   /** Optional 2-letter locale gate ("fr", "en"). If set, only shown for that locale. */
   lang?: string;
@@ -57,8 +59,8 @@ export function Testimonials({ locale }: { locale: string }) {
               className="rounded-2xl border border-(--q-border) bg-(--q-bg-1) p-6 flex flex-col gap-4"
             >
               <Quote className="w-5 h-5 text-(--q-accent) shrink-0" />
-              <blockquote className="text-sm text-(--q-text-1) leading-relaxed">
-                {item.quote}
+              <blockquote className="text-sm text-(--q-text-1) leading-relaxed whitespace-pre-line">
+                {item.quotes?.[locale] || item.quote}
               </blockquote>
               <figcaption className="flex items-center gap-3 mt-auto pt-2 border-t border-(--q-border)/50">
                 {item.avatar ? (
@@ -90,7 +92,7 @@ export function Testimonials({ locale }: { locale: string }) {
                     )}
                   </p>
                   <p className="text-xs text-(--q-text-2) truncate">
-                    {item.role}
+                    {item.roles?.[locale] || item.role}
                   </p>
                 </div>
               </figcaption>

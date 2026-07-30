@@ -20,7 +20,7 @@ QoreDB est léger. Le binaire fait quelques dizaines de mégaoctets et l'applica
 
 ## Télécharger une version précompilée
 
-La façon la plus rapide d'installer QoreDB est de récupérer le programme d'installation pour votre plateforme sur la [page des Releases](https://github.com/raphplt/QoreDB/releases).
+La façon la plus rapide d'installer QoreDB est de récupérer le programme d'installation pour votre plateforme sur la [page des Releases](https://github.com/QoreDB/QoreDB/releases).
 
 | Plateforme | Format            | Remarques                                                                 |
 | ---------- | ----------------- | ------------------------------------------------------------------------- |
@@ -102,7 +102,7 @@ sudo apt-get install -y \
 Ensuite, clonez, installez et compilez :
 
 ```bash
-git clone https://github.com/raphplt/QoreDB.git
+git clone https://github.com/QoreDB/QoreDB.git
 cd QoreDB
 pnpm install
 pnpm tauri dev      # mode développement avec rechargement à chaud (hot reload)
@@ -134,7 +134,7 @@ Si vous avez installé via l'AUR d'Arch ou à partir des sources, mettez à jour
 | Plateforme | Étapes                                                                                                 |
 | ---------- | ------------------------------------------------------------------------------------------------------ |
 | **macOS**  | Déplacez QoreDB hors des Applications. Les données de l'application se trouvent dans `~/Library/Application Support/com.qoredb.*`. |
-| **Windows**| Utilisez Paramètres → Applications → QoreDB → Désinstaller. Les données de l'application se trouvent sous `%APPDATA%\com.qoredb.*`. |
+| **Windows**| Utilisez Paramètres → Applications → QoreDB → Désinstaller. Les données de l'application se trouvent sous `%LOCALAPPDATA%\com.qoredb.*`. |
 | **Linux**  | `.deb` : `sudo apt remove qoredb`. `.AppImage` : supprimez simplement le fichier. Les données de l'application se trouvent sous `~/.local/share/com.qoredb.*` et `~/.config/com.qoredb.*`. |
 
 <Callout type="warning">

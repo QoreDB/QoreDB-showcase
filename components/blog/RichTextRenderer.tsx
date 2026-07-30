@@ -3,6 +3,7 @@ import { AlertTriangle, CheckCircle2, Info, Lightbulb } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { codeToHtml } from "shiki";
+import { getHeadingId } from "@/lib/blog-content";
 import type {
   PortableTextCallout,
   PortableTextCodeBlock,
@@ -159,13 +160,23 @@ const components: PortableTextComponents = {
     h1: ({ children }) => (
       <h1 className="text-4xl font-bold mt-12 mb-4 scroll-m-20">{children}</h1>
     ),
-    h2: ({ children }) => (
-      <h2 className="text-3xl font-semibold mt-10 mb-4 scroll-m-20 pb-2 border-b">
+    h2: ({ children, value }) => (
+      <h2
+        id={getHeadingId(
+          value.children?.map((child) => child.text).join("") ?? "",
+        )}
+        className="text-3xl font-semibold mt-12 mb-4 scroll-m-28 pb-3 border-b"
+      >
         {children}
       </h2>
     ),
-    h3: ({ children }) => (
-      <h3 className="text-2xl font-semibold mt-8 mb-4 scroll-m-20">
+    h3: ({ children, value }) => (
+      <h3
+        id={getHeadingId(
+          value.children?.map((child) => child.text).join("") ?? "",
+        )}
+        className="text-2xl font-semibold mt-10 mb-4 scroll-m-28"
+      >
         {children}
       </h3>
     ),
@@ -175,7 +186,9 @@ const components: PortableTextComponents = {
       </h4>
     ),
     normal: ({ children }) => (
-      <p className="leading-7 not-first:mt-6 text-foreground/90">{children}</p>
+      <p className="leading-8 not-first:mt-6 text-(--q-text-0)/90">
+        {children}
+      </p>
     ),
     blockquote: ({ children }) => (
       <blockquote className="mt-6 border-l-2 pl-6 italic text-muted-foreground">

@@ -32,42 +32,85 @@ const rows = [
   "price",
 ] as const;
 
-const positiveValues = new Set([
-  "Yes",
-  "Oui",
-  "Apache 2.0",
-  "Community",
-  "Argon2",
-  "BYOK",
-  "Pro",
-  "15 drivers",
-  "15 drivers natifs",
-  "15 motors",
-  "15 motores",
-  "15 Treiber",
-  "15 driver",
-  "15ドライバー",
-  "15 个驱动",
-  "15+ years",
-  "15+ ans",
-  "Established",
-  "Établi",
-  "20+ years",
-  "20+ ans",
-  "Rust/Tauri",
-  "Native",
-  "Natif",
-  "Keychain",
-  "Free",
-  "Free / Pro",
-  "Gratuit",
-  "Gratuit / Pro",
-]);
+type Competitor = (typeof competitors)[number];
+type Row = (typeof rows)[number];
+type CellTone = "positive" | "negative" | "neutral";
 
-const negativeValues = new Set(["No", "Non", "PG only", "PG seul"]);
+// Icon tone is derived from the semantic value of each cell (not from the
+// translated string), so the comparison renders identically in every locale.
+const cellTones: Record<Competitor, Record<Row, CellTone>> = {
+  qoredb: {
+    opensource: "positive",
+    multidb: "positive",
+    native: "positive",
+    local: "positive",
+    vault: "positive",
+    safety: "positive",
+    sandbox: "positive",
+    fulltext: "positive",
+    er_diagram: "positive",
+    federation: "positive",
+    ai: "positive",
+    plugins: "positive",
+    ui: "positive",
+    maturity: "neutral",
+    price: "positive",
+  },
+  dbeaver: {
+    opensource: "positive",
+    multidb: "positive",
+    native: "neutral",
+    local: "positive",
+    vault: "neutral",
+    safety: "negative",
+    sandbox: "negative",
+    fulltext: "negative",
+    er_diagram: "positive",
+    federation: "negative",
+    ai: "negative",
+    plugins: "positive",
+    ui: "neutral",
+    maturity: "positive",
+    price: "neutral",
+  },
+  tableplus: {
+    opensource: "negative",
+    multidb: "neutral",
+    native: "positive",
+    local: "positive",
+    vault: "positive",
+    safety: "neutral",
+    sandbox: "negative",
+    fulltext: "negative",
+    er_diagram: "negative",
+    federation: "negative",
+    ai: "negative",
+    plugins: "negative",
+    ui: "positive",
+    maturity: "positive",
+    price: "neutral",
+  },
+  pgadmin: {
+    opensource: "positive",
+    multidb: "negative",
+    native: "neutral",
+    local: "positive",
+    vault: "negative",
+    safety: "negative",
+    sandbox: "negative",
+    fulltext: "negative",
+    er_diagram: "neutral",
+    federation: "negative",
+    ai: "negative",
+    plugins: "negative",
+    ui: "negative",
+    maturity: "positive",
+    price: "positive",
+  },
+};
 
-function CellValue({ value }: { value: string }) {
-  if (positiveValues.has(value)) {
+function CellValue({ value, tone }: { value: string; tone: CellTone }) {
+  if (tone === "positive") {
     return (
       <span className="inline-flex items-center gap-1.5 text-emerald-500 font-medium">
         <Check className="w-3.5 h-3.5" />
@@ -75,7 +118,7 @@ function CellValue({ value }: { value: string }) {
       </span>
     );
   }
-  if (negativeValues.has(value)) {
+  if (tone === "negative") {
     return (
       <span className="inline-flex items-center gap-1.5 text-red-400">
         <X className="w-3.5 h-3.5" />
@@ -161,7 +204,10 @@ export function ComparisonTable() {
                           {t(`comparison.values.${c}.${row}`)}
                         </span>
                       ) : (
-                        <CellValue value={t(`comparison.values.${c}.${row}`)} />
+                        <CellValue
+                          value={t(`comparison.values.${c}.${row}`)}
+                          tone={cellTones[c][row]}
+                        />
                       )}
                     </td>
                   ))}

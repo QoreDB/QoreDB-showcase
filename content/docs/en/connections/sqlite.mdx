@@ -12,13 +12,7 @@ SQLite is the simplest engine to connect to: there is no server and no network. 
 
 Open **New Connection**, choose **SQLite**, and either browse to a file or paste a path.
 
-You can also use a `sqlite://` URI:
-
-```
-sqlite:///absolute/path/to/database.db
-sqlite://./relative/path/to/database.db
-sqlite://:memory:
-```
+SQLite takes a bare file path (absolute or relative) or `:memory:` — there is no `sqlite://` URL scheme.
 
 ## Connection fields
 

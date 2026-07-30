@@ -1,5 +1,15 @@
 import type { LucideIcon } from "lucide-react";
-import { FileCheck, History, Network } from "lucide-react";
+import {
+  Blocks,
+  FileCheck,
+  FlaskConical,
+  History,
+  Layers,
+  Network,
+  NotebookPen,
+  ShieldCheck,
+  Webhook,
+} from "lucide-react";
 
 export type FeatureTier = "core" | "pro";
 
@@ -7,15 +17,69 @@ export interface FeaturePage {
   slug: string;
   icon: LucideIcon;
   tier: FeatureTier;
+  // Capture d'écran optionnelle affichée en tête de page. Ajouter le fichier
+  // dans public/images/features/ puis renseigner le chemin ici suffit.
+  image?: string;
 }
 
 // Registre des pages de présentation des fonctionnalités phares.
 // Ajouter une entrée ici (+ le bloc i18n `features_pages.<slug>`) suffit à
 // publier une nouvelle page et à la référencer sur l'index /features.
 export const FEATURE_PAGES: FeaturePage[] = [
-  { slug: "federation", icon: Network, tier: "pro" },
-  { slug: "time-travel", icon: History, tier: "pro" },
-  { slug: "data-contracts", icon: FileCheck, tier: "pro" },
+  {
+    slug: "federation",
+    icon: Network,
+    tier: "pro",
+    image: "/images/features/federation.webp",
+  },
+  {
+    slug: "time-travel",
+    icon: History,
+    tier: "pro",
+    image: "/images/features/time-travel.webp",
+  },
+  {
+    slug: "data-contracts",
+    icon: FileCheck,
+    tier: "pro",
+    image: "/images/features/data-contracts.webp",
+  },
+  {
+    slug: "instant-api",
+    icon: Webhook,
+    tier: "pro",
+    image: "/images/features/instant-api.webp",
+  },
+  {
+    slug: "sandbox",
+    icon: FlaskConical,
+    tier: "pro",
+    image: "/images/features/sandbox.webp",
+  },
+  {
+    slug: "migrations",
+    icon: Layers,
+    tier: "core",
+    image: "/images/features/migrations.webp",
+  },
+  {
+    slug: "notebooks",
+    icon: NotebookPen,
+    tier: "core",
+    image: "/images/features/notebooks.webp",
+  },
+  {
+    slug: "production-safety",
+    icon: ShieldCheck,
+    tier: "core",
+    image: "/images/features/query-safety.webp",
+  },
+  {
+    slug: "plugins",
+    icon: Blocks,
+    tier: "core",
+    image: "/images/features/plugins.webp",
+  },
 ];
 
 export const FEATURE_SLUGS = FEATURE_PAGES.map((feature) => feature.slug);

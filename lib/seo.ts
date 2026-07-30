@@ -31,11 +31,15 @@ export const INDEXABLE_PATHS = [
   "/features",
   "/download",
   "/pricing",
+  "/pricing/team",
   "/roadmap",
   "/faq",
   "/docs",
   "/blog",
   "/changelog",
+  "/plugins",
+  "/newsletter",
+  "/oss-program",
   "/links",
   "/privacy",
   "/legal",
@@ -79,6 +83,29 @@ export function getLanguageAlternates(
   return {
     ...alternates,
     "x-default": getLocalizedUrl(DEFAULT_LOCALE, normalizedPathname || "/"),
+  };
+}
+
+export function getLanguageAlternatesFromPaths(
+  pathByLocale: Partial<Record<AppLocale, string>>,
+): Record<string, string> {
+  const entries = SUPPORTED_LOCALES.flatMap((locale) => {
+    const pathname = pathByLocale[locale];
+    return pathname
+      ? [[locale, getLocalizedUrl(locale, pathname)] as const]
+      : [];
+  });
+
+  if (entries.length === 0) {
+    return {};
+  }
+
+  const defaultEntry =
+    entries.find(([locale]) => locale === DEFAULT_LOCALE) ?? entries[0];
+
+  return {
+    ...Object.fromEntries(entries),
+    "x-default": defaultEntry[1],
   };
 }
 
@@ -141,6 +168,8 @@ type BuildPageMetadataOptions = {
   publishedTime?: string;
   modifiedTime?: string;
   authors?: string[];
+  alternatePaths?: Partial<Record<AppLocale, string>>;
+  rssPath?: string;
 };
 
 export function buildPageMetadata({
@@ -155,18 +184,28 @@ export function buildPageMetadata({
   publishedTime,
   modifiedTime,
   authors,
+  alternatePaths,
+  rssPath,
 }: BuildPageMetadataOptions): Metadata {
   const normalizedLocale = normalizeLocale(locale);
   const canonical = getLocalizedUrl(normalizedLocale, pathname);
   const titleWithSiteName = ensureSiteName(title);
   const imageUrl = getAbsoluteUrl(imagePath);
+  const languages = alternatePaths
+    ? getLanguageAlternatesFromPaths(alternatePaths)
+    : getLanguageAlternates(pathname);
 
   return {
     title: titleWithSiteName,
     description,
     alternates: {
       canonical,
-      languages: getLanguageAlternates(pathname),
+      languages,
+      ...(rssPath
+        ? {
+            types: { "application/rss+xml": getAbsoluteUrl(rssPath) },
+          }
+        : {}),
     },
     openGraph: {
       title: titleWithSiteName,

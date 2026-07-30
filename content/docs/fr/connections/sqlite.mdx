@@ -12,13 +12,7 @@ SQLite est le moteur le plus simple auquel se connecter : il n'y a pas de serveu
 
 Ouvrez **Nouvelle Connexion** (New Connection), choisissez **SQLite**, et parcourez pour trouver un fichier ou collez un chemin.
 
-Vous pouvez également utiliser une URI `sqlite://` :
-
-```
-sqlite:///chemin/absolu/vers/base_de_donnees.db
-sqlite://./chemin/relatif/vers/base_de_donnees.db
-sqlite://:memory:
-```
+SQLite accepte un chemin de fichier brut (absolu ou relatif) ou `:memory:` — il n'y a pas de schéma d'URL `sqlite://`.
 
 ## Champs de connexion
 

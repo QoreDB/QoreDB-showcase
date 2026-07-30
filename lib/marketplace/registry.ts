@@ -6,7 +6,7 @@
 //
 // We trust the registry's URLs (raw.githubusercontent.com) and don't proxy
 // the .zip bytes — the in-app marketplace downloads them directly from
-// GitHub. That keeps Vercel egress flat and matches how the QoreDB host
+// GitHub. That keeps egress off our own server and matches how the QoreDB host
 // would treat any third-party mirror: verify by the sha256 declared in the
 // catalog before doing anything with the file.
 

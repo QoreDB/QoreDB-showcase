@@ -20,7 +20,7 @@ QoreDB is light. The binary is a few tens of megabytes and the app uses a fracti
 
 ## Download a pre-built release
 
-The fastest way to install QoreDB is to grab the installer for your platform from the [Releases page](https://github.com/raphplt/QoreDB/releases).
+The fastest way to install QoreDB is to grab the installer for your platform from the [Releases page](https://github.com/QoreDB/QoreDB/releases).
 
 | Platform   | Format            | Notes                                                       |
 | ---------- | ----------------- | ----------------------------------------------------------- |
@@ -102,7 +102,7 @@ sudo apt-get install -y \
 Then clone, install, and build:
 
 ```bash
-git clone https://github.com/raphplt/QoreDB.git
+git clone https://github.com/QoreDB/QoreDB.git
 cd QoreDB
 pnpm install
 pnpm tauri dev      # development mode with hot reload
@@ -134,7 +134,7 @@ If you installed via the Arch AUR or from source, update through your usual flow
 | Platform   | Steps                                                                  |
 | ---------- | ---------------------------------------------------------------------- |
 | **macOS**  | Move QoreDB out of Applications. App data lives in `~/Library/Application Support/com.qoredb.*`. |
-| **Windows**| Use Settings → Apps → QoreDB → Uninstall. App data is under `%APPDATA%\com.qoredb.*`. |
+| **Windows**| Use Settings → Apps → QoreDB → Uninstall. App data is under `%LOCALAPPDATA%\com.qoredb.*`. |
 | **Linux**  | `.deb`: `sudo apt remove qoredb`. `.AppImage`: just delete the file. App data is under `~/.local/share/com.qoredb.*` and `~/.config/com.qoredb.*`. |
 
 <Callout type="warning">

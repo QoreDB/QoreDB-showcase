@@ -126,6 +126,8 @@ export function Header() {
 
       <button
         type="button"
+        aria-label={t(mobileMenuOpen ? "nav.close_menu" : "nav.open_menu")}
+        aria-expanded={mobileMenuOpen}
         className={`md:hidden text-(--q-text-0) p-2 transition-transform duration-300 ease-in-out ${mobileMenuOpen ? "rotate-90" : "rotate-0"}`}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >

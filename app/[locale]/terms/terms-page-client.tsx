@@ -10,6 +10,7 @@ const sections = [
   "access",
   "software_use",
   "team_licensing",
+  "payments",
   "user_obligations",
   "ip",
   "liability",

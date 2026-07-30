@@ -3,6 +3,18 @@ export type DocsLocale = "en" | "fr";
 export const DOCS_LOCALES: DocsLocale[] = ["en", "fr"];
 export const DEFAULT_DOCS_LOCALE: DocsLocale = "en";
 
+export function isDocsLocale(locale: string): locale is DocsLocale {
+  return (DOCS_LOCALES as readonly string[]).includes(locale);
+}
+
+export function getDocsAlternates(pathname: string) {
+  return {
+    alternatePaths: Object.fromEntries(
+      DOCS_LOCALES.map((locale) => [locale, pathname]),
+    ),
+  };
+}
+
 export type DocFrontmatter = {
   title: string;
   description: string;

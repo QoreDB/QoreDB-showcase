@@ -27,7 +27,8 @@
       "**/*.json",
       "!**/.next",
       "!**/out",
-      "!**/build"
+      "!**/build",
+      "!**/*.generated.ts"
     ]
   }
 }

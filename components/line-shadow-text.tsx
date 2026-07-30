@@ -1,10 +1,7 @@
-import { type MotionProps, motion } from "framer-motion";
-import React from "react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
-interface LineShadowTextProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
-    MotionProps {
+interface LineShadowTextProps extends React.HTMLAttributes<HTMLElement> {
   shadowColor?: string;
   as?: React.ElementType;
 }
@@ -16,11 +13,6 @@ export function LineShadowText({
   as: Component = "span",
   ...props
 }: LineShadowTextProps) {
-  const MotionComponent = React.useMemo(
-    () => motion.create(Component),
-    [Component],
-  );
-
   const content =
     typeof children === "string"
       ? children
@@ -43,7 +35,7 @@ export function LineShadowText({
   }
 
   return (
-    <MotionComponent
+    <Component
       style={{ "--shadow-color": shadowColor } as React.CSSProperties}
       className={cn(
         "relative z-0 inline-flex",
@@ -57,6 +49,6 @@ export function LineShadowText({
       {...props}
     >
       {content}
-    </MotionComponent>
+    </Component>
   );
 }

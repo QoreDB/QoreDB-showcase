@@ -23,7 +23,7 @@ Every source file in the repository carries an SPDX header declaring its license
 
 The core covers everything you need for a complete, production-quality database client:
 
-- **All database drivers**: PostgreSQL (and Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse
+- **All database drivers**: PostgreSQL (and Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB (and MotherDuck), MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch
 - **Connection management**: vault, profiles, SSH tunneling, environment guards
 - **Query editor and execution**: SQL and MongoDB editors, syntax highlighting, autocomplete, history, query library
 - **Data grid and editing**: inline edit, virtualization, server-side filters, bulk edit (up to 5 rows)
@@ -32,7 +32,7 @@ The core covers everything you need for a complete, production-quality database 
 - **ER Diagram**: interactive schema graph with isolate/focus workflows
 - **Notebooks**: full notebook engine with parameterized variables, Run All, import/export
 - **CSV import**, **export pipeline** (CSV/JSON/SQL/HTML), **transaction management**
-- **Sandbox mode**, **audit logging** with **query fingerprinting**, **read-only mode**, **dangerous query detection**
+- **Audit logging** with **query fingerprinting**, **read-only mode**, **dangerous query detection**
 - **Cross-database federation** via DuckDB
 - **Backup & restore helpers**: visual wrappers around `pg_dump`, `mysqldump`, `mongodump`, `sqlite3 .dump` and their restore counterparts
 - **Customizable keyboard shortcuts**: every binding rebindable from Settings, with cross-OS chord syntax
@@ -50,6 +50,7 @@ In other words, the core is enough to ship real work every day. Pro is not a pay
 Premium features are advanced workflows that typically only become valuable once you're using QoreDB heavily or in a team setting:
 
 - **Visual Data Diff**: side-by-side comparison of table and query results
+- **Sandbox mode**: stage grid edits, review the DML, then apply
 - **Time Travel**: full row history with visual timeline, range filters, point-to-point diff and Rollback SQL preview
 - **Data Contracts**: declarative, executable data-quality assertions (12 rule types, including arbitrary `custom_sql`) persisted as YAML in the workspace, with post-mutation re-evaluation and an embeddable notebook cell
 - **Instant Data API**: turn any saved read-only query into a token-authenticated REST endpoint on `127.0.0.1`, with per-endpoint rate limiting and an auto-generated OpenAPI 3.1 document
@@ -90,7 +91,7 @@ This is the same model used by HashiCorp's Terraform/Vault (BSL 1.1), Sentry (BS
 **For competitors**: you cannot take the BSL-licensed code and ship a commercial product that competes with QoreDB. After four years, that restriction lifts automatically.
 </Callout>
 
-If you want the full legal text, see the [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) (Apache 2.0) and [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) files in the repository.
+If you want the full legal text, see the [LICENSE](https://github.com/QoreDB/QoreDB/blob/main/LICENSE) (Apache 2.0) and [LICENSE-BSL](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL) files in the repository.
 
 ## Where to go next
 

@@ -12,8 +12,8 @@ QoreDB is licensed under an **Open Core** model. The core of the application is 
 
 | Tier         | License                                | Where to read it                                         |
 | ------------ | -------------------------------------- | -------------------------------------------------------- |
-| **Core**     | Apache 2.0                             | [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) |
-| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) |
+| **Core**     | Apache 2.0                             | [LICENSE](https://github.com/QoreDB/QoreDB/blob/main/LICENSE) |
+| **Premium**  | Business Source License 1.1 (`BUSL-1.1`) | [LICENSE-BSL](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL) |
 
 Both license files are at the root of the repository. Always read them as the source of truth; this page is a summary.
 
@@ -35,13 +35,21 @@ This is the same model used by HashiCorp's Terraform and Vault, Sentry, Cockroac
 
 ### What's in BSL today
 
-Files currently marked Premium:
+The Premium (BSL) surface is grouped into these modules:
 
-- `src/components/Diff/*` (Visual Data Diff)
-- `src/lib/diffUtils.ts` (Diff utilities)
-- `src-tauri/src/interceptor/profiling.rs` (Query profiling)
+- **AI Assistant**
+- **Data Contracts**
+- **Cross-database Federation**
+- **Time Travel**
+- **Advanced Notebook** (chart, AI and contract cells)
+- **Advanced Export** (XLSX and Parquet)
+- **Profiling**
+- **Index Suggestions**
+- **Schema Diff & migration generation**
+- **Visual Data Diff**
+- **ER diagram source**
 
-The list above is the current state. New Pro features land under BSL over time; new features under Apache stay in Core.
+See the SPDX headers in each source file (and CLAUDE.md) for the authoritative, always-current list. New Pro features land under BSL over time; new features under Apache stay in Core.
 
 ## SPDX header convention
 
@@ -77,7 +85,7 @@ The header is a contract: when you read a file, the header tells you which licen
 | Submit a PR to a Core file                                         | Apache 2.0      | Yes, welcome       |
 | Use generated SQL exports / data exports for any purpose            | n/a             | Yes (your data, your call) |
 
-When in doubt about a specific case, the [LICENSE](https://github.com/raphplt/QoreDB/blob/main/LICENSE) and [LICENSE-BSL](https://github.com/raphplt/QoreDB/blob/main/LICENSE-BSL) files have the legal text.
+When in doubt about a specific case, the [LICENSE](https://github.com/QoreDB/QoreDB/blob/main/LICENSE) and [LICENSE-BSL](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL) files have the legal text.
 
 ## License activation for Pro
 

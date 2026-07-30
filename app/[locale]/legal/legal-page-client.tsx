@@ -7,6 +7,7 @@ import { Header } from "@/components/landing/header";
 const sections = [
   "editor",
   "hosting",
+  "payments",
   "ip",
   "liability",
   "external_links",

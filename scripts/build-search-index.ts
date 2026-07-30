@@ -3,7 +3,7 @@
  * and copy the resulting bundle into `public/pagefind` so the search
  * dialog can fetch `/pagefind/pagefind.js` at runtime.
  *
- * Usage: `pnpm tsx scripts/build-search-index.ts`
+ * Usage: `tsx scripts/build-search-index.ts`
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -34,11 +34,16 @@ if (!source) {
 const outDir = path.join(root, "public", "pagefind");
 fs.mkdirSync(outDir, { recursive: true });
 
+const pagefindBin = path.join(
+  root,
+  "node_modules",
+  ".bin",
+  process.platform === "win32" ? "pagefind.cmd" : "pagefind",
+);
+
 const result = spawnSync(
-  "pnpm",
+  pagefindBin,
   [
-    "exec",
-    "pagefind",
     "--site",
     source,
     "--output-path",
@@ -48,6 +53,11 @@ const result = spawnSync(
   ],
   { stdio: "inherit" },
 );
+
+if (result.error) {
+  console.error(`[pagefind] unable to start: ${result.error.message}`);
+  process.exit(1);
+}
 
 if (result.status !== 0) {
   console.error("[pagefind] indexing failed");

@@ -9,7 +9,10 @@
     "changelog": "Registro de cambios",
     "download": "Descargar",
     "join_beta": "Unirse a la beta",
-    "docs": "Docs"
+    "docs": "Docs",
+    "marketplace": "Plugins",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú"
   },
   "download": {
     "title": "Descargar QoreDB",
@@ -21,7 +24,7 @@
     "detected_platform": "Detectamos que estás en {{platform}}",
     "other_platforms": "Otras plataformas",
     "recommended": "Recomendado",
-    "apple_silicon": "Silicona de Apple (M1/M2/M3/M4)",
+    "apple_silicon": "Apple Silicon (M1/M2/M3/M4)",
     "intel_mac": "Mac Intel",
     "windows_installer": "Instalador (.exe)",
     "windows_msi": "Instalador MSI",
@@ -29,7 +32,19 @@
     "linux_appimage": "Imagen de aplicación (universal)",
     "linux_deb": "Debian/Ubuntu (.deb)",
     "linux_rpm": "Fedora/RHEL (.rpm)",
-    "view_all_releases": "Ver todos los lanzamientos en GitHub"
+    "linux_aur": "Arch Linux (AUR)",
+    "view_all_releases": "Ver todos los lanzamientos en GitHub",
+    "next_steps": {
+      "eyebrow": "Después de instalar",
+      "title": "Ahora vamos a conectarte",
+      "description": "Tres páginas cortas y tendrás un dominio completo de QoreDB.",
+      "first_connection_title": "Tu primera conexión",
+      "first_connection_description": "Pega un DSN o rellena el formulario. Conéctate en menos de un minuto.",
+      "interface_tour_title": "Recorrido por la interfaz",
+      "interface_tour_description": "Barra lateral, pestañas, editor, panel de resultados: el modelo mental completo.",
+      "full_docs_title": "Explorar la documentación completa",
+      "full_docs_description": "Drivers, consultas, seguridad, atajos de teclado y más."
+    }
   },
   "changelog": {
     "title": "Registro de cambios",
@@ -72,7 +87,8 @@
       "discover_pro": "Ver en GitHub",
       "view_project": "Ver proyecto",
       "participate": "participar",
-      "community": "Unirse a Discord"
+      "community": "Unirse a Discord",
+      "read_docs": "Leer la documentación"
     },
     "social_proof": "Únase a <highlight>100+</highlight> desarrolladores que esperan la versión beta",
     "meta": {
@@ -220,6 +236,16 @@
           "peek": "Pase el cursor sobre las relaciones para ver los detalles"
         }
       },
+      "federation": {
+        "title": "Federación entre bases de datos",
+        "desc": "Ejecuta una sola consulta SQL que hace JOIN entre tablas de varias conexiones activas — Postgres, MySQL y más — sin exportar CSV ni montar un warehouse.",
+        "badge": "Una consulta, todas las BD",
+        "list": {
+          "join": "JOIN entre conexiones activas en una sola consulta",
+          "engine": "Federación con DuckDB, totalmente local",
+          "nowarehouse": "Sin exportaciones, sin ETL, sin warehouse que mantener"
+        }
+      },
       "safety_net": {
         "title": "Red de seguridad de consultas universales",
         "desc": "Prevención activa de errores. Detecta consultas peligrosas (ELIMINAR sin DÓNDE) y proporciona alertas inteligentes.",
@@ -253,7 +279,8 @@
     "title": "Deja de luchar contra tu herramienta de base de datos",
     "description": "Descarga QoreDB y ve la diferencia en 30 segundos.",
     "download_button": "Descargar gratis",
-    "github_button": "Estrella en GitHub"
+    "github_button": "Estrella en GitHub",
+    "docs_link": "O lee primero la documentación"
   },
   "database_strip": {
     "label": "Una interfaz, cada base de datos"
@@ -262,7 +289,7 @@
     "databases": "15 motores",
     "binary_size": "~15 MB binarios",
     "startup": "<1s de inicio",
-    "license": "apache 2.0"
+    "license": "Apache 2.0"
   },
   "social_proof": {
     "aria_label": "Estadísticas de popularidad del proyecto",
@@ -310,17 +337,17 @@
     },
     "values": {
       "qoredb": {
-        "opensource": "apache 2.0",
+        "opensource": "Apache 2.0",
         "multidb": "15 motores",
-        "native": "Óxido/Tauri",
+        "native": "Rust/Tauri",
         "local": "si",
-        "vault": "Argón2",
+        "vault": "Argon2",
         "safety": "si",
         "sandbox": "profesional",
         "fulltext": "si",
         "er_diagram": "si",
         "federation": "profesional",
-        "ai": "BIOK",
+        "ai": "BYOK",
         "plugins": "si",
         "ui": "si",
         "maturity": "Nuevo",
@@ -329,7 +356,7 @@
       "dbeaver": {
         "opensource": "Comunidad",
         "multidb": "si",
-        "native": "Java/Columpio",
+        "native": "Java/Swing",
         "local": "si",
         "vault": "Básico",
         "safety": "No",
@@ -420,13 +447,13 @@
     "title": "QoreDB Hoja de ruta",
     "subtitle": "Descubra los próximos pasos en el desarrollo de QoreDB.",
     "now": {
-      "title": "Recién lanzado: v0.1.23 → v0.1.31",
+      "title": "Recién lanzado: v0.1.23 → v0.1.34",
       "quote": "QoreDB es más rápido, más seguro y listo para uso diario serio.",
       "items": {
         "1": "15 controladores nativos: Elasticsearch y OpenSearch se unen a ClickHouse, Supabase, Neon y TimescaleDB",
         "2": "Data Contracts (Pro): reglas declarativas de calidad de datos re-evaluadas tras cada mutación",
         "3": "Instant Data API (Pro): convierte cualquier consulta guardada en un endpoint REST autenticado por token",
-        "4": "Helpers de backup y restore, atajos personalizables y fingerprinting de consultas en la auditoría",
+        "4": "Migrations Manager con schema-diff y detección de drift, sugerencias de índices, además de backup/restore y atajos personalizables",
         "5": "Workspaces, Time Travel, editor DDL, edición masiva y tab groups en los 9 idiomas de interfaz"
       },
       "goal": "Objetivo: una herramienta que los desarrolladores ya utilizan y recomiendan con confianza."
@@ -436,7 +463,7 @@
       "quote": "Vaya más allá de los clientes de bases de datos tradicionales.",
       "items": {
         "1": "Herramientas MongoDB más profundas y workflows de agregación enriquecidos",
-        "2": "Migraciones de esquema visuales y vistas previas de refactor",
+        "2": "Database Agent: chat agéntico que explora tu esquema y responde con datos reales",
         "3": "Notebooks más completos para exploración de datos y reporting",
         "4": "IA más inteligente para explicaciones, correcciones y revisiones",
         "5": "Primeros ladrillos de colaboración y sincronización local-first"
@@ -564,7 +591,7 @@
         "vault": "Bóveda cifrada (Argon2) + soporte de proxy y ssh-agent",
         "ssh": "Túnel SSH nativo (OpenSSH, proxy jump)",
         "safety": "Reglas de seguridad de producción (etiquetas de entorno, modo solo lectura) + registro de auditoría básico con redacción",
-        "audit_basic": "Registro de auditoría básico (50 entradas) con redacción de consultas",
+        "audit_basic": "Registro de auditoría básico (10 000 entradas) con redacción de consultas",
         "export_basic": "Exportación CSV / JSON / SQL y enlaces para compartir resultados",
         "shortcuts": "Historial, favoritos, tab groups, atajos de teclado y 9 idiomas de interfaz"
       }
@@ -573,7 +600,7 @@
       "title": "Pro",
       "tagline": "Para tu trabajo profesional",
       "description": "La actualización natural para desarrolladores exigentes.",
-      "price": "XX€",
+      "price": "49 €",
       "badge": "Pago único",
       "cta": "Comprar QoreDB Pro",
       "student_note": "¿Estudiante? Ponte en contacto.",
@@ -596,7 +623,7 @@
       "title": "Team",
       "tagline": "Pro para tus equipos",
       "description": "Las funciones Pro para todo el equipo, gestionadas por asientos.",
-      "price": "Próximamente",
+      "price": "99 €",
       "badge": "Por asiento",
       "cta": "Comprar",
       "features": {
@@ -718,6 +745,13 @@
   "license_management": {
     "title": "Gestión de licencias",
     "subtitle": "Verifique el estado de su licencia QoreDB Pro y vuelva a enviar su clave por correo electrónico.",
+    "licensing": {
+      "title": "Licencias del software",
+      "description": "QoreDB sigue un modelo open core con doble licencia: el núcleo del software se publica bajo licencia Apache 2.0, mientras que las funcionalidades Premium se publican bajo Business Source License 1.1, que pasa automáticamente a Apache 2.0 cuatro años después de la publicación de cada versión.",
+      "apache": "Apache 2.0 (núcleo)",
+      "bsl": "BSL 1.1 (Premium)",
+      "docs": "Modelo open core"
+    },
     "fields": {
       "email": "Correo electrónico",
       "payment_id": "ID de pago de raya"
@@ -771,15 +805,15 @@
   },
   "privacy_page": {
     "title": "Política de privacidad",
-    "last_updated": "Última actualización: 24 de enero de 2026",
+    "last_updated": "Última actualización: 22 de julio de 2026",
     "sections": {
       "intro": {
         "title": "1. Responsable del tratamiento de datos",
-        "content": "<p>El responsable del tratamiento es el editor del proyecto <strong>QoreDB</strong>.</p><p>La información completa sobre la entidad jurídica se especificará tan pronto como se finalice la estructura jurídica.</p>"
+        "content": "<p>El responsable del tratamiento es <strong>Raphaël Plassart</strong>, empresario individual (microempresa francesa), editor y operador de <strong>QoreDB</strong>.</p><ul><li>SIREN: 942 906 157</li><li>SIRET (establecimiento principal): 942 906 157 00014</li><li>Código de actividad (APE): 62.01Z — Programación informática</li><li>Contacto: <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>La dirección postal del establecimiento se comunica previa solicitud escrita a esta dirección de contacto.</p>"
       },
       "data_collection": {
         "title": "2. Recopilación de datos",
-        "content": "<p>QoreDB limita estrictamente la recopilación de datos personales.</p><h3>2.1 Datos de navegación (sitio web)</h3><p>Al consultar el sitio, se pueden recopilar datos técnicos anonimizados con fines estadísticos, incluidos:</p><ul><li>páginas visitadas,</li><li>tipo de dispositivo y navegador,</li><li>sistema operativo,</li><li>país o área geográfica aproximada,</li><li>tiempos de carga y rendimiento.</li></ul><p>Estos datos <strong>no permiten la identificación personal de un usuario</strong>.</p><p>QoreDB utiliza <strong>Vercel Analytics</strong>, una solución de análisis que respeta la privacidad:</p><ul><li>sin cookies,</li><li>sin seguimiento entre sitios,</li><li>sin perfiles publicitarios.</li></ul><h3>2.2 Proporcionado voluntariamente Datos</h3><p>Ciertos datos pueden ser proporcionados voluntariamente por el usuario, por ejemplo:</p><ul><li>durante el contacto,</li><li>durante el registro para recibir un boletín informativo,</li><li>durante el uso de servicios futuros que requieran autenticación.</li></ul><p>Los datos recopilados pueden incluya:</p><ul><li>dirección de correo electrónico,</li><li>nombre o seudónimo,</li><li>contenido del mensaje.</li></ul>"
+        "content": "<p>QoreDB limita estrictamente la recopilación de datos personales.</p><h3>2.1 Datos de navegación (sitio web)</h3><p>Al consultar el sitio, se pueden recopilar datos técnicos anonimizados con fines estadísticos, incluidos:</p><ul><li>páginas visitadas,</li><li>tipo de dispositivo y navegador,</li><li>sistema operativo,</li><li>país o área geográfica aproximada,</li><li>tiempos de carga y rendimiento.</li></ul><p>Estos datos <strong>no permiten la identificación personal de un usuario</strong>.</p><p>QoreDB utiliza <strong>Umami</strong>, una solución de analítica de código abierto autoalojada en su propio servidor (Hetzner, Alemania):</p><ul><li>sin cookies,</li><li>sin seguimiento entre sitios,</li><li>sin perfiles publicitarios,</li><li>sin transferencia de las estadísticas a un proveedor externo.</li></ul><h3>2.2 Proporcionado voluntariamente Datos</h3><p>Ciertos datos pueden ser proporcionados voluntariamente por el usuario, por ejemplo:</p><ul><li>durante el contacto,</li><li>durante el registro para recibir un boletín informativo,</li><li>durante el uso de servicios futuros que requieran autenticación.</li></ul><p>Los datos recopilados pueden incluya:</p><ul><li>dirección de correo electrónico,</li><li>nombre o seudónimo,</li><li>contenido del mensaje.</li></ul><h3>2.3 Datos relativos a las compras y licencias</h3><p>Al comprar una licencia, el pago es tratado por <strong>Stripe</strong>. Los datos de la tarjeta bancaria se introducen directamente en la infraestructura de Stripe: nunca transitan por los servidores de QoreDB ni se almacenan en ellos.</p><p>QoreDB solo conserva la información necesaria para emitir y gestionar las licencias:</p><ul><li>la dirección de correo electrónico de compra,</li><li>el identificador de pago o de suscripción de Stripe,</li><li>la clave de licencia asociada y, en su caso, los asientos asignados.</li></ul>"
       },
       "purposes": {
         "title": "3. Finalidades del Tratamiento",
@@ -791,11 +825,11 @@
       },
       "cookies": {
         "title": "5. Cookies y rastreadores",
-        "content": "<p>QoreDB <strong>no utiliza cookies publicitarias ni de seguimiento del comportamiento</strong>.</p><p>Las herramientas analíticas utilizadas no requieren consentimiento previo de acuerdo con la normativa aplicable.</p><p>Si se utilizaran cookies en el futuro, esta política se actualizaría y se implementaría un mecanismo de consentimiento.</p>"
+        "content": "<p>QoreDB <strong>no utiliza cookies publicitarias ni de seguimiento del comportamiento</strong>.</p><p>La única cookie que se deposita es estrictamente funcional (<code>NEXT_LOCALE</code>) y memoriza el idioma de visualización elegido. Está exenta de consentimiento y no permite ningún seguimiento.</p><p>La medición de audiencia (Umami, autoalojado) funciona sin cookies ni identificadores persistentes, por lo que no se requiere ningún banner de consentimiento.</p><p>Si en el futuro se utilizaran cookies sujetas a consentimiento, esta política se actualizaría y se implementaría un mecanismo de consentimiento.</p>"
       },
       "hosting": {
         "title": "6. Alojamiento y Subprocesadores",
-        "content": "<p>El sitio y los servicios QoreDB están alojados por proveedores que respetan altos estándares de seguridad y cumplimiento.</p><p>Los datos pueden procesarse en servidores ubicados en la Unión Europea o en países que ofrecen un nivel adecuado de protección de acuerdo con el RGPD.</p>"
+        "content": "<p>El sitio y los servicios de QoreDB se apoyan en los siguientes encargados del tratamiento:</p><ul><li><strong>Hetzner Online GmbH</strong> (Alemania) — alojamiento del sitio y de los servicios, en servidores situados en Núremberg, dentro de la Unión Europea;</li><li><strong>Cloudflare, Inc.</strong> (Estados Unidos) — gestión DNS del dominio, distribución de contenidos y protección frente a ataques;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagos, facturación y gestión de suscripciones;</li><li><strong>Resend</strong> — envío de correos transaccionales y de la newsletter;</li><li><strong>Sanity</strong> — gestión del contenido editorial (blog).</li></ul><p>La medición de audiencia se realiza con <strong>Umami</strong>, autoalojado en el servidor Hetzner de QoreDB: las estadísticas de visita no se transmiten a ningún proveedor externo.</p><p>Los datos del sitio se alojan en la Unión Europea. Los tratamientos técnicos realizados fuera de la Unión Europea (en particular por Cloudflare y Stripe) se basan en garantías conformes al RGPD, en especial las cláusulas contractuales tipo de la Comisión Europea.</p>"
       },
       "security": {
         "title": "7. Seguridad de los datos",
@@ -825,19 +859,23 @@
   },
   "legal_page": {
     "title": "Aviso Legal",
-    "last_updated": "Última actualización: 24 de enero de 2026",
+    "last_updated": "Última actualización: 22 de julio de 2026",
     "sections": {
       "editor": {
         "title": "Editor del sitio",
-        "content": "**Nombre del proyecto/Producto:** QoreDB\n**Director de publicación:** Raphaël Plassart\n**Estado:** Proyecto de software (núcleo abierto)\n\n> La información sobre la entidad jurídica (razón social, forma jurídica, dirección, número de registro) se especificará tan pronto como se finalice la estructura jurídica."
+        "content": "**Editor del sitio y del software:** Raphaël Plassart, empresario individual (*micro-entreprise* francesa)\n**Director de la publicación:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (establecimiento principal):** 942 906 157 00014\n**Código de actividad (APE):** 62.01Z — Programación informática\n**Registro:** empresa registrada en Francia, activa desde el 4 de abril de 2025\n**IVA:** IVA no aplicable, artículo 293 B del Código General de Impuestos francés\n**Contacto:** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB es un producto de software editado y explotado por esta microempresa, que asume todas las relaciones contractuales con las personas usuarias y clientes.\n\n> La dirección postal del establecimiento se comunica previa solicitud escrita a la dirección de contacto indicada."
       },
       "hosting": {
         "title": "Alojamiento",
-        "content": "El sitio web QoreDB está alojado en **Vercel Inc.**, ubicado en 340 S Lemon Ave #4133 Walnut, CA 91789, EE. UU.\n\nLos datos podrán estar alojados en infraestructuras ubicadas dentro de la Unión Europea o en países que ofrezcan un nivel de protección de datos conforme a la normativa vigente."
+        "content": "El sitio web QoreDB está alojado por **Hetzner Online GmbH**, Industriestr. 25, 91710 Gunzenhausen, Alemania ([hetzner.com](https://www.hetzner.com)).\n\nEl servidor utilizado se encuentra en el **centro de datos de Núremberg (Alemania, Unión Europea)**.\n\nLa gestión del nombre de dominio (DNS), la red de distribución de contenidos y la protección frente a ataques corren a cargo de **Cloudflare, Inc.**, 101 Townsend Street, San Francisco, CA 94107, EE. UU. ([cloudflare.com](https://www.cloudflare.com)).\n\nLos datos del sitio se alojan, por tanto, dentro de la Unión Europea. Los tratamientos técnicos realizados por Cloudflare fuera de la Unión Europea se basan en las cláusulas contractuales tipo de la Comisión Europea."
+      },
+      "payments": {
+        "title": "Pagos y facturación",
+        "content": "Los pagos de las licencias de QoreDB (Pro, Team) son tratados íntegramente por **Stripe**, proveedor de servicios de pago operado en Europa por **Stripe Payments Europe, Limited** (Irlanda).\n\n* ningún dato de tarjeta bancaria transita ni se almacena en los servidores de QoreDB,\n* el proceso de pago, la facturación y la gestión de suscripciones corren a cargo de Stripe (Stripe Checkout y Stripe Billing),\n* las facturas se emiten por cuenta de la microempresa Raphaël Plassart y son puestas a disposición por Stripe.\n\nAl acogerse la empresa al régimen francés de franquicia de IVA, los precios mostrados no incluyen IVA (artículo 293 B del Código General de Impuestos francés)."
       },
       "ip": {
         "title": "Propiedad Intelectual",
-        "content": "Todo el contenido presente en el sitio QoreDB, incluido en particular:\n\n* textos,\n* documentación,\n* publicaciones de blog,\n* elementos gráficos,\n* identidad visual,\n* el nombre, logotipo y marca de QoreDB,\n\nestá protegido por derechos de autor y leyes relacionadas con la propiedad intelectual.\n\nA menos que se indique lo contrario, el código fuente QoreDB se distribuye bajo un modelo **de núcleo abierto**:\n\n* una parte se publica bajo una licencia de código abierto,\n* ciertas funciones avanzadas pueden estar sujetas a una licencia de propiedad.\n\nQueda terminantemente prohibida cualquier reproducción, representación, modificación o explotación no autorizada de los contenidos o elementos protegidos."
+        "content": "Todo el contenido presente en el sitio QoreDB, en particular:\n\n* los textos,\n* la documentación,\n* los artículos del blog,\n* los elementos gráficos,\n* la identidad visual,\n* el nombre, el logotipo y la marca QoreDB,\n\nestá protegido por los derechos de autor y las leyes de propiedad intelectual.\n\nEl código fuente de QoreDB se distribuye según un modelo **open core**, con **doble licencia**:\n\n* el núcleo del software se publica bajo licencia **Apache 2.0**,\n* algunas funcionalidades avanzadas (Premium) se publican bajo la **Business Source License 1.1**.\n\nEl detalle figura en la sección Licencia siguiente. Queda estrictamente prohibida toda reproducción, representación, modificación o explotación no autorizada del contenido protegido, más allá de los derechos concedidos por dichas licencias."
       },
       "liability": {
         "title": "Acceso al sitio y responsabilidad",
@@ -853,11 +891,11 @@
       },
       "terms": {
         "title": "Términos de uso",
-        "content": "El uso del sitio, la documentación y el software QoreDB implica la aceptación total de:\n\n➡️ [Términos de uso](#)"
+        "content": "El uso del sitio, la documentación y el software QoreDB implica la aceptación total de:\n\n➡️ [Términos de uso](/terms)"
       },
       "license": {
         "title": "Licencia",
-        "content": "Las condiciones de licencia aplicables al software QoreDB se detallan en la página dedicada:\n\n➡️ [Licencia](#)"
+        "content": "QoreDB se distribuye según un modelo **open core**, con **doble licencia**:\n\n* **Núcleo — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: uso, modificación, redistribución y uso comercial libres, sin regalías, respetando las obligaciones de atribución.\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: código fuente consultable, uso personal e interno en la empresa gratuito, prohibida la comercialización de una oferta competidora. Cada versión pasa automáticamente a la licencia Apache 2.0 cuatro años después de su publicación.\n\nCada archivo fuente del repositorio incluye una cabecera SPDX que indica la licencia aplicable. Solo dan fe los archivos de licencia situados en la raíz del repositorio oficial.\n\n➡️ [Modelo open core y licencias](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "Contacto",
@@ -867,13 +905,13 @@
   },
   "terms_page": {
     "title": "Términos de servicio",
-    "last_updated": "Última actualización: 24 de enero de 2026",
+    "last_updated": "Última actualización: 21 de julio de 2026",
     "intro": "Estos Términos de servicio (en adelante, \"TdS\") rigen el acceso y el uso del sitio web **QoreDB**, su documentación, sus servicios en línea y el software QoreDB.\n\nAl acceder al sitio o utilizar el software QoreDB, el usuario reconoce haber leído estos ToS y aceptarlos sin reservas.",
     "copyright": "© QoreDB – Todos los derechos reservados.",
     "sections": {
       "definitions": {
         "title": "1. Definiciones",
-        "content": "* **QoreDB**: se refiere al proyecto de software, el sitio web, la documentación, las herramientas y servicios asociados.\n* **Usuario**: cualquier persona que acceda al sitio o utilice el software QoreDB.\n* **Software**: el software QoreDB, distribuido bajo un modelo de núcleo abierto.\n* **Sitio**: el sitio web oficial QoreDB."
+        "content": "* **QoreDB**: se refiere al proyecto de software, el sitio web, la documentación, las herramientas y servicios asociados.\n* **Usuario**: cualquier persona que acceda al sitio o utilice el software QoreDB.\n* **Software**: el software QoreDB, distribuido bajo un modelo de núcleo abierto.\n* **Sitio**: el sitio web oficial QoreDB.\n* **Editor**: Raphaël Plassart, empresario individual (*micro-entreprise* francesa), SIRET 942 906 157 00014, editor y operador del sitio y del software QoreDB."
       },
       "object": {
         "title": "2. Objeto",
@@ -885,43 +923,47 @@
       },
       "software_use": {
         "title": "4. Uso del software QoreDB",
-        "content": "El software QoreDB se distribuye bajo un modelo **de núcleo abierto**:\n\n* una parte del código se publica bajo una licencia de código abierto,\n* ciertas funciones, extensiones o servicios pueden estar sujetos a una licencia de propiedad independiente.\n\nLas condiciones precisas de uso, modificación y distribución del software están definidas en la Licencia **QoreDB**, disponible en el sitio y en los repositorios oficiales."
-      },
-      "user_obligations": {
-        "title": "6. Obligaciones del usuario",
-        "content": "El usuario acepta:\n\n* utilizar QoreDB de acuerdo con las leyes y regulaciones aplicables,\n* no infringir la seguridad, integridad o funcionamiento adecuado del sitio o del software,\n* no intentar el acceso no autorizado a sistemas o datos,\n* no utilizar QoreDB con fines fraudulentos, ilegales o abusivos.\n\nCualquier uso abusivo podrá tener como resultado la suspensión del acceso a los servicios."
-      },
-      "ip": {
-        "title": "7. Propiedad intelectual",
-        "content": "Todos los elementos del sitio QoreDB (textos, documentación, gráficos, logotipo, identidad visual) están protegidos por derechos de propiedad intelectual.\n\nA menos que se indique lo contrario, cualquier reproducción, representación o explotación no autorizada está prohibida.\n\nEl código fuente del software QoreDB está sujeto a los términos de la licencia aplicable, tal como se define en la página **Licencia**."
-      },
-      "liability": {
-        "title": "8. Responsabilidad",
-        "content": "QoreDB se proporciona \"tal cual\", sin garantía de ningún tipo.\n\nQoreDB no se hace responsable de:\n\n* daños directos o indirectos resultantes del uso del sitio o del software,\n* pérdida de datos, interrupción del negocio o daños comerciales,\n* consecuencias relacionadas con una configuración o uso inadecuado del software.\n\nEl usuario es el único responsable del uso que hace de QoreDB y de los datos que procesa."
-      },
-      "privacy": {
-        "title": "9. Datos personales",
-        "content": "El procesamiento de datos personales se rige por la **Política de Privacidad** accesible en el sitio QoreDB."
-      },
-      "external_links": {
-        "title": "10. Enlaces externos",
-        "content": "El sitio QoreDB puede contener enlaces a sitios o servicios de terceros. QoreDB no ejerce control sobre estos servicios y declina toda responsabilidad sobre su contenido o funcionamiento."
-      },
-      "updates": {
-        "title": "11. Cambios en los términos de servicio",
-        "content": "QoreDB se reserva el derecho de modificar estos ToS en cualquier momento.\n\nSe invita a los usuarios a consultar periódicamente la versión actual. La fecha de la última actualización se indica en la parte superior de la página."
-      },
-      "law": {
-        "title": "12. Ley Aplicable",
-        "content": "Estos Términos de Servicio se rigen por la ley francesa.\n\nEn caso de litigio, a falta de resolución amistosa, los tribunales competentes serán los de la jurisdicción aplicable de acuerdo con la legislación vigente."
-      },
-      "contact": {
-        "title": "13. Contacto",
-        "content": "Para cualquier pregunta relacionada con estos Términos de Servicio, el usuario puede contactar al equipo QoreDB a través de los canales oficiales indicados en el sitio."
+        "content": "El software QoreDB se distribuye según un modelo **open core**, con **doble licencia**:\n\n* el núcleo del software se publica bajo **[licencia Apache 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: uso, modificación, redistribución y uso comercial libres, sin regalías;\n* algunas funcionalidades avanzadas (Premium) se publican bajo la **[Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: código fuente consultable, uso personal e interno en la empresa gratuito, prohibida la comercialización de una oferta competidora, con paso automático a la licencia Apache 2.0 cuatro años después de la publicación de cada versión.\n\nCada archivo fuente incluye una cabecera SPDX que indica la licencia aplicable. En caso de discrepancia entre este resumen y los archivos de licencia publicados en los repositorios oficiales, prevalecen estos últimos."
       },
       "team_licensing": {
         "title": "5. Licencias Team (asientos nominativos)",
         "content": "La licencia **Team** se concede **por asiento**. Da derecho a tantos **asientos nominativos** como asientos contratados, a razón de **una (1) clave de licencia por persona**.\n\n* cada clave de asiento está vinculada a la dirección de correo de su titular,\n* **compartir una clave** entre varias personas está **prohibido**,\n* usar el software **más allá del número de asientos contratados** está **prohibido**.\n\nEl titular de la suscripción (administrador) asigna los asientos y vela por el cumplimiento de estas condiciones en su organización. Cualquier incumplimiento puede conllevar la suspensión o resolución de la licencia."
+      },
+      "payments": {
+        "title": "6. Compras, pago y facturación",
+        "content": "Las licencias de pago (Pro, Team) son comercializadas por la microempresa Raphaël Plassart.\n\n* los pagos son tratados exclusivamente por **Stripe** (Stripe Payments Europe, Limited); QoreDB no tiene acceso a ningún dato de tarjeta bancaria,\n* los precios se indican en euros, sin IVA — IVA no aplicable, artículo 293 B del Código General de Impuestos francés,\n* la factura es emitida y puesta a disposición por Stripe al finalizar el pago,\n* la clave de licencia se entrega por correo electrónico tras la confirmación del pago,\n* las suscripciones se renuevan automáticamente según la periodicidad contratada y pueden cancelarse en cualquier momento desde el portal de cliente de Stripe; la cancelación surte efecto al final del período en curso.\n\nDe conformidad con el artículo L221-28 del Código de Consumo francés, la persona consumidora que solicita la entrega inmediata de su clave de licencia renuncia a su derecho de desistimiento una vez ejecutada íntegramente la prestación. Cualquier consulta relativa a un pago o a un reembolso puede dirigirse a la dirección de contacto indicada en el sitio."
+      },
+      "user_obligations": {
+        "title": "7. Obligaciones del usuario",
+        "content": "El usuario acepta:\n\n* utilizar QoreDB de acuerdo con las leyes y regulaciones aplicables,\n* no infringir la seguridad, integridad o funcionamiento adecuado del sitio o del software,\n* no intentar el acceso no autorizado a sistemas o datos,\n* no utilizar QoreDB con fines fraudulentos, ilegales o abusivos.\n\nCualquier uso abusivo podrá tener como resultado la suspensión del acceso a los servicios."
+      },
+      "ip": {
+        "title": "8. Propiedad intelectual",
+        "content": "Todos los elementos del sitio QoreDB (textos, documentación, gráficos, logotipo, identidad visual) están protegidos por derechos de propiedad intelectual.\n\nA menos que se indique lo contrario, cualquier reproducción, representación o explotación no autorizada está prohibida.\n\nEl código fuente del software QoreDB está sujeto a los términos de la licencia aplicable, tal como se define en la página **Licencia**."
+      },
+      "liability": {
+        "title": "9. Responsabilidad",
+        "content": "QoreDB se proporciona \"tal cual\", sin garantía de ningún tipo.\n\nQoreDB no se hace responsable de:\n\n* daños directos o indirectos resultantes del uso del sitio o del software,\n* pérdida de datos, interrupción del negocio o daños comerciales,\n* consecuencias relacionadas con una configuración o uso inadecuado del software.\n\nEl usuario es el único responsable del uso que hace de QoreDB y de los datos que procesa."
+      },
+      "privacy": {
+        "title": "10. Datos personales",
+        "content": "El procesamiento de datos personales se rige por la **Política de Privacidad** accesible en el sitio QoreDB."
+      },
+      "external_links": {
+        "title": "11. Enlaces externos",
+        "content": "El sitio QoreDB puede contener enlaces a sitios o servicios de terceros. QoreDB no ejerce control sobre estos servicios y declina toda responsabilidad sobre su contenido o funcionamiento."
+      },
+      "updates": {
+        "title": "12. Cambios en los términos de servicio",
+        "content": "QoreDB se reserva el derecho de modificar estos ToS en cualquier momento.\n\nSe invita a los usuarios a consultar periódicamente la versión actual. La fecha de la última actualización se indica en la parte superior de la página."
+      },
+      "law": {
+        "title": "13. Ley Aplicable",
+        "content": "Estos Términos de Servicio se rigen por la ley francesa.\n\nEn caso de litigio, a falta de resolución amistosa, los tribunales competentes serán los de la jurisdicción aplicable de acuerdo con la legislación vigente."
+      },
+      "contact": {
+        "title": "14. Contacto",
+        "content": "Para cualquier pregunta relacionada con estos Términos de Servicio, el usuario puede contactar al equipo QoreDB a través de los canales oficiales indicados en el sitio."
       }
     }
   },
@@ -1058,16 +1100,29 @@
     "not_found_title": "No encontrado"
   },
   "blog_page": {
+    "eyebrow": "Diario técnico",
     "title": "El Blog de QoreDB",
     "subtitle": "Artículos, tutoriales y noticias sobre QoreDB y el desarrollo moderno.",
     "search_placeholder": "Buscar artículos...",
+    "search_label": "Buscar en los artículos",
+    "filters": "Búsqueda y filtros",
     "category": "Categoría",
     "all_categories": "Todas las categorías",
     "sort_by": "Ordenar por",
+    "relevance": "Más relevantes",
     "newest": "Más recientes",
     "oldest": "Más antiguos",
     "title_asc": "Título (A-Z)",
     "title_desc": "Título (Z-A)",
+    "clear_filters": "Restablecer",
+    "featured": "Destacado",
+    "read_article": "Leer artículo",
+    "archive": "Explorar",
+    "latest_articles": "Últimos artículos",
+    "search_results": "Resultados para «{{query}}»",
+    "articles_count": "{{count}} artículos",
+    "published_articles": "artículos publicados",
+    "matching_articles": "artículos encontrados",
     "no_results": "No se encontraron artículos.",
     "try_adjusting": "Intenta ajustar tus filtros o tu búsqueda.",
     "previous": "Anterior",
@@ -1078,9 +1133,16 @@
     "back_to_blog": "Volver al blog",
     "reading_time": "{{minutes}} min de lectura",
     "related_articles": "Artículos relacionados",
+    "table_of_contents": "En este artículo",
+    "previous_article": "Artículo anterior",
+    "next_article": "Artículo siguiente",
+    "updated": "Actualizado el {{date}}",
+    "reading_progress": "Progreso de lectura",
     "share": "Compartir",
     "copied": "¡Copiado!",
-    "copy_link": "Copiar enlace"
+    "copy_link": "Copiar enlace",
+    "copy_code": "Copiar el código",
+    "code_copied": "Código copiado"
   },
   "docs": {
     "search_label": "Buscar en la documentación",
@@ -1094,7 +1156,14 @@
     "not_found_title": "Página no encontrada",
     "not_found_body": "Esta página de documentación no existe o aún no se ha escrito.",
     "landing_title": "Documentación de QoreDB",
-    "landing_subtitle": "Todo lo necesario para instalar QoreDB, conectar tus bases de datos y avanzar más rápido."
+    "landing_subtitle": "Todo lo necesario para instalar QoreDB, conectar tus bases de datos y avanzar más rápido.",
+    "fallback_banner_title": "Mostrando la versión en inglés",
+    "fallback_banner_body": "Esta página aún no se ha traducido. A continuación se muestra la versión en inglés.",
+    "learning_hub": "Centro de aprendizaje",
+    "quick_start_cta": "Empezar rápido",
+    "databases_cta": "Bases de datos",
+    "more_pages": "+ {{remaining}} más",
+    "explore_section": "Explorar la sección"
   },
   "marketplace": {
     "categories": {
@@ -1105,11 +1174,99 @@
       "integrations": "Integraciones"
     },
     "submit": {
+      "title": "Enviar un plugin",
+      "subtitle": "Los plugins son revisados por los mantenedores de QoreDB antes de aparecer en el marketplace. La revisión suele tardar unos días: revisamos el manifiesto, las capacidades solicitadas y el origen del módulo WASM.",
+      "field_plugin_id": "ID del plugin",
+      "field_plugin_id_hint": "DNS inverso, p. ej. acme.linter. Debe coincidir con plugin.json#id.",
+      "field_name": "Nombre visible",
+      "field_version": "Versión",
+      "field_kind": "Tipo de plugin",
+      "field_kind_declarative": "Declarativo — solo snippets, temas y plantillas de conexión",
+      "field_kind_executable": "Ejecutable — incluye un módulo WASM aislado en un sandbox",
+      "field_description": "Descripción breve",
+      "field_author": "Autor / mantenedor",
+      "field_contact_email": "Correo de contacto",
+      "field_contact_email_hint": "Nos pondremos en contacto para preguntas de seguimiento o para confirmar la aprobación. No se publica.",
+      "field_repository_url": "Repositorio de código (opcional)",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "Pega el manifiesto tal cual. El ID y la versión del plugin deben coincidir con los campos de arriba.",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "Archivo plano que contiene plugin.json y el módulo WASM (si lo hay). Máximo 8 MiB, el mismo presupuesto de instalación que aplica QoreDB.",
+      "submit_button": "Enviar para revisión",
+      "submitting": "Enviando…",
+      "success_title": "Envío recibido",
+      "success_body": "Gracias. Tu plugin está en la cola de revisión: te enviaremos un correo a {{email}} en cuanto lo revisemos.",
+      "error_title": "Error en el envío",
+      "checklist_title": "Antes de enviar",
+      "checklist_items": [
+        "El módulo WASM se instancia sin problemas y exporta los hooks declarados en el manifiesto.",
+        "Cada capacidad que solicita el manifiesto es realmente necesaria: los usuarios las ven en el diálogo de consentimiento.",
+        "Si el plugin hace llamadas HTTP, allowedHosts es una lista precisa, no un comodín.",
+        "runtime.integrity contiene el sha256 de los bytes .wasm finales.",
+        "El archivo contiene solo plugin.json + el módulo WASM en su raíz."
+      ],
       "field_category": "Categoría",
       "field_category_hint": "Elige la más cercana. El revisor puede ajustarla."
     },
     "eyebrow": "Biblioteca de plugins",
-    "page_subtitle": "Amplía QoreDB con plugins: snippets, temas, plantillas de conexión y módulos WASM."
+    "page_title": "Plugins",
+    "page_subtitle": "Amplía QoreDB con plugins: snippets, temas, plantillas de conexión y módulos WASM.",
+    "section_title": "Plugins disponibles",
+    "section_subtitle": "Todos los plugins de esta lista superaron la revisión de los mantenedores y están en el registro público en GitHub.",
+    "registry_link_label": "Explorar el registro en GitHub",
+    "submit_cta": "Enviar un plugin",
+    "empty": "Aún no hay plugins. Sé el primero en publicar uno.",
+    "search_placeholder": "Buscar plugins…",
+    "filter_all": "Todos",
+    "filter_declarative": "Declarativo",
+    "filter_executable": "Ejecutable (WASM)",
+    "registry_unavailable": "El registro no está disponible temporalmente. Inténtalo de nuevo en unos minutos.",
+    "kind": {
+      "declarative": "Declarativo",
+      "executable": "Ejecutable (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "por {{author}}",
+      "view_details": "Ver detalles"
+    },
+    "detail": {
+      "back": "Volver a los plugins",
+      "install_title": "Instalar en QoreDB",
+      "install_step_1": "Abre QoreDB → Ajustes → Explorar y haz clic en Instalar. La app descarga el archivo, verifica su sha256 contra esta página y luego valida el manifiesto antes de que se active ningún hook.",
+      "install_step_2": "O descarga el archivo directamente e instálalo desde Ajustes → Plugins → Instalar plugin. El host de QoreDB vuelve a comprobar el manifiesto de la misma manera.",
+      "download_archive": "Descargar plugin.zip ({{size}})",
+      "view_manifest": "Ver plugin.json",
+      "manifest_heading": "El manifiesto de un vistazo",
+      "manifest_id": "ID del plugin",
+      "manifest_version": "Versión",
+      "manifest_qoredb": "Compatibilidad con QoreDB",
+      "manifest_author": "Autor",
+      "manifest_kind": "Tipo",
+      "manifest_archive_sha": "sha256 del archivo",
+      "manifest_integrity": "Integridad del WASM",
+      "manifest_no_integrity": "Sin firmar — QoreDB marcará este plugin como Sin firmar en el panel.",
+      "manifest_hooks": "Hooks del ciclo de vida",
+      "manifest_no_hooks": "Sin hooks del ciclo de vida (plugin declarativo).",
+      "manifest_capabilities": "Capacidades solicitadas",
+      "manifest_no_capabilities": "No se solicitan capacidades.",
+      "manifest_contributes": "Aporta",
+      "contributes_none": "Sin aportaciones declarativas.",
+      "contributes_snippets": "{{count}} snippet",
+      "contributes_snippets_plural": "{{count}} snippets",
+      "contributes_templates": "{{count}} plantilla de conexión",
+      "contributes_templates_plural": "{{count}} plantillas de conexión",
+      "contributes_themes": "{{count}} tema",
+      "contributes_themes_plural": "{{count}} temas",
+      "contributes_viewers": "{{count}} visor de resultados",
+      "contributes_viewers_plural": "{{count}} visores de resultados",
+      "contributes_commands": "Comandos: {{commands}}",
+      "versions_heading": "Todas las versiones",
+      "version_label": "Versión {{version}}",
+      "version_size": "archivo de {{size}}",
+      "not_found_title": "Plugin no encontrado",
+      "not_found_subtitle": "Este plugin no está en el registro. Puede que se haya renombrado o eliminado."
+    }
   },
   "features_common": {
     "tier_pro": "Pro",
@@ -1280,6 +1437,353 @@
         "title": "Formaliza tus expectativas sobre los datos",
         "body": "Los Data Contracts forman parte de QoreDB Pro. Descarga la aplicación y escribe tu primer contrato."
       }
+    },
+    "instant-api": {
+      "eyebrow": "Integration · Instant Data API",
+      "title": "Instant Data API",
+      "subtitle": "Convierte una consulta SQL parametrizada en un endpoint REST de solo lectura en tu máquina, en aproximadamente un minuto.",
+      "teaser": "Un endpoint GET de solo lectura en 127.0.0.1, autenticado con un token Bearer y documentado por un archivo OpenAPI 3.1 generado a partir de tus endpoints activos.",
+      "problem": {
+        "title": "El problema",
+        "body": "Un compañero necesita una cifra que vive en tu base de datos. Un script necesita leer una tabla. Un panel local necesita una consulta. Cada vez la respuesta es la misma: montar un pequeño backend, cablear una conexión, exponer una ruta, gestionar la autenticación. Horas de fontanería para una consulta que ya habías escrito."
+      },
+      "solution": {
+        "title": "Cómo lo resuelve QoreDB",
+        "intro": "QoreDB incorpora un servidor HTTP que sirve tus consultas como endpoints GET. Tú declaras la consulta y sus parámetros; QoreDB se encarga del enrutado, el tipado, la autenticación y la documentación. El servidor se enlaza a 127.0.0.1 y a nada más: no hay ningún ajuste para exponerlo en la red.",
+        "steps": [
+          {
+            "title": "Declara el endpoint",
+            "body": "Le das un nombre, eliges una conexión y escribes la consulta SQL con sus parámetros marcados como {{country}}. Cada parámetro se declara con un tipo (string, integer, float, boolean), un indicador de obligatoriedad y un valor por defecto opcional."
+          },
+          {
+            "title": "Arranca el servidor",
+            "body": "Escucha en 127.0.0.1:4787. HTTPS está disponible mediante un certificado autofirmado generado en memoria al arrancar y que nunca se escribe en disco. Arrancarlo es un acto deliberado: no es un servicio en segundo plano que corre a tus espaldas."
+          },
+          {
+            "title": "Llámalo con un token",
+            "body": "Cada endpoint lleva su propio token Bearer, mostrado una sola vez al crearlo. En disco solo se guarda un hash Argon2id, nunca el token en sí. Regenerar un token cuesta un clic y revoca el anterior de inmediato."
+          },
+          {
+            "title": "Lee el documento OpenAPI",
+            "body": "GET /openapi.json devuelve un documento OpenAPI 3.1 generado a partir del registro activo: una ruta por endpoint, parámetros tipados y el esquema de seguridad bearer. Pásaselo a tu generador de clientes."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un ejemplo concreto",
+        "intro": "Un endpoint llamado orders_top, sobre una conexión PostgreSQL, con un parámetro string obligatorio:",
+        "caption": "Los valores nunca se concatenan en crudo: cada parámetro se escapa para el dialecto de destino, y el SQL final se vuelve a analizar antes de ejecutarse. Todo lo que se clasifica como mutación se rechaza."
+      },
+      "limits": {
+        "title": "Los límites, con total transparencia",
+        "intro": "La Instant Data API apunta a scripts locales, notebooks e integraciones puntuales. No es un backend de aplicación, y sus fronteras son explícitas:",
+        "items": [
+          "Solo loopback. El servidor se enlaza a 127.0.0.1; no hay opción para exponerlo en la red.",
+          "Sin cabeceras CORS, así que una página web no puede llamar a estos endpoints desde un navegador. El objetivo son curl, los scripts, los backends locales y los notebooks.",
+          "Solo GET, solo lectura. El SQL final se analiza en cada petición y se rechaza si se clasifica como mutación. Esa comprobación ocurre en el momento de la petición, no al guardar el endpoint.",
+          "Límite de 10 peticiones por segundo por endpoint, ráfaga de 10, no configurable.",
+          "El tope de filas (100 por defecto) recorta la respuesta después de que la consulta ya se haya ejecutado. Para una tabla grande, escribe tu propio LIMIT en la consulta.",
+          "Sin paginación y sin tiempo de espera de consulta: una consulta lenta bloquea hasta que el driver responde.",
+          "Se admiten catorce identificadores de driver: la familia PostgreSQL, MySQL/MariaDB, SQLite, DuckDB, SQL Server y ClickHouse. MongoDB, Redis y los demás se rechazan.",
+          "El servidor no arranca solo; lo arrancas en cada sesión. Las definiciones de tus endpoints sí persisten.",
+          "Un endpoint no se puede editar. Cambiar una consulta implica borrarlo y volver a crearlo, lo que emite un token nuevo."
+        ]
+      },
+      "cta": {
+        "title": "Expón una consulta, no un backend",
+        "body": "La Instant Data API forma parte de QoreDB Pro. Descarga la aplicación y convierte tu primera consulta en un endpoint."
+      }
+    },
+    "sandbox": {
+      "eyebrow": "Data Tools · Modo Sandbox",
+      "title": "Modo Sandbox",
+      "subtitle": "Retén tus ediciones del grid en local, lee el SQL que producen y aplícalas, o descártalas y sigue adelante.",
+      "teaser": "Las ediciones hechas en el grid de datos se retienen en local en lugar de escribirse. Lees el SQL antes de que nada llegue a la base de datos.",
+      "problem": {
+        "title": "El problema",
+        "body": "En un grid de datos, una edición es una escritura. Cambias una celda y ya está confirmada. En una tabla de producción, un valor mal escrito o un borrado en la fila equivocada no deja margen para reconsiderar. Y cuando diez cambios van juntos, no hay ningún momento en el que los veas como conjunto, antes de que aterricen."
+      },
+      "solution": {
+        "title": "Cómo lo resuelve QoreDB",
+        "intro": "El modo Sandbox intercepta las ediciones que haces a través del grid. Nada se envía a la base de datos: los cambios se retienen en local, el grid te muestra el resultado proyectado y un panel lista todo lo pendiente. Cuando estés listo, QoreDB te muestra el SQL y tú decides.",
+        "steps": [
+          {
+            "title": "Actívalo",
+            "body": "Un botón, o Cmd/Ctrl+Shift+S. Un borde de color alrededor del espacio de trabajo y una insignia hacen que el estado sea imposible de pasar por alto, porque una sandbox en la que olvidaste que estabas es peor que ninguna sandbox."
+          },
+          {
+            "title": "Edita como siempre",
+            "body": "La edición en línea del grid, el modal de fila, los borrados y la edición masiva alimentan la sandbox en lugar de la base de datos. El grid muestra el resultado que obtendrías, así que puedes seguir trabajando sobre tus propios cambios pendientes."
+          },
+          {
+            "title": "Revisa el conjunto entero",
+            "body": "Un panel Pending Changes agrupa todo por tabla con recuentos por operación. Las ediciones redundantes se pliegan entre sí: cinco ediciones sobre la misma fila nueva son un insert, y borrar una fila que acabas de insertar la elimina del conjunto por completo."
+          },
+          {
+            "title": "Lee el SQL y luego decide",
+            "body": "Generate SQL abre las instrucciones correspondientes a tus cambios, listas para copiar o descargar. Apply las escribe; en una conexión de producción tienes que escribir APPLY para confirmar. O lo descartas todo, y nunca pasó nada."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un ejemplo concreto",
+        "intro": "Tras editar una fila y borrar otra en una tabla PostgreSQL, el script generado dice:",
+        "caption": "Este script es lo que revisas y puedes exportar. Aplicar reproduce cada cambio a través del driver en lugar de ejecutar el script en sí, de modo que lo que lees y lo que se ejecuta son equivalentes, no idénticos."
+      },
+      "limits": {
+        "title": "Los límites, con total transparencia",
+        "intro": "El modo Sandbox cubre las ediciones que haces a través del grid. Es una frontera real, y vale la pena ser preciso sobre dónde se detiene:",
+        "items": [
+          "Cubre los datos, no el esquema. CREATE, ALTER y DROP se ejecutan contra la base de datos de inmediato, haya sandbox o no.",
+          "Cubre los cambios del grid, no el editor SQL ni el generador de datos. Un DELETE escrito en el editor, o un lote de filas generadas, se ejecuta al momento: la sandbox no es un interceptor de consultas.",
+          "No se reserva nada en la base de datos. Si alguien cambia una fila mientras tú la retienes en la sandbox, aplicar sobrescribe su cambio.",
+          "Los cambios pendientes los guarda QoreDB en local y sobreviven a un reinicio. No son una transacción de base de datos y no mantienen ningún bloqueo.",
+          "La generación de SQL apunta a PostgreSQL, MySQL/MariaDB, SQLite y SQL Server. Los motores compatibles con PostgreSQL recurren a la sintaxis de PostgreSQL con una advertencia.",
+          "Que la aplicación se ejecute dentro de una única transacción depende del driver. Donde no es así, un fallo a medio camino deja aplicados los cambios anteriores.",
+          "Las actualizaciones y los borrados necesitan que las columnas de clave primaria estén presentes en el resultado para poder rastrearse."
+        ]
+      },
+      "cta": {
+        "title": "Lee antes de escribir",
+        "body": "El modo Sandbox forma parte de QoreDB Pro. Descarga la aplicación y pon un paso entre tus ediciones y tus tablas de producción."
+      }
+    },
+    "migrations": {
+      "eyebrow": "Schema · Migrations Manager",
+      "title": "Migrations Manager",
+      "subtitle": "Migraciones .sql versionadas en tu repositorio, aplicadas y revertidas desde el cliente, con el estado aplicado registrado en la propia base de datos.",
+      "teaser": "Archivos .sql planos con secciones up y down, confirmados junto a tu código, y una tabla de historial que te dice qué se ejecutó realmente.",
+      "problem": {
+        "title": "El problema",
+        "body": "Los cambios de esquema viajan mal. Una migración aplicada en un portátil y olvidada en staging. Un ALTER ejecutado a mano en una consola, sin rastro. Un rollback que nadie escribió. O metes un framework de migraciones completo con su runtime, o mantienes una carpeta de archivos SQL y una hoja de cálculo, y confías en la suerte."
+      },
+      "solution": {
+        "title": "Cómo lo resuelve QoreDB",
+        "intro": "QoreDB lee archivos .sql planos de una carpeta de tu proyecto, los aplica a la conexión que elijas y registra lo que hizo en una tabla dentro de la propia base de datos. Sin agente, sin dependencia de runtime en tu aplicación: los archivos son artefactos de Git, el estado vive donde vive el esquema.",
+        "steps": [
+          {
+            "title": "Un archivo por migración",
+            "body": "Los archivos viven en .qoredb/migrations/, con el nombre version_slug.sql, con una sección -- migrate:up y una sección -- migrate:down. SQL plano, versionado con tu código, legible sin QoreDB instalado."
+          },
+          {
+            "title": "El estado en la base de datos",
+            "body": "Una tabla qoredb_migrations registra la versión, la suma de comprobación del script up, cuándo se ejecutó, cuánto tardó y a través de qué conexión. Se crea fuera de la transacción, así que sobrevive al rollback de la migración que está registrando."
+          },
+          {
+            "title": "Cada instrucción se revisa antes de que se ejecute la primera",
+            "body": "El script se divide en instrucciones preservando el texto exacto, y cada una se clasifica y se contrasta con tus reglas de seguridad antes de que empiece la ejecución. En una conexión de producción, las instrucciones peligrosas se retienen por política en lugar de descubrirse a medio camino."
+          },
+          {
+            "title": "Estados que no mienten",
+            "body": "Aplicada, revertida, fallida. Una migración que se rompió a medio camino se marca como fallida, no como pendiente, porque pendiente sugeriría que no pasó nada. Y si editas un script up ya aplicado, QoreDB se niega a volver a ejecutarlo: la suma de comprobación ya no coincide con el esquema que describía. Escribir una migración nueva es la única reparación segura."
+          },
+          {
+            "title": "Genera el diff (Pro)",
+            "body": "Captura una baseline de tu esquema y QoreDB escribe la migración de la diferencia: tablas añadidas y modificadas en la sección up, lo inverso en la down, con las instrucciones irreversibles comentadas en lugar de adivinadas. Check drift compara el esquema activo con tu baseline, y una vista Prod↔Staging enfrenta lado a lado dos conexiones del mismo driver."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un ejemplo concreto",
+        "intro": "Una migración que añade una columna y su índice. Este es el archivo completo:",
+        "caption": "Un archivo, dos direcciones, sin framework. Se lee igual en una revisión de código que en QoreDB."
+      },
+      "limits": {
+        "title": "Los límites, con total transparencia",
+        "intro": "El Migrations Manager es un runner de archivos SQL, no un framework de migraciones. Lo que no hace importa tanto como lo que hace:",
+        "items": [
+          "Once drivers: la familia PostgreSQL, MySQL/MariaDB, SQLite, DuckDB/MotherDuck y SQL Server. MongoDB, Redis, Elasticsearch y ClickHouse quedan fuera del alcance.",
+          "En MySQL y MariaDB, el DDL no es transaccional. Cualquier migración que contenga DDL se ejecuta fuera de una transacción: si falla a medio camino, no se deshace nada y la migración se marca como fallida para que la inspecciones. MySQL además exige una base de datos de destino explícita.",
+          "No hay garantía de orden ni botón para aplicar todo. Cada migración se aplica por su cuenta; nada te impide ejecutar la tercera antes que la primera.",
+          "El rollback es el SQL que escribiste en la sección down. Cuando el diff de esquema no puede invertir una instrucción sin inventar datos, la comenta en lugar de adivinar.",
+          "El diff de esquema cubre tablas, columnas, índices, claves foráneas de una sola columna y claves primarias. Vistas, secuencias, triggers, procedimientos, restricciones CHECK y claves foráneas compuestas no se introspeccionan.",
+          "La detección de drift es una comparación que tú lanzas, contra una baseline que capturaste. No es monitorización continua, y la baseline se queda en tu máquina: deliberadamente no se confirma en el repositorio.",
+          "Los conflictos de Git no se gestionan. Dos ramas que crean la misma versión se detectan al aplicar, no al fusionar."
+        ]
+      },
+      "cta": {
+        "title": "Despliega tu esquema como tu código",
+        "body": "El Migrations Manager se incluye en el núcleo gratuito de QoreDB. La generación del diff de esquema, la detección de drift y la comparación Prod↔Staging son Pro."
+      }
+    },
+    "notebooks": {
+      "eyebrow": "Analysis · Notebooks",
+      "title": "Notebooks de base de datos",
+      "subtitle": "Documentos ejecutables que mezclan SQL y Markdown sobre una conexión activa, guardados como un archivo plano que tu equipo puede revisar en una pull request.",
+      "teaser": "Celdas SQL y Markdown, parámetros tipados, Run All o Run From Here: en un archivo JSON cuyo diff se lee limpio en Git.",
+      "problem": {
+        "title": "El problema",
+        "body": "Una consulta que responde a una pregunta real nunca es solo una consulta. Necesita el contexto que la rodea: por qué ese filtro, qué significa realmente el número, qué comprobar después. Ese contexto acaba en un hilo de Slack, en una página de wiki o en ninguna parte. Seis meses más tarde la consulta sigue en el editor de alguien y nadie recuerda para qué era. Las herramientas que resuelven esto bien —Jupyter, los notebooks alojados— implican un runtime de Python, otro driver que configurar y tus credenciales en un segundo sitio."
+      },
+      "solution": {
+        "title": "Cómo lo resuelve QoreDB",
+        "intro": "Los notebooks de QoreDB son documentos hechos de celdas: SQL sobre tu conexión activa, Markdown para todo lo que el SQL no puede decir. Se ejecutan en el cliente que ya tienes conectado y se guardan en un archivo que confirmas junto a tu código.",
+        "steps": [
+          {
+            "title": "Celdas sobre una conexión activa",
+            "body": "Una celda SQL se ejecuta en la conexión y el espacio de nombres del notebook, y muestra su resultado ahí mismo. Una celda Markdown contiene el razonamiento. Funciona con todas las bases que QoreDB soporta, porque la celda entrega su fuente a la sesión sin tocarla: en una conexión MongoDB escribes MQL en la misma celda y el driver la interpreta."
+          },
+          {
+            "title": "Parámetros, tipados y declarados una sola vez",
+            "body": "Declara una variable y úsala como $customer_id o {{date_from}} en cualquier punto del notebook. Cuatro tipos —texto, número, fecha, selección—, cada uno con su propio campo de entrada. Cambia el valor arriba, vuelve a ejecutar, y el documento entero se ajusta."
+          },
+          {
+            "title": "Run All, o Run From Here",
+            "body": "La ejecución es secuencial y se detiene en el primer error, así una celda rota no arrastra diez resultados engañosos debajo. Una ejecución se puede cancelar a mitad de vuelo, y la cancelación llega a la base de datos, no solo a la interfaz."
+          },
+          {
+            "title": "Un archivo, no un documento en la nube de alguien",
+            "body": "El formato .qnb es JSON indentado. Los resultados y el estado de ejecución se eliminan al guardar, así que un diff muestra lo que cambiaste y no lo que ejecutaste por última vez. Se revisa como código porque es un archivo de tu repositorio."
+          },
+          {
+            "title": "Celdas AI (Pro)",
+            "body": "Describe lo que quieres en lenguaje corriente; la celda escribe SQL en una celda nueva justo debajo, que lees antes de ejecutarla. Bring your own key: OpenAI, Anthropic, Mistral, Gemini, DeepSeek u Ollama para un modelo que nunca sale de tu máquina. Las claves viven en el llavero de tu sistema."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un ejemplo concreto",
+        "intro": "Una celda SQL que usa dos variables declaradas al principio del notebook:",
+        "caption": "Las variables se sustituyen como literales entrecomillados, no como parámetros vinculados. Los números deben parsearse como finitos, las fechas deben ajustarse a una forma ISO y el texto se escapa antes de llegar a la consulta. Sustituyen valores, no identificadores: una variable en una cláusula FROM no hará lo que esperas."
+      },
+      "limits": {
+        "title": "Los límites, con total transparencia",
+        "intro": "Un notebook es un documento, no un planificador ni una herramienta BI. Dónde se detiene:",
+        "items": [
+          "Las celdas son SQL y Markdown, más las celdas AI y contract en Pro. Las celdas de gráfico y las referencias entre celdas existen en el formato de archivo pero aún no tienen interfaz: dalas por no disponibles.",
+          "Las variables sustituyen valores, no identificadores ni fragmentos de SQL. Una variable en una cláusula FROM o en la posición de una columna no funcionará.",
+          "La ejecución es secuencial y se detiene en el primer error. No hay interruptor continue-on-error, ni ejecución en paralelo, ni programación.",
+          "Los resultados se mantienen en memoria. Un SELECT sin LIMIT carga todas las filas en la aplicación antes de que la celda trunque lo que muestra.",
+          "El notebook no fija ningún tiempo de espera de consulta propio; hereda el que defina tu política de gobernanza, y no define ninguno si la política no lo hace.",
+          "La exportación a Markdown conserva las celdas SQL y Markdown. La exportación a HTML autónomo muestra el Markdown como texto plano en lugar de formatearlo, y ninguna de las dos incluye resultados.",
+          "Un borrador local se autoguarda cada 30 segundos. Es una red ante caídas, no un historial de versiones: el archivo en disco es la fuente de verdad.",
+          "Las celdas AI necesitan una clave que aportas tú, y el esquema de las tablas en alcance se envía al proveedor que elijas, con los nombres de columna sensibles redactados. Tus filas no se envían. Solo Ollama lo mantiene todo en local."
+        ]
+      },
+      "cta": {
+        "title": "Una consulta que merece guardarse merece explicarse",
+        "body": "Los notebooks se incluyen en el núcleo gratuito de QoreDB. Las celdas AI y las celdas contract son Pro."
+      }
+    },
+    "production-safety": {
+      "eyebrow": "Safety · Barreras de producción",
+      "title": "Barreras de producción",
+      "subtitle": "Etiqueta una conexión como producción y QoreDB lee cada instrucción antes de ejecutarla, con un parser SQL real y no con una coincidencia de patrones.",
+      "teaser": "Las conexiones de desarrollo, staging y producción se comportan de forma distinta. Las instrucciones peligrosas se clasifican a partir del AST analizado, no con una regex sobre la primera palabra.",
+      "problem": {
+        "title": "El problema",
+        "body": "Todo desarrollador con acceso a producción tiene la misma historia: la pestaña equivocada, un DELETE que iba destinado a una base local, una cláusula WHERE que nunca llegó a la consulta. La herramienta hizo exactamente lo que se le dijo, al instante, y no hubo ningún momento intermedio. La mayoría de los clientes tratan una conexión de producción igual que una base de pruebas, porque para ellos no es más que otro host y otro puerto."
+      },
+      "solution": {
+        "title": "Cómo lo resuelve QoreDB",
+        "intro": "Una conexión lleva un entorno: desarrollo, staging o producción. En una conexión de producción, QoreDB analiza tu instrucción antes de enviarla, clasifica lo que hace realmente y aplica las reglas que configuraste. El parser es la clave: un cliente que busca DROP con un grep se pierde la mitad de lo que importa y señala cosas que no importan.",
+        "steps": [
+          {
+            "title": "Clasificación a partir de la instrucción analizada",
+            "body": "Tu SQL se analiza con el dialecto del driver al que estás conectado, y la clasificación sale del árbol sintáctico resultante. DROP, TRUNCATE, ALTER en sus muchas formas, un UPDATE sin WHERE, un DELETE sin WHERE y un EXPLAIN ANALYZE que envuelva cualquiera de ellos. Una CTE que modifica datos —WITH x AS (DELETE ...) SELECT— se detecta como mutación, algo que una coincidencia de patrones sobre la primera palabra clave nunca ve."
+          },
+          {
+            "title": "Fail closed en producción",
+            "body": "Si el parser no consigue leer tu instrucción en una conexión de producción, la instrucción no se ejecuta. QoreDB se niega a adivinar sobre una consulta que no entendió, justo en la base de datos donde adivinar sale más caro."
+          },
+          {
+            "title": "Reglas que puedes leer y cambiar",
+            "body": "Las reglas integradas bloquean DROP y TRUNCATE en producción, piden confirmación en DELETE y avisan en ALTER. Cada una se identifica cuando se dispara, así que un rechazo te dice qué regla rechazó y por qué. En Pro añades las tuyas: un entorno, una operación, un patrón opcional y una de tres acciones: bloquear, avisar o preguntar."
+          },
+          {
+            "title": "Endurecimiento específico por motor",
+            "body": "Las instrucciones arriesgadas no son las mismas en todos los motores. En DuckDB se señalan INSTALL, LOAD, ATTACH y COPY TO porque alcanzan la red o el sistema de archivos. En SQLite se señalan ATTACH y los PRAGMA que desactivan las claves foráneas o el journaling. En ClickHouse, todo lo que el clasificador no consigue situar se trata como una mutación en lugar de dejarlo pasar."
+          },
+          {
+            "title": "Un rastro de lo que pasó",
+            "body": "Cada consulta se registra con su resultado, su duración, la regla que la bloqueó si la hubo y una huella SHA-256 de su forma normalizada, de modo que las consultas repetidas se agrupan. Los literales se redactan antes de escribir nada. El registro se exporta a JSONL o CSV."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un ejemplo concreto",
+        "intro": "Un DROP TABLE en una conexión etiquetada como producción, con las reglas por defecto:",
+        "caption": "La instrucción nunca llega a la base de datos. El rechazo nombra la regla, porque una barrera que bloquea sin decir cuál es una barrera que acabarás desactivando."
+      },
+      "limits": {
+        "title": "Los límites, con total transparencia",
+        "intro": "Esto es una barrera contra accidentes, no un control de seguridad. La distinción importa, así que aquí está entera:",
+        "items": [
+          "No se aplica nada del lado de la base de datos, salvo en DuckDB, donde el modo de solo lectura se fija en el propio motor. El modo de solo lectura y todas las reglas son decisiones que QoreDB toma antes de enviar la consulta. Tus credenciales siguen teniendo exactamente los permisos que siempre tuvieron, y cualquier otro cliente que las use no se ve afectado.",
+          "Si lo que necesitas es una barrera de verdad, la versión duradera es un rol de base de datos con los permisos que quieras. QoreDB te protege de tu propio descuido; no protege a una base de datos de sus usuarios.",
+          "De fábrica, producción pide confirmación en las instrucciones peligrosas pero no las bloquea de forma dura por política. El bloqueo es un ajuste, y está desactivado por defecto. Las reglas integradas sí bloquean DROP y TRUNCATE, y esas reglas se pueden desactivar.",
+          "La confirmación la gestiona el cliente. El backend confía en el acuse que se le envía, así que la confirmación protege contra las prisas, no contra una elusión deliberada. Solo el bloqueo a nivel de política es incondicional.",
+          "Staging recibe dos reglas integradas pero no las comprobaciones exclusivas de producción: no hay fail closed ante un error de análisis, ni bloqueo por política. Está más cerca de desarrollo de lo que el nombre sugiere.",
+          "En desarrollo y en staging, una instrucción que el parser no consigue leer se ejecuta sin análisis.",
+          "Un valor de entorno que QoreDB no reconoce recae en desarrollo, en silencio.",
+          "El límite de tasa es de 60 consultas de ráfaga por conexión, con recarga a 6 por segundo. Detiene un bucle descontrolado; no es ajustable y se reinicia cuando se reinicia la aplicación.",
+          "El registro de auditoría conserva las 10 000 entradas más recientes por defecto y descarta las más antiguas a partir de ahí, sin archivarlas. Es un archivo local corriente: legible, editable y borrable por cualquier cosa que se ejecute con tu usuario. Es un registro para ti, no una prueba a prueba de manipulaciones para otra persona.",
+          "La redacción sustituye por completo los literales de cadena entrecomillados, además de las formas de credenciales conocidas. Los números no se redactan: un valor como un número de cuenta en una cláusula WHERE sigue siendo legible en el registro."
+        ]
+      },
+      "cta": {
+        "title": "La base de datos no sabe que querías decir staging",
+        "body": "Las barreras de producción se incluyen en el núcleo gratuito de QoreDB. Las reglas de seguridad personalizadas son Pro."
+      }
+    },
+    "plugins": {
+      "eyebrow": "Extensibility · Sistema de plugins",
+      "title": "Plugins",
+      "subtitle": "Amplía QoreDB con plugins que se ejecutan como WebAssembly en un sandbox, con capacidades que concedes una a una y puedes revocar sin reiniciar.",
+      "teaser": "Módulos WebAssembly con combustible medido, memoria limitada y tiempo acotado, además de plugins puramente declarativos que no ejecutan código alguno.",
+      "problem": {
+        "title": "El problema",
+        "body": "Un cliente de base de datos no puede traer de serie todos los flujos de trabajo de tu equipo. La respuesta habitual es una API de plugins, y el coste habitual es que un plugin se convierte en código con tus privilegios: tus conexiones, tus credenciales, tu sistema de archivos. Instalas uno para formatear una columna JSON y puede leer todo lo que consultes. Por eso la mayoría de la gente no instala ninguno."
+      },
+      "solution": {
+        "title": "Cómo lo resuelve QoreDB",
+        "intro": "Los plugins de QoreDB vienen en dos formas. Los simples son datos puros: un manifiesto que aporta snippets, plantillas de conexión o temas, sin código que ejecutar. El resto compila a WebAssembly y se ejecuta dentro de un intérprete sin autoridad ambiental: nada es alcanzable si el manifiesto no lo pide y tú no lo concedes.",
+        "steps": [
+          {
+            "title": "Un manifiesto y, opcionalmente, un módulo",
+            "body": "Cada plugin es una carpeta con un plugin.json. Puede aportar snippets, plantillas de conexión, temas, visores de resultados y comandos. Si se queda ahí, no se ejecuta código y no hay nada que aislar en un sandbox. Si incluye un módulo .wasm, el manifiesto declara qué hooks implementa y qué capacidades necesita."
+          },
+          {
+            "title": "Siete capacidades, concedidas una a una",
+            "body": "Registro, notificaciones, almacenamiento, lectura de resultados de consulta, HTTP, sistema de archivos y secretos. Todas están desactivadas por defecto. Lo que concedes se cruza con lo que el manifiesto pidió, así que editar a mano el archivo de consentimiento no puede ampliar el alcance de un plugin más allá de su propia declaración. Las comprobaciones ocurren en el momento de la llamada, lo que significa que revocar surte efecto de inmediato y no en el siguiente reinicio."
+          },
+          {
+            "title": "Acotado, no confiable",
+            "body": "Cada invocación recibe un store nuevo, 50 millones de unidades de combustible y 16 MB de memoria. Un hook en la ruta de consulta tiene 500 ms; el trabajo en segundo plano recibe 5 segundos y un comando, 10. Un módulo que falla tres veces seguidas se descarga. No hay forma de colgar la aplicación: el presupuesto se agota antes."
+          },
+          {
+            "title": "La red es una lista de permitidos",
+            "body": "Un plugin que quiere HTTP nombra en su manifiesto los hosts exactos a los que llamará, sin comodines. Las peticiones resuelven DNS primero y rechazan loopback, rangos privados y direcciones de metadatos de nube, salvo que el manifiesto pida explícitamente redes privadas. Los secretos viven en el llavero de tu sistema operativo, bajo un servicio aparte del de tus credenciales de base de datos, y un módulo solo lee los nombres que declaró."
+          },
+          {
+            "title": "Lo que un plugin no puede alcanzar",
+            "body": "No puede ejecutar SQL: esa capacidad se eliminó en lugar de restringirse. No puede leer las credenciales de tus conexiones ni tu vault. No puede alterar el resultado de una consulta. No puede salir de su propia carpeta de datos. No hay más sistema de archivos que ese, ni sockets, ni subprocesos."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un ejemplo concreto",
+        "intro": "Un manifiesto de un plugin que envía las mutaciones ejecutadas a un endpoint de auditoría y aporta un snippet:",
+        "caption": "Todo lo que el plugin puede hacer está en esta página, en el archivo, antes de que lo instales. El diálogo de consentimiento te muestra la misma lista."
+      },
+      "limits": {
+        "title": "Los límites, con total transparencia",
+        "intro": "Un sandbox es un conjunto de garantías concretas, no una promesa general. Esto es lo que estas son y lo que no:",
+        "items": [
+          "Se comprueba la integridad, no la autoría. No hay firmas. El marketplace verifica que un archivo coincide con el SHA-256 que anotó el registro, lo que demuestra que los bytes no se alteraron en tránsito, no quién los escribió. Quien controla el registro controla ese resumen.",
+          "El hash del módulo en un manifiesto es opcional. Un plugin sin él se instala igualmente; la interfaz lo etiqueta como sin firmar.",
+          "Leer resultados de consulta y hacer llamadas HTTP son capacidades separadas, pero un plugin al que concedes ambas puede enviar todas las filas que consultes a su host permitido. Ese es el sentido de un plugin de auditoría, y es también la vía de exfiltración. Concédelas juntas a propósito.",
+          "El diálogo de consentimiento preselecciona todo lo que el manifiesto pidió. El modelo de debajo es opt-in; el diálogo no lo es. Léelo en vez de confirmarlo.",
+          "Un plugin con un hook en la ruta de consulta puede rechazar cualquier consulta con el motivo que quiera. Es lo más potente que puede hacer un plugin, y se concede al instalarlo, no mediante una capacidad.",
+          "Puedes instalar desde cualquier URL, no solo desde el marketplace. No hay lista de hosts permitidos en la instalación.",
+          "Los límites son por invocación, no por plugin: el combustible y la memoria se reinician en cada llamada. Un plugin no puede colgar la aplicación, pero sí puede ser llamado a menudo.",
+          "La revisión del marketplace es una persona leyendo una pull request en el repositorio del registro. No es una auditoría automatizada ni una certificación de seguridad."
+        ]
+      },
+      "cta": {
+        "title": "Amplía el cliente, no tu superficie de ataque",
+        "body": "El sistema de plugins, con su runtime de WebAssembly incluido, forma parte del núcleo gratuito de QoreDB."
+      }
     }
   },
   "team_seats": {
@@ -1316,5 +1820,17 @@
       "error": "Algo salió mal. Inténtalo de nuevo.",
       "loading": "Cargando…"
     }
+  },
+  "newsletter_page": {
+    "title": "Suscríbase a nuestro boletín",
+    "subtitle": "Reciba las últimas novedades, tutoriales y consejos directamente en su bandeja de entrada.",
+    "placeholder": "Introduzca su dirección de correo electrónico",
+    "cta": "Suscribirse",
+    "success_title": "¡Gracias!",
+    "success": "Se ha suscrito correctamente a nuestro boletín.",
+    "error": "Error al suscribirse. Inténtelo de nuevo.",
+    "card_title": "Mantente al día de las novedades",
+    "card_subtitle": "Suscríbete para recibir los lanzamientos, los nuevos controladores y nuestros tutoriales técnicos.",
+    "card_bonus": "🎁 Bonus: recibe nuestra hoja de referencia de rendimiento SQL — 9 páginas, PostgreSQL / MySQL / SQLite (PDF)."
   }
 }

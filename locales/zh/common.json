@@ -9,7 +9,10 @@
     "changelog": "变更日志",
     "download": "下载",
     "join_beta": "加入测试版",
-    "docs": "文档"
+    "docs": "文档",
+    "marketplace": "插件",
+    "open_menu": "打开菜单",
+    "close_menu": "关闭菜单"
   },
   "download": {
     "title": "下载QoreDB",
@@ -29,7 +32,19 @@
     "linux_appimage": "应用程序图像（通用）",
     "linux_deb": "Debian / Ubuntu (.deb)",
     "linux_rpm": "Fedora / RHEL (.rpm)",
-    "view_all_releases": "查看 GitHub 上的所有版本"
+    "linux_aur": "Arch Linux (AUR)",
+    "view_all_releases": "查看 GitHub 上的所有版本",
+    "next_steps": {
+      "eyebrow": "安装之后",
+      "title": "现在来连接吧",
+      "description": "三个简短的页面，让您完全掌握 QoreDB。",
+      "first_connection_title": "您的第一个连接",
+      "first_connection_description": "粘贴 DSN 或填写表单。不到一分钟即可连接。",
+      "interface_tour_title": "界面导览",
+      "interface_tour_description": "侧边栏、标签页、编辑器、结果面板：完整的心智模型。",
+      "full_docs_title": "浏览完整文档",
+      "full_docs_description": "驱动、查询、安全、键盘快捷键等等。"
+    }
   },
   "changelog": {
     "title": "变更日志",
@@ -72,7 +87,8 @@
       "discover_pro": "在 GitHub 上查看",
       "view_project": "查看项目",
       "participate": "参与",
-      "community": "加入 Discord"
+      "community": "加入 Discord",
+      "read_docs": "阅读文档"
     },
     "social_proof": "与 <highlight>100+</highlight> 开发者一起等待 Beta 版",
     "meta": {
@@ -220,6 +236,16 @@
           "peek": "将鼠标悬停关系可查看详细信息"
         }
       },
+      "federation": {
+        "title": "跨数据库联邦查询",
+        "desc": "用一条 SQL 查询即可在多个活动连接（Postgres、MySQL 等）之间进行 JOIN —— 无需导出 CSV，也无需搭建数据仓库。",
+        "badge": "一条查询，覆盖所有数据库",
+        "list": {
+          "join": "在一条查询中跨活动连接进行 JOIN",
+          "engine": "由 DuckDB 驱动的联邦查询，完全本地",
+          "nowarehouse": "无需导出、无需 ETL、无需维护数据仓库"
+        }
+      },
       "safety_net": {
         "title": "通用查询安全网",
         "desc": "积极预防错误。检测危险查询（不带 WHERE 的 DELETE）并提供智能警报。",
@@ -253,7 +279,8 @@
     "title": "停止与数据库工具对抗",
     "description": "下载 QoreDB 并在 30 秒内查看差异。",
     "download_button": "免费下载",
-    "github_button": "在 GitHub 上加星标"
+    "github_button": "在 GitHub 上加星标",
+    "docs_link": "或先阅读文档"
   },
   "database_strip": {
     "label": "一个界面，每个数据库"
@@ -310,17 +337,17 @@
     },
     "values": {
       "qoredb": {
-        "opensource": "阿帕奇2.0",
+        "opensource": "Apache 2.0",
         "multidb": "15 个驱动",
-        "native": "铁锈/金牛座",
+        "native": "Rust/Tauri",
         "local": "是的",
-        "vault": "氩气2",
+        "vault": "Argon2",
         "safety": "是的",
         "sandbox": "专业版",
         "fulltext": "是的",
         "er_diagram": "是的",
         "federation": "专业版",
-        "ai": "自带设备",
+        "ai": "BYOK",
         "plugins": "是的",
         "ui": "是的",
         "maturity": "新",
@@ -345,8 +372,8 @@
       },
       "tableplus": {
         "opensource": "否",
-        "multidb": "有限公司",
-        "native": "本地人",
+        "multidb": "有限",
+        "native": "原生",
         "local": "是的",
         "vault": "钥匙扣",
         "safety": "部分",
@@ -420,13 +447,13 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "刚刚发布：v0.1.23 → v0.1.31",
+      "title": "刚刚发布：v0.1.23 → v0.1.34",
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
         "1": "15 个原生驱动 — Elasticsearch 和 OpenSearch 加入 ClickHouse、Supabase、Neon 和 TimescaleDB 行列",
         "2": "Data Contracts（Pro）：声明式数据质量规则，变更后自动重新评估",
         "3": "Instant Data API（Pro）：将任意保存的查询转为带令牌鉴权的 REST 端点",
-        "4": "备份/恢复助手、可自定义快捷键，以及审计中的查询指纹",
+        "4": "带模式差异与漂移检测的 Migrations Manager、索引建议，以及备份/恢复和可自定义快捷键",
         "5": "Workspaces、Time Travel、DDL 编辑器、批量编辑和 tab groups 已覆盖全部 9 种界面语言"
       },
       "goal": "目标：开发者已经放心使用和推荐的工具。"
@@ -436,7 +463,7 @@
       "quote": "超越传统的数据库客户端。",
       "items": {
         "1": "更深入的 MongoDB 工具和更丰富的聚合工作流",
-        "2": "可视化模式迁移和重构预览",
+        "2": "Database Agent：自主探索数据库模式并用真实数据回答的智能对话",
         "3": "更完善的笔记本，用于数据探索和报告",
         "4": "更智能的 AI 辅助解释、修复和审查",
         "5": "本地优先协作和同步的第一块砖"
@@ -564,7 +591,7 @@
         "vault": "加密凭证库 (Argon2) + 代理和 ssh-agent 支持",
         "ssh": "原生 SSH 隧道（OpenSSH、proxy jump）",
         "safety": "生产安全规则（环境标签、只读模式）+ 含 redaction 的基本审核日志",
-        "audit_basic": "基本审核日志（50 条）含查询 redaction",
+        "audit_basic": "基本审核日志（10,000 条）含查询 redaction",
         "export_basic": "CSV/JSON/SQL 导出和可分享的结果链接",
         "shortcuts": "历史记录、收藏夹、tab groups、键盘快捷键和 9 种界面语言"
       }
@@ -573,7 +600,7 @@
       "title": "Pro",
       "tagline": "为您的专业工作而设",
       "description": "对于要求苛刻的开发人员来说是自然的升级。",
-      "price": "XX欧元",
+      "price": "€49",
       "badge": "一次性付款",
       "cta": "购买 QoreDB 专业版",
       "student_note": "学生？联系我们。",
@@ -596,7 +623,7 @@
       "title": "Team",
       "tagline": "面向团队的 Pro",
       "description": "为整个团队提供 Pro 功能，按席位管理。",
-      "price": "即将推出",
+      "price": "€99",
       "badge": "按席位",
       "cta": "购买",
       "features": {
@@ -665,7 +692,7 @@
     "year_label": "每年",
     "perpetual_label": "一次性",
     "tco_label": "{{years}} 年总计",
-    "lifetime_perk": "之后终身 0 元",
+    "lifetime_perk": "之后终身 0 €",
     "note": "竞品价格来自其官方网站，欧元等值，2026 年 5 月。",
     "tools": {
       "dbeaver": {
@@ -718,6 +745,13 @@
   "license_management": {
     "title": "许可证管理",
     "subtitle": "检查您的 QoreDB Pro 许可证状态并通过电子邮件重新发送您的密钥。",
+    "licensing": {
+      "title": "软件许可证",
+      "description": "QoreDB 采用开放核心（open core）模式与双重许可：软件核心部分基于 Apache 2.0 许可证发布，Premium 功能基于 Business Source License 1.1 发布，并在每个版本发布四年后自动转为 Apache 2.0 许可证。",
+      "apache": "Apache 2.0（核心）",
+      "bsl": "BSL 1.1（Premium）",
+      "docs": "开放核心模式"
+    },
     "fields": {
       "email": "电子邮件",
       "payment_id": "条纹支付ID"
@@ -771,15 +805,15 @@
   },
   "privacy_page": {
     "title": "隐私政策",
-    "last_updated": "最后更新时间：2026 年 1 月 24 日",
+    "last_updated": "最后更新时间：2026 年 7 月 22 日",
     "sections": {
       "intro": {
         "title": "1. 数据控制者",
-        "content": "<p>数据控制者是 <strong>QoreDB</strong> 项目的编辑者。</p><p>法律结构最终确定后，将立即指定有关法律实体的完整信息。</p>"
+        "content": "<p>数据控制者为 <strong>Raphaël Plassart</strong>，法国个体经营者（微型企业），<strong>QoreDB</strong> 的出版和运营方。</p><ul><li>SIREN：942 906 157</li><li>SIRET（主要经营场所）：942 906 157 00014</li><li>经营活动代码（APE）：62.01Z — 计算机编程</li><li>联系方式：<a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>注册经营场所的通信地址可应书面请求，通过该联系邮箱提供。</p>"
       },
       "data_collection": {
         "title": "2. 数据收集",
-        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB使用<strong>Vercel Analytics</strong>，一种尊重隐私的分析解决方案：</p><ul><li>无 cookies，</li><li>无跨站点跟踪，</li><li>无广告分析。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul>"
+        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB 使用 <strong>Umami</strong>——一款自托管于自有服务器（Hetzner，德国）的开源访问统计方案：</p><ul><li>无 Cookie，</li><li>无跨站点跟踪，</li><li>无广告画像，</li><li>统计数据不会传输给任何第三方服务商。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul><h3>2.3 购买与许可证相关数据</h3><p>购买许可证时，支付由 <strong>Stripe</strong> 处理。银行卡信息直接在 Stripe 的基础设施上输入：绝不会经过 QoreDB 的服务器，也不会存储在其中。</p><p>QoreDB 仅保留签发和管理许可证所必需的信息：</p><ul><li>购买时使用的电子邮件地址，</li><li>Stripe 的支付或订阅标识符，</li><li>关联的许可证密钥，以及（如适用）已分配的席位。</li></ul>"
       },
       "purposes": {
         "title": "3. 处理目的",
@@ -791,11 +825,11 @@
       },
       "cookies": {
         "title": "5. Cookie 和跟踪器",
-        "content": "<p>QoreDB <strong>不使用广告或行为跟踪cookie</strong>.</p><p>根据适用法规，所使用的分析工具不需要事先同意。</p><p>如果将来使用cookie，我们将更新本政策并实施同意机制。</p>"
+        "content": "<p>QoreDB <strong>不使用广告或行为跟踪 Cookie</strong>。</p><p>唯一存放的 Cookie 是严格功能性的 <code>NEXT_LOCALE</code>，用于记住所选的显示语言。它无需征得同意，也不用于任何跟踪。</p><p>访问统计（自托管的 Umami）不使用 Cookie 或持久标识符，因此无需任何同意横幅。</p><p>如果将来使用需要征得同意的 Cookie，我们将更新本政策并实施同意机制。</p>"
       },
       "hosting": {
         "title": "6. 托管和子处理者",
-        "content": "<p>QoreDB 网站和服务由尊重高安全性和合规性标准的提供商托管。</p><p>数据可能在位于欧盟或根据 GDPR 提供足够保护级别的国家/地区的服务器上进行处理。</p>"
+        "content": "<p>QoreDB 网站及服务依托以下受托处理方：</p><ul><li><strong>Hetzner Online GmbH</strong>（德国） — 网站及服务的托管，服务器位于欧盟境内的纽伦堡；</li><li><strong>Cloudflare, Inc.</strong>（美国） — 域名 DNS 管理、内容分发及攻击防护；</li><li><strong>Stripe Payments Europe, Limited</strong>（爱尔兰） — 支付、开票及订阅管理；</li><li><strong>Resend</strong> — 发送事务性邮件和新闻通讯；</li><li><strong>Sanity</strong> — 编辑内容（博客）管理。</li></ul><p>访问统计由 <strong>Umami</strong> 提供，自托管于 QoreDB 的 Hetzner 服务器：访问数据不会传输给任何第三方服务商。</p><p>本网站数据托管于欧盟境内。在欧盟境外进行的技术处理（尤其是 Cloudflare 和 Stripe）依据符合 GDPR 的保障措施，特别是欧盟委员会的标准合同条款。</p>"
       },
       "security": {
         "title": "7. 数据安全",
@@ -825,19 +859,23 @@
   },
   "legal_page": {
     "title": "法律声明",
-    "last_updated": "最后更新时间：2026 年 1 月 24 日",
+    "last_updated": "最后更新时间：2026 年 7 月 22 日",
     "sections": {
       "editor": {
         "title": "网站编辑",
-        "content": "**项目名称/产品：** QoreDB\n**出版总监：** Raphaël Plassart\n**状态：** 软件项目（开放核心）\n\n> 法律结构最终确定后，将立即指定有关法人实体的信息（公司名称、法律形式、地址、注册号）。"
+        "content": "**网站及软件运营方：** Raphaël Plassart，法国个体经营者（*micro-entreprise* 微型企业）\n**出版负责人：** Raphaël Plassart\n**SIREN：** 942 906 157\n**SIRET（主要经营场所）：** 942 906 157 00014\n**经营活动代码（APE）：** 62.01Z — 计算机编程\n**注册信息：** 于法国注册，自 2025 年 4 月 4 日起营业\n**增值税：** 根据法国《税法典》第 293 B 条（小规模企业免税制度），不适用增值税\n**联系方式：** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB 是由该微型企业出版和运营的软件产品，与所有用户和客户的合同关系均由该企业承担。\n\n> 注册经营场所的通信地址可应书面请求，通过上述联系邮箱提供。"
       },
       "hosting": {
         "title": "托管",
-        "content": "QoreDB 网站由 **Vercel Inc.** 托管，地址为 340 S Lemon Ave #4133 Walnut, CA 91789, USA。\n\n数据可能托管在欧盟境内或提供符合现行法规的数据保护级别的国家/地区的基础设施上。"
+        "content": "QoreDB 网站由 **Hetzner Online GmbH**（Industriestr. 25, 91710 Gunzenhausen, 德国，[hetzner.com](https://www.hetzner.com)）托管。\n\n所使用的服务器位于**纽伦堡数据中心（德国，欧盟）**。\n\n域名（DNS）管理、内容分发网络及攻击防护由 **Cloudflare, Inc.**（101 Townsend Street, San Francisco, CA 94107, 美国，[cloudflare.com](https://www.cloudflare.com)）提供。\n\n因此，本网站的数据托管于欧盟境内。Cloudflare 在欧盟境外进行的技术处理依据欧盟委员会的标准合同条款。"
+      },
+      "payments": {
+        "title": "支付与开票",
+        "content": "QoreDB 许可证（Pro、Team）的支付全部由 **Stripe** 处理，在欧洲由 **Stripe Payments Europe, Limited**（爱尔兰）运营。\n\n* 银行卡数据不会经过 QoreDB 的服务器，也不会存储在其中；\n* 支付流程、开票和订阅管理均由 Stripe 负责（Stripe Checkout 与 Stripe Billing）；\n* 发票以微型企业 Raphaël Plassart 的名义开具，并由 Stripe 提供。\n\n由于该企业适用法国小规模企业增值税免税制度，所显示价格不含增值税（法国《税法典》第 293 B 条）。"
       },
       "ip": {
         "title": "知识产权",
-        "content": "QoreDB 网站上的所有内容，特别包括：\n\n* 文字，\n* 文档，\n* 博客文章，\n*图形元素，\n* 视觉识别，\n* QoreDB 名称、徽标和品牌，\n\n受版权和知识产权相关法律的保护。\n\n除非另有说明，QoreDB 源代码在 **开放核心** 模型下分发：\n\n* 一部分是根据开源许可证发布的，\n* 某些高级功能可能需要专有许可。\n\n严禁对受保护内容或元素进行任何未经授权的复制、呈现、修改或利用。"
+        "content": "QoreDB 网站上的全部内容，特别包括：\n\n* 文本，\n* 文档，\n* 博客文章，\n* 图形元素，\n* 视觉标识，\n* QoreDB 的名称、徽标和商标，\n\n均受著作权法和知识产权法保护。\n\nQoreDB 的源代码采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* 软件核心部分基于 **Apache 2.0** 许可证发布，\n* 部分高级功能（Premium）基于 **Business Source License 1.1** 发布。\n\n详情请见下方的许可证部分。除上述许可证所授予的权利外，未经授权复制、传播、修改或利用受保护内容均被严格禁止。"
       },
       "liability": {
         "title": "网站访问和责任",
@@ -853,11 +891,11 @@
       },
       "terms": {
         "title": "使用条款",
-        "content": "使用 QoreDB 网站、文档和软件意味着完全接受：\n\n➡️ [使用条款](#)"
+        "content": "使用 QoreDB 网站、文档和软件意味着完全接受：\n\n➡️ [使用条款](/terms)"
       },
       "license": {
         "title": "许可证",
-        "content": "适用于 QoreDB 软件的许可条件在专用页面中有详细说明：\n\n➡️ [许可证](#)"
+        "content": "QoreDB 采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* **核心 — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**：在遵守署名义务的前提下，可自由使用、修改、再分发并用于商业用途，无需支付使用费。\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**：源代码可供查阅，个人使用和企业内部使用免费，禁止以此提供与之竞争的商业产品。每个版本在发布四年后自动转为 Apache 2.0 许可证。\n\n仓库中的每个源文件都带有 SPDX 头部，标明其适用许可证。仅以官方仓库根目录下的许可证文件为准。\n\n➡️ [开放核心模式与许可证](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "联系方式",
@@ -867,13 +905,13 @@
   },
   "terms_page": {
     "title": "服务条款",
-    "last_updated": "最后更新时间：2026 年 1 月 24 日",
+    "last_updated": "最后更新时间：2026 年 7 月 21 日",
     "intro": "这些服务条款（以下简称“ToS”）管辖对 **QoreDB** 网站、其文档、在线服务和 QoreDB 软件的访问和使用。\n\n通过访问该网站或使用QoreDB软件，用户承认已阅读这些服务条款并毫无保留地接受它们。",
     "copyright": "© QoreDB – 保留所有权利。",
     "sections": {
       "definitions": {
         "title": "1. 定义",
-        "content": "* **QoreDB**：指软件项目、网站、文档、相关工具和服务。\n* **用户**：访问该网站或使用 QoreDB 软件的任何人。\n* **软件**：QoreDB 软件，在开放核心模型下分发。\n* **网站**：官方 QoreDB 网站。"
+        "content": "* **QoreDB**：指软件项目、网站、文档、相关工具和服务。\n* **用户**：访问该网站或使用 QoreDB 软件的任何人。\n* **软件**：QoreDB 软件，在开放核心模型下分发。\n* **网站**：官方 QoreDB 网站。\n* **运营方**：Raphaël Plassart，法国个体经营者（*micro-entreprise*），SIRET 942 906 157 00014，QoreDB 网站及软件的出版和运营方。"
       },
       "object": {
         "title": "2. 对象",
@@ -885,43 +923,47 @@
       },
       "software_use": {
         "title": "4. QoreDB 软件的使用",
-        "content": "QoreDB 软件在 **开放核心** 模型下分发：\n\n* 部分代码是在开源许可证下发布的，\n* 某些功能、扩展或服务可能需要单独的专有许可。\n\n该软件的使用、修改和分发的精确条件在 **QoreDB 许可证** 中定义，可在网站和官方存储库中获取。"
-      },
-      "user_obligations": {
-        "title": "6. 用户义务",
-        "content": "用户同意：\n\n* 根据适用的法律法规使用 QoreDB，\n* 不侵犯网站或软件的安全性、完整性或正常运行，\n* 不尝试未经授权访问系统或数据，\n* 不得将 QoreDB 用于欺诈、非法或滥用目的。\n\n任何滥用行为都可能导致服务访问被暂停。"
-      },
-      "ip": {
-        "title": "7. 知识产权",
-        "content": "QoreDB 网站的所有元素（文本、文档、图形、徽标、视觉标识）均受知识产权保护。\n\n除非另有说明，否则禁止任何未经授权的复制、陈述或利用。\n\nQoreDB 软件的源代码受适用许可证条款的约束，如 **许可证** 页面中所定义。"
-      },
-      "liability": {
-        "title": "七、责任",
-        "content": "QoreDB 按“原样”提供，不提供任何形式的保证。\n\nQoreDB 不承担以下责任：\n\n* 由于使用本网站或软件而造成的直接或间接损害，\n* 数据丢失、业务中断或商业损失，\n* 与软件配置或使用不当相关的后果。\n\n用户对其使用 QoreDB 及其处理的数据承担全部责任。"
-      },
-      "privacy": {
-        "title": "9. 个人资料",
-        "content": "个人数据处理受 QoreDB 网站上的 **隐私政策** 管辖。"
-      },
-      "external_links": {
-        "title": "10. 外部链接",
-        "content": "QoreDB 网站可能包含第三方网站或服务的链接。 QoreDB 对这些服务没有控制权，并且不承担与其内容或功能有关的所有责任。"
-      },
-      "updates": {
-        "title": "11. 服务条款的变更",
-        "content": "QoreDB 保留随时修改这些服务条款的权利。\n\n欢迎用户定期查阅当前版本。上次更新日期显示在页面顶部。"
-      },
-      "law": {
-        "title": "12. 适用法律",
-        "content": "这些服务条款受法国法律管辖。\n\n如果发生争议且未能友好解决，则将根据现行法律，由具有适用管辖权的法院管辖。"
-      },
-      "contact": {
-        "title": "13. 联系方式",
-        "content": "对于与本服务条款相关的任何问题，用户可以通过网站上指定的官方渠道联系QoreDB团队。"
+        "content": "QoreDB 软件采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* 软件核心部分基于 **[Apache 2.0 许可证](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)** 发布：可自由使用、修改、再分发并用于商业用途，无需支付使用费；\n* 部分高级功能（Premium）基于 **[Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)** 发布：源代码可供查阅，个人使用和企业内部使用免费，禁止提供与之竞争的商业产品；每个版本在发布四年后自动转为 Apache 2.0 许可证。\n\n每个源文件均带有标明适用许可证的 SPDX 头部。若本摘要与官方仓库中发布的许可证文件存在差异，以后者为准。"
       },
       "team_licensing": {
         "title": "5. Team 许可证（实名席位）",
         "content": "**Team** 许可证按**席位**授予，可获得与所购席位数量相同的**实名席位**，且**每人一个（1）许可证密钥**。\n\n* 每个席位密钥均与其持有人的电子邮件地址绑定，\n* **禁止**在多人之间**共享密钥**，\n* **禁止**在所购席位数量**之外**使用本软件。\n\n订阅持有人（管理员）负责分配席位，并确保其组织内遵守这些条款。任何违规行为均可能导致许可证被暂停或终止。"
+      },
+      "payments": {
+        "title": "6. 购买、支付与开票",
+        "content": "付费许可证（Pro、Team）由微型企业 Raphaël Plassart 销售。\n\n* 支付仅由 **Stripe**（Stripe Payments Europe, Limited）处理；QoreDB 无法访问任何银行卡数据；\n* 价格以欧元标示且不含增值税 — 根据法国《税法典》第 293 B 条不适用增值税；\n* 发票在支付完成后由 Stripe 开具并提供；\n* 许可证密钥在支付确认后通过电子邮件发送；\n* 订阅按所选周期自动续订，可随时在 Stripe 客户门户中取消，取消将于当前周期结束时生效。\n\n根据法国《消费法典》第 L221-28 条，要求立即交付许可证密钥的消费者在服务完全履行后即放弃其撤回权。有关支付或退款的任何问题，可发送至网站上标明的联系邮箱。"
+      },
+      "user_obligations": {
+        "title": "7. 用户义务",
+        "content": "用户同意：\n\n* 根据适用的法律法规使用 QoreDB，\n* 不侵犯网站或软件的安全性、完整性或正常运行，\n* 不尝试未经授权访问系统或数据，\n* 不得将 QoreDB 用于欺诈、非法或滥用目的。\n\n任何滥用行为都可能导致服务访问被暂停。"
+      },
+      "ip": {
+        "title": "8. 知识产权",
+        "content": "QoreDB 网站的所有元素（文本、文档、图形、徽标、视觉标识）均受知识产权保护。\n\n除非另有说明，否则禁止任何未经授权的复制、陈述或利用。\n\nQoreDB 软件的源代码受适用许可证条款的约束，如 **许可证** 页面中所定义。"
+      },
+      "liability": {
+        "title": "9. 责任",
+        "content": "QoreDB 按“原样”提供，不提供任何形式的保证。\n\nQoreDB 不承担以下责任：\n\n* 由于使用本网站或软件而造成的直接或间接损害，\n* 数据丢失、业务中断或商业损失，\n* 与软件配置或使用不当相关的后果。\n\n用户对其使用 QoreDB 及其处理的数据承担全部责任。"
+      },
+      "privacy": {
+        "title": "10. 个人资料",
+        "content": "个人数据处理受 QoreDB 网站上的 **隐私政策** 管辖。"
+      },
+      "external_links": {
+        "title": "11. 外部链接",
+        "content": "QoreDB 网站可能包含第三方网站或服务的链接。 QoreDB 对这些服务没有控制权，并且不承担与其内容或功能有关的所有责任。"
+      },
+      "updates": {
+        "title": "12. 服务条款的变更",
+        "content": "QoreDB 保留随时修改这些服务条款的权利。\n\n欢迎用户定期查阅当前版本。上次更新日期显示在页面顶部。"
+      },
+      "law": {
+        "title": "13. 适用法律",
+        "content": "这些服务条款受法国法律管辖。\n\n如果发生争议且未能友好解决，则将根据现行法律，由具有适用管辖权的法院管辖。"
+      },
+      "contact": {
+        "title": "14. 联系方式",
+        "content": "对于与本服务条款相关的任何问题，用户可以通过网站上指定的官方渠道联系QoreDB团队。"
       }
     }
   },
@@ -1058,16 +1100,29 @@
     "not_found_title": "未找到"
   },
   "blog_page": {
+    "eyebrow": "技术日志",
     "title": "QoreDB 博客",
     "subtitle": "关于 QoreDB 和现代开发的见解、教程和新闻。",
     "search_placeholder": "搜索文章...",
+    "search_label": "搜索文章内容",
+    "filters": "搜索和筛选",
     "category": "分类",
     "all_categories": "所有分类",
     "sort_by": "排序方式",
+    "relevance": "最相关",
     "newest": "最新",
     "oldest": "最旧",
     "title_asc": "标题 (A-Z)",
     "title_desc": "标题 (Z-A)",
+    "clear_filters": "重置",
+    "featured": "精选文章",
+    "read_article": "阅读文章",
+    "archive": "探索",
+    "latest_articles": "最新文章",
+    "search_results": "“{{query}}”的搜索结果",
+    "articles_count": "{{count}} 篇文章",
+    "published_articles": "篇已发布文章",
+    "matching_articles": "篇匹配文章",
     "no_results": "未找到文章。",
     "try_adjusting": "尝试调整您的过滤器或搜索词。",
     "previous": "上一页",
@@ -1078,9 +1133,16 @@
     "back_to_blog": "返回博客",
     "reading_time": "{{minutes}} 分钟阅读",
     "related_articles": "相关文章",
+    "table_of_contents": "本文目录",
+    "previous_article": "上一篇文章",
+    "next_article": "下一篇文章",
+    "updated": "更新于 {{date}}",
+    "reading_progress": "阅读进度",
     "share": "分享",
     "copied": "已复制！",
-    "copy_link": "复制链接"
+    "copy_link": "复制链接",
+    "copy_code": "复制代码",
+    "code_copied": "代码已复制"
   },
   "docs": {
     "search_label": "搜索文档",
@@ -1094,7 +1156,14 @@
     "not_found_title": "页面未找到",
     "not_found_body": "此文档页面不存在或尚未撰写。",
     "landing_title": "QoreDB 文档",
-    "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。"
+    "landing_subtitle": "安装 QoreDB、连接数据库、更快交付所需的一切。",
+    "fallback_banner_title": "正在显示英文版本",
+    "fallback_banner_body": "此页面尚未翻译。下面显示的是英文版本。",
+    "learning_hub": "学习中心",
+    "quick_start_cta": "快速开始",
+    "databases_cta": "数据库",
+    "more_pages": "+ 另外 {{remaining}} 个",
+    "explore_section": "浏览此章节"
   },
   "marketplace": {
     "categories": {
@@ -1105,11 +1174,99 @@
       "integrations": "集成"
     },
     "submit": {
+      "title": "提交插件",
+      "subtitle": "插件在出现在市场之前会由 QoreDB 维护者审核。审核通常需要几天时间——我们会查看清单、请求的权限以及 WASM 模块的来源。",
+      "field_plugin_id": "插件 ID",
+      "field_plugin_id_hint": "反向 DNS，例如 acme.linter。必须与 plugin.json#id 匹配。",
+      "field_name": "显示名称",
+      "field_version": "版本",
+      "field_kind": "插件类型",
+      "field_kind_declarative": "声明式 — 仅代码片段、主题和连接模板",
+      "field_kind_executable": "可执行 — 附带沙箱化的 WASM 模块",
+      "field_description": "简短描述",
+      "field_author": "作者 / 维护者",
+      "field_contact_email": "联系邮箱",
+      "field_contact_email_hint": "我们会就后续问题或确认批准与您联系。不会公开。",
+      "field_repository_url": "源代码仓库（可选）",
+      "field_manifest": "plugin.json",
+      "field_manifest_hint": "原样粘贴清单。插件 ID 和版本必须与上面的字段匹配。",
+      "field_archive": "plugin.zip",
+      "field_archive_hint": "包含 plugin.json 和 WASM 模块（如有）的扁平归档包。最大 8 MiB — 与 QoreDB 强制执行的安装上限相同。",
+      "submit_button": "提交审核",
+      "submitting": "提交中…",
+      "success_title": "已收到提交",
+      "success_body": "谢谢。您的插件已进入审核队列——审核完成后我们会发送邮件至 {{email}}。",
+      "error_title": "提交失败",
+      "checklist_title": "提交前",
+      "checklist_items": [
+        "WASM 模块能够顺利实例化，并导出清单中声明的钩子。",
+        "清单请求的每项权限都确实需要——用户会在同意对话框中看到它们。",
+        "如果插件进行 HTTP 调用，allowedHosts 是精确的列表，而非通配符。",
+        "runtime.integrity 包含最终 .wasm 字节的 sha256。",
+        "归档包根目录只包含 plugin.json 和 WASM 模块。"
+      ],
       "field_category": "类别",
       "field_category_hint": "请选择最接近的类别。审核时可以调整。"
     },
     "eyebrow": "插件库",
-    "page_subtitle": "用插件扩展 QoreDB：代码片段、主题、连接模板和 WASM 模块。"
+    "page_title": "插件",
+    "page_subtitle": "用插件扩展 QoreDB：代码片段、主题、连接模板和 WASM 模块。",
+    "section_title": "可用插件",
+    "section_subtitle": "此列表中的每个插件都通过了维护者审核，并收录在 GitHub 上的公共注册表中。",
+    "registry_link_label": "在 GitHub 上浏览注册表",
+    "submit_cta": "提交插件",
+    "empty": "还没有插件。成为第一个发布的人吧。",
+    "search_placeholder": "搜索插件…",
+    "filter_all": "全部",
+    "filter_declarative": "声明式",
+    "filter_executable": "可执行 (WASM)",
+    "registry_unavailable": "注册表暂时无法访问。请几分钟后重试。",
+    "kind": {
+      "declarative": "声明式",
+      "executable": "可执行 (WASM)"
+    },
+    "card": {
+      "version": "v{{version}}",
+      "by": "作者：{{author}}",
+      "view_details": "查看详情"
+    },
+    "detail": {
+      "back": "返回插件列表",
+      "install_title": "在 QoreDB 中安装",
+      "install_step_1": "打开 QoreDB → 设置 → 浏览，然后点击「安装」。应用会下载归档包，对照此页面校验其 sha256，然后在任何钩子触发之前验证清单。",
+      "install_step_2": "或者直接下载归档包，通过 设置 → 插件 → 安装插件 进行安装。QoreDB 主机会以相同方式重新校验清单。",
+      "download_archive": "下载 plugin.zip（{{size}}）",
+      "view_manifest": "查看 plugin.json",
+      "manifest_heading": "清单概览",
+      "manifest_id": "插件 ID",
+      "manifest_version": "版本",
+      "manifest_qoredb": "QoreDB 兼容性",
+      "manifest_author": "作者",
+      "manifest_kind": "类型",
+      "manifest_archive_sha": "归档包 sha256",
+      "manifest_integrity": "WASM 完整性",
+      "manifest_no_integrity": "未签名 — QoreDB 会在面板中将此插件标记为「未签名」。",
+      "manifest_hooks": "生命周期钩子",
+      "manifest_no_hooks": "没有生命周期钩子（声明式插件）。",
+      "manifest_capabilities": "请求的权限",
+      "manifest_no_capabilities": "未请求任何权限。",
+      "manifest_contributes": "贡献内容",
+      "contributes_none": "没有声明式贡献。",
+      "contributes_snippets": "{{count}} 个代码片段",
+      "contributes_snippets_plural": "{{count}} 个代码片段",
+      "contributes_templates": "{{count}} 个连接模板",
+      "contributes_templates_plural": "{{count}} 个连接模板",
+      "contributes_themes": "{{count}} 个主题",
+      "contributes_themes_plural": "{{count}} 个主题",
+      "contributes_viewers": "{{count}} 个结果查看器",
+      "contributes_viewers_plural": "{{count}} 个结果查看器",
+      "contributes_commands": "命令：{{commands}}",
+      "versions_heading": "所有版本",
+      "version_label": "版本 {{version}}",
+      "version_size": "{{size}} 归档包",
+      "not_found_title": "未找到插件",
+      "not_found_subtitle": "此插件不在注册表中。它可能已被重命名或移除。"
+    }
   },
   "features_common": {
     "tier_pro": "Pro",
@@ -1280,6 +1437,353 @@
         "title": "把你对数据的期望固化下来",
         "body": "数据契约属于 QoreDB Pro。下载应用，编写你的第一份契约。"
       }
+    },
+    "instant-api": {
+      "eyebrow": "Integration · Instant Data API",
+      "title": "Instant Data API",
+      "subtitle": "把一条带参数的 SQL 查询变成本机上的只读 REST 接口，大约一分钟即可完成。",
+      "teaser": "运行在 127.0.0.1 上的只读 GET 接口，使用 Bearer 令牌鉴权，并由从你的活动接口生成的 OpenAPI 3.1 文件提供文档。",
+      "problem": {
+        "title": "问题所在",
+        "body": "同事需要一个存在你数据库里的数字。某个脚本需要读取一张表。某个本地仪表盘需要一条查询。每一次的答案都一样：搭一个小后端、接上连接、暴露一个路由、处理鉴权。为了一条你早已写好的查询，耗上几个小时做管道工。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "QoreDB 内嵌了一个 HTTP 服务器，把你的查询作为 GET 接口对外提供。你声明查询及其参数，路由、类型、鉴权与文档交给 QoreDB。服务器只绑定 127.0.0.1，别无其他——没有任何设置可以把它暴露到网络上。",
+        "steps": [
+          {
+            "title": "声明接口",
+            "body": "你给它起个名字、选择一个连接，并写下 SQL 查询，参数以 {{country}} 的形式标记。每个参数都要声明类型（string、integer、float、boolean）、是否必填，以及可选的默认值。"
+          },
+          {
+            "title": "启动服务器",
+            "body": "它监听 127.0.0.1:4787。HTTPS 通过启动时在内存中生成的自签名证书提供，绝不写入磁盘。启动是一个明确的动作：这不是一个在你背后运行的后台服务。"
+          },
+          {
+            "title": "带令牌调用",
+            "body": "每个接口都有自己的 Bearer 令牌，仅在创建时显示一次。磁盘上只保存 Argon2id 哈希，绝不保存令牌本身。重新生成令牌只需一次点击，并立即吊销此前的令牌。"
+          },
+          {
+            "title": "读取 OpenAPI 文档",
+            "body": "GET /openapi.json 会返回一份根据活动注册表生成的 OpenAPI 3.1 文档：每个接口一个路径、带类型的参数，以及 bearer 安全方案。把它交给你的客户端生成器即可。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "一个名为 orders_top 的接口，建立在 PostgreSQL 连接上，带一个必填的 string 参数：",
+        "caption": "取值绝不会被原样拼接：每个参数都会按目标方言转义，最终的 SQL 在执行前会被再次解析。任何被判定为写操作的语句都会被拒绝。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "Instant Data API 面向本地脚本、notebook 与一次性集成。它不是应用后端，其边界是明确的：",
+        "items": [
+          "仅限回环地址。服务器绑定 127.0.0.1；没有任何选项可以把它暴露到网络上。",
+          "不设置 CORS 响应头，因此网页无法从浏览器调用这些接口。目标使用场景是 curl、脚本、本地后端与 notebook。",
+          "仅支持 GET，只读。每次请求都会分析最终的 SQL，若被判定为写操作则拒绝。该检查发生在请求时，而非保存接口时。",
+          "限流为每个接口每秒 10 个请求，突发上限 10，不可配置。",
+          "行数上限（默认 100 行）是在查询已经执行完之后对响应做截断。对于大表，请在查询里自己写 LIMIT。",
+          "没有分页，也没有查询超时：慢查询会一直阻塞，直到驱动返回。",
+          "支持 14 个驱动 ID——PostgreSQL 家族、MySQL/MariaDB、SQLite、DuckDB、SQL Server 与 ClickHouse。MongoDB、Redis 及其他驱动会被拒绝。",
+          "服务器不会自行启动；每个会话都需要你手动启动。你的接口定义则会被保留。",
+          "接口无法编辑。修改查询意味着删除并重新创建，这会签发一个新令牌。"
+        ]
+      },
+      "cta": {
+        "title": "暴露一条查询，而不是一个后端",
+        "body": "Instant Data API 属于 QoreDB Pro。下载应用，把你的第一条查询变成接口。"
+      }
+    },
+    "sandbox": {
+      "eyebrow": "Data Tools · Sandbox 模式",
+      "title": "Sandbox 模式",
+      "subtitle": "把你在数据表格中的编辑暂存在本地，读一遍它们生成的 SQL，然后应用它们——或者丢弃，继续干别的。",
+      "teaser": "在数据表格中所做的编辑会暂存在本地而不写入。在任何内容抵达数据库之前，你先读到 SQL。",
+      "problem": {
+        "title": "问题所在",
+        "body": "在数据表格里，一次编辑就是一次写入。你改了一个单元格，它已经提交了。在生产表上，一个输错的值、一次删错行，都不会给你留下反悔的窗口。而当十处改动本属一整套时，你没有任何时刻能在它们落地之前把它们作为一个整体看一遍。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "Sandbox 模式会拦截你通过表格所做的编辑。不会有任何内容发送到数据库：变更暂存在本地，表格向你展示预期结果，一个面板列出所有待处理项。等你准备好了，QoreDB 会把 SQL 摆给你看，由你决定。",
+        "steps": [
+          {
+            "title": "开启它",
+            "body": "一个按钮，或者 Cmd/Ctrl+Shift+S。工作区周围的彩色边框和一个徽标让这个状态无法被忽视，因为忘了自己身处 sandbox，比根本没有 sandbox 更糟。"
+          },
+          {
+            "title": "照常编辑",
+            "body": "表格内联编辑、行编辑弹窗、删除与批量编辑，都会写入 sandbox 而不是数据库。表格会呈现你将会得到的结果，因此你可以在自己的待处理变更之上继续工作。"
+          },
+          {
+            "title": "整体审阅",
+            "body": "Pending Changes 面板按表分组呈现全部内容，并给出每种操作的计数。冗余的编辑会被合并：对同一新行的五次编辑就是一次插入；而删除一行你刚插入的记录，会把它整个从集合中移除。"
+          },
+          {
+            "title": "先读 SQL，再做决定",
+            "body": "Generate SQL 会打开与你的变更相对应的语句，可直接复制或下载。Apply 会把它们写入；在生产连接上，你必须输入 APPLY 来确认。或者你把一切丢弃，就当什么都没发生过。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "在一张 PostgreSQL 表中编辑一行、删除另一行之后，生成的脚本如下：",
+        "caption": "这份脚本正是你所审阅、并且可以导出的内容。应用时是通过驱动重放每一次变更，而不是执行这份脚本本身，因此你读到的与实际运行的是等价的，而非完全相同。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "Sandbox 模式覆盖你通过表格所做的编辑。这是一条实实在在的边界，值得把它止步之处说清楚：",
+        "items": [
+          "它覆盖数据，而非模式。CREATE、ALTER 与 DROP 会立即对数据库执行，无论是否处于 sandbox。",
+          "它覆盖表格中的编辑，而非 SQL 编辑器，也不包括数据生成器。在编辑器里敲下的 DELETE，或一批生成的行，都会立刻执行：sandbox 不是查询拦截器。",
+          "数据库中不会预留任何东西。如果在你把某一行暂存于 sandbox 期间有人改了它，应用时会覆盖掉对方的变更。",
+          "待处理变更由 QoreDB 保存在本地，重启后依然存在。它们不是数据库事务，也不持有任何锁。",
+          "SQL 生成面向 PostgreSQL、MySQL/MariaDB、SQLite 与 SQL Server。PostgreSQL 兼容引擎会回退到 PostgreSQL 语法，并给出警告。",
+          "应用是否在单个事务中执行，取决于驱动。在不支持的情况下，中途失败会让先前的变更保持已应用状态。",
+          "更新与删除需要结果集中存在主键列才能被追踪。"
+        ]
+      },
+      "cta": {
+        "title": "先读，再写",
+        "body": "Sandbox 模式属于 QoreDB Pro。下载应用，在你的编辑与生产表之间加上一道工序。"
+      }
+    },
+    "migrations": {
+      "eyebrow": "Schema · Migrations Manager",
+      "title": "Migrations Manager",
+      "subtitle": "把带版本的 .sql 迁移放进你的代码仓库，从客户端应用与回滚，并把已应用状态记录在数据库自身之中。",
+      "teaser": "带 up 与 down 段落的纯 .sql 文件，与你的代码一同提交；再加一张历史表，告诉你到底跑过什么。",
+      "problem": {
+        "title": "问题所在",
+        "body": "模式变更很难顺利流转。一次在笔记本上应用、却在预发环境被遗忘的迁移。一条在控制台里手工执行、毫无痕迹的 ALTER。一个没人写过的回滚。要么你引入一整套迁移框架及其运行时，要么你守着一个 SQL 文件夹和一张表格，然后祈祷。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "QoreDB 从你项目里的一个文件夹读取纯 .sql 文件，把它们应用到你选定的连接上，并把做过的事记录到数据库内部的一张表里。没有 agent，你的应用里也没有运行时依赖：文件是 Git 制品，状态就住在模式所在的地方。",
+        "steps": [
+          {
+            "title": "一次迁移一个文件",
+            "body": "文件位于 .qoredb/migrations/，命名为 version_slug.sql，包含一个 -- migrate:up 段和一个 -- migrate:down 段。纯 SQL，与你的代码一同版本化，不装 QoreDB 也能读懂。"
+          },
+          {
+            "title": "状态存在数据库里",
+            "body": "一张 qoredb_migrations 表记录版本、up 脚本的校验和、执行时间、耗时以及经由哪个连接执行。它在事务之外创建，因此能在它所追踪的那次迁移被回滚之后依然存在。"
+          },
+          {
+            "title": "第一条语句执行前，每条语句都已审查",
+            "body": "脚本会被切分成语句并保留原文，每条语句在执行开始前都会被分类，并对照你的安全规则做检查。在生产连接上，危险语句会依据策略被拦下，而不是执行到一半才被发现。"
+          },
+          {
+            "title": "不会说谎的状态",
+            "body": "已应用、已回滚、失败。中途出错的迁移会被标记为失败，而不是待处理，因为待处理会让人以为什么都没发生。而如果你修改了一个已经应用的 up 脚本，QoreDB 会拒绝重新执行它：校验和已经与它当初描述的模式对不上了。写一个新的迁移，是唯一安全的补救方式。"
+          },
+          {
+            "title": "生成差异（Pro）",
+            "body": "捕获一份模式基线，QoreDB 就会为其中的差异写出迁移：新增与修改的表放进 up 段，反向操作放进 down 段，不可逆的语句会被注释掉，而不是靠猜。Check drift 会把线上模式与你的基线做对比，Prod↔Staging 视图则把同一驱动的两个连接并排比对。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "一次新增列及其索引的迁移。整个文件就这些：",
+        "caption": "一个文件、两个方向、没有框架。它在代码评审里读起来，和在 QoreDB 里读起来是一样的。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "Migrations Manager 是一个 SQL 文件的执行器，而不是迁移框架。它不做什么，和它做什么同样重要：",
+        "items": [
+          "支持十一个驱动：PostgreSQL 家族、MySQL/MariaDB、SQLite、DuckDB/MotherDuck 与 SQL Server。MongoDB、Redis、Elasticsearch 与 ClickHouse 不在范围内。",
+          "在 MySQL 与 MariaDB 上，DDL 不具备事务性。任何包含 DDL 的迁移都会在事务之外执行：如果中途失败，什么都不会被撤销，该迁移会被标记为失败，交由你排查。MySQL 还要求显式指定目标数据库。",
+          "没有顺序保证，也没有一键全部应用。每个迁移各自独立应用；没有任何东西阻止你先跑第三个再跑第一个。",
+          "回滚就是你在 down 段里写的 SQL。当模式差异无法在不凭空捏造数据的前提下反向撤销一条语句时，它会把它注释掉，而不是靠猜。",
+          "模式差异覆盖表、列、索引、单列外键与主键。视图、序列、触发器、存储过程、CHECK 约束与复合外键不会被内省。",
+          "漂移检测是一次由你触发的比对，对象是你自己捕获的基线。它不是持续监控，而且基线只留在你的机器上：它被刻意排除在提交之外。",
+          "不处理 Git 冲突。两个分支创建了相同的版本，会在你应用时被发现，而不是在合并时。"
+        ]
+      },
+      "cta": {
+        "title": "像交付代码一样交付你的模式",
+        "body": "Migrations Manager 随免费的 QoreDB 核心一同提供。模式差异生成、漂移检测与 Prod↔Staging 比对属于 Pro。"
+      }
+    },
+    "notebooks": {
+      "eyebrow": "Analysis · Notebooks",
+      "title": "数据库笔记本（Notebooks）",
+      "subtitle": "可执行的文档，把 SQL 与 Markdown 混合起来，针对一个活动连接运行；保存为一个纯文件，你的团队可以在 pull request 里评审。",
+      "teaser": "SQL 与 Markdown 单元、带类型的参数、Run All 或 Run From Here——都在一个能在 Git 里干净地做差异比对的 JSON 文件里。",
+      "problem": {
+        "title": "问题所在",
+        "body": "一条能回答真实问题的查询，从来都不只是一条查询。它需要周围的上下文：为什么用这个过滤条件、这个数字究竟意味着什么、接下来该核对什么。这些上下文最后落在某个 Slack 线程里、某个 wiki 页面上，或者干脆无处安放。半年之后，查询还躺在某人的编辑器里，没人记得它是干什么用的。能把这件事真正解决好的工具——Jupyter、托管的 notebook——意味着一个 Python 运行时、又一个要配置的驱动，以及你的凭据出现在第二个地方。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "QoreDB 的笔记本是由单元构成的文档：SQL 跑在你的活动连接上，Markdown 承载 SQL 说不出来的一切。它们在你已经连上的客户端里运行，并保存成一个可以跟代码一起提交的文件。",
+        "steps": [
+          {
+            "title": "针对活动连接的单元",
+            "body": "SQL 单元在笔记本的连接与命名空间上执行，并就地渲染结果。Markdown 单元承载推理过程。QoreDB 支持的每一种数据库都能用，因为单元会把它的源文本原封不动交给会话——在 MongoDB 连接上，你在同一个单元里写 MQL，由驱动来解释。"
+          },
+          {
+            "title": "参数带类型，且只声明一次",
+            "body": "声明一个变量，就能在笔记本的任何位置以 $customer_id 或 {{date_from}} 使用它。四种类型——文本、数字、日期、下拉选择——每种都有为它渲染的输入控件。在顶部改一个值，重新运行，整份文档随之更新。"
+          },
+          {
+            "title": "Run All，或者 Run From Here",
+            "body": "执行是顺序的，并在第一个错误处停止，所以一个出错的单元不会往下级联出十个具有误导性的结果。运行可以中途取消，而且取消会一直传到数据库，而不只是停在界面上。"
+          },
+          {
+            "title": "是一个文件，而不是某人云端里的一份文档",
+            "body": ".qnb 格式是带缩进的 JSON。保存时会剥离结果与执行状态，因此差异显示的是你改了什么，而不是你上次跑了什么。它在评审里读起来就像代码，因为它就是你仓库里的一个文件。"
+          },
+          {
+            "title": "AI 单元（Pro）",
+            "body": "用平实的语言描述你想要什么；该单元会把 SQL 写进正下方的一个新单元，你在运行前先读它。Bring your own key——OpenAI、Anthropic、Mistral、Gemini、DeepSeek，或者用 Ollama 让模型永不离开你的机器。密钥存放在你操作系统的钥匙串里。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "一个使用了笔记本顶部声明的两个变量的 SQL 单元：",
+        "caption": "变量是以带引号的字面量替换进去的，而不是绑定参数。数字必须能解析为有限值，日期必须符合 ISO 形式，文本在抵达查询之前会被转义。它们代表的是值，不是标识符：把变量放在 FROM 子句里，不会得到你想要的结果。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "笔记本是一份文档，不是调度器，也不是 BI 工具。它到哪里为止：",
+        "items": [
+          "单元类型是 SQL 与 Markdown，Pro 上另有 AI 单元与 contract 单元。图表单元与跨单元引用存在于文件格式中，但还没有界面，请当作不可用。",
+          "变量替换的是值，不是标识符，也不是 SQL 片段。放在 FROM 子句或列位置上的变量不会生效。",
+          "执行是顺序的，并在第一个错误处停止。没有 continue-on-error 开关，没有并行运行，也没有调度。",
+          "结果保存在内存中。没有 LIMIT 的 SELECT 会把每一行都加载进应用，之后单元才会截断它所显示的内容。",
+          "笔记本自身不设置查询超时；它继承你的治理策略所定义的超时，策略没有定义，它也就没有。",
+          "导出为 Markdown 会保留 SQL 单元与 Markdown 单元。独立的 HTML 导出会把 Markdown 渲染成纯文本而不做排版，且两种导出都不包含结果。",
+          "本地草稿每 30 秒自动保存一次。它是崩溃时的兜底，不是版本历史：磁盘上的文件才是事实来源。",
+          "AI 单元需要你自己提供密钥，并且作用范围内表的模式会被发送到你选定的提供商，敏感列名会被脱敏。你的数据行不会被发送。只有 Ollama 把一切都留在本地。"
+        ]
+      },
+      "cta": {
+        "title": "值得留下的查询，也值得解释清楚",
+        "body": "笔记本包含在免费的 QoreDB 核心中。AI 单元与 contract 单元属于 Pro。"
+      }
+    },
+    "production-safety": {
+      "eyebrow": "Safety · 生产环境防护栏",
+      "title": "生产环境防护栏",
+      "subtitle": "把一个连接标记为生产环境，QoreDB 就会在每条语句执行前读懂它——用的是真正的 SQL 解析器，而不是模式匹配。",
+      "teaser": "开发、预发环境 与生产连接的行为各不相同。危险语句是从解析出的 AST 来分类的，而不是对第一个单词做正则匹配。",
+      "problem": {
+        "title": "问题所在",
+        "body": "每一个有生产环境访问权限的开发者都有同样的故事：开错了标签页；一条本该发给本地数据库的 DELETE；一个始终没被写进查询的 WHERE 子句。工具只是即刻照做，中间没有任何余地。大多数客户端把生产连接当作一个随手用的数据库来对待，因为在它们眼里，那不过是又一个主机和端口。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "一个连接带有它的环境：开发、预发环境 或生产。在生产连接上，QoreDB 会在发送前解析你的语句，判断它实际会做什么，并应用你配置的规则。关键就在解析器：一个靠 grep DROP 的客户端，会漏掉一半真正要紧的东西，又会对无关的东西发出警告。",
+        "steps": [
+          {
+            "title": "从解析后的语句做分类",
+            "body": "你的 SQL 会按你所连驱动的方言被解析，分类来自由此得到的语法树：DROP、TRUNCATE、形态各异的 ALTER、没有 WHERE 的 UPDATE、没有 WHERE 的 DELETE，以及把它们包起来的 EXPLAIN ANALYZE。一个会修改数据的 CTE——WITH x AS (DELETE ...) SELECT——会被识别为变更，而对第一个关键字做模式匹配永远看不到它。"
+          },
+          {
+            "title": "生产环境下，读不懂就不执行",
+            "body": "在生产连接上，如果解析器读不懂你的语句，这条语句就不会执行。QoreDB 拒绝对一条它没有理解的查询做猜测——尤其是在最不该猜的那个数据库上。"
+          },
+          {
+            "title": "你读得懂、也改得了的规则",
+            "body": "内置规则会在生产环境拦下 DROP 与 TRUNCATE，对 DELETE 要求确认，对 ALTER 发出警告。每条规则触发时都会报出自己的名字，因此一次拒绝会告诉你是哪条规则、为什么拒绝。在 Pro 上你可以添加自己的规则：一个环境、一个操作、一个可选的模式，以及三种动作之一——拦截、警告或询问。"
+          },
+          {
+            "title": "针对引擎的加固",
+            "body": "危险语句在每种引擎上并不相同。在 DuckDB 上，INSTALL、LOAD、ATTACH 与 COPY TO 会被标记，因为它们能触及网络或文件系统。在 SQLite 上，ATTACH 以及那些关闭外键或日志的 PRAGMA 会被标记。在 ClickHouse 上，分类器无法归类的任何东西都会被当作变更处理，而不是放行。"
+          },
+          {
+            "title": "留下发生过什么的痕迹",
+            "body": "每条查询都会连同其结果、耗时、拦下它的规则（如果有），以及其规范化形态的 SHA-256 指纹一起被记录，因此重复的查询会归到一组。字面量在写入之前会被脱敏。日志可导出为 JSONL 或 CSV。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "在一个标记为生产环境的连接上执行 DROP TABLE，使用默认规则：",
+        "caption": "这条语句永远不会抵达数据库。拒绝会点名是哪条规则，因为一个拦下你却不说是哪条规则的防护栏，就是你迟早会关掉的防护栏。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "这是一道防事故的防护栏，不是一项安全控制。这个区别很重要，所以完整写在这里：",
+        "items": [
+          "数据库侧不强制任何东西，DuckDB 除外——那里的只读是设在引擎自身上的。只读以及每一条规则，都是 QoreDB 在发送查询之前做出的决定。你的凭据仍然拥有它一直以来的全部权限，用同一套凭据的其他客户端不受任何影响。",
+          "如果你需要的是一道真正的防护栏，可持久的做法是一个只有你想要的权限的数据库角色。QoreDB 保护你不被自己的手滑所伤；它不保护数据库不被它的使用者所伤。",
+          "开箱即用时，生产环境会对危险语句要求确认，但不会依据策略硬性拦截。拦截是一个设置项，而且默认是关闭的。内置规则确实会拦下 DROP 与 TRUNCATE，而这些规则也可以被禁用。",
+          "确认由客户端驱动。后端信任发给它的那个确认，所以确认防的是仓促，不是防一个铁了心要绕过它的人。只有策略层面的拦截是无条件的。",
+          "预发环境 有两条内置规则，但没有生产环境专属的检查：解析出错时不会失败即拒绝，也没有策略拦截。它比这个名字听起来更接近开发环境。",
+          "在开发与 预发环境 环境中，解析器读不懂的语句会不经分析直接执行。",
+          "QoreDB 不认识的环境字符串会静默回退为开发环境。",
+          "限流为每个连接 60 次查询的突发额度，以每秒 6 次回填。它能拦住失控的循环；它不可调整，并且会在应用重启时重置。",
+          "审计记录默认保留最近 10000 条，超出的最旧条目会被丢弃，且不做归档。它是一个普通的本地文件：任何以你的身份运行的程序都能读取、编辑和删除它。它是给你自己看的记录，不是能向别人证明未被篡改的证据。",
+          "脱敏会整体替换带引号的字符串字面量，以及已知形态的凭据。数字不会被脱敏：像 WHERE 子句里的账号这样的值，会以可读形式留在日志中。"
+        ]
+      },
+      "cta": {
+        "title": "数据库并不知道你想连的其实是 预发环境",
+        "body": "生产环境防护栏随免费的 QoreDB 核心一同提供。自定义安全规则属于 Pro。"
+      }
+    },
+    "plugins": {
+      "eyebrow": "Extensibility · 插件系统",
+      "title": "插件（Plugins）",
+      "subtitle": "用以沙箱化 WebAssembly 运行的插件扩展 QoreDB：能力由你逐项授予，且无需重启即可撤销。",
+      "teaser": "带计量燃料、内存上限与时间边界的 WebAssembly 模块——外加完全声明式、不执行任何代码的插件。",
+      "problem": {
+        "title": "问题所在",
+        "body": "一个数据库客户端不可能内置你团队的每一种工作流。通常的答案是插件 API，通常的代价是：插件成为一段拥有你权限的代码——你的连接、你的凭据、你的文件系统。你为了美化一个 JSON 列而装上它，它却能读到你查询过的一切。这正是大多数人一个都不装的原因。"
+      },
+      "solution": {
+        "title": "QoreDB 如何解决",
+        "intro": "QoreDB 的插件有两种形态。简单的那种是纯数据：一份提供 snippets、连接模板或主题的清单，没有任何代码要运行。其余的会编译成 WebAssembly，并在一个不带环境权限的解释器中执行——除非清单提出请求且你予以授予，否则它什么都碰不到。",
+        "steps": [
+          {
+            "title": "一份清单，以及可选的一个模块",
+            "body": "每个插件都是一个含有 plugin.json 的文件夹。它可以提供 snippets、连接模板、主题、结果查看器与命令。如果到此为止，就没有代码运行，也没有什么需要沙箱。如果它附带一个 .wasm 模块，清单就要声明它实现了哪些钩子、需要哪些能力。"
+          },
+          {
+            "title": "七项能力，逐项授予",
+            "body": "日志、通知、存储、读取查询结果、HTTP、文件系统、密钥。每一项默认都是关闭的。你授予的会与清单所请求的取交集，因此手工编辑同意文件也无法让插件的触及范围超出它自己的声明。检查发生在调用时，这意味着撤销会立即生效，而不是等到下次重启。"
+          },
+          {
+            "title": "有边界，而非被信任",
+            "body": "每次调用都会获得一个全新的 store、5000 万单位的燃料（fuel）与 16 MB 内存。查询路径上的钩子有 500 毫秒，后台工作有 5 秒，命令有 10 秒。连续三次失败的模块会被卸载。没有办法把应用卡住：预算会先耗尽。"
+          },
+          {
+            "title": "网络是一张允许列表",
+            "body": "想用 HTTP 的插件，要在清单里点名它将调用的确切主机，不支持通配符。请求会先解析 DNS，并拒绝回环地址、私有网段与云元数据地址，除非清单明确请求了私有网络。密钥存放在你操作系统的钥匙串里，与你的数据库凭据分属不同的服务，而模块只能读取它声明过的那些名字。"
+          },
+          {
+            "title": "插件够不到的东西",
+            "body": "它不能执行 SQL——这项能力是被移除的，而不是被加了门禁。它读不到你的连接凭据，也读不到你的保险库（vault）。它不能改动查询结果。它出不了自己的数据文件夹。除此之外没有文件系统，没有套接字，也没有子进程。"
+          }
+        ]
+      },
+      "example": {
+        "title": "一个具体示例",
+        "intro": "一份插件清单：它把执行过的变更发送到一个审计端点，并提供一个 snippet：",
+        "caption": "这个插件被允许做的一切，都在这一页上、在这个文件里，就在你安装它之前。同意对话框展示的是同一份清单。"
+      },
+      "limits": {
+        "title": "坦诚说明限制",
+        "intro": "沙箱是一组具体的保证，而不是一个笼统的承诺。以下是这些保证是什么、又不是什么：",
+        "items": [
+          "被校验的是完整性，不是作者身份。这里没有签名。marketplace 校验的是压缩包与注册表记录的 SHA-256 是否一致，这只能证明字节在传输中未被改动——证明不了是谁写的。谁控制了注册表，谁就控制了那个摘要。",
+          "清单里的模块哈希是可选的。没有它的插件照样能安装；界面会把它标为未签名。",
+          "读取查询结果与发起 HTTP 调用是两项独立的能力，但同时被授予两者的插件，可以把你查询到的每一行都发往它允许列表里的主机。这正是审计插件的用途，同时也是数据外泄的通道。要同时授予，就请有意为之。",
+          "同意对话框会预先勾选清单请求的全部内容。底层模型是选择加入的；对话框不是。请读它，而不是确认它。",
+          "带有查询路径钩子的插件，可以用它自己选定的理由拒绝任何一条查询。这是一个插件能做的最强的事，而它是通过安装被授予的，不是通过某项能力。",
+          "你可以从任意 URL 安装，不限于 marketplace。安装环节没有主机允许列表。",
+          "边界是按每次调用算的，不是按每个插件算：燃料与内存在每次调用时重置。插件无法把应用挂住，但它可以被频繁调用。",
+          "marketplace 的审核是一个人在读注册表仓库上的一个 pull request。它不是自动化审计，也不是安全认证。"
+        ]
+      },
+      "cta": {
+        "title": "扩展客户端，而不是你的攻击面",
+        "body": "插件系统（含 WebAssembly 运行时）是免费 QoreDB 核心的一部分。"
+      }
     }
   },
   "team_seats": {
@@ -1316,5 +1820,17 @@
       "error": "出现错误，请重试。",
       "loading": "加载中…"
     }
+  },
+  "newsletter_page": {
+    "title": "订阅我们的新闻邮件",
+    "subtitle": "获取最新动态、教程和技巧，直接发送到您的收件箱。",
+    "placeholder": "输入您的电子邮件地址",
+    "cta": "订阅",
+    "success_title": "谢谢！",
+    "success": "您已成功订阅我们的新闻邮件。",
+    "error": "订阅失败。请重试。",
+    "card_title": "及时了解最新动态",
+    "card_subtitle": "订阅我们的通讯，获取版本发布、新驱动通知和技术教程。",
+    "card_bonus": "🎁 福利：领取我们的 SQL 性能速查表 —— 共 9 页，涵盖 PostgreSQL / MySQL / SQLite（PDF）！"
   }
 }

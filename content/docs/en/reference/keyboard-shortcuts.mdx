@@ -20,6 +20,7 @@ These shortcuts work everywhere in QoreDB.
 | <KeyboardShortcut shortcut="Cmd+," />                     | Open settings.                                           |
 | <KeyboardShortcut shortcut="Esc" />                       | Close the active overlay (modal, palette, dialog).       |
 | <KeyboardShortcut shortcut="?" />                         | Show the keyboard shortcut cheatsheet.                   |
+| <KeyboardShortcut shortcut="Cmd+R" />                     | Refresh the current table.                               |
 
 The command palette (<KeyboardShortcut shortcut="Cmd+K" />) is also a fast path to any other shortcut: search the command and run it without remembering the binding.
 
@@ -58,15 +59,15 @@ The same `Cmd+Enter` runs either the full tab or the selection: with text select
 
 | Shortcut                                                  | Action                                                   |
 | --------------------------------------------------------- | -------------------------------------------------------- |
-| <KeyboardShortcut shortcut="Ctrl+Shift+S" />              | Toggle the sandbox for the active session.               |
+| <KeyboardShortcut shortcut="Cmd+Shift+S" />               | Toggle the sandbox for the active session.               |
 
-The sandbox shortcut is `Ctrl+Shift+S` on every platform (not `Cmd+Shift+S` on macOS).
+The sandbox shortcut is `Cmd/Ctrl+Shift+S` (⌘⇧S on macOS, Ctrl+Shift+S on Windows/Linux).
 
 ## Context-sensitive behavior
 
 A few shortcuts behave differently depending on what's focused:
 
-- **Inside a text input**: most shortcuts are passed through to the input (typing, selection, etc.). The exceptions are <KeyboardShortcut shortcut="Cmd+K" /> and <KeyboardShortcut shortcut="Cmd+Shift+N" />, which always intercept globally.
+- **Inside a text input**: most shortcuts are passed through to the input (typing, selection, etc.). The exceptions are <KeyboardShortcut shortcut="Cmd+K" />, <KeyboardShortcut shortcut="Cmd+R" />, <KeyboardShortcut shortcut="Cmd+Shift+S" /> and <KeyboardShortcut shortcut="Cmd+Shift+N" />, which always intercept globally.
 - **With an overlay open**: only <KeyboardShortcut shortcut="Esc" /> is bound; it closes the overlay.
 - **Without an active session**: connection-scoped shortcuts (<KeyboardShortcut shortcut="Cmd+T" />, <KeyboardShortcut shortcut="Cmd+Shift+F" />) do nothing.
 - **Without an active tab**: <KeyboardShortcut shortcut="Cmd+W" /> does nothing.
@@ -94,7 +95,7 @@ Combinations the operating system or window manager owns can't be assigned; Qore
 Each remapped shortcut shows a reset control that reverts it to its default, and **Reset all** at the top of the panel clears every override at once. Your customizations are stored locally and persist across restarts.
 
 <Callout type="info">
-A few in-editor bindings aren't remappable yet: running a query (<KeyboardShortcut shortcut="Cmd+Enter" />), formatting, the autocomplete trigger (<KeyboardShortcut shortcut="Ctrl+Space" />), and the sandbox toggle (<KeyboardShortcut shortcut="Ctrl+Shift+S" />). Everything listed in the Settings → Keyboard Shortcuts panel is.
+A few in-editor bindings aren't remappable yet: running a query (<KeyboardShortcut shortcut="Cmd+Enter" />), formatting, and the autocomplete trigger (<KeyboardShortcut shortcut="Ctrl+Space" />). Everything listed in the Settings → Keyboard Shortcuts panel is.
 </Callout>
 
 The command palette (<KeyboardShortcut shortcut="Cmd+K" />) remains a fast path regardless of bindings: search any command by name and run it without remembering its shortcut.

@@ -26,7 +26,7 @@ Nothing in steps 1 to 3 hits the database.
 
 ## Turning the sandbox on and off
 
-Toggle the sandbox from the title bar (Flask icon) or with <KeyboardShortcut shortcut="Ctrl+Shift+S" />. When on, the connection's UI shows a colored sandbox indicator (blue for development, orange for staging, red for production) and a count of pending changes.
+Toggle the sandbox from the title bar (Flask icon) or with <KeyboardShortcut shortcut="Cmd+Shift+S" /> (⌘⇧S on macOS, Ctrl+Shift+S on Windows/Linux). When on, the connection's UI shows a colored sandbox indicator (blue for development, orange for staging, red for production) and a count of pending changes.
 
 While the sandbox is on, every edit you make through the data grid (inline edit, bulk edit, row insert, row delete) is captured into the local buffer. Direct SQL queries you run from the editor still execute as normal.
 
@@ -90,7 +90,7 @@ To stay honest about the current behavior:
 
 - **No automatic rollback / down migration**: the generated script is "up" only. If you need to revert, capture a snapshot before applying and use the [data diff](/docs/diff-and-migrations/data-diff) to compare back, or write a manual undo SQL.
 - **No timestamped multi-file output**: it's a single `.sql` file per session, not a structured migration folder. If your project uses a migration framework (Knex, Flyway, Alembic, etc.), copy the generated SQL into a new file in that framework's format yourself.
-- **No DDL diff between two databases**: this page covers data changes captured in the sandbox. To compare the *contents* of two tables side by side, see [Data diff](/docs/diff-and-migrations/data-diff). Comparing schemas (DDL) between two databases is not in QoreDB today.
+- **No DDL diff in the sandbox**: the sandbox captures data changes, not schema changes. To compare the *contents* of two tables side by side, see [Data diff](/docs/diff-and-migrations/data-diff). To compare schemas (DDL) between databases and generate the migration, use [Schema diff](/docs/diff-and-migrations/schema-diff), a Pro feature.
 
 ## When to use the sandbox vs a transaction
 

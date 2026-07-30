@@ -2,6 +2,7 @@ import { createInstance } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import { i18nConfig } from "@/i18nConfig";
+import { normalizeLocale } from "@/lib/locale";
 
 export default async function initI18next(lng: string, ns: string) {
   const i18nInstance = createInstance();
@@ -20,7 +21,7 @@ export default async function initI18next(lng: string, ns: string) {
       supportedLngs: i18nConfig.locales,
       defaultNS: "common",
       fallbackNS: "common",
-      preload: typeof window === "undefined" ? i18nConfig.locales : [],
+      preload: [],
     });
   return i18nInstance;
 }
@@ -32,6 +33,13 @@ export async function useTranslation(
   options: any = {},
 ) {
   const i18nextInstance = await initI18next(lng, ns);
+  const normalizedLng = normalizeLocale(lng);
+  const store = i18nextInstance.services.resourceStore.data;
+
+  const resources = store[normalizedLng]
+    ? { [normalizedLng]: store[normalizedLng] }
+    : store;
+
   return {
     t: i18nextInstance.getFixedT(
       lng,
@@ -39,6 +47,6 @@ export async function useTranslation(
       options.keyPrefix,
     ),
     i18n: i18nextInstance,
-    resources: i18nextInstance.services.resourceStore.data,
+    resources,
   };
 }

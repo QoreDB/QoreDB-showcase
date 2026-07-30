@@ -2,8 +2,10 @@
 
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function CopyButton({ code }: { code: string }) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -20,7 +22,7 @@ export function CopyButton({ code }: { code: string }) {
     <button
       onClick={handleCopy}
       className="p-1.5 rounded-md hover:bg-white/10 text-white/50 hover:text-white transition-colors"
-      title="Copy code"
+      title={copied ? t("blog_post.code_copied") : t("blog_post.copy_code")}
       type="button"
     >
       {copied ? (

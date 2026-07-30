@@ -7,6 +7,8 @@ import { buildPageMetadata } from "@/lib/seo";
 import { getStripeTeamPricing } from "@/lib/stripe/pricing";
 import { TEAM_MIN_SEATS } from "@/lib/stripe/server";
 
+export const revalidate = 3600;
+
 export async function generateMetadata({
   params,
 }: {
@@ -35,7 +37,6 @@ export default async function TeamPricingPage({
   try {
     pricing = await getStripeTeamPricing(normalizedLocale);
   } catch (error) {
-    // Sans prix Team configuré (STRIPE_TEAM_PRICE_ID), la page n'a pas de sens.
     console.error("Failed to load Stripe Team price on /pricing/team", error);
     notFound();
   }

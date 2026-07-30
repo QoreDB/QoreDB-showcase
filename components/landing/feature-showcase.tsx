@@ -23,8 +23,8 @@ const features = [
     pro: true,
   },
   {
-    key: "er_diagram",
-    image: "/images/features/er-diagram.webp",
+    key: "federation",
+    image: "/images/features/federation.webp",
     icon: Network,
     color: "text-blue-500",
     colorBg: "bg-blue-500/10",
@@ -32,11 +32,11 @@ const features = [
     checkColor: "text-blue-500",
     checkBg: "bg-blue-500/10",
     listKeys: [
-      "features.killer.er_diagram.list.canvas",
-      "features.killer.er_diagram.list.nav",
-      "features.killer.er_diagram.list.peek",
+      "features.killer.federation.list.join",
+      "features.killer.federation.list.engine",
+      "features.killer.federation.list.nowarehouse",
     ],
-    pro: false,
+    pro: true,
   },
   {
     key: "safety_net",

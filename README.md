@@ -23,6 +23,8 @@ This website is built with the latest modern web technologies:
 - **CMS:** [Sanity](https://www.sanity.io/)
 - **Internationalization:** [i18next](https://www.i18next.com/)
 - **Email:** [Resend](https://resend.com/)
+- **Analytics:** [Umami](https://umami.is/) (self-hosted)
+- **Hosting:** [Hetzner](https://www.hetzner.com/) (Docker, Nuremberg) behind [Cloudflare](https://www.cloudflare.com/) (DNS/CDN)
 
 ## ⚡ Getting Started
 
