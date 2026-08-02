@@ -482,19 +482,21 @@
       "title": "Pourquoi QoreDB ne sera jamais un SaaS",
       "category": "Vision",
       "publishedAt": "2026-07-30"
+    },
+    {
+      "slug": "multi-statement-execution-script-sql-complet",
+      "title": "Le multi-statement execution dans QoreDB : exécuter un script SQL complet",
+      "category": "Produit",
+      "publishedAt": "2026-07-31"
+    },
+    {
+      "slug": "test-connexion-dry-run-timeout-qoredb",
+      "title": "Comment fonctionne le test de connexion dans QoreDB",
+      "category": "Architecture",
+      "publishedAt": "2026-08-02"
     }
   ],
   "queue": [
-    {
-      "title": "Le multi-statement execution : exécuter un script SQL complet",
-      "category": "Produit",
-      "topic_notes": "Séparation statements, comptage, notices, seul le dernier résultat affiché"
-    },
-    {
-      "title": "Comment fonctionne le test de connexion dans QoreDB",
-      "category": "Architecture",
-      "topic_notes": "Dry-run, feedback utilisateur, timeout, pas de connexion persistée"
-    },
     {
       "title": "La pagination dans QoreDB : OFFSET/LIMIT et ses limites réelles",
       "category": "Architecture",
