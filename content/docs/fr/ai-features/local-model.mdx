@@ -1,0 +1,64 @@
+---
+title: Qore AI Local
+description: Faites tourner les fonctionnalités IA sur un modèle local, sans clé d'API. Un runtime llama-server embarqué pour macOS, Windows et Linux, installé de façon reprenable et vérifié par SHA-256 face à un manifeste signé.
+premium: true
+---
+
+# Qore AI Local
+
+<Callout type="info">
+Qore AI Local fait partie de l'offre QoreDB Pro. Disponible depuis la v0.1.35.
+</Callout>
+
+Tous les autres fournisseurs IA de QoreDB fonctionnent en BYOK : vous apportez une clé d'API, et vos prompts partent chez ce fournisseur. **Qore AI Local** est l'option pour les cas où ce n'est pas acceptable — un modèle qui tourne sur votre machine, installé depuis l'application, sans clé et sans appel réseau à l'inférence.
+
+Ollama couvre déjà ce besoin si vous l'avez installé. Qore AI Local existe pour que vous n'ayez pas à le faire.
+
+## Ce qui est installé
+
+Deux artefacts, téléchargés à la demande :
+
+- **Le runtime** — le binaire officiel précompilé `llama-server` issu des releases de llama.cpp (MIT), épinglé à un build précis pour chaque plateforme.
+- **Le modèle** — Qwen 3 8B, quantifié en Q4_K_M (Apache-2.0), environ 5 Go.
+
+Plateformes supportées : macOS, Windows et Linux, en `x86_64` comme en `aarch64`. Ailleurs, le fournisseur se déclare non supporté plutôt que de fonctionner à moitié.
+
+## Installer
+
+Ouvrez **Réglages → IA**, choisissez **Qore AI Local** et lancez l'installation. Le panneau affiche la taille du téléchargement d'emblée et rapporte la progression par artefact, en quatre phases : téléchargement, vérification, installation, terminé. Vous pouvez annuler à tout moment.
+
+Les téléchargements sont **reprenables**. Un modèle de 5 Go sur une connexion capricieuse repart d'où il s'était arrêté au lieu de tout recommencer, via une requête de plage à partir des octets déjà présents sur le disque. La vérification d'empreinte a lieu une fois le fichier complet.
+
+## Comment le téléchargement est vérifié
+
+Chaque artefact est épinglé à une empreinte **SHA-256**, vérifiée après téléchargement. Une divergence fait échouer l'installation ; elle n'émet pas un avertissement pour continuer quand même.
+
+Le catalogue qui liste ces empreintes est lui-même protégé. QoreDB en embarque une copie et peut en récupérer une plus récente depuis les releases QoreDB — mais uniquement après vérification octet par octet en **Minisign** face à la clé publique de mise à jour de QoreDB. Le moindre échec fait retomber sur le catalogue embarqué.
+
+Plusieurs contraintes s'ajoutent à la signature pour un catalogue distant : les URL d'artefacts doivent être en HTTPS et sans identifiants, les tailles sont plafonnées, chaque plateforme supportée doit être présente exactement une fois, et un catalogue distant **ne peut pas changer l'emplacement d'installation** du runtime sur le disque.
+
+## Exécution
+
+Démarrer le fournisseur lance `llama-server` sur `127.0.0.1`, sur un port éphémère, avec une fenêtre de contexte de 32k, exposant localement un point d'accès compatible OpenAI. QoreDB en vérifie la santé avant de le déclarer prêt.
+
+Le fournisseur rapporte l'un des six états visibles dans les réglages : non supporté, non installé, installation, prêt, en cours d'exécution, erreur. Le démarrage et l'arrêt sont manuels : le modèle ne mobilise pas de mémoire quand vous ne l'utilisez pas.
+
+## Basculer entre local et cloud
+
+Qore AI Local est un fournisseur comme les autres dans la liste. Choisissez-le dans **Réglages → IA**, ou basculez à la volée depuis le sélecteur de modèle dans l'en-tête de la discussion — QoreDB mémorise votre modèle préféré par fournisseur.
+
+Un usage raisonnable : un modèle cloud pour le raisonnement difficile sur un schéma inconnu, le modèle local pour tout ce que vous préférez ne pas envoyer ailleurs.
+
+## Compromis
+
+<Callout type="warning">
+Un modèle de 8 milliards de paramètres n'est pas un modèle de pointe. Attendez-vous à ce qu'il soit plus lent et moins fiable que Claude, GPT ou Gemini sur du raisonnement complexe en plusieurs étapes, en particulier quand [Q](/docs/ai-features/agent) doit enchaîner plusieurs appels d'outils. Il convient bien aux résumés de schéma, à la génération d'une requête isolée et à la correction d'erreurs — et il est le bon choix chaque fois que les données ne doivent pas quitter la machine.
+</Callout>
+
+L'inférence tourne sur votre CPU ou votre GPU : le débit dépend donc de votre matériel. Les 5 Go de téléchargement sont ponctuels, mais ce sont 5 Go de disque.
+
+## Pour aller plus loin
+
+- [Q, votre agent base de données](/docs/ai-features/agent) pour ce que le modèle pilote
+- [Vue d'ensemble des fonctionnalités IA](/docs/ai-features/overview) pour les fournisseurs cloud et le stockage des clés
+- [Modèle Open Core](/docs/introduction/open-core-model) pour ce qui relève du Pro, et pourquoi

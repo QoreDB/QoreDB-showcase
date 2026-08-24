@@ -1,0 +1,108 @@
+---
+title: Gestionnaire de migrations
+description: Versionnez votre schéma sous forme de fichiers .sql dans .qoredb/migrations/, partagez-les via Git, appliquez-les ou annulez-les sur une connexion. L'état appliqué et la dérive de checksum sont suivis dans la base cible.
+premium: false
+---
+
+# Gestionnaire de migrations
+
+QoreDB gère les migrations de schéma comme de simples fichiers `.sql` stockés dans votre workspace et partagés via Git. Appliquer, annuler et savoir ce qui a déjà tourné sont pris en charge par l'application ; les fichiers, eux, restent lisibles, relisables et exécutables par n'importe quel autre outil.
+
+C'est le workflow de migration Core. Générer une migration automatiquement à partir d'une comparaison de schémas est un ajout Pro, décrit plus bas.
+
+## Organisation des fichiers
+
+Les migrations vivent dans `.qoredb/migrations/`, un fichier par migration :
+
+```
+.qoredb/migrations/
+  0001_create_users.sql
+  0002_add_orders_status.sql
+```
+
+Le nom doit suivre la forme `<version>_<nom>.sql` — un préfixe numérique suivi d'un slug non vide. Le préfixe numérique est l'identité de la migration : c'est la clé primaire dans la table d'historique. QoreDB propose comme version suivante la plus haute existante plus un, complétée à quatre chiffres.
+
+Chaque fichier utilise le format de marqueurs dbmate :
+
+```sql
+-- migrate:up
+ALTER TABLE orders ADD COLUMN status TEXT NOT NULL DEFAULT 'pending';
+
+-- migrate:down
+ALTER TABLE orders DROP COLUMN status;
+```
+
+Un fichier sans marqueur est traité intégralement comme du `up` : un dossier existant de fichiers SQL simples fonctionne donc sans conversion — vous ne pourrez simplement pas les annuler.
+
+## L'état appliqué vit dans la base
+
+À la première utilisation, QoreDB crée une table `qoredb_migrations` dans la base cible et y suit tout, plutôt que dans un fichier local. Deux personnes pointant sur la même base voient ainsi la même vérité.
+
+| Colonne          | Rôle                                                  |
+| ---------------- | ----------------------------------------------------- |
+| `version`        | Clé primaire, reprise du préfixe du nom de fichier.   |
+| `name`           | La partie slug du nom de fichier.                     |
+| `checksum`       | SHA-256 de la section `up`.                           |
+| `applied_at`     | Horodatage de l'application réussie.                  |
+| `applied_by`     | La connexion par laquelle elle a été appliquée.       |
+| `execution_ms`   | Durée.                                                |
+| `rolled_back_at` | Renseignée lorsque la migration est annulée.          |
+| `failed_at`      | Renseignée lorsqu'une exécution a échoué en cours de route. |
+
+Chaque migration affiche donc l'un des quatre états dans le panneau : **appliquée**, **en attente**, **annulée** ou **en échec**. Une exécution en échec mémorise son sens : un rollback qui a échoué reprend comme rollback, il ne redémarre pas comme une application.
+
+## Dérive de checksum
+
+Le checksum ne couvre **que la section `up`** : modifier votre SQL d'annulation n'est donc pas une dérive. Si la section `up` d'une migration déjà appliquée change, QoreDB refuse d'agir et vous explique pourquoi.
+
+La dérive est un garde-fou, pas une erreur fatale, et les règles diffèrent selon l'intention :
+
+- **Réappliquer** une migration déjà appliquée et dérivée est refusé d'office. La version est déjà enregistrée ; exécuter un script différent sous la même identité désynchroniserait silencieusement les deux.
+- **Annuler** une migration dérivée, ou réappliquer une migration annulée, peut être forcé une fois l'avertissement lu.
+
+Le panneau analyse également le dossier lui-même avant toute exécution, et bloque sur deux problèmes : deux fichiers revendiquant la même version (ils partageraient une ligne d'historique), et un préfixe de version qui n'est pas un nombre valide. Les versions non monotones sont signalées à titre informatif seulement.
+
+## Exécuter une migration
+
+L'application exécute les instructions dans l'ordre, dans une transaction lorsque le moteur le permet : contrôle préalable, `BEGIN`, réservation de la ligne d'historique, exécution des instructions, `COMMIT`. Réserver la ligne en premier est ce qui transforme deux personnes appliquant la même migration au même moment en conflit plutôt qu'en course. Chaque instruction est analysée par la même couche de sûreté qu'une requête tapée à la main, et toutes le sont **avant que l'une d'elles ne s'exécute** — un script contenant quelque chose que la couche de sûreté refuse n'est jamais exécuté à moitié.
+
+Sur une connexion de **production**, appliquer exige de retaper le nom du fichier de migration dans un champ de confirmation.
+
+<Callout type="warning">
+**MySQL, MariaDB et PlanetScale committent le DDL implicitement.** Sur ces moteurs, une migration ne peut pas être encapsulée dans une transaction comme sur PostgreSQL. QoreDB ne conserve dans le chemin transactionnel que les instructions dont il sait qu'elles restent dans une transaction InnoDB (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`) ; le reste s'exécute en dehors. Un échec en cours de route est enregistré via `failed_at`, avec un avertissement explicite, car les instructions déjà passées ne peuvent pas être annulées automatiquement.
+</Callout>
+
+## Pilotes supportés
+
+Les migrations sont disponibles sur les douze moteurs SQL dont la sémantique DDL et transactionnelle est standard :
+
+PostgreSQL, CockroachDB, TimescaleDB, Supabase, Neon, MySQL, MariaDB, PlanetScale, SQLite, DuckDB, MotherDuck, SQL Server.
+
+MongoDB et DocumentDB, Redis, Valkey et Dragonfly, Elasticsearch et OpenSearch, ainsi que ClickHouse ne sont pas couverts : leurs modèles DDL et transactionnels ne correspondent pas au contrat appliquer/annuler. La restriction est appliquée côté backend, pas seulement masquée dans l'interface.
+
+## Générer une migration depuis un diff de schéma
+
+<Callout type="info">
+La génération de migration à partir d'une comparaison de schémas fait partie de l'offre QoreDB Pro.
+</Callout>
+
+Plutôt que d'écrire le DDL à la main, vous pouvez laisser QoreDB le dériver de ce qui a réellement changé :
+
+1. **Capturez une référence** — un instantané du schéma courant, stocké localement.
+2. Modifiez le schéma comme bon vous semble : éditeur DDL, autre outil, ORM.
+3. **Générez** — QoreDB compare le schéma vivant à la référence et produit une migration avec ses sections `up` et `down`. Le schéma vivant devient ensuite la nouvelle référence, pour que le même delta ne soit pas émis deux fois.
+4. **Vérifiez la dérive** à tout moment pour savoir si le schéma vivant s'est éloigné de la référence, sans rien générer.
+
+Deux garde-fous méritent d'être connus :
+
+- Si une table n'a pas pu être introspectée, la génération est **refusée**. Un instantané partiel ressemblerait à « ces tables ont été supprimées » et produirait des `DROP` destructeurs.
+- Les changements que le dialecte cible ne sait pas exprimer, et les opérations avec perte de données, produisent des avertissements explicites et marquent la migration comme non entièrement réversible.
+
+Relisez le SQL généré avant de l'appliquer. C'est un point de départ, pas une autorité.
+
+## Pour aller plus loin
+
+- [Schema diff](/docs/diff-and-migrations/schema-diff) pour la comparaison sur laquelle repose le générateur
+- [Query Replay Lab](/docs/diff-and-migrations/query-replay-lab) pour vérifier qu'une migration n'a pas cassé vos requêtes
+- [Environnements](/docs/connections/environments) pour les confirmations en production
+- [Validation de sûreté SQL](/docs/security/sql-safety-validation) pour les contrôles que chaque instruction traverse

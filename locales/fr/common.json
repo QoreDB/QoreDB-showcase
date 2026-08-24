@@ -1387,6 +1387,59 @@
         "body": "Le Data Time-Travel fait partie de QoreDB Pro. Téléchargez l'application et activez la capture sur vos connexions."
       }
     },
+    "query-replay": {
+      "eyebrow": "Data Tools · Query Replay Lab",
+      "title": "Query Replay Lab",
+      "subtitle": "Enregistrez les requêtes que vous exécutez vraiment, puis rejouez le lot après une migration. Le rapport dit ce qui casse, ce qui change et ce qui ralentit.",
+      "teaser": "Un lot de requêtes enregistrées, rejoué après un changement — avec un verdict par requête et un diff ligne à ligne.",
+      "problem": {
+        "title": "Le problème",
+        "body": "Vous avez modifié un schéma. Est-ce que quelque chose a cassé ? En toute honnêteté, la réponse habituelle est qu'on rejoue quelques requêtes à la main et qu'on scrute les résultats. Ce qu'il vous fallait, c'était le lot des requêtes que vous exécutez réellement, rejoué d'un coup, avec un verdict par requête — et aucun client de base de données ne le propose."
+      },
+      "solution": {
+        "title": "Comment QoreDB le résout",
+        "intro": "Enregistrez un lot en travaillant normalement : QoreDB conserve les requêtes et ce qu'elles ont renvoyé. Rejouez le lot plus tard — après une migration, sur une autre branche, sur une autre connexion — et lisez un rapport qui répond à quatre questions d'un coup.",
+        "steps": [
+          {
+            "title": "Enregistrez en travaillant",
+            "body": "Démarrez un enregistrement et continuez à interroger depuis l'éditeur ou un notebook. Seule cette connexion est enregistrée, et vous pouvez retirer des entrées du lot avant de le sauvegarder."
+          },
+          {
+            "title": "Les requêtes partent dans Git, les lignes restent en local",
+            "body": "Le lot vit dans .qoredb/replays/ et contient les requêtes et les attentes — jamais une ligne de résultat. Les lignes capturées restent sur votre machine comme référence : le dépôt ne transporte jamais vos données."
+          },
+          {
+            "title": "Rejouez face à ce que vous voulez",
+            "body": "Comparez à l'enregistrement d'origine, à une exécution précédente lorsque le changement était volontaire, ou à une seconde connexion active — la production face à une préproduction migrée, par exemple."
+          },
+          {
+            "title": "Lisez les verdicts, puis le diff",
+            "body": "Chaque requête est classée identique, cassée, nombre de lignes, contenu, plus lente ou ignorée. Tout ce qui dispose de lignes capturées ouvre un diff complet entre la référence et l'exécution."
+          }
+        ]
+      },
+      "example": {
+        "title": "Un exemple concret",
+        "intro": "Un lot de 24 requêtes enregistré avant une migration, rejoué après. Six lignes vous disent tout ce qu'il faut regarder :",
+        "caption": "Les changements de contenu sont détectés par une empreinte SHA-256 du résultat, les lignes étant triées de façon canonique pour qu'une requête sans ORDER BY ne produise pas de faux positif. Les colonnes ignorées — updated_at et consorts — sont exclues de l'empreinte et versionnées avec le lot."
+      },
+      "limits": {
+        "title": "Les limites, clairement posées",
+        "intro": "Le replay est un rapport de comparaison, pas un framework de tests. Ses frontières sont explicites :",
+        "items": [
+          "Les mutations sont exclues du replay par défaut, et refusées d'office en production — classifiées à partir du texte de la requête, jamais d'un drapeau stocké dans le fichier.",
+          "Le texte des requêtes est versionné tel quel : une requête contenant un secret en dur se retrouve dans le dépôt. QoreDB signale les requêtes suspectes et peut les rédiger, au prix de rendre le lot non rejouable.",
+          "La capture est bornée : 1 000 lignes par résultat et un budget de 64 Mo par enregistrement, par défaut. Au-delà, la comparaison retombe sur les métadonnées et le rapport le précise.",
+          "« Plus lente » exige à la fois un rapport de 2× et un écart absolu de 100 ms : les variations ordinaires restent hors du rapport.",
+          "Un lot enregistre des requêtes, pas des fixtures : il dit ce qui a changé par rapport à une référence, il n'alimente pas les données dont cette référence dépend.",
+          "Un seul enregistrement et un seul replay à la fois, pour toute l'application."
+        ]
+      },
+      "cta": {
+        "title": "Sachez ce que votre migration a cassé",
+        "body": "Query Replay Lab fait partie de QoreDB Pro. Téléchargez l'application et enregistrez un lot sur vos propres connexions."
+      }
+    },
     "data-contracts": {
       "eyebrow": "Data Quality · Data Contracts",
       "title": "Data Contracts",

@@ -1,4 +1,4 @@
 {
   "label": "AI features",
-  "items": ["overview"]
+  "items": ["overview", "agent", "local-model"]
 }

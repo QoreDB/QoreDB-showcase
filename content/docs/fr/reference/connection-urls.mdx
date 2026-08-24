@@ -20,10 +20,30 @@ Le pilote est automatiquement détecté à partir du schéma : collez une URL et
 | **CockroachDB**      | `cockroachdb://`, `cockroach://`         | 26257           |
 | **MongoDB**          | `mongodb://`, `mongodb+srv://`           | 27017           |
 | **Redis**            | `redis://` (TCP), `rediss://` (TLS)      | 6379            |
+| **Valkey**           | `valkey://` (TCP), `valkeys://` (TLS)    | 6379            |
 | **SQLite**           | (chemin de fichier, `:memory:`)          | n/a             |
 | **DuckDB**           | (chemin de fichier, `:memory:`)          | n/a             |
 
-Les fournisseurs compatibles Postgres (Supabase, Neon, TimescaleDB) utilisent le schéma standard `postgresql://`. Choisissez le pilote dédié dans la boîte de dialogue Nouvelle connexion si vous souhaitez des fonctionnalités de schéma spécifiques au fournisseur ; dans les deux cas, le format de l'URL est le même.
+## Moteurs compatibles au niveau protocole
+
+Plusieurs moteurs parlent le protocole d'un autre moteur et n'ont **pas de schéma propre**. Ils sont sélectionnés soit à partir de l'hôte, soit en choisissant le moteur dans la fenêtre Nouvelle connexion — la détection d'hôte l'emporte sur le schéma lorsque les deux s'appliquent.
+
+| Moteur                | Schéma à utiliser          | Détecté depuis                                              |
+| --------------------- | -------------------------- | ------------------------------------------------------------ |
+| **PlanetScale**       | `mysql://`                 | `*.psdb.cloud`                                                |
+| **MariaDB**           | `mysql://`                 | non détecté — choisissez le moteur                            |
+| **Amazon DocumentDB** | `mongodb://`               | `*.docdb.amazonaws.com`, `*.docdb-elastic.amazonaws.com`      |
+| **Dragonfly**         | `redis://`, `rediss://`    | non détecté — choisissez le moteur                            |
+| **Supabase**          | `postgresql://`            | `*.supabase.co`, `*.supabase.net`, `pooler.supabase.com`      |
+| **Neon**              | `postgresql://`            | `*.neon.tech`                                                 |
+| **MotherDuck**        | `postgresql://`            | `*.motherduck.com`                                            |
+| **TimescaleDB**       | `postgresql://`            | non détecté — choisissez le moteur                            |
+
+Choisir le moteur dédié n'est pas cosmétique : PlanetScale et DocumentDB forcent le TLS à la connexion, et chaque moteur porte ses propres particularités de schéma et sa base par défaut.
+
+<Callout type="info">
+**TimescaleDB n'est délibérément pas détecté depuis l'URL.** Une instance Timescale est un serveur PostgreSQL ordinaire avec une extension installée ; rien dans la chaîne de connexion ne le dit. Choisissez le moteur vous-même.
+</Callout>
 
 ## PostgreSQL
 
@@ -121,6 +141,15 @@ rediss://[UTILISATEUR:MOTDEPASSE@]HOTE:PORT[/INDEX_DB]?param=valeur&...
 
 Le segment de chemin après l'hôte est l'**index de la base de données** (un entier entre 0 et 15 par défaut ; configurable côté serveur).
 
+**Valkey** dispose de sa propre paire de schémas, au comportement identique :
+
+```
+valkey://[UTILISATEUR:MOTDEPASSE@]HOTE:PORT[/INDEX_DB]?param=valeur&...
+valkeys://[UTILISATEUR:MOTDEPASSE@]HOTE:PORT[/INDEX_DB]?param=valeur&...
+```
+
+`valkeys://` active TLS, en miroir de `rediss://`. **Dragonfly** n'a pas de schéma propre : utilisez `redis://` ou `rediss://` et choisissez le moteur dans la fenêtre de connexion.
+
 ## SQLite
 
 SQLite n'a pas de schéma d'URL au sens strict. Vous pointez vers un chemin de fichier ou `:memory:` :
@@ -153,7 +182,7 @@ L'analyseur (parser) renvoie l'une de ces erreurs lorsque l'URL n'est pas valide
 | ---------------------- | ------------------------------------------------------ |
 | `MissingHost`          | L'URL n'inclut pas d'hôte (ex. `postgres:///mydb`).      |
 | `InvalidUrl`           | L'URL est mal formée.                                  |
-| `UnsupportedScheme`    | Le schéma n'est pas dans la liste ci-dessus. Schémas reconnus : `postgres`, `postgresql`, `mysql`, `mongodb`, `mongodb+srv`, `redis`, `rediss`, `mssql`, `sqlserver`, `cockroachdb`, `cockroach`. |
+| `UnsupportedScheme`    | Le schéma n'est pas dans la liste ci-dessus. Schémas reconnus : `postgres`, `postgresql`, `mysql`, `mongodb`, `mongodb+srv`, `redis`, `rediss`, `valkey`, `valkeys`, `mssql`, `sqlserver`, `cockroachdb`, `cockroach`. |
 | `InvalidUtf8`          | Les caractères encodés en pourcentage ne se décodent pas en UTF-8 valide. |
 | `InvalidPort`          | Le segment de port n'est pas un entier valide.         |
 

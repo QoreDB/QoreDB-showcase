@@ -1,0 +1,60 @@
+---
+title: PlanetScale
+description: Connectez QoreDB à PlanetScale via le pilote MySQL, avec TLS forcé à la connexion et les limitations propres à Vitess exposées plutôt que masquées.
+premium: false
+---
+
+# PlanetScale
+
+PlanetScale parle le protocole MySQL : QoreDB le pilote donc avec le pilote MySQL. Depuis la v0.1.38, il dispose aussi de sa propre entrée moteur, de son icône et de sa détection d'hôte, ainsi que des deux comportements qui font la différence en pratique : le TLS est forcé, et les fonctionnalités absentes de Vitess sont rapportées comme absentes au lieu de produire une erreur.
+
+Tout ce qui figure sur la page [MySQL](/docs/connections/mysql) s'applique ici. Cette page ne couvre que les différences.
+
+## Connexion rapide
+
+Les chaînes de connexion PlanetScale utilisent le schéma MySQL standard :
+
+```
+mysql://USER:PASSWORD@HOST.psdb.cloud:3306/DATABASE?ssl-mode=REQUIRED
+```
+
+Collez-la et QoreDB reconnaît l'hôte `*.psdb.cloud`, ce qui sélectionne automatiquement le moteur PlanetScale. Il n'existe pas de schéma `planetscale://` : c'est la détection d'hôte qui choisit le moteur.
+
+Port par défaut : **3306**.
+
+## Le TLS est forcé
+
+PlanetScale exige le TLS, donc QoreDB l'active à la connexion quels que soient les réglages. Si le mode SSL vaut `disable` ou `prefer`, le pilote le réécrit en `require`.
+
+Les modes plus stricts sont laissés intacts. Si vous demandez `verify-ca` ou `verify-full`, c'est ce que vous obtenez — le pilote relève le plancher, il n'abaisse jamais votre plafond.
+
+## Ce que Vitess ne propose pas
+
+<Callout type="warning">
+**Les routines stockées, les triggers et le planificateur d'événements ne sont pas supportés par Vitess.** QoreDB les rapporte comme absents et masque les sections correspondantes de l'arbre des schémas, plutôt que de vous laisser ouvrir un éditeur pour quelque chose qui ne pourra jamais s'exécuter.
+</Callout>
+
+Les séquences ne sont pas supportées non plus, exactement comme sur MySQL.
+
+Les **clés étrangères** ne fonctionnent que sur les branches où les contraintes de clé étrangère sont activées. Sur une branche sans elles, une clé étrangère est acceptée par l'éditeur DDL mais n'est pas appliquée par le moteur — QoreDB le signale plutôt que de faire comme si de rien n'était.
+
+## Migrations et deploy requests
+
+<Callout type="warning">
+**Les deploy requests ne sont pas modélisées.** Appliquer une migration depuis QoreDB écrit **directement sur la branche à laquelle vous êtes connecté**. Cela n'ouvre pas de deploy request et ne passe pas par le workflow de changement de schéma de PlanetScale.
+</Callout>
+
+Pointez QoreDB sur une branche de développement, appliquez-y vos migrations, puis promouvez-les avec l'outillage de PlanetScale. Traitez une connexion à `main` comme n'importe quelle connexion de production.
+
+Le [Gestionnaire de migrations](/docs/diff-and-migrations/migrations-manager) supporte bien PlanetScale, avec la même réserve que MySQL et MariaDB : le DDL committe implicitement, donc une migration qui échoue en cours de route ne peut pas être annulée automatiquement.
+
+## Angles morts connus
+
+- **Les sauvegardes `mysqldump` ne sont pas testées.** PlanetScale restreint le privilège `PROCESS`, sur lequel s'appuient les assistants de sauvegarde.
+- Le pilote est validé en CI contre un MySQL local, pas contre un cluster PlanetScale réel. Des comportements propres à Vitess, au-delà de ce qui est listé ci-dessus, peuvent encore surprendre — n'hésitez pas à les remonter.
+
+## Pour aller plus loin
+
+- [MySQL](/docs/connections/mysql) pour tout ce que les deux partagent
+- [Limitations des pilotes](/docs/reference/driver-limitations) pour la liste complète par moteur
+- [Gestionnaire de migrations](/docs/diff-and-migrations/migrations-manager) pour appliquer les changements de schéma

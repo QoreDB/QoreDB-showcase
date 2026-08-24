@@ -20,10 +20,30 @@ The driver is auto-detected from the scheme: paste a URL and QoreDB picks the ri
 | **CockroachDB**      | `cockroachdb://`, `cockroach://`         | 26257        |
 | **MongoDB**          | `mongodb://`, `mongodb+srv://`           | 27017        |
 | **Redis**            | `redis://` (TCP), `rediss://` (TLS)      | 6379         |
+| **Valkey**           | `valkey://` (TCP), `valkeys://` (TLS)    | 6379         |
 | **SQLite**           | (file path, `:memory:`)                  | n/a          |
 | **DuckDB**           | (file path, `:memory:`)                  | n/a          |
 
-Postgres-compatible providers (Supabase, Neon, TimescaleDB) use the standard `postgresql://` scheme. Pick the dedicated driver in the New Connection dialog if you want provider-specific schema niceties; either way the URL format is the same.
+## Wire-compatible engines
+
+Several engines speak another engine's protocol and have **no scheme of their own**. They are selected either from the host, or by picking the engine in the New Connection dialog — host detection wins over the scheme when both apply.
+
+| Engine                | Scheme to use              | Detected from                                              |
+| --------------------- | -------------------------- | ---------------------------------------------------------- |
+| **PlanetScale**       | `mysql://`                 | `*.psdb.cloud`                                              |
+| **MariaDB**           | `mysql://`                 | not detected — pick the engine                              |
+| **Amazon DocumentDB** | `mongodb://`               | `*.docdb.amazonaws.com`, `*.docdb-elastic.amazonaws.com`    |
+| **Dragonfly**         | `redis://`, `rediss://`    | not detected — pick the engine                              |
+| **Supabase**          | `postgresql://`            | `*.supabase.co`, `*.supabase.net`, `pooler.supabase.com`    |
+| **Neon**              | `postgresql://`            | `*.neon.tech`                                               |
+| **MotherDuck**        | `postgresql://`            | `*.motherduck.com`                                          |
+| **TimescaleDB**       | `postgresql://`            | not detected — pick the engine                              |
+
+Picking the dedicated engine is not cosmetic: PlanetScale and DocumentDB force TLS on connect, and each engine carries its own schema quirks and default database.
+
+<Callout type="info">
+**TimescaleDB is deliberately not detected from the URL.** A Timescale instance is an ordinary PostgreSQL server with an extension installed; nothing in the connection string says so. Pick the engine yourself.
+</Callout>
 
 ## PostgreSQL
 
@@ -121,6 +141,15 @@ rediss://[USER:PASSWORD@]HOST:PORT[/DB_INDEX]?param=value&...
 
 The path segment after the host is the **database index** (an integer between 0 and 15 by default; configurable server-side).
 
+**Valkey** has its own pair of schemes, behaving identically:
+
+```
+valkey://[USER:PASSWORD@]HOST:PORT[/DB_INDEX]?param=value&...
+valkeys://[USER:PASSWORD@]HOST:PORT[/DB_INDEX]?param=value&...
+```
+
+`valkeys://` enables TLS, mirroring `rediss://`. **Dragonfly** has no scheme of its own; use `redis://` or `rediss://` and pick the engine in the dialog.
+
 ## SQLite
 
 SQLite has no URL scheme in the strict sense. You point at a file path or `:memory:`:
@@ -153,7 +182,7 @@ The URL parser returns one of these errors when the URL is invalid.
 | ---------------------- | ------------------------------------------------------ |
 | `MissingHost`          | The URL doesn't include a host (e.g. `postgres:///mydb`). |
 | `InvalidUrl`           | The URL is not well-formed.                            |
-| `UnsupportedScheme`    | The scheme is not in the list above. Recognized schemes: `postgres`, `postgresql`, `mysql`, `mongodb`, `mongodb+srv`, `redis`, `rediss`, `mssql`, `sqlserver`, `cockroachdb`, `cockroach`. |
+| `UnsupportedScheme`    | The scheme is not in the list above. Recognized schemes: `postgres`, `postgresql`, `mysql`, `mongodb`, `mongodb+srv`, `redis`, `rediss`, `valkey`, `valkeys`, `mssql`, `sqlserver`, `cockroachdb`, `cockroach`. |
 | `InvalidUtf8`          | Percent-encoded characters don't decode to valid UTF-8. |
 | `InvalidPort`          | The port segment isn't a valid integer.                |
 

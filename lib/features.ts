@@ -7,6 +7,7 @@ import {
   Layers,
   Network,
   NotebookPen,
+  Repeat2,
   ShieldCheck,
   Webhook,
 } from "lucide-react";
@@ -49,6 +50,11 @@ export const FEATURE_PAGES: FeaturePage[] = [
     icon: Webhook,
     tier: "pro",
     image: "/images/features/instant-api.webp",
+  },
+  {
+    slug: "query-replay",
+    icon: Repeat2,
+    tier: "pro",
   },
   {
     slug: "sandbox",

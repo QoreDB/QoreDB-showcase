@@ -1,4 +1,10 @@
 {
   "label": "Diff & migrations",
-  "items": ["data-diff", "migration-generation", "schema-diff"]
+  "items": [
+    "data-diff",
+    "schema-diff",
+    "migrations-manager",
+    "migration-generation",
+    "query-replay-lab"
+  ]
 }

@@ -1,0 +1,64 @@
+---
+title: Qore AI Local
+description: Run the AI features against a local model with no API key. A bundled llama-server runtime for macOS, Windows and Linux, installed resumably and verified by SHA-256 against a signed manifest.
+premium: true
+---
+
+# Qore AI Local
+
+<Callout type="info">
+Qore AI Local is part of the QoreDB Pro tier. It shipped in v0.1.35.
+</Callout>
+
+Every other AI provider in QoreDB is BYOK: you bring an API key, and your prompts go to that provider. **Qore AI Local** is the option for when that isn't acceptable — a model that runs on your machine, installed from inside the app, with no key and no network call at inference time.
+
+Ollama already covers this if you have it set up. Qore AI Local exists so that you don't have to.
+
+## What gets installed
+
+Two artifacts, downloaded on demand:
+
+- **The runtime** — the official prebuilt `llama-server` binary from the llama.cpp releases (MIT), pinned to a specific build per platform.
+- **The model** — Qwen 3 8B, quantised to Q4_K_M (Apache-2.0), roughly 5 GB.
+
+Supported platforms: macOS, Windows and Linux, on both `x86_64` and `aarch64`. On anything else the provider reports itself as unsupported rather than half-working.
+
+## Installing
+
+Open **Settings → AI**, pick **Qore AI Local**, and start the install. The panel shows the download size up front and reports progress per artifact through four phases: downloading, verifying, installing, done. You can cancel at any point.
+
+Downloads are **resumable**. A 5 GB model over a flaky connection picks up where it left off rather than starting over, using a range request from the bytes already on disk. The hash check happens once the file is complete.
+
+## How the download is verified
+
+Every artifact is pinned to a **SHA-256** hash and checked after download. A mismatch fails the install; it does not warn and continue.
+
+The catalog listing those hashes is itself protected. QoreDB ships an embedded copy, and may fetch a newer one from the QoreDB releases — but only after verifying it byte-for-byte with **Minisign** against QoreDB's updater public key. Any failure falls back to the embedded catalog.
+
+Several constraints are enforced on a remote catalog on top of the signature: artifact URLs must be HTTPS and carry no credentials, sizes are capped, every supported platform must be present exactly once, and a remote catalog **cannot change where the runtime is installed** on disk.
+
+## Running it
+
+Starting the provider spawns `llama-server` bound to `127.0.0.1` on an ephemeral port, with a 32k context window, exposing an OpenAI-compatible endpoint locally. QoreDB health-checks it before declaring it ready.
+
+The provider reports one of six states, visible in the settings panel: unsupported, not installed, installing, ready, running, error. Start and stop are manual, so the model isn't holding memory when you aren't using it.
+
+## Switching between local and cloud
+
+Qore AI Local is a normal provider in the list. Pick it in **Settings → AI**, or switch on the fly from the model dropdown in the chat header — QoreDB remembers your preferred model per provider.
+
+A reasonable pattern: a cloud model for hard reasoning over an unfamiliar schema, the local model for everything you'd rather not send anywhere.
+
+## Trade-offs
+
+<Callout type="warning">
+An 8B model is not a frontier model. Expect it to be slower and less reliable on complex multi-step reasoning than Claude, GPT or Gemini, particularly when [Q](/docs/ai-features/agent) needs to chain several tool calls. It is a good fit for schema summaries, single-query generation and error fixing — and the right fit whenever the data cannot leave the machine.
+</Callout>
+
+Inference runs on your CPU or GPU, so throughput depends on your hardware. The 5 GB download is a one-off, but it is 5 GB of disk.
+
+## Where to go next
+
+- [Q, the database agent](/docs/ai-features/agent) for what the model is driving
+- [AI features overview](/docs/ai-features/overview) for the cloud providers and key storage
+- [Open Core model](/docs/introduction/open-core-model) for what's in Pro and why

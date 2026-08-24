@@ -12,7 +12,7 @@ premium: false
   todo="Hero shot of the full app: dark theme, a connection expanded in the sidebar showing tables, an active SQL query tab in the editor, a results grid below with a few rows. Use a real-looking dataset (no Lorem Ipsum). Capture at 1600×1000 on macOS for the prettiest window chrome."
 />
 
-QoreDB est un client de base de données de bureau pour les développeurs. À partir d'une seule application, vous pouvez vous connecter à PostgreSQL (et Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB (et MotherDuck), MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch et OpenSearch, parcourir les schémas, écrire des requêtes, éditer des données et exécuter des notebooks.
+QoreDB est un client de base de données de bureau pour les développeurs. À partir d'une seule application, vous pouvez vous connecter à vingt moteurs — PostgreSQL (et Supabase, Neon, TimescaleDB), MySQL/MariaDB (et PlanetScale), SQL Server, SQLite, DuckDB (et MotherDuck), MongoDB (et Amazon DocumentDB), Redis (et Valkey, Dragonfly), CockroachDB, ClickHouse, Elasticsearch et OpenSearch — parcourir les schémas, écrire des requêtes, éditer des données et exécuter des notebooks.
 
 Il est construit avec Tauri, React et Rust, ce qui signifie un binaire natif de petite taille, un démarrage rapide et une faible utilisation de la mémoire par rapport aux clients basés sur Electron.
 
@@ -31,11 +31,11 @@ Que vous vous connectiez à un Postgres local pour la première fois ou que vous
 
 L'ensemble des fonctionnalités est vaste, mais s'articule autour de quatre piliers :
 
-**Connectez-vous à n'importe quoi.** PostgreSQL (et Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB (et MotherDuck), MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch. Détection automatique du pilote à partir de la chaîne de connexion : collez un DSN et QoreDB choisit automatiquement le bon pilote. Le tunneling SSH avec prise en charge du proxy jump est intégré.
+**Connectez-vous à n'importe quoi.** PostgreSQL (et Supabase, Neon, TimescaleDB), MySQL/MariaDB (et PlanetScale), SQL Server, SQLite, DuckDB (et MotherDuck), MongoDB (et Amazon DocumentDB), Redis (et Valkey, Dragonfly), CockroachDB, ClickHouse, Elasticsearch, OpenSearch. Détection automatique du pilote à partir de la chaîne de connexion : collez un DSN et QoreDB choisit automatiquement le bon pilote. Le tunneling SSH avec prise en charge du proxy jump est intégré.
 
 **Interrogez et explorez.** Un éditeur SQL soigné avec coloration syntaxique, saisie semi-automatique et extraits de code. Un éditeur MongoDB dédié avec autocomplétion des collections et des opérateurs ainsi que la validation du pipeline d'agrégation. Un générateur de requêtes multi-dialectes fortement typé (QoreQuery) pour des requêtes portables. Diagrammes ER interactifs et visualisation du plan d'exécution. Une grille de données virtualisée haute performance avec filtrage, tri et pagination côté serveur.
 
-**Éditez et gérez les données en toute sécurité.** Édition de lignes en ligne sur SQL et NoSQL, éditions en masse multi-lignes avec aperçu SQL en direct, importation CSV avec détection automatique, transactions avec validation/annulation (commit/rollback) explicite et un mode bac à sable (sandbox) qui isole vos modifications locales et génère des migrations.
+**Éditez et gérez les données en toute sécurité.** Édition de lignes en ligne sur SQL et NoSQL, éditions en masse multi-lignes avec aperçu SQL en direct, import CSV et SQL, transactions avec validation/annulation (commit/rollback) explicite et un mode bac à sable (sandbox) qui isole vos modifications locales et génère des migrations. Les changements de schéma se versionnent en fichiers `.sql` avec le [Gestionnaire de migrations](/docs/diff-and-migrations/migrations-manager), et [Query Replay Lab](/docs/diff-and-migrations/query-replay-lab) vous dit si une migration a cassé l'une des requêtes que vous exécutez réellement.
 
 **Restez productif tous les jours.** Un concept d'espace de travail qui regroupe les connexions, les requêtes et les notebooks par projet. Éditeur multi-onglets avec réorganisation par glisser-déposer et groupes d'onglets. Notebooks de bases de données (`.qnb`) mélangeant des cellules SQL/Mongo et Markdown avec des variables paramétrées, parfaits pour les runbooks, les post-mortems et les analyses partageables. Recherche globale avec `Cmd/Ctrl + K`. Thèmes sombre et clair. Disponible en 9 langues.
 

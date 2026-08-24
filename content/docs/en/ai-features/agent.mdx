@@ -1,0 +1,89 @@
+---
+title: Q, the database agent
+description: A chat tab where you ask in plain language. Q explores the schema, runs read-only queries, and answers from the rows it actually read — with writes gated behind an explicit approval and refused outright in production.
+premium: true
+---
+
+# Q, the database agent
+
+<Callout type="info">
+Q is part of the QoreDB Pro tier. It shipped in v0.1.35.
+</Callout>
+
+The [AI assistant](/docs/ai-features/overview) generates a query and hands it to you. **Q** goes a step further: it is an agent with its own chat tab that explores the schema, runs queries itself, and answers from the rows it actually read — showing every step and result inline so you can check its work.
+
+The difference matters for trust. An assistant that writes SQL can be confidently wrong about your schema. An agent that reads the schema and the rows can be checked against what it read.
+
+## What Q can do
+
+Q has exactly seven tools, and nothing else:
+
+| Tool                  | What it does                                                    |
+| --------------------- | --------------------------------------------------------------- |
+| `list_connections`    | Lists open connections with their driver and environment.        |
+| `list_namespaces`     | Lists databases or schemas on a connection.                      |
+| `list_tables`         | Lists tables or collections in a namespace.                      |
+| `describe_table`      | Returns columns, keys and indexes.                               |
+| `run_query`           | Runs a **read-only** query and returns rows.                     |
+| `run_mutation`        | Runs an `INSERT` / `UPDATE` / `DELETE` / DDL statement.           |
+| `run_federated_query` | Runs a read-only query joining several connections in scope.     |
+
+Results fed back to the model are capped — 50 rows per tool call, cell values clamped — so a wide `SELECT *` doesn't blow up the context or the bill. Columns your sensitive-data settings mark as sensitive have both their values and their names replaced by `<redacted>` unless you explicitly opt in.
+
+## The approval model
+
+This is the part worth reading carefully.
+
+**Runs without asking.** The four read-only exploration tools, and `run_query` when the query text classifies as a read.
+
+**Refused outright, with no prompt to override it:**
+
+- A write submitted through `run_query`. Reads and writes go through different tools on purpose.
+- A query that **cannot be classified**. The classifier fails closed: if QoreDB isn't sure a statement is a read, the agent doesn't get to run it.
+- **Any write in production.** Writes initiated by the agent are always blocked on a production connection. There is no toggle.
+
+**Asks you first:**
+
+- `run_mutation` on a development or staging connection.
+- `run_federated_query`, every time.
+- Any access to a connection outside the conversation's declared scope.
+
+Each prompt offers **Allow**, **Deny**, and — where it makes sense — **Always allow**.
+
+<Callout type="warning">
+"Always allow" is deliberately narrow. It is offered for mutations and for scope access **only outside production**, and it is never offered for federated queries. Grants last for the app session and are held in memory; restarting QoreDB clears them.
+</Callout>
+
+## Scope
+
+A conversation carries a scope: the set of connections Q is allowed to touch. Reaching outside it triggers an approval prompt rather than failing silently, so a question about the billing database never quietly reads production by itself.
+
+## Conversations
+
+Conversations are listed, renamed, resumed and deleted across sessions. Each one is a single JSON file in QoreDB's application data directory.
+
+What is stored: the messages, a short summary per tool step (clamped to 500 characters), and token usage.
+
+What is **not** stored: query results. Rows Q read to answer you never touch the disk. Reopening an old conversation shows you what was asked and what was done, not the data.
+
+## Budgets
+
+A single run is bounded so a confused agent can't loop forever: 10 minutes of activity, 64,000 tokens, and a 60-second timeout per tool call. Time spent waiting for you to answer an approval prompt does not count against the activity budget — you can go make coffee.
+
+You can cancel a run at any point.
+
+## Choosing a model
+
+Q works with any configured provider (see [AI features overview](/docs/ai-features/overview)), selected from the chat header. Tool calling is the requirement, and support varies:
+
+- **Anthropic, OpenAI, Google Gemini** — validated tool calling.
+- **Mistral AI, DeepSeek** — best-effort through the OpenAI-compatible path.
+- **Ollama** — depends on the model; one that can't call tools degrades to plain text.
+- **[Qore AI Local](/docs/ai-features/local-model)** — a bundled local model, no API key, nothing leaving your machine.
+
+## Where to go next
+
+- [Qore AI Local](/docs/ai-features/local-model) to run Q against a local model
+- [AI features overview](/docs/ai-features/overview) for providers and key storage
+- [Environments](/docs/connections/environments) for how a connection is tagged production
+- [SQL safety validation](/docs/security/sql-safety-validation) for the classifier the approval model relies on

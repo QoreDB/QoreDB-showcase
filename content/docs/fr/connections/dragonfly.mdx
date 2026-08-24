@@ -1,0 +1,59 @@
+---
+title: Dragonfly & Valkey
+description: Connectez QoreDB à Dragonfly et Valkey via le pilote Redis. Même navigation, mêmes commandes, mêmes limitations — avec valkey:// reconnu comme schéma à part entière.
+premium: false
+---
+
+# Dragonfly & Valkey
+
+Dragonfly et Valkey parlent tous deux le protocole Redis : QoreDB les pilote donc avec le pilote Redis. Chacun dispose de sa propre entrée moteur et de son icône, pour que votre liste de connexions dise à quoi vous vous connectez réellement.
+
+Tout ce qui figure sur la page [Redis](/docs/connections/redis) s'applique aux deux. Cette page ne couvre que les différences.
+
+## Dragonfly
+
+Dragonfly est un remplaçant direct de Redis, avec un moteur d'exécution différent. Il s'annonce via le schéma Redis standard :
+
+```
+redis://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+rediss://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+```
+
+Port par défaut : **6379**. `rediss://` active le TLS, exactement comme avec Redis.
+
+<Callout type="info">
+Dragonfly n'a **pas de schéma d'URL propre**, et QoreDB ne sonde pas un serveur pour deviner sa variante. Coller une URL `redis://` sélectionne le moteur Redis ; choisissez **Dragonfly** dans la fenêtre de connexion si vous voulez que la connexion soit étiquetée correctement.
+</Callout>
+
+## Valkey
+
+Valkey est le fork de Redis porté par la Linux Foundation. Contrairement à Dragonfly, il a ses propres schémas :
+
+```
+valkey://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+valkeys://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+```
+
+Collez l'un ou l'autre et QoreDB sélectionne automatiquement le moteur Valkey. `valkeys://` active le TLS, en miroir de `rediss://`. Un serveur Valkey joint par une URL `redis://` classique fonctionne aussi — vous obtenez simplement l'étiquette Redis.
+
+Port par défaut : **6379**.
+
+## Limitations partagées
+
+Les deux héritent du comportement du pilote Redis, sans exception :
+
+- **`SCAN` n'est pas atomique.** Parcourir les clés peut renvoyer des doublons ou manquer des clés insérées pendant l'itération. Ne vous y fiez pas pour des comptages exacts.
+- **Les espaces de noms** sont numérotés de 0 à 15 par défaut. Seules les bases non vides apparaissent dans l'arbre.
+- **Pas de schéma.** Décrire une clé renvoie sa forme selon son type (chaîne, hash, liste, set, sorted set, stream), pas des métadonnées de colonnes.
+- **Les écritures passent par des commandes brutes.** La grille de données est orientée lecture ; utilisez l'éditeur avec `SET`, `HSET`, `LPUSH` et consorts.
+- **L'annulation est best-effort.** Une commande bloquante peut ne pas s'arrêter immédiatement.
+
+Le classifieur de commandes dangereuses est également partagé : `FLUSHALL`, `FLUSHDB`, `SHUTDOWN`, `CONFIG SET` / `REWRITE` / `RESETSTAT`, `SCRIPT FLUSH` et `SCRIPT KILL` sont signalés de la même manière sur les trois moteurs.
+
+Le [Gestionnaire de migrations](/docs/diff-and-migrations/migrations-manager) n'en couvre aucun.
+
+## Pour aller plus loin
+
+- [Redis](/docs/connections/redis) pour la documentation complète du pilote
+- [Limitations des pilotes](/docs/reference/driver-limitations) pour la liste complète par moteur
+- [URL de connexion](/docs/reference/connection-urls) pour la référence des schémas

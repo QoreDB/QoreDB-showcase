@@ -22,6 +22,18 @@ Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionn
 - **Schémas système masqués** : `information_schema`, `mysql`, `performance_schema` et `sys` n'apparaissent pas dans l'arborescence du schéma par défaut. Interrogez-les directement si vous en avez besoin.
 - **Plugins d'authentification** : MySQL 8 utilise par défaut `caching_sha2_password`. Les anciens clients peuvent échouer ; basculez l'utilisateur vers `mysql_native_password` côté serveur ou mettez à niveau.
 
+## PlanetScale
+
+Tout ce qui figure dans la section MySQL s'applique. En complément :
+
+- **TLS forcé à la connexion** : un mode SSL valant `disable` ou `prefer` est réécrit en `require`. Les modes plus stricts (`verify-ca`, `verify-full`) sont laissés intacts.
+- **Pas de schéma d'URL propre** : le moteur est sélectionné à partir de l'hôte `*.psdb.cloud`, ou manuellement dans la fenêtre de connexion.
+- **Manques de Vitess** : routines stockées, triggers, planificateur d'événements et séquences ne sont pas supportés. QoreDB les rapporte comme absents et masque l'interface correspondante, plutôt que de vous laisser éditer quelque chose qui ne pourra pas s'exécuter.
+- **Les clés étrangères ne sont pas appliquées**, sauf si la branche a les contraintes de clé étrangère activées.
+- **Les deploy requests ne sont pas modélisées** : appliquer une migration écrit directement sur la branche connectée. Pointez sur une branche de développement et promouvez avec l'outillage de PlanetScale.
+- **Sauvegardes `mysqldump` non testées** : PlanetScale restreint le privilège `PROCESS` sur lequel s'appuient les assistants de sauvegarde.
+- Validé en CI contre un MySQL local, pas contre un cluster PlanetScale réel.
+
 ## SQL Server
 
 - **Le certificat du serveur est approuvé par défaut** : avec le SSL activé, QoreDB appelle `trust_cert()` sur la configuration Tiberius, qui accepte le certificat du serveur sans validation stricte de l'Autorité de Certification (CA). C'est parfait pour les services gérés avec des CA publiques, et pour les réseaux privés de confiance ; moins sûr sur l'internet public.
@@ -44,6 +56,17 @@ Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionn
 - **Index TTL** : uniquement à clé unique, ascendant ou descendant. Les index TTL composés ne sont pas pris en charge par Mongo lui-même.
 - **`$out` et `$merge`** : doivent être la dernière étape d'un pipeline (une contrainte propre à Mongo, affichée telle quelle).
 
+## Amazon DocumentDB
+
+Tout ce qui figure dans la section MongoDB s'applique. En complément :
+
+- **TLS forcé**, et vous devez fournir le fichier `global-bundle.pem` d'Amazon comme CA. QoreDB utilise ce bundle *à la place* du magasin de confiance système et **refuse de se connecter si le chemin n'existe pas**, plutôt que de retomber sur une connexion non vérifiée.
+- **La vérification du nom d'hôte n'est assouplie que derrière un tunnel ou un proxy**, où le certificat nomme le cluster alors que vous vous connectez à `localhost`. La CA reste vérifiée dans ce cas.
+- **`retryWrites` est forcé à `false`**, écrasant un `retryWrites=true` explicite. DocumentDB ne supporte pas les écritures réessayables.
+- **Pas de schéma d'URL propre** : le moteur est sélectionné à partir de l'hôte `*.docdb.amazonaws.com` / `*.docdb-elastic.amazonaws.com`, ou manuellement.
+- **La compatibilité est partielle** : certains opérateurs d'agrégation ne sont pas supportés, `$lookup` est limité, certains types d'index n'existent pas. L'erreur du serveur est transmise telle quelle.
+- Validé en CI contre un MongoDB local avec TLS, pas contre un cluster DocumentDB réel.
+
 ## Redis
 
 - **Écritures de mutation depuis l'interface utilisateur** : la grille de données pour Redis est orientée vers la lecture. L'édition en ligne des clés et des valeurs n'est pas prise en charge dans l'interface utilisateur actuelle ; utilisez l'éditeur avec des commandes Redis brutes (`SET`, `HSET`, `LPUSH`, etc.) à la place.
@@ -53,6 +76,13 @@ Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionn
 - **Mode Cluster** : non détecté comme un concept distinct ; le pilote se connecte à un nœud. Pour un cluster Redis, pointez vers le nœud d'entrée et laissez le pilote suivre les redirections.
 - **Scripting Lua** : `EVAL`, `EVALSHA`, `FCALL` sont classés comme des mutations. `SCRIPT LOAD` fonctionne ; `SCRIPT FLUSH`, `SCRIPT KILL`, `SLEEP`, `FLUSHALL`, `FLUSHDB`, `SHUTDOWN`, `CONFIG` déclenchent des avertissements de requête dangereuse.
 - **Annulation** : fait de son mieux. Les commandes bloquantes de longue durée peuvent ne pas répondre immédiatement à l'annulation.
+
+### Valkey & Dragonfly
+
+Toutes les limitations Redis ci-dessus s'appliquent aux deux, sans exception.
+
+- **Valkey** ajoute les schémas `valkey://` et `valkeys://`, reconnus par l'analyseur d'URL.
+- **Dragonfly n'a pas de schéma propre** et s'annonce via `redis://`. QoreDB ne sonde pas un serveur pour deviner sa variante : choisissez le moteur dans la fenêtre de connexion si vous voulez que la connexion soit étiquetée correctement.
 
 ## DuckDB
 

@@ -1,0 +1,108 @@
+---
+title: Migrations Manager
+description: Version your schema as .sql files in .qoredb/migrations/, share them through Git, and apply or roll them back against a connection with applied state and checksum drift tracked in the target database.
+premium: false
+---
+
+# Migrations Manager
+
+QoreDB manages schema migrations as plain `.sql` files stored in your workspace and shared through Git. Applying, rolling back, and knowing what has already run are handled by the app; the files themselves stay readable, reviewable, and runnable by anything else.
+
+This is the Core migration workflow. Generating a migration automatically from a schema comparison is a Pro addition, covered further down.
+
+## File layout
+
+Migrations live in `.qoredb/migrations/`, one file per migration:
+
+```
+.qoredb/migrations/
+  0001_create_users.sql
+  0002_add_orders_status.sql
+```
+
+The name must be `<version>_<name>.sql` — a numeric prefix followed by a non-empty slug. The numeric prefix is the identity of the migration: it is the primary key in the history table. QoreDB proposes the next version as the highest existing one plus one, zero-padded to four digits.
+
+Each file uses the dbmate marker format:
+
+```sql
+-- migrate:up
+ALTER TABLE orders ADD COLUMN status TEXT NOT NULL DEFAULT 'pending';
+
+-- migrate:down
+ALTER TABLE orders DROP COLUMN status;
+```
+
+A file with no markers is treated as `up` in its entirety, so an existing folder of plain SQL files works without conversion — you just can't roll those back.
+
+## Applied state lives in the database
+
+On first use, QoreDB creates a `qoredb_migrations` table in the target database and tracks everything there rather than in a local file. That way, two people pointing at the same database see the same truth.
+
+| Column           | Purpose                                        |
+| ---------------- | ---------------------------------------------- |
+| `version`        | Primary key, taken from the filename prefix.   |
+| `name`           | The slug part of the filename.                 |
+| `checksum`       | SHA-256 of the `up` section.                   |
+| `applied_at`     | Timestamp of the successful apply.             |
+| `applied_by`     | The connection it was applied through.         |
+| `execution_ms`   | Duration.                                      |
+| `rolled_back_at` | Set when the migration is rolled back.         |
+| `failed_at`      | Set when a run failed partway through.         |
+
+Each migration therefore shows one of four states in the panel: **applied**, **pending**, **rolled back**, or **failed**. A failed run remembers its direction, so a failed rollback resumes as a rollback rather than restarting as an apply.
+
+## Checksum drift
+
+The checksum covers the **`up` section only**, so editing your rollback SQL is not drift. If the `up` section of an already-applied migration changes, QoreDB refuses to act and tells you why.
+
+Drift is a guard, not a hard error, and the guards differ by intent:
+
+- **Re-applying** a drifted, already-applied migration is refused outright. The version is already recorded; running a different script under the same identity would silently desynchronise the two.
+- **Rolling back** a drifted migration, or re-applying one that was rolled back, can be forced once you have read the warning.
+
+The panel also lints the folder itself before you run anything, and blocks on two problems: two files claiming the same version (they would share a history row), and a version prefix that isn't a valid number. Versions that aren't monotonic are reported as information only.
+
+## Running a migration
+
+Applying runs the statements in order, inside a transaction where the engine allows it: preflight, `BEGIN`, the history row is claimed, the statements run, `COMMIT`. Claiming the row first is what makes two people applying the same migration at the same time a conflict rather than a race. Every statement is analysed by the same safety layer as a query you type, and all of them are vetted **before any of them runs** — a script that contains something the safety layer refuses never gets half-executed.
+
+Against a **production** connection, applying requires typing the migration filename into a confirmation field.
+
+<Callout type="warning">
+**MySQL, MariaDB and PlanetScale commit DDL implicitly.** On these engines a migration cannot be wrapped in a transaction the way it can on PostgreSQL. QoreDB only keeps the statements it knows stay inside an InnoDB transaction (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`) in the transactional path; anything else runs outside it. A failure partway through is recorded as `failed_at` with an explicit warning, because the statements that already ran cannot be undone automatically.
+</Callout>
+
+## Supported drivers
+
+Migrations are available on the twelve SQL engines with standard transactional DDL semantics:
+
+PostgreSQL, CockroachDB, TimescaleDB, Supabase, Neon, MySQL, MariaDB, PlanetScale, SQLite, DuckDB, MotherDuck, SQL Server.
+
+MongoDB and DocumentDB, Redis, Valkey and Dragonfly, Elasticsearch and OpenSearch, and ClickHouse are not covered: their DDL and transaction models don't fit the apply/rollback contract. The restriction is enforced in the backend as well as hidden in the UI.
+
+## Generating a migration from a schema diff
+
+<Callout type="info">
+Migration generation from a schema comparison is part of the QoreDB Pro tier.
+</Callout>
+
+Rather than writing the DDL by hand, you can let QoreDB derive it from what actually changed:
+
+1. **Capture a baseline** — a snapshot of the current schema, stored locally.
+2. Change the schema however you like: through the DDL editor, another tool, an ORM.
+3. **Generate** — QoreDB diffs the live schema against the baseline and produces a migration with both `up` and `down` sections. The live schema then becomes the new baseline, so the same delta is not emitted twice.
+4. **Check drift** at any point to see whether the live schema has moved away from the baseline, without generating anything.
+
+Two guardrails are worth knowing:
+
+- If any table failed to introspect, generation is **refused**. A partial snapshot would look like "these tables were deleted" and emit destructive `DROP`s.
+- Changes the target dialect cannot express, and operations that lose data, produce explicit warnings and mark the migration as not fully reversible.
+
+Read the generated SQL before applying it. It is a starting point, not an authority.
+
+## Where to go next
+
+- [Schema diff](/docs/diff-and-migrations/schema-diff) for the comparison the generator is built on
+- [Query Replay Lab](/docs/diff-and-migrations/query-replay-lab) to verify that a migration didn't break your queries
+- [Environments](/docs/connections/environments) for the production confirmation prompts
+- [SQL safety validation](/docs/security/sql-safety-validation) for the checks every statement passes through

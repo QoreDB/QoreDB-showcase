@@ -1,0 +1,59 @@
+---
+title: Dragonfly & Valkey
+description: Connect QoreDB to Dragonfly and Valkey over the Redis driver. Same browsing, same command execution, same limitations — with valkey:// recognised as a scheme of its own.
+premium: false
+---
+
+# Dragonfly & Valkey
+
+Dragonfly and Valkey both speak the Redis protocol, so QoreDB drives them with the Redis driver. Each has its own engine entry and icon so your connection list says what you actually connect to.
+
+Everything on the [Redis](/docs/connections/redis) page applies to both. This page covers only what differs.
+
+## Dragonfly
+
+Dragonfly is a drop-in Redis replacement with a different execution engine. It announces itself over the standard Redis scheme:
+
+```
+redis://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+rediss://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+```
+
+Default port: **6379**. `rediss://` enables TLS, exactly as with Redis.
+
+<Callout type="info">
+Dragonfly has **no URL scheme of its own**, and QoreDB does not probe a server to detect its flavour. Pasting a `redis://` URL selects the Redis engine; pick **Dragonfly** in the connection dialog if you want the connection labelled accurately.
+</Callout>
+
+## Valkey
+
+Valkey is the Linux Foundation fork of Redis. Unlike Dragonfly, it has its own schemes:
+
+```
+valkey://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+valkeys://[USER:PASSWORD@]HOST:6379[/DB_INDEX]
+```
+
+Paste either and QoreDB selects the Valkey engine automatically. `valkeys://` enables TLS, mirroring `rediss://`. A Valkey server reached over a plain `redis://` URL works too — you just get the Redis engine label.
+
+Default port: **6379**.
+
+## Shared limitations
+
+Both inherit the Redis driver's behaviour without exception:
+
+- **`SCAN` is not atomic.** Browsing keys can return duplicates or miss keys inserted during iteration. Don't rely on it for exact counts.
+- **Database namespaces** are numbered 0 to 15 by default. Only non-empty databases appear in the tree.
+- **No schema.** Describing a key returns its type-specific shape (string, hash, list, set, sorted set, stream), not column metadata.
+- **Writes go through raw commands.** The data grid is read-oriented; use the editor with `SET`, `HSET`, `LPUSH` and friends.
+- **Cancellation is best-effort.** A blocking command may not stop immediately.
+
+The dangerous-command classifier is shared as well: `FLUSHALL`, `FLUSHDB`, `SHUTDOWN`, `CONFIG SET` / `REWRITE` / `RESETSTAT`, `SCRIPT FLUSH` and `SCRIPT KILL` are flagged the same way on all three engines.
+
+[Migrations Manager](/docs/diff-and-migrations/migrations-manager) does not cover any of them.
+
+## Where to go next
+
+- [Redis](/docs/connections/redis) for the full driver documentation
+- [Driver limitations](/docs/reference/driver-limitations) for the full per-engine list
+- [Connection URLs](/docs/reference/connection-urls) for the scheme reference

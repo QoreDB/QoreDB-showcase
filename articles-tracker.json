@@ -494,19 +494,21 @@
       "title": "Comment fonctionne le test de connexion dans QoreDB",
       "category": "Architecture",
       "publishedAt": "2026-08-02"
+    },
+    {
+      "slug": "pagination-offset-limit-limites-reelles",
+      "title": "La pagination dans QoreDB : OFFSET/LIMIT et ses limites réelles",
+      "category": "Architecture",
+      "publishedAt": "2026-08-23"
+    },
+    {
+      "slug": "systeme-themes-dark-mode-tailwind-4-css-variables",
+      "title": "Le système de thèmes de QoreDB : dark mode natif et cohérence Tailwind 4",
+      "category": "Produit",
+      "publishedAt": "2026-08-24"
     }
   ],
   "queue": [
-    {
-      "title": "La pagination dans QoreDB : OFFSET/LIMIT et ses limites réelles",
-      "category": "Architecture",
-      "topic_notes": "Pagination server-side, infinite scroll, coût OFFSET élevé, pas de keyset"
-    },
-    {
-      "title": "Le système de thèmes : dark mode natif et cohérence Tailwind",
-      "category": "Produit",
-      "topic_notes": "Tailwind CSS, variables CSS, dark/light, high contrast, pas de theming runtime"
-    },
     {
       "title": "L'onboarding de QoreDB : première connexion en moins de 30 secondes",
       "category": "Produit",

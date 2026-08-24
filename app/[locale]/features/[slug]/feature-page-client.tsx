@@ -26,6 +26,18 @@ UPDATE "users" SET "status" = 'active'
 UPDATE "users" SET "status" = 'active'
   WHERE "id" = 4218;   -- annule l'UPDATE du 07/07 14:32
 COMMIT;`,
+  "query-replay": `# Rapport de replay — set "checkout" — 24 requêtes
+#
+# #   Requête                                  Verdict          Lignes      Durée
+# 1   SELECT * FROM orders WHERE …             identique      1 204 / 1 204   12 ms
+# 7   SELECT o.*, u.email FROM orders o …      contenu        1 204 / 1 204   18 ms
+# 12  SELECT status, count(*) FROM orders …    nombre de lignes    5 / 4       9 ms
+# 15  SELECT * FROM order_items WHERE …        cassée               – / 89      –
+# 19  SELECT * FROM orders ORDER BY total …    plus lente     1 204 / 1 204  980 ms
+# 22  UPDATE orders SET status = …             ignorée              –          –
+#
+# .qoredb/replays/checkout.qreplay.json  →  versionné (requêtes + attentes)
+# ~/.../replays/<workspace>/<run>/       →  local (lignes capturées)`,
   "data-contracts": `# .qoredb/contracts/orders.yml
 target:
   connection: prod_pg

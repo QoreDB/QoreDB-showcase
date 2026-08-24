@@ -1,0 +1,63 @@
+---
+title: Amazon DocumentDB
+description: Connect QoreDB to Amazon DocumentDB over the MongoDB driver, with TLS forced, Amazon's CA bundle required, and retryWrites disabled.
+premium: false
+---
+
+# Amazon DocumentDB
+
+Amazon DocumentDB is MongoDB-compatible, so QoreDB drives it with the MongoDB driver. Since v0.1.38 it has its own engine entry, icon and host detection, plus the connection settings DocumentDB actually requires.
+
+Everything on the [MongoDB](/docs/connections/mongodb) page applies here. This page covers only what differs.
+
+## Quick connect
+
+DocumentDB uses the standard MongoDB scheme:
+
+```
+mongodb://USER:PASSWORD@HOST.docdb.amazonaws.com:27017/DATABASE
+```
+
+QoreDB recognises `*.docdb.amazonaws.com` and `*.docdb-elastic.amazonaws.com` hosts and selects the DocumentDB engine automatically. There is no scheme of its own.
+
+Default port: **27017**.
+
+## TLS and the CA bundle
+
+TLS is forced on connect. DocumentDB clusters are not reachable in clear text, and QoreDB does not offer to try.
+
+<Callout type="warning">
+**You must point `ssl_ca_cert` at Amazon's `global-bundle.pem`.** DocumentDB is signed by Amazon's own CA, which is not in your system trust store. QoreDB uses the bundle you provide *instead of* the system store, and **refuses to connect if the path doesn't exist** rather than silently falling back to an unverified connection.
+</Callout>
+
+Download the bundle from Amazon's documentation, save it somewhere stable, and reference it in the connection's TLS settings.
+
+## Connecting through a tunnel
+
+DocumentDB clusters live inside a VPC, so you will usually reach one over an [SSH tunnel](/docs/connections/ssh-tunneling) or a proxy. That breaks hostname verification: you connect to `localhost` while the certificate names the cluster.
+
+QoreDB handles this by relaxing **hostname** verification only when a tunnel or proxy is configured. The CA is still verified in that case — an unverifiable certificate still fails the connection.
+
+## retryWrites is disabled
+
+DocumentDB does not support retryable writes. QoreDB forces `retryWrites=false` on connect, overriding an explicit `retryWrites=true` in your URL. This is a compatibility requirement, not a preference you can express.
+
+## DocumentDB is not MongoDB
+
+<Callout type="warning">
+Compatibility is partial. Some aggregation operators are unsupported, `$lookup` is limited, and some index types don't exist. QoreDB passes the server's own error through unmodified rather than rewriting it, so what you see is what DocumentDB said.
+</Callout>
+
+Consult the AWS compatibility matrix for your cluster's engine version before assuming a pipeline that works on MongoDB will run here.
+
+[Migrations Manager](/docs/diff-and-migrations/migrations-manager) does not cover DocumentDB, for the same reason it doesn't cover MongoDB.
+
+## Known gaps
+
+The driver is validated in CI against a TLS-enabled local MongoDB, not a live DocumentDB cluster. The test that matters most — that an unverifiable certificate fails closed — is covered; engine-level compatibility differences are not.
+
+## Where to go next
+
+- [MongoDB](/docs/connections/mongodb) for everything shared between the two
+- [SSH tunneling](/docs/connections/ssh-tunneling) for reaching a cluster inside a VPC
+- [Driver limitations](/docs/reference/driver-limitations) for the full per-engine list

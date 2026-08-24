@@ -1,0 +1,89 @@
+---
+title: Q, votre agent base de données
+description: Un onglet de discussion où vous posez vos questions en langage naturel. Q explore le schéma, exécute des requêtes en lecture seule et répond à partir des lignes réellement lues — les écritures passant par une approbation explicite et étant refusées d'office en production.
+premium: true
+---
+
+# Q, votre agent base de données
+
+<Callout type="info">
+Q fait partie de l'offre QoreDB Pro. Disponible depuis la v0.1.35.
+</Callout>
+
+L'[assistant IA](/docs/ai-features/overview) génère une requête et vous la remet. **Q** va un cran plus loin : c'est un agent, doté de son propre onglet de discussion, qui explore le schéma, exécute lui-même les requêtes et répond à partir des lignes qu'il a réellement lues — en affichant chaque étape et chaque résultat pour que vous puissiez vérifier son travail.
+
+La différence compte pour la confiance. Un assistant qui écrit du SQL peut se tromper avec aplomb sur votre schéma. Un agent qui lit le schéma et les lignes peut être confronté à ce qu'il a lu.
+
+## Ce que Q sait faire
+
+Q dispose d'exactement sept outils, et de rien d'autre :
+
+| Outil                 | Rôle                                                              |
+| --------------------- | ------------------------------------------------------------------ |
+| `list_connections`    | Liste les connexions ouvertes, avec leur pilote et leur environnement. |
+| `list_namespaces`     | Liste les bases ou schémas d'une connexion.                        |
+| `list_tables`         | Liste les tables ou collections d'un espace de noms.               |
+| `describe_table`      | Renvoie colonnes, clés et index.                                   |
+| `run_query`           | Exécute une requête en **lecture seule** et renvoie les lignes.    |
+| `run_mutation`        | Exécute un `INSERT` / `UPDATE` / `DELETE` ou du DDL.                |
+| `run_federated_query` | Exécute une requête en lecture seule joignant plusieurs connexions du périmètre. |
+
+Les résultats renvoyés au modèle sont plafonnés — 50 lignes par appel d'outil, valeurs de cellules tronquées — pour qu'un `SELECT *` large ne fasse exploser ni le contexte ni la facture. Les colonnes que vos réglages marquent comme sensibles voient leurs valeurs *et* leurs noms remplacés par `<redacted>`, sauf opt-in explicite.
+
+## Le modèle d'approbation
+
+C'est la partie à lire attentivement.
+
+**S'exécute sans demander.** Les quatre outils d'exploration en lecture seule, et `run_query` lorsque le texte de la requête est classifié comme une lecture.
+
+**Refusé d'office, sans possibilité de contournement :**
+
+- Une écriture soumise via `run_query`. Lectures et écritures passent par des outils différents, volontairement.
+- Une requête qui **ne peut pas être classifiée**. Le classifieur échoue en position fermée : si QoreDB n'est pas certain qu'une instruction est une lecture, l'agent ne l'exécute pas.
+- **Toute écriture en production.** Les écritures initiées par l'agent sont toujours bloquées sur une connexion de production. Aucun réglage ne le change.
+
+**Vous demande d'abord :**
+
+- `run_mutation` sur une connexion de développement ou de préproduction.
+- `run_federated_query`, à chaque fois.
+- Tout accès à une connexion hors du périmètre déclaré de la conversation.
+
+Chaque demande propose **Autoriser**, **Refuser** et, quand cela a du sens, **Toujours autoriser**.
+
+<Callout type="warning">
+« Toujours autoriser » est délibérément restreint. L'option n'est proposée pour les mutations et les accès hors périmètre **qu'en dehors de la production**, et jamais pour les requêtes fédérées. Les autorisations valent pour la session de l'application et sont conservées en mémoire ; redémarrer QoreDB les efface.
+</Callout>
+
+## Périmètre
+
+Une conversation porte un périmètre : l'ensemble des connexions auxquelles Q a le droit de toucher. En sortir déclenche une demande d'approbation plutôt qu'un échec silencieux — une question sur la base de facturation ne lit donc jamais la production de sa propre initiative.
+
+## Conversations
+
+Les conversations sont listées, renommées, reprises et supprimées d'une session à l'autre. Chacune est un fichier JSON unique dans le répertoire de données de QoreDB.
+
+Ce qui est stocké : les messages, un résumé court par étape d'outil (limité à 500 caractères) et la consommation de jetons.
+
+Ce qui n'est **pas** stocké : les résultats des requêtes. Les lignes que Q a lues pour vous répondre ne touchent jamais le disque. Rouvrir une ancienne conversation vous montre ce qui a été demandé et ce qui a été fait, pas les données.
+
+## Budgets
+
+Une exécution est bornée pour qu'un agent égaré ne tourne pas indéfiniment : 10 minutes d'activité, 64 000 jetons, et 60 secondes de délai maximum par appel d'outil. Le temps passé à attendre votre réponse à une demande d'approbation ne compte pas dans le budget d'activité — vous pouvez aller faire un café.
+
+Vous pouvez annuler une exécution à tout moment.
+
+## Choisir un modèle
+
+Q fonctionne avec n'importe quel fournisseur configuré (voir [Vue d'ensemble des fonctionnalités IA](/docs/ai-features/overview)), sélectionnable depuis l'en-tête de la discussion. Le prérequis est le tool calling, dont le support varie :
+
+- **Anthropic, OpenAI, Google Gemini** — tool calling validé.
+- **Mistral AI, DeepSeek** — au mieux, via le chemin compatible OpenAI.
+- **Ollama** — dépend du modèle ; un modèle incapable d'appeler des outils retombe en mode texte.
+- **[Qore AI Local](/docs/ai-features/local-model)** — un modèle local embarqué, sans clé d'API, sans rien qui quitte votre machine.
+
+## Pour aller plus loin
+
+- [Qore AI Local](/docs/ai-features/local-model) pour faire tourner Q sur un modèle local
+- [Vue d'ensemble des fonctionnalités IA](/docs/ai-features/overview) pour les fournisseurs et le stockage des clés
+- [Environnements](/docs/connections/environments) pour la façon dont une connexion est marquée « production »
+- [Validation de sûreté SQL](/docs/security/sql-safety-validation) pour le classifieur sur lequel repose le modèle d'approbation

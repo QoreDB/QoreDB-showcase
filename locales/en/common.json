@@ -1387,6 +1387,59 @@
         "body": "Data Time-Travel is part of QoreDB Pro. Download the app and enable capture on your own connections."
       }
     },
+    "query-replay": {
+      "eyebrow": "Data Tools · Query Replay Lab",
+      "title": "Query Replay Lab",
+      "subtitle": "Record the queries you actually run, then replay the set after a migration. The report says what broke, what changed, and what got slower.",
+      "teaser": "A recorded set of queries, replayed after a change — with a verdict per query and a row-level diff.",
+      "problem": {
+        "title": "The problem",
+        "body": "You changed a schema. Did anything break? The honest answer is usually that you re-ran a handful of queries by hand and squinted at the results. What you needed was the set of queries you actually run, replayed in one go, with a verdict per query — and nothing in a database client gives you that."
+      },
+      "solution": {
+        "title": "How QoreDB solves it",
+        "intro": "Record a set while you work normally, and QoreDB keeps the queries alongside what they returned. Replay the set later — after a migration, on another branch, on another connection — and read a report that answers four questions at once.",
+        "steps": [
+          {
+            "title": "Record while you work",
+            "body": "Start a recording and keep querying from the editor or a notebook. Only that connection is recorded, and you can drop entries from the set before saving it."
+          },
+          {
+            "title": "Queries go in Git, rows stay local",
+            "body": "The set lives in .qoredb/replays/ and holds queries and expectations — never a result row. The captured rows stay on your machine as the baseline, so the repository never carries your data."
+          },
+          {
+            "title": "Replay against whatever you like",
+            "body": "Compare against the original recording, against a previous run when the change was intentional, or against a second live connection — production versus a migrated staging, for instance."
+          },
+          {
+            "title": "Read the verdicts, then the diff",
+            "body": "Each query is classified as identical, broken, row count, content, slower or skipped. Anything with captured rows opens a full baseline-versus-run diff."
+          }
+        ]
+      },
+      "example": {
+        "title": "A concrete example",
+        "intro": "A set of 24 queries recorded before a migration, replayed after it. Six rows tell you everything you need to look at:",
+        "caption": "Content changes are detected by a SHA-256 digest of the result, with rows canonically sorted so a query without ORDER BY doesn't report a false positive. Ignored columns — updated_at and friends — are excluded from the digest and versioned with the set."
+      },
+      "limits": {
+        "title": "The limits, stated plainly",
+        "intro": "Replay is a comparison report, not a test framework. Its boundaries are explicit:",
+        "items": [
+          "Mutations are excluded from replay by default, and refused outright against production — classified from the query text, never from a flag stored in the file.",
+          "Query text is versioned verbatim: a query containing a literal secret ends up in the repository. QoreDB flags secret-looking queries, and can redact them at the cost of making the set unreplayable.",
+          "Capture is bounded: 1,000 rows per result and a 64 MB budget per recording by default. Past that, the comparison falls back to metadata and the report says so.",
+          "\"Slower\" requires both a 2× ratio and a 100 ms absolute delta, so ordinary jitter stays out of the report.",
+          "A set records queries, not fixtures: it tells you what changed relative to a baseline, it does not seed the data that baseline depends on.",
+          "One recording and one replay at a time, app-wide."
+        ]
+      },
+      "cta": {
+        "title": "Know what your migration broke",
+        "body": "Query Replay Lab is part of QoreDB Pro. Download the app and record a set on your own connections."
+      }
+    },
     "data-contracts": {
       "eyebrow": "Data Quality · Data Contracts",
       "title": "Data Contracts",

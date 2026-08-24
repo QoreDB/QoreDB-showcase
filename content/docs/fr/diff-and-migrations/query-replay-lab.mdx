@@ -1,0 +1,130 @@
+---
+title: Query Replay Lab
+description: Enregistrez les requêtes que vous exécutez, puis rejouez le lot après une migration ou sur une autre connexion. Le rapport indique ce qui casse, ce qui renvoie d'autres lignes et ce qui ralentit.
+premium: true
+---
+
+# Query Replay Lab
+
+<Callout type="info">
+Query Replay Lab fait partie de l'offre QoreDB Pro. Disponible depuis la v0.1.38.
+</Callout>
+
+Vous avez modifié un schéma. Est-ce que quelque chose a cassé ? En général, on rejoue quelques requêtes à la main et on scrute les résultats. Query Replay Lab en fait une opération reproductible : enregistrez les requêtes exécutées pendant votre travail, rejouez le lot plus tard, et lisez un verdict par requête.
+
+Il répond à quatre questions d'un coup — ce qui **casse**, ce qui renvoie un **nombre de lignes différent**, ce qui change en **contenu**, et ce qui **ralentit**.
+
+## La boucle
+
+1. **Enregistrez** un lot en travaillant normalement dans l'éditeur ou un notebook.
+2. QoreDB écrit le lot dans `.qoredb/replays/` et conserve les résultats observés comme **référence** locale.
+3. Plus tard — après une migration, sur une autre branche, sur une autre connexion — **rejouez** le lot.
+4. Lisez le **rapport**, et ouvrez un diff ligne à ligne sur ce qui a changé.
+
+## Enregistrer un lot
+
+Ouvrez l'onglet **Replay** et renseignez le formulaire d'enregistrement :
+
+| Champ                                    | Notes                                                                              |
+| ---------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Nom du lot**                           | Requis. Transformé en slug pour le nom de fichier — mis en minuscules, les suites de caractères non alphanumériques deviennent `-`. |
+| **Colonnes ignorées**                    | Séparées par des virgules. Pré-remplies avec `updated_at`.                          |
+| **Capturer les valeurs**                 | Activé : les lignes sont capturées localement, vous obtenez des diffs. Désactivé : métadonnées seules. |
+| **Capturer les valeurs en production**   | Proposé uniquement sur une connexion de production, désactivé par défaut.           |
+
+Cliquez sur **Démarrer l'enregistrement**, puis travaillez normalement. **Arrêter et enregistrer** écrit le lot ; vous pouvez aussi tout abandonner.
+
+Le périmètre de capture est volontairement étroit :
+
+- Seules les requêtes lancées depuis l'**éditeur** et depuis les **cellules de notebook** sont enregistrées. Naviguer dans l'arbre des schémas ou prévisualiser une table n'enregistre rien.
+- Seules les requêtes exécutées sur la **connexion depuis laquelle vous avez démarré**. Les exécutions venant d'une autre connexion sont comptées puis écartées, et le panneau vous dit combien.
+- Un seul enregistrement à la fois, pour toute l'application.
+
+Avant de sauvegarder, le panneau liste chaque entrée capturée et vous permet de retirer celles que vous ne voulez pas dans le lot.
+
+## Ce qui part dans Git, ce qui reste sur votre machine
+
+C'est tout l'intérêt de la fonctionnalité.
+
+**Versionné** — `.qoredb/replays/<nom>.qreplay.json`, un fichier JSON qui contient les requêtes et les attentes : pour chaque entrée, le texte de la requête, le pilote, le type d'opération, ainsi que le nombre de lignes, la durée, le statut de succès et l'empreinte du résultat attendus.
+
+**Jamais versionné** — les lignes capturées. Les références et les exécutions vivent dans le répertoire de données de QoreDB, cloisonnées par workspace, avec conservation des exécutions les plus récentes (10 par défaut) en plus de la référence.
+
+<Callout type="warning">
+Le texte des requêtes est versionné **tel quel**. Une requête contenant un secret en dur se retrouve dans le dépôt telle qu'elle a été écrite. QoreDB signale les requêtes qui ressemblent à des secrets au moment de l'enregistrement — voir [Secrets](#secrets) plus bas.
+</Callout>
+
+## Rejouer
+
+Sélectionnez un lot, choisissez la référence de comparaison, puis cliquez sur **Rejouer** :
+
+- **L'enregistrement** — le cas par défaut. Les attentes viennent de la capture d'origine.
+- **Une exécution précédente** — les attentes sont recalées sur ce que cette exécution a observé. C'est ainsi qu'on déclare « voilà la nouvelle normale » après un changement volontaire.
+- **Une autre connexion ouverte** — voir [Comparer deux connexions](#comparer-deux-connexions).
+
+Chaque entrée passe par le même contrôle préalable qu'une requête tapée à la main : règles de sûreté, mode lecture seule, limitation de débit et audit s'appliquent. Une requête refusée par ce contrôle est reportée comme **ignorée**, pas comme cassée.
+
+## Lire le rapport
+
+| Verdict            | Signification                                                                     |
+| ------------------ | --------------------------------------------------------------------------------- |
+| **identique**      | Même succès, même nombre de lignes, même empreinte — ou une requête qui a échoué les deux fois, de la même façon. |
+| **cassée**         | Le statut de succès a basculé — la requête fonctionnait à l'enregistrement et échoue maintenant, ou l'inverse. |
+| **nombre de lignes** | Nombre de lignes différent.                                                      |
+| **contenu**        | Même nombre de lignes, empreinte différente : les valeurs ont changé.              |
+| **plus lente**     | Ralentissement significatif (voir ci-dessous).                                     |
+| **ignorée**        | Exclue en tant que mutation, bloquée par la politique de production, ou refusée par le contrôle préalable. |
+
+Les verdicts sont évalués dans cet ordre : une requête cassée n'est donc jamais aussi reportée comme lente.
+
+**Plus lente** exige que les *deux* conditions soient réunies, ce qui écarte les variations normales : l'exécution doit être au moins **2× plus longue** que celle enregistrée **et** au moins **100 ms** plus lente en absolu. Les deux seuils sont ajustables par exécution.
+
+Lorsque les lignes ont été capturées des deux côtés, un bouton ouvre le diff entre la référence et l'exécution courante dans le visualiseur de diff de données habituel. Si un résultat dépassait le plafond de capture (1 000 lignes par défaut), le rapport précise que la comparaison s'est limitée aux lignes capturées.
+
+## Colonnes ignorées et empreintes
+
+La comparaison de contenu repose sur une **empreinte SHA-256** du résultat, pas sur une égalité ligne à ligne. Les lignes sont triées de façon canonique avant hachage : une requête sans `ORDER BY` ne signale donc pas de faux changement. Les noms des colonnes retenues font partie du hachage, ce qui fait qu'un renommage apparaît comme un changement de contenu.
+
+Les colonnes ignorées sont exclues de l'empreinte — sans distinction de casse — et stockées sur le lot, donc l'exclusion est versionnée avec lui. `updated_at` et consorts cessent de signaler un changement à chaque exécution.
+
+Vous pouvez modifier la liste après coup depuis l'en-tête de l'onglet. QoreDB recalcule alors les empreintes attendues à partir de la capture de référence. Si celle-ci avait été tronquée par le plafond de capture, l'empreinte est abandonnée plutôt que reconstruite sur des données partielles, et la comparaison retombe sur les seules métadonnées.
+
+## Mutations et production
+
+Le drapeau `is_mutation` stocké dans le fichier n'est **jamais utilisé comme source de vérité** — le fichier est éditable à la main, et un drapeau falsifié ne doit pas faire exécuter une écriture. Chaque entrée est reclassifiée à partir de son texte, par le contrôle préalable, au moment de rejouer.
+
+- Les mutations sont **exclues du replay par défaut**. Le commutateur « Rejouer les mutations » les autorise.
+- Sur une connexion de **production**, les mutations sont refusées d'office et le commutateur est désactivé. Aucun contournement possible.
+- Rejouer en production force également la capture en mode métadonnées seules : aucune ligne n'est écrite sur le disque.
+
+## Comparer deux connexions
+
+Plutôt que de comparer à un enregistrement, rejouez le même lot sur **deux connexions actives** et comparez-les l'une à l'autre — la production face à une préproduction migrée, par exemple, ou deux branches de la même base.
+
+- Les deux connexions doivent être différentes.
+- Les exclusions sont décidées en amont pour les deux côtés : un côté ne peut donc jamais exécuter une mutation que l'autre refuse.
+- Le diff n'est disponible que si les deux côtés ont capturé des lignes ; si l'un des deux est ignoré, le verdict fusionné est « ignorée ».
+
+## Secrets
+
+Comme le texte des requêtes est versionné, QoreDB analyse les requêtes enregistrées à la recherche de contenu ressemblant à des identifiants : chaînes de connexion avec identifiants, affectations `password=` / `token=` / `api_key=`, `AUTH` Redis, formes courantes de clés d'API et de JWT, ainsi que vos propres motifs de rédaction d'interception.
+
+Trois politiques sont disponibles dans les réglages :
+
+- **Ne rien faire.**
+- **Signaler** — le comportement par défaut. Le panneau vous alerte, vous décidez.
+- **Rédiger le texte de la requête** — le lot est marqué comme rédigé et ne peut plus être rejoué, puisque les requêtes ne sont plus celles que vous avez exécutées.
+
+## Limites
+
+- Un seul enregistrement et un seul replay à la fois, pour toute l'application.
+- La capture est bornée : 1 000 lignes par résultat et un budget de 64 Mo par enregistrement, par défaut. Au-delà, la capture s'arrête et le rapport le précise.
+- Un lot enregistre des requêtes, pas des fixtures. Il vous dit ce qui a changé par rapport à une référence ; il n'alimente pas les données dont cette référence dépend.
+- Le replay n'est pas un framework de tests : aucune assertion à écrire, aucun code de sortie. C'est un rapport de comparaison, à lire.
+
+## Pour aller plus loin
+
+- [Schema diff](/docs/diff-and-migrations/schema-diff) pour voir ce qui a changé dans le schéma en premier lieu
+- [Gestionnaire de migrations](/docs/diff-and-migrations/migrations-manager) pour appliquer le changement que le replay vérifie
+- [Data diff](/docs/diff-and-migrations/data-diff) pour le visualiseur que le rapport ouvre
+- [Environnements](/docs/connections/environments) pour les protections de production dont le replay hérite

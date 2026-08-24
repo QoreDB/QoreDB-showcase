@@ -1,4 +1,4 @@
 {
   "label": "Fonctionnalités IA",
-  "items": ["overview"]
+  "items": ["overview", "agent", "local-model"]
 }

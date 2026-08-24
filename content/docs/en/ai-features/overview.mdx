@@ -1,31 +1,38 @@
 ---
 title: AI features overview
-description: AI-assisted querying in QoreDB. Six providers, your own keys, schema-aware prompts, and the same safety net as manual queries.
+description: AI-assisted querying in QoreDB. Seven providers including a bundled local model, your own keys, schema-aware prompts, and the same safety net as manual queries.
 premium: true
 ---
 
 # AI features overview
 
 <Callout type="info">
-The AI assistant is part of the QoreDB Pro tier.
+The AI features are part of the QoreDB Pro tier.
 </Callout>
 
 QoreDB integrates an **AI assistant** that helps you write, understand and fix queries. It's **BYOK** (Bring Your Own Key): you provide your provider credentials, QoreDB stores them locally in your OS keychain, and prompts are sent directly from your machine to your chosen provider. **Nothing transits through QoreDB's servers.**
+
+Since v0.1.35 there is also **[Q](/docs/ai-features/agent)**, an agent that goes further than suggesting a query: it explores the schema and runs read-only queries itself, with writes gated behind an explicit approval. This page covers the shared foundation — providers, keys, schema context and the safety net.
 
 ## Supported providers
 
 You configure one or several providers from the AI settings panel.
 
-| Provider          | API key required? | Notes                                                  |
-| ----------------- | ----------------- | ------------------------------------------------------ |
-| **OpenAI**        | Yes               | GPT-4.1, GPT-4.1 Mini, o4-mini, o3-mini.               |
-| **Anthropic**     | Yes               | Claude Sonnet 4.6, Sonnet 4, Haiku 4.5.                |
-| **Mistral AI**    | Yes               | Mistral Large/Medium/Small, Codestral, Pixtral.        |
-| **Google Gemini** | Yes               | Gemini 2.5 Pro/Flash, Gemini 2.0 Flash.                |
-| **DeepSeek**      | Yes               | DeepSeek V3, DeepSeek R1.                              |
-| **Ollama**        | No                | Local models. Llama 3.3, Llama 3.1, Qwen 2.5 Coder.    |
+| Provider              | API key required? | Notes                                                        |
+| --------------------- | ----------------- | ------------------------------------------------------------ |
+| **Qore AI Local**     | No                | Bundled local model (Qwen 3 8B). See [Qore AI Local](/docs/ai-features/local-model). |
+| **OpenAI**            | Yes               | GPT-5.6 Terra, Sol, Luna.                                    |
+| **Anthropic**         | Yes               | Claude Sonnet 5, Opus 4.8, Haiku 4.5.                        |
+| **Mistral AI**        | Yes               | Mistral Large / Medium / Small.                              |
+| **Google Gemini**     | Yes               | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite.                   |
+| **DeepSeek**          | Yes               | DeepSeek V4 Pro, V4 Flash.                                   |
+| **Ollama**            | No                | Your own local models via `http://localhost:11434`.          |
 
-You can install several at once and pick which one to use per request.
+The model lists above are the curated defaults; QoreDB intersects them with what your account can actually reach, so you always pick from models you have access to. You can configure several providers at once and switch per request.
+
+<Callout type="info">
+**[Q](/docs/ai-features/agent) needs tool calling.** It is validated on Anthropic, OpenAI and Google Gemini. Mistral and DeepSeek work best-effort through the OpenAI-compatible path, and an Ollama model that can't call tools degrades to plain text.
+</Callout>
 
 ## How keys are stored
 
@@ -101,10 +108,12 @@ Because prompts are sent to your chosen provider, the usual data-handling questi
 - **Where it goes**: directly to the provider you picked. QoreDB's servers are not in the path.
 - **What gets retained**: depends on the provider's terms. OpenAI, Anthropic, Mistral, Google and DeepSeek each have different policies on retention and training-data use; check theirs. Ollama runs locally, so nothing leaves your machine.
 
-If you work against schemas where even column names are sensitive, prefer a local model (Ollama) or skip the assistant for those connections.
+If you work against schemas where even column names are sensitive, prefer a local model — [Qore AI Local](/docs/ai-features/local-model) or your own Ollama install — or skip the assistant for those connections.
 
 ## Where to go next
 
+- [Q, the database agent](/docs/ai-features/agent) for the agent, its tools and the approval model
+- [Qore AI Local](/docs/ai-features/local-model) to run everything on your own machine
 - [SQL safety validation](/docs/security/sql-safety-validation) for the safety checks generated queries pass through
 - [Vault and profiles](/docs/connections/vault-and-profiles) for the keychain-backed storage
 - [Pricing](/pricing) to see what's included in Pro

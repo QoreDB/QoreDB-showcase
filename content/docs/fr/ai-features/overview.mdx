@@ -1,31 +1,38 @@
 ---
 title: Aperçu des fonctionnalités IA
-description: L'interrogation assistée par IA dans QoreDB. Six fournisseurs, vos propres clés, des invites sensibles au schéma, et le même filet de sécurité que les requêtes manuelles.
+description: L'interrogation assistée par IA dans QoreDB. Sept fournisseurs dont un modèle local embarqué, vos propres clés, des invites sensibles au schéma, et le même filet de sécurité que les requêtes manuelles.
 premium: true
 ---
 
 # Aperçu des fonctionnalités IA
 
 <Callout type="info">
-L'assistant IA fait partie du niveau QoreDB Pro.
+Les fonctionnalités IA font partie du niveau QoreDB Pro.
 </Callout>
 
 QoreDB intègre un **assistant IA** qui vous aide à écrire, comprendre et corriger des requêtes. C'est du **BYOK** (Bring Your Own Key - Apportez votre propre clé) : vous fournissez les identifiants de votre fournisseur, QoreDB les stocke localement dans le trousseau de clés de votre système d'exploitation, et les invites (prompts) sont envoyées directement depuis votre machine au fournisseur de votre choix. **Rien ne transite par les serveurs de QoreDB.**
+
+Depuis la v0.1.35, il existe aussi **[Q](/docs/ai-features/agent)**, un agent qui va plus loin que suggérer une requête : il explore le schéma et exécute lui-même des requêtes en lecture seule, les écritures passant par une approbation explicite. Cette page couvre le socle commun — fournisseurs, clés, contexte de schéma et filet de sécurité.
 
 ## Fournisseurs pris en charge
 
 Vous configurez un ou plusieurs fournisseurs depuis le panneau des paramètres IA.
 
-| Fournisseur       | Clé API requise ? | Remarques                                              |
-| ----------------- | ----------------- | ------------------------------------------------------ |
-| **OpenAI**        | Oui               | GPT-4.1, GPT-4.1 Mini, o4-mini, o3-mini.               |
-| **Anthropic**     | Oui               | Claude Sonnet 4.6, Sonnet 4, Haiku 4.5.                |
-| **Mistral AI**    | Oui               | Mistral Large/Medium/Small, Codestral, Pixtral.        |
-| **Google Gemini** | Oui               | Gemini 2.5 Pro/Flash, Gemini 2.0 Flash.                |
-| **DeepSeek**      | Oui               | DeepSeek V3, DeepSeek R1.                              |
-| **Ollama**        | Non               | Modèles locaux. Llama 3.3, Llama 3.1, Qwen 2.5 Coder.    |
+| Fournisseur       | Clé API requise ? | Remarques                                                    |
+| ----------------- | ----------------- | ------------------------------------------------------------ |
+| **Qore AI Local** | Non               | Modèle local embarqué (Qwen 3 8B). Voir [Qore AI Local](/docs/ai-features/local-model). |
+| **OpenAI**        | Oui               | GPT-5.6 Terra, Sol, Luna.                                    |
+| **Anthropic**     | Oui               | Claude Sonnet 5, Opus 4.8, Haiku 4.5.                        |
+| **Mistral AI**    | Oui               | Mistral Large / Medium / Small.                              |
+| **Google Gemini** | Oui               | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite.                   |
+| **DeepSeek**      | Oui               | DeepSeek V4 Pro, V4 Flash.                                   |
+| **Ollama**        | Non               | Vos propres modèles locaux via `http://localhost:11434`.     |
 
-Vous pouvez en installer plusieurs à la fois et choisir lequel utiliser par requête.
+Les listes de modèles ci-dessus sont les sélections par défaut ; QoreDB les recoupe avec ce que votre compte peut réellement atteindre, pour que vous choisissiez toujours parmi des modèles auxquels vous avez accès. Vous pouvez configurer plusieurs fournisseurs à la fois et basculer requête par requête.
+
+<Callout type="info">
+**[Q](/docs/ai-features/agent) a besoin du tool calling.** Il est validé sur Anthropic, OpenAI et Google Gemini. Mistral et DeepSeek fonctionnent au mieux via le chemin compatible OpenAI, et un modèle Ollama incapable d'appeler des outils retombe en mode texte.
+</Callout>
 
 ## Comment les clés sont stockées
 
@@ -101,10 +108,12 @@ Puisque les invites sont envoyées au fournisseur de votre choix, les questions 
 - **Où ça va** : directement au fournisseur que vous avez choisi. Les serveurs de QoreDB ne sont pas sur le chemin.
 - **Ce qui est conservé** : dépend des conditions du fournisseur. OpenAI, Anthropic, Mistral, Google et DeepSeek ont chacun des politiques différentes sur la rétention et l'utilisation des données d'entraînement ; vérifiez les leurs. Ollama s'exécute localement, donc rien ne quitte votre machine.
 
-Si vous travaillez sur des schémas où même les noms de colonnes sont sensibles, préférez un modèle local (Ollama) ou n'utilisez pas l'assistant pour ces connexions.
+Si vous travaillez sur des schémas où même les noms de colonnes sont sensibles, préférez un modèle local — [Qore AI Local](/docs/ai-features/local-model) ou votre propre installation Ollama — ou n'utilisez pas l'assistant pour ces connexions.
 
 ## Où aller ensuite
 
+- [Q, votre agent base de données](/docs/ai-features/agent) pour l'agent, ses outils et le modèle d'approbation
+- [Qore AI Local](/docs/ai-features/local-model) pour tout faire tourner sur votre machine
 - [Validation de la sécurité SQL](/docs/security/sql-safety-validation) pour les contrôles de sécurité par lesquels passent les requêtes générées
 - [Coffre-fort et profils](/docs/connections/vault-and-profiles) pour le stockage sécurisé par le trousseau de clés
 - [Tarification](/pricing) pour voir ce qui est inclus dans l'offre Pro

@@ -1,0 +1,130 @@
+---
+title: Query Replay Lab
+description: Record the queries you run, then replay the set after a migration or against another connection. The report tells you what broke, what returns different rows, and what got slower.
+premium: true
+---
+
+# Query Replay Lab
+
+<Callout type="info">
+Query Replay Lab is part of the QoreDB Pro tier. It shipped in v0.1.38.
+</Callout>
+
+You changed a schema. Did anything break? The usual answer is to re-run a handful of queries by hand and squint at the results. Query Replay Lab makes that a repeatable operation: record the queries you ran while working, replay the whole set later, and read a verdict per query.
+
+It answers four questions at once — what **broke**, what returns a **different row count**, what changed in **content**, and what got **slower**.
+
+## The loop
+
+1. **Record** a set while you work normally in the editor or a notebook.
+2. QoreDB saves the set to `.qoredb/replays/` and keeps the observed results as a local **baseline**.
+3. Later — after a migration, on a different branch, on another connection — **replay** the set.
+4. Read the **report**, and open a row-level diff on anything that changed.
+
+## Recording a set
+
+Open the **Replay** tab and fill in the recording form:
+
+| Field                          | Notes                                                                 |
+| ------------------------------ | --------------------------------------------------------------------- |
+| **Set name**                   | Required. Slugified into the filename — lowercased, non-alphanumeric runs become `-`. |
+| **Ignored columns**            | Comma-separated. Prefilled with `updated_at`.                          |
+| **Capture result values**      | On: rows are captured locally so you get diffs. Off: metadata only.    |
+| **Capture values from production** | Only offered on a production connection, and off by default.       |
+
+Press **Start recording**, then work as usual. Press **Stop and save** to write the set, or discard it entirely.
+
+What actually gets recorded is narrow on purpose:
+
+- Only queries run from the **query editor** and from **notebook cells**. Browsing the schema tree or previewing a table does not record anything.
+- Only queries run on the **connection you started the recording from**. Executions from another connection are counted and dropped, and the panel tells you how many.
+- One recording at a time, app-wide.
+
+Before you save, the live panel lists every captured entry and lets you remove the ones you don't want in the set.
+
+## What goes in Git, what stays on your machine
+
+This split is the point of the feature.
+
+**Versioned** — `.qoredb/replays/<name>.qreplay.json`, a JSON file holding the queries and the expectations: for each entry, the query text, the driver, the operation type, and the expected row count, duration, success flag and result digest.
+
+**Never versioned** — the captured rows. Baselines and runs live in QoreDB's application data directory, scoped per workspace, with the newest runs kept (10 by default) plus the baseline.
+
+<Callout type="warning">
+Query text is committed **verbatim**. A query containing a literal secret ends up in the repository as written. QoreDB flags secret-looking queries at recording time — see [Secrets](#secrets) below.
+</Callout>
+
+## Replaying
+
+Select a set, choose what to compare against, and press **Replay**:
+
+- **The recording** — the default. Expectations come from the original capture.
+- **A previous run** — expectations are rebased onto what that run observed, which is how you say "this is the new normal" after an intentional change.
+- **Another open connection** — see [Comparing two connections](#comparing-two-connections).
+
+Every entry goes through the same preflight as a query you typed: safety rules, read-only mode, rate limiting and audit all apply. A query refused by the preflight is reported as **skipped**, not as broken.
+
+## Reading the report
+
+| Verdict        | Meaning                                                                 |
+| -------------- | ----------------------------------------------------------------------- |
+| **identical**  | Same success, same row count, same digest — or a query that failed both times, in the same way. |
+| **broken**     | The success flag flipped — it worked at recording time and fails now, or the reverse. |
+| **row count**  | Different number of rows.                                               |
+| **content**    | Same row count, different digest: values changed.                       |
+| **slower**     | Meaningfully slower (see below).                                        |
+| **skipped**    | Excluded as a mutation, blocked by the production policy, or refused by the preflight. |
+
+Verdicts are evaluated in that order, so a broken query is never also reported as slow.
+
+**Slower** requires *both* conditions to hold, which keeps normal jitter out of the report: the run must be at least **2× the recorded duration** *and* at least **100 ms** slower in absolute terms. Both thresholds are adjustable per run.
+
+Where rows were captured on both sides, a diff button opens the baseline against the current run in the standard data-diff viewer. When a result was larger than the capture cap (1,000 rows by default), the report says the comparison was limited to the captured rows.
+
+## Ignored columns and digests
+
+Content comparison is a **SHA-256 digest** of the result, not a row-by-row equality check. Rows are canonically sorted before hashing, so a query without `ORDER BY` doesn't report a false change. Retained column names are part of the hash, which means a rename shows up as a content change.
+
+Ignored columns are excluded from the digest — case-insensitively — and stored on the set, so the exclusion is versioned with it. `updated_at` and friends stop reporting a change on every run.
+
+You can edit the list after recording, from the tab header. QoreDB then recomputes the expected digests from the baseline capture. If the baseline was truncated by the capture cap, the digest is dropped rather than rebuilt from partial data, and comparison falls back to metadata only.
+
+## Mutations and production
+
+The `is_mutation` flag stored in the file is **never trusted** — the file is hand-editable, and a forged flag must not get a write executed. Each entry is reclassified from its query text by the preflight at replay time.
+
+- Mutations are **excluded from replay by default**. The "Replay mutations" toggle enables them.
+- Against a **production** connection, mutations are refused outright and the toggle is disabled. There is no override.
+- Replaying against production also forces metadata-only capture: no rows are written to disk.
+
+## Comparing two connections
+
+Instead of comparing against a recording, replay the same set on **two live connections** and compare them against each other — production against a migrated staging, for instance, or two branches of the same database.
+
+- The two connections must be different.
+- Exclusions are decided up front for both sides, so one side can never execute a mutation the other refuses.
+- A diff is available only when both sides captured rows; if either side is skipped, the merged verdict is skipped.
+
+## Secrets
+
+Because query text is versioned, QoreDB scans recorded queries for credential-shaped content: connection strings with credentials, `password=` / `token=` / `api_key=` assignments, Redis `AUTH`, and common API-key and JWT shapes, plus your own interceptor redaction patterns.
+
+Three policies are available in Settings:
+
+- **Do nothing.**
+- **Flag it** — the default. The panel warns you; you decide.
+- **Redact the query text** — the set is marked redacted and can no longer be replayed, since the queries are no longer the queries you ran.
+
+## Limits
+
+- One recording and one replay at a time, app-wide.
+- Capture is bounded: 1,000 rows per result and a 64 MB budget per recording by default. Past the budget, capture stops and the report says so.
+- A set records queries, not fixtures. It tells you what changed relative to a baseline; it does not seed the data that baseline depends on.
+- Replay is not a test framework: there are no assertions to write, and no exit code. It is a comparison report you read.
+
+## Where to go next
+
+- [Schema diff](/docs/diff-and-migrations/schema-diff) to see what changed in the schema in the first place
+- [Migrations Manager](/docs/diff-and-migrations/migrations-manager) to apply the change the replay is verifying
+- [Data diff](/docs/diff-and-migrations/data-diff) for the viewer the report opens
+- [Environments](/docs/connections/environments) for the production guards replay inherits
