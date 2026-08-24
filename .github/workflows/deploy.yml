@@ -53,8 +53,23 @@ jobs:
           WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
           TOKEN: ${{ secrets.COOLIFY_TOKEN }}
         run: |
-          if [ -n "$WEBHOOK" ]; then
-            curl -fsSL -X GET "$WEBHOOK" -H "Authorization: Bearer $TOKEN" && echo "Coolify triggered"
-          else
-            echo "COOLIFY_WEBHOOK non defini - etape ignoree"
+          if [ -z "$WEBHOOK" ]; then
+            echo "::error::COOLIFY_WEBHOOK non defini - deploiement NON declenche"
+            exit 1
           fi
+          if [ -z "$TOKEN" ]; then
+            echo "::error::COOLIFY_TOKEN non defini - deploiement NON declenche"
+            exit 1
+          fi
+          code=$(curl -sS -o /tmp/coolify.out -w '%{http_code}' \
+            -X GET "$WEBHOOK" -H "Authorization: Bearer $TOKEN")
+          echo "Coolify a repondu HTTP $code"
+          echo "--- corps de la reponse ---"
+          cat /tmp/coolify.out; echo
+          case "$code" in
+            2??) echo "Coolify triggered" ;;
+            401|403) echo "::error::COOLIFY_TOKEN invalide ou sans droit de deploiement (HTTP $code)"; exit 1 ;;
+            404) echo "::error::UUID inconnu dans COOLIFY_WEBHOOK (HTTP 404)"; exit 1 ;;
+            405) echo "::error::Mauvaise URL : attendu https://<coolify>/api/v1/deploy?uuid=<uuid>&force=false (HTTP 405)"; exit 1 ;;
+            *)   echo "::error::Echec du declenchement Coolify (HTTP $code)"; exit 1 ;;
+          esac
