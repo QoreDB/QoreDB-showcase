@@ -26,7 +26,6 @@ export function SiteAnalytics() {
       data-website-id={websiteId}
       strategy="afterInteractive"
       // Décommente pour n'enregistrer que le trafic du domaine de prod
-      // (utile si tu testes d'abord sur un sous-domaine temporaire) :
       // data-domains="qoredb.com,www.qoredb.com"
     />
   );
