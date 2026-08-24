@@ -62,7 +62,9 @@ jobs:
             exit 1
           fi
           code=$(curl -sS -o /tmp/coolify.out -w '%{http_code}' \
-            -X GET "$WEBHOOK" -H "Authorization: Bearer $TOKEN")
+            -X POST "$WEBHOOK" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/json")
           echo "Coolify a repondu HTTP $code"
           echo "--- corps de la reponse ---"
           cat /tmp/coolify.out; echo
@@ -70,6 +72,6 @@ jobs:
             2??) echo "Coolify triggered" ;;
             401|403) echo "::error::COOLIFY_TOKEN invalide ou sans droit de deploiement (HTTP $code)"; exit 1 ;;
             404) echo "::error::UUID inconnu dans COOLIFY_WEBHOOK (HTTP 404)"; exit 1 ;;
-            405) echo "::error::Mauvaise URL : attendu https://<coolify>/api/v1/deploy?uuid=<uuid>&force=false (HTTP 405)"; exit 1 ;;
+            405) echo "::error::Mauvaise methode HTTP : /api/v1/deploy attend un POST (HTTP 405)"; exit 1 ;;
             *)   echo "::error::Echec du declenchement Coolify (HTTP $code)"; exit 1 ;;
           esac
