@@ -32,13 +32,13 @@ export function NextSteps() {
   ];
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-10 text-center">
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-(--q-accent-strong)">
+    <section className="q-container border-t border-(--q-border) py-16 lg:py-24">
+      <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
+        <div className="">
+          <span className="font-mono text-xs text-(--q-accent)">
             {t("download.next_steps.eyebrow")}
           </span>
-          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-(--q-text-0) sm:text-4xl">
+          <h2 className="mt-3 font-heading text-3xl font-semibold tracking-[-0.035em] text-(--q-text-0) sm:text-4xl">
             {t("download.next_steps.title")}
           </h2>
           <p className="mt-3 text-(--q-text-2)">
@@ -46,24 +46,24 @@ export function NextSteps() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="divide-y divide-(--q-border)">
           {items.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group flex flex-col gap-3 rounded-xl border border-(--q-border) bg-(--q-bg-1)/50 p-6 transition-all hover:-translate-y-0.5 hover:border-(--q-accent)/40 hover:shadow-md"
+                className="group relative flex flex-col gap-2 py-6 pr-8 first:pt-0"
               >
-                <div className="inline-flex size-10 items-center justify-center rounded-lg bg-(--q-accent-soft) text-(--q-accent-strong)">
+                <div className="text-(--q-accent)">
                   <Icon className="size-5" />
                 </div>
                 <h3 className="font-heading text-base font-semibold text-(--q-text-0)">
                   {item.title}
                 </h3>
                 <p className="text-sm text-(--q-text-2)">{item.description}</p>
-                <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-(--q-accent) group-hover:text-(--q-accent-strong)">
-                  <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                <span className="absolute right-0 top-7 inline-flex text-(--q-accent)">
+                  <ArrowRight className="size-4" />
                 </span>
               </Link>
             );

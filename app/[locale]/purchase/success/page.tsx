@@ -144,7 +144,11 @@ export default async function PurchaseSuccessPage({
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 px-4 sm:px-6 lg:px-12 pt-32 pb-20">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 px-4 sm:px-6 lg:px-12 pt-32 pb-20"
+      >
         <div className="mx-auto w-full max-w-3xl rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-8 sm:p-10">
           <div className="mb-8 flex items-center gap-3 text-green-500">
             <CheckCircle2 className="h-7 w-7" />

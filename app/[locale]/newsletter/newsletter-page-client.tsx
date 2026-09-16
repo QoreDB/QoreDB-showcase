@@ -40,7 +40,11 @@ export function NewsletterPageClient({ locale }: { locale: string }) {
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden"
+      >
         {/* Floating background orbs */}
         <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-(--q-accent) opacity-5 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />

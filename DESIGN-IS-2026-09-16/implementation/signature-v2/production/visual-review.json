@@ -1,0 +1,50 @@
+[
+  {
+    "name": "home-light-390",
+    "status": 200,
+    "errors": [],
+    "width": 390,
+    "height": 8293,
+    "h1": [
+      "Vos bases.\nUn espace\nde travail."
+    ],
+    "main": 1,
+    "broken": []
+  },
+  {
+    "name": "home-light-1440",
+    "status": 200,
+    "errors": [],
+    "width": 1440,
+    "height": 6192,
+    "h1": [
+      "Vos bases.\nUn espace\nde travail."
+    ],
+    "main": 1,
+    "broken": []
+  },
+  {
+    "name": "home-dark-390",
+    "status": 200,
+    "errors": [],
+    "width": 390,
+    "height": 8293,
+    "h1": [
+      "Vos bases.\nUn espace\nde travail."
+    ],
+    "main": 1,
+    "broken": []
+  },
+  {
+    "name": "home-dark-1440",
+    "status": 200,
+    "errors": [],
+    "width": 1440,
+    "height": 6192,
+    "h1": [
+      "Vos bases.\nUn espace\nde travail."
+    ],
+    "main": 1,
+    "broken": []
+  }
+]

@@ -119,8 +119,12 @@ export default async function BlogIndexPage({
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 pb-20 pt-28 sm:pt-32">
-        <div className="container mx-auto max-w-7xl px-5 sm:px-6">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pb-20 pt-28 sm:pt-32"
+      >
+        <div className="q-container">
           <header className="grid items-end gap-8 border-b border-(--q-border) pb-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:pb-12">
             <div className="max-w-3xl">
               <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-(--q-accent-strong)">
@@ -206,7 +210,7 @@ export default async function BlogIndexPage({
                 ))}
               </div>
             ) : (
-              <div className="flex min-h-80 flex-col items-center justify-center rounded-2xl border border-dashed border-(--q-border) bg-(--q-bg-1) px-6 text-center">
+              <div className="flex min-h-80 flex-col items-center justify-center rounded-lg border border-dashed border-(--q-border) bg-(--q-bg-1) px-6 text-center">
                 <p className="text-xl font-semibold text-(--q-text-0)">
                   {t("blog_page.no_results")}
                 </p>

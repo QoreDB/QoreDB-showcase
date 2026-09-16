@@ -1,0 +1,136 @@
+[
+  {
+    "width": 390,
+    "url": "/fr/blog",
+    "status": 200,
+    "errors": [],
+    "h1": "Le Blog QoreDB",
+    "images": [
+      {
+        "src": "http://127.0.0.1:3101/logo.webp",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/8b150d4b8faa9ccba91d3062b6b9b199de03a167-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/04ed1acfb74c08910a6b9f6ef401fa6321bece7a-800x800.png?fit=max&auto=format&w=32&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/0cd3ea67a42a083dc282dfdb347e21e6e5cdbeba-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      }
+    ],
+    "filters": [
+      "/fr/blog?page=1",
+      "/fr/blog?page=2",
+      "/fr/blog?page=13",
+      "/fr/blog?page=2"
+    ]
+  },
+  {
+    "width": 390,
+    "url": "/fr/blog/masquage-colonnes-connexion-toutes-sorties",
+    "status": 200,
+    "errors": [],
+    "h1": "Le masquage de colonnes dans QoreDB : une règle par connexion, appliquée à toutes les sorties",
+    "images": [
+      {
+        "src": "http://127.0.0.1:3101/logo.webp",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/04ed1acfb74c08910a6b9f6ef401fa6321bece7a-800x800.png?fit=max&auto=format&w=48&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/8b150d4b8faa9ccba91d3062b6b9b199de03a167-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      }
+    ],
+    "filters": []
+  },
+  {
+    "width": 1440,
+    "url": "/fr/blog",
+    "status": 200,
+    "errors": [],
+    "h1": "Le Blog QoreDB",
+    "images": [
+      {
+        "src": "http://127.0.0.1:3101/logo.webp",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/8b150d4b8faa9ccba91d3062b6b9b199de03a167-1920x1080.png?fit=max&auto=format&w=1080&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/04ed1acfb74c08910a6b9f6ef401fa6321bece7a-800x800.png?fit=max&auto=format&w=32&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/0cd3ea67a42a083dc282dfdb347e21e6e5cdbeba-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/0aa3f3eeb7b9d663b26a78d80d287620ed4e320e-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/77ee03974beb609138d9cf1dfbe5d5495999b044-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/477137af695d17bca549e34161769e3e1086d4d9-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/5ad1f60e3a0672c91e3277a81a123b3a0ce21b0e-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/bddfaa6fb2e3fac5bce7b991565a7502b33f878d-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/24a71124f2e9f20ad9938f87be24be17091b6d7b-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/f1a8e63f661beb88e85dcac8229a8dee2e1cac6d-1920x1080.png?fit=max&auto=format&w=640&q=75",
+        "loaded": true
+      }
+    ],
+    "filters": [
+      "/fr/blog?page=1",
+      "/fr/blog?page=2",
+      "/fr/blog?page=13",
+      "/fr/blog?page=2"
+    ]
+  },
+  {
+    "width": 1440,
+    "url": "/fr/blog/masquage-colonnes-connexion-toutes-sorties",
+    "status": 200,
+    "errors": [],
+    "h1": "Le masquage de colonnes dans QoreDB : une règle par connexion, appliquée à toutes les sorties",
+    "images": [
+      {
+        "src": "http://127.0.0.1:3101/logo.webp",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/04ed1acfb74c08910a6b9f6ef401fa6321bece7a-800x800.png?fit=max&auto=format&w=48&q=75",
+        "loaded": true
+      },
+      {
+        "src": "https://cdn.sanity.io/images/jnq6wixe/production/8b150d4b8faa9ccba91d3062b6b9b199de03a167-1920x1080.png?fit=max&auto=format&w=1200&q=75",
+        "loaded": true
+      }
+    ],
+    "filters": []
+  }
+]

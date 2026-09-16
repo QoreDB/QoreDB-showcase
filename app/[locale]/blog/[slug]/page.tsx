@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
-import { JsonLd } from "@/components/JsonLd";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import { TableOfContents } from "@/components/blog/TableOfContents";
+import { JsonLd } from "@/components/JsonLd";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { NewsletterCard } from "@/components/newsletter-card";
@@ -195,7 +195,11 @@ export default async function BlogPostPage({
       />
       <Header />
 
-      <main className="flex-1 pb-20 pt-24 sm:pt-28">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pb-20 pt-24 sm:pt-28"
+      >
         <article>
           <header className="container mx-auto max-w-5xl px-5 pb-10 pt-10 sm:px-6 sm:pb-14 sm:pt-14">
             <Link
@@ -273,7 +277,7 @@ export default async function BlogPostPage({
 
           {post.mainImage && (
             <div className="container mx-auto max-w-6xl px-5 sm:px-6">
-              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-(--q-border) bg-(--q-bg-1)">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-(--q-border) bg-(--q-bg-1)">
                 <Image
                   src={urlForImage(post.mainImage).url()}
                   alt={post.title || "Article QoreDB"}

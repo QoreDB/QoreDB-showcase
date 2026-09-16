@@ -37,7 +37,11 @@ export function FAQPageClient() {
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12 max-w-4xl mx-auto w-full">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12 max-w-4xl mx-auto w-full"
+      >
         <div className="text-center mb-12 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-(--q-accent) opacity-5 blur-[100px] rounded-full pointer-events-none" />
           <h1 className="relative text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-linear-to-br from-(--q-text-0) to-(--q-text-1)">

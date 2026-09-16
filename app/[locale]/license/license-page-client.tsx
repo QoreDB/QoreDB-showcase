@@ -86,7 +86,11 @@ export function LicensePageClient() {
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12"
+      >
         <div className="mx-auto max-w-5xl space-y-8">
           <div className="text-center max-w-2xl mx-auto">
             <h1 className="text-4xl font-bold">

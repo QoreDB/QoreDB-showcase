@@ -1,0 +1,121 @@
+{
+  "base": "http://127.0.0.1:3101/",
+  "createdAt": "2026-09-16T19:36:25.968Z",
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "name": "home-fr",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-fr.png",
+      "durationMs": 1179
+    },
+    {
+      "name": "home-en",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-en.png",
+      "durationMs": 1096
+    },
+    {
+      "name": "home-de",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-de.png",
+      "durationMs": 1073
+    },
+    {
+      "name": "home-es",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-es.png",
+      "durationMs": 1087
+    },
+    {
+      "name": "home-ja",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-ja.png",
+      "durationMs": 1075
+    },
+    {
+      "name": "home-it",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-it.png",
+      "durationMs": 1074
+    },
+    {
+      "name": "home-zh",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-zh.png",
+      "durationMs": 1794
+    },
+    {
+      "name": "layout-light-320",
+      "status": "passed",
+      "screenshot": "layout-light-320.png",
+      "durationMs": 1065
+    },
+    {
+      "name": "layout-dark-1440",
+      "status": "passed",
+      "screenshot": "layout-dark-1440.png",
+      "durationMs": 1077
+    }
+  ]
+}

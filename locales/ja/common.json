@@ -1,5 +1,176 @@
 {
+  "home": {
+    "demo": {
+      "eyebrow": "操作デモ / Core",
+      "title": "クエリから結果まで。",
+      "silent": "音声なし",
+      "posterAlt": "デモ用のSQLiteデータベースに接続したQoreDB。",
+      "play": "デモを見る",
+      "loading": "動画を読み込み中…",
+      "error": "動画を読み込めませんでした。",
+      "retry": "再試行",
+      "open": "動画を開く",
+      "caption": "デモデータを使った、実際のQoreDBの操作画面です。",
+      "transcript": "操作の流れを読む",
+      "steps": [
+        "「Atelier / demo」接続を開き、SQLエディターを開きます。",
+        "本番環境のプロジェクトをデプロイ数の多い順に取得します。結果にはAtlas（128）、Forma（96）、Prism（84）、Tempo（72）と、それぞれの環境、状態、リージョンが表示されます。",
+        "UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging' を準備します。下書きのまま保持し、実行はしません。"
+      ]
+    },
+    "download": "QoreDBをダウンロード",
+    "fullImage": "スクリーンショット全体を開く",
+    "hero": {
+      "eyebrow": "デスクトップクライアント · SQL + NoSQL",
+      "title": ["データベースを、", "ひとつの", "作業空間に"],
+      "description": "データの探索、クエリ、編集をひとつの画面で。状況を把握しながら、確実に作業できます。",
+      "explore": "製品を見る",
+      "free": "Coreは無料",
+      "workspace": "あなたのワークスペース",
+      "alt": "QoreDBのSQLエディター、結果のグリッド、SQLite接続。",
+      "caption": "クエリから結果まで。"
+    },
+    "compatibility": {
+      "label": "対応するエンジンとサービス",
+      "title": "エンジンが違っても。",
+      "subtitle": "操作はいつもの感覚で。",
+      "link": "対応データベース一覧"
+    },
+    "workflows": {
+      "eyebrow": "使い心地を詳しく",
+      "title": "機能",
+      "explore": {
+        "label": "探索とクエリ",
+        "title": "テーブルを探索。データをクエリ。",
+        "description": "テーブルを開き、クエリを書き、結果を確認。接続先もデータも、同じ作業空間にまとまります。",
+        "steps": [
+          {
+            "title": "接続先を選ぶ",
+            "description": "どこで作業しているかが明確です。"
+          },
+          {
+            "title": "読んで、探索する",
+            "description": "テーブルと構造にすぐアクセス。"
+          },
+          {
+            "title": "検索を絞り込む",
+            "description": "グリッドでデータを絞り込み、詳しく確認。"
+          }
+        ],
+        "link": "ドキュメントを見る",
+        "alt": "QoreDBのデータグリッド。テーブルのナビゲーション、列、検索欄を表示。",
+        "caption": "テーブル、列、作業の文脈をひとつに。· Core"
+      },
+      "sandbox": {
+        "label": "準備と確認",
+        "title": "変更の結果より先に、変更内容を確認。",
+        "description": "Proのサンドボックスで変更をローカルに準備。保留中の操作を確認してからSQLを生成し、適用するか判断できます。",
+        "steps": [
+          {
+            "title": "落ち着いて編集する",
+            "description": "変更したセルは明確に表示されます。"
+          },
+          {
+            "title": "操作を見直す",
+            "description": "追加、更新、削除をまとめて確認。"
+          }
+        ],
+        "link": "サンドボックスを見る",
+        "alt": "編集済みセルと保留中の操作パネルを表示したQoreDBサンドボックス。",
+        "caption": "適用する前に、変更内容を確認。· Pro"
+      },
+      "safety": {
+        "label": "保護機能とともに作業",
+        "title": "大切な場面で、ひと呼吸。",
+        "description": "本番環境での作業には慎重さが必要です。組み込みの保護機能が、重要な操作を実行前に明示します。",
+        "steps": [
+          {
+            "title": "環境を識別する",
+            "description": "開発、テスト、本番を明確に区別。"
+          },
+          {
+            "title": "重要な操作を確認する",
+            "description": "画面は、本番データベース削除前の警告です。"
+          }
+        ],
+        "link": "保護機能について",
+        "alt": "QoreDBのデータベース削除確認。本番環境の警告とキャンセル・続行の選択肢を表示。",
+        "caption": "本番環境の確認 · Core。カスタムルール · Pro。"
+      }
+    },
+    "mcp": {
+      "eyebrow": "自動化 · MCP / Core",
+      "title": "あなたの文脈を、エージェントにも。",
+      "description": "許可した接続先をMCP対応ツールと連携。読み取り専用セッションでスキーマを探索し、データをクエリできます。",
+      "link": "MCPサーバーを設定する",
+      "flowLabel": "MCPリクエストの流れ",
+      "assistant": "エージェント",
+      "connections": "許可した接続先",
+      "access": {
+        "title": "明示的な許可",
+        "description": "公開する接続先は自分で選択。クエリ制限と監査ログは引き続き有効です。"
+      },
+      "local": {
+        "title": "ローカル優先",
+        "description": "クライアントは手元のマシンで動作。任意のサービスは提供元と通信する場合があります。"
+      },
+      "source": {
+        "title": "公開されたCore",
+        "description": "コアはApache-2.0。Premiumモジュールには別途BUSL-1.1ライセンスが適用されます。"
+      },
+      "note": "Pro内蔵のAIは任意です。外部アシスタントは設定に応じて結果を提供元に送信する場合があります。"
+    },
+    "pricing": {
+      "eyebrow": "プラン",
+      "title": "Core・Pro・Team",
+      "compare": "プランを比較",
+      "core": {
+        "model": "無料",
+        "description": "日々のデータ作業に。SQL・NoSQL接続、エディター、グリッド、組み込みの保護機能。",
+        "link": "Coreで始める"
+      },
+      "pro": {
+        "model": "買い切り",
+        "description": "サンドボックス、視覚的な差分、任意のAI、カスタム安全ルールで、さらに深い作業を。",
+        "link": "Proを見る"
+      },
+      "team": {
+        "model": "席数ごと・年額",
+        "description": "チーム向けのプラン。対象機能、条件、提供状況は料金ページで確認できます。",
+        "link": "Teamを見る"
+      }
+    },
+    "faq": {
+      "eyebrow": "始める前に",
+      "title": "よくある質問。",
+      "start": {
+        "question": "無料で始められますか？",
+        "answer": "はい。Coreは無料で、macOS、Windows、Linuxに対応しています。Proを購入しなくても、データベースに接続してエディターやグリッドで作業できます。"
+      },
+      "privacy": {
+        "question": "データはどこに送られますか？",
+        "answer": "QoreDBは手元のマシンからデータベースに接続します。任意のAI機能や外部アシスタントは、設定に応じてコンテキストを提供元に送信する場合があります。ローカル優先とは、すべての利用がオフラインに限られるという意味ではありません。"
+      },
+      "license": {
+        "question": "CoreとProの違いは何ですか？",
+        "answer": "CoreはApache-2.0のオープンソース基盤です。ProはBUSL-1.1のPremium機能を買い切りで追加します。Teamは席数に応じた年額条件です。各プランの詳細と提供状況は料金ページをご覧ください。"
+      }
+    },
+    "cta": {
+      "eyebrow": "ダウンロード",
+      "title": "QoreDBを使い始める。",
+      "description": "macOS、Windows、Linuxに対応。"
+    }
+  },
+  "a11y": {
+    "skip_content": "本文へスキップ",
+    "primary_navigation": "メインナビゲーション",
+    "toggle_theme": "テーマを切り替え",
+    "contact_email": "メールで問い合わせ"
+  },
   "nav": {
+    "product": "製品",
+    "resources": "リソース",
     "features": "特長",
     "preview": "プレビュー",
     "pricing": "価格設定",
@@ -24,7 +195,7 @@
     "detected_platform": "あなたが{{platform}}にいることを検出しました",
     "other_platforms": "他のプラットフォーム",
     "recommended": "おすすめ",
-    "apple_silicon": "Appleシリコン(M1/M2/M3/M4)",
+    "apple_silicon": "Apple Silicon",
     "intel_mac": "インテル Mac",
     "windows_installer": "インストーラー(.exe)",
     "windows_msi": "MSI インストーラー",
@@ -44,7 +215,13 @@
       "interface_tour_description": "サイドバー、タブ、エディタ、結果ペイン：全体像を把握できます。",
       "full_docs_title": "完全なドキュメントを見る",
       "full_docs_description": "ドライバー、クエリ、セキュリティ、キーボードショートカットなど。"
-    }
+    },
+    "loading": "リリース情報を読み込み中…",
+    "retry": "再試行",
+    "unavailable": "このリリースでは利用できません",
+    "mac_arch_hint": "Macのプロセッサを選択してください：Apple SiliconまたはIntel。Appleメニュー → このMacについてで確認できます。",
+    "unknown_platform": "QoreDBをインストールするパソコンのOSを選択してください。",
+    "install_note": "無料のCoreから始めましょう。お使いのOSとパソコンに合ったパッケージを選択してください。"
   },
   "changelog": {
     "title": "変更履歴",
@@ -55,6 +232,8 @@
     "load_more": "さらにリリースをロードする"
   },
   "footer": {
+    "license_summary": "Core：Apache-2.0。Premium機能：BUSL-1.1。",
+    "newsletter_label": "ニュースレター",
     "product": "製品",
     "features": "特長",
     "preview": "プレビュー",
@@ -593,18 +772,18 @@
   "pricing_page": {
     "badge": "オープンコア",
     "title": "ワークフローに合ったプランをお選びください",
-    "subtitle": "個人利用は無料、日常の仕事には Pro。",
+    "subtitle": "Coreは無料。Proは買い切り。Teamで全メンバーにProを。",
     "checkout_error": "現在、Stripe Checkout を開始できません。",
     "faq_title": "よくある質問",
     "core": {
-      "title": "無料",
+      "title": "Core",
       "tagline": "ソロ & 探索",
       "description": "QoreDB の完全なオープンソース基盤。",
       "price": "無料",
       "badge": "主な選択肢",
       "cta": "無料でダウンロード",
       "features": {
-        "drivers": "v0.1.39 は 34 ドライバーに対応。対応エンジン： PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
+        "drivers": "SQL・NoSQLエンジンとサービス：PostgreSQL、MySQL、MongoDB、Redis、Snowflake、BigQuery、Cassandraなど。",
         "crud": "完全な CRUD + オートコンプリートと linting 付きの SQL/Mongo エディター",
         "workspaces": "Workspaces：接続、クエリ、ノートブックをプロジェクトごとにグループ化",
         "grid": "bulk edit と高度なフィルター付きの高性能データ グリッド",
@@ -619,7 +798,8 @@
         "shortcuts": "履歴、お気に入り、tab groups、キーボード ショートカット、9 つの UI 言語",
         "mcp": "読み取り専用 MCP サーバー — 外部 AI エージェントに、明示的に許可した接続、スキーマ、保存済みクエリへのアクセスを提供します。",
         "trends": "クエリ傾向 · Core — 保存された監査履歴から、7・14・30 日間の実行回数、P50/P95 レイテンシ、エラー率を追跡します。"
-      }
+      },
+      "billing": "無料・サブスクリプション不要"
     },
     "pro": {
       "title": "Pro",
@@ -643,7 +823,8 @@
         "virtual_relations": "仮想関係の自動提案",
         "masking": "列マスキング · Pro — 接続ごとに機密列を完全・部分・ハッシュ形式でマスク。結果、エクスポート、API、エージェントに適用されます。"
       },
-      "individual_use": "個人利用向けライセンス。"
+      "individual_use": "個人利用向けライセンス。",
+      "billing": "買い切り・個人ライセンス"
     },
     "team": {
       "title": "Team",
@@ -678,11 +859,11 @@
       },
       "data_sent": {
         "question": "私のデータはどこかに送信されていますか?",
-        "answer": "いいえ、QoreDB は 100% ローカルファーストです。データがマシンから離れることはありません。 AI も独自の API キーを使用して実行されます。"
+        "answer": "QoreDBはお使いのパソコンからデータベースに接続します。オプションのAI機能は、自分のAPIキーを使う場合でも、選択したプロバイダーにコンテキストを送信することがあります。使用前にプロバイダーと設定をご確認ください。"
       },
       "lifetime_updates": {
         "question": "アップデートは生涯無料ですか？",
-        "answer": "はい。一度の支払いで生涯アップデート無料 — サブスクリプションなし、更新なし、将来のバージョンにも追加料金なし。"
+        "answer": "Proは買い切りで、生涯アップデートが含まれます。Teamは別のサブスクリプションで、シートごとの年額課金です。"
       },
       "try_pro": {
         "question": "最初に Pro 機能を試してもいいですか?",
@@ -1171,6 +1352,14 @@
     "code_copied": "コードをコピーしました"
   },
   "docs": {
+    "navigation_label": "ドキュメントを閲覧",
+    "search_close": "検索を閉じる",
+    "search_loading": "検索を読み込み中…",
+    "search_error": "検索を利用できません。もう一度お試しください。",
+    "search_retry": "再試行",
+    "search_hint": "ドキュメントを検索する語句を入力してください。",
+    "search_empty": "「{{query}}」の検索結果はありません。",
+    "search_results": "{{count}} 件の結果を表示",
     "search_label": "ドキュメントを検索",
     "search_placeholder": "ドキュメントを検索…",
     "on_this_page": "このページの内容",

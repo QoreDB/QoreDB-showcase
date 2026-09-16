@@ -1,0 +1,34 @@
+[
+  {
+    "name": "desktop-light",
+    "overflow": false,
+    "imageY": 221,
+    "imageHeight": 424,
+    "font": true,
+    "brokenImages": 0
+  },
+  {
+    "name": "desktop-dark",
+    "overflow": false,
+    "imageY": 221,
+    "imageHeight": 424,
+    "font": true,
+    "brokenImages": 0
+  },
+  {
+    "name": "mobile-light",
+    "overflow": false,
+    "imageY": 529.421875,
+    "imageHeight": 263,
+    "font": true,
+    "brokenImages": 0
+  },
+  {
+    "name": "mobile-dark",
+    "overflow": false,
+    "imageY": 529.421875,
+    "imageHeight": 263,
+    "font": true,
+    "brokenImages": 0
+  }
+]

@@ -1,202 +1,191 @@
 "use client";
 
-import { Menu, MessageCircle, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FEATURE_PAGES } from "@/lib/features";
 import { LanguageSwitcher } from "../language-switcher";
 import { ThemeToggle } from "../theme-toggle";
 import { Button } from "../ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "../ui/navigation-menu";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const resourcesMenu = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname();
   const params = useParams();
-  const locale = params.locale as string;
+  const locale = (params.locale as string) || "fr";
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const handleLogoClick = (e: React.MouseEvent) => {
-    setMobileMenuOpen(false);
-    if (pathname === `/${locale}`) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const navLinks = [
+  const primaryLinks = [
+    { href: `/${locale}/features`, label: t("nav.product") },
     { href: `/${locale}/docs`, label: t("nav.docs") },
-    { href: `/${locale}/plugins`, label: t("nav.marketplace") },
     { href: `/${locale}/pricing`, label: t("nav.pricing") },
+  ];
+  const resourceLinks = [
+    { href: `/${locale}/plugins`, label: t("nav.marketplace") },
     { href: `/${locale}/blog`, label: t("nav.blog") },
-    { href: `/${locale}/download`, label: t("nav.download") },
+    { href: `/${locale}/changelog`, label: t("nav.changelog") },
+    { href: `/${locale}/roadmap`, label: t("nav.roadmap") },
+    { href: `/${locale}/faq`, label: t("nav.faq") },
   ];
 
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        menuButton.current?.focus();
+      }
+      if (resourcesMenu.current?.open) {
+        resourcesMenu.current.open = false;
+        resourcesMenu.current.querySelector("summary")?.focus();
+      }
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      const menu = resourcesMenu.current;
+      if (menu?.open && !menu.contains(event.target as Node)) menu.open = false;
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [mobileMenuOpen]);
+
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 sm:px-6 py-2 md:py-4 lg:px-12 transition-all duration-300 ${
-        scrolled
-          ? "bg-(--q-bg-0)/80 backdrop-blur-xl border-b border-(--q-border)/50 shadow-sm"
-          : "bg-transparent backdrop-blur-none"
-      }`}
-    >
-      <Link
-        href={`/${locale}`}
-        className="flex items-center gap-1"
-        onClick={handleLogoClick}
-      >
-        <Image
-          src="/logo.webp"
-          alt="QoreDB Logo"
-          width={48}
-          height={48}
-          className="w-6 sm:w-8 dark:hidden"
-        />
-        <Image
-          src="/logo-white.webp"
-          alt="QoreDB Logo"
-          width={48}
-          height={48}
-          className="w-6 sm:w-8 hidden dark:block"
-        />
-        <span className="text-(--q-text-0) font-semibold text-lg">QoreDB</span>
-      </Link>
-
-      <NavigationMenu className="hidden md:flex">
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors data-[state=open]:text-(--q-text-0)">
-              {t("nav.features")}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {FEATURE_PAGES.map((feature) => (
-                <NavigationMenuLink key={feature.slug} asChild>
-                  <Link
-                    href={`/${locale}/features/${feature.slug}`}
-                    className="block rounded-md px-3 py-2 text-sm text-(--q-text-1) hover:bg-(--q-bg-2) hover:text-(--q-text-0)"
-                  >
-                    {t(`features_pages.${feature.slug}.title`)}
-                  </Link>
-                </NavigationMenuLink>
-              ))}
-              <div className="my-1 h-px bg-(--q-border)" />
-              <NavigationMenuLink asChild>
-                <Link
-                  href={`/${locale}/features`}
-                  className="block rounded-md px-3 py-2 text-sm text-(--q-text-2) hover:bg-(--q-bg-2) hover:text-(--q-text-0)"
-                >
-                  {t("features_common.back_to_index")}
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          {navLinks.map((link) => (
-            <NavigationMenuItem key={link.href}>
-              <NavigationMenuLink asChild>
-                <Link
-                  href={link.href}
-                  className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors text-sm"
-                >
-                  {link.label}
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      <button
-        type="button"
-        aria-label={t(mobileMenuOpen ? "nav.close_menu" : "nav.open_menu")}
-        aria-expanded={mobileMenuOpen}
-        className={`md:hidden text-(--q-text-0) p-2 transition-transform duration-300 ease-in-out ${mobileMenuOpen ? "rotate-90" : "rotate-0"}`}
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-      >
-        {mobileMenuOpen ? (
-          <X className="w-6 h-6" />
-        ) : (
-          <Menu className="w-6 h-6" />
-        )}
-      </button>
-
-      <div className="hidden md:flex items-center space-x-4">
-        <div className="hidden md:flex items-center gap-2 mr-2">
-          <ThemeToggle />
-          <LanguageSwitcher />
-        </div>
-
-        <Button
-          variant="outline"
-          className="hidden md:flex group gap-2 border-[#5865F2]/40 text-[#5865F2] hover:text-[#5865F2] hover:border-[#5865F2] hover:bg-[#5865F2]/10"
-          onClick={() => window.open("https://discord.gg/Yr6P3wuZDt", "_blank")}
-        >
-          <MessageCircle className="w-4 h-4" />
-          {t("hero.cta.community")}
-        </Button>
-      </div>
-
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-(--q-bg-0)/95 backdrop-blur-xl border-b border-(--q-border) z-20">
-          <nav className="flex flex-col space-y-4 px-6 py-6">
-            <div className="flex flex-col gap-3">
-              <Link
-                href={`/${locale}/features`}
-                className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {t("nav.features")}
-              </Link>
-              <div className="flex flex-col gap-2 pl-3 border-l border-(--q-border)">
-                {FEATURE_PAGES.map((feature) => (
-                  <Link
-                    key={feature.slug}
-                    href={`/${locale}/features/${feature.slug}`}
-                    className="text-sm text-(--q-text-2) hover:text-(--q-accent) transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {t(`features_pages.${feature.slug}.title`)}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {navLinks.map((link) => (
+    <>
+      <a href="#main-content" className="q-skip-link">
+        {t("a11y.skip_content")}
+      </a>
+      <header className="q-site-header">
+        <div className="q-container q-header-inner">
+          <Link
+            href={`/${locale}`}
+            className="q-brand"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Image
+              src="/logo.webp"
+              alt=""
+              width={32}
+              height={32}
+              className="dark:hidden"
+            />
+            <Image
+              src="/logo-white.webp"
+              alt=""
+              width={32}
+              height={32}
+              className="hidden dark:block"
+            />
+            <span>QoreDB</span>
+          </Link>
+          <nav
+            className="q-desktop-nav"
+            aria-label={t("a11y.primary_navigation")}
+          >
+            {primaryLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-(--q-text-1) hover:text-(--q-text-0) transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                aria-current={pathname === link.href ? "page" : undefined}
               >
                 {link.label}
               </Link>
             ))}
-
-            <div className="flex items-center gap-4 py-2">
+            <details className="q-resources-menu" ref={resourcesMenu}>
+              <summary>
+                {t("nav.resources")}
+                <ChevronDown size={14} aria-hidden="true" />
+              </summary>
+              <div className="q-resources-panel">
+                {resourceLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    prefetch={false}
+                    onClick={() => {
+                      if (resourcesMenu.current)
+                        resourcesMenu.current.open = false;
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </details>
+          </nav>
+          <div className="q-header-actions">
+            <div className="q-desktop-preferences">
               <ThemeToggle />
               <LanguageSwitcher />
             </div>
-          </nav>
+            <Button asChild className="q-header-download">
+              <Link href={`/${locale}/download`}>
+                {t("nav.download")}
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </Button>
+            <button
+              ref={menuButton}
+              type="button"
+              className="q-menu-toggle"
+              aria-controls="mobile-navigation"
+              aria-label={t(
+                mobileMenuOpen ? "nav.close_menu" : "nav.open_menu",
+              )}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X size={22} aria-hidden="true" />
+              ) : (
+                <Menu size={22} aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+        {mobileMenuOpen && (
+          <nav
+            id="mobile-navigation"
+            className="q-mobile-nav"
+            aria-label={t("a11y.primary_navigation")}
+          >
+            <div className="q-container">
+              {primaryLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              ))}
+              <p className="q-mobile-nav-label">{t("nav.resources")}</p>
+              <div className="q-mobile-resources">
+                {resourceLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    prefetch={false}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+              <div className="q-mobile-preferences">
+                <ThemeToggle />
+                <LanguageSwitcher />
+              </div>
+            </div>
+          </nav>
+        )}
+      </header>
+    </>
   );
 }

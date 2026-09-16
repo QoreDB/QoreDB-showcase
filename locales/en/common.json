@@ -1,5 +1,176 @@
 {
+  "home": {
+    "demo": {
+      "eyebrow": "In action / Core",
+      "title": "From query to results.",
+      "silent": "No audio",
+      "posterAlt": "QoreDB connected to a demonstration SQLite database.",
+      "play": "Watch the demo",
+      "loading": "Loading video…",
+      "error": "The video could not be loaded.",
+      "retry": "Try again",
+      "open": "Open the video",
+      "caption": "A real QoreDB session, using demonstration data.",
+      "transcript": "Read the walkthrough",
+      "steps": [
+        "Open the “Atelier / demo” connection, then the SQL editor.",
+        "Select production projects, ordered by deployment count from highest to lowest. The grid shows Atlas (128), Forma (96), Prism (84) and Tempo (72), with their environment, status and region.",
+        "Prepare UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging'. The statement remains a draft; it is not executed."
+      ]
+    },
+    "download": "Download QoreDB",
+    "fullImage": "Open the full screenshot",
+    "hero": {
+      "eyebrow": "Desktop client · SQL + NoSQL",
+      "title": ["Your databases.", "One place", "to work"],
+      "description": "Explore, query and edit your data in an interface designed to keep you in control.",
+      "explore": "See the product",
+      "free": "Free Core",
+      "workspace": "Your workspace",
+      "alt": "QoreDB SQL editor, results grid and SQLite connection.",
+      "caption": "From query to results."
+    },
+    "compatibility": {
+      "label": "Supported engines and services",
+      "title": "Different engines.",
+      "subtitle": "Familiar ground.",
+      "link": "All supported databases"
+    },
+    "workflows": {
+      "eyebrow": "A closer look",
+      "title": "Features",
+      "explore": {
+        "label": "Explore & query",
+        "title": "Explore your tables. Query your data.",
+        "description": "Browse a table, write a query, inspect the results. Your connections and your data share one workspace.",
+        "steps": [
+          {
+            "title": "Choose a connection",
+            "description": "Know exactly where you are working."
+          },
+          {
+            "title": "Read and explore",
+            "description": "Tables and their structure within reach."
+          },
+          {
+            "title": "Narrow your search",
+            "description": "A grid to filter and inspect your data."
+          }
+        ],
+        "link": "Explore the documentation",
+        "alt": "QoreDB data grid showing table navigation, columns and search.",
+        "caption": "The table, its columns, your context. · Core"
+      },
+      "sandbox": {
+        "label": "Prepare & review",
+        "title": "Your changes. Before their consequences.",
+        "description": "Prepare edits locally with the Pro sandbox. Review pending operations before generating SQL and deciding whether to apply it.",
+        "steps": [
+          {
+            "title": "Make room to edit",
+            "description": "Changed cells stay clearly marked."
+          },
+          {
+            "title": "Review each operation",
+            "description": "Inserts, updates and deletes in one place."
+          }
+        ],
+        "link": "Explore the sandbox",
+        "alt": "QoreDB sandbox with edited cells and a panel of pending operations.",
+        "caption": "Changes stay visible before you apply them. · Pro"
+      },
+      "safety": {
+        "label": "Work with safeguards",
+        "title": "A pause when it matters.",
+        "description": "Production deserves your full attention. Built-in safeguards make sensitive operations explicit before they run.",
+        "steps": [
+          {
+            "title": "Identify the environment",
+            "description": "Development, staging and production have clear labels."
+          },
+          {
+            "title": "Confirm a sensitive action",
+            "description": "Shown here: a warning before deleting a production database."
+          }
+        ],
+        "link": "Understand the safeguards",
+        "alt": "QoreDB database deletion confirmation with a production warning and Cancel or Continue choices.",
+        "caption": "Production confirmation · Core. Custom rules · Pro."
+      }
+    },
+    "mcp": {
+      "eyebrow": "Automation · MCP / Core",
+      "title": "Your context. For your agents, too.",
+      "description": "Connect MCP-compatible tools to the connections you authorize. They explore schemas and query data in read-only sessions.",
+      "link": "Set up the MCP server",
+      "flowLabel": "Path of an MCP request",
+      "assistant": "Your agent",
+      "connections": "Authorized connections",
+      "access": {
+        "title": "Explicit access",
+        "description": "You choose which connections to expose. Query limits and audit logging stay active."
+      },
+      "local": {
+        "title": "Local-first",
+        "description": "The client works from your machine. Optional services may communicate with their providers."
+      },
+      "source": {
+        "title": "Open Core",
+        "description": "The core uses Apache-2.0. Premium modules have a separate BUSL-1.1 license."
+      },
+      "note": "Built-in Pro AI is optional. External assistants may send results to their provider depending on their configuration."
+    },
+    "pricing": {
+      "eyebrow": "Plans",
+      "title": "Core, Pro and Team",
+      "compare": "Compare plans",
+      "core": {
+        "model": "Free",
+        "description": "Everyday data work: SQL and NoSQL connections, an editor, a data grid and built-in safeguards.",
+        "link": "Start with Core"
+      },
+      "pro": {
+        "model": "One-time purchase",
+        "description": "Go further with the sandbox, visual diff, optional AI and custom safety rules.",
+        "link": "Discover Pro"
+      },
+      "team": {
+        "model": "Per seat / year",
+        "description": "For teams: see the pricing page for the scope, terms and availability of this plan.",
+        "link": "Explore Team"
+      }
+    },
+    "faq": {
+      "eyebrow": "Before you begin",
+      "title": "Good questions.",
+      "start": {
+        "question": "Can I start for free?",
+        "answer": "Yes. Core is free and available on macOS, Windows and Linux. Connect your databases and work in the editor and data grid without buying Pro."
+      },
+      "privacy": {
+        "question": "Where does my data go?",
+        "answer": "QoreDB connects to databases from your machine. Optional AI features or external assistants may send context to their provider depending on your configuration. Local-first does not mean every use stays offline."
+      },
+      "license": {
+        "question": "What is the difference between Core and Pro?",
+        "answer": "Core is the open-source foundation under Apache-2.0. Pro adds Premium features under BUSL-1.1 with a one-time purchase. Team has per-seat, annual terms. The pricing page details the plans and their availability."
+      }
+    },
+    "cta": {
+      "eyebrow": "Download",
+      "title": "Get started with QoreDB.",
+      "description": "Available on macOS, Windows and Linux."
+    }
+  },
+  "a11y": {
+    "skip_content": "Skip to content",
+    "primary_navigation": "Main navigation",
+    "toggle_theme": "Switch theme",
+    "contact_email": "Contact by email"
+  },
   "nav": {
+    "product": "Product",
+    "resources": "Resources",
     "features": "Features",
     "preview": "Preview",
     "pricing": "Pricing",
@@ -127,7 +298,7 @@
     "detected_platform": "We detected you're on {{platform}}",
     "other_platforms": "Other platforms",
     "recommended": "Recommended",
-    "apple_silicon": "Apple Silicon (M1/M2/M3/M4)",
+    "apple_silicon": "Apple Silicon",
     "intel_mac": "Intel Mac",
     "windows_installer": "Installer (.exe)",
     "windows_msi": "MSI Installer",
@@ -147,7 +318,13 @@
       "interface_tour_description": "Sidebar, tabs, editor, results pane: the full mental model.",
       "full_docs_title": "Browse the full documentation",
       "full_docs_description": "Drivers, querying, security, keyboard shortcuts, and more."
-    }
+    },
+    "loading": "Loading release information…",
+    "retry": "Try again",
+    "unavailable": "Unavailable in this release",
+    "mac_arch_hint": "Choose your Mac’s processor: Apple Silicon or Intel. Find it in the Apple menu → About This Mac.",
+    "unknown_platform": "Choose the desktop system on which you want to install QoreDB.",
+    "install_note": "Start with Core, free. Choose your system and the package that fits your machine."
   },
   "changelog": {
     "title": "Changelog",
@@ -158,6 +335,8 @@
     "load_more": "Load more releases"
   },
   "footer": {
+    "license_summary": "Core: Apache-2.0. Premium features: BUSL-1.1.",
+    "newsletter_label": "Newsletter",
     "product": "Product",
     "features": "Features",
     "preview": "Preview",
@@ -696,18 +875,18 @@
   "pricing_page": {
     "badge": "Open Core",
     "title": "Choose the plan that fits your workflow",
-    "subtitle": "Free for solo work, Pro for the daily job.",
+    "subtitle": "Core is free. Pro is yours with a one-time payment. Team brings Pro to every seat.",
     "checkout_error": "Unable to start Stripe Checkout right now.",
     "faq_title": "Frequently asked questions",
     "core": {
-      "title": "Free",
+      "title": "Core",
       "tagline": "Solo & exploration",
       "description": "The complete open-source foundation of QoreDB.",
       "price": "Free",
       "badge": "Main choice",
       "cta": "Download for free",
       "features": {
-        "drivers": "34 drivers in v0.1.39. Supported engines: PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
+        "drivers": "SQL and NoSQL engines and services: PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
         "crud": "Full CRUD + SQL/Mongo editor with autocomplete and linting",
         "workspaces": "Workspaces:group connections, queries and notebooks by project",
         "grid": "High-performance data grid with bulk edit and advanced filters",
@@ -722,7 +901,8 @@
         "shortcuts": "Query history, favorites, tab groups, keyboard shortcuts and 9 UI languages",
         "mcp": "Read-only MCP server — Give external AI agents access to explicitly enabled connections, with schema discovery and saved queries.",
         "trends": "Query trends · Core — Track execution counts, P50/P95 latency and error rates over 7, 14 or 30 days from your retained audit history."
-      }
+      },
+      "billing": "Free, no subscription"
     },
     "pro": {
       "title": "Pro",
@@ -746,7 +926,8 @@
         "virtual_relations": "Auto-suggest virtual relations",
         "masking": "Column masking · Pro — Mask sensitive columns per connection with full, partial or hashed values, across results, exports, APIs and agents."
       },
-      "individual_use": "License for individual use."
+      "individual_use": "License for individual use.",
+      "billing": "One-time payment · individual license"
     },
     "team": {
       "title": "Team",
@@ -781,11 +962,11 @@
       },
       "data_sent": {
         "question": "Is any of my data sent somewhere?",
-        "answer": "No. QoreDB is 100% local-first. Your data never leaves your machine. Even AI runs with your own API keys."
+        "answer": "QoreDB connects to your databases from your machine. Optional AI features can send context to your chosen provider, including when you use your own API key. Review the provider and settings before using them."
       },
       "lifetime_updates": {
         "question": "Are updates included for life?",
-        "answer": "Yes. One payment, lifetime updates included — no subscription, no renewal, no paywall on future versions."
+        "answer": "Pro is a one-time purchase with lifetime updates included. Team is a separate subscription, billed per seat per year."
       },
       "try_pro": {
         "question": "Can I try Pro features first?",
@@ -1274,6 +1455,14 @@
     "code_copied": "Code copied"
   },
   "docs": {
+    "navigation_label": "Documentation navigation",
+    "search_close": "Close search",
+    "search_loading": "Loading search…",
+    "search_error": "Search is unavailable. Please try again.",
+    "search_retry": "Try again",
+    "search_hint": "Enter a term to search the documentation.",
+    "search_empty": "No results for “{{query}}”.",
+    "search_results": "{{count}} results shown",
     "search_label": "Search docs",
     "search_placeholder": "Search the docs…",
     "on_this_page": "On this page",

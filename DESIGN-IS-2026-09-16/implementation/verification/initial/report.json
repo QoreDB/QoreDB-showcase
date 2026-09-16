@@ -1,0 +1,790 @@
+{
+  "base": "http://127.0.0.1:3101/",
+  "createdAt": "2026-09-16T18:22:37.198Z",
+  "summary": {
+    "passed": 49,
+    "failed": 3,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "name": "home-fr",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-fr.png",
+      "durationMs": 1078
+    },
+    {
+      "name": "home-en",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-en.png",
+      "durationMs": 1067
+    },
+    {
+      "name": "home-de",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-de.png",
+      "durationMs": 1060
+    },
+    {
+      "name": "home-es",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-es.png",
+      "durationMs": 1071
+    },
+    {
+      "name": "home-ja",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-ja.png",
+      "durationMs": 1062
+    },
+    {
+      "name": "home-it",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-it.png",
+      "durationMs": 1058
+    },
+    {
+      "name": "home-zh",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-zh.png",
+      "durationMs": 1545
+    },
+    {
+      "name": "layout-light-320",
+      "status": "passed",
+      "screenshot": "layout-light-320.png",
+      "durationMs": 1037
+    },
+    {
+      "name": "layout-light-768",
+      "status": "passed",
+      "screenshot": "layout-light-768.png",
+      "durationMs": 1057
+    },
+    {
+      "name": "layout-light-1024",
+      "status": "passed",
+      "screenshot": "layout-light-1024.png",
+      "durationMs": 1070
+    },
+    {
+      "name": "layout-light-1440",
+      "status": "passed",
+      "screenshot": "layout-light-1440.png",
+      "durationMs": 1079
+    },
+    {
+      "name": "layout-light-1920",
+      "status": "passed",
+      "screenshot": "layout-light-1920.png",
+      "durationMs": 1083
+    },
+    {
+      "name": "layout-dark-320",
+      "status": "passed",
+      "screenshot": "layout-dark-320.png",
+      "durationMs": 1045
+    },
+    {
+      "name": "layout-dark-768",
+      "status": "passed",
+      "screenshot": "layout-dark-768.png",
+      "durationMs": 1055
+    },
+    {
+      "name": "layout-dark-1024",
+      "status": "passed",
+      "screenshot": "layout-dark-1024.png",
+      "durationMs": 1066
+    },
+    {
+      "name": "layout-dark-1440",
+      "status": "passed",
+      "screenshot": "layout-dark-1440.png",
+      "durationMs": 1076
+    },
+    {
+      "name": "layout-dark-1920",
+      "status": "passed",
+      "screenshot": "layout-dark-1920.png",
+      "durationMs": 1085
+    },
+    {
+      "name": "home-no-javascript",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-no-javascript.png",
+      "durationMs": 1067
+    },
+    {
+      "name": "home-reduced-motion",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-reduced-motion.png",
+      "durationMs": 1058
+    },
+    {
+      "name": "navigation-mobile",
+      "status": "passed",
+      "screenshot": "navigation-mobile.png",
+      "durationMs": 1087
+    },
+    {
+      "name": "preferences-route",
+      "status": "failed",
+      "error": "Navigation timeout of 15000 ms exceeded",
+      "browserErrors": [],
+      "screenshot": "preferences-route.png",
+      "durationMs": 16068
+    },
+    {
+      "name": "navigation-links-fr",
+      "status": "passed",
+      "detail": {
+        "checked": [
+          "/fr",
+          "/fr/features",
+          "/fr/docs",
+          "/fr/pricing",
+          "/fr/plugins",
+          "/fr/blog",
+          "/fr/changelog",
+          "/fr/roadmap",
+          "/fr/faq",
+          "/fr/download",
+          "/images/screenshots/query-screen.webp",
+          "/fr/docs/connections/supported-databases",
+          "/fr/docs/querying/results-and-exports",
+          "/images/screenshots/table-screen.webp",
+          "/fr/features/sandbox",
+          "/images/features/sandbox.webp",
+          "/fr/docs/connections/environments",
+          "/images/features/query-safety.webp",
+          "/fr/docs/automation/mcp-server",
+          "/fr/docs/getting-started/installation",
+          "/fr/newsletter",
+          "/fr/legal",
+          "/fr/privacy",
+          "/fr/terms",
+          "/fr/license"
+        ]
+      },
+      "screenshot": "navigation-links-fr.png",
+      "durationMs": 1352
+    },
+    {
+      "name": "navigation-links-en",
+      "status": "passed",
+      "detail": {
+        "checked": [
+          "/en",
+          "/en/features",
+          "/en/docs",
+          "/en/pricing",
+          "/en/plugins",
+          "/en/blog",
+          "/en/changelog",
+          "/en/roadmap",
+          "/en/faq",
+          "/en/download",
+          "/images/screenshots/query-screen.webp",
+          "/en/docs/connections/supported-databases",
+          "/en/docs/querying/results-and-exports",
+          "/images/screenshots/table-screen.webp",
+          "/en/features/sandbox",
+          "/images/features/sandbox.webp",
+          "/en/docs/connections/environments",
+          "/images/features/query-safety.webp",
+          "/en/docs/automation/mcp-server",
+          "/en/docs/getting-started/installation",
+          "/en/newsletter",
+          "/en/legal",
+          "/en/privacy",
+          "/en/terms",
+          "/en/license"
+        ]
+      },
+      "screenshot": "navigation-links-en.png",
+      "durationMs": 1562
+    },
+    {
+      "name": "seo-fr",
+      "status": "passed",
+      "detail": {
+        "canonical": "https://www.qoredb.com/fr",
+        "alternates": [
+          [
+            "fr",
+            "https://www.qoredb.com/fr"
+          ],
+          [
+            "en",
+            "https://www.qoredb.com/en"
+          ],
+          [
+            "es",
+            "https://www.qoredb.com/es"
+          ],
+          [
+            "it",
+            "https://www.qoredb.com/it"
+          ],
+          [
+            "de",
+            "https://www.qoredb.com/de"
+          ],
+          [
+            "zh",
+            "https://www.qoredb.com/zh"
+          ],
+          [
+            "ja",
+            "https://www.qoredb.com/ja"
+          ],
+          [
+            "x-default",
+            "https://www.qoredb.com/fr"
+          ]
+        ],
+        "structured": [
+          {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                "name": "QoreDB",
+                "url": "https://www.qoredb.com/fr",
+                "logo": "https://www.qoredb.com/logo.png",
+                "sameAs": [
+                  "https://github.com/QoreDB/QoreDB",
+                  "https://www.linkedin.com/company/qoredb/?viewAsMember=true"
+                ]
+              },
+              {
+                "@type": "WebSite",
+                "name": "QoreDB",
+                "url": "https://www.qoredb.com/fr",
+                "inLanguage": "fr",
+                "description": "Un client de bases de données moderne, rapide et sécurisé pour les développeurs. SQL + NoSQL unifié, vault sécurisé, local-first."
+              },
+              {
+                "@type": "SoftwareApplication",
+                "name": "QoreDB",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "macOS, Windows, Linux",
+                "description": "Un client de bases de données moderne, rapide et sécurisé pour les développeurs. SQL + NoSQL unifié, vault sécurisé, local-first.",
+                "url": "https://www.qoredb.com/fr",
+                "downloadUrl": "https://www.qoredb.com/fr/download",
+                "image": "https://www.qoredb.com/images/screenshots/query-screen.png",
+                "screenshot": "https://www.qoredb.com/images/screenshots/query-screen.png",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "EUR",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://www.qoredb.com/fr/download",
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "0",
+                      "currency": "EUR"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": [
+                        "FR",
+                        "BE",
+                        "CH",
+                        "LU",
+                        "CA",
+                        "US",
+                        "GB",
+                        "ES",
+                        "IT",
+                        "DE",
+                        "AT",
+                        "CN",
+                        "JP"
+                      ]
+                    },
+                    "deliveryTime": {
+                      "@type": "ShippingDeliveryTime",
+                      "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                      },
+                      "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                      }
+                    }
+                  },
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": [
+                      "FR",
+                      "BE",
+                      "CH",
+                      "LU",
+                      "CA",
+                      "US",
+                      "GB",
+                      "ES",
+                      "IT",
+                      "DE",
+                      "AT",
+                      "CN",
+                      "JP"
+                    ],
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "screenshot": "seo-fr.png",
+      "durationMs": 1047
+    },
+    {
+      "name": "seo-en",
+      "status": "passed",
+      "detail": {
+        "canonical": "https://www.qoredb.com/en",
+        "alternates": [
+          [
+            "fr",
+            "https://www.qoredb.com/fr"
+          ],
+          [
+            "en",
+            "https://www.qoredb.com/en"
+          ],
+          [
+            "es",
+            "https://www.qoredb.com/es"
+          ],
+          [
+            "it",
+            "https://www.qoredb.com/it"
+          ],
+          [
+            "de",
+            "https://www.qoredb.com/de"
+          ],
+          [
+            "zh",
+            "https://www.qoredb.com/zh"
+          ],
+          [
+            "ja",
+            "https://www.qoredb.com/ja"
+          ],
+          [
+            "x-default",
+            "https://www.qoredb.com/fr"
+          ]
+        ],
+        "structured": [
+          {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                "name": "QoreDB",
+                "url": "https://www.qoredb.com/en",
+                "logo": "https://www.qoredb.com/logo.png",
+                "sameAs": [
+                  "https://github.com/QoreDB/QoreDB",
+                  "https://www.linkedin.com/company/qoredb/?viewAsMember=true"
+                ]
+              },
+              {
+                "@type": "WebSite",
+                "name": "QoreDB",
+                "url": "https://www.qoredb.com/en",
+                "inLanguage": "en",
+                "description": "A fast, secure modern database client for developers. Unified SQL + NoSQL, secure vault, local-first."
+              },
+              {
+                "@type": "SoftwareApplication",
+                "name": "QoreDB",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "macOS, Windows, Linux",
+                "description": "A fast, secure modern database client for developers. Unified SQL + NoSQL, secure vault, local-first.",
+                "url": "https://www.qoredb.com/en",
+                "downloadUrl": "https://www.qoredb.com/en/download",
+                "image": "https://www.qoredb.com/images/screenshots/query-screen.png",
+                "screenshot": "https://www.qoredb.com/images/screenshots/query-screen.png",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "EUR",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://www.qoredb.com/en/download",
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "0",
+                      "currency": "EUR"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": [
+                        "FR",
+                        "BE",
+                        "CH",
+                        "LU",
+                        "CA",
+                        "US",
+                        "GB",
+                        "ES",
+                        "IT",
+                        "DE",
+                        "AT",
+                        "CN",
+                        "JP"
+                      ]
+                    },
+                    "deliveryTime": {
+                      "@type": "ShippingDeliveryTime",
+                      "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                      },
+                      "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                      }
+                    }
+                  },
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": [
+                      "FR",
+                      "BE",
+                      "CH",
+                      "LU",
+                      "CA",
+                      "US",
+                      "GB",
+                      "ES",
+                      "IT",
+                      "DE",
+                      "AT",
+                      "CN",
+                      "JP"
+                    ],
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "screenshot": "seo-en.png",
+      "durationMs": 1041
+    },
+    {
+      "name": "routing-sitemap-quick-start",
+      "status": "passed",
+      "screenshot": "routing-sitemap-quick-start.png",
+      "durationMs": 48
+    },
+    {
+      "name": "secondary-faq",
+      "status": "passed",
+      "detail": {
+        "route": "faq",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-faq.png",
+      "durationMs": 1052
+    },
+    {
+      "name": "secondary-changelog",
+      "status": "failed",
+      "error": "Expected values to be strictly equal:\n\n3 !== 1\n",
+      "browserErrors": [],
+      "screenshot": "secondary-changelog.png",
+      "durationMs": 1063
+    },
+    {
+      "name": "secondary-newsletter",
+      "status": "passed",
+      "detail": {
+        "route": "newsletter",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-newsletter.png",
+      "durationMs": 801
+    },
+    {
+      "name": "secondary-legal",
+      "status": "passed",
+      "detail": {
+        "route": "legal",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-legal.png",
+      "durationMs": 1061
+    },
+    {
+      "name": "secondary-privacy",
+      "status": "passed",
+      "detail": {
+        "route": "privacy",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-privacy.png",
+      "durationMs": 1053
+    },
+    {
+      "name": "secondary-terms",
+      "status": "passed",
+      "detail": {
+        "route": "terms",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-terms.png",
+      "durationMs": 1063
+    },
+    {
+      "name": "secondary-oss-program",
+      "status": "passed",
+      "detail": {
+        "route": "oss-program",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-oss-program.png",
+      "durationMs": 1065
+    },
+    {
+      "name": "secondary-team-join",
+      "status": "passed",
+      "detail": {
+        "route": "team/join",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-team-join.png",
+      "durationMs": 1082
+    },
+    {
+      "name": "secondary-team-admin",
+      "status": "passed",
+      "detail": {
+        "route": "team/admin",
+        "viewport": 390,
+        "forms": "not submitted"
+      },
+      "screenshot": "secondary-team-admin.png",
+      "durationMs": 1057
+    },
+    {
+      "name": "docs-mobile-fixture",
+      "status": "passed",
+      "screenshot": "docs-mobile-fixture.png",
+      "durationMs": 2278
+    },
+    {
+      "name": "docs-load-error-retry",
+      "status": "passed",
+      "screenshot": "docs-load-error-retry.png",
+      "durationMs": 1708
+    },
+    {
+      "name": "docs-real-index",
+      "status": "failed",
+      "error": "Waiting failed: 15000ms exceeded",
+      "browserErrors": [],
+      "screenshot": "docs-real-index.png",
+      "durationMs": 16117
+    },
+    {
+      "name": "download-windows",
+      "status": "passed",
+      "screenshot": "download-windows.png",
+      "durationMs": 1039
+    },
+    {
+      "name": "download-macIntel",
+      "status": "passed",
+      "screenshot": "download-macIntel.png",
+      "durationMs": 1070
+    },
+    {
+      "name": "download-macArm",
+      "status": "passed",
+      "screenshot": "download-macArm.png",
+      "durationMs": 1067
+    },
+    {
+      "name": "download-linux",
+      "status": "passed",
+      "screenshot": "download-linux.png",
+      "durationMs": 1060
+    },
+    {
+      "name": "download-unknown",
+      "status": "passed",
+      "screenshot": "download-unknown.png",
+      "durationMs": 1079
+    },
+    {
+      "name": "download-formats",
+      "status": "passed",
+      "screenshot": "download-formats.png",
+      "durationMs": 1107
+    },
+    {
+      "name": "download-loading",
+      "status": "passed",
+      "screenshot": "download-loading.png",
+      "durationMs": 237
+    },
+    {
+      "name": "download-error-retry",
+      "status": "passed",
+      "screenshot": "download-error-retry.png",
+      "durationMs": 1138
+    },
+    {
+      "name": "download-missing-format",
+      "status": "passed",
+      "screenshot": "download-missing-format.png",
+      "durationMs": 1038
+    },
+    {
+      "name": "checkout-failure",
+      "status": "passed",
+      "detail": {
+        "bodies": [
+          {
+            "locale": "en"
+          }
+        ],
+        "checkout": "entirely mocked; no payment session created"
+      },
+      "screenshot": "checkout-failure.png",
+      "durationMs": 1106
+    },
+    {
+      "name": "checkout-success",
+      "status": "passed",
+      "detail": {
+        "bodies": [
+          {
+            "locale": "en"
+          }
+        ],
+        "checkout": "entirely mocked; no payment session created"
+      },
+      "screenshot": "checkout-success.png",
+      "durationMs": 1086
+    },
+    {
+      "name": "team-availability-waitlist-ssr",
+      "status": "passed",
+      "detail": "Real component, synthetic prices, no Stripe or network call"
+    },
+    {
+      "name": "team-availability-available-ssr",
+      "status": "passed",
+      "detail": "Real component, synthetic prices, no Stripe or network call"
+    },
+    {
+      "name": "team-annual-total-ssr",
+      "status": "passed",
+      "detail": "€123 per seat per year × 3 minimum seats = €369 per year"
+    }
+  ]
+}

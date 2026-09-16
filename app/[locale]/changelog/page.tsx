@@ -38,7 +38,11 @@ export default async function ChangelogPage({
 
       <Header />
 
-      <main className="flex-grow container relative mx-auto px-4 pt-32 pb-20 z-10">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-grow container relative mx-auto px-4 pt-32 pb-20 z-10"
+      >
         <div className="max-w-5xl mx-auto space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">

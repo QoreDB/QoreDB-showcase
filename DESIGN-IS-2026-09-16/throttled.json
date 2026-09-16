@@ -1,0 +1,1231 @@
+{
+  "protocol": {
+    "viewport": "390x844 DPR1",
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 93750,
+    "cache": "disabled, new browser context each run",
+    "externalRequests": "blocked",
+    "server": "existing local production build :3101, server cache warm",
+    "sampleWindow": "load + 3 seconds"
+  },
+  "runs": [
+    {
+      "metrics": {
+        "lcp": [
+          {
+            "start": 1288,
+            "duration": 0
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 2521.199999999255,
+            "duration": 105
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 13.900000002235174,
+          "dcl": 1288.800000000745,
+          "load": 3906.10000000149
+        }
+      ],
+      "resources": [
+        {
+          "type": "link",
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/0-hy1uxzbd3yv.css",
+          "encoded": 21129,
+          "decoded": 150801
+        },
+        {
+          "type": "link",
+          "url": "/images/screenshots/landing-640.webp",
+          "encoded": 23234,
+          "decoded": 23234
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/0hvk9i1wnmymy.js",
+          "encoded": 9486,
+          "decoded": 31097
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2j3jk4kkxelg7.js",
+          "encoded": 39610,
+          "decoded": 147543
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/turbopack-1u7v7jqzyzpsg.js",
+          "encoded": 4485,
+          "decoded": 11870
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1tpr-pk44-8vz.js",
+          "encoded": 5300,
+          "decoded": 13173
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/0ow93uzyj2d2w.js",
+          "encoded": 20704,
+          "decoded": 66057
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/07aqfmyj-0x28.js",
+          "encoded": 13526,
+          "decoded": 39790
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/11h4e4y7w-2bx.js",
+          "encoded": 29744,
+          "decoded": 100847
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/05amtyppr7-l4.js",
+          "encoded": 48415,
+          "decoded": 148193
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3txxg-e99xcck.js",
+          "encoded": 17593,
+          "decoded": 62069
+        },
+        {
+          "type": "img",
+          "url": "/logo-white.webp",
+          "encoded": 14006,
+          "decoded": 14006
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/postgresql-384.webp",
+          "encoded": 13786,
+          "decoded": 13786
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/neon-384.webp",
+          "encoded": 7184,
+          "decoded": 7184
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/supabase-384.webp",
+          "encoded": 12318,
+          "decoded": 12318
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/timescaledb.webp",
+          "encoded": 5812,
+          "decoded": 5812
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/cockroachdb-384.webp",
+          "encoded": 20102,
+          "decoded": 20102
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/yugabytedb.webp",
+          "encoded": 1482,
+          "decoded": 1482
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mysql-384.webp",
+          "encoded": 16298,
+          "decoded": 16298
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/planetscale.webp",
+          "encoded": 952,
+          "decoded": 952
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mariadb-384.webp",
+          "encoded": 10614,
+          "decoded": 10614
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/tidb.webp",
+          "encoded": 1514,
+          "decoded": 1514
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/singlestore.webp",
+          "encoded": 2906,
+          "decoded": 2906
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/azuresql.webp",
+          "encoded": 1924,
+          "decoded": 1924
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/sqlserver-384.webp",
+          "encoded": 28976,
+          "decoded": 28976
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/sqlite-384.webp",
+          "encoded": 8708,
+          "decoded": 8708
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/duckdb-384.webp",
+          "encoded": 9100,
+          "decoded": 9100
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/motherduck.webp",
+          "encoded": 1556,
+          "decoded": 1556
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/clickhouse-384.webp",
+          "encoded": 1338,
+          "decoded": 1338
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/snowflake.webp",
+          "encoded": 3418,
+          "decoded": 3418
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/bigquery.webp",
+          "encoded": 1674,
+          "decoded": 1674
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/starrocks.webp",
+          "encoded": 2570,
+          "decoded": 2570
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/doris.webp",
+          "encoded": 1790,
+          "decoded": 1790
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/synapse.webp",
+          "encoded": 2980,
+          "decoded": 2980
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mongodb.webp",
+          "encoded": 2222,
+          "decoded": 2222
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/documentdb.webp",
+          "encoded": 3338,
+          "decoded": 3338
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/redis-384.webp",
+          "encoded": 16762,
+          "decoded": 16762
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/valkey.webp",
+          "encoded": 2698,
+          "decoded": 2698
+        },
+        {
+          "type": "fetch",
+          "url": "/api/latest-release",
+          "encoded": 6063,
+          "decoded": 6063
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=EylmaytQesAzsSpi",
+          "encoded": 353,
+          "decoded": 753
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=CtvQwiKcw2nCiWhS",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=BJ2v-kvwzFgRmoUo",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=ugmzWV37bLArWpyC",
+          "encoded": 43480,
+          "decoded": 128576
+        },
+        {
+          "type": "other",
+          "url": "/favicon.ico?favicon.357p4zu5hqulr.ico",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/218bzvthcrr0a.css",
+          "encoded": 1228,
+          "decoded": 8005
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=CtvQwiKcw2nCiWhS",
+          "encoded": 1230,
+          "decoded": 4075
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=sJo6Q-3ikOgSbd9V",
+          "encoded": 2978,
+          "decoded": 15330
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=9Tn3aD5QpOomi1qF",
+          "encoded": 5559,
+          "decoded": 62492
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=K_SGnkbznnBBDMeX",
+          "encoded": 1849,
+          "decoded": 10209
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1kbmfzyd63qn-.js",
+          "encoded": 5449,
+          "decoded": 16286
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3a1rpk4_tez9r.js",
+          "encoded": 594,
+          "decoded": 594
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/10mt2nxc0irws.js",
+          "encoded": 1617,
+          "decoded": 4083
+        }
+      ]
+    },
+    {
+      "metrics": {
+        "lcp": [
+          {
+            "start": 1248,
+            "duration": 0
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 2510.5,
+            "duration": 126
+          },
+          {
+            "start": 3517.5,
+            "duration": 51
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 7.799999997019768,
+          "dcl": 1246.2999999970198,
+          "load": 3900.89999999851
+        }
+      ],
+      "resources": [
+        {
+          "type": "link",
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "type": "link",
+          "url": "/images/screenshots/landing-640.webp",
+          "encoded": 23234,
+          "decoded": 23234
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/0-hy1uxzbd3yv.css",
+          "encoded": 21129,
+          "decoded": 150801
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/0hvk9i1wnmymy.js",
+          "encoded": 9486,
+          "decoded": 31097
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/turbopack-1u7v7jqzyzpsg.js",
+          "encoded": 4485,
+          "decoded": 11870
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2j3jk4kkxelg7.js",
+          "encoded": 39610,
+          "decoded": 147543
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1tpr-pk44-8vz.js",
+          "encoded": 5300,
+          "decoded": 13173
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/0ow93uzyj2d2w.js",
+          "encoded": 20704,
+          "decoded": 66057
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/07aqfmyj-0x28.js",
+          "encoded": 13526,
+          "decoded": 39790
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/05amtyppr7-l4.js",
+          "encoded": 48415,
+          "decoded": 148193
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3txxg-e99xcck.js",
+          "encoded": 17593,
+          "decoded": 62069
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/11h4e4y7w-2bx.js",
+          "encoded": 29744,
+          "decoded": 100847
+        },
+        {
+          "type": "img",
+          "url": "/logo-white.webp",
+          "encoded": 14006,
+          "decoded": 14006
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/postgresql-384.webp",
+          "encoded": 13786,
+          "decoded": 13786
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/supabase-384.webp",
+          "encoded": 12318,
+          "decoded": 12318
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/neon-384.webp",
+          "encoded": 7184,
+          "decoded": 7184
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/timescaledb.webp",
+          "encoded": 5812,
+          "decoded": 5812
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/cockroachdb-384.webp",
+          "encoded": 20102,
+          "decoded": 20102
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/yugabytedb.webp",
+          "encoded": 1482,
+          "decoded": 1482
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mysql-384.webp",
+          "encoded": 16298,
+          "decoded": 16298
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/planetscale.webp",
+          "encoded": 952,
+          "decoded": 952
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mariadb-384.webp",
+          "encoded": 10614,
+          "decoded": 10614
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/tidb.webp",
+          "encoded": 1514,
+          "decoded": 1514
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/singlestore.webp",
+          "encoded": 2906,
+          "decoded": 2906
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/azuresql.webp",
+          "encoded": 1924,
+          "decoded": 1924
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/sqlserver-384.webp",
+          "encoded": 28976,
+          "decoded": 28976
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/sqlite-384.webp",
+          "encoded": 8708,
+          "decoded": 8708
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/duckdb-384.webp",
+          "encoded": 9100,
+          "decoded": 9100
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/motherduck.webp",
+          "encoded": 1556,
+          "decoded": 1556
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/clickhouse-384.webp",
+          "encoded": 1338,
+          "decoded": 1338
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/snowflake.webp",
+          "encoded": 3418,
+          "decoded": 3418
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/bigquery.webp",
+          "encoded": 1674,
+          "decoded": 1674
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/starrocks.webp",
+          "encoded": 2570,
+          "decoded": 2570
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/doris.webp",
+          "encoded": 1790,
+          "decoded": 1790
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mongodb.webp",
+          "encoded": 2222,
+          "decoded": 2222
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/synapse.webp",
+          "encoded": 2980,
+          "decoded": 2980
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/documentdb.webp",
+          "encoded": 3338,
+          "decoded": 3338
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/redis-384.webp",
+          "encoded": 16762,
+          "decoded": 16762
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/valkey.webp",
+          "encoded": 2698,
+          "decoded": 2698
+        },
+        {
+          "type": "fetch",
+          "url": "/api/latest-release",
+          "encoded": 6063,
+          "decoded": 6063
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=EylmaytQesAzsSpi",
+          "encoded": 353,
+          "decoded": 753
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=CtvQwiKcw2nCiWhS",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=BJ2v-kvwzFgRmoUo",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=ugmzWV37bLArWpyC",
+          "encoded": 43480,
+          "decoded": 128576
+        },
+        {
+          "type": "other",
+          "url": "/favicon.ico?favicon.357p4zu5hqulr.ico",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/218bzvthcrr0a.css",
+          "encoded": 1228,
+          "decoded": 8005
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=CtvQwiKcw2nCiWhS",
+          "encoded": 1230,
+          "decoded": 4075
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=sJo6Q-3ikOgSbd9V",
+          "encoded": 2978,
+          "decoded": 15330
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=9Tn3aD5QpOomi1qF",
+          "encoded": 5559,
+          "decoded": 62492
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=K_SGnkbznnBBDMeX",
+          "encoded": 1849,
+          "decoded": 10209
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1kbmfzyd63qn-.js",
+          "encoded": 5449,
+          "decoded": 16286
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3a1rpk4_tez9r.js",
+          "encoded": 594,
+          "decoded": 594
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/10mt2nxc0irws.js",
+          "encoded": 1617,
+          "decoded": 4083
+        }
+      ]
+    },
+    {
+      "metrics": {
+        "lcp": [
+          {
+            "start": 1264,
+            "duration": 0
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 2514.699999999255,
+            "duration": 109
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 7.300000000745058,
+          "dcl": 1264.199999999255,
+          "load": 3892.199999999255
+        }
+      ],
+      "resources": [
+        {
+          "type": "link",
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "type": "link",
+          "url": "/images/screenshots/landing-640.webp",
+          "encoded": 23234,
+          "decoded": 23234
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/0hvk9i1wnmymy.js",
+          "encoded": 9486,
+          "decoded": 31097
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/0-hy1uxzbd3yv.css",
+          "encoded": 21129,
+          "decoded": 150801
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2j3jk4kkxelg7.js",
+          "encoded": 39610,
+          "decoded": 147543
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/turbopack-1u7v7jqzyzpsg.js",
+          "encoded": 4485,
+          "decoded": 11870
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1tpr-pk44-8vz.js",
+          "encoded": 5300,
+          "decoded": 13173
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/0ow93uzyj2d2w.js",
+          "encoded": 20704,
+          "decoded": 66057
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/07aqfmyj-0x28.js",
+          "encoded": 13526,
+          "decoded": 39790
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/11h4e4y7w-2bx.js",
+          "encoded": 29744,
+          "decoded": 100847
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/05amtyppr7-l4.js",
+          "encoded": 48415,
+          "decoded": 148193
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3txxg-e99xcck.js",
+          "encoded": 17593,
+          "decoded": 62069
+        },
+        {
+          "type": "img",
+          "url": "/logo-white.webp",
+          "encoded": 14006,
+          "decoded": 14006
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/postgresql-384.webp",
+          "encoded": 13786,
+          "decoded": 13786
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/neon-384.webp",
+          "encoded": 7184,
+          "decoded": 7184
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/supabase-384.webp",
+          "encoded": 12318,
+          "decoded": 12318
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/timescaledb.webp",
+          "encoded": 5812,
+          "decoded": 5812
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/cockroachdb-384.webp",
+          "encoded": 20102,
+          "decoded": 20102
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/yugabytedb.webp",
+          "encoded": 1482,
+          "decoded": 1482
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mysql-384.webp",
+          "encoded": 16298,
+          "decoded": 16298
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mariadb-384.webp",
+          "encoded": 10614,
+          "decoded": 10614
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/planetscale.webp",
+          "encoded": 952,
+          "decoded": 952
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/tidb.webp",
+          "encoded": 1514,
+          "decoded": 1514
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/singlestore.webp",
+          "encoded": 2906,
+          "decoded": 2906
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/sqlserver-384.webp",
+          "encoded": 28976,
+          "decoded": 28976
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/azuresql.webp",
+          "encoded": 1924,
+          "decoded": 1924
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/motherduck.webp",
+          "encoded": 1556,
+          "decoded": 1556
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/sqlite-384.webp",
+          "encoded": 8708,
+          "decoded": 8708
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/duckdb-384.webp",
+          "encoded": 9100,
+          "decoded": 9100
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/clickhouse-384.webp",
+          "encoded": 1338,
+          "decoded": 1338
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/bigquery.webp",
+          "encoded": 1674,
+          "decoded": 1674
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/snowflake.webp",
+          "encoded": 3418,
+          "decoded": 3418
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/starrocks.webp",
+          "encoded": 2570,
+          "decoded": 2570
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/doris.webp",
+          "encoded": 1790,
+          "decoded": 1790
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/synapse.webp",
+          "encoded": 2980,
+          "decoded": 2980
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/mongodb.webp",
+          "encoded": 2222,
+          "decoded": 2222
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/documentdb.webp",
+          "encoded": 3338,
+          "decoded": 3338
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/valkey.webp",
+          "encoded": 2698,
+          "decoded": 2698
+        },
+        {
+          "type": "img",
+          "url": "/images/databases/redis-384.webp",
+          "encoded": 16762,
+          "decoded": 16762
+        },
+        {
+          "type": "fetch",
+          "url": "/api/latest-release",
+          "encoded": 6063,
+          "decoded": 6063
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=EylmaytQesAzsSpi",
+          "encoded": 353,
+          "decoded": 753
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=CtvQwiKcw2nCiWhS",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=BJ2v-kvwzFgRmoUo",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=ugmzWV37bLArWpyC",
+          "encoded": 43480,
+          "decoded": 128576
+        },
+        {
+          "type": "other",
+          "url": "/favicon.ico?favicon.357p4zu5hqulr.ico",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "type": "link",
+          "url": "/_next/static/chunks/218bzvthcrr0a.css",
+          "encoded": 1228,
+          "decoded": 8005
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=CtvQwiKcw2nCiWhS",
+          "encoded": 1230,
+          "decoded": 4075
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=sJo6Q-3ikOgSbd9V",
+          "encoded": 2978,
+          "decoded": 15330
+        },
+        {
+          "type": "fetch",
+          "url": "/fr/docs?_rsc=9Tn3aD5QpOomi1qF",
+          "encoded": 5559,
+          "decoded": 62492
+        },
+        {
+          "type": "fetch",
+          "url": "/fr?_rsc=K_SGnkbznnBBDMeX",
+          "encoded": 1849,
+          "decoded": 10209
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/1kbmfzyd63qn-.js",
+          "encoded": 5449,
+          "decoded": 16286
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/3a1rpk4_tez9r.js",
+          "encoded": 594,
+          "decoded": 594
+        },
+        {
+          "type": "script",
+          "url": "/_next/static/chunks/10mt2nxc0irws.js",
+          "encoded": 1617,
+          "decoded": 4083
+        }
+      ]
+    }
+  ]
+}

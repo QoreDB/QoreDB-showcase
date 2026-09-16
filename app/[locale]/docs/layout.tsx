@@ -1,12 +1,12 @@
 import dynamic from "next/dynamic";
-import { Header } from "@/components/landing/header";
 import { DocsSidebar } from "@/components/docs/DocsSidebar";
 import { SearchDialog } from "@/components/docs/SearchDialog";
+import { Header } from "@/components/landing/header";
 import { getDocsTree } from "@/lib/docs/tree";
 import {
-  type DocsLocale,
-  DOCS_LOCALES,
   DEFAULT_DOCS_LOCALE,
+  DOCS_LOCALES,
+  type DocsLocale,
 } from "@/lib/docs/types";
 import "@/components/docs/docs-prose.css";
 
@@ -36,15 +36,20 @@ export default async function DocsLayout({
   return (
     <div className="min-h-screen bg-(--q-bg-0)">
       <Header />
-      <div className="mx-auto max-w-[96rem] px-4 pt-24 pb-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[16rem_1fr]">
-          <aside className="hidden lg:block">
-            <div className="mb-4">
+      <div className="q-container pt-28 pb-16 lg:pt-36">
+        <div className="grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12">
+          <aside
+            data-pagefind-ignore
+            className="self-start lg:sticky lg:top-32"
+          >
+            <div className="mb-3 lg:mb-6">
               <SearchDialog locale={locale} />
             </div>
             <DocsSidebar tree={tree} locale={locale} />
           </aside>
-          <main className="min-w-0">{children}</main>
+          <main id="main-content" tabIndex={-1} className="min-w-0">
+            {children}
+          </main>
         </div>
       </div>
       <Footer />

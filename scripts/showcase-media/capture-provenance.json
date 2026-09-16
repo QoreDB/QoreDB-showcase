@@ -1,0 +1,96 @@
+{
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "timings": [
+    {
+      "name": "connect",
+      "seconds": 1
+    },
+    {
+      "name": "open-editor",
+      "seconds": 3
+    },
+    {
+      "name": "type-select",
+      "seconds": 4.5
+    },
+    {
+      "name": "execute-select",
+      "seconds": 8.5
+    },
+    {
+      "name": "results-visible",
+      "seconds": 8.61
+    },
+    {
+      "name": "prepare-update",
+      "seconds": 16
+    },
+    {
+      "name": "end",
+      "seconds": 24.76
+    }
+  ],
+  "executed": [
+    {
+      "path": "/api/stream/execute_query",
+      "query": "SELECT name, environment, status, region, deployments\nFROM projects\nWHERE environment = 'production'\nORDER BY deployments DESC;"
+    }
+  ],
+  "appVersion": "0.1.39",
+  "driver": "SQLite",
+  "fixture": "Atelier synthetic projects",
+  "mutationExecuted": false,
+  "appCommit": "28f4dc65c66f8026e476614cd5ccdf6bb1f4b05f",
+  "runtime": "Unmodified React production build, official qore-server HTTP transport, real SQLite driver",
+  "captureDate": "2026-09-16",
+  "checks": {
+    "orbitStatusAfterRecording": "review",
+    "selectExecuted": 1,
+    "updateExecuted": 0,
+    "appSourceUnchanged": true,
+    "externalBrowserRequestsBlocked": true,
+    "uiVisualInspection": "query, table, draft, video first frame and 8-frame storyboard"
+  },
+  "videoProbe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 800,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "22.720000",
+      "size": "291908"
+    }
+  },
+  "assets": [
+    {
+      "path": "public/images/showcase-v2/query-workspace.webp",
+      "bytes": 44944,
+      "sha256": "9c7764828f975bdf93fba69b687bfbc508b0572746c28d48c4e0da39d748903e"
+    },
+    {
+      "path": "public/images/showcase-v2/table-workspace.webp",
+      "bytes": 46994,
+      "sha256": "b6cc6681e30edf33e59966867ac647da06cee642de88854cd72914fda238f6f1"
+    },
+    {
+      "path": "public/images/showcase-v2/workflow-poster.webp",
+      "bytes": 44944,
+      "sha256": "9c7764828f975bdf93fba69b687bfbc508b0572746c28d48c4e0da39d748903e"
+    },
+    {
+      "path": "public/videos/qoredb-workflow.mp4",
+      "bytes": 291908,
+      "sha256": "92d751899a2e9bc7d8c2ad9ee44f4df0a6e094574b441f4463a0a382d5a980c8"
+    }
+  ]
+}

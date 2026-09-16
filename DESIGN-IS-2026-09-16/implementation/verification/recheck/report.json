@@ -1,0 +1,169 @@
+{
+  "base": "http://127.0.0.1:3101/",
+  "createdAt": "2026-09-16T18:26:43.031Z",
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "name": "preferences-route",
+      "status": "passed",
+      "screenshot": "preferences-route.png",
+      "durationMs": 1349
+    },
+    {
+      "name": "secondary-changelog",
+      "status": "passed",
+      "detail": {
+        "route": "changelog",
+        "viewport": 390,
+        "forms": "not submitted",
+        "knownIssue": "3 h1 elements: pre-existing release Markdown headings in unchanged components/changelog/release-card.tsx; changelog heading hierarchy is not certified"
+      },
+      "screenshot": "secondary-changelog.png",
+      "durationMs": 1072
+    },
+    {
+      "name": "docs-real-index",
+      "status": "passed",
+      "detail": {
+        "guardedIndexRequests": [
+          {
+            "path": "/pagefind/pagefind.js",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/pagefind-worker.js",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/pagefind-entry.json",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/pagefind.en_0e8d1b10c0.pf_meta",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/wasm.en.pagefind",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/index/en_e39a6da.pf_index",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_ccd8fba.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_1ab13be.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_3fdf751.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_4fdadf6.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_5a33f36.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_f5d8b35.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_195c18f.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_26bc968.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_a9b072c.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_e35634b.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_6732db2.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_eb9f417.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_f153d54.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_2a40795.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_aa3df8f.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_586763e.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_7385b8f.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_b68555d.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_e98f64e.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          },
+          {
+            "path": "/pagefind/fragment/en_32793d8.pf_fragment",
+            "method": "GET",
+            "guard": "cdp"
+          }
+        ]
+      },
+      "screenshot": "docs-real-index.png",
+      "durationMs": 1330
+    }
+  ]
+}

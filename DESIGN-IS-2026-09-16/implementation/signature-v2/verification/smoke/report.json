@@ -1,0 +1,234 @@
+{
+  "base": "http://127.0.0.1:3101/",
+  "createdAt": "2026-09-16T19:11:14.380Z",
+  "summary": {
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "name": "home-fr",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-fr.png",
+      "durationMs": 1116
+    },
+    {
+      "name": "home-en",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-en.png",
+      "durationMs": 1067
+    },
+    {
+      "name": "home-de",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-de.png",
+      "durationMs": 1074
+    },
+    {
+      "name": "home-es",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-es.png",
+      "durationMs": 1080
+    },
+    {
+      "name": "home-ja",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-ja.png",
+      "durationMs": 1083
+    },
+    {
+      "name": "home-it",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-it.png",
+      "durationMs": 1072
+    },
+    {
+      "name": "home-zh",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-zh.png",
+      "durationMs": 1550
+    },
+    {
+      "name": "layout-light-320",
+      "status": "passed",
+      "screenshot": "layout-light-320.png",
+      "durationMs": 1056
+    },
+    {
+      "name": "layout-light-768",
+      "status": "passed",
+      "screenshot": "layout-light-768.png",
+      "durationMs": 1071
+    },
+    {
+      "name": "layout-light-1024",
+      "status": "passed",
+      "screenshot": "layout-light-1024.png",
+      "durationMs": 1129
+    },
+    {
+      "name": "layout-light-1440",
+      "status": "passed",
+      "screenshot": "layout-light-1440.png",
+      "durationMs": 1088
+    },
+    {
+      "name": "layout-light-1920",
+      "status": "passed",
+      "screenshot": "layout-light-1920.png",
+      "durationMs": 1083
+    },
+    {
+      "name": "layout-dark-320",
+      "status": "passed",
+      "screenshot": "layout-dark-320.png",
+      "durationMs": 1051
+    },
+    {
+      "name": "layout-dark-768",
+      "status": "passed",
+      "screenshot": "layout-dark-768.png",
+      "durationMs": 1068
+    },
+    {
+      "name": "layout-dark-1024",
+      "status": "passed",
+      "screenshot": "layout-dark-1024.png",
+      "durationMs": 1080
+    },
+    {
+      "name": "layout-dark-1440",
+      "status": "passed",
+      "screenshot": "layout-dark-1440.png",
+      "durationMs": 1118
+    },
+    {
+      "name": "layout-dark-1920",
+      "status": "passed",
+      "screenshot": "layout-dark-1920.png",
+      "durationMs": 1110
+    },
+    {
+      "name": "home-no-javascript",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-no-javascript.png",
+      "durationMs": 1090
+    },
+    {
+      "name": "home-reduced-motion",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-reduced-motion.png",
+      "durationMs": 1087
+    },
+    {
+      "name": "preferences-route",
+      "status": "passed",
+      "screenshot": "preferences-route.png",
+      "durationMs": 1388
+    },
+    {
+      "name": "demo-playback-keyboard",
+      "status": "passed",
+      "detail": {
+        "duration": 22.72,
+        "nativeKeyboardPauseResume": true,
+        "endsWithoutLoop": true
+      },
+      "screenshot": "demo-playback-keyboard.png",
+      "durationMs": 4487
+    },
+    {
+      "name": "demo-error-retry",
+      "status": "passed",
+      "detail": {
+        "firstResponse": 503,
+        "retry": "actual local MP4"
+      },
+      "screenshot": "demo-error-retry.png",
+      "durationMs": 1495
+    },
+    {
+      "name": "demo-no-javascript",
+      "status": "passed",
+      "detail": {
+        "fallback": "/videos/qoredb-workflow.mp4",
+        "transcriptWithoutJavaScript": true
+      },
+      "screenshot": "demo-no-javascript.png",
+      "durationMs": 1168
+    }
+  ]
+}

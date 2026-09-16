@@ -94,29 +94,13 @@ export default async function DocsLandingPage({
 
   return (
     <article className="docs-prose">
-      <header className="relative not-prose mb-12 overflow-hidden rounded-3xl border border-(--q-border)/60 bg-linear-to-br from-(--q-bg-1) to-(--q-bg-2)/45 p-8 sm:p-10">
-        <div
-          className="absolute inset-0 opacity-[0.35] pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(var(--q-border) 1.5px, transparent 1.5px)",
-            backgroundSize: "24px 24px",
-            maskImage: "radial-gradient(ellipse at center, black, transparent)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, black, transparent)",
-          }}
-        />
-
-        <div className="absolute -right-24 -bottom-24 h-96 w-96 rounded-full bg-linear-to-br from-(--q-accent)/20 to-transparent blur-3xl pointer-events-none opacity-60 animate-pulse duration-5000" />
-        <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-linear-to-br from-(--q-accent-soft) to-transparent blur-3xl pointer-events-none opacity-45" />
-
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <header className="not-prose mb-10 border-b border-(--q-border) pb-10">
+        <div className="flex flex-col gap-6">
           <div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-(--q-accent-soft) px-3 py-1.5 text-xs font-semibold text-(--q-accent-strong) mb-4">
-              <Sparkles className="size-3.5" />
+            <span className="q-eyebrow mb-4 inline-block">
               {t("docs.learning_hub")}
             </span>
-            <h1 className="font-heading text-3.5xl font-extrabold text-(--q-text-0) tracking-tight">
+            <h1 className="font-heading text-4xl font-semibold leading-tight tracking-[-0.04em] text-(--q-text-0) sm:text-5xl">
               {t("docs.landing_title")}
             </h1>
             <p className="mt-3 text-base text-(--q-text-1) max-w-2xl leading-relaxed">
@@ -124,17 +108,17 @@ export default async function DocsLandingPage({
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 shrink-0 self-start md:self-center">
+          <div className="flex flex-wrap gap-3">
             <Link
               href={`/${locale}/docs/getting-started/installation`}
-              className="inline-flex items-center justify-center rounded-xl bg-(--q-accent) px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-(--q-accent-strong) transition-all duration-200"
+              className="inline-flex items-center justify-center min-h-11 rounded-md bg-(--q-action) px-4 py-2.5 text-sm font-semibold text-(--q-on-action) hover:bg-(--q-action-hover) transition-colors"
             >
               <Rocket className="mr-2 size-4" />
               {t("docs.quick_start_cta")}
             </Link>
             <Link
               href={`/${locale}/docs/connections/postgresql`}
-              className="inline-flex items-center justify-center rounded-xl border border-(--q-border) bg-(--q-bg-0) px-4 py-2.5 text-sm font-semibold text-(--q-text-0) hover:bg-(--q-bg-1) hover:text-(--q-accent) transition-all duration-200"
+              className="inline-flex items-center justify-center min-h-11 rounded-md border border-(--q-border) bg-(--q-bg-0) px-4 py-2.5 text-sm font-semibold text-(--q-text-0) hover:bg-(--q-bg-1) hover:text-(--q-accent) transition-colors"
             >
               <Database className="mr-2 size-4" />
               {t("docs.databases_cta")}
@@ -143,7 +127,7 @@ export default async function DocsLandingPage({
         </div>
       </header>
 
-      <div className="not-prose grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="not-prose grid gap-x-8 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
         {tree.map((node) => {
           if (node.kind !== "section") return null;
           const leafPages = getLeafPages(node);
@@ -157,16 +141,15 @@ export default async function DocsLandingPage({
           return (
             <div
               key={node.slug.join("/")}
-              className="group relative flex flex-col rounded-2xl border border-(--q-border)/60 bg-linear-to-b from-(--q-bg-0) to-(--q-bg-1)/35 p-6 transition-all duration-350 hover:-translate-y-1 hover:border-(--q-accent)/30 hover:shadow-md hover:shadow-(--q-accent-soft)/10"
+              className="flex min-w-0 flex-col border-t border-(--q-border) pt-6"
             >
-              <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-transparent to-transparent transition-all duration-500 group-hover:via-(--q-accent)/40" />
-
               <div className="flex items-center gap-4 mb-5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-(--q-accent-soft) text-(--q-accent) transition-all duration-300 group-hover:scale-105 group-hover:bg-(--q-accent) group-hover:text-white">
+                <div className="flex size-6 shrink-0 items-center justify-center text-(--q-accent)">
                   <IconComponent className="size-5.5" />
                 </div>
                 <Link
                   href={firstLeaf.href}
+                  prefetch={false}
                   className="font-heading text-lg font-bold text-(--q-text-0) hover:text-(--q-accent) transition-colors leading-snug"
                 >
                   {node.label}
@@ -178,14 +161,13 @@ export default async function DocsLandingPage({
                   <li key={page.href} className="flex items-center">
                     <Link
                       href={page.href}
+                      prefetch={false}
                       className="inline-flex items-center text-sm text-(--q-text-1) hover:text-(--q-accent) transition-colors group/link"
                     >
                       <span className="mr-2 h-1.5 w-1.5 shrink-0 rounded-full bg-(--q-text-2)/40 transition-colors group-hover/link:bg-(--q-accent)" />
-                      <span className="truncate max-w-[200px] sm:max-w-[240px] md:max-w-[180px] lg:max-w-[220px]">
-                        {page.label}
-                      </span>
+                      <span className="min-w-0">{page.label}</span>
                       {page.premium && (
-                        <span className="ml-2 rounded bg-(--q-accent-soft) px-1.5 py-0.25 text-[9px] font-bold tracking-wide uppercase text-(--q-accent-strong)">
+                        <span className="ml-2 rounded bg-(--q-accent-soft) px-1.5 py-0.25 shrink-0 text-[10px] font-bold tracking-wide uppercase text-(--q-accent-strong)">
                           PRO
                         </span>
                       )}
@@ -201,10 +183,11 @@ export default async function DocsLandingPage({
 
               <Link
                 href={firstLeaf.href}
+                prefetch={false}
                 className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-(--q-accent) hover:text-(--q-accent-strong) transition-colors"
               >
                 {t("docs.explore_section")}
-                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="size-3.5" />
               </Link>
             </div>
           );

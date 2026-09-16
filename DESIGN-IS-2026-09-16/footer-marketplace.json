@@ -1,0 +1,17 @@
+{
+  "status": 404,
+  "url": "http://localhost:3101/fr/marketplace",
+  "headings": [
+    {
+      "text": "404",
+      "opacity": "1",
+      "parentOpacity": "1"
+    },
+    {
+      "text": "This page could not be found.",
+      "opacity": "1",
+      "parentOpacity": "1"
+    }
+  ],
+  "visibleButtons": []
+}

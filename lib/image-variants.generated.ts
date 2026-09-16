@@ -1,101 +1,289 @@
 // GÉNÉRÉ AUTOMATIQUEMENT par scripts/generate-image-variants.ts — ne pas éditer.
 // Mappe chaque image locale vers les largeurs de variantes WebP disponibles.
 export const IMAGE_VARIANTS: Record<string, number[]> = {
+  "/images/databases/azuresql.webp": [
+    24,
+    40
+  ],
+  "/images/databases/bigquery.webp": [
+    24,
+    40
+  ],
+  "/images/databases/cassandra.webp": [
+    24,
+    40
+  ],
   "/images/databases/clickhouse.png": [
-    384,
-    640,
-    828,
-    1200,
-    1600,
-    2048
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/clickhouse.webp": [
-    384,
-    640,
-    828,
-    1200,
-    1600,
-    2048
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/cockroachdb.png": [
-    384,
-    640,
-    828
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/cockroachdb.webp": [
-    384,
-    640,
-    828
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/documentdb.webp": [
+    24,
+    40
+  ],
+  "/images/databases/doris.webp": [
+    24,
+    40
+  ],
+  "/images/databases/dragonfly.webp": [
+    24,
+    40
   ],
   "/images/databases/duckdb.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/duckdb.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/elasticsearch.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/elasticsearch.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/garnet.webp": [
+    24,
+    40
+  ],
+  "/images/databases/keydb.webp": [
+    24,
+    40
+  ],
+  "/images/databases/keyspaces.webp": [
+    24,
+    40
   ],
   "/images/databases/mariadb.png": [
-    384,
-    640
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/mariadb.webp": [
-    384,
-    640
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/mongodb.png": [
+    24,
+    40,
+    64,
+    96
+  ],
+  "/images/databases/mongodb.webp": [
+    24,
+    40,
+    64,
+    96
+  ],
+  "/images/databases/motherduck.webp": [
+    24,
+    40
   ],
   "/images/databases/mysql.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/mysql.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/neon.png": [
-    384,
-    640,
-    828
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/neon.webp": [
-    384,
-    640,
-    828
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/opensearch.png": [
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/opensearch.webp": [
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/planetscale.webp": [
+    24,
+    40
   ],
   "/images/databases/postgresql.png": [
-    384,
-    640,
-    828
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/postgresql.webp": [
-    384,
-    640,
-    828
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/redis.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/redis.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/scylladb.webp": [
+    24,
+    40
+  ],
+  "/images/databases/singlestore.webp": [
+    24,
+    40
+  ],
+  "/images/databases/snowflake.webp": [
+    24,
+    40
   ],
   "/images/databases/sqlite.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/sqlite.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/sqlserver.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/sqlserver.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/starrocks.webp": [
+    24,
+    40
   ],
   "/images/databases/supabase.png": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
   ],
   "/images/databases/supabase.webp": [
-    384
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/synapse.webp": [
+    24,
+    40
+  ],
+  "/images/databases/tidb.webp": [
+    24,
+    40
+  ],
+  "/images/databases/timescaledb.png": [
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/timescaledb.webp": [
+    24,
+    40,
+    64,
+    96,
+    128
+  ],
+  "/images/databases/valkey.webp": [
+    24,
+    40
+  ],
+  "/images/databases/yugabytedb.webp": [
+    24,
+    40
   ],
   "/images/docs/configure.png": [
     384,
@@ -432,5 +620,23 @@ export const IMAGE_VARIANTS: Record<string, number[]> = {
     828,
     1200,
     1600
+  ],
+  "/images/showcase-v2/query-workspace.webp": [
+    384,
+    640,
+    828,
+    1200
+  ],
+  "/images/showcase-v2/table-workspace.webp": [
+    384,
+    640,
+    828,
+    1200
+  ],
+  "/images/showcase-v2/workflow-poster.webp": [
+    384,
+    640,
+    828,
+    1200
   ]
 };

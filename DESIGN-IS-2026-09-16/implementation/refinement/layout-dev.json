@@ -1,0 +1,2858 @@
+[
+  {
+    "locale": "fr",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 539.09375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 541.828125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 539.09375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 541.828125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "fr",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 540.4375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 523.453125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 540.4375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 523.453125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 539.09375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 541.828125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 539.09375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 541.828125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "de",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 517,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 541.828125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 517,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 541.828125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "es",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 498.625,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 523.453125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 498.625,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 523.453125,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "it",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 469.0625,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 486.75,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 469.0625,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 486.75,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "zh",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 474.15625,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 492.84375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 320,
+    "overflow": false,
+    "scrollWidth": 320,
+    "frame": {
+      "y": 474.15625,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 390,
+    "overflow": false,
+    "scrollWidth": 390,
+    "frame": {
+      "y": 492.84375,
+      "height": 265,
+      "visible": 265
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 768,
+    "overflow": false,
+    "scrollWidth": 768,
+    "frame": {
+      "y": 184,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 1024,
+    "overflow": false,
+    "scrollWidth": 1024,
+    "frame": {
+      "y": 208,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": false,
+    "scrollWidth": 1440,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 1920,
+    "overflow": false,
+    "scrollWidth": 1920,
+    "frame": {
+      "y": 224,
+      "height": 426,
+      "visible": 426
+    },
+    "logos": [
+      {
+        "src": "http://127.0.0.1:3000/images/databases/postgresql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mysql.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/mongodb.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/redis.webp-40.webp",
+        "width": 28
+      },
+      {
+        "src": "http://127.0.0.1:3000/images/databases/sqlite.webp-40.webp",
+        "width": 28
+      }
+    ]
+  }
+]

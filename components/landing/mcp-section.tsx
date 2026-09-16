@@ -1,77 +1,46 @@
 // SPDX-License-Identifier: Apache-2.0
-"use client";
-
-import { ArrowRight, Bot, Check, Database, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useTranslation } from "react-i18next";
+import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 
-export function McpSection() {
-  const { t } = useTranslation();
-  const { locale } = useParams<{ locale: string }>();
-  const steps = t("mcp_showcase.steps", { returnObjects: true }) as Array<{
-    title: string;
-    body: string;
-  }>;
-
+export async function McpSection({ locale }: { locale: string }) {
+  const { t } = await getTranslation(locale, "common");
   return (
-    <section id="mcp" className="relative z-10 bg-(--q-bg-1) px-6 py-24">
-      <div className="mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-2">
+    <section id="mcp" className="q-home-mcp" aria-labelledby="mcp-title">
+      <div className="q-container q-home-mcp-grid">
         <div>
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-(--q-accent)/30 bg-(--q-accent)/10 px-3 py-1 text-xs font-semibold text-(--q-accent)">
-            <Bot className="size-4" aria-hidden="true" /> MCP · Core
-          </span>
-          <h2 className="font-heading mb-6 text-3xl font-bold tracking-tight text-(--q-text-0) sm:text-4xl">
-            {t("mcp_showcase.title")}
-          </h2>
-          <p className="mb-8 leading-relaxed text-(--q-text-1)">
-            {t("mcp_showcase.description")}
+          <p className="q-eyebrow">
+            <span>03 /</span> {t("home.mcp.eyebrow")}
           </p>
+          <h2 id="mcp-title">{t("home.mcp.title")}</h2>
+          <p className="q-home-mcp-description">{t("home.mcp.description")}</p>
           <Link
+            className="q-home-link"
             href={`/${locale}/docs/automation/mcp-server`}
-            className="inline-flex items-center gap-2 rounded-xl bg-(--q-accent) px-5 py-3 font-semibold text-white transition-colors hover:bg-(--q-accent-strong)"
           >
-            {t("mcp_showcase.cta")}
-            <ArrowRight className="size-4" aria-hidden="true" />
+            {t("home.mcp.link")} <span aria-hidden="true">↗︎</span>
           </Link>
-          <p className="mt-5 text-sm leading-relaxed text-(--q-text-2)">
-            {t("mcp_showcase.tiers")}
-          </p>
         </div>
-        <div className="rounded-2xl border border-(--q-border) bg-(--q-bg-0) p-6 sm:p-8">
-          <div className="mb-7 flex flex-wrap items-center gap-2 border-b border-(--q-border) pb-6 text-sm text-(--q-text-1)">
-            <Bot className="size-5 text-(--q-accent)" aria-hidden="true" />
-            <span>Claude Desktop · Claude Code · Cursor</span>
-            <ArrowRight className="size-4" aria-hidden="true" />
-            <span className="font-mono text-(--q-accent)">qore-mcp</span>
-            <Database className="size-5 text-(--q-accent)" aria-hidden="true" />
-          </div>
-          <ol className="space-y-6">
-            {steps.map((step, index) => (
-              <li key={step.title} className="flex gap-4">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-(--q-accent)/10 text-sm font-semibold text-(--q-accent)">
-                  {index + 1}
-                </span>
-                <div>
-                  <h3 className="mb-1 font-semibold text-(--q-text-0)">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-(--q-text-2)">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
-            ))}
+        <div className="q-home-mcp-detail">
+          <ol className="q-home-mcp-flow" aria-label={t("home.mcp.flowLabel")}>
+            <li>{t("home.mcp.assistant")}</li>
+            <li>
+              <span aria-hidden="true">→</span>
+              <code>qore-mcp</code>
+            </li>
+            <li>
+              <span aria-hidden="true">→</span>
+              {t("home.mcp.connections")}
+            </li>
           </ol>
-          <div className="mt-7 flex flex-wrap gap-3 border-t border-(--q-border) pt-5 text-xs text-(--q-text-2)">
-            <span className="inline-flex items-center gap-1">
-              <Check className="size-3.5" aria-hidden="true" /> stdio
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <ShieldCheck className="size-3.5" aria-hidden="true" />{" "}
-              {t("features.items.mcp.title")}
-            </span>
-          </div>
+          <dl>
+            {["access", "local", "source"].map((key) => (
+              <div key={key}>
+                <dt>{t(`home.mcp.${key}.title`)}</dt>
+                <dd>{t(`home.mcp.${key}.description`)}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="q-home-mcp-note">{t("home.mcp.note")}</p>
         </div>
       </div>
     </section>
