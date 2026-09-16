@@ -133,8 +133,10 @@ export default async function HomePage({
       <JsonLd id={`home-jsonld-${normalizedLocale}`} data={structuredData} />
       <Header />
       <main id="main-content" tabIndex={-1} className="q-home">
-        <Hero locale={normalizedLocale} />
-        <DatabaseStrip locale={normalizedLocale} />
+        <div className="q-home-first-screen">
+          <Hero locale={normalizedLocale} />
+          <DatabaseStrip locale={normalizedLocale} />
+        </div>
         <FeatureShowcase locale={normalizedLocale} />
         <McpSection locale={normalizedLocale} />
         <PricingPreview locale={normalizedLocale} />

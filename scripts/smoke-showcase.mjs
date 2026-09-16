@@ -30,6 +30,8 @@ const release = {
   pub_date: "2026-09-16T00:00:00Z",
   platforms: Object.fromEntries(
     [
+      "windows-x86_64-msi",
+      "windows-x86_64-nsis",
       "darwin-aarch64",
       "darwin-x86_64",
       "linux-x86_64-appimage",
@@ -305,7 +307,9 @@ async function checkHome(page, locale, requests) {
     const infinite = document
       .getAnimations()
       .filter(
-        (animation) => animation.effect.getTiming().iterations === Infinity,
+        (animation) =>
+          animation.effect.getTiming().iterations === Infinity &&
+          !animation.effect.target?.matches(".q-home-drivers-track"),
       ).length;
     const image = main.querySelector("figure img");
     let imageVisible = 0;
@@ -335,7 +339,11 @@ async function checkHome(page, locale, requests) {
     [],
     "Editorial headings must be visible without hydration",
   );
-  assert.equal(visuals.infinite, 0, "No idle infinite animations");
+  assert.equal(
+    visuals.infinite,
+    0,
+    "No infinite animations outside the requested driver rail",
+  );
   if (locale === "fr" && (await page.evaluate(() => innerWidth === 390)))
     assert.ok(
       visuals.imageVisible >= 200,
@@ -369,6 +377,129 @@ try {
     (page, requests) => checkHome(page, "fr", requests),
     { reducedMotion: true },
   );
+  for (const [width, height] of [
+    [390, 844],
+    [1440, 900],
+    [1920, 1080],
+  ]) {
+    await scenario(
+      `hero-first-screen-${width}`,
+      async (page) => {
+        await navigate(page, "/fr");
+        const bounds = await page.evaluate(() => ({
+          next: document.querySelector("#features").getBoundingClientRect().top,
+          height: innerHeight,
+        }));
+        assert.ok(
+          bounds.next >= bounds.height - 1,
+          `Next section begins at ${bounds.next}, inside ${bounds.height}px viewport`,
+        );
+        await noOverflow(page);
+        return bounds;
+      },
+      { viewport: { width, height } },
+    );
+  }
+  await scenario(
+    "drivers-motion-controls",
+    async (page) => {
+      await navigate(page, "/fr");
+      await page.waitForSelector(
+        '.q-home-drivers[data-ready="true"][data-playing="true"]',
+      );
+      const track = ".q-home-drivers-track";
+      const state = () =>
+        page.$eval(track, (e) => getComputedStyle(e).animationPlayState);
+      await page.mouse.move(0, 0);
+      assert.equal(await state(), "running");
+      const before = await page.$eval(
+        track,
+        (e) => getComputedStyle(e).transform,
+      );
+      await new Promise((r) => setTimeout(r, 250));
+      assert.notEqual(
+        await page.$eval(track, (e) => getComputedStyle(e).transform),
+        before,
+      );
+      await page.click(".q-home-drivers-pause");
+      await page.$eval(".q-home-drivers-pause", (e) => e.blur());
+      await page.mouse.move(0, 0);
+      assert.equal(await state(), "paused");
+      await page.focus(".q-home-drivers-pause");
+      await page.keyboard.press("Enter");
+      await page.$eval(".q-home-drivers-pause", (e) => e.blur());
+      assert.equal(await state(), "running");
+      await page.hover(".q-home-drivers");
+      assert.equal(await state(), "paused");
+      await page.mouse.move(0, 0);
+      await page.$eval("footer", (e) => e.scrollIntoView());
+      await page.waitForSelector('.q-home-drivers[data-playing="false"]');
+      assert.equal(await state(), "paused");
+    },
+    { viewport: { width: 1440, height: 900 } },
+  );
+  await scenario(
+    "drivers-reduced-motion",
+    async (page) => {
+      await navigate(page, "/fr");
+      assert.equal(
+        await page.$eval(
+          ".q-home-drivers-track",
+          (e) => getComputedStyle(e).animationName,
+        ),
+        "none",
+      );
+      assert.equal(
+        await page.$eval(
+          ".q-home-drivers-pause",
+          (e) => getComputedStyle(e).display,
+        ),
+        "none",
+      );
+      assert.equal(
+        await page.$$eval(
+          ".q-home-drivers-track > ul li",
+          (items) => items.length,
+        ),
+        5,
+      );
+      await noOverflow(page);
+    },
+    { reducedMotion: true },
+  );
+  for (const locale of ["fr", "en"]) {
+    await scenario(`docs-breadcrumb-${locale}`, async (page) => {
+      await navigate(page, `/${locale}/docs/introduction/open-core-model`);
+      const links = await page.$$eval(
+        '.docs-prose nav[aria-label="Breadcrumb"] a',
+        (nodes) =>
+          nodes.map((e) => ({
+            text: e.textContent,
+            href: e.getAttribute("href"),
+          })),
+      );
+      assert.equal(
+        links[1].href,
+        `/${locale}/docs/introduction/what-is-qoredb`,
+      );
+      const schema = await page.$eval(
+        'script[id^="docs-breadcrumbs-jsonld-"]',
+        (e) => JSON.parse(e.textContent),
+      );
+      assert.ok(schema.itemListElement[1].item.endsWith(links[1].href));
+      await Promise.all([
+        page.waitForNavigation({ waitUntil: "domcontentloaded" }),
+        page.click(
+          '.docs-prose nav[aria-label="Breadcrumb"] li:nth-child(2) a',
+        ),
+      ]);
+      assert.equal(new URL(page.url()).pathname, links[1].href);
+      assert.ok(await page.$(".docs-prose h1"));
+      assert.ok(
+        !(await page.evaluate(() => document.body.innerText)).includes("404"),
+      );
+    });
+  }
   await scenario("navigation-mobile", async (page) => {
     await navigate(page, "/en");
     const toggle = await named(page, en.nav.open_menu);
@@ -898,6 +1029,47 @@ try {
     );
 
   await scenario(
+    "download-windows-missing-installers",
+    async (page) => {
+      await navigate(page, "/en/download");
+      await page.waitForFunction(
+        (version) => document.body.innerText.includes(version),
+        {},
+        release.version,
+      );
+      await selectPlatform(page, "windows");
+      assert.ok(
+        await page.$(
+          'main a[href="https://apps.microsoft.com/detail/9NZLCGFWCHHG"]',
+        ),
+      );
+      assert.ok(
+        !(await page.$(
+          `main a[href="${release.platforms["windows-x86_64-msi"].url}"]`,
+        )),
+      );
+      assert.ok(
+        !(await page.$(
+          `main a[href="${release.platforms["windows-x86_64-nsis"].url}"]`,
+        )),
+      );
+      assert.ok(
+        (await page.evaluate(() => document.body.innerText)).includes(
+          en.download.unavailable,
+        ),
+      );
+    },
+    {
+      mock: (_request, url) => {
+        if (url.pathname !== "/api/latest-release") return;
+        const missing = structuredClone(release);
+        delete missing.platforms["windows-x86_64-msi"];
+        delete missing.platforms["windows-x86_64-nsis"];
+        return json(missing);
+      },
+    },
+  );
+  await scenario(
     "download-formats",
     async (page) => {
       await navigate(page, "/en/download");
@@ -907,6 +1079,7 @@ try {
         release.version,
       );
       for (const [platform, keys] of [
+        ["windows", ["windows-x86_64-msi", "windows-x86_64-nsis"]],
         ["mac", ["darwin-aarch64", "darwin-x86_64"]],
         [
           "linux",

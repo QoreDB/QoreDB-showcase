@@ -1,0 +1,99 @@
+{
+  "base": "http://127.0.0.1:3101/",
+  "createdAt": "2026-09-16T21:09:39.994Z",
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "name": "home-no-javascript",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-no-javascript.png",
+      "durationMs": 1205
+    },
+    {
+      "name": "home-reduced-motion",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-reduced-motion.png",
+      "durationMs": 1087
+    },
+    {
+      "name": "hero-first-screen-390",
+      "status": "passed",
+      "detail": {
+        "next": 1078.421875,
+        "height": 844
+      },
+      "screenshot": "hero-first-screen-390.png",
+      "durationMs": 1064
+    },
+    {
+      "name": "hero-first-screen-1440",
+      "status": "passed",
+      "detail": {
+        "next": 900,
+        "height": 900
+      },
+      "screenshot": "hero-first-screen-1440.png",
+      "durationMs": 1054
+    },
+    {
+      "name": "hero-first-screen-1920",
+      "status": "passed",
+      "detail": {
+        "next": 1080,
+        "height": 1080
+      },
+      "screenshot": "hero-first-screen-1920.png",
+      "durationMs": 1016
+    },
+    {
+      "name": "drivers-motion-controls",
+      "status": "passed",
+      "screenshot": "drivers-motion-controls.png",
+      "durationMs": 1382
+    },
+    {
+      "name": "drivers-reduced-motion",
+      "status": "passed",
+      "screenshot": "drivers-reduced-motion.png",
+      "durationMs": 1069
+    },
+    {
+      "name": "docs-breadcrumb-fr",
+      "status": "passed",
+      "screenshot": "docs-breadcrumb-fr.png",
+      "durationMs": 1178
+    },
+    {
+      "name": "docs-breadcrumb-en",
+      "status": "passed",
+      "screenshot": "docs-breadcrumb-en.png",
+      "durationMs": 1179
+    },
+    {
+      "name": "download-formats",
+      "status": "passed",
+      "screenshot": "download-formats.png",
+      "durationMs": 1171
+    }
+  ]
+}

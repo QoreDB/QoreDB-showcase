@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
+import { DatabaseMarquee } from "./database-marquee";
 
 export async function DatabaseStrip({ locale }: { locale: string }) {
   const { t } = await getTranslation(locale, "common");
@@ -13,21 +14,26 @@ export async function DatabaseStrip({ locale }: { locale: string }) {
         {t("home.compatibility.title")}
         <strong>{t("home.compatibility.subtitle")}</strong>
       </p>
-      <ul>
-        {["PostgreSQL", "MySQL", "MongoDB", "Redis", "SQLite"].map((name) => (
-          <li key={name}>
-            <Image
-              className={`q-home-database-${name.toLowerCase()}`}
-              src={`/images/databases/${name.toLowerCase()}.webp`}
-              alt=""
-              width={28}
-              height={28}
-              sizes="28px"
-            />
-            <span>{name}</span>
-          </li>
-        ))}
-      </ul>
+      <DatabaseMarquee
+        pauseLabel={t("home.compatibility.pause")}
+        resumeLabel={t("home.compatibility.resume")}
+      >
+        <ul>
+          {["PostgreSQL", "MySQL", "MongoDB", "Redis", "SQLite"].map((name) => (
+            <li key={name}>
+              <Image
+                className={`q-home-database-${name.toLowerCase()}`}
+                src={`/images/databases/${name.toLowerCase()}.webp`}
+                alt=""
+                width={28}
+                height={28}
+                sizes="28px"
+              />
+              <span>{name}</span>
+            </li>
+          ))}
+        </ul>
+      </DatabaseMarquee>
       <Link
         className="q-home-link"
         href={`/${locale}/docs/connections/supported-databases`}

@@ -34,7 +34,9 @@
       "label": "Unterstützte Engines und Dienste",
       "title": "Verschiedene Engines.",
       "subtitle": "Vertraute Abläufe.",
-      "link": "Alle Kompatibilitäten"
+      "link": "Alle Kompatibilitäten",
+      "pause": "Datenbanklaufband pausieren",
+      "resume": "Datenbanklaufband fortsetzen"
     },
     "workflows": {
       "eyebrow": "Im Detail",

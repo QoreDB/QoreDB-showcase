@@ -12,19 +12,18 @@ import { EditOnGithub } from "@/components/docs/EditOnGithub";
 import { FallbackBanner } from "@/components/docs/FallbackBanner";
 import { LastUpdated } from "@/components/docs/LastUpdated";
 import { docsMdxComponents } from "@/components/docs/mdx";
-import { JsonLd } from "@/components/JsonLd";
 import { PremiumBadge } from "@/components/docs/PremiumBadge";
 import { PrevNextNav } from "@/components/docs/PrevNextNav";
 import { TableOfContents } from "@/components/docs/TableOfContents";
+import { JsonLd } from "@/components/JsonLd";
 import { NewsletterCard } from "@/components/newsletter-card";
+import { buildBreadcrumbs } from "@/lib/docs/breadcrumbs";
 import { getLastUpdated } from "@/lib/docs/git";
 import { loadDoc } from "@/lib/docs/mdx";
-import { humanize, readMeta } from "@/lib/docs/meta";
 import {
   findPageWithFallback,
   getAdjacentPages,
   getAllPages,
-  getDocsTree,
 } from "@/lib/docs/tree";
 import {
   DEFAULT_DOCS_LOCALE,
@@ -86,36 +85,6 @@ export async function generateMetadata({
   });
 }
 
-function buildBreadcrumbs(
-  locale: string,
-  metaSourceLocale: DocsLocale,
-  slug: string[],
-  title: string,
-  tDocsLanding: string,
-) {
-  const items: Array<{ label: string; href?: string }> = [
-    { label: tDocsLanding, href: `/${locale}/docs` },
-  ];
-  let acc: string[] = [];
-  for (let i = 0; i < slug.length - 1; i++) {
-    acc = [...acc, slug[i]];
-    const dirPath = path.join(
-      process.cwd(),
-      "content",
-      "docs",
-      metaSourceLocale,
-      ...acc,
-    );
-    const meta = readMeta(dirPath);
-    items.push({
-      label: meta?.label ?? humanize(slug[i]),
-      href: `/${locale}/docs/${acc.join("/")}`,
-    });
-  }
-  items.push({ label: title });
-  return items;
-}
-
 export default async function DocPage({
   params,
 }: {
@@ -131,7 +100,6 @@ export default async function DocPage({
   const { source, frontmatter, headings } = loadDoc(page.filePath);
   const lastUpdated = getLastUpdated(page.filePath);
   const adjacent = getAdjacentPages(docsLocale, slug, DEFAULT_DOCS_LOCALE);
-  getDocsTree(docsLocale, DEFAULT_DOCS_LOCALE);
 
   const breadcrumbs = buildBreadcrumbs(
     locale,

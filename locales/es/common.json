@@ -34,7 +34,9 @@
       "label": "Motores y servicios compatibles",
       "title": "Distintos motores.",
       "subtitle": "Las mismas referencias.",
-      "link": "Todas las compatibilidades"
+      "link": "Todas las compatibilidades",
+      "pause": "Pausar el desplazamiento de motores",
+      "resume": "Reanudar el desplazamiento de motores"
     },
     "workflows": {
       "eyebrow": "En detalle",

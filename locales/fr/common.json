@@ -34,7 +34,9 @@
       "label": "Moteurs et services compatibles",
       "title": "Plusieurs moteurs.",
       "subtitle": "Les mêmes repères.",
-      "link": "Toutes les compatibilités"
+      "link": "Toutes les compatibilités",
+      "pause": "Mettre le défilement des moteurs en pause",
+      "resume": "Reprendre le défilement des moteurs"
     },
     "workflows": {
       "eyebrow": "Dans le détail",

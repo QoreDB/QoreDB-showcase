@@ -36,6 +36,15 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+.q-home-first-screen {
+  min-height: calc(100svh - 96px);
+  display: flex;
+  flex-direction: column;
+}
+.q-home-first-screen > .q-home-hero {
+  flex: 1;
+  width: 100%;
+}
 .q-home-hero {
   display: grid;
   grid-template-columns: 5fr 7fr;
@@ -253,19 +262,6 @@
   display: block;
   color: var(--q-text-0);
   font-weight: 550;
-}
-.q-home-compatibility ul {
-  display: flex;
-  flex: 1;
-  gap: 20px;
-  justify-content: space-evenly;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-heading);
-  font-size: 18px;
-  letter-spacing: -0.6px;
-  font-weight: 500;
 }
 .q-home-compatibility li {
   display: flex;
@@ -686,10 +682,6 @@
   .q-home-compatibility {
     gap: 20px;
   }
-  .q-home-compatibility ul {
-    gap: 14px;
-    font-size: 15px;
-  }
   .q-home-compatibility li {
     gap: 7px;
   }
@@ -835,12 +827,6 @@
     gap: 20px;
     padding-top: 24px;
     padding-bottom: 24px;
-  }
-  .q-home-compatibility ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 20px;
-    font-size: 14px;
   }
   .q-home-compatibility > a {
     max-width: none;
@@ -1114,4 +1100,113 @@
 }
 .q-home-compatibility::after {
   bottom: 0;
+}
+
+/* The full first screen includes the compatibility rail. Content may grow on small screens. */
+.q-home-compatibility::before {
+  display: none;
+}
+.q-home-drivers {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 8px;
+}
+.q-home-drivers-viewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.q-home-drivers ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+}
+.q-home-drivers-duplicate,
+.q-home-drivers-pause {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .q-home-drivers-viewport {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .q-home-drivers[data-ready="true"] .q-home-drivers-viewport {
+    overflow-x: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 20px,
+      #000 calc(100% - 20px),
+      transparent
+    );
+  }
+  .q-home-drivers-track {
+    display: flex;
+    width: max-content;
+  }
+  .q-home-drivers[data-ready="true"] .q-home-drivers-track {
+    animation: q-driver-scroll 38s linear infinite paused;
+  }
+  .q-home-drivers ul {
+    flex: none;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    min-width: 860px;
+    gap: 48px;
+    padding-right: 48px;
+  }
+  .q-home-drivers[data-ready="true"] .q-home-drivers-duplicate {
+    display: block;
+  }
+  .q-home-drivers-pause {
+    visibility: hidden;
+    display: grid;
+    place-items: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--q-border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--q-text-1);
+    cursor: pointer;
+  }
+  .q-home-drivers[data-ready="true"] .q-home-drivers-pause {
+    visibility: visible;
+  }
+  .q-home-drivers[data-playing="true"] .q-home-drivers-track {
+    animation-play-state: running;
+  }
+  .q-home-drivers:hover .q-home-drivers-track,
+  .q-home-drivers:focus-within .q-home-drivers-track {
+    animation-play-state: paused;
+  }
+}
+@keyframes q-driver-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 1023px) {
+  .q-home-first-screen {
+    min-height: calc(100svh - 72px);
+  }
+}
+@media (max-width: 760px) {
+  .q-home-drivers {
+    flex-basis: 100%;
+  }
+  .q-home-drivers ul {
+    font-size: 14px;
+  }
 }

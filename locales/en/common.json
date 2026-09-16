@@ -34,7 +34,9 @@
       "label": "Supported engines and services",
       "title": "Different engines.",
       "subtitle": "Familiar ground.",
-      "link": "All supported databases"
+      "link": "All supported databases",
+      "pause": "Pause database scrolling",
+      "resume": "Resume database scrolling"
     },
     "workflows": {
       "eyebrow": "A closer look",
