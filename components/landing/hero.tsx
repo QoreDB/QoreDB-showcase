@@ -23,6 +23,13 @@ export function Hero() {
 
   return (
     <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-12 pt-32 pb-20 overflow-hidden w-full">
+      <Link
+        href="https://github.com/QoreDB/QoreDB/releases/tag/v0.1.39"
+        className="mb-7 inline-flex max-w-full items-center gap-2 rounded-full border border-(--q-accent)/30 bg-(--q-accent)/10 px-4 py-2 text-center text-xs sm:text-sm font-medium text-(--q-accent) hover:bg-(--q-accent)/20 transition-colors"
+      >
+        {t("hero.release")}
+        <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+      </Link>
       {/* h1 : élément FCP/LCP texte — rendu visible immédiatement, aucune
           animation pilotée par JS qui retarderait le premier rendu. */}
       <h1 className="font-heading text-(--q-text-0) text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight text-center max-w-5xl">

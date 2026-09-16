@@ -30,8 +30,6 @@ export function RoadmapPageClient() {
     },
   ];
 
-  const items = ["1", "2", "3", "4", "5"];
-
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
@@ -71,7 +69,11 @@ export function RoadmapPageClient() {
               </div>
 
               <ul className="space-y-4 mb-8 flex-1">
-                {items.map((itemNum) => (
+                {Object.keys(
+                  t(`roadmap_page.${section.key}.items`, {
+                    returnObjects: true,
+                  }),
+                ).map((itemNum) => (
                   <li
                     key={itemNum}
                     className="flex items-start gap-3 group/item"

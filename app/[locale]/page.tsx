@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { JsonLd } from "@/components/JsonLd";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { HeroBackgroundManager } from "@/components/hero-background-manager";
+import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/landing/header";
 import { Hero } from "@/components/landing/hero";
 import { normalizeLocale } from "@/lib/locale";
@@ -21,6 +21,11 @@ const MiniFaq = dynamic(() =>
 const DatabaseStrip = dynamic(() =>
   import("@/components/landing/database-strip").then((m) => ({
     default: m.DatabaseStrip,
+  })),
+);
+const McpSection = dynamic(() =>
+  import("@/components/landing/mcp-section").then((m) => ({
+    default: m.McpSection,
   })),
 );
 const FeaturesSection = dynamic(() =>
@@ -187,6 +192,7 @@ export default async function HomePage({
         <Hero />
         <SocialProofBar />
         <DatabaseStrip />
+        <McpSection />
         <FeaturesSection />
         <FeatureShowcase />
         <InlineCTA />

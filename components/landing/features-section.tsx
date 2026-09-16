@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import {
+  Activity,
+  BellRing,
+  Bot,
   Brain,
   Combine,
   Database,
+  EyeOff,
   FolderKanban,
   History,
   Layers,
@@ -19,6 +23,10 @@ import { Trans, useTranslation } from "react-i18next";
 
 const featureIcons = {
   unified: Database,
+  mcp: Bot,
+  masking: EyeOff,
+  trends: Activity,
+  alerts: BellRing,
   workspaces: FolderKanban,
   time_travel: History,
   vault: Shield,
@@ -67,6 +75,7 @@ export function FeaturesSection() {
                 relative: <span className="relative" />,
                 underline: (
                   <svg
+                    aria-hidden="true"
                     className="absolute -bottom-2 left-0 w-full h-3"
                     viewBox="0 0 100 10"
                     preserveAspectRatio="none"

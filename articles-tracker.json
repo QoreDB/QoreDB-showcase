@@ -506,73 +506,133 @@
       "title": "Le système de thèmes de QoreDB : dark mode natif et cohérence Tailwind 4",
       "category": "Produit",
       "publishedAt": "2026-08-24"
-    }
-  ],
-  "queue": [
-    {
-      "title": "L'onboarding de QoreDB : première connexion en moins de 30 secondes",
-      "category": "Produit",
-      "topic_notes": "Flow guidé, configuration minimale, pas de compte, pas de setup serveur"
     },
     {
-      "title": "Le système de favoris et la sidebar de connexions",
+      "slug": "onboarding-qoredb-premiere-connexion-sans-compte",
+      "title": "L'onboarding de QoreDB : première connexion sans compte ni serveur",
       "category": "Produit",
-      "topic_notes": "Arbre multi-serveurs, favoris persistés, recherche, organisation"
+      "publishedAt": "2026-08-25"
     },
     {
+      "slug": "systeme-favoris-sidebar-connexions",
+      "title": "Le système de favoris et la sidebar de connexions dans QoreDB",
+      "category": "Produit",
+      "publishedAt": "2026-08-26"
+    },
+    {
+      "slug": "index-afficher-ce-que-le-moteur-expose",
       "title": "Les index dans QoreDB : afficher ce que le moteur expose réellement",
       "category": "Architecture",
-      "topic_notes": "Métadonnées index, pas d'inférence, ce que chaque driver remonte"
+      "publishedAt": "2026-08-27"
     },
     {
+      "slug": "import-export-configuration-portabilite-setup",
       "title": "Import/Export de configuration : portabilité complète de son setup",
       "category": "Produit",
-      "topic_notes": "JSON complet, backup auto, transfert entre machines, pas de cloud sync"
+      "publishedAt": "2026-08-28"
     },
     {
+      "slug": "telemetrie-qoredb-ce-qui-est-collecte",
       "title": "La télémétrie dans QoreDB : ce qui est collecté, ce qui ne l'est pas",
       "category": "Security",
-      "topic_notes": "Tracking anonyme, opt-in, pas de données utilisateur, debugging only"
+      "publishedAt": "2026-08-29"
     },
     {
-      "title": "Construire un client de BDD en 2026 : les outils qui n'ont pas évolué",
+      "slug": "construire-client-base-donnees-2026-ce-qui-a-change",
+      "title": "Construire un client de base de données en 2026 : ce qui a changé sous les outils",
       "category": "Vision",
-      "topic_notes": "DBeaver, pgAdmin, phpMyAdmin, pourquoi l'UX stagne, ce qui manque"
+      "publishedAt": "2026-08-30"
     },
     {
+      "slug": "trait-dataengine-interface-rust-drivers",
       "title": "Le trait DataEngine : une interface Rust pour unifier tous les drivers",
       "category": "Architecture",
-      "topic_notes": "Trait system Rust, dispatch dynamique, méthodes communes, extension"
+      "publishedAt": "2026-08-31"
     },
     {
-      "title": "Ce que QoreDB ne fait pas et ne fera pas",
+      "slug": "perimetre-qoredb-ce-qu-il-ne-fait-pas",
+      "title": "Ce que QoreDB ne fait pas, et pourquoi le périmètre est écrit",
       "category": "Vision",
-      "topic_notes": "Pas de BI, pas de ETL, pas de migration automatique, périmètre volontaire"
+      "publishedAt": "2026-09-02"
     },
     {
-      "title": "Le App Lock : verrouiller QoreDB au démarrage",
+      "slug": "app-lock-verrouiller-vault-demarrage",
+      "title": "Le App Lock de QoreDB : verrouiller le vault au démarrage",
       "category": "Security",
-      "topic_notes": "Protection physique, PIN/OS keychain, threat model accès local"
+      "publishedAt": "2026-09-03"
     },
     {
+      "slug": "infinite-scroll-data-grid-charger-sans-paginer",
       "title": "Le Infinite Scroll dans le Data Grid : charger sans paginer",
       "category": "Produit",
-      "topic_notes": "Chargement progressif, virtualisation, seuil de déclenchement, limites mémoire"
+      "publishedAt": "2026-09-04"
     },
     {
+      "slug": "gestion-erreurs-types-custom-propagation-rust",
       "title": "Comment QoreDB gère les erreurs : types custom et propagation Rust",
       "category": "Architecture",
-      "topic_notes": "error.rs, types custom, opérateur ?, messages utilisateur vs dev"
+      "publishedAt": "2026-09-05"
     },
     {
-      "title": "Le DriverRegistry : instanciation dynamique des drivers",
+      "slug": "driver-registry-instanciation-dynamique-drivers",
+      "title": "Le DriverRegistry de QoreDB : instanciation dynamique des drivers",
       "category": "Architecture",
-      "topic_notes": "Registry pattern, lazy init, pool partagé, cleanup"
+      "publishedAt": "2026-09-06"
     },
     {
-      "title": "Créer et supprimer des bases de données depuis l'interface",
+      "slug": "creer-supprimer-base-interface-ddl-guide",
+      "title": "Créer et supprimer une base depuis l'interface : DDL guidé et double confirmation",
       "category": "Produit",
-      "topic_notes": "DDL graphique, double confirmation, support sélectif par driver"
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "slug": "serveur-mcp-qoredb-lecture-seule-opt-in",
+      "title": "Le serveur MCP de QoreDB : un binaire séparé, en lecture seule et opt-in",
+      "category": "Open Source",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "slug": "vendoriser-dependance-patch-sqlx-mysql",
+      "title": "Vendoriser une dépendance : le patch sqlx-mysql de QoreDB",
+      "category": "Open Source",
+      "publishedAt": "2026-09-09"
+    },
+    {
+      "slug": "sbom-cargo-deny-checksums-supply-chain",
+      "title": "La chaîne d'approvisionnement de QoreDB : SBOM, cargo-deny et checksums",
+      "category": "Security",
+      "publishedAt": "2026-09-10"
+    },
+    {
+      "slug": "journal-audit-qoredb-jsonl-empreintes-tendances",
+      "title": "Le journal d'audit de QoreDB : audit.jsonl, empreintes et tendances",
+      "category": "Security",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "slug": "cli-qore-interroger-connexions-terminal",
+      "title": "Le CLI qore : interroger ses connexions QoreDB depuis le terminal",
+      "category": "Open Source",
+      "publishedAt": "2026-09-12"
+    },
+    {
+      "slug": "feature-flags-drivers-compiler-ce-quon-utilise",
+      "title": "Les feature flags de drivers dans QoreDB : ne compiler que ce qu'on utilise",
+      "category": "Open Source",
+      "publishedAt": "2026-09-13"
+    },
+    {
+      "slug": "ci-qoredb-tester-drivers-vraies-bases",
+      "title": "La CI de QoreDB : tester les drivers contre de vraies bases",
+      "category": "Open Source",
+      "publishedAt": "2026-09-14"
+    },
+    {
+      "slug": "masquage-colonnes-connexion-toutes-sorties",
+      "title": "Le masquage de colonnes dans QoreDB : une règle par connexion, appliquée à toutes les sorties",
+      "category": "Security",
+      "publishedAt": "2026-09-16"
     }
-  ]
+  ],
+  "queue": []
 }

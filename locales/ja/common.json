@@ -80,7 +80,7 @@
     },
     "ph_badge": "Product Hunt での発売",
     "title": "<italic>すべてのデータベース</italic> に 1 つのアプリで対応",
-    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>15 個のネイティブ ドライバー</highlight>に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
+    "subtitle": "Rust で構築された高速なオープンソース データベース クライアント。<highlight>34 個のネイティブ ドライバー</highlight>に、単一の美しいインターフェイスから接続できます。ローカルファースト：データは自分のもののままです。",
     "cta": {
       "join_beta": "ベータ版に参加する",
       "download_core": "無料ダウンロード",
@@ -104,7 +104,8 @@
       "home": "ホーム",
       "connection": "新しい接続",
       "settings": "設定"
-    }
+    },
+    "release": "v0.1.39 の新機能：14 の新しいドライバー + MCP"
   },
   "preview": {
     "eyebrow": "プレビュー",
@@ -152,11 +153,11 @@
   "features": {
     "eyebrow": "特長",
     "title": "必要なものはすべて揃っており、<accent>必要なものは何もありません</accent>",
-    "subtitle": "15 個のドライバー、1 つのインターフェイス。Electron もクラウド依存も bloat もありません。",
+    "subtitle": "34 個のドライバー、1 つのインターフェイス。Electron もクラウド依存も bloat もありません。",
     "items": {
       "unified": {
-        "title": "15 個のネイティブ ドライバー",
-        "desc": "PostgreSQL ファミリー（Supabase、Neon、TimescaleDB を含む）、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB、ClickHouse。"
+        "title": "34 個のネイティブ ドライバー",
+        "desc": "PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra, ScyllaDB, Azure SQL…"
       },
       "workspaces": {
         "title": "Workspaces",
@@ -213,6 +214,22 @@
       "plugins": {
         "title": "プラグインシステム",
         "desc": "宣言的パック（スニペット、テーマ、テンプレート）またはクエリのライフサイクルにフックするサンドボックス化された WASM モジュール。"
+      },
+      "mcp": {
+        "title": "読み取り専用 MCP サーバー",
+        "desc": "外部 AI エージェントに、明示的に許可した接続、スキーマ、保存済みクエリへのアクセスを提供します。"
+      },
+      "masking": {
+        "title": "列マスキング · Pro",
+        "desc": "接続ごとに機密列を完全・部分・ハッシュ形式でマスク。結果、エクスポート、API、エージェントに適用されます。"
+      },
+      "trends": {
+        "title": "クエリ傾向 · Core",
+        "desc": "保存された監査履歴から、7・14・30 日間の実行回数、P50/P95 レイテンシ、エラー率を追跡します。"
+      },
+      "alerts": {
+        "title": "パフォーマンス通知 · Pro",
+        "desc": "性能劣化や N+1 の兆候を検出。エラーと低速クエリのしきい値を設定できます。"
       }
     },
     "killer": {
@@ -283,10 +300,17 @@
     "docs_link": "またはまずドキュメントを読む"
   },
   "database_strip": {
-    "label": "1 つのインターフェイス、すべてのデータベース"
+    "label": "1 つのインターフェイス、すべてのデータベース",
+    "count": "{{count}} ドライバー",
+    "groups": {
+      "sql": "SQL・マネージドデータベース",
+      "analytics": "分析・クラウドデータウェアハウス",
+      "nosql": "ドキュメント・キーバリュー・検索・ワイドカラム"
+    },
+    "note": "閲覧、クエリ、編集、トランザクションの対応範囲は、選択したドライバーによって異なります。"
   },
   "product_specs": {
-    "databases": "15ドライバー",
+    "databases": "34ドライバー",
     "binary_size": "~15 MB バイナリ",
     "startup": "1秒未満の起動",
     "license": "アパッチ2.0"
@@ -300,7 +324,7 @@
   "mini_faq": {
     "privacy": {
       "question": "私のデータはどこかに送信されますか？",
-      "answer": "いいえ、決して。100%ローカルファースト — データはお使いのマシンに留まります。"
+      "answer": "QoreDB はクラウドの中継サービスを必須とせず、データベースに直接接続します。AI ツールは、明示的に公開したデータを設定済みプロバイダーに送信する場合があります。接続とプロバイダーを適切に選択してください。"
     },
     "oss": {
       "question": "オープンソースですか？",
@@ -338,7 +362,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "15ドライバー",
+        "multidb": "34ドライバー",
         "native": "Rust/Tauri",
         "local": "はい",
         "vault": "Argon2",
@@ -447,14 +471,14 @@
     "title": "QoreDB ロードマップ",
     "subtitle": "QoreDB 開発の次のステップをご覧ください。",
     "now": {
-      "title": "リリース済み：v0.1.23 → v0.1.34",
+      "title": "v0.1.39 の新機能：14 の新しいドライバー + MCP",
       "quote": "QoreDB はより速く、より安全になり、本格的な日常使用の準備が整いました。",
       "items": {
-        "1": "15 個のネイティブ ドライバー — Elasticsearch と OpenSearch が ClickHouse、Supabase、Neon、TimescaleDB に加わりました",
-        "2": "Data Contracts（Pro）：宣言的なデータ品質ルール、ミューテーション後に再評価",
-        "3": "Instant Data API（Pro）：保存済みクエリをトークン認証付き REST エンドポイントとして公開",
-        "4": "スキーマ差分とドリフト検出を備えた Migrations Manager、インデックス提案、さらにバックアップ／リストアとカスタマイズ可能なショートカット",
-        "5": "Workspaces、Time Travel、DDL エディター、bulk edit、tab groups を 9 言語すべてで提供"
+        "1": "v0.1.39 は 34 ドライバーに対応。対応エンジン： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "2": "読み取り専用 MCP サーバー — 外部 AI エージェントに、明示的に許可した接続、スキーマ、保存済みクエリへのアクセスを提供します。",
+        "3": "列マスキング · Pro — 接続ごとに機密列を完全・部分・ハッシュ形式でマスク。結果、エクスポート、API、エージェントに適用されます。",
+        "4": "クエリ傾向 · Core — 保存された監査履歴から、7・14・30 日間の実行回数、P50/P95 レイテンシ、エラー率を追跡します。",
+        "5": "パフォーマンス通知 · Pro — 性能劣化や N+1 の兆候を検出。エラーと低速クエリのしきい値を設定できます。"
       },
       "goal": "目標: 開発者がすでに自信を持って使用し、推奨しているツール。"
     },
@@ -463,7 +487,6 @@
       "quote": "従来のデータベース クライアントを超えてください。",
       "items": {
         "1": "より深い MongoDB ツールとよりリッチな集計ワークフロー",
-        "2": "Database Agent：スキーマを探索し、実データで回答するエージェント型チャット",
         "3": "データ探索とレポート作成のためのより充実したノートブック",
         "4": "より賢い AI 支援による説明、修正、レビュー",
         "5": "ローカルファーストのコラボレーションと同期の最初のブロック"
@@ -527,7 +550,7 @@
       },
       "supported_databases": {
         "question": "どのデータベースがサポートされていますか?",
-        "answer": "QoreDB は現在 15 個のネイティブ ドライバーをサポートしています:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB（PostgreSQL ファミリー）\n* MySQL / MariaDB\n* SQL Server（Windows 認証：NTLM および Kerberos を含む）\n* SQLite\n* DuckDB\n* MongoDB（エディタのオートコンプリートと集計の linting 付き）\n* Redis（フルキー管理付き）\n* CockroachDB\n* ClickHouse (HTTP/HTTPS、AST セーフティ分類)\n* Elasticsearch（複数の認証モード、専用の検索エディタ、SQL モード）\n* OpenSearch（複数の認証モード、専用の検索エディタ、SQL モード）\n\nアーキテクチャの進化に応じて、さらに多くのエンジンが計画されています。"
+        "answer": "v0.1.39 は 34 ドライバーに対応。対応エンジン：\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\n閲覧、クエリ、編集、トランザクションの対応範囲は、選択したドライバーによって異なります。"
       },
       "remote_ssh": {
         "question": "リモート接続と SSH は機能しますか?",
@@ -581,7 +604,7 @@
       "badge": "主な選択肢",
       "cta": "無料でダウンロード",
       "features": {
-        "drivers": "15 個のネイティブ ドライバー（PostgreSQL ファミリー：Supabase、Neon、TimescaleDB を含む。MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB、ClickHouse、Elasticsearch、OpenSearch）",
+        "drivers": "v0.1.39 は 34 ドライバーに対応。対応エンジン： PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
         "crud": "完全な CRUD + オートコンプリートと linting 付きの SQL/Mongo エディター",
         "workspaces": "Workspaces：接続、クエリ、ノートブックをプロジェクトごとにグループ化",
         "grid": "bulk edit と高度なフィルター付きの高性能データ グリッド",
@@ -593,7 +616,9 @@
         "safety": "実稼働安全ルール（環境ラベル、読み取り専用モード）＋ redaction 付き基本監査ログ",
         "audit_basic": "基本監査ログ (10,000 エントリ) およびクエリ redaction",
         "export_basic": "CSV / JSON / SQL エクスポートと共有可能な結果リンク",
-        "shortcuts": "履歴、お気に入り、tab groups、キーボード ショートカット、9 つの UI 言語"
+        "shortcuts": "履歴、お気に入り、tab groups、キーボード ショートカット、9 つの UI 言語",
+        "mcp": "読み取り専用 MCP サーバー — 外部 AI エージェントに、明示的に許可した接続、スキーマ、保存済みクエリへのアクセスを提供します。",
+        "trends": "クエリ傾向 · Core — 保存された監査履歴から、7・14・30 日間の実行回数、P50/P95 レイテンシ、エラー率を追跡します。"
       }
     },
     "pro": {
@@ -610,12 +635,13 @@
         "time_travel": "Time Travel：行履歴、バージョン diff、ロールバック SQL",
         "visual_diff": "Visual Data Diff (テーブル比較)",
         "audit_advanced": "高度な監査ログ (無制限、フィルター可能、エクスポート可能)",
-        "profiling": "クエリプロファイリングとパフォーマンス分析",
+        "profiling": "パフォーマンス通知 · Pro — 性能劣化や N+1 の兆候を検出。エラーと低速クエリのしきい値を設定できます。",
         "ai": "AI アシスタント (BYOK：OpenAI / Anthropic / Ollama)",
         "export_advanced": "高度なエクスポート (XLSX、Parquet)",
         "security_rules": "カスタム安全ルール",
         "library_advanced": "高度なクエリ ライブラリ",
-        "virtual_relations": "仮想関係の自動提案"
+        "virtual_relations": "仮想関係の自動提案",
+        "masking": "列マスキング · Pro — 接続ごとに機密列を完全・部分・ハッシュ形式でマスク。結果、エクスポート、API、エージェントに適用されます。"
       },
       "individual_use": "個人利用向けライセンス。"
     },
@@ -977,7 +1003,7 @@
       },
       "connect": {
         "title": "2. 最初の接続を作成する",
-        "content": "<p>サイドバーの <strong>+</strong> をクリックしてデータベースを追加します。QoreDB には 15 個のネイティブ ドライバーが付属しています:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（Windows 認証対応）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>接続文字列を貼り付けるとドライバーが自動検出されます。または、ホスト、ポート、データベース、ユーザー、環境 (dev/staging/prod) を入力します。すべてを <strong>Workspaces</strong> にまとめて、プロジェクトをきれいに保ちましょう。</p>"
+        "content": "<p>サイドバーの <strong>+</strong> をクリックしてデータベースを追加します。QoreDB には 34 個のネイティブ ドライバーが付属しています:</p><ul><li>PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite</li><li>DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse</li><li>MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces</li></ul><p>接続文字列を貼り付けるとドライバーが自動検出されます。または、ホスト、ポート、データベース、ユーザー、環境 (dev/staging/prod) を入力します。すべてを <strong>Workspaces</strong> にまとめて、プロジェクトをきれいに保ちましょう。</p>"
       },
       "explore": {
         "title": "3. データを探索する",
@@ -1078,7 +1104,7 @@
     "title": "シンプルで透明性のある価格設定",
     "subtitle": "コアは永久に無料です。 Pro ではパワーユーザー向けの機能が利用可能になります。",
     "core_price": "無料",
-    "core_1": "15 個のネイティブ ドライバー（Supabase、Neon、TimescaleDB を含む）",
+    "core_1": "34 個のネイティブ ドライバー（Supabase、Neon、TimescaleDB を含む）",
     "core_2": "Workspaces、DDL、bulk edit、高度なフィルター",
     "core_3": "暗号化されたボールトとネイティブ SSH トンネリング",
     "core_4": "実稼働安全装置と 9 つの UI 言語",
@@ -1832,5 +1858,25 @@
     "card_title": "最新情報をお届けします",
     "card_subtitle": "ニュースレターに登録して、リリース情報、新しいドライバー、技術チュートリアルを受け取りましょう。",
     "card_bonus": "🎁 特典：SQL パフォーマンス チートシートを進呈 — 全 9 ページ、PostgreSQL / MySQL / SQLite（PDF）！"
+  },
+  "mcp_showcase": {
+    "title": "データベースを AI ツールへ",
+    "description": "Claude Desktop、Claude Code、Cursor から、選択した接続のスキーマ探索やクエリを実行できます。QoreDB の MCP サーバーは Core に含まれます。",
+    "steps": [
+      {
+        "title": "アクセスできる接続を選択",
+        "body": "接続は初期状態では非公開です。設定 → AI エージェントで個別に有効にします。"
+      },
+      {
+        "title": "読み取り専用で探索",
+        "body": "スキーマの確認、テーブルのプレビュー、クエリの説明、保存済みクエリの再利用ができます。"
+      },
+      {
+        "title": "保護機能を維持",
+        "body": "行数、タイムアウト、レート制限は引き続き適用されます。Pro のマスキングはエージェントに結果を渡す前に適用されます。"
+      }
+    ],
+    "cta": "MCP を設定",
+    "tiers": "Core には MCP とクエリ傾向が含まれます。MCP のデータベース横断クエリ、列マスキング、パフォーマンス通知には Pro が必要です。"
   }
 }

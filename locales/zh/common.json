@@ -80,7 +80,7 @@
     },
     "ph_badge": "启动产品搜寻",
     "title": "一款适用于<italic>所有数据库</italic>的应用程序",
-    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>15 个原生驱动</highlight>。本地优先：您的数据归您所有。",
+    "subtitle": "使用 Rust 构建的快速开源数据库客户端。从一个漂亮的界面连接到 <highlight>34 个原生驱动</highlight>。本地优先：您的数据归您所有。",
     "cta": {
       "join_beta": "加入测试版",
       "download_core": "免费下载",
@@ -104,7 +104,8 @@
       "home": "首页",
       "connection": "新连接",
       "settings": "设置"
-    }
+    },
+    "release": "v0.1.39 新增：14 个驱动 + MCP"
   },
   "preview": {
     "eyebrow": "预览",
@@ -152,11 +153,11 @@
   "features": {
     "eyebrow": "特点",
     "title": "您需要的一切，<accent>您不需要的一切</accent>",
-    "subtitle": "15 个驱动，1 个界面。没有 Electron，没有云依赖，没有膨胀。",
+    "subtitle": "34 个驱动，1 个界面。没有 Electron，没有云依赖，没有膨胀。",
     "items": {
       "unified": {
-        "title": "15 个原生驱动",
-        "desc": "PostgreSQL 系列（含 Supabase、Neon、TimescaleDB）、MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB 和 ClickHouse。"
+        "title": "34 个原生驱动",
+        "desc": "PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra, ScyllaDB, Azure SQL…"
       },
       "workspaces": {
         "title": "Workspaces",
@@ -213,6 +214,22 @@
       "plugins": {
         "title": "插件系统",
         "desc": "声明式包（代码片段、主题、模板）或挂接到查询生命周期的沙盒化 WASM 模块。"
+      },
+      "mcp": {
+        "title": "只读 MCP 服务器",
+        "desc": "让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。"
+      },
+      "masking": {
+        "title": "列脱敏 · Pro",
+        "desc": "按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。"
+      },
+      "trends": {
+        "title": "查询趋势 · Core",
+        "desc": "基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。"
+      },
+      "alerts": {
+        "title": "性能告警 · Pro",
+        "desc": "识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。"
       }
     },
     "killer": {
@@ -283,10 +300,17 @@
     "docs_link": "或先阅读文档"
   },
   "database_strip": {
-    "label": "一个界面，每个数据库"
+    "label": "一个界面，每个数据库",
+    "count": "{{count}} 个驱动",
+    "groups": {
+      "sql": "SQL 与托管数据库",
+      "analytics": "分析与云数据仓库",
+      "nosql": "文档、键值、搜索与宽列"
+    },
+    "note": "浏览、查询、编辑和事务的支持范围取决于所选驱动。"
   },
   "product_specs": {
-    "databases": "15 个驱动",
+    "databases": "34 个驱动",
     "binary_size": "~15 MB 二进制文件",
     "startup": "<1秒启动",
     "license": "阿帕奇2.0"
@@ -300,7 +324,7 @@
   "mini_faq": {
     "privacy": {
       "question": "我的数据会被发送到任何地方吗？",
-      "answer": "不，从不。100% 本地优先 — 您的数据始终留在您的机器上。"
+      "answer": "QoreDB 直接连接数据库，无需强制使用云中转。AI 工具可能将你明确公开的数据发送给其配置的提供商。请据此选择连接和提供商。"
     },
     "oss": {
       "question": "是开源的吗？",
@@ -338,7 +362,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "15 个驱动",
+        "multidb": "34 个驱动",
         "native": "Rust/Tauri",
         "local": "是的",
         "vault": "Argon2",
@@ -447,14 +471,14 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "刚刚发布：v0.1.23 → v0.1.34",
+      "title": "v0.1.39 新增：14 个驱动 + MCP",
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
-        "1": "15 个原生驱动 — Elasticsearch 和 OpenSearch 加入 ClickHouse、Supabase、Neon 和 TimescaleDB 行列",
-        "2": "Data Contracts（Pro）：声明式数据质量规则，变更后自动重新评估",
-        "3": "Instant Data API（Pro）：将任意保存的查询转为带令牌鉴权的 REST 端点",
-        "4": "带模式差异与漂移检测的 Migrations Manager、索引建议，以及备份/恢复和可自定义快捷键",
-        "5": "Workspaces、Time Travel、DDL 编辑器、批量编辑和 tab groups 已覆盖全部 9 种界面语言"
+        "1": "v0.1.39 支持 34 个驱动。支持的引擎： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "2": "只读 MCP 服务器 — 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
+        "3": "列脱敏 · Pro — 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。",
+        "4": "查询趋势 · Core — 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。",
+        "5": "性能告警 · Pro — 识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。"
       },
       "goal": "目标：开发者已经放心使用和推荐的工具。"
     },
@@ -463,7 +487,6 @@
       "quote": "超越传统的数据库客户端。",
       "items": {
         "1": "更深入的 MongoDB 工具和更丰富的聚合工作流",
-        "2": "Database Agent：自主探索数据库模式并用真实数据回答的智能对话",
         "3": "更完善的笔记本，用于数据探索和报告",
         "4": "更智能的 AI 辅助解释、修复和审查",
         "5": "本地优先协作和同步的第一块砖"
@@ -527,7 +550,7 @@
       },
       "supported_databases": {
         "question": "支持哪些数据库？",
-        "answer": "QoreDB 目前支持 15 个原生驱动：\n\n* PostgreSQL\n* Supabase、Neon、TimescaleDB（PostgreSQL 系列）\n* MySQL / MariaDB\n* SQL Server（含 Windows 身份验证：NTLM 和 Kerberos）\n* SQLite\n* DuckDB\n* MongoDB（带编辑器自动补全和聚合 linting）\n* Redis（含完整键管理）\n* CockroachDB\n* ClickHouse（HTTP/HTTPS，AST 安全分类）\n* Elasticsearch（多种认证模式、专用搜索编辑器、SQL 模式）\n* OpenSearch（多种认证模式、专用搜索编辑器、SQL 模式）\n\n随着架构的发展，计划推出更多引擎。"
+        "answer": "v0.1.39 支持 34 个驱动。支持的引擎：\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\n浏览、查询、编辑和事务的支持范围取决于所选驱动。"
       },
       "remote_ssh": {
         "question": "它可以与远程连接和 SSH 一起使用吗？",
@@ -581,7 +604,7 @@
       "badge": "主要选择",
       "cta": "免费下载",
       "features": {
-        "drivers": "15 个原生驱动（PostgreSQL 系列：含 Supabase、Neon、TimescaleDB；MySQL/MariaDB、SQL Server、SQLite、DuckDB、MongoDB、Redis、CockroachDB、ClickHouse、Elasticsearch、OpenSearch）",
+        "drivers": "v0.1.39 支持 34 个驱动。支持的引擎： PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
         "crud": "完整的 CRUD + 带自动补全和 linting 的 SQL/Mongo 编辑器",
         "workspaces": "Workspaces：按项目分组连接、查询和笔记本",
         "grid": "支持批量编辑和高级过滤的高性能数据网格",
@@ -593,7 +616,9 @@
         "safety": "生产安全规则（环境标签、只读模式）+ 含 redaction 的基本审核日志",
         "audit_basic": "基本审核日志（10,000 条）含查询 redaction",
         "export_basic": "CSV/JSON/SQL 导出和可分享的结果链接",
-        "shortcuts": "历史记录、收藏夹、tab groups、键盘快捷键和 9 种界面语言"
+        "shortcuts": "历史记录、收藏夹、tab groups、键盘快捷键和 9 种界面语言",
+        "mcp": "只读 MCP 服务器 — 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
+        "trends": "查询趋势 · Core — 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。"
       }
     },
     "pro": {
@@ -610,12 +635,13 @@
         "time_travel": "Time Travel：行历史、版本 diff 和回滚 SQL",
         "visual_diff": "视觉数据差异（表格比较）",
         "audit_advanced": "高级审核日志（无限制、可过滤、可导出）",
-        "profiling": "查询分析和性能分析",
+        "profiling": "性能告警 · Pro — 识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。",
         "ai": "AI 助手（BYOK：OpenAI / Anthropic / Ollama）",
         "export_advanced": "高级导出（XLSX、Parquet）",
         "security_rules": "自定义安全规则",
         "library_advanced": "高级查询库",
-        "virtual_relations": "自动建议虚拟关系"
+        "virtual_relations": "自动建议虚拟关系",
+        "masking": "列脱敏 · Pro — 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。"
       },
       "individual_use": "个人使用许可证。"
     },
@@ -977,7 +1003,7 @@
       },
       "connect": {
         "title": "2. 创建您的第一个连接",
-        "content": "<p>点击侧边栏的 <strong>+</strong> 添加数据库。QoreDB 提供 15 个原生驱动：</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server（支持 Windows 身份验证）</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>粘贴连接字符串可自动检测驱动，或者输入主机、端口、数据库、用户和环境（dev/staging/prod）。将所有内容组织到 <strong>Workspaces</strong> 中以保持项目整洁。</p>"
+        "content": "<p>点击侧边栏的 <strong>+</strong> 添加数据库。QoreDB 提供 34 个原生驱动：</p><ul><li>PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite</li><li>DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse</li><li>MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces</li></ul><p>粘贴连接字符串可自动检测驱动，或者输入主机、端口、数据库、用户和环境（dev/staging/prod）。将所有内容组织到 <strong>Workspaces</strong> 中以保持项目整洁。</p>"
       },
       "explore": {
         "title": "3. 探索您的数据",
@@ -1078,7 +1104,7 @@
     "title": "简单、透明的定价",
     "subtitle": "核心永远免费。 Pro 解锁高级用户功能。",
     "core_price": "免费",
-    "core_1": "15 个原生驱动（含 Supabase、Neon、TimescaleDB）",
+    "core_1": "34 个原生驱动（含 Supabase、Neon、TimescaleDB）",
     "core_2": "Workspaces、DDL、批量编辑和高级过滤",
     "core_3": "加密保管库和原生 SSH 隧道",
     "core_4": "生产安全卫士和 9 种界面语言",
@@ -1832,5 +1858,25 @@
     "card_title": "及时了解最新动态",
     "card_subtitle": "订阅我们的通讯，获取版本发布、新驱动通知和技术教程。",
     "card_bonus": "🎁 福利：领取我们的 SQL 性能速查表 —— 共 9 页，涵盖 PostgreSQL / MySQL / SQLite（PDF）！"
+  },
+  "mcp_showcase": {
+    "title": "让 AI 工具连接你的数据库",
+    "description": "让 Claude Desktop、Claude Code 或 Cursor 探索结构并查询你选择的连接。QoreDB 的 MCP 服务器包含在 Core 中。",
+    "steps": [
+      {
+        "title": "选择允许访问的连接",
+        "body": "默认隐藏所有连接。在设置 → AI 代理中逐一启用。"
+      },
+      {
+        "title": "以只读方式探索",
+        "body": "检查结构、预览表、解释查询并复用已保存的查询。"
+      },
+      {
+        "title": "保留安全防护",
+        "body": "行数上限、超时和速率限制始终生效。Pro 脱敏会在结果发送给代理之前应用。"
+      }
+    ],
+    "cta": "配置 MCP",
+    "tiers": "Core 包含 MCP 和查询趋势。MCP 跨库联合查询、列脱敏和性能告警需要 Pro。"
   }
 }

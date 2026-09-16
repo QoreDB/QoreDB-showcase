@@ -80,7 +80,7 @@
     },
     "ph_badge": "Lancio su Product Hunt",
     "title": "Un'unica app per <italic>tutti i tuoi database</italic>",
-    "subtitle": "Il client di database veloce e open source creato con Rust. Connettiti a <highlight>15 driver nativi</highlight> da un'unica, bellissima interfaccia. Local-first: i tuoi dati rimangono tuoi.",
+    "subtitle": "Il client di database veloce e open source creato con Rust. Connettiti a <highlight>34 driver nativi</highlight> da un'unica, bellissima interfaccia. Local-first: i tuoi dati rimangono tuoi.",
     "cta": {
       "join_beta": "Unisciti alla Beta",
       "download_core": "Scarica gratis",
@@ -104,7 +104,8 @@
       "home": "Casa",
       "connection": "Nuova connessione",
       "settings": "Impostazioni"
-    }
+    },
+    "release": "Novità in v0.1.39: 14 nuovi driver + MCP"
   },
   "preview": {
     "eyebrow": "Anteprima",
@@ -152,11 +153,11 @@
   "features": {
     "eyebrow": "Caratteristiche",
     "title": "Tutto ciò di cui hai bisogno, <accent>niente di più</accent>",
-    "subtitle": "15 driver, un'unica interfaccia. Nessun Electron, nessuna dipendenza dal cloud, nessun bloat.",
+    "subtitle": "34 driver, un'unica interfaccia. Nessun Electron, nessuna dipendenza dal cloud, nessun bloat.",
     "items": {
       "unified": {
-        "title": "15 driver nativi",
-        "desc": "Famiglia PostgreSQL (incl. Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB e ClickHouse."
+        "title": "34 driver nativi",
+        "desc": "PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra, ScyllaDB, Azure SQL…"
       },
       "workspaces": {
         "title": "Workspaces",
@@ -213,6 +214,22 @@
       "plugins": {
         "title": "Sistema di plugin",
         "desc": "Pacchetti dichiarativi (snippet, temi, template) o moduli WASM in sandbox agganciati al ciclo di vita delle query."
+      },
+      "mcp": {
+        "title": "Server MCP in sola lettura",
+        "desc": "Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate."
+      },
+      "masking": {
+        "title": "Mascheramento colonne · Pro",
+        "desc": "Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti."
+      },
+      "trends": {
+        "title": "Tendenze delle query · Core",
+        "desc": "Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata."
+      },
+      "alerts": {
+        "title": "Avvisi sulle prestazioni · Pro",
+        "desc": "Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente."
       }
     },
     "killer": {
@@ -283,10 +300,17 @@
     "docs_link": "Oppure leggi prima la documentazione"
   },
   "database_strip": {
-    "label": "Un'interfaccia, ogni database"
+    "label": "Un'interfaccia, ogni database",
+    "count": "{{count}} driver",
+    "groups": {
+      "sql": "SQL e database gestiti",
+      "analytics": "Analisi e warehouse cloud",
+      "nosql": "Documenti, chiave-valore, ricerca e wide-column"
+    },
+    "note": "Le capacità variano per motore: esplorazione, query, modifica e transazioni dipendono dal driver."
   },
   "product_specs": {
-    "databases": "15 driver",
+    "databases": "34 driver",
     "binary_size": "~15 MB binario",
     "startup": "<1s avvio",
     "license": "Apache 2.0"
@@ -300,7 +324,7 @@
   "mini_faq": {
     "privacy": {
       "question": "I miei dati vengono inviati da qualche parte?",
-      "answer": "No, mai. 100% local-first — i tuoi dati restano sulla tua macchina."
+      "answer": "QoreDB si connette direttamente ai tuoi database, senza un intermediario cloud obbligatorio. Gli strumenti IA possono inviare i dati esposti al fornitore configurato. Scegli connessioni e fornitore di conseguenza."
     },
     "oss": {
       "question": "È open source?",
@@ -338,7 +362,7 @@
     "values": {
       "qoredb": {
         "opensource": "Apache 2.0",
-        "multidb": "15 driver",
+        "multidb": "34 driver",
         "native": "Rust/Tauri",
         "local": "Sì",
         "vault": "Argon2",
@@ -447,14 +471,14 @@
     "title": "QoreDB Tabella di marcia",
     "subtitle": "Scopri i passaggi successivi nello sviluppo di QoreDB.",
     "now": {
-      "title": "Appena rilasciato: v0.1.23 → v0.1.34",
+      "title": "Novità in v0.1.39: 14 nuovi driver + MCP",
       "quote": "QoreDB è più veloce, più sicuro e pronto per un uso quotidiano serio.",
       "items": {
-        "1": "15 driver nativi: Elasticsearch e OpenSearch si aggiungono a ClickHouse, Supabase, Neon e TimescaleDB",
-        "2": "Data Contracts (Pro): regole dichiarative di qualità dei dati rivalutate dopo ogni mutazione",
-        "3": "Instant Data API (Pro): trasforma qualsiasi query salvata in un endpoint REST autenticato con token",
-        "4": "Migrations Manager con schema-diff e rilevamento del drift, suggerimenti di indici, oltre a backup/restore e scorciatoie personalizzabili",
-        "5": "Workspaces, Time Travel, editor DDL, bulk edit e tab groups in tutte le 9 lingue di interfaccia"
+        "1": "34 driver in v0.1.39. Motori supportati: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "2": "Server MCP in sola lettura — Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
+        "3": "Mascheramento colonne · Pro — Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti.",
+        "4": "Tendenze delle query · Core — Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata.",
+        "5": "Avvisi sulle prestazioni · Pro — Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente."
       },
       "goal": "Obiettivo: uno strumento che gli sviluppatori già utilizzano e consigliano con sicurezza."
     },
@@ -463,7 +487,6 @@
       "quote": "Vai oltre i tradizionali client di database.",
       "items": {
         "1": "Strumenti MongoDB più approfonditi e workflow di aggregazione arricchiti",
-        "2": "Database Agent: chat agentica che esplora il tuo schema e risponde con dati reali",
         "3": "Notebook più completi per esplorazione dati e reporting",
         "4": "Assistenza AI più intelligente per spiegazioni, fix e review",
         "5": "Primi mattoni della collaborazione e sincronizzazione local-first"
@@ -527,7 +550,7 @@
       },
       "supported_databases": {
         "question": "Quali database sono supportati?",
-        "answer": "QoreDB attualmente supporta 15 driver nativi:\n\n* PostgreSQL\n* Supabase, Neon, TimescaleDB (famiglia PostgreSQL)\n* MySQL / MariaDB\n* SQL Server (incl. autenticazione Windows: NTLM e Kerberos)\n* SQLite\n* DuckDB\n* MongoDB (con autocompletamento dell'editor e linting di aggregazioni)\n* Redis (con gestione completa delle chiavi)\n* CockroachDB\n* ClickHouse (HTTP/HTTPS, classificazione di sicurezza AST)\n* Elasticsearch (diverse modalità di autenticazione, editor di ricerca dedicato, modalità SQL)\n* OpenSearch (diverse modalità di autenticazione, editor di ricerca dedicato, modalità SQL)\n\nSono previsti più motori man mano che l'architettura si evolve."
+        "answer": "34 driver in v0.1.39. Motori supportati:\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\nLe capacità variano per motore: esplorazione, query, modifica e transazioni dipendono dal driver."
       },
       "remote_ssh": {
         "question": "Funziona con connessioni remote e SSH?",
@@ -581,7 +604,7 @@
       "badge": "Scelta principale",
       "cta": "Scarica gratuitamente",
       "features": {
-        "drivers": "15 driver nativi (famiglia PostgreSQL con Supabase, Neon, TimescaleDB; MySQL/MariaDB, SQL Server, SQLite, DuckDB, MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch)",
+        "drivers": "34 driver in v0.1.39. Motori supportati: PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
         "crud": "CRUD completo + editor SQL/Mongo con autocompletamento e linting",
         "workspaces": "Workspaces:raggruppa connessioni, query e notebook per progetto",
         "grid": "Griglia dati ad alte prestazioni con bulk edit e filtri avanzati",
@@ -593,7 +616,9 @@
         "safety": "Regole di sicurezza di produzione (etichette ambiente, modalità sola lettura) + registro di controllo di base con redaction",
         "audit_basic": "Registro di controllo di base (10.000 voci) con redaction delle query",
         "export_basic": "Esportazione CSV / JSON / SQL e link condivisibili dei risultati",
-        "shortcuts": "Cronologia, preferiti, tab groups, scorciatoie da tastiera e 9 lingue di interfaccia"
+        "shortcuts": "Cronologia, preferiti, tab groups, scorciatoie da tastiera e 9 lingue di interfaccia",
+        "mcp": "Server MCP in sola lettura — Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
+        "trends": "Tendenze delle query · Core — Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata."
       }
     },
     "pro": {
@@ -610,12 +635,13 @@
         "time_travel": "Time Travel:cronologia delle righe, diff di versioni e SQL di rollback",
         "visual_diff": "Differenza dati visivi (confronto tabelle)",
         "audit_advanced": "Log di controllo avanzato (illimitato, filtrabile, esportabile)",
-        "profiling": "Profilazione delle query e analisi delle prestazioni",
+        "profiling": "Avvisi sulle prestazioni · Pro — Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente.",
         "ai": "Assistente AI (BYOK: OpenAI / Anthropic / Ollama)",
         "export_advanced": "Esportazioni avanzate (XLSX, Parquet)",
         "security_rules": "Regole di sicurezza personalizzate",
         "library_advanced": "Libreria di query avanzate",
-        "virtual_relations": "Suggerisci automaticamente le relazioni virtuali"
+        "virtual_relations": "Suggerisci automaticamente le relazioni virtuali",
+        "masking": "Mascheramento colonne · Pro — Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti."
       },
       "individual_use": "Licenza per uso individuale."
     },
@@ -977,7 +1003,7 @@
       },
       "connect": {
         "title": "2. Crea la tua prima connessione",
-        "content": "<p>Fai clic su <strong>+</strong> nella barra laterale per aggiungere un database. QoreDB include 15 driver nativi:</p><ul><li>PostgreSQL · Supabase · Neon · TimescaleDB</li><li>MySQL / MariaDB</li><li>SQL Server (autenticazione Windows supportata)</li><li>SQLite · DuckDB</li><li>MongoDB · Redis · CockroachDB</li><li>ClickHouse · Elasticsearch · OpenSearch</li></ul><p>Incolla una stringa di connessione per il rilevamento automatico del driver, oppure inserisci host, porta, database, utente e ambiente (sviluppo/staging/prod). Organizza tutto in <strong>Workspaces</strong> per mantenere puliti i tuoi progetti.</p>"
+        "content": "<p>Fai clic su <strong>+</strong> nella barra laterale per aggiungere un database. QoreDB include 34 driver nativi:</p><ul><li>PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite</li><li>DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse</li><li>MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces</li></ul><p>Incolla una stringa di connessione per il rilevamento automatico del driver, oppure inserisci host, porta, database, utente e ambiente (sviluppo/staging/prod). Organizza tutto in <strong>Workspaces</strong> per mantenere puliti i tuoi progetti.</p>"
       },
       "explore": {
         "title": "3. Esplora i tuoi dati",
@@ -1078,7 +1104,7 @@
     "title": "Prezzi semplici e trasparenti",
     "subtitle": "Core è gratuito per sempre. Pro sblocca funzionalità per utenti esperti.",
     "core_price": "Gratuito",
-    "core_1": "15 driver nativi (incl. Supabase, Neon, TimescaleDB)",
+    "core_1": "34 driver nativi (incl. Supabase, Neon, TimescaleDB)",
     "core_2": "Workspaces, DDL, bulk edit e filtri avanzati",
     "core_3": "Deposito crittografato e tunneling SSH nativo",
     "core_4": "Protezioni di produzione e 9 lingue di interfaccia",
@@ -1832,5 +1858,25 @@
     "card_title": "Resta aggiornato sulle novità",
     "card_subtitle": "Iscriviti per ricevere i rilasci, i nuovi driver e i nostri tutorial tecnici.",
     "card_bonus": "🎁 Bonus: ricevi il nostro prontuario sulle prestazioni SQL — 9 pagine, PostgreSQL / MySQL / SQLite (PDF)."
+  },
+  "mcp_showcase": {
+    "title": "I tuoi database nei tuoi strumenti IA",
+    "description": "Consenti a Claude Desktop, Claude Code o Cursor di esplorare gli schemi e interrogare le connessioni che scegli. Il server MCP di QoreDB è incluso in Core.",
+    "steps": [
+      {
+        "title": "Scegli le connessioni accessibili",
+        "body": "Le connessioni sono nascoste per impostazione predefinita. Abilitale singolarmente in Impostazioni → Agenti IA."
+      },
+      {
+        "title": "Esplora in sola lettura",
+        "body": "Ispeziona schemi, visualizza anteprime delle tabelle, spiega query e riutilizza quelle salvate."
+      },
+      {
+        "title": "Mantieni le protezioni",
+        "body": "Limiti di righe, timeout e limiti di frequenza restano attivi. Il mascheramento Pro si applica prima che i risultati raggiungano l’agente."
+      }
+    ],
+    "cta": "Configura MCP",
+    "tiers": "Core include MCP e tendenze. Federazione MCP tra database, mascheramento e avvisi richiedono Pro."
   }
 }

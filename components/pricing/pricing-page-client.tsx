@@ -173,6 +173,8 @@ export default function PricingPageClient({
 
   const coreFeatures: PlanFeature[] = [
     "drivers",
+    "mcp",
+    "trends",
     "crud",
     "workspaces",
     "grid",
@@ -195,6 +197,7 @@ export default function PricingPageClient({
     "visual_diff",
     "audit_advanced",
     "profiling",
+    "masking",
     "ai",
     "export_advanced",
     "security_rules",
