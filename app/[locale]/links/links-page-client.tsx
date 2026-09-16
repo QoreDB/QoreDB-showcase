@@ -265,7 +265,11 @@ export function LinksPageClient() {
         <div className="absolute bottom-10 right-1/3 h-60 w-60 rounded-full bg-(--q-accent) opacity-10 blur-[120px]" />
       </div>
       <Header />
-      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12 max-w-6xl mx-auto w-full relative">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12 max-w-6xl mx-auto w-full relative"
+      >
         <motion.div
           variants={container}
           initial="hidden"

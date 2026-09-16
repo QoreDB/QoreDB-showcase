@@ -162,7 +162,7 @@ function TierBadge({ tier }: { tier: FeaturePage["tier"] }) {
   const isPro = tier === "pro";
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase ${
+      className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium ${
         isPro
           ? "bg-(--q-accent)/10 text-(--q-accent) border border-(--q-accent)/30"
           : "bg-(--q-bg-1) text-(--q-text-2) border border-(--q-border)"
@@ -194,7 +194,11 @@ export function FeaturePageClient({ slug }: { slug: string }) {
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="q-container flex-1 pt-28 pb-20 lg:pt-36"
+      >
         <div className="mb-6">
           <Link
             href={`/${locale}/features`}
@@ -205,10 +209,9 @@ export function FeaturePageClient({ slug }: { slug: string }) {
           </Link>
         </div>
 
-        <header className="relative mb-16">
-          <div className="absolute -top-10 -left-10 w-[300px] h-[300px] bg-(--q-accent) opacity-5 blur-[100px] rounded-full pointer-events-none" />
+        <header className="q-page-header mb-12 !pt-6">
           <div className="relative flex items-center gap-3 mb-5">
-            <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-(--q-accent)/10 text-(--q-accent) shrink-0">
+            <span className="flex items-center justify-center w-12 h-12 rounded-lg bg-(--q-accent)/10 text-(--q-accent) shrink-0">
               <Icon className="w-6 h-6" />
             </span>
             <TierBadge tier={feature.tier} />
@@ -216,28 +219,26 @@ export function FeaturePageClient({ slug }: { slug: string }) {
           <p className="relative text-sm font-medium text-(--q-accent) mb-3">
             {t(`${base}.eyebrow`)}
           </p>
-          <h1 className="relative text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-br from-(--q-text-0) to-(--q-text-1)">
-            {t(`${base}.title`)}
-          </h1>
-          <p className="relative text-lg text-(--q-text-2) max-w-2xl leading-relaxed">
+          <h1 className="mb-5 max-w-4xl">{t(`${base}.title`)}</h1>
+          <p className="max-w-3xl text-lg leading-relaxed text-(--q-text-1)">
             {t(`${base}.subtitle`)}
           </p>
         </header>
 
         {feature.image && (
-          <figure className="mb-16">
+          <figure className="mb-16 max-w-5xl">
             <Image
               src={feature.image}
               alt={t(`${base}.title`)}
               width={1600}
               height={1000}
-              className="w-full h-auto rounded-xl border border-(--q-border)"
-              sizes="(max-width: 896px) 100vw, 896px"
+              className="w-full h-auto rounded-lg border border-(--q-border)"
+              sizes="(max-width: 1024px) 100vw, 1024px"
             />
           </figure>
         )}
 
-        <section className="mb-14">
+        <section className="mb-14 max-w-3xl">
           <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">
             {t(`${base}.problem.title`)}
           </h2>
@@ -246,17 +247,17 @@ export function FeaturePageClient({ slug }: { slug: string }) {
           </p>
         </section>
 
-        <section className="mb-14">
+        <section className="mb-14 max-w-3xl">
           <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">
             {t(`${base}.solution.title`)}
           </h2>
           <p className="text-(--q-text-1) leading-relaxed mb-8">
             {t(`${base}.solution.intro`)}
           </p>
-          <ol className="space-y-5">
+          <ol className="divide-y divide-(--q-border)">
             {steps.map((step, index) => (
-              <li key={step.title} className="flex gap-4">
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-(--q-accent)/10 text-(--q-accent) font-semibold text-sm shrink-0">
+              <li key={step.title} className="flex gap-6 py-6">
+                <span className="flex items-center justify-center w-8 h-8 text-(--q-accent) font-mono font-medium text-sm shrink-0">
                   {index + 1}
                 </span>
                 <div>
@@ -273,14 +274,14 @@ export function FeaturePageClient({ slug }: { slug: string }) {
         </section>
 
         {code && (
-          <section className="mb-14">
+          <section className="mb-14 max-w-3xl">
             <h2 className="text-2xl font-semibold mb-4 text-(--q-text-0)">
               {t(`${base}.example.title`)}
             </h2>
             <p className="text-(--q-text-1) leading-relaxed mb-5">
               {t(`${base}.example.intro`)}
             </p>
-            <div className="rounded-xl border border-(--q-border) bg-(--q-bg-1) overflow-hidden">
+            <div className="rounded-lg border border-(--q-border) bg-(--q-bg-1) overflow-hidden">
               <pre className="p-5 overflow-x-auto text-sm leading-relaxed">
                 <code className="font-mono text-(--q-text-1)">{code}</code>
               </pre>
@@ -291,8 +292,8 @@ export function FeaturePageClient({ slug }: { slug: string }) {
           </section>
         )}
 
-        <section className="mb-14">
-          <div className="rounded-xl border border-(--q-border) bg-(--q-bg-1) p-6 md:p-8">
+        <section className="mb-14 max-w-3xl">
+          <div className="rounded-lg border border-(--q-border) bg-(--q-bg-1) p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
               <TriangleAlert className="w-5 h-5 text-(--q-text-2)" />
               <h2 className="text-xl font-semibold text-(--q-text-0)">
@@ -313,14 +314,14 @@ export function FeaturePageClient({ slug }: { slug: string }) {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-(--q-border) bg-linear-to-br from-(--q-accent)/10 to-transparent p-8 text-center">
+        <section className="border-t border-(--q-border) pt-12">
           <h2 className="text-2xl font-semibold mb-3 text-(--q-text-0)">
             {t(`${base}.cta.title`)}
           </h2>
-          <p className="text-(--q-text-1) leading-relaxed max-w-xl mx-auto mb-6">
+          <p className="text-(--q-text-1) leading-relaxed max-w-xl mb-6">
             {t(`${base}.cta.body`)}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <Button asChild>
               <Link href={`/${locale}/download`}>
                 {t("features_common.cta_download")}

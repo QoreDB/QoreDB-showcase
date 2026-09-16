@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Check, Infinity as InfinityIcon, RotateCw } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -38,28 +37,16 @@ export function PricingComparison({
 
   return (
     <section className="max-w-5xl mx-auto mt-20">
-      <motion.div
-        className="text-center mb-10"
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+      <div className="mb-10">
+        <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight">
           {t("pricing_comparison.title")}
         </h2>
         <p className="mt-3 text-(--q-text-1)">
           {t("pricing_comparison.subtitle")}
         </p>
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-4"
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        viewport={{ once: true }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {competitors.map((c) => {
           const isQoreDb = c.id === "qoredb";
           const yearlyDisplay =
@@ -71,9 +58,9 @@ export function PricingComparison({
           return (
             <div
               key={c.id}
-              className={`rounded-2xl border p-6 flex flex-col ${
+              className={`rounded-lg border p-6 flex flex-col ${
                 c.highlight
-                  ? "border-(--q-accent) bg-(--q-accent)/5 shadow-[0_30px_70px_-40px_var(--q-accent)]"
+                  ? "border-(--q-accent) bg-(--q-accent)/5 "
                   : "border-(--q-border) bg-(--q-bg-1)"
               }`}
             >
@@ -118,7 +105,7 @@ export function PricingComparison({
                   </span>
                   <span
                     className={`font-semibold ${
-                      isQoreDb ? "text-emerald-500" : "text-(--q-text-1)"
+                      isQoreDb ? "text-(--q-accent)" : "text-(--q-text-1)"
                     }`}
                   >
                     {tcoDisplay}
@@ -127,7 +114,7 @@ export function PricingComparison({
               </div>
 
               {isQoreDb ? (
-                <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-emerald-500 font-medium">
+                <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-(--q-accent) font-medium">
                   <Check className="w-3.5 h-3.5" />
                   {t("pricing_comparison.lifetime_perk")}
                 </p>
@@ -135,7 +122,7 @@ export function PricingComparison({
             </div>
           );
         })}
-      </motion.div>
+      </div>
 
       <p className="text-center mt-6 text-xs text-(--q-text-2) italic">
         {t("pricing_comparison.note")}

@@ -239,3 +239,43 @@
   border-radius: 0;
   border: 0;
 }
+
+
+.q-docs-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--q-border);
+  border-radius: 6px;
+  background: var(--q-bg-1);
+  color: var(--q-text-1);
+  font-size: 14px;
+  transition: background 150ms ease;
+}
+.q-docs-search-trigger:hover { background: var(--q-bg-2); }
+.q-docs-mobile-nav { border-bottom: 1px solid var(--q-border); }
+.q-docs-mobile-nav summary { list-style: none; }
+.q-docs-mobile-nav summary::-webkit-details-marker { display: none; }
+.q-docs-mobile-nav[open] summary svg { transform: rotate(180deg); }
+.q-docs-search-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(640px, calc(100% - 32px));
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--q-border);
+  border-radius: 8px;
+  background: var(--q-bg-0);
+  color: var(--q-text-0);
+  box-shadow: 0 24px 64px -24px #0008;
+}
+.q-docs-search-dialog::backdrop { background: #0008; }
+.q-docs-search-results { max-height: min(60dvh, 480px); overflow-y: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .q-docs-search-trigger { transition: none; }
+}

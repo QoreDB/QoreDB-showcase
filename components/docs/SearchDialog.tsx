@@ -1,48 +1,46 @@
 "use client";
 
 import { Search, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-declare global {
-  interface Window {
-    pagefind?: {
-      search: (query: string) => Promise<{
-        results: Array<{
-          id: string;
-          data: () => Promise<{
-            url: string;
-            meta: Record<string, string>;
-            excerpt: string;
-          }>;
-        }>;
-      }>;
-    };
-  }
-}
-
-type Result = {
-  id: string;
+type SearchResult = {
   url: string;
-  title: string;
+  meta: Record<string, string>;
   excerpt: string;
 };
+
+type Pagefind = {
+  init: () => Promise<void>;
+  destroy: () => Promise<void>;
+  mergeIndex: (path: string, options: { language: string }) => Promise<void>;
+  search: (query: string) => Promise<{
+    results: Array<{ data: () => Promise<SearchResult> }>;
+  }>;
+};
+
+type Result = { url: string; title: string; excerpt: string };
+type SearchState = "idle" | "loading" | "ready" | "error";
 
 export function SearchDialog({ locale }: { locale: string }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Result[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState<SearchState>("idle");
+  const [attempt, setAttempt] = useState(0);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const titleId = useId();
+  const statusId = useId();
 
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
+    function onKey(event: KeyboardEvent) {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
         setOpen(true);
       }
-      if (e.key === "Escape") setOpen(false);
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -50,133 +48,247 @@ export function SearchDialog({ locale }: { locale: string }) {
 
   useEffect(() => {
     if (!open) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
+    // showModal supplies inert background, focus containment and native Escape.
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal
+    dialog.showModal();
     inputRef.current?.focus();
-    if (window.pagefind) return;
-    const url = `/pagefind/pagefind.js`;
-    import(/* webpackIgnore: true */ url)
-      .then((mod) => {
-        window.pagefind = mod;
-      })
-      .catch(() => {
-        window.pagefind = undefined;
-      });
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      returnFocusRef.current?.focus();
+    };
   }, [open]);
 
+  const engineRef = useRef<Promise<Pagefind> | null>(null);
   useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      return;
-    }
-    let cancelled = false;
-    setLoading(true);
-    (async () => {
-      try {
-        if (!window.pagefind) {
-          setResults([]);
-          return;
+    if (!open) return;
+    let disposed = false;
+    const url = attempt
+      ? `/pagefind/pagefind.js?retry=${attempt}`
+      : "/pagefind/pagefind.js";
+    const pending = import(/* webpackIgnore: true */ url).then(
+      async (module) => {
+        const engine: Pagefind = module.createInstance();
+        try {
+          await engine.init();
+          if (locale !== "en" && locale !== "fr") {
+            // Explicit language merging is supported by Pagefind 1.5.2. Keep the
+            // absolute bundle URL so the English index is distinct from the
+            // worker’s relative primary path; no change to document language.
+            // https://pagefind.app/docs/multisite/#merging-a-specific-language-index
+            await engine.mergeIndex(
+              new URL("/pagefind/", window.location.origin).href,
+              { language: "en" },
+            );
+          }
+          return engine;
+        } catch (error) {
+          await engine.destroy().catch(() => {});
+          throw error;
         }
-        const search = await window.pagefind.search(query);
-        const sliced = search.results.slice(0, 10);
-        const data = await Promise.all(sliced.map((r) => r.data()));
-        if (cancelled) return;
-        const filtered = data
-          .filter((d) => d.url.includes(`/${locale}/docs`))
-          .map<Result>((d) => ({
-            id: d.url,
-            url: d.url,
-            title: d.meta.title ?? d.url,
-            excerpt: d.excerpt,
-          }));
-        setResults(filtered);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
+      },
+    );
+    engineRef.current = pending;
+    // A failed import/init must be handled even before the first query.
+    pending.catch(() => {
+      if (!disposed) setState("error");
+    });
+    return () => {
+      disposed = true;
+      engineRef.current = null;
+      void pending.then((engine) => engine.destroy()).catch(() => {});
+    };
+  }, [open, locale, attempt]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Retry reruns the same query against the replacement instance.
+  useEffect(() => {
+    if (!open) return;
+    let cancelled = false;
+    const normalizedQuery = query.trim();
+    setResults([]);
+    setState("loading");
+    const timer = window.setTimeout(
+      async () => {
+        try {
+          const engine = await engineRef.current;
+          if (!engine || cancelled) return;
+          if (!normalizedQuery) {
+            setState("idle");
+            return;
+          }
+          const search = await engine.search(normalizedQuery);
+          const docsLocale = locale === "fr" ? "fr" : "en";
+          const prefix = `/${docsLocale}/docs`;
+          const matches: Result[] = [];
+          // Pagefind indexes other routes too. Filter before limiting, and only
+          // request another batch when the current one has too few docs matches.
+          for (let offset = 0; offset < search.results.length; offset += 10) {
+            if (cancelled) return;
+            const batch = await Promise.all(
+              search.results
+                .slice(offset, offset + 10)
+                .map((result) => result.data()),
+            );
+            for (const result of batch) {
+              const url = new URL(result.url, window.location.origin);
+              if (url.origin !== window.location.origin) continue;
+              if (
+                url.pathname !== prefix &&
+                !url.pathname.startsWith(`${prefix}/`)
+              )
+                continue;
+              matches.push({
+                url: `/${locale}${url.pathname
+                  .slice(docsLocale.length + 1)
+                  .replace(/\.html$/, "")
+                  .replace(/\/index$/, "")}${url.search}${url.hash}`,
+                title: result.meta.title ?? result.url,
+                excerpt: result.excerpt,
+              });
+              if (matches.length === 10) break;
+            }
+            if (matches.length === 10) break;
+          }
+          if (!cancelled) {
+            setResults(matches);
+            setState("ready");
+          }
+        } catch {
+          if (!cancelled) setState("error");
+        }
+      },
+      normalizedQuery ? 150 : 0,
+    );
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
     };
-  }, [query, locale]);
+  }, [query, locale, open, attempt]);
 
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-2 rounded-md border border-(--q-border) bg-(--q-bg-1) px-3 py-1.5 text-sm text-(--q-text-2) hover:bg-(--q-bg-2) hover:text-(--q-text-1) transition-colors w-full max-w-xs"
+        className="q-docs-search-trigger"
         aria-label={t("docs.search_label")}
+        aria-haspopup="dialog"
       >
-        <Search className="size-4" />
+        <Search className="size-4 shrink-0" aria-hidden="true" />
         <span className="flex-1 text-left">{t("docs.search_placeholder")}</span>
-        <kbd className="hidden sm:inline-flex h-5 items-center rounded border border-(--q-border) bg-(--q-bg-0) px-1.5 font-mono text-[10px] text-(--q-text-2)">
-          ⌘K
-        </kbd>
+        <kbd className="hidden sm:inline text-xs">⌘K</kbd>
       </button>
-
-      {open ? (
-        <div
-          className="fixed inset-0 z-[60] flex items-start justify-center bg-black/50 p-4 pt-24 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="w-full max-w-xl rounded-xl border border-(--q-border) bg-(--q-bg-0) shadow-xl"
-            onClick={(e) => e.stopPropagation()}
+      <dialog
+        ref={dialogRef}
+        className="q-docs-search-dialog"
+        aria-labelledby={titleId}
+        onClose={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            setOpen(false);
+          }
+          if (event.key === "Tab") {
+            const controls = event.currentTarget.querySelectorAll<HTMLElement>(
+              "a[href], button:not([disabled]), input:not([disabled])",
+            );
+            const first = controls[0];
+            const last = controls[controls.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+              event.preventDefault();
+              last?.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+              event.preventDefault();
+              first?.focus();
+            }
+          }
+        }}
+      >
+        <div className="flex items-center justify-between gap-4 border-b border-(--q-border) px-5 py-3">
+          <h2 id={titleId} className="text-base font-semibold">
+            {t("docs.search_label")}
+          </h2>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="flex size-11 items-center justify-center rounded-md hover:bg-(--q-bg-1)"
+            aria-label={t("docs.search_close")}
           >
-            <div className="flex items-center gap-2 border-b border-(--q-border) p-3">
-              <Search className="size-4 shrink-0 text-(--q-text-2)" />
-              <input
-                ref={inputRef}
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={t("docs.search_placeholder")}
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-(--q-text-2)"
-              />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="rounded-md p-1 text-(--q-text-2) hover:bg-(--q-bg-1) hover:text-(--q-text-0)"
-                aria-label="Close"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
-            <div className="max-h-[60vh] overflow-y-auto p-2 text-sm">
-              {loading ? (
-                <p className="px-3 py-4 text-(--q-text-2)">…</p>
-              ) : results.length === 0 ? (
-                <p className="px-3 py-4 text-(--q-text-2)">
-                  {query.trim()
-                    ? `No results for "${query}"`
-                    : t("docs.search_placeholder")}
-                </p>
-              ) : (
-                <ul className="space-y-1">
-                  {results.map((r) => (
-                    <li key={r.id}>
-                      <a
-                        href={r.url}
-                        className="block rounded-md px-3 py-2 hover:bg-(--q-bg-1)"
-                        onClick={() => setOpen(false)}
-                      >
-                        <p className="font-medium text-(--q-text-0)">
-                          {r.title}
-                        </p>
-                        <p
-                          className="mt-1 line-clamp-2 text-xs text-(--q-text-2) [&>mark]:bg-(--q-accent-soft) [&>mark]:text-(--q-accent-strong)"
-                          // biome-ignore lint/security/noDangerouslySetInnerHtml: Pagefind highlights via <mark>
-                          dangerouslySetInnerHTML={{ __html: r.excerpt }}
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
+            <X className="size-5" aria-hidden="true" />
+          </button>
         </div>
-      ) : null}
+        <div className="flex items-center gap-3 border-b border-(--q-border) px-5 py-4">
+          <Search
+            className="size-5 shrink-0 text-(--q-text-2)"
+            aria-hidden="true"
+          />
+          <input
+            ref={inputRef}
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={t("docs.search_placeholder")}
+            aria-label={t("docs.search_label")}
+            aria-describedby={statusId}
+            className="min-w-0 flex-1 bg-transparent py-2 text-base placeholder:text-(--q-text-2)"
+          />
+        </div>
+        <div className="q-docs-search-results">
+          <p
+            id={statusId}
+            role="status"
+            aria-live="polite"
+            className="px-5 py-4 text-sm text-(--q-text-2)"
+          >
+            {state === "loading"
+              ? t("docs.search_loading")
+              : state === "error"
+                ? t("docs.search_error")
+                : state === "idle"
+                  ? t("docs.search_hint")
+                  : results.length
+                    ? t("docs.search_results", { count: results.length })
+                    : t("docs.search_empty", { query: query.trim() })}
+          </p>
+          {state === "error" && (
+            <button
+              type="button"
+              onClick={() => setAttempt((value) => value + 1)}
+              className="mx-5 mb-5 min-h-11 rounded-md border border-(--q-border) px-4 text-sm font-medium hover:bg-(--q-bg-1)"
+            >
+              {t("docs.search_retry")}
+            </button>
+          )}
+          {state === "ready" && results.length > 0 && (
+            <ul className="px-2 pb-2">
+              {results.map((result) => (
+                <li key={result.url}>
+                  <a
+                    href={result.url}
+                    className="block rounded-md px-3 py-4 hover:bg-(--q-bg-1)"
+                    onClick={() => setOpen(false)}
+                  >
+                    <p className="font-medium text-(--q-text-0)">
+                      {result.title}
+                    </p>
+                    <p
+                      className="mt-1 line-clamp-2 text-sm leading-relaxed text-(--q-text-2) [&>mark]:bg-(--q-accent-soft) [&>mark]:text-(--q-accent-strong)"
+                      // biome-ignore lint/security/noDangerouslySetInnerHtml: Pagefind generates trusted local index excerpts with mark highlights.
+                      dangerouslySetInnerHTML={{ __html: result.excerpt }}
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </dialog>
     </>
   );
 }

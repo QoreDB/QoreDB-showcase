@@ -33,9 +33,10 @@ export default function customImageLoader({
   // Local static image with pre-generated responsive variants.
   const widths = IMAGE_VARIANTS[src];
   if (widths && widths.length > 0) {
-    const target = widths.find((w) => w >= width) ?? widths[widths.length - 1];
-    const dot = src.lastIndexOf(".");
-    return `${src.slice(0, dot)}-${target}.webp`;
+    const target = widths.find((w) => w >= width);
+    // Preserve native resolution above the largest generated size. Include
+    // the source extension so different PNG/WebP originals cannot collide.
+    return target ? `${src}-${target}.webp` : src;
   }
 
   // No variant available: serve as-is, no optimization.

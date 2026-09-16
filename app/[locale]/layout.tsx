@@ -7,7 +7,6 @@ import { ThemeProvider } from "next-themes";
 import { useTranslation as initTranslations } from "@/app/[locale]/i18n";
 import { SiteAnalytics } from "@/components/SiteAnalytics";
 import TranslationsProvider from "@/components/TranslationsProvider";
-import { DownloadProvider } from "@/contexts/DownloadProvider";
 import { SUPPORTED_LOCALES } from "@/lib/locale";
 import {
   DEFAULT_OG_IMAGE_PATH,
@@ -119,7 +118,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <DownloadProvider>{children}</DownloadProvider>
+            {children}
             <SiteAnalytics />
           </ThemeProvider>
         </TranslationsProvider>

@@ -1,73 +1,18 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
-import { HeroBackgroundManager } from "@/components/hero-background-manager";
 import { JsonLd } from "@/components/JsonLd";
+import { CTASection } from "@/components/landing/cta-section";
+import { DatabaseStrip } from "@/components/landing/database-strip";
+import { FeatureShowcase } from "@/components/landing/feature-showcase";
+import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { Hero } from "@/components/landing/hero";
+import { McpSection } from "@/components/landing/mcp-section";
+import { MiniFaq } from "@/components/landing/mini-faq";
+import { PricingPreview } from "@/components/landing/pricing-preview";
 import { normalizeLocale } from "@/lib/locale";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
-
-const SocialProofBar = dynamic(() =>
-  import("@/components/landing/social-proof-bar").then((m) => ({
-    default: m.SocialProofBar,
-  })),
-);
-const MiniFaq = dynamic(() =>
-  import("@/components/landing/mini-faq").then((m) => ({
-    default: m.MiniFaq,
-  })),
-);
-const DatabaseStrip = dynamic(() =>
-  import("@/components/landing/database-strip").then((m) => ({
-    default: m.DatabaseStrip,
-  })),
-);
-const McpSection = dynamic(() =>
-  import("@/components/landing/mcp-section").then((m) => ({
-    default: m.McpSection,
-  })),
-);
-const FeaturesSection = dynamic(() =>
-  import("@/components/landing/features-section").then((m) => ({
-    default: m.FeaturesSection,
-  })),
-);
-const FeatureShowcase = dynamic(() =>
-  import("@/components/landing/feature-showcase").then((m) => ({
-    default: m.FeatureShowcase,
-  })),
-);
-const InlineCTA = dynamic(() =>
-  import("@/components/landing/inline-cta").then((m) => ({
-    default: m.InlineCTA,
-  })),
-);
-const Testimonials = dynamic(() =>
-  import("@/components/landing/testimonials").then((m) => ({
-    default: m.Testimonials,
-  })),
-);
-const ComparisonTable = dynamic(() =>
-  import("@/components/landing/comparison-table").then((m) => ({
-    default: m.ComparisonTable,
-  })),
-);
-const PricingPreview = dynamic(() =>
-  import("@/components/landing/pricing-preview").then((m) => ({
-    default: m.PricingPreview,
-  })),
-);
-const CTASection = dynamic(() =>
-  import("@/components/landing/cta-section").then((m) => ({
-    default: m.CTASection,
-  })),
-);
-const Footer = dynamic(() =>
-  import("@/components/landing/footer").then((m) => ({
-    default: m.Footer,
-  })),
-);
+import "@/components/landing/home.css";
 
 const OFFER_COUNTRIES = [
   "FR",
@@ -137,8 +82,8 @@ export default async function HomePage({
         description: t("metadata.site_description"),
         url: getLocalizedUrl(normalizedLocale, "/"),
         downloadUrl: getLocalizedUrl(normalizedLocale, "/download"),
-        image: getAbsoluteUrl("/images/screenshots/query-screen.png"),
-        screenshot: getAbsoluteUrl("/images/screenshots/query-screen.png"),
+        image: getAbsoluteUrl("/images/showcase-v2/query-workspace.webp"),
+        screenshot: getAbsoluteUrl("/images/showcase-v2/query-workspace.webp"),
         offers: {
           "@type": "Offer",
           price: "0",
@@ -186,23 +131,17 @@ export default async function HomePage({
   return (
     <>
       <JsonLd id={`home-jsonld-${normalizedLocale}`} data={structuredData} />
-      <div className="min-h-screen overflow-hidden relative">
-        <HeroBackgroundManager />
-        <Header />
-        <Hero />
-        <SocialProofBar />
-        <DatabaseStrip />
-        <McpSection />
-        <FeaturesSection />
-        <FeatureShowcase />
-        <InlineCTA />
-        <Testimonials locale={normalizedLocale} />
-        <ComparisonTable />
-        <MiniFaq />
-        <PricingPreview />
-        <CTASection />
-        <Footer />
-      </div>
+      <Header />
+      <main id="main-content" tabIndex={-1} className="q-home">
+        <Hero locale={normalizedLocale} />
+        <DatabaseStrip locale={normalizedLocale} />
+        <FeatureShowcase locale={normalizedLocale} />
+        <McpSection locale={normalizedLocale} />
+        <PricingPreview locale={normalizedLocale} />
+        <MiniFaq locale={normalizedLocale} />
+        <CTASection locale={normalizedLocale} />
+      </main>
+      <Footer />
     </>
   );
 }

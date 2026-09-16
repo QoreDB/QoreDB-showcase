@@ -1,0 +1,1664 @@
+{
+  "protocol": {
+    "browser": "Chrome/152.0.7977.64",
+    "viewport": "390x844 DPR1",
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 93750,
+    "cache": "disabled, new browser context each run",
+    "externalRequests": "blocked",
+    "server": "local production :3101, warmed",
+    "sampleWindow": "load + 3 seconds"
+  },
+  "runs": [
+    {
+      "config": {
+        "name": "home-desktop-light",
+        "width": 1440,
+        "height": 1000
+      },
+      "status": 200,
+      "errors": [],
+      "metrics": {
+        "lcp": [
+          {
+            "start": 224,
+            "duration": 0,
+            "element": "<img alt=\"QoreDB : éditeur SQL, tableau des résultats et connexion PostgreSQL.\" fetchpriority=\"high\" width=\"1604\" height=\"1004\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" sizes=\"(max-width: 760px) 950px, 1030px\" srcset=\"/images/screenshots/query-screen.webp-384.webp 32w, /images/screen"
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 104,
+            "duration": 103
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 63.200000000186265,
+          "load": 245.70000000018626,
+          "dcl": 95.3000000002794,
+          "encoded": 60744,
+          "decoded": 215160
+        }
+      ],
+      "scripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/1oqm_lsp2w7bd.js",
+        "/_next/static/chunks/1rg13yghtgn8n.js",
+        "/_next/static/chunks/1mnx-51rf-qms.js",
+        "/_next/static/chunks/3iuuiw28ekch9.js",
+        "/_next/static/chunks/0xtu6fo4y2awc.js",
+        "/_next/static/chunks/0et9ko3k88v9k.js",
+        "/_next/static/chunks/3a1rpk4_tez9r.js",
+        "/_next/static/chunks/1omurgvipfksl.js",
+        "/_next/static/chunks/3xry-456u453j.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "resources": [
+        {
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "type": "link",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "type": "link",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "url": "/images/screenshots/query-screen.webp-1200.webp",
+          "type": "link",
+          "encoded": 68324,
+          "decoded": 68324
+        },
+        {
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "type": "link",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "url": "/_next/static/chunks/1uv6a-_jdddt8.css",
+          "type": "link",
+          "encoded": 3150,
+          "decoded": 15198
+        },
+        {
+          "url": "/_next/static/chunks/19qaluom74yhd.css",
+          "type": "link",
+          "encoded": 20687,
+          "decoded": 137128
+        },
+        {
+          "url": "/_next/static/chunks/36_8gvvxhdrgh.js",
+          "type": "link",
+          "encoded": 9310,
+          "decoded": 30414
+        },
+        {
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "type": "script",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "url": "/_next/static/chunks/0_y5vw_kd3y1a.js",
+          "type": "script",
+          "encoded": 39784,
+          "decoded": 148226
+        },
+        {
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "type": "script",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "type": "script",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+          "type": "script",
+          "encoded": 4488,
+          "decoded": 11870
+        },
+        {
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "type": "script",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "type": "script",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "url": "/_next/static/chunks/0v68gtx_l7tth.js",
+          "type": "script",
+          "encoded": 4605,
+          "decoded": 11089
+        },
+        {
+          "url": "/_next/static/chunks/29bty08et5pz9.js",
+          "type": "script",
+          "encoded": 20854,
+          "decoded": 66522
+        },
+        {
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "type": "script",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "type": "script",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "type": "script",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "url": "/_next/static/chunks/2fqlrf_h8ftgl.js",
+          "type": "script",
+          "encoded": 14758,
+          "decoded": 44361
+        },
+        {
+          "url": "/_next/static/chunks/300ehea63dzn8.js",
+          "type": "script",
+          "encoded": 24019,
+          "decoded": 79181
+        },
+        {
+          "url": "/logo.webp",
+          "type": "img",
+          "encoded": 21956,
+          "decoded": 21956
+        },
+        {
+          "url": "/images/screenshots/table-screen.webp-1200.webp",
+          "type": "img",
+          "encoded": 72540,
+          "decoded": 72540
+        },
+        {
+          "url": "/images/features/sandbox.webp-1200.webp",
+          "type": "img",
+          "encoded": 40470,
+          "decoded": 40470
+        },
+        {
+          "url": "/favicon.ico",
+          "type": "other",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 703
+        },
+        {
+          "url": "/fr/pricing",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 702
+        },
+        {
+          "url": "/fr/docs",
+          "type": "fetch",
+          "encoded": 353,
+          "decoded": 753
+        },
+        {
+          "url": "/fr/features",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 703
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 1293,
+          "decoded": 4564
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 45608,
+          "decoded": 135524
+        },
+        {
+          "url": "/_next/static/chunks/12udjo0859tln.css",
+          "type": "link",
+          "encoded": 1552,
+          "decoded": 9115
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 643,
+          "decoded": 2822
+        },
+        {
+          "url": "/fr/pricing",
+          "type": "fetch",
+          "encoded": 1335,
+          "decoded": 4698
+        },
+        {
+          "url": "/fr/pricing",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/fr/pricing",
+          "type": "fetch",
+          "encoded": 878,
+          "decoded": 1972
+        },
+        {
+          "url": "/_next/static/chunks/1oqm_lsp2w7bd.js",
+          "type": "script",
+          "encoded": 5193,
+          "decoded": 14108
+        },
+        {
+          "url": "/_next/static/chunks/1rg13yghtgn8n.js",
+          "type": "script",
+          "encoded": 14766,
+          "decoded": 44361
+        },
+        {
+          "url": "/fr/docs",
+          "type": "fetch",
+          "encoded": 1230,
+          "decoded": 4075
+        },
+        {
+          "url": "/fr/docs",
+          "type": "fetch",
+          "encoded": 3025,
+          "decoded": 15412
+        },
+        {
+          "url": "/fr/docs",
+          "type": "fetch",
+          "encoded": 4761,
+          "decoded": 51552
+        },
+        {
+          "url": "/_next/static/chunks/1mnx-51rf-qms.js",
+          "type": "script",
+          "encoded": 4201,
+          "decoded": 14250
+        },
+        {
+          "url": "/fr/features",
+          "type": "fetch",
+          "encoded": 1321,
+          "decoded": 4747
+        },
+        {
+          "url": "/fr/features",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/_next/static/chunks/3iuuiw28ekch9.js",
+          "type": "script",
+          "encoded": 3732,
+          "decoded": 9986
+        },
+        {
+          "url": "/_next/static/chunks/0et9ko3k88v9k.js",
+          "type": "script",
+          "encoded": 8894,
+          "decoded": 28279
+        },
+        {
+          "url": "/_next/static/chunks/0xtu6fo4y2awc.js",
+          "type": "script",
+          "encoded": 14785,
+          "decoded": 44361
+        },
+        {
+          "url": "/_next/static/chunks/3a1rpk4_tez9r.js",
+          "type": "script",
+          "encoded": 594,
+          "decoded": 594
+        },
+        {
+          "url": "/fr/features",
+          "type": "fetch",
+          "encoded": 476,
+          "decoded": 1193
+        },
+        {
+          "url": "/_next/static/chunks/1omurgvipfksl.js",
+          "type": "script",
+          "encoded": 1827,
+          "decoded": 4596
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 5414,
+          "decoded": 22968
+        },
+        {
+          "url": "/_next/static/chunks/3xry-456u453j.js",
+          "type": "script",
+          "encoded": 2386,
+          "decoded": 6260
+        }
+      ],
+      "height": 5243,
+      "width": 1440,
+      "hero": {
+        "x": 465.65625,
+        "y": 200,
+        "width": 1030,
+        "height": 644.59375,
+        "top": 200,
+        "right": 1495.65625,
+        "bottom": 844.59375,
+        "left": 465.65625
+      },
+      "infinite": 0,
+      "initialHtmlScripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "totals": {
+        "initialEncoded": 279729,
+        "initialDecoded": 983378,
+        "startupJsEncoded": 336107,
+        "startupJsDecoded": 1150173,
+        "resources": 55,
+        "totalResourceEncoded": 722193,
+        "databaseLogosEncoded": 0
+      }
+    },
+    {
+      "config": {
+        "name": "home-mobile-light",
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "errors": [],
+      "metrics": {
+        "lcp": [
+          {
+            "start": 120,
+            "duration": 0,
+            "element": "<img alt=\"QoreDB : éditeur SQL, tableau des résultats et connexion PostgreSQL.\" fetchpriority=\"high\" width=\"1604\" height=\"1004\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" sizes=\"(max-width: 760px) 950px, 1030px\" srcset=\"/images/screenshots/query-screen.webp-384.webp 32w, /images/screen"
+          }
+        ],
+        "cls": [],
+        "long": []
+      },
+      "nav": [
+        {
+          "ttfb": 9,
+          "load": 136.8000000002794,
+          "dcl": 101.8000000002794,
+          "encoded": 60744,
+          "decoded": 215160
+        }
+      ],
+      "scripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/1oqm_lsp2w7bd.js",
+        "/_next/static/chunks/1rg13yghtgn8n.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "resources": [
+        {
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "type": "link",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "type": "link",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "url": "/images/screenshots/query-screen.webp-1200.webp",
+          "type": "link",
+          "encoded": 68324,
+          "decoded": 68324
+        },
+        {
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "type": "link",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "url": "/_next/static/chunks/1uv6a-_jdddt8.css",
+          "type": "link",
+          "encoded": 3150,
+          "decoded": 15198
+        },
+        {
+          "url": "/_next/static/chunks/19qaluom74yhd.css",
+          "type": "link",
+          "encoded": 20687,
+          "decoded": 137128
+        },
+        {
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "type": "script",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "url": "/_next/static/chunks/36_8gvvxhdrgh.js",
+          "type": "link",
+          "encoded": 9310,
+          "decoded": 30414
+        },
+        {
+          "url": "/_next/static/chunks/0_y5vw_kd3y1a.js",
+          "type": "script",
+          "encoded": 39784,
+          "decoded": 148226
+        },
+        {
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "type": "script",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "type": "script",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+          "type": "script",
+          "encoded": 4488,
+          "decoded": 11870
+        },
+        {
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "type": "script",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "url": "/_next/static/chunks/0v68gtx_l7tth.js",
+          "type": "script",
+          "encoded": 4605,
+          "decoded": 11089
+        },
+        {
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "type": "script",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "type": "script",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "type": "script",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "url": "/_next/static/chunks/29bty08et5pz9.js",
+          "type": "script",
+          "encoded": 20854,
+          "decoded": 66522
+        },
+        {
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "type": "script",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "url": "/_next/static/chunks/300ehea63dzn8.js",
+          "type": "script",
+          "encoded": 24019,
+          "decoded": 79181
+        },
+        {
+          "url": "/_next/static/chunks/2fqlrf_h8ftgl.js",
+          "type": "script",
+          "encoded": 14758,
+          "decoded": 44361
+        },
+        {
+          "url": "/logo.webp",
+          "type": "img",
+          "encoded": 21956,
+          "decoded": 21956
+        },
+        {
+          "url": "/images/screenshots/table-screen.webp-1200.webp",
+          "type": "img",
+          "encoded": 72540,
+          "decoded": 72540
+        },
+        {
+          "url": "/favicon.ico",
+          "type": "other",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 703
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 45608,
+          "decoded": 135524
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 1293,
+          "decoded": 4564
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 643,
+          "decoded": 2822
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 5414,
+          "decoded": 22968
+        },
+        {
+          "url": "/_next/static/chunks/1oqm_lsp2w7bd.js",
+          "type": "script",
+          "encoded": 5193,
+          "decoded": 14108
+        },
+        {
+          "url": "/_next/static/chunks/1rg13yghtgn8n.js",
+          "type": "script",
+          "encoded": 14766,
+          "decoded": 44361
+        }
+      ],
+      "height": 7752,
+      "width": 390,
+      "hero": {
+        "x": -142,
+        "y": 478.421875,
+        "width": 950,
+        "height": 594.53125,
+        "top": 478.421875,
+        "right": 808,
+        "bottom": 1072.953125,
+        "left": -142
+      },
+      "infinite": 0,
+      "initialHtmlScripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "totals": {
+        "initialEncoded": 279729,
+        "initialDecoded": 983378,
+        "startupJsEncoded": 299688,
+        "startupJsDecoded": 1041847,
+        "resources": 34,
+        "totalResourceEncoded": 629123,
+        "databaseLogosEncoded": 0
+      }
+    },
+    {
+      "config": {
+        "name": "throttled-1",
+        "width": 390,
+        "height": 844,
+        "throttled": true
+      },
+      "status": 200,
+      "errors": [],
+      "metrics": {
+        "lcp": [
+          {
+            "start": 1136,
+            "duration": 0,
+            "element": "<span>Vos bases.</span>"
+          },
+          {
+            "start": 2136,
+            "duration": 0,
+            "element": "<img alt=\"QoreDB : éditeur SQL, tableau des résultats et connexion PostgreSQL.\" fetchpriority=\"high\" width=\"1604\" height=\"1004\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" sizes=\"(max-width: 760px) 950px, 1030px\" srcset=\"/images/screenshots/query-screen.webp-384.webp 32w, /images/screen"
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 1001.1000000000931,
+            "duration": 114
+          },
+          {
+            "start": 2612.2999999998137,
+            "duration": 100
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 7.7999999998137355,
+          "load": 3293.600000000093,
+          "dcl": 982.3999999999069,
+          "encoded": 60744,
+          "decoded": 215160
+        }
+      ],
+      "scripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/1oqm_lsp2w7bd.js",
+        "/_next/static/chunks/1rg13yghtgn8n.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "resources": [
+        {
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "type": "link",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "type": "link",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "type": "link",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "url": "/images/screenshots/query-screen.webp-1200.webp",
+          "type": "link",
+          "encoded": 68324,
+          "decoded": 68324
+        },
+        {
+          "url": "/_next/static/chunks/1uv6a-_jdddt8.css",
+          "type": "link",
+          "encoded": 3150,
+          "decoded": 15198
+        },
+        {
+          "url": "/_next/static/chunks/19qaluom74yhd.css",
+          "type": "link",
+          "encoded": 20687,
+          "decoded": 137128
+        },
+        {
+          "url": "/_next/static/chunks/36_8gvvxhdrgh.js",
+          "type": "link",
+          "encoded": 9310,
+          "decoded": 30414
+        },
+        {
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "type": "script",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "url": "/_next/static/chunks/0_y5vw_kd3y1a.js",
+          "type": "script",
+          "encoded": 39784,
+          "decoded": 148226
+        },
+        {
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "type": "script",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "type": "script",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+          "type": "script",
+          "encoded": 4488,
+          "decoded": 11870
+        },
+        {
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "type": "script",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "url": "/_next/static/chunks/0v68gtx_l7tth.js",
+          "type": "script",
+          "encoded": 4605,
+          "decoded": 11089
+        },
+        {
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "type": "script",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "url": "/_next/static/chunks/29bty08et5pz9.js",
+          "type": "script",
+          "encoded": 20854,
+          "decoded": 66522
+        },
+        {
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "type": "script",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "type": "script",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "type": "script",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "url": "/_next/static/chunks/300ehea63dzn8.js",
+          "type": "script",
+          "encoded": 24019,
+          "decoded": 79181
+        },
+        {
+          "url": "/_next/static/chunks/2fqlrf_h8ftgl.js",
+          "type": "script",
+          "encoded": 14758,
+          "decoded": 44361
+        },
+        {
+          "url": "/logo.webp",
+          "type": "img",
+          "encoded": 21956,
+          "decoded": 21956
+        },
+        {
+          "url": "/images/screenshots/table-screen.webp-1200.webp",
+          "type": "img",
+          "encoded": 72540,
+          "decoded": 72540
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 703
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 45608,
+          "decoded": 135524
+        },
+        {
+          "url": "/favicon.ico",
+          "type": "other",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 1293,
+          "decoded": 4564
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 643,
+          "decoded": 2822
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 5414,
+          "decoded": 22968
+        },
+        {
+          "url": "/_next/static/chunks/1oqm_lsp2w7bd.js",
+          "type": "script",
+          "encoded": 5193,
+          "decoded": 14108
+        },
+        {
+          "url": "/_next/static/chunks/1rg13yghtgn8n.js",
+          "type": "script",
+          "encoded": 14766,
+          "decoded": 44361
+        }
+      ],
+      "height": 7752,
+      "width": 390,
+      "hero": {
+        "x": -142,
+        "y": 478.421875,
+        "width": 950,
+        "height": 594.53125,
+        "top": 478.421875,
+        "right": 808,
+        "bottom": 1072.953125,
+        "left": -142
+      },
+      "infinite": 0,
+      "initialHtmlScripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "totals": {
+        "initialEncoded": 279729,
+        "initialDecoded": 983378,
+        "startupJsEncoded": 299688,
+        "startupJsDecoded": 1041847,
+        "resources": 34,
+        "totalResourceEncoded": 629123,
+        "databaseLogosEncoded": 0
+      }
+    },
+    {
+      "config": {
+        "name": "throttled-2",
+        "width": 390,
+        "height": 844,
+        "throttled": true
+      },
+      "status": 200,
+      "errors": [],
+      "metrics": {
+        "lcp": [
+          {
+            "start": 1124,
+            "duration": 0,
+            "element": "<span>Vos bases.</span>"
+          },
+          {
+            "start": 2104,
+            "duration": 0,
+            "element": "<img alt=\"QoreDB : éditeur SQL, tableau des résultats et connexion PostgreSQL.\" fetchpriority=\"high\" width=\"1604\" height=\"1004\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" sizes=\"(max-width: 760px) 950px, 1030px\" srcset=\"/images/screenshots/query-screen.webp-384.webp 32w, /images/screen"
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 1000.4000000003725,
+            "duration": 101
+          },
+          {
+            "start": 2582.100000000093,
+            "duration": 98
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 9.700000000186265,
+          "load": 3294.600000000093,
+          "dcl": 983,
+          "encoded": 60744,
+          "decoded": 215160
+        }
+      ],
+      "scripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/1oqm_lsp2w7bd.js",
+        "/_next/static/chunks/1rg13yghtgn8n.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "resources": [
+        {
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "type": "link",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "type": "link",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "url": "/images/screenshots/query-screen.webp-1200.webp",
+          "type": "link",
+          "encoded": 68324,
+          "decoded": 68324
+        },
+        {
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "type": "link",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "url": "/_next/static/chunks/1uv6a-_jdddt8.css",
+          "type": "link",
+          "encoded": 3150,
+          "decoded": 15198
+        },
+        {
+          "url": "/_next/static/chunks/19qaluom74yhd.css",
+          "type": "link",
+          "encoded": 20687,
+          "decoded": 137128
+        },
+        {
+          "url": "/_next/static/chunks/36_8gvvxhdrgh.js",
+          "type": "link",
+          "encoded": 9310,
+          "decoded": 30414
+        },
+        {
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "type": "script",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "url": "/_next/static/chunks/0_y5vw_kd3y1a.js",
+          "type": "script",
+          "encoded": 39784,
+          "decoded": 148226
+        },
+        {
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "type": "script",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "type": "script",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+          "type": "script",
+          "encoded": 4488,
+          "decoded": 11870
+        },
+        {
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "type": "script",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "url": "/_next/static/chunks/0v68gtx_l7tth.js",
+          "type": "script",
+          "encoded": 4605,
+          "decoded": 11089
+        },
+        {
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "type": "script",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "type": "script",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "url": "/_next/static/chunks/29bty08et5pz9.js",
+          "type": "script",
+          "encoded": 20854,
+          "decoded": 66522
+        },
+        {
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "type": "script",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "type": "script",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "url": "/_next/static/chunks/300ehea63dzn8.js",
+          "type": "script",
+          "encoded": 24019,
+          "decoded": 79181
+        },
+        {
+          "url": "/_next/static/chunks/2fqlrf_h8ftgl.js",
+          "type": "script",
+          "encoded": 14758,
+          "decoded": 44361
+        },
+        {
+          "url": "/logo.webp",
+          "type": "img",
+          "encoded": 21956,
+          "decoded": 21956
+        },
+        {
+          "url": "/images/screenshots/table-screen.webp-1200.webp",
+          "type": "img",
+          "encoded": 72540,
+          "decoded": 72540
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 703
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 45608,
+          "decoded": 135524
+        },
+        {
+          "url": "/favicon.ico",
+          "type": "other",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 1293,
+          "decoded": 4564
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 643,
+          "decoded": 2822
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 5414,
+          "decoded": 22968
+        },
+        {
+          "url": "/_next/static/chunks/1oqm_lsp2w7bd.js",
+          "type": "script",
+          "encoded": 5193,
+          "decoded": 14108
+        },
+        {
+          "url": "/_next/static/chunks/1rg13yghtgn8n.js",
+          "type": "script",
+          "encoded": 14766,
+          "decoded": 44361
+        }
+      ],
+      "height": 7752,
+      "width": 390,
+      "hero": {
+        "x": -142,
+        "y": 478.421875,
+        "width": 950,
+        "height": 594.53125,
+        "top": 478.421875,
+        "right": 808,
+        "bottom": 1072.953125,
+        "left": -142
+      },
+      "infinite": 0,
+      "initialHtmlScripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "totals": {
+        "initialEncoded": 279729,
+        "initialDecoded": 983378,
+        "startupJsEncoded": 299688,
+        "startupJsDecoded": 1041847,
+        "resources": 34,
+        "totalResourceEncoded": 629123,
+        "databaseLogosEncoded": 0
+      }
+    },
+    {
+      "config": {
+        "name": "throttled-3",
+        "width": 390,
+        "height": 844,
+        "throttled": true
+      },
+      "status": 200,
+      "errors": [],
+      "metrics": {
+        "lcp": [
+          {
+            "start": 1152,
+            "duration": 0,
+            "element": "<span>Vos bases.</span>"
+          },
+          {
+            "start": 2132,
+            "duration": 0,
+            "element": "<img alt=\"QoreDB : éditeur SQL, tableau des résultats et connexion PostgreSQL.\" fetchpriority=\"high\" width=\"1604\" height=\"1004\" decoding=\"async\" data-nimg=\"1\" style=\"color:transparent\" sizes=\"(max-width: 760px) 950px, 1030px\" srcset=\"/images/screenshots/query-screen.webp-384.webp 32w, /images/screen"
+          }
+        ],
+        "cls": [],
+        "long": [
+          {
+            "start": 1014.9000000003725,
+            "duration": 106
+          },
+          {
+            "start": 2558.9000000003725,
+            "duration": 100
+          }
+        ]
+      },
+      "nav": [
+        {
+          "ttfb": 11.200000000186265,
+          "load": 3293.5,
+          "dcl": 998.1000000000931,
+          "encoded": 60744,
+          "decoded": 215160
+        }
+      ],
+      "scripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/1oqm_lsp2w7bd.js",
+        "/_next/static/chunks/1rg13yghtgn8n.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "resources": [
+        {
+          "url": "/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2",
+          "type": "link",
+          "encoded": 22320,
+          "decoded": 22320
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+          "type": "link",
+          "encoded": 48432,
+          "decoded": 48432
+        },
+        {
+          "url": "/images/screenshots/query-screen.webp-1200.webp",
+          "type": "link",
+          "encoded": 68324,
+          "decoded": 68324
+        },
+        {
+          "url": "/_next/static/chunks/22jim2_fv21fp.css",
+          "type": "link",
+          "encoded": 958,
+          "decoded": 3455
+        },
+        {
+          "url": "/_next/static/chunks/1uv6a-_jdddt8.css",
+          "type": "link",
+          "encoded": 3150,
+          "decoded": 15198
+        },
+        {
+          "url": "/_next/static/chunks/19qaluom74yhd.css",
+          "type": "link",
+          "encoded": 20687,
+          "decoded": 137128
+        },
+        {
+          "url": "/_next/static/chunks/36_8gvvxhdrgh.js",
+          "type": "link",
+          "encoded": 9310,
+          "decoded": 30414
+        },
+        {
+          "url": "/_next/static/chunks/18tp1eiksusin.js",
+          "type": "script",
+          "encoded": 7132,
+          "decoded": 23633
+        },
+        {
+          "url": "/_next/static/chunks/0_y5vw_kd3y1a.js",
+          "type": "script",
+          "encoded": 39784,
+          "decoded": 148226
+        },
+        {
+          "url": "/_next/static/chunks/2ejk_26znfoeu.js",
+          "type": "script",
+          "encoded": 64084,
+          "decoded": 203393
+        },
+        {
+          "url": "/_next/static/chunks/08hmhnfvcb6rr.js",
+          "type": "script",
+          "encoded": 9319,
+          "decoded": 45213
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+          "type": "script",
+          "encoded": 4488,
+          "decoded": 11870
+        },
+        {
+          "url": "/_next/static/chunks/215tlmy56_7co.js",
+          "type": "script",
+          "encoded": 1532,
+          "decoded": 3597
+        },
+        {
+          "url": "/_next/static/chunks/2smec23kb5b2w.js",
+          "type": "script",
+          "encoded": 13385,
+          "decoded": 56652
+        },
+        {
+          "url": "/_next/static/chunks/0v68gtx_l7tth.js",
+          "type": "script",
+          "encoded": 4605,
+          "decoded": 11089
+        },
+        {
+          "url": "/_next/static/chunks/1k5xkzhd7bsfp.js",
+          "type": "script",
+          "encoded": 48037,
+          "decoded": 205655
+        },
+        {
+          "url": "/_next/static/chunks/3-g7n29d1t0-z.js",
+          "type": "script",
+          "encoded": 9530,
+          "decoded": 25293
+        },
+        {
+          "url": "/_next/static/chunks/1rsq7ubgz0kv1.js",
+          "type": "script",
+          "encoded": 8892,
+          "decoded": 28279
+        },
+        {
+          "url": "/_next/static/chunks/29bty08et5pz9.js",
+          "type": "script",
+          "encoded": 20854,
+          "decoded": 66522
+        },
+        {
+          "url": "/_next/static/chunks/300ehea63dzn8.js",
+          "type": "script",
+          "encoded": 24019,
+          "decoded": 79181
+        },
+        {
+          "url": "/_next/static/chunks/2fqlrf_h8ftgl.js",
+          "type": "script",
+          "encoded": 14758,
+          "decoded": 44361
+        },
+        {
+          "url": "/logo.webp",
+          "type": "img",
+          "encoded": 21956,
+          "decoded": 21956
+        },
+        {
+          "url": "/images/screenshots/table-screen.webp-1200.webp",
+          "type": "img",
+          "encoded": 72540,
+          "decoded": 72540
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 344,
+          "decoded": 703
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 765,
+          "decoded": 1541
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 1314,
+          "decoded": 4741
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 45608,
+          "decoded": 135524
+        },
+        {
+          "url": "/favicon.ico",
+          "type": "other",
+          "encoded": 15406,
+          "decoded": 15406
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 1293,
+          "decoded": 4564
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 281,
+          "decoded": 447
+        },
+        {
+          "url": "/fr/download",
+          "type": "fetch",
+          "encoded": 643,
+          "decoded": 2822
+        },
+        {
+          "url": "/fr",
+          "type": "fetch",
+          "encoded": 5414,
+          "decoded": 22968
+        },
+        {
+          "url": "/_next/static/chunks/1oqm_lsp2w7bd.js",
+          "type": "script",
+          "encoded": 5193,
+          "decoded": 14108
+        },
+        {
+          "url": "/_next/static/chunks/1rg13yghtgn8n.js",
+          "type": "script",
+          "encoded": 14766,
+          "decoded": 44361
+        }
+      ],
+      "height": 7752,
+      "width": 390,
+      "hero": {
+        "x": -142,
+        "y": 478.421875,
+        "width": 950,
+        "height": 594.53125,
+        "top": 478.421875,
+        "right": 808,
+        "bottom": 1072.953125,
+        "left": -142
+      },
+      "infinite": 0,
+      "initialHtmlScripts": [
+        "/_next/static/chunks/18tp1eiksusin.js",
+        "/_next/static/chunks/2ejk_26znfoeu.js",
+        "/_next/static/chunks/0_y5vw_kd3y1a.js",
+        "/_next/static/chunks/08hmhnfvcb6rr.js",
+        "/_next/static/chunks/turbopack-0y6t1d4d5kjrc.js",
+        "/_next/static/chunks/215tlmy56_7co.js",
+        "/_next/static/chunks/2smec23kb5b2w.js",
+        "/_next/static/chunks/0v68gtx_l7tth.js",
+        "/_next/static/chunks/1k5xkzhd7bsfp.js",
+        "/_next/static/chunks/29bty08et5pz9.js",
+        "/_next/static/chunks/3-g7n29d1t0-z.js",
+        "/_next/static/chunks/1rsq7ubgz0kv1.js",
+        "/_next/static/chunks/300ehea63dzn8.js",
+        "/_next/static/chunks/2fqlrf_h8ftgl.js",
+        "/_next/static/chunks/36_8gvvxhdrgh.js"
+      ],
+      "totals": {
+        "initialEncoded": 279729,
+        "initialDecoded": 983378,
+        "startupJsEncoded": 299688,
+        "startupJsDecoded": 1041847,
+        "resources": 34,
+        "totalResourceEncoded": 629123,
+        "databaseLogosEncoded": 0
+      }
+    }
+  ]
+}

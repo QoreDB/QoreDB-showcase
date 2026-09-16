@@ -1,317 +1,202 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Download, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppleIcon, LinuxIcon, WindowsIcon } from "@/components/icons/os-icons";
 import { useDownload } from "@/contexts/DownloadProvider";
 import { getIntlLocale } from "@/lib/locale";
-import { Button } from "../ui/button";
+
+type Platform = "mac" | "windows" | "linux";
+const platforms = [
+  { id: "mac", label: "macOS", icon: AppleIcon },
+  { id: "windows", label: "Windows", icon: WindowsIcon },
+  { id: "linux", label: "Linux", icon: LinuxIcon },
+] as const;
 
 export function DownloadSection() {
   const { t, i18n } = useTranslation();
-  const { os, arch, release, loading, getDownloadLink, getOsDisplayName } =
-    useDownload();
-  const [showOtherPlatforms, setShowOtherPlatforms] = useState(false);
-
-  const openDownloadLink = (url?: string) => {
-    if (url) {
-      window.location.href = url;
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString(
-      getIntlLocale(i18n.language),
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      },
-    );
-  };
-
-  const getOsIcon = (targetOs: string, className: string = "w-8 h-8") => {
-    switch (targetOs) {
-      case "mac":
-        return <AppleIcon className={className} />;
-      case "windows":
-        return <WindowsIcon className={className} />;
-      case "linux":
-        return <LinuxIcon className={className} />;
-      default:
-        return <Download className={className} />;
-    }
-  };
-
-  const mainLink = getDownloadLink(os);
-  const allPlatforms = ["mac", "windows", "linux"] as const;
-  const otherPlatforms = allPlatforms.filter((p) => p !== os);
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
-
-  // Download options for each platform
-  const getPlatformOptions = (platform: string) => {
-    if (platform === "windows") {
-      return [
-        {
-          label: t("download.microsoft_store", "Microsoft Store"),
-          url: getDownloadLink("windows") ?? undefined,
-          recommended: true,
-        },
-      ];
-    }
-
-    if (!release) return [];
-
-    switch (platform) {
-      case "mac":
-        return [
+  const { os, release, loading, error, retry, getDownloadLink } = useDownload();
+  const [selection, setSelection] = useState<Platform | null>(null);
+  const selected = selection ?? os;
+  const date = release?.pub_date ? new Date(release.pub_date) : null;
+  const options =
+    selected === "mac"
+      ? [
           {
-            label: t("download.apple_silicon", "Apple Silicon (M1/M2/M3/M4)"),
-            url: release.platforms["darwin-aarch64"]?.url,
-            recommended: arch === "arm64",
+            label: t("download.apple_silicon"),
+            detail: "ARM64",
+            url: release?.platforms["darwin-aarch64"]?.url,
           },
           {
-            label: t("download.intel_mac", "Intel Mac"),
-            url: release.platforms["darwin-x86_64"]?.url,
-            recommended: arch === "x86_64",
+            label: t("download.intel_mac"),
+            detail: "x86_64",
+            url: release?.platforms["darwin-x86_64"]?.url,
           },
-        ];
-      case "linux":
-        return [
-          {
-            label: t("download.linux_appimage", "AppImage (Universal)"),
-            url: release.platforms["linux-x86_64-appimage"]?.url,
-            recommended: true,
-          },
-          {
-            label: t("download.linux_deb", "Debian / Ubuntu (.deb)"),
-            url: release.platforms["linux-x86_64-deb"]?.url,
-            recommended: false,
-          },
-          {
-            label: t("download.linux_rpm", "Fedora / RHEL (.rpm)"),
-            url: release.platforms["linux-x86_64-rpm"]?.url,
-            recommended: false,
-          },
-          {
-            label: t("download.linux_aur", "Arch Linux (AUR)"),
-            url: "https://aur.archlinux.org/packages/qoredb-bin",
-            recommended: false,
-          },
-        ];
-      default:
-        return [];
-    }
-  };
+        ]
+      : selected === "windows"
+        ? [
+            {
+              label: t("download.microsoft_store"),
+              detail: "Windows",
+              url: getDownloadLink("windows"),
+            },
+          ]
+        : selected === "linux"
+          ? [
+              {
+                label: t("download.linux_appimage"),
+                detail: "x86_64",
+                url: release?.platforms["linux-x86_64-appimage"]?.url,
+              },
+              {
+                label: t("download.linux_deb"),
+                detail: "x86_64",
+                url: release?.platforms["linux-x86_64-deb"]?.url,
+              },
+              {
+                label: t("download.linux_rpm"),
+                detail: "x86_64",
+                url: release?.platforms["linux-x86_64-rpm"]?.url,
+              },
+              {
+                label: t("download.linux_aur"),
+                detail: "AUR",
+                url: "https://aur.archlinux.org/packages/qoredb-bin",
+              },
+            ]
+          : [];
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-blue-900/20 via-background to-background pointer-events-none" />
+    <section className="q-container pt-32 pb-16 lg:pt-44 lg:pb-24">
+      <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
+        <div>
+          <p className="font-mono text-xs text-(--q-accent)">
+            QoreDB / Desktop
+          </p>
+          <h1 className="mt-6 font-heading text-5xl leading-[1.05] font-semibold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+            {t("download.title")}
+          </h1>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-(--q-text-1)">
+            {t("download.subtitle")}
+          </p>
+          <p className="mt-8 border-t border-(--q-border) pt-5 text-sm text-(--q-text-1)">
+            {t("download.install_note")}
+          </p>
+        </div>
 
-      <div className="container relative mx-auto px-4 z-10">
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={container}
-          className="max-w-3xl mx-auto text-center space-y-8"
-        >
-          {/* Header */}
-          <motion.div variants={item} className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              {t("download.title", "Download QoreDB")}
-            </h1>
-            <p className="text-xl text-(--q-text-2) max-w-2xl mx-auto">
-              {t(
-                "download.subtitle",
-                "Get the latest version of QoreDB for your operating system.",
-              )}
-            </p>
-          </motion.div>
-
-          {loading ? (
-            <div className="flex justify-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <div className="self-start rounded-lg border border-(--q-border) bg-(--q-bg-1) p-5 sm:p-8">
+          <fieldset>
+            <legend className="mb-5 text-sm font-medium">
+              {t("download.select_platform")}
+            </legend>
+            <div className="grid grid-cols-3 gap-2">
+              {platforms.map(({ id, label, icon: Icon }) => (
+                <label
+                  key={id}
+                  className={`relative flex min-h-24 cursor-pointer flex-col items-center justify-center gap-3 rounded-md border px-2 py-4 text-sm transition-colors ${selected === id ? "border-(--q-accent) bg-(--q-bg-0) text-(--q-accent)" : "border-(--q-border) hover:bg-(--q-bg-0)"}`}
+                >
+                  <input
+                    type="radio"
+                    name="platform"
+                    value={id}
+                    checked={selected === id}
+                    onChange={() => setSelection(id)}
+                    className="peer sr-only"
+                  />
+                  <span className="pointer-events-none absolute inset-0 rounded-md peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-(--q-accent)" />
+                  <Icon className="size-6" />
+                  {label}
+                </label>
+              ))}
             </div>
-          ) : release ? (
-            <motion.div
-              variants={item}
-              initial="hidden"
-              animate="show"
-              className="space-y-8"
-            >
-              {/* Detected Platform - Primary Card */}
-              <div className="relative p-8 rounded-3xl border-2 border-primary/20 bg-linear-to-br from-card/80 to-card/40 backdrop-blur-xl shadow-2xl overflow-hidden">
-                {/* Decorative background */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-
-                <div className="relative z-10">
-                  {/* Badge */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </fieldset>
+          {selected === "mac" && (
+            <p className="mt-5 text-sm leading-relaxed text-(--q-text-1)">
+              {t("download.mac_arch_hint")}
+            </p>
+          )}
+          {selected === "unknown" && (
+            <p className="mt-5 text-sm text-(--q-text-1)">
+              {t("download.unknown_platform")}
+            </p>
+          )}
+          <div className="mt-6 space-y-2">
+            {options.map((option) =>
+              option.url ? (
+                <a
+                  key={option.label}
+                  href={option.url}
+                  className="flex min-h-14 items-center justify-between gap-3 rounded-md bg-(--q-action) px-4 py-3 text-sm font-medium text-(--q-on-action) transition-colors hover:bg-(--q-action-hover)"
+                >
+                  <span>
+                    {option.label}
+                    <span className="ml-2 font-mono text-xs">
+                      {option.detail}
                     </span>
-                    {t(
-                      "download.detected_platform",
-                      "We detected you're on {{platform}}",
-                    ).replace("{{platform}}", getOsDisplayName(os))}
-                  </div>
-
-                  {/* OS Icon & Info */}
-                  <div className="flex flex-col items-center gap-6 mb-8">
-                    <div className="p-6 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 border border-primary/10">
-                      {getOsIcon(os, "w-16 h-16 text-primary")}
-                    </div>
-                    <div className="text-center">
-                      <h2 className="text-3xl font-bold mb-2">
-                        {getOsDisplayName(os)}
-                      </h2>
-                      <p className="text-(--q-text-2)">
-                        Version {release.version} •{" "}
-                        {formatDate(release.pub_date)}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Main Download Button */}
-                  {mainLink && (
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Button
-                        size="lg"
-                        className="w-full max-w-md h-14 text-lg gap-3 rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
-                        onClick={() => openDownloadLink(mainLink)}
-                      >
-                        <Download className="w-5 h-5" />
-                        {t("download.download_now", "Download Now")}
-                      </Button>
-                    </motion.div>
-                  )}
-
-                  {/* Platform-specific options */}
-                  {os !== "unknown" && (
-                    <div className="mt-6 flex flex-wrap justify-center gap-3">
-                      {getPlatformOptions(os).map((option) => (
-                        <Button
-                          key={`${os}-${option.label}`}
-                          variant="outline"
-                          size="sm"
-                          className={`gap-2 ${option.recommended ? "border-primary/30 bg-primary/5" : ""}`}
-                          onClick={() => openDownloadLink(option.url)}
-                          disabled={!option.url}
-                        >
-                          {option.label}
-                          {option.recommended && (
-                            <span className="text-[10px] uppercase font-bold text-primary">
-                              {t("download.recommended", "Recommended")}
-                            </span>
-                          )}
-                        </Button>
-                      ))}
-                    </div>
-                  )}
+                  </span>
+                  <ArrowDownToLine
+                    aria-hidden="true"
+                    className="size-4 shrink-0"
+                  />
+                </a>
+              ) : (
+                <div
+                  key={option.label}
+                  className="flex min-h-14 flex-wrap items-center justify-between gap-2 rounded-md border border-(--q-border) px-4 py-3 text-sm text-(--q-text-1)"
+                >
+                  <span>
+                    {option.label}{" "}
+                    <span className="font-mono text-xs">{option.detail}</span>
+                  </span>
+                  <span className="text-xs">
+                    {loading
+                      ? t("download.loading")
+                      : t("download.unavailable")}
+                  </span>
                 </div>
-              </div>
-
-              {/* Other Platforms - Collapsible */}
-              <div className="relative">
+              ),
+            )}
+          </div>
+          <div className="mt-6 border-t border-(--q-border) pt-5 text-sm text-(--q-text-1)">
+            {loading && <p role="status">{t("download.loading")}</p>}
+            {error && (
+              <div role="alert">
+                <p>{t("download.error")}</p>
                 <button
                   type="button"
-                  onClick={() => setShowOtherPlatforms(!showOtherPlatforms)}
-                  className="group flex items-center justify-center gap-2 w-full py-4 text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
+                  onClick={retry}
+                  className="mt-2 min-h-11 text-(--q-accent) underline underline-offset-4"
                 >
-                  <span className="text-sm font-medium">
-                    {t("download.other_platforms", "Other platforms")}
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${showOtherPlatforms ? "rotate-180" : ""}`}
-                  />
+                  {t("download.retry")}
                 </button>
-
-                <AnimatePresence>
-                  {showOtherPlatforms && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                        {otherPlatforms.map((platform) => (
-                          <div
-                            key={platform}
-                            className="p-5 rounded-xl border bg-card/30 hover:bg-card/50 transition-all text-left space-y-4"
-                          >
-                            <div className="flex items-center gap-3">
-                              {getOsIcon(platform, "w-5 h-5")}
-                              <h3 className="font-semibold">
-                                {getOsDisplayName(platform)}
-                              </h3>
-                            </div>
-                            <div className="space-y-2">
-                              {getPlatformOptions(platform).map((option) => (
-                                <Button
-                                  key={`${platform}-${option.label}`}
-                                  variant="ghost"
-                                  size="sm"
-                                  className="w-full justify-start gap-2 h-9 text-sm"
-                                  onClick={() => openDownloadLink(option.url)}
-                                  disabled={!option.url}
-                                >
-                                  <Download className="w-3.5 h-3.5" />
-                                  {option.label}
-                                </Button>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
-
-              {/* GitHub Link */}
-              <motion.div variants={item} className="pt-4">
-                <a
-                  href="https://github.com/QoreDB/QoreDB/releases"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  {t(
-                    "download.view_all_releases",
-                    "View all releases on GitHub",
-                  )}
-                </a>
-              </motion.div>
-            </motion.div>
-          ) : (
-            <div className="text-center text-(--q-text-2)">
-              {t("download.error", "Unable to load version information.")}
-            </div>
-          )}
-        </motion.div>
+            )}
+            {!loading && !error && release && (
+              <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="font-mono">v{release.version}</span>
+                {date && !Number.isNaN(date.getTime()) && (
+                  <time dateTime={release.pub_date}>
+                    {date.toLocaleDateString(getIntlLocale(i18n.language), {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                )}
+              </p>
+            )}
+            <a
+              href="https://github.com/QoreDB/QoreDB/releases"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex min-h-11 items-center gap-2 underline underline-offset-4 hover:text-(--q-text-0)"
+            >
+              {t("download.view_all_releases")}
+              <ArrowUpRight aria-hidden="true" className="size-4 shrink-0" />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

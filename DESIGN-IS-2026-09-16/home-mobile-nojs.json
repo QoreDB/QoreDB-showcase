@@ -1,0 +1,64 @@
+{
+  "status": 200,
+  "url": "http://localhost:3101/fr",
+  "headings": [
+    {
+      "text": "Une app pour toutes vos bases",
+      "opacity": "1",
+      "parentOpacity": "1"
+    },
+    {
+      "text": "Vos bases, accessibles à vos outils IA",
+      "opacity": "1",
+      "parentOpacity": "1"
+    },
+    {
+      "text": "Tout ce qu'il faut, rien de superflu",
+      "opacity": "1",
+      "parentOpacity": "0"
+    },
+    {
+      "text": "Concu pour de vrais workflows",
+      "opacity": "1",
+      "parentOpacity": "0"
+    },
+    {
+      "text": "Ce que disent les développeurs",
+      "opacity": "1",
+      "parentOpacity": "0"
+    },
+    {
+      "text": "QoreDB face à la concurrence",
+      "opacity": "1",
+      "parentOpacity": "0"
+    },
+    {
+      "text": "Tarification simple et transparente",
+      "opacity": "1",
+      "parentOpacity": "0"
+    },
+    {
+      "text": "Arrêtez de vous battre avec votre outil de BDD",
+      "opacity": "1",
+      "parentOpacity": "0"
+    }
+  ],
+  "visibleButtons": [
+    {
+      "text": "",
+      "aria": "Ouvrir le menu"
+    },
+    {
+      "text": "Télécharger gratuitement",
+      "aria": null
+    },
+    {
+      "text": "Voir sur GitHub",
+      "aria": null
+    },
+    {
+      "text": "",
+      "aria": "Email"
+    }
+  ]
+}

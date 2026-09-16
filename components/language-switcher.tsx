@@ -30,7 +30,11 @@ export function LanguageSwitcher() {
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     const expires = date.toUTCString();
     document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
-    router.push(localizePathname(currentPathname, currentLocale, newLocale));
+    router.push(
+      localizePathname(currentPathname, currentLocale, newLocale) +
+        window.location.search +
+        window.location.hash,
+    );
 
     router.refresh();
   };
@@ -38,7 +42,7 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-9 gap-2 px-2.5">
+        <Button variant="ghost" className="h-11 gap-2 px-2.5">
           <Languages className="h-4 w-4" />
           <span className="text-xs font-semibold uppercase">
             {currentLocale}
@@ -51,7 +55,7 @@ export function LanguageSwitcher() {
           <DropdownMenuItem
             key={locale}
             onClick={() => handleChange(locale)}
-            className="flex items-center justify-between gap-3 cursor-pointer py-2"
+            className="flex items-center justify-between gap-3 cursor-pointer py-3"
           >
             <span className="font-medium">{LOCALE_LABELS[locale]}</span>
             <span className="text-xs uppercase text-(--q-text-2)">

@@ -12,8 +12,8 @@ export const getFooterLinks = (t: Translate) => ({
     { label: t("footer.features"), href: "/#features" },
     { label: t("footer.preview"), href: "/#preview" },
     { label: t("footer.pricing"), href: "/pricing" },
-    { label: t("nav.marketplace"), href: "/marketplace" },
-    { label: "Roadmap", href: "/roadmap" },
+    { label: t("nav.marketplace"), href: "/plugins" },
+    { label: t("nav.roadmap"), href: "/roadmap" },
     { label: t("footer.changelog"), href: "/changelog" },
   ],
   resources: [
@@ -23,10 +23,10 @@ export const getFooterLinks = (t: Translate) => ({
       href: "/docs/getting-started/installation",
       external: false,
     },
-    { label: t("nav.marketplace"), href: "/marketplace" },
-    { label: "Blog", href: "/blog" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Newsletter", href: "/newsletter" },
+    { label: t("nav.marketplace"), href: "/plugins" },
+    { label: t("nav.blog"), href: "/blog" },
+    { label: t("nav.faq"), href: "/faq" },
+    { label: t("footer.newsletter_label"), href: "/newsletter" },
   ],
   community: [
     {

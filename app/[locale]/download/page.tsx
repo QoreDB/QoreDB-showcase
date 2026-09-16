@@ -4,10 +4,8 @@ import { DownloadSection } from "@/components/download/download-section";
 import { NextSteps } from "@/components/download/next-steps";
 import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
-import TranslationsProvider from "@/components/TranslationsProvider";
+import { DownloadProvider } from "@/contexts/DownloadProvider";
 import { buildPageMetadata } from "@/lib/seo";
-
-const i18nNamespaces = ["common"];
 
 export async function generateMetadata({
   params,
@@ -28,26 +26,17 @@ export async function generateMetadata({
   });
 }
 
-export default async function DownloadPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const { resources } = await getTranslation(locale, "common");
-
+export default function DownloadPage() {
   return (
-    <TranslationsProvider
-      namespaces={i18nNamespaces}
-      locale={locale}
-      resources={resources}
-    >
-      <main className="min-h-screen bg-background text-foreground overflow-hidden">
-        <Header />
-        <DownloadSection />
+    <div className="min-h-screen bg-(--q-bg-0) text-(--q-text-0)">
+      <Header />
+      <main id="main-content" tabIndex={-1}>
+        <DownloadProvider>
+          <DownloadSection />
+        </DownloadProvider>
         <NextSteps />
-        <Footer />
       </main>
-    </TranslationsProvider>
+      <Footer />
+    </div>
   );
 }

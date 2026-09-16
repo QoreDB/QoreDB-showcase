@@ -115,8 +115,7 @@ export function ManifestDetail({ plugin, version }: ManifestDetailProps) {
             {t("marketplace.detail.manifest_integrity")}
           </SectionLabel>
           <p className="mt-2 break-all font-mono text-xs text-(--q-text-1)">
-            {runtime.integrity ??
-              t("marketplace.detail.manifest_no_integrity")}
+            {runtime.integrity ?? t("marketplace.detail.manifest_no_integrity")}
           </p>
         </Card>
       ) : null}
@@ -132,8 +131,8 @@ export function ManifestDetail({ plugin, version }: ManifestDetailProps) {
           </p>
         ) : (
           <ul className="mt-3 space-y-1.5 text-sm text-(--q-text-1)">
-            {contributionSummaries.map((s, i) => (
-              <li key={i} className="flex gap-2">
+            {contributionSummaries.map((s) => (
+              <li key={s} className="flex gap-2">
                 <span className="text-(--q-accent)">•</span>
                 <span>{s}</span>
               </li>
@@ -185,23 +184,16 @@ export function ManifestDetail({ plugin, version }: ManifestDetailProps) {
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-(--q-border) bg-(--q-bg-1) p-6">
-      <div className="pointer-events-none absolute -top-12 -right-12 h-24 w-24 rounded-full bg-(--q-accent)/5 blur-2xl" />
+    <div className="border-b border-(--q-border) py-6">
       <div className="relative">{children}</div>
     </div>
   );
 }
 
-function Field({
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-}) {
+function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[10px] font-medium uppercase tracking-widest text-(--q-text-3)">
+      <p className="text-xs font-medium uppercase tracking-wide text-(--q-text-2)">
         {label}
       </p>
       <p className="mt-1 text-sm text-(--q-text-0)">{value}</p>
@@ -218,7 +210,7 @@ function SectionLabel({
 }) {
   return (
     <p
-      className={`text-[10px] font-medium uppercase tracking-widest text-(--q-text-3) ${className}`}
+      className={`text-xs font-medium uppercase tracking-wide text-(--q-text-2) ${className}`}
     >
       {children}
     </p>

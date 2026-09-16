@@ -1,0 +1,217 @@
+.q-demo {
+  padding: 0 0 64px;
+  max-width: 1100px;
+  margin: 80px auto 0;
+}
+.q-demo + .q-home-workflow {
+  padding-top: 64px;
+  border-top: 1px solid var(--q-border);
+}
+.q-demo-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 24px;
+}
+.q-demo-index {
+  margin: 0 0 10px;
+  color: var(--q-accent);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.q-demo h3 {
+  margin: 0;
+  font-size: clamp(24px, 2.5vw, 34px);
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+.q-demo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+  margin: 0;
+  text-align: right;
+  color: var(--q-text-2);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.q-demo-meta > span {
+  color: var(--q-text-0);
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, monospace;
+  font-size: 15px;
+}
+.q-demo-frame {
+  position: relative;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  border: 1px solid var(--q-border);
+  border-radius: 6px;
+  background: #101114;
+}
+.q-demo-poster,
+.q-demo-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.q-demo-video[hidden] {
+  display: none;
+}
+.q-demo-play {
+  position: absolute;
+  inset: auto auto 24px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 52px;
+  max-width: calc(100% - 48px);
+  padding: 10px 17px 10px 12px;
+  border: 1px solid #ffffff2e;
+  border-radius: 4px;
+  background: #f3f4f7;
+  color: #15161b;
+  box-shadow: 0 8px 24px #0004;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background-color 150ms;
+}
+.q-demo-play:hover {
+  background: white;
+}
+.q-demo-play-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #15161b;
+  color: #f3f4f7;
+  font-size: 11px;
+}
+.q-demo-play-time {
+  border-left: 1px solid #c8cbd2;
+  padding-left: 16px;
+  color: #5b6070;
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+.q-demo-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 0;
+  color: var(--q-text-2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.q-demo-caption p {
+  margin: 0;
+}
+.q-demo-caption a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--q-text-0);
+}
+.q-demo-caption a > span {
+  color: var(--q-accent);
+}
+.q-demo-transcript {
+  border-top: 1px solid var(--q-border);
+  color: var(--q-text-1);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.q-demo-transcript summary {
+  padding: 13px 0;
+  width: fit-content;
+  cursor: pointer;
+}
+.q-demo-transcript ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 4px 0 12px;
+  list-style: none;
+  counter-reset: demo-step;
+}
+.q-demo-transcript li {
+  counter-increment: demo-step;
+}
+.q-demo-transcript li::before {
+  content: "0" counter(demo-step);
+  display: block;
+  margin-bottom: 5px;
+  color: var(--q-accent);
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+}
+.q-demo-status,
+.q-demo-error {
+  margin: 12px 0 0;
+  color: var(--q-text-1);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.q-demo-error p {
+  margin: 0 0 8px;
+}
+.q-demo-error > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.q-demo-error button,
+.q-demo-error a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--q-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+@media (max-width: 760px) {
+  .q-demo {
+    margin-top: 40px;
+    padding-bottom: 40px;
+  }
+  .q-demo + .q-home-workflow {
+    padding-top: 40px;
+  }
+  .q-demo-heading {
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .q-demo-play {
+    inset: auto auto 12px 12px;
+    gap: 12px;
+    max-width: calc(100% - 24px);
+    padding-right: 12px;
+  }
+  .q-demo-play-time {
+    padding-left: 12px;
+  }
+  .q-demo-caption {
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 8px;
+  }
+  .q-demo-transcript ol {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

@@ -1,20 +1,10 @@
 "use client";
 
-import {
-  ArrowRight,
-  Check,
-  ExternalLink,
-  Github,
-  Linkedin,
-  Loader2,
-  Mail,
-} from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { subscribeNewsletter } from "@/actions/subscribe-newsletter";
 import { getContactMailtoHref } from "@/lib/contact";
 import { getFooterLinks } from "@/lib/footer-links";
 import { localizeInternalHref } from "@/lib/seo";
@@ -23,212 +13,103 @@ export function Footer() {
   const { t } = useTranslation();
   const params = useParams();
   const locale = (params.locale as string) || "fr";
-
   const footerLinks = getFooterLinks(t);
 
-  const [email, setEmail] = useState("");
-  const [honeypot, setHoneypot] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [isPending, startTransition] = useTransition();
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    startTransition(async () => {
-      const res = await subscribeNewsletter(
-        { email, address: honeypot, source: "footer" },
-        locale,
-      );
-      if (res.success) {
-        setSubmitted(true);
-        setEmail("");
-      }
-    });
-  };
-
   return (
-    <footer className="relative z-10 border-t border-(--q-border) bg-(--q-bg-0)">
-      {/* Main footer content */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
-          {/* Brand column */}
-          <div className="col-span-2 md:col-span-1">
+    <footer className="q-site-footer">
+      <div className="q-container">
+        <div className="q-footer-grid">
+          <div className="q-footer-brand">
             <Link
               href={localizeInternalHref("/", locale)}
-              className="flex items-center gap-1 mb-4"
+              prefetch={false}
+              className="q-brand"
             >
               <Image
                 src="/logo.webp"
-                alt="QoreDB Logo"
-                width={48}
-                height={48}
-                className="w-6 sm:w-8 dark:hidden"
+                alt=""
+                width={32}
+                height={32}
+                className="dark:hidden"
               />
               <Image
                 src="/logo-white.webp"
-                alt="QoreDB Logo"
-                width={48}
-                height={48}
-                className="w-6 sm:w-8 hidden dark:block"
+                alt=""
+                width={32}
+                height={32}
+                className="hidden dark:block"
               />
-              <span className="text-(--q-text-0) font-bold text-xl">
-                QoreDB
-              </span>
+              <span>QoreDB</span>
             </Link>
-            <p className="text-(--q-text-2) text-sm leading-relaxed mb-6">
-              {t("footer.description")}
-            </p>
-            <div className="flex items-center gap-4">
+            <p>{t("footer.description")}</p>
+            <div className="q-footer-social">
               <a
                 href="https://github.com/QoreDB/QoreDB"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
                 aria-label="GitHub"
               >
-                <Github className="w-5 h-5" />
+                <Github size={18} />
               </a>
               <a
-                href="https://www.linkedin.com/company/qoredb/?viewAsMember=true"
+                href="https://www.linkedin.com/company/qoredb/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors"
-                aria-label="Linkedin"
+                aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin size={18} />
               </a>
-              <button
-                type="button"
-                onClick={() => {
-                  window.location.href = getContactMailtoHref();
-                }}
-                className="bg-transparent text-(--q-text-2) hover:text-(--q-text-0) transition-colors cursor-pointer"
-                aria-label="Email"
-              >
-                <Mail className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="mt-4 flex flex-col items-start gap-3">
               <a
-                href="https://www.producthunt.com/products/qoredb?utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-qoredb-2"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={getContactMailtoHref()}
+                aria-label={t("a11y.contact_email")}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1197632&theme=light&t=1784298260312"
-                  alt="QoreDB - The local-first, AI-native database client, in Rust | Product Hunt"
-                  width={250}
-                  height={54}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
+                <Mail size={18} />
               </a>
             </div>
           </div>
-
-          {/* Product links */}
-          <div>
-            <h3 className="font-heading text-(--q-text-0) font-semibold text-sm mb-4">
-              {t("footer.product")}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={localizeInternalHref(link.href, locale)}
-                    className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources links */}
-          <div>
-            <h3 className="font-heading text-(--q-text-0) font-semibold text-sm mb-4">
-              {t("footer.resources")}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={localizeInternalHref(link.href, locale)}
-                    className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors text-sm inline-flex items-center gap-1"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Community links */}
-          <div>
-            <h3 className="font-heading text-(--q-text-0) font-semibold text-sm mb-4">
-              {t("footer.community")}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.community.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors text-sm inline-flex items-center gap-1"
-                  >
-                    {link.label}
-                    {link.external && <ExternalLink className="w-3 h-3" />}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal links */}
-          <div>
-            <h3 className="font-heading text-(--q-text-0) font-semibold text-sm mb-4">
-              {t("footer.legal")}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={localizeInternalHref(link.href, locale)}
-                    className="text-(--q-text-2) hover:text-(--q-text-0) transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {Object.entries(footerLinks).map(([group, links]) => (
+            <div key={group}>
+              <h2>{t(`footer.${group}`)}</h2>
+              <ul>
+                {links.map((link) => (
+                  <li key={link.href}>
+                    {"external" in link && link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {link.label}
+                        <ArrowUpRight size={12} aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <Link
+                        href={localizeInternalHref(link.href, locale)}
+                        prefetch={false}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-(--q-border)">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-(--q-text-2)">
-            © {new Date().getFullYear()} QoreDB. Open Source under Apache 2.0
-            license.
+        <div className="q-footer-bottom">
+          <p>
+            © {new Date().getFullYear()} QoreDB. {t("footer.license_summary")}
           </p>
-          <div className="flex items-center gap-2 text-sm text-(--q-text-2)">
-            <span>
-              {t("footer.made_with_love", { heart: "" }).trim()}{" "}
-              <span className="text-(--q-accent)">♥</span>{" "}
-            </span>
+          <p>
+            {t("footer.made_with_love", { heart: "♥" }).trim()}{" "}
             <a
               href="https://github.com/raphplt"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-(--q-text-0) hover:text-(--q-accent) transition-colors font-medium"
             >
               Raphaël Plassart
             </a>
-          </div>
+          </p>
         </div>
       </div>
     </footer>

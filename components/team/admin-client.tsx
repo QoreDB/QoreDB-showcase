@@ -117,7 +117,11 @@ export function TeamAdminClient({ token }: { token: string | null }) {
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 px-4 sm:px-6 lg:px-12 pt-32 pb-20">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 px-4 sm:px-6 lg:px-12 pt-32 pb-20"
+      >
         <div className="mx-auto w-full max-w-2xl rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-8 sm:p-10">
           <h1 className="text-2xl sm:text-3xl font-bold">
             {t("team_seats.admin.title")}

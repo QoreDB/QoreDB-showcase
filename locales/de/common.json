@@ -1,5 +1,176 @@
 {
+  "home": {
+    "demo": {
+      "eyebrow": "In Aktion / Core",
+      "title": "Von der Abfrage zum Ergebnis.",
+      "silent": "Ohne Ton",
+      "posterAlt": "QoreDB mit einer SQLite-Demodatenbank.",
+      "play": "Demo ansehen",
+      "loading": "Video wird geladen…",
+      "error": "Das Video konnte nicht geladen werden.",
+      "retry": "Erneut versuchen",
+      "open": "Video öffnen",
+      "caption": "Eine echte QoreDB-Sitzung mit Demodaten.",
+      "transcript": "Ablauf lesen",
+      "steps": [
+        "Die Verbindung „Atelier / demo“ und anschließend den SQL-Editor öffnen.",
+        "Produktionsprojekte nach absteigender Anzahl der Deployments auswählen. Die Tabelle zeigt Atlas (128), Forma (96), Prism (84) und Tempo (72) mit Umgebung, Status und Region.",
+        "UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging' vorbereiten. Die Anweisung bleibt ein Entwurf und wird nicht ausgeführt."
+      ]
+    },
+    "download": "QoreDB herunterladen",
+    "fullImage": "Vollständigen Screenshot öffnen",
+    "hero": {
+      "eyebrow": "Desktop-Client · SQL + NoSQL",
+      "title": ["Ihre Daten.", "Ein Ort", "zum Arbeiten"],
+      "description": "Daten erkunden, abfragen und bearbeiten. In einer Oberfläche, mit der Sie den Überblick behalten.",
+      "explore": "Produkt ansehen",
+      "free": "Core kostenlos",
+      "workspace": "Ihr Arbeitsbereich",
+      "alt": "QoreDB mit SQL-Editor, Ergebnistabelle und SQLite-Verbindung.",
+      "caption": "Von der Abfrage zum Ergebnis."
+    },
+    "compatibility": {
+      "label": "Unterstützte Engines und Dienste",
+      "title": "Verschiedene Engines.",
+      "subtitle": "Vertraute Abläufe.",
+      "link": "Alle Kompatibilitäten"
+    },
+    "workflows": {
+      "eyebrow": "Im Detail",
+      "title": "Funktionen",
+      "explore": {
+        "label": "Erkunden & abfragen",
+        "title": "Tabellen erkunden. Daten abfragen.",
+        "description": "Tabellen durchsuchen, Abfragen schreiben, Ergebnisse prüfen. Ihre Verbindungen und Daten teilen sich einen Arbeitsbereich.",
+        "steps": [
+          {
+            "title": "Verbindung wählen",
+            "description": "Der Arbeitskontext ist jederzeit klar."
+          },
+          {
+            "title": "Lesen und erkunden",
+            "description": "Tabellen und ihre Struktur direkt im Zugriff."
+          },
+          {
+            "title": "Suche eingrenzen",
+            "description": "Daten in der Tabelle filtern und prüfen."
+          }
+        ],
+        "link": "Dokumentation erkunden",
+        "alt": "QoreDB-Datentabelle mit Tabellennavigation, Spalten und Suche.",
+        "caption": "Die Tabelle, ihre Spalten, Ihr Kontext. · Core"
+      },
+      "sandbox": {
+        "label": "Vorbereiten & prüfen",
+        "title": "Erst die Änderungen. Dann die Auswirkungen.",
+        "description": "Mit der Pro-Sandbox bereiten Sie Änderungen lokal vor. Prüfen Sie vorgemerkte Vorgänge, bevor Sie SQL erzeugen und über die Anwendung entscheiden.",
+        "steps": [
+          {
+            "title": "In Ruhe bearbeiten",
+            "description": "Geänderte Zellen bleiben klar markiert."
+          },
+          {
+            "title": "Vorgänge prüfen",
+            "description": "Einfügungen, Änderungen und Löschungen im Überblick."
+          }
+        ],
+        "link": "Sandbox entdecken",
+        "alt": "QoreDB-Sandbox mit geänderten Zellen und vorgemerkten Vorgängen.",
+        "caption": "Änderungen vor der Anwendung im Blick. · Pro"
+      },
+      "safety": {
+        "label": "Mit Schutzmechanismen arbeiten",
+        "title": "Kurz innehalten. Im richtigen Moment.",
+        "description": "Eine Produktionsumgebung braucht Ihre volle Aufmerksamkeit. Integrierte Schutzmechanismen machen sensible Vorgänge vor der Ausführung deutlich.",
+        "steps": [
+          {
+            "title": "Umgebung erkennen",
+            "description": "Entwicklung, Test und Produktion sind klar gekennzeichnet."
+          },
+          {
+            "title": "Sensible Aktion bestätigen",
+            "description": "Hier: eine Warnung vor dem Löschen einer Produktionsdatenbank."
+          }
+        ],
+        "link": "Schutzmechanismen verstehen",
+        "alt": "QoreDB-Bestätigung zum Löschen einer Datenbank mit Produktionswarnung und den Optionen Abbrechen und Fortfahren.",
+        "caption": "Produktionsbestätigung · Core. Eigene Regeln · Pro."
+      }
+    },
+    "mcp": {
+      "eyebrow": "Automatisierung · MCP / Core",
+      "title": "Ihr Kontext. Auch für Ihre Agenten.",
+      "description": "Verbinden Sie MCP-kompatible Werkzeuge mit ausdrücklich freigegebenen Verbindungen. Sie erkunden Schemas und fragen Daten in schreibgeschützten Sitzungen ab.",
+      "link": "MCP-Server einrichten",
+      "flowLabel": "Ablauf einer MCP-Anfrage",
+      "assistant": "Ihr Agent",
+      "connections": "Freigegebene Verbindungen",
+      "access": {
+        "title": "Gezielter Zugriff",
+        "description": "Sie wählen die freigegebenen Verbindungen. Abfragelimits und Protokollierung bleiben aktiv."
+      },
+      "local": {
+        "title": "Local-first",
+        "description": "Der Client arbeitet auf Ihrem Rechner. Optionale Dienste können mit ihren Anbietern kommunizieren."
+      },
+      "source": {
+        "title": "Offener Kern",
+        "description": "Der Kern steht unter Apache-2.0. Premium-Module haben eine separate BUSL-1.1-Lizenz."
+      },
+      "note": "Die integrierte Pro-KI ist optional. Externe Assistenten können Ergebnisse je nach Konfiguration an ihren Anbieter übertragen."
+    },
+    "pricing": {
+      "eyebrow": "Tarife",
+      "title": "Core, Pro und Team",
+      "compare": "Tarife vergleichen",
+      "core": {
+        "model": "Kostenlos",
+        "description": "Für die tägliche Datenarbeit: SQL- und NoSQL-Verbindungen, Editor, Datentabelle und integrierte Schutzmechanismen.",
+        "link": "Mit Core starten"
+      },
+      "pro": {
+        "model": "Einmalkauf",
+        "description": "Mehr Möglichkeiten mit Sandbox, visuellem Diff, optionaler KI und eigenen Sicherheitsregeln.",
+        "link": "Pro entdecken"
+      },
+      "team": {
+        "model": "Pro Sitz / Jahr",
+        "description": "Für Teams: Umfang, Bedingungen und Verfügbarkeit des Angebots finden Sie auf der Preisseite.",
+        "link": "Team ansehen"
+      }
+    },
+    "faq": {
+      "eyebrow": "Vor dem Start",
+      "title": "Gute Fragen.",
+      "start": {
+        "question": "Kann ich kostenlos starten?",
+        "answer": "Ja. Core ist kostenlos für macOS, Windows und Linux verfügbar. Verbinden Sie Ihre Datenbanken und nutzen Sie Editor und Datentabelle, ohne Pro zu kaufen."
+      },
+      "privacy": {
+        "question": "Wohin gelangen meine Daten?",
+        "answer": "QoreDB verbindet sich von Ihrem Rechner aus mit Datenbanken. Optionale KI-Funktionen oder externe Assistenten können je nach Konfiguration Kontext an ihren Anbieter senden. Local-first bedeutet nicht, dass jede Nutzung offline bleibt."
+      },
+      "license": {
+        "question": "Was unterscheidet Core und Pro?",
+        "answer": "Core ist die Open-Source-Basis unter Apache-2.0. Pro ergänzt Premium-Funktionen unter BUSL-1.1 als Einmalkauf. Für Team gelten jährliche Bedingungen pro Sitz. Details und Verfügbarkeit finden Sie auf der Preisseite."
+      }
+    },
+    "cta": {
+      "eyebrow": "Download",
+      "title": "Mit QoreDB starten.",
+      "description": "Verfügbar für macOS, Windows und Linux."
+    }
+  },
+  "a11y": {
+    "skip_content": "Zum Inhalt springen",
+    "primary_navigation": "Hauptnavigation",
+    "toggle_theme": "Design wechseln",
+    "contact_email": "Per E-Mail kontaktieren"
+  },
   "nav": {
+    "product": "Produkt",
+    "resources": "Ressourcen",
     "features": "Funktionen",
     "preview": "Vorschau",
     "pricing": "Preise",
@@ -24,7 +195,7 @@
     "detected_platform": "Wir haben festgestellt, dass Sie sich auf {{platform}} befinden.",
     "other_platforms": "Andere Plattformen",
     "recommended": "Empfohlen",
-    "apple_silicon": "Apple Silizium (M1/M2/M3/M4)",
+    "apple_silicon": "Apple Silicon",
     "intel_mac": "Intel-Mac",
     "windows_installer": "Installationsprogramm (.exe)",
     "windows_msi": "MSI-Installer",
@@ -44,7 +215,13 @@
       "interface_tour_description": "Seitenleiste, Tabs, Editor, Ergebnisbereich: das vollständige mentale Modell.",
       "full_docs_title": "Die vollständige Dokumentation durchsuchen",
       "full_docs_description": "Treiber, Abfragen, Sicherheit, Tastenkürzel und mehr."
-    }
+    },
+    "loading": "Versionsinformationen werden geladen…",
+    "retry": "Erneut versuchen",
+    "unavailable": "In dieser Version nicht verfügbar",
+    "mac_arch_hint": "Wählen Sie den Prozessor Ihres Macs: Apple Silicon oder Intel. Sie finden ihn im Apple-Menü → Über diesen Mac.",
+    "unknown_platform": "Wählen Sie das Desktop-System, auf dem Sie QoreDB installieren möchten.",
+    "install_note": "Starten Sie kostenlos mit Core. Wählen Sie Ihr System und das passende Paket für Ihren Computer."
   },
   "changelog": {
     "title": "Änderungsprotokoll",
@@ -55,6 +232,8 @@
     "load_more": "Laden Sie weitere Veröffentlichungen"
   },
   "footer": {
+    "license_summary": "Core: Apache-2.0. Premium-Funktionen: BUSL-1.1.",
+    "newsletter_label": "Newsletter",
     "product": "Produkt",
     "features": "Funktionen",
     "preview": "Vorschau",
@@ -593,18 +772,18 @@
   "pricing_page": {
     "badge": "Offener Kern",
     "title": "Wählen Sie den Plan, der zu Ihrem Arbeitsablauf passt",
-    "subtitle": "Kostenlos für Solo-Arbeit, Pro für den Alltag.",
+    "subtitle": "Core ist kostenlos. Pro gibt es als Einmalkauf. Team bringt Pro an jeden Arbeitsplatz.",
     "checkout_error": "Stripe Checkout kann derzeit nicht gestartet werden.",
     "faq_title": "Häufig gestellte Fragen",
     "core": {
-      "title": "Kostenlos",
+      "title": "Core",
       "tagline": "Solo & Erkundung",
       "description": "Die vollständige Open-Source-Grundlage von QoreDB.",
       "price": "Kostenlos",
       "badge": "Hauptwahl",
       "cta": "Kostenlos herunterladen",
       "features": {
-        "drivers": "34 Treiber in v0.1.39. Unterstützte Engines: PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
+        "drivers": "SQL- und NoSQL-Systeme und -Dienste: PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
         "crud": "Vollständiger CRUD + SQL/Mongo-Editor mit Autovervollständigung und Linting",
         "workspaces": "Workspaces – Verbindungen, Abfragen und Notebooks nach Projekt gruppieren",
         "grid": "Hochleistungs-Datenraster mit Bulk Edit und erweiterten Filtern",
@@ -619,7 +798,8 @@
         "shortcuts": "Verlauf, Favoriten, Tab Groups, Tastaturkürzel und 9 UI-Sprachen",
         "mcp": "MCP-Server mit Lesezugriff — Externe KI-Agenten erhalten Zugriff auf ausdrücklich freigegebene Verbindungen, Schemas und gespeicherte Abfragen.",
         "trends": "Abfragetrends · Core — Ausführungen, P50/P95-Latenz und Fehlerraten über 7, 14 oder 30 Tage anhand des gespeicherten Auditverlaufs verfolgen."
-      }
+      },
+      "billing": "Kostenlos, ohne Abonnement"
     },
     "pro": {
       "title": "Pro",
@@ -643,7 +823,8 @@
         "virtual_relations": "Virtuelle Beziehungen automatisch vorschlagen",
         "masking": "Spaltenmaskierung · Pro — Sensible Spalten pro Verbindung vollständig, teilweise oder als Hash maskieren – in Ergebnissen, Exporten, APIs und Agenten."
       },
-      "individual_use": "Lizenz zur individuellen Nutzung."
+      "individual_use": "Lizenz zur individuellen Nutzung.",
+      "billing": "Einmalzahlung · Einzellizenz"
     },
     "team": {
       "title": "Team",
@@ -678,11 +859,11 @@
       },
       "data_sent": {
         "question": "Werden meine Daten irgendwohin gesendet?",
-        "answer": "Nein. QoreDB ist zu 100 % lokal. Ihre Daten verlassen niemals Ihren Computer. Sogar AI läuft mit Ihren eigenen API-Schlüsseln."
+        "answer": "QoreDB verbindet sich von Ihrem Computer mit Ihren Datenbanken. Optionale KI-Funktionen können Kontext an den gewählten Anbieter senden, auch mit Ihrem eigenen API-Schlüssel. Prüfen Sie vor der Nutzung den Anbieter und die Einstellungen."
       },
       "lifetime_updates": {
         "question": "Sind Updates lebenslang enthalten?",
-        "answer": "Ja. Einmalige Zahlung, lebenslange Updates inklusive — kein Abonnement, keine Verlängerung, keine Paywall für zukünftige Versionen."
+        "answer": "Pro ist ein einmaliger Kauf mit lebenslangen Updates. Team ist ein separates Abonnement, das pro Sitz und Jahr abgerechnet wird."
       },
       "try_pro": {
         "question": "Kann ich zuerst die Pro-Funktionen ausprobieren?",
@@ -1171,6 +1352,14 @@
     "code_copied": "Code kopiert"
   },
   "docs": {
+    "navigation_label": "Dokumentation durchsuchen",
+    "search_close": "Suche schließen",
+    "search_loading": "Suche wird geladen…",
+    "search_error": "Die Suche ist nicht verfügbar. Bitte erneut versuchen.",
+    "search_retry": "Erneut versuchen",
+    "search_hint": "Geben Sie einen Suchbegriff für die Dokumentation ein.",
+    "search_empty": "Keine Ergebnisse für „{{query}}“.",
+    "search_results": "{{count}} Ergebnisse angezeigt",
     "search_label": "Doku durchsuchen",
     "search_placeholder": "In der Doku suchen…",
     "on_this_page": "Auf dieser Seite",

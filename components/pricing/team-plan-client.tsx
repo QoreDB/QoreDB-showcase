@@ -67,7 +67,11 @@ export function TeamPlanClient({
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="q-container flex-1 pt-32 pb-20 lg:pt-44"
+      >
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/${locale}/pricing`}
@@ -77,11 +81,11 @@ export function TeamPlanClient({
             {t("pricing_page.team.back")}
           </Link>
 
-          <div className="mt-8 text-center max-w-2xl mx-auto">
-            <span className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) text-xs font-semibold px-2.5 py-1">
+          <div className="mt-8 max-w-2xl">
+            <span className="inline-flex font-mono text-(--q-accent) text-xs">
               {t("pricing_page.team.badge")}
             </span>
-            <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">
+            <h1 className="mt-4 font-heading text-5xl md:text-6xl font-semibold tracking-[-0.045em]">
               {t("pricing_page.team.title")}
             </h1>
             <p className="mt-3 text-(--q-text-1)">
@@ -91,7 +95,7 @@ export function TeamPlanClient({
 
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             {/* Features */}
-            <div className="rounded-3xl border border-(--q-border) bg-(--q-bg-1) p-6 sm:p-8">
+            <div className="order-2 lg:order-1 rounded-lg border border-(--q-border) bg-(--q-bg-1) p-6 sm:p-8">
               <h2 className="text-lg font-semibold text-(--q-text-0)">
                 {t("pricing_page.team.tagline")}
               </h2>
@@ -114,7 +118,7 @@ export function TeamPlanClient({
             </div>
 
             {/* Configurateur */}
-            <div className="rounded-3xl border border-(--q-accent)/30 bg-(--q-accent)/5 p-6 sm:p-8 shadow-[0_30px_70px_-40px_var(--q-accent)]">
+            <div className="order-1 lg:order-2 rounded-lg border border-(--q-accent)/30 bg-(--q-accent)/5 p-6 sm:p-8 ">
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-bold text-(--q-text-0)">
                   {unitLabel}
@@ -124,7 +128,7 @@ export function TeamPlanClient({
                 </span>
               </div>
 
-              <div className="mt-6 flex items-center justify-between rounded-xl border border-(--q-border) bg-(--q-bg-0) px-3 py-2.5">
+              <div className="mt-6 flex items-center justify-between rounded-md border border-(--q-border) bg-(--q-bg-0) px-3 py-2.5">
                 <span className="text-sm text-(--q-text-1)">
                   {t("pricing_page.team.seats_label")}
                 </span>
@@ -135,19 +139,23 @@ export function TeamPlanClient({
                     onClick={() =>
                       setSeats((value) => Math.max(minSeats, value - 1))
                     }
-                    disabled={seats <= minSeats}
-                    className="h-8 w-8 inline-flex items-center justify-center rounded-lg border border-(--q-border) text-(--q-text-0) disabled:opacity-40 disabled:cursor-not-allowed hover:border-(--q-accent)/40 transition"
+                    disabled={seats <= minSeats || loading}
+                    className="h-11 w-11 inline-flex items-center justify-center rounded-lg border border-(--q-border) text-(--q-text-0) disabled:opacity-40 disabled:cursor-not-allowed hover:border-(--q-accent)/40 transition"
                   >
                     −
                   </button>
-                  <span className="w-8 text-center text-base font-semibold text-(--q-text-0)">
+                  <span
+                    aria-live="polite"
+                    className="w-8 text-center text-base font-semibold text-(--q-text-0)"
+                  >
                     {seats}
                   </span>
                   <button
                     type="button"
                     aria-label={t("pricing_page.team.seats_increase")}
                     onClick={() => setSeats((value) => value + 1)}
-                    className="h-8 w-8 inline-flex items-center justify-center rounded-lg border border-(--q-border) text-(--q-text-0) hover:border-(--q-accent)/40 transition"
+                    disabled={loading}
+                    className="h-11 w-11 inline-flex items-center justify-center rounded-lg border border-(--q-border) text-(--q-text-0) hover:border-(--q-accent)/40 transition"
                   >
                     +
                   </button>
@@ -171,19 +179,27 @@ export function TeamPlanClient({
                 type="button"
                 onClick={startCheckout}
                 disabled={loading}
-                className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-(--q-accent) text-white px-4 py-3 font-semibold transition hover:bg-(--q-accent-strong) disabled:opacity-60 disabled:cursor-not-allowed"
+                aria-busy={loading}
+                className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-(--q-action) text-(--q-on-action) px-4 py-3 font-semibold transition hover:bg-(--q-action-hover) disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  t("pricing_page.team.cta")
+                {loading && (
+                  <Loader2
+                    aria-hidden="true"
+                    className="mr-2 h-4 w-4 animate-spin"
+                  />
                 )}
+                {t("pricing_page.team.cta")}
               </button>
               <p className="mt-3 text-center text-[11px] text-(--q-text-2)">
                 {t("pricing_page.team.min_seats_note", { min: minSeats })}
               </p>
               {error ? (
-                <p className="mt-3 text-center text-sm text-red-500">{error}</p>
+                <p
+                  role="alert"
+                  className="mt-3 text-center text-sm text-(--q-error)"
+                >
+                  {error}
+                </p>
               ) : null}
             </div>
           </div>

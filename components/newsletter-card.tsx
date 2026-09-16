@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Check, FileText, Loader2, Mail } from "lucide-react";
 import { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
@@ -69,14 +68,13 @@ export function NewsletterCard({
 
         <div className="w-full md:max-w-xs shrink-0">
           {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+            <div
+              role="status"
               className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/5 px-4 py-3 text-sm font-medium text-emerald-500"
             >
               <Check className="h-4 w-4 shrink-0" />
               <span>{t("newsletter_page.success")}</span>
-            </motion.div>
+            </div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-2">
               <input

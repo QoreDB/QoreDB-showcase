@@ -1,0 +1,25 @@
+{
+  "status": 200,
+  "url": "http://localhost:3101/fr/docs",
+  "headings": [
+    {
+      "text": "Documentation QoreDB",
+      "opacity": "1",
+      "parentOpacity": "1"
+    }
+  ],
+  "visibleButtons": [
+    {
+      "text": "",
+      "aria": "Ouvrir le menu"
+    },
+    {
+      "text": "S'abonner",
+      "aria": null
+    },
+    {
+      "text": "",
+      "aria": "Email"
+    }
+  ]
+}

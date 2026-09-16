@@ -51,7 +51,11 @@ export default async function OssProgramPage({
   return (
     <div className="min-h-screen flex flex-col bg-(--q-bg-0) text-(--q-text-0)">
       <Header />
-      <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-12"
+      >
         <div className="max-w-3xl mx-auto">
           <header className="text-center mb-10">
             <p className="inline-flex rounded-full bg-(--q-accent)/10 text-(--q-accent) px-3 py-1 text-xs font-semibold uppercase tracking-wide">

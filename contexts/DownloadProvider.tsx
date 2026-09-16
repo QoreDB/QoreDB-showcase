@@ -10,10 +10,7 @@ import {
   useState,
 } from "react";
 
-// Types
 type OS = "mac" | "windows" | "linux" | "unknown";
-type Arch = "arm64" | "x86_64" | "unknown";
-
 type Platform =
   | "windows-x86_64"
   | "windows-x86_64-msi"
@@ -31,141 +28,86 @@ export interface LatestRelease {
   version: string;
   notes: string;
   pub_date: string;
-  platforms: Record<Platform, { signature: string; url: string }>;
+  platforms: Partial<Record<Platform, { signature: string; url: string }>>;
 }
 
 const MICROSOFT_STORE_URL = "https://apps.microsoft.com/detail/9NZLCGFWCHHG";
 
 interface DownloadContextType {
   os: OS;
-  arch: Arch;
   release: LatestRelease | null;
   loading: boolean;
-  error: string | null;
-  getDownloadLink: (targetOs?: OS) => string | null;
-  getOsDisplayName: (targetOs?: OS) => string;
+  error: boolean;
+  retry: () => void;
+  getDownloadLink: (targetOs: OS) => string | null;
 }
 
 const DownloadContext = createContext<DownloadContextType | undefined>(
   undefined,
 );
 
-// Utility functions for OS and architecture detection
 function detectOS(): OS {
-  if (typeof window === "undefined") return "unknown";
-
-  const platform = navigator.userAgent.toLowerCase();
-  if (platform.includes("mac")) return "mac";
-  if (platform.includes("win")) return "windows";
-  if (platform.includes("linux")) return "linux";
+  const ua = navigator.userAgent.toLowerCase();
+  // Mobile browsers may identify as macOS or Linux but cannot run these desktop builds.
+  if (
+    /android|iphone|ipad|ipod/.test(ua) ||
+    (ua.includes("mac") && navigator.maxTouchPoints > 1)
+  )
+    return "unknown";
+  if (ua.includes("mac")) return "mac";
+  if (ua.includes("win")) return "windows";
+  if (ua.includes("linux")) return "linux";
   return "unknown";
 }
 
-function detectArch(): Arch {
-  if (typeof window === "undefined") return "unknown";
-
-  // Check for Apple Silicon
-  // Modern browsers on Apple Silicon often show ARM in various ways
-  const ua = navigator.userAgent;
-
-  // macOS detection for Apple Silicon
-  if (ua.includes("Mac")) {
-    // If it doesn't mention Intel, it's likely Apple Silicon (M1/M2/M3/M4)
-    if (!ua.includes("Intel")) {
-      return "arm64";
-    }
-    return "x86_64";
-  }
-
-  // For Windows ARM (rare but exists)
-  if (ua.includes("ARM") || ua.includes("aarch64")) {
-    return "arm64";
-  }
-
-  return "x86_64";
-}
-
 export function DownloadProvider({ children }: { children: ReactNode }) {
-  // Use lazy initialization to avoid calling setState in effect
-  const [os] = useState<OS>(() => detectOS());
-  const [arch] = useState<Arch>(() => detectArch());
+  const [os, setOs] = useState<OS>("unknown");
   const [release, setRelease] = useState<LatestRelease | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const retry = useCallback(() => setAttempt((value) => value + 1), []);
 
-  // Fetch release info on mount
   useEffect(() => {
-    fetch("/api/latest-release")
-      .then((res) => {
-        if (!res.ok) throw new Error("API response not ok");
-        return res.json();
-      })
-      .then((data) => {
-        setRelease(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch latest version", err);
-        setError("Failed to fetch release data");
-        setLoading(false);
-      });
+    setOs(detectOS());
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setError(false);
+    fetch("/api/latest-release", {
+      signal: controller.signal,
+      cache: attempt > 0 ? "no-store" : "default",
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Release unavailable");
+        const data = await response.json();
+        if (
+          typeof data?.version !== "string" ||
+          !data.platforms ||
+          typeof data.platforms !== "object"
+        )
+          throw new Error("Invalid release");
+        if (!controller.signal.aborted) setRelease(data);
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setError(true);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () => controller.abort();
+  }, [attempt]);
+
   const getDownloadLink = useCallback(
-    (targetOs?: OS): string | null => {
-      const effectiveOs = targetOs || os;
-
-      // Windows is distributed via Microsoft Store (independent from GitHub releases)
-      if (effectiveOs === "windows") {
-        return MICROSOFT_STORE_URL;
-      }
-
-      if (!release) return null;
-
-      if (effectiveOs === "mac") {
-        // Use detected architecture for macOS
-        return arch === "arm64"
-          ? release.platforms["darwin-aarch64"]?.url
-          : release.platforms["darwin-x86_64"]?.url;
-      }
-      if (effectiveOs === "linux") {
-        return release.platforms["linux-x86_64-appimage"]?.url;
-      }
-      return null;
-    },
-    [release, os, arch],
+    (targetOs: OS) => (targetOs === "windows" ? MICROSOFT_STORE_URL : null),
+    [],
   );
-
-  const getOsDisplayName = useCallback(
-    (targetOs?: OS): string => {
-      const effectiveOs = targetOs || os;
-      switch (effectiveOs) {
-        case "mac":
-          return "macOS";
-        case "windows":
-          return "Windows";
-        case "linux":
-          return "Linux";
-        default:
-          return "Your Platform";
-      }
-    },
-    [os],
-  );
-
   const value = useMemo(
-    () => ({
-      os,
-      arch,
-      release,
-      loading,
-      error,
-      getDownloadLink,
-      getOsDisplayName,
-    }),
-    [os, arch, release, loading, error, getDownloadLink, getOsDisplayName],
+    () => ({ os, release, loading, error, retry, getDownloadLink }),
+    [os, release, loading, error, retry, getDownloadLink],
   );
-
   return (
     <DownloadContext.Provider value={value}>
       {children}
@@ -175,8 +117,7 @@ export function DownloadProvider({ children }: { children: ReactNode }) {
 
 export function useDownload() {
   const context = useContext(DownloadContext);
-  if (context === undefined) {
+  if (!context)
     throw new Error("useDownload must be used within a DownloadProvider");
-  }
   return context;
 }
