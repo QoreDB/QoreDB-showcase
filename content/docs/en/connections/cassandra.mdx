@@ -1,0 +1,39 @@
+---
+title: Cassandra
+description: "Configure Cassandra in QoreDB with CQL, keyspaces, TLS, primary-key editing and bounded reads."
+premium: false
+---
+
+# Cassandra
+
+The **Cassandra** driver is included in Core since v0.1.39. QoreDB connects through CQL v4 and lists keyspaces, tables and columns from `system_schema`.
+
+## Connect
+
+1. Select **Cassandra** in **New Connection**. Use the form, not a `cassandra://` URL: this driver has no connection-URL input.
+2. Enter the host, port **9042**, and the keyspace to use.
+3. Enter credentials if required by your cluster, configure TLS and test the connection.
+
+Enable TLS when required by the server and provide the relevant CA certificate if necessary. Certificate validation is not bypassed through a permissive TLS mode.
+
+## Querying and editing
+
+Use CQL in the editor. For a table keyed by `id`, a bounded query could be:
+
+```sql
+SELECT * FROM app.events WHERE id = 'example' LIMIT 100;
+```
+
+Adapt the key, value type and keyspace to your schema. Table browsing uses native paging-state cursors. Inserting, updating or deleting rows requires the complete primary key, including partition and clustering keys where applicable.
+
+## Limits and safety
+
+- QoreDB does not expose transaction controls, stored routines, triggers or visual DDL for this driver.
+- Unbounded reads are refused on production connections. Bound your queries and use the appropriate partition key.
+- `ALLOW FILTERING` is refused on **production** connections.
+
+A rejected query should be rewritten around its partition key and a bounded result. Changing the connection label to avoid a safety check does not fix its access pattern.
+
+- [Environments](/docs/connections/environments)
+- [Driver limitations](/docs/reference/driver-limitations)
+- [Supported databases](/docs/connections/supported-databases)

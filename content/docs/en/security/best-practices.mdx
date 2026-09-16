@@ -153,3 +153,7 @@ The right mental model: QoreDB makes a developer's daily workflow safer through 
 - [Vault encryption](/docs/security/vault-encryption) for credential protection
 - [SQL safety validation](/docs/security/sql-safety-validation) for the safety detector and the interceptor
 - [Sandbox mode](/docs/security/sandbox-mode) for review-before-apply workflows
+
+## Agent access and masking
+
+Authorize connections individually for [MCP](/docs/automation/mcp-server) and the [CLI](/docs/automation/cli). Both force read-only sessions. Use [column masking](/docs/security/column-masking) when appropriate and review what your external AI provider receives.

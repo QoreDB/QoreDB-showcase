@@ -1,0 +1,45 @@
+---
+title: BigQuery
+description: "Configurer le compte de service, les projets et la localisation, prévisualiser les tables et estimer les scans."
+premium: false
+---
+
+# BigQuery
+
+BigQuery est inclus dans Core depuis la v0.1.39. QoreDB utilise les API REST Google avec une **clé JSON de compte de service**.
+
+## Configurer la connexion
+
+Choisissez **BigQuery** dans **Nouvelle connexion**. Utilisez le formulaire dédié, pas une URL de base de données.
+
+| Champ | Valeur |
+| --- | --- |
+| Projet | Projet par défaut. Sans valeur, QoreDB utilise le `project_id` de la clé. |
+| Compte de service | Collez la clé JSON complète, comprenant `client_email` et `private_key`. |
+| Localisation | Localisation des datasets et jobs, par exemple `EU`, adaptée aux données interrogées. |
+| Projet de facturation | Projet utilisé pour les jobs ; par défaut, le projet sélectionné. |
+
+Le compte de service doit pouvoir accéder aux datasets et lancer les jobs souhaités. QoreDB liste les datasets des projets visibles par ce compte, pas seulement ceux du projet par défaut. Une connexion Google personnelle ou une clé API ne remplace pas la clé du compte de service.
+
+## Prévisualiser ou interroger
+
+Les aperçus de tables utilisent `tabledata.list`, sans lancer de scan de requête. Les requêtes de l’éditeur suivent un autre parcours : QoreDB estime le volume scanné avant exécution et demande confirmation si le scan peut entraîner un coût.
+
+Pour une estimation explicite sans exécution :
+
+```sql
+EXPLAIN SELECT * FROM `PROJECT.DATASET.TABLE` LIMIT 100;
+```
+
+Remplacez les identifiants, examinez l’estimation, puis lancez le `SELECT` si nécessaire. Un `LIMIT` borne les lignes renvoyées ; il ne garantit pas un faible volume scanné. Filtrez les partitions ou sélectionnez moins de colonnes lorsque c’est pertinent.
+
+Les jobs sont suivis de manière asynchrone et l’annulation est envoyée à BigQuery.
+
+## Limites et dépannage
+
+- Les résultats sont plafonnés à **200 000 lignes**, avec une erreur explicite si des pages restent à lire.
+- Les contrôles de transaction, le DDL visuel et la gestion des routines ne sont pas exposés par ce driver.
+- Si des datasets manquent, vérifiez les accès du compte. Pour une erreur de job, contrôlez le projet de facturation, les permissions et la localisation.
+- Gardez la clé JSON dans le champ secret de la connexion ; ne l’insérez pas dans une requête ou un notebook partagé.
+
+Voir les [limites des drivers](/docs/reference/driver-limitations) et le [masquage des colonnes](/docs/security/column-masking).

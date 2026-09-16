@@ -8,7 +8,7 @@ premium: false
 
 QoreDB analyse les URL de connexion en champs normalisés avant de les stocker. Cette page répertorie chaque schéma que l'analyseur accepte, les paramètres de requête qu'il reconnaît et les valeurs par défaut qui s'appliquent lorsque vous omettez quelque chose.
 
-Le pilote est automatiquement détecté à partir du schéma : collez une URL et QoreDB choisit le bon moteur. Vous n'avez pas besoin de définir le pilote manuellement si votre URL est bien formée.
+Le schéma identifie un protocole et les hôtes de services reconnus peuvent préciser le moteur. Pour un moteur compatible sur un hôte générique, vérifiez le driver sélectionné après import de l’URL. Certains drivers utilisent un formulaire dédié.
 
 ## Recherche rapide
 
@@ -44,6 +44,33 @@ Choisir le moteur dédié n'est pas cosmétique : PlanetScale et DocumentDB forc
 <Callout type="info">
 **TimescaleDB n'est délibérément pas détecté depuis l'URL.** Une instance Timescale est un serveur PostgreSQL ordinaire avec une extension installée ; rien dans la chaîne de connexion ne le dit. Choisissez le moteur vous-même.
 </Callout>
+
+## Drivers ajoutés en v0.1.39
+
+Ces moteurs réutilisent des schémas existants. Indiquez explicitement le bon port et vérifiez le driver sélectionné après import de l’URL.
+
+| Moteur | Schéma / port par défaut | Sélection |
+| --- | --- | --- |
+| [TiDB](/docs/connections/tidb) | `mysql://`, 4000 | `*.tidbcloud.com`, ou sélection manuelle. |
+| [StarRocks](/docs/connections/starrocks) | `mysql://`, 9030 | Sélection manuelle. |
+| [Apache Doris](/docs/connections/doris) | `mysql://`, 9030 | Sélection manuelle. |
+| [SingleStore](/docs/connections/singlestore) | `mysql://`, 3306 | `*.svc.singlestore.com`, ou sélection manuelle. |
+| [YugabyteDB](/docs/connections/yugabytedb) | `postgresql://`, 5433 | `*.yugabyte.cloud`, ou sélection manuelle ; base `yugabyte` par défaut. |
+| [KeyDB](/docs/connections/keydb) | `redis://` / `rediss://`, 6379 | Sélection manuelle. |
+| [Garnet](/docs/connections/garnet) | `redis://` / `rediss://`, 6379 | Sélection manuelle. |
+| [Azure SQL](/docs/connections/azuresql) | `sqlserver://` / `mssql://`, 1433 | `*.database.windows.net` ; TLS imposé. |
+| [Azure Synapse](/docs/connections/synapse) | `sqlserver://` / `mssql://`, 1433 | `*.sql.azuresynapse.net` ; TLS imposé. |
+
+### Drivers configurés par formulaire
+
+L’analyseur générique d’URL n’accepte **pas** `snowflake://`, `bigquery://`, `cassandra://`, `scylladb://` ou `keyspaces://`.
+
+- [Snowflake](/docs/connections/snowflake) : compte/hôte, base, warehouse, rôle et authentification par paire de clés ou jeton en HTTPS.
+- [BigQuery](/docs/connections/bigquery) : JSON du compte de service, projet, projet de facturation et localisation en HTTPS.
+- [Cassandra](/docs/connections/cassandra) / [ScyllaDB](/docs/connections/scylladb) : hôte, port 9042, keyspace, identifiants et paramètres TLS.
+- [Amazon Keyspaces](/docs/connections/keyspaces) : hôte régional, port 9142, identifiants spécifiques au service et TLS imposé.
+
+ClickHouse, Elasticsearch et OpenSearch utilisent également leurs formulaires dédiés ; un point d’accès HTTP n’est pas une URL SQL générique. Consultez le [catalogue complet](/docs/connections/supported-databases).
 
 ## PostgreSQL
 

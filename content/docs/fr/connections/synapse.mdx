@@ -1,0 +1,35 @@
+---
+title: Azure Synapse
+description: "Connecter QoreDB à Azure Synapse : champs de connexion, protocole SQL Server, port par défaut et opérations disponibles."
+premium: false
+---
+
+# Azure Synapse
+
+Le driver **Azure Synapse** est inclus dans Core depuis la v0.1.39. Il utilise le protocole SQL Server, avec sa propre identité de connexion et ses limites fonctionnelles.
+
+## Se connecter
+
+1. Ouvrez **Nouvelle connexion** et choisissez **Azure Synapse**.
+2. Renseignez l’hôte, le port (**1433** par défaut), les identifiants et la base ou le namespace.
+3. Configurez TLS pour votre point d’accès, choisissez l’environnement et **testez la connexion** avant de l’enregistrer.
+
+Utilisez le point d’accès SQL dédié ou serverless fourni par votre workspace. Les hôtes `*.sql.azuresynapse.net` sont détectés automatiquement. TLS est imposé.
+
+```text
+sqlserver://USER:PASSWORD@WORKSPACE.sql.azuresynapse.net:1433/DATABASE?encrypt=true
+```
+
+Remplacez les valeurs en majuscules par vos paramètres. Pour les moteurs compatibles, vérifiez le driver sélectionné après import d’une URL : le protocole seul peut n’identifier que le moteur parent.
+
+## Capacités et limites
+
+Les requêtes SQL et l’exploration du catalogue utilisent TDS. Les mutations structurées, contrôles de transaction, opérations de maintenance et DDL visuel sont désactivés dans QoreDB pour tenir compte des différences entre pools dédiés et serverless. L’absence de ces commandes est une limite volontaire du driver.
+
+## Dépannage
+
+Si la connexion échoue, vérifiez le point d’accès, le port, les identifiants et les certificats. Si une commande reste indisponible après connexion, vérifiez les capacités du driver avant de modifier les permissions.
+
+- [Options de connexion SQL Server](/docs/connections/sqlserver)
+- [Bases prises en charge](/docs/connections/supported-databases)
+- [Limites des drivers](/docs/reference/driver-limitations)

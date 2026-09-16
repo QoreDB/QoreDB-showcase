@@ -1,0 +1,45 @@
+---
+title: Column masking
+description: "Configure per-connection masking rules and understand their effect on results, exports, AI tools and editing."
+premium: true
+---
+
+# Column masking
+
+Column masking is a **Pro** feature introduced in v0.1.39. Rules belong to a saved connection and change the values returned by QoreDB; they do not rewrite the stored database values.
+
+## Configure a rule
+
+1. Create or edit a connection and find **Column masking** below the advanced connection options.
+2. Add a rule with a **column** name and, optionally, a **table**. Leave the table empty to match that column across tables.
+3. Select a mode and save the connection.
+4. Reopen a table or rerun a query to inspect the masked result before exporting or exposing the connection to an agent.
+
+| Mode | Result |
+| --- | --- |
+| Masked | Replaces the whole value with a placeholder. |
+| Partial | Keeps a small identifying portion visible. |
+| Hashed | Returns a stable fingerprint derived from SHA-256, salted per connection. |
+
+For example, use a full mask on `users.password_hash`, a partial mask on `users.email`, or a hash when you need to compare repeated values without displaying their original text. A partial value still discloses information; choose a full mask when that is inappropriate.
+
+The **automatic detection** switch applies partial masks to common sensitive column names, including passwords, tokens and email addresses. Explicit rules take precedence; if several explicit rules match, the first match is used.
+
+## Where masking applies
+
+Rules apply to query results (including streams), table browsing and pagination, CSV/JSON/SQL/HTML/XLSX/Parquet exports, federation, Data API responses, AI context and agent tools, MCP, CLI, data contracts, full-text search and mutation previews/results.
+
+Masked columns are marked in the grid. Inline and bulk editing of masked columns are refused. Row and document forms submit only changed fields; the backend also rejects masked fields and nested objects containing masked keys. This prevents a displayed placeholder from being written back as data.
+
+## Licensing and removal
+
+Creating or strengthening rules requires Pro. Existing rules can still be removed without an active Pro license. Removing protection on a production connection requires an additional confirmation.
+
+## Boundaries
+
+- Free-form query results are matched by output column name when the source table is unknown. This is not full SQL data-lineage tracking; review aliases and calculated values before sharing results.
+- Agent queries that use masked columns outside supported simple projections are refused.
+- Masked primary-key values may remain in internal pagination cursors. Masking does not replace database permissions or provide a general anonymization guarantee.
+- External AI tools may send returned data to their configured provider. Authorize connections deliberately, even when masking is enabled.
+
+See [MCP access](/docs/automation/mcp-server), [CLI access](/docs/automation/cli) and [security best practices](/docs/security/best-practices).

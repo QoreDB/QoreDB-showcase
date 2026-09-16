@@ -1,0 +1,60 @@
+---
+title: Supported databases
+description: "Supported databases — QoreDB v0.1.39, Core, 34 drivers."
+premium: false
+---
+
+# Supported databases
+
+QoreDB v0.1.39 provides **34 drivers**, all included in **Core**. Select an engine below for its connection guide. Compatible engines keep their own defaults and limits; support for a protocol does not mean identical editing, DDL or transaction capabilities.
+
+## SQL and managed databases
+
+- [PostgreSQL](/docs/connections/postgresql)
+- [Supabase](/docs/connections/postgresql)
+- [Neon](/docs/connections/postgresql)
+- [TimescaleDB](/docs/connections/postgresql)
+- [CockroachDB](/docs/connections/cockroachdb)
+- [YugabyteDB](/docs/connections/yugabytedb)
+- [MySQL](/docs/connections/mysql)
+- [MariaDB](/docs/connections/mysql)
+- [PlanetScale](/docs/connections/planetscale)
+- [TiDB](/docs/connections/tidb)
+- [SingleStore](/docs/connections/singlestore)
+- [SQL Server](/docs/connections/sqlserver)
+- [Azure SQL](/docs/connections/azuresql)
+- [SQLite](/docs/connections/sqlite)
+
+## Analytics and cloud warehouses
+
+- [DuckDB](/docs/connections/duckdb)
+- [MotherDuck](/docs/connections/motherduck)
+- [ClickHouse](/docs/connections/clickhouse)
+- [Snowflake](/docs/connections/snowflake)
+- [BigQuery](/docs/connections/bigquery)
+- [StarRocks](/docs/connections/starrocks)
+- [Apache Doris](/docs/connections/doris)
+- [Azure Synapse](/docs/connections/synapse)
+
+## Documents, key-value, search and wide-column
+
+- [MongoDB](/docs/connections/mongodb)
+- [Amazon DocumentDB](/docs/connections/documentdb)
+- [Redis](/docs/connections/redis)
+- [Valkey](/docs/connections/dragonfly)
+- [Dragonfly](/docs/connections/dragonfly)
+- [KeyDB](/docs/connections/keydb)
+- [Garnet](/docs/connections/garnet)
+- [Elasticsearch](/docs/connections/elasticsearch)
+- [OpenSearch](/docs/connections/opensearch)
+- [Cassandra](/docs/connections/cassandra)
+- [ScyllaDB](/docs/connections/scylladb)
+- [Amazon Keyspaces](/docs/connections/keyspaces)
+
+## Connection methods
+
+PostgreSQL-, MySQL-, SQL Server-, MongoDB- and Redis-compatible engines accept their protocol’s connection URLs. Snowflake, BigQuery, Cassandra, ScyllaDB and Keyspaces use dedicated forms. SQLite and DuckDB use file paths. ClickHouse, Elasticsearch and OpenSearch also use their connection forms.
+
+- [Connection URL reference](/docs/reference/connection-urls)
+- [Driver limitations](/docs/reference/driver-limitations)
+- [Expose selected connections to MCP](/docs/automation/mcp-server)

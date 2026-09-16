@@ -61,7 +61,7 @@ cargo build --manifest-path src-tauri/Cargo.toml -p qore-mcp --release --feature
 
 ## Access controls
 
-Sessions are always read-only. Query row caps, timeouts, rate limits and audit logging remain active, and idle sessions close after ten minutes. Pro column masking is applied to returned data. Federated queries can only use exposed connections; the embedded DuckDB runtime cannot access local files, URLs or extensions.
+Sessions are always read-only. Query row caps, timeouts, rate limits and audit logging remain active, and idle sessions close after ten minutes. [Pro column masking](/docs/security/column-masking) is applied to returned data. Federated queries can only use exposed connections; the embedded DuckDB runtime cannot access local files, URLs or extensions.
 
 <Callout type="warning">
 Read-only does not mean private: an external AI client may forward the results to its configured model provider. Expose only appropriate connections, prefer restricted database roles, and configure masking when needed.

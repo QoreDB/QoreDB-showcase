@@ -1,0 +1,35 @@
+---
+title: Garnet
+description: "Connecter QoreDB à Garnet : champs de connexion, protocole Redis, port par défaut et opérations disponibles."
+premium: false
+---
+
+# Garnet
+
+Le driver **Garnet** est inclus dans Core depuis la v0.1.39. Il utilise le protocole Redis, avec sa propre identité de connexion et ses limites fonctionnelles.
+
+## Se connecter
+
+1. Ouvrez **Nouvelle connexion** et choisissez **Garnet**.
+2. Renseignez l’hôte, le port (**6379** par défaut), les identifiants et la base ou le namespace.
+3. Configurez TLS pour votre point d’accès, choisissez l’environnement et **testez la connexion** avant de l’enregistrer.
+
+Choisissez Garnet explicitement et utilisez une URL Redis. Aucun schéma `garnet://` ni détection du moteur côté serveur n’est fourni. Utilisez `rediss://` si votre point d’accès impose TLS.
+
+```text
+redis://USER:PASSWORD@HOST:6379/0
+```
+
+Remplacez les valeurs en majuscules par vos paramètres. Pour les moteurs compatibles, vérifiez le driver sélectionné après import d’une URL : le protocole seul peut n’identifier que le moteur parent.
+
+## Capacités et limites
+
+Le driver RESP est utilisé sous l’identité Garnet. Explorez les clés et exécutez les commandes acceptées par votre serveur. La compatibilité avec le protocole Redis ne garantit pas toutes les commandes ou tous les modules Redis.
+
+## Dépannage
+
+Si la connexion échoue, vérifiez le point d’accès, le port, les identifiants et les certificats. Si une commande reste indisponible après connexion, vérifiez les capacités du driver avant de modifier les permissions.
+
+- [Options de connexion Redis](/docs/connections/redis)
+- [Bases prises en charge](/docs/connections/supported-databases)
+- [Limites des drivers](/docs/reference/driver-limitations)

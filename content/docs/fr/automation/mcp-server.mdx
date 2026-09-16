@@ -61,7 +61,7 @@ cargo build --manifest-path src-tauri/Cargo.toml -p qore-mcp --release --feature
 
 ## Contrôles d’accès
 
-Les sessions restent en lecture seule. Les plafonds de lignes, délais, quotas et traces d’audit s’appliquent ; les sessions inactives sont fermées après dix minutes. Le masquage Pro s’applique aux données renvoyées. Les requêtes fédérées utilisent uniquement les connexions exposées ; le moteur DuckDB embarqué n’accède ni aux fichiers locaux, ni aux URL, ni aux extensions.
+Les sessions restent en lecture seule. Les plafonds de lignes, délais, quotas et traces d’audit s’appliquent ; les sessions inactives sont fermées après dix minutes. Le [masquage Pro](/docs/security/column-masking) s’applique aux données renvoyées. Les requêtes fédérées utilisent uniquement les connexions exposées ; le moteur DuckDB embarqué n’accède ni aux fichiers locaux, ni aux URL, ni aux extensions.
 
 <Callout type="warning">
 Lecture seule ne signifie pas confidentialité : un client IA externe peut transmettre les résultats à son fournisseur de modèle. Exposez uniquement les connexions appropriées, privilégiez des rôles restreints et configurez le masquage si nécessaire.

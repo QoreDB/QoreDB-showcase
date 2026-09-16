@@ -1,0 +1,35 @@
+---
+title: Azure SQL
+description: "Connecter QoreDB à Azure SQL : champs de connexion, protocole SQL Server, port par défaut et opérations disponibles."
+premium: false
+---
+
+# Azure SQL
+
+Le driver **Azure SQL** est inclus dans Core depuis la v0.1.39. Il utilise le protocole SQL Server, avec sa propre identité de connexion et ses limites fonctionnelles.
+
+## Se connecter
+
+1. Ouvrez **Nouvelle connexion** et choisissez **Azure SQL**.
+2. Renseignez l’hôte, le port (**1433** par défaut), les identifiants et la base ou le namespace.
+3. Configurez TLS pour votre point d’accès, choisissez l’environnement et **testez la connexion** avant de l’enregistrer.
+
+Utilisez le point d’accès de votre base et indiquez la base cible. Les hôtes `*.database.windows.net` sont détectés automatiquement. Ce driver impose TLS.
+
+```text
+sqlserver://USER:PASSWORD@SERVER.database.windows.net:1433/DATABASE?encrypt=true
+```
+
+Remplacez les valeurs en majuscules par vos paramètres. Pour les moteurs compatibles, vérifiez le driver sélectionné après import d’une URL : le protocole seul peut n’identifier que le moteur parent.
+
+## Capacités et limites
+
+Le driver SQL Server TDS prend en charge les requêtes SQL et l’exploration du catalogue. Le rôle et la configuration du service déterminent les opérations autorisées. Toutes les fonctions d’administration d’une instance SQL Server ne sont pas nécessairement disponibles sur Azure SQL.
+
+## Dépannage
+
+Si la connexion échoue, vérifiez le point d’accès, le port, les identifiants et les certificats. Si une commande reste indisponible après connexion, vérifiez les capacités du driver avant de modifier les permissions.
+
+- [Options de connexion SQL Server](/docs/connections/sqlserver)
+- [Bases prises en charge](/docs/connections/supported-databases)
+- [Limites des drivers](/docs/reference/driver-limitations)

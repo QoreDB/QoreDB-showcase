@@ -1,0 +1,35 @@
+---
+title: SingleStore
+description: "Connect QoreDB to SingleStore: connection fields, MySQL protocol, default port and supported operations."
+premium: false
+---
+
+# SingleStore
+
+The **SingleStore** driver is included in Core since v0.1.39. It uses the MySQL protocol with its own connection identity and capability limits.
+
+## Connect
+
+1. Open **New Connection** and select **SingleStore**.
+2. Enter the host, port (**3306** by default), credentials and database or namespace.
+3. Configure TLS for your endpoint, choose the environment and use **Test Connection** before saving.
+
+Cloud hosts under `*.svc.singlestore.com` are detected automatically. Otherwise choose SingleStore explicitly. Enter the database and credentials for your endpoint.
+
+```text
+mysql://USER:PASSWORD@HOST:3306/DATABASE?ssl-mode=required
+```
+
+Replace the uppercase placeholders with your connection details. For compatible engines, verify the selected driver after importing a URL; the protocol alone may identify only the parent engine.
+
+## Capabilities and limits
+
+Uses the MySQL protocol with engine-specific session handling. The visual DDL editor hides foreign keys, CHECK constraints and uniqueness controls that do not match this driver’s capabilities.
+
+## Troubleshooting
+
+If the connection fails, check the endpoint, port, credentials and certificate settings. If a control is unavailable after connecting, check the driver’s capabilities before changing permissions.
+
+- [MySQL connection options](/docs/connections/mysql)
+- [Supported databases](/docs/connections/supported-databases)
+- [Driver limitations](/docs/reference/driver-limitations)

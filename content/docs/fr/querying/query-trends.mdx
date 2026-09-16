@@ -1,0 +1,43 @@
+---
+title: Tendances et alertes de performance
+description: "Lire les empreintes, latences P50/P95 et taux d’erreur, puis configurer les alertes de performance Pro."
+premium: false
+---
+
+# Tendances et alertes de performance
+
+La v0.1.39 ajoute un onglet **Tendances** au journal d’audit. Les tendances sont incluses dans **Core**. Le profilage, la détection des régressions et des N+1 ainsi que les alertes de seuil nécessitent **Pro**.
+
+## Lire les tendances
+
+Ouvrez le **journal d’audit**, sélectionnez **Tendances**, puis une période de **7, 14 ou 30 jours**. Les requêtes sont regroupées par empreinte. Les 50 empreintes les plus fréquentes affichent le nombre d’exécutions, les latences P50 et P95, le taux d’erreur et une courbe quotidienne du P95.
+
+Le P50 est la médiane. Le P95 représente la partie lente de la distribution : environ 95 % des exécutions enregistrées se terminent à cette durée ou avant. Comparez ces valeurs avec le nombre d’exécutions ; un petit échantillon peut être trompeur.
+
+Les tendances utilisent tout l’historique `audit.jsonl` conservé, pas seulement les lignes visibles dans la grille d’audit. Elles survivent aux redémarrages. Une période de 30 jours ne peut pas restituer des événements jamais enregistrés ou déjà supprimés par la rétention.
+
+## Détection des régressions — Pro
+
+Une empreinte est signalée lorsque son P95 sur les dernières 24 heures dépasse **deux fois** le P95 des sept jours précédents, avec au moins **20 exécutions sur les dernières 24 heures** et une période de référence non vide dont le P95 est positif. Des indicateurs apparaissent dans les tendances et la barre d’état.
+
+Examinez la requête, son plan, les changements d’index, le volume de données et les paramètres. Un signalement est une observation, pas la preuve qu’un déploiement précis a causé le ralentissement.
+
+## Schémas N+1 potentiels — Pro
+
+Plus de **20 exécutions de la même empreinte en deux secondes** dans une session déclenchent une détection de N+1 potentiel. QoreDB crée un événement d’audit dédié et limite la notification à une par session pour éviter les alertes répétées sur une même boucle.
+
+Vérifiez le parcours appelant avant de le réécrire : des répétitions peuvent être intentionnelles. L’analyse concerne les exécutions observées par QoreDB, pas toutes les requêtes de votre application ou de tous les clients de la base.
+
+## Configurer les alertes de seuil — Pro
+
+Dans les réglages de l’audit/intercepteur, ouvrez la section **profilage** et activez-le. Configurez :
+
+- le seuil de durée d’une requête lente, en millisecondes ;
+- le taux d’erreur, en pourcentage sur les **15 dernières minutes** ;
+- le nombre de requêtes lentes sur les **15 dernières minutes** déclenchant une alerte.
+
+Une valeur de **0** désactive le seuil d’alerte correspondant. Le taux d’erreur nécessite au moins **10 requêtes** dans la fenêtre. Un dépassement crée une notification dans l’application et un événement d’audit, une fois par fenêtre pour cette alerte.
+
+Si aucune tendance n’apparaît, vérifiez l’enregistrement de l’audit et sa rétention. Pour les alertes, vérifiez la licence Pro, l’activation du profilage, les seuils et la taille minimale de l’échantillon.
+
+Voir l’[historique des requêtes](/docs/querying/query-history), l’[exécution](/docs/querying/running-queries) et les [explications de requêtes via MCP](/docs/automation/mcp-server).

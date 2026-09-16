@@ -1,0 +1,43 @@
+---
+title: Snowflake
+description: "Connect with a key pair or access token, choose a warehouse and role, query and cancel statements."
+premium: false
+---
+
+# Snowflake
+
+Snowflake is included in Core since v0.1.39. QoreDB uses the SQL API v2 over HTTPS, with asynchronous execution and query cancellation.
+
+## Configure the connection
+
+Choose **Snowflake** in **New Connection** and use the form. Snowflake does not use QoreDB’s generic SQL URL parser.
+
+| Field | Value |
+| --- | --- |
+| Account / host | Your Snowflake account identifier or account hostname. |
+| Database | The database to open. |
+| Warehouse | The compute warehouse to use for statements. |
+| Role | The role to use, if you need to override the default. |
+| Authentication | Key pair or access token. |
+
+For **key-pair authentication**, enter the Snowflake username and paste the RSA private key in PEM format. The corresponding public key must already be registered for that user. QoreDB signs RS256 JWTs locally.
+
+For **token authentication**, paste a programmatic access token. A password or an interactive browser login is not a substitute for either supported mode.
+
+Test the connection, save it, then select the database and schema in the browser.
+
+## Run a first query
+
+```sql
+SELECT CURRENT_DATABASE(), CURRENT_SCHEMA(), CURRENT_WAREHOUSE();
+```
+
+Query your tables with bounded SQL, for example `SELECT * FROM MY_DB.PUBLIC.ORDERS LIMIT 100`. Warehouse and role permissions still apply. An authentication failure points to the key, token or user configuration; a warehouse or access error may require a different warehouse or role.
+
+## Limits
+
+- Results are bounded at **200,000 rows**. If more result pages remain, QoreDB returns an explicit error; narrow the query or aggregate in SQL.
+- QoreDB does not expose transactions, visual DDL or stored-routine management for this driver. These are client capabilities, not a claim about everything Snowflake supports.
+- Cancellation is sent to the service. Closing a result view is not a substitute for cancelling an active statement.
+
+See [driver limitations](/docs/reference/driver-limitations) and [supported databases](/docs/connections/supported-databases).

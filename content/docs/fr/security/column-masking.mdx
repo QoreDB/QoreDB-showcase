@@ -1,0 +1,45 @@
+---
+title: Masquage des colonnes
+description: "Configurer les règles par connexion et comprendre leur effet sur les résultats, exports, outils IA et éditions."
+premium: true
+---
+
+# Masquage des colonnes
+
+Le masquage des colonnes est une fonctionnalité **Pro** introduite en v0.1.39. Les règles appartiennent à une connexion enregistrée et modifient les valeurs renvoyées par QoreDB ; elles ne réécrivent pas les valeurs stockées en base.
+
+## Configurer une règle
+
+1. Créez ou modifiez une connexion et repérez **Masquage des colonnes**, sous les options avancées.
+2. Ajoutez une règle avec un nom de **colonne** et, éventuellement, une **table**. Laissez la table vide pour viser cette colonne dans toutes les tables.
+3. Choisissez un mode et enregistrez la connexion.
+4. Rouvrez une table ou relancez une requête pour vérifier le résultat avant de l’exporter ou d’exposer la connexion à un agent.
+
+| Mode | Résultat |
+| --- | --- |
+| Masqué | Remplace toute la valeur par un masque. |
+| Partiel | Conserve une petite partie identifiable. |
+| Empreinte | Renvoie une empreinte stable dérivée de SHA-256, salée par connexion. |
+
+Par exemple, masquez entièrement `users.password_hash`, partiellement `users.email`, ou utilisez une empreinte pour comparer des valeurs répétées sans afficher leur texte initial. Une valeur partielle révèle encore de l’information ; choisissez un masque complet si ce n’est pas souhaitable.
+
+La **détection automatique** applique un masque partiel aux noms de colonnes sensibles courants, notamment mots de passe, jetons et adresses e-mail. Les règles explicites sont prioritaires ; si plusieurs correspondent, la première est utilisée.
+
+## Périmètre d’application
+
+Les règles s’appliquent aux résultats de requêtes, y compris en streaming, à l’exploration et à la pagination, aux exports CSV/JSON/SQL/HTML/XLSX/Parquet, à la fédération, à la Data API, au contexte IA, aux agents, au MCP, à la CLI, aux contrats de données, à la recherche plein texte et aux aperçus/résultats de mutation.
+
+Les colonnes masquées sont signalées dans la grille. Leur édition inline ou en masse est refusée. Les formulaires de lignes et documents n’envoient que les champs modifiés ; le backend refuse aussi les champs masqués et les objets imbriqués contenant une clé masquée. Un masque affiché ne doit pas être réenregistré comme donnée.
+
+## Licence et suppression
+
+Créer ou renforcer les règles nécessite Pro. Une règle existante peut être retirée sans licence Pro active. Retirer une protection en production nécessite une confirmation supplémentaire.
+
+## Limites
+
+- Pour une requête libre dont la table source est inconnue, la correspondance se fait par nom de colonne de sortie. Ce n’est pas un suivi complet de la provenance SQL : vérifiez les alias et valeurs calculées avant de partager les résultats.
+- Les requêtes d’agents utilisant une colonne masquée hors des projections simples prises en charge sont refusées.
+- Les valeurs de clés primaires masquées peuvent rester présentes dans les curseurs internes de pagination. Le masquage ne remplace pas les permissions en base et ne constitue pas une garantie générale d’anonymisation.
+- Un outil IA externe peut transmettre les résultats à son fournisseur configuré. Autorisez les connexions explicitement, même avec le masquage activé.
+
+Voir l’[accès MCP](/docs/automation/mcp-server), l’[accès CLI](/docs/automation/cli) et les [bonnes pratiques](/docs/security/best-practices).

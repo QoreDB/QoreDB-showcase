@@ -10,6 +10,25 @@ QoreDB tries to expose a consistent interface across every supported driver, but
 
 This list reflects current behavior. Things that "should work" from a feature-list perspective but actually have a caveat go here.
 
+
+## Drivers added in v0.1.39
+
+| Driver | QoreDB-specific boundaries |
+| --- | --- |
+| [Snowflake](/docs/connections/snowflake) | Key pair or access token; no transaction controls, visual DDL or routine management. Error when results exceed the 200,000-row bound. |
+| [BigQuery](/docs/connections/bigquery) | Service account; no transaction controls, visual DDL or routine management. Scan estimate/confirmation in the editor, dry run with `EXPLAIN`, 200,000-row result bound. |
+| [Cassandra](/docs/connections/cassandra), [ScyllaDB](/docs/connections/scylladb) | Complete primary key required for row mutations; native cursor pagination. No transaction controls or visual DDL. Unbounded reads and `ALLOW FILTERING` refused in production. |
+| [Amazon Keyspaces](/docs/connections/keyspaces) | Cassandra limits plus forced TLS, service-specific credentials (no SigV4), and `ALLOW FILTERING` refused in every environment. |
+| [TiDB](/docs/connections/tidb) | MySQL protocol with unsupported routine, trigger, event and maintenance controls hidden. |
+| [StarRocks](/docs/connections/starrocks), [Apache Doris](/docs/connections/doris) | Querying and introspection; structured mutations, transactions and visual DDL disabled. |
+| [SingleStore](/docs/connections/singlestore) | MySQL protocol with adapted session settings; visual DDL hides foreign-key, CHECK and uniqueness controls. |
+| [YugabyteDB](/docs/connections/yugabytedb) | YSQL/PostgreSQL protocol, port 5433, default database `yugabyte`; not a YCQL connection. |
+| [KeyDB](/docs/connections/keydb), [Garnet](/docs/connections/garnet) | RESP driver; choose the engine manually, no dedicated URL scheme. Redis compatibility depends on the server’s supported commands. |
+| [Azure SQL](/docs/connections/azuresql) | TDS with forced TLS; server permissions and service capabilities still apply. |
+| [Azure Synapse](/docs/connections/synapse) | Forced TLS; structured mutations, transactions, maintenance and visual DDL disabled. |
+
+These are limits of QoreDB’s driver and UI, not a complete list of the underlying database’s capabilities.
+
 ## PostgreSQL
 
 - **Cancellation**: a running query is cancelled by issuing `pg_cancel_backend(pid)` on a separate connection. Your role needs `pg_signal_backend` or to be the owner of the cancelled query, or the cancellation silently fails.

@@ -1,0 +1,45 @@
+---
+title: BigQuery
+description: "Configure service-account authentication, projects and location, then preview tables and estimate query scans."
+premium: false
+---
+
+# BigQuery
+
+BigQuery is included in Core since v0.1.39. QoreDB connects through the Google REST APIs using a **service-account JSON key**.
+
+## Configure the connection
+
+Select **BigQuery** in **New Connection**. Use the dedicated form rather than a database URL.
+
+| Field | Value |
+| --- | --- |
+| Project | Default project. If omitted, QoreDB uses the key’s `project_id`. |
+| Service account | Paste the complete JSON key, including `client_email` and `private_key`. |
+| Location | Dataset/job location, for example `EU`; match the datasets you query. |
+| Billing project | Project used for jobs; defaults to the selected project. |
+
+The service account needs permission to access the datasets and run the intended jobs. QoreDB lists datasets across projects visible to that account, not just the default project. A personal Google login or API key does not replace the service-account key.
+
+## Preview or query
+
+Table previews use `tabledata.list` and do not run a query scan. Editor queries are different: QoreDB estimates scan size before execution and requests confirmation when a scan may incur costs.
+
+For an explicit dry run, use:
+
+```sql
+EXPLAIN SELECT * FROM `PROJECT.DATASET.TABLE` LIMIT 100;
+```
+
+Replace the identifiers, review the estimate, then execute the actual `SELECT` if appropriate. A `LIMIT` bounds returned rows; it is not a guarantee of a small scan. Filter partitions or select fewer columns when relevant.
+
+Running jobs are polled asynchronously, and cancellation is sent to BigQuery.
+
+## Limits and troubleshooting
+
+- Results are bounded at **200,000 rows**, with an explicit error if more pages remain.
+- Transaction controls, visual DDL and routine management are not exposed by this driver.
+- If datasets are missing, check the account’s project and dataset access. For job errors, check the billing project, job permissions and location.
+- Keep the JSON key in the connection’s secret field; do not include it in queries or shared notebooks.
+
+See [driver limitations](/docs/reference/driver-limitations) and [column masking](/docs/security/column-masking).

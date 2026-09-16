@@ -23,7 +23,7 @@ Every source file in the repository carries an SPDX header declaring its license
 
 The core covers everything you need for a complete, production-quality database client:
 
-- **All database drivers**: PostgreSQL (and Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB (and MotherDuck), MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch
+- **All 34 database drivers**: see the [complete catalog](/docs/connections/supported-databases). Operations depend on the selected engine.
 - **Connection management**: vault, profiles, SSH tunneling, environment guards
 - **Query editor and execution**: SQL and MongoDB editors, syntax highlighting, autocomplete, history, query library
 - **Data grid and editing**: inline edit, virtualization, server-side filters, bulk edit (up to 5 rows)
@@ -32,8 +32,9 @@ The core covers everything you need for a complete, production-quality database 
 - **ER Diagram**: interactive schema graph with isolate/focus workflows
 - **Notebooks**: full notebook engine with parameterized variables, Run All, import/export
 - **CSV import**, **export pipeline** (CSV/JSON/SQL/HTML), **transaction management**
+- **Read-only MCP and CLI access** with explicit per-connection authorization
+- **Query trends** from retained audit history (P50/P95, execution counts, error rates)
 - **Audit logging** with **query fingerprinting**, **read-only mode**, **dangerous query detection**
-- **Cross-database federation** via DuckDB
 - **Backup & restore helpers**: visual wrappers around `pg_dump`, `mysqldump`, `mongodump`, `sqlite3 .dump` and their restore counterparts
 - **Customizable keyboard shortcuts**: every binding rebindable from Settings, with cross-OS chord syntax
 - **Workspaces**, **multi-tab system**, **global search**, **9-language i18n**
@@ -49,6 +50,9 @@ In other words, the core is enough to ship real work every day. Pro is not a pay
 
 Premium features are advanced workflows that typically only become valuable once you're using QoreDB heavily or in a team setting:
 
+- **Cross-database federation**, including the Pro MCP federation tool
+- **Column masking** across results, exports, API and agent outputs
+- **Performance regression and N+1 detection**, plus error-rate and slow-query alerts
 - **Visual Data Diff**: side-by-side comparison of table and query results
 - **Sandbox mode**: stage grid edits, review the DML, then apply
 - **Time Travel**: full row history with visual timeline, range filters, point-to-point diff and Rollback SQL preview

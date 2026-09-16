@@ -1,0 +1,35 @@
+---
+title: Azure SQL
+description: "Connect QoreDB to Azure SQL: connection fields, SQL Server protocol, default port and supported operations."
+premium: false
+---
+
+# Azure SQL
+
+The **Azure SQL** driver is included in Core since v0.1.39. It uses the SQL Server protocol with its own connection identity and capability limits.
+
+## Connect
+
+1. Open **New Connection** and select **Azure SQL**.
+2. Enter the host, port (**1433** by default), credentials and database or namespace.
+3. Configure TLS for your endpoint, choose the environment and use **Test Connection** before saving.
+
+Use your database endpoint and specify the target database. Hosts under `*.database.windows.net` are detected automatically. TLS is forced by this driver.
+
+```text
+sqlserver://USER:PASSWORD@SERVER.database.windows.net:1433/DATABASE?encrypt=true
+```
+
+Replace the uppercase placeholders with your connection details. For compatible engines, verify the selected driver after importing a URL; the protocol alone may identify only the parent engine.
+
+## Capabilities and limits
+
+Uses the SQL Server TDS driver for SQL queries and catalog browsing. Your database role and service configuration determine which operations the server permits. Do not assume every SQL Server instance-level administration feature exists on Azure SQL.
+
+## Troubleshooting
+
+If the connection fails, check the endpoint, port, credentials and certificate settings. If a control is unavailable after connecting, check the driver’s capabilities before changing permissions.
+
+- [SQL Server connection options](/docs/connections/sqlserver)
+- [Supported databases](/docs/connections/supported-databases)
+- [Driver limitations](/docs/reference/driver-limitations)

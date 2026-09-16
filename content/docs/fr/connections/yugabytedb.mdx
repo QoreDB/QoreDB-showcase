@@ -1,0 +1,35 @@
+---
+title: YugabyteDB
+description: "Connecter QoreDB à YugabyteDB : champs de connexion, protocole PostgreSQL, port par défaut et opérations disponibles."
+premium: false
+---
+
+# YugabyteDB
+
+Le driver **YugabyteDB** est inclus dans Core depuis la v0.1.39. Il utilise le protocole PostgreSQL, avec sa propre identité de connexion et ses limites fonctionnelles.
+
+## Se connecter
+
+1. Ouvrez **Nouvelle connexion** et choisissez **YugabyteDB**.
+2. Renseignez l’hôte, le port (**5433** par défaut), les identifiants et la base ou le namespace.
+3. Configurez TLS pour votre point d’accès, choisissez l’environnement et **testez la connexion** avant de l’enregistrer.
+
+Utilisez le point d’accès YSQL, pas YCQL. La base par défaut est `yugabyte`. Les hôtes `*.yugabyte.cloud` sont détectés automatiquement ; choisissez le driver manuellement pour un hôte local.
+
+```text
+postgresql://yugabyte:PASSWORD@HOST:5433/yugabyte?sslmode=verify-full
+```
+
+Remplacez les valeurs en majuscules par vos paramètres. Pour les moteurs compatibles, vérifiez le driver sélectionné après import d’une URL : le protocole seul peut n’identifier que le moteur parent.
+
+## Capacités et limites
+
+Le driver utilise le protocole et le catalogue PostgreSQL pour l’exploration et les requêtes SQL. Le port est 5433, et non 5432. La compatibilité PostgreSQL ne garantit pas la disponibilité de toutes les extensions ou commandes d’administration sur le cluster.
+
+## Dépannage
+
+Si la connexion échoue, vérifiez le point d’accès, le port, les identifiants et les certificats. Si une commande reste indisponible après connexion, vérifiez les capacités du driver avant de modifier les permissions.
+
+- [Options de connexion PostgreSQL](/docs/connections/postgresql)
+- [Bases prises en charge](/docs/connections/supported-databases)
+- [Limites des drivers](/docs/reference/driver-limitations)

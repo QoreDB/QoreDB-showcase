@@ -1,0 +1,35 @@
+---
+title: TiDB
+description: "Connecter QoreDB à TiDB : champs de connexion, protocole MySQL, port par défaut et opérations disponibles."
+premium: false
+---
+
+# TiDB
+
+Le driver **TiDB** est inclus dans Core depuis la v0.1.39. Il utilise le protocole MySQL, avec sa propre identité de connexion et ses limites fonctionnelles.
+
+## Se connecter
+
+1. Ouvrez **Nouvelle connexion** et choisissez **TiDB**.
+2. Renseignez l’hôte, le port (**4000** par défaut), les identifiants et la base ou le namespace.
+3. Configurez TLS pour votre point d’accès, choisissez l’environnement et **testez la connexion** avant de l’enregistrer.
+
+Les hôtes TiDB Cloud se terminant par `tidbcloud.com` sont détectés automatiquement. Pour un serveur local, choisissez TiDB explicitement. Utilisez le port fourni par votre instance cloud s’il diffère de 4000.
+
+```text
+mysql://USER:PASSWORD@HOST:4000/test
+```
+
+Remplacez les valeurs en majuscules par vos paramètres. Pour les moteurs compatibles, vérifiez le driver sélectionné après import d’une URL : le protocole seul peut n’identifier que le moteur parent.
+
+## Capacités et limites
+
+Interrogez et explorez les tables via le protocole MySQL. Les routines, triggers, événements et opérations de maintenance MySQL ne sont pas exposés lorsqu’ils ne sont pas pris en charge par TiDB.
+
+## Dépannage
+
+Si la connexion échoue, vérifiez le point d’accès, le port, les identifiants et les certificats. Si une commande reste indisponible après connexion, vérifiez les capacités du driver avant de modifier les permissions.
+
+- [Options de connexion MySQL](/docs/connections/mysql)
+- [Bases prises en charge](/docs/connections/supported-databases)
+- [Limites des drivers](/docs/reference/driver-limitations)

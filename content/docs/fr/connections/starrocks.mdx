@@ -1,0 +1,35 @@
+---
+title: StarRocks
+description: "Connecter QoreDB à StarRocks : champs de connexion, protocole MySQL, port par défaut et opérations disponibles."
+premium: false
+---
+
+# StarRocks
+
+Le driver **StarRocks** est inclus dans Core depuis la v0.1.39. Il utilise le protocole MySQL, avec sa propre identité de connexion et ses limites fonctionnelles.
+
+## Se connecter
+
+1. Ouvrez **Nouvelle connexion** et choisissez **StarRocks**.
+2. Renseignez l’hôte, le port (**9030** par défaut), les identifiants et la base ou le namespace.
+3. Configurez TLS pour votre point d’accès, choisissez l’environnement et **testez la connexion** avant de l’enregistrer.
+
+Utilisez le point d’accès aux requêtes MySQL du frontend. Choisissez StarRocks explicitement : une URL MySQL générique ne permet pas d’identifier ce moteur.
+
+```text
+mysql://USER:PASSWORD@HOST:9030/DATABASE
+```
+
+Remplacez les valeurs en majuscules par vos paramètres. Pour les moteurs compatibles, vérifiez le driver sélectionné après import d’une URL : le protocole seul peut n’identifier que le moteur parent.
+
+## Capacités et limites
+
+L’introspection du schéma et les requêtes SQL sont prises en charge. Les mutations structurées de lignes, transactions et DDL visuel sont désactivés : le modèle OLAP de clés et de distribution diffère de MySQL. Dans l’éditeur, utilisez du SQL accepté par le serveur ; les contrôles de sécurité restent actifs.
+
+## Dépannage
+
+Si la connexion échoue, vérifiez le point d’accès, le port, les identifiants et les certificats. Si une commande reste indisponible après connexion, vérifiez les capacités du driver avant de modifier les permissions.
+
+- [Options de connexion MySQL](/docs/connections/mysql)
+- [Bases prises en charge](/docs/connections/supported-databases)
+- [Limites des drivers](/docs/reference/driver-limitations)

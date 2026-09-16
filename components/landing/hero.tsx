@@ -30,8 +30,6 @@ export function Hero() {
         {t("hero.release")}
         <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
       </Link>
-      {/* h1 : élément FCP/LCP texte — rendu visible immédiatement, aucune
-          animation pilotée par JS qui retarderait le premier rendu. */}
       <h1 className="font-heading text-(--q-text-0) text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight text-center max-w-5xl">
         <Trans
           i18nKey="hero.title"
@@ -46,9 +44,6 @@ export function Hero() {
           }}
         />
       </h1>
-
-      {/* Éléments secondaires : entrée en CSS pur (tourne au premier paint,
-          sans attendre l'hydratation) → n'impacte ni le FCP ni le LCP. */}
       <p
         className="q-fade-up text-(--q-text-1) text-base sm:text-lg md:text-xl mb-12 max-w-2xl leading-relaxed text-center"
         style={{ animationDelay: "80ms" }}

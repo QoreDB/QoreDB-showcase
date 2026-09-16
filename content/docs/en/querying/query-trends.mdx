@@ -1,0 +1,43 @@
+---
+title: Query trends and performance alerts
+description: "Read query fingerprints, P50/P95 latency and error rates, then configure Pro performance alerts."
+premium: false
+---
+
+# Query trends and performance alerts
+
+Version 0.1.39 adds a **Trends** view to the audit log. Trends are included in **Core**. Profiling, regression detection, N+1 detection and threshold alerts require **Pro**.
+
+## Read the Trends view
+
+Open the **audit log**, select **Trends**, and choose **7, 14 or 30 days**. The view groups queries by fingerprint and displays the 50 most frequent fingerprints, with execution count, P50 latency, P95 latency, error rate and a daily P95 sparkline.
+
+P50 is the median latency. P95 describes the slower end of the distribution: about 95% of recorded executions complete at or below that value. Compare both alongside execution count; a small sample can be misleading.
+
+Trends are calculated from the complete retained `audit.jsonl` history, not just the rows currently visible in the audit grid. They survive application restarts. A selected 30-day period cannot restore events that were never recorded or have already been removed by retention.
+
+## Regression detection — Pro
+
+A fingerprint is flagged when its P95 over the last 24 hours is **more than twice** its P95 over the preceding seven days, with at least **20 executions in the last 24 hours** and a non-empty baseline with a positive P95. Indicators appear in Trends and the status bar.
+
+Investigate the query and its execution plan, changed indexes, data volume and parameter distribution. A flag is an observation, not proof that a particular deployment caused the slowdown.
+
+## Potential N+1 patterns — Pro
+
+More than **20 executions of the same fingerprint within two seconds** in a session trigger a possible N+1 detection. QoreDB records a dedicated audit event and limits the notification to one per session to avoid repeated alerts for the same loop.
+
+Review the calling workflow before rewriting it: repeated queries can be intentional. This analyzes executions observed by QoreDB, not all queries issued by your application or every client of the database.
+
+## Configure threshold alerts — Pro
+
+In the audit/interceptor settings, open the **profiling** section and enable profiling. Configure:
+
+- the slow-query duration threshold, in milliseconds;
+- the error-rate threshold, as a percentage over the last **15 minutes**;
+- the number of slow queries over the last **15 minutes** that should trigger an alert.
+
+A value of **0** disables the corresponding alert threshold. Error-rate evaluation requires at least **10 queries** in the window. A threshold breach creates an in-app notification and an audit event, once per window for that alert.
+
+If no trends appear, check audit recording and retention. If no threshold alerts appear, check the Pro license, profiling switch, configured thresholds and minimum sample size.
+
+See [query history](/docs/querying/query-history), [running queries](/docs/querying/running-queries) and [MCP query explanations](/docs/automation/mcp-server).

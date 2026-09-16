@@ -1,0 +1,43 @@
+---
+title: Snowflake
+description: "Connexion par paire de clés ou jeton, choix du warehouse et du rôle, requêtes et annulation."
+premium: false
+---
+
+# Snowflake
+
+Snowflake est inclus dans Core depuis la v0.1.39. QoreDB utilise la SQL API v2 en HTTPS, avec exécution asynchrone et annulation des requêtes.
+
+## Configurer la connexion
+
+Choisissez **Snowflake** dans **Nouvelle connexion** et utilisez le formulaire. Snowflake ne passe pas par l’analyseur générique d’URL SQL de QoreDB.
+
+| Champ | Valeur |
+| --- | --- |
+| Compte / hôte | Identifiant du compte Snowflake ou nom d’hôte du compte. |
+| Base | Base à ouvrir. |
+| Warehouse | Entrepôt de calcul à utiliser pour les requêtes. |
+| Rôle | Rôle à utiliser pour remplacer le rôle par défaut, si nécessaire. |
+| Authentification | Paire de clés ou jeton d’accès. |
+
+Avec une **paire de clés**, renseignez l’utilisateur Snowflake et collez la clé privée RSA au format PEM. La clé publique correspondante doit déjà être enregistrée pour cet utilisateur. QoreDB signe les JWT RS256 localement.
+
+Avec un **jeton**, collez un jeton d’accès programmatique. Un mot de passe ou une connexion interactive par navigateur ne remplace aucun de ces deux modes.
+
+Testez la connexion, enregistrez-la, puis choisissez la base et le schéma dans l’explorateur.
+
+## Première requête
+
+```sql
+SELECT CURRENT_DATABASE(), CURRENT_SCHEMA(), CURRENT_WAREHOUSE();
+```
+
+Interrogez les tables avec du SQL borné, par exemple `SELECT * FROM MY_DB.PUBLIC.ORDERS LIMIT 100`. Les permissions du warehouse et du rôle restent applicables. Une erreur d’authentification invite à vérifier la clé, le jeton ou l’utilisateur ; une erreur d’accès peut nécessiter un autre warehouse ou rôle.
+
+## Limites
+
+- Les résultats sont plafonnés à **200 000 lignes**. Si des pages restent à lire, QoreDB renvoie une erreur explicite : réduisez la requête ou agrégez en SQL.
+- QoreDB n’expose pas les transactions, le DDL visuel ou la gestion des routines pour ce driver. Il s’agit des capacités du client, pas de toutes les capacités de Snowflake.
+- L’annulation est envoyée au service. Fermer un résultat ne remplace pas l’annulation d’une requête active.
+
+Voir les [limites des drivers](/docs/reference/driver-limitations) et les [bases prises en charge](/docs/connections/supported-databases).

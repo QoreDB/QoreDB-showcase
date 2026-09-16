@@ -1,0 +1,28 @@
+---
+title: MotherDuck
+description: "Connect through the MotherDuck PostgreSQL endpoint with a token and verified TLS."
+premium: false
+---
+
+# MotherDuck
+
+Choose **MotherDuck** in **New Connection**. Unlike the local DuckDB driver, this connection uses MotherDuck’s PostgreSQL-compatible endpoint.
+
+## Connection fields
+
+- **Host:** the regional endpoint, such as `pg.REGION-aws.motherduck.com`.
+- **Port:** `5432`.
+- **User:** `postgres`.
+- **Password:** your MotherDuck token.
+- **Database:** `md:` or the database path appropriate to your connection.
+- **TLS:** use verified TLS, for example `sslmode=verify-full`.
+
+```text
+postgresql://postgres:TOKEN@pg.REGION-aws.motherduck.com:5432/md:?sslmode=verify-full
+```
+
+The connection form can infer the regional host from the token’s `mdRegion` claim for supported AWS regions. A custom host is preserved. Check the host and token together if connection tests fail.
+
+Use the schema browser and query editor after connecting. This is a remote connection, not a local `.duckdb` file. Features follow the MotherDuck driver’s capabilities; PostgreSQL wire compatibility does not make it a PostgreSQL server.
+
+See [DuckDB](/docs/connections/duckdb), [connection URLs](/docs/reference/connection-urls) and [supported databases](/docs/connections/supported-databases).

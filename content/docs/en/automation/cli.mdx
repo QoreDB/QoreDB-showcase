@@ -1,61 +1,59 @@
 ---
 title: Command-line access
-description: Query your saved QoreDB connections from the terminal with the qore CLI. Reuses the same vault, drivers, and safety gates as the desktop app — ideal for scripts and CI.
+description: Query explicitly authorized QoreDB connections from the terminal with forced read-only sessions and workspace support.
 premium: false
 ---
 
 # Command-line access
 
-The `qore` CLI gives you scriptable, headless access to the connections you already saved in the QoreDB desktop app. It runs the same engine, reads the same vault, and enforces the same safety gates — so a query that's safe in the app is safe from the terminal, and there's no separate credential setup.
+The `qore` CLI reuses QoreDB’s engine, saved connections and credential vault. In v0.1.39 it follows the same access policy as MCP: **connections must be explicitly exposed**, and **every CLI session is read-only**, even if the desktop connection allows writes.
 
-This makes QoreDB usable in places the desktop UI can't reach: CI pipelines, cron jobs, remote servers over SSH, and quick one-off checks without leaving your shell.
+## Authorize a connection
 
-## How it works
+In the desktop app, open **Settings → AI Agents** and enable the connections that the CLI may access. New and existing connections are hidden by default. `qore connections` only lists exposed connections; knowing another connection’s ID does not grant access.
 
-- **Shared credentials.** Connections and their passwords come from the same OS keyring and config directory as the desktop app (the vault, project `default`). If the desktop can connect, so can the CLI — nothing to re-enter.
-- **Same safety engine.** Queries go through the existing safety layer (production-dangerous blocking, the anti-loop rate limiter, governance limits). A connection keeps its saved read-only flag.
-- **Machine-friendly output.** Results are printed as JSON on stdout. Errors go to stderr with a non-zero exit code, so scripts can branch on success.
+The CLI retains row caps, timeouts, rate limits, audit logging and column masking. It is intended for read-only scripts and inspection, not migration or mutation scripts.
 
 ## Commands
 
 ```bash
-qore connections                                      # list saved connections
-qore query <connection_id> "<sql>"                    # run a query, print rows as JSON
-qore tables <connection_id> <database> [--schema s]   # list tables/collections
-qore describe <connection_id> <database> <table> [--schema s]
-```
-
-A typical session starts by listing connections to get an id, then querying:
-
-```bash
 qore connections
-qore query prod-pg "SELECT count(*) FROM orders WHERE status = 'paid'"
-qore tables prod-pg analytics --schema public
-qore describe prod-pg analytics orders --schema public
+qore query CONNECTION_ID "SELECT 1"
+qore tables CONNECTION_ID DATABASE --schema public
+qore describe CONNECTION_ID DATABASE TABLE --schema public
 ```
 
-## Pointing at a different config
+Replace uppercase placeholders. The `--schema` option is optional and depends on the engine. Use the IDs returned by `qore connections`, not an invented connection name.
 
-By default the CLI reads the desktop app's config directory. Set `QOREDB_CONFIG_DIR` to point it elsewhere — useful on a CI runner where you've staged a dedicated config:
+Results are JSON on stdout. Failures go to stderr and return a non-zero exit code. Query syntax follows the selected engine.
+
+## Select a workspace
+
+The CLI detects a `.qoredb` workspace from the current directory, or accepts a global option:
 
 ```bash
-QOREDB_CONFIG_DIR=/etc/qoredb qore query prod-pg "SELECT 1"
+qore --workspace /absolute/path/to/project connections
+qore --workspace /absolute/path/to/project query CONNECTION_ID "SELECT 1"
 ```
 
-## Building it
+An explicit workspace must contain a valid `.qoredb/workspace.json` (or resolve to its parent project); an invalid path is an error. Without a workspace, the default vault is used.
 
-The CLI ships as a separate binary you build from the QoreDB workspace:
+`QOREDB_CONFIG_DIR` selects a different application configuration directory. A copied configuration alone does not guarantee access to credentials: the required keyring or vault access must also be available in the environment where the CLI runs.
+
+## Build from source
+
+From the QoreDB repository root:
 
 ```bash
-cargo build -p qore-cli --release   # produces target/release/qore
+cargo build --manifest-path src-tauri/Cargo.toml -p qore-cli --release
 ```
 
-<Callout type="info">
-The CLI honours the connection's read-only flag and the standard safety gates, but it is still a real client with whatever privileges the saved credentials carry. For CI, point it at a read-only role and a read-only replica.
-</Callout>
+The binary is generated in the Rust workspace’s target directory (`src-tauri/target/release/qore` with the default configuration).
 
-## Where to go next
+## Troubleshooting
 
-- [MCP server](/docs/automation/mcp-server) to expose the same connections to AI agents
-- [Vault & profiles](/docs/connections/vault-and-profiles) for how credentials are stored
-- [Best practices](/docs/security/best-practices) for safe production access
+An empty connection list usually means the connections have not been enabled for agent access or the CLI is reading a different workspace/configuration. A write query is refused by design; changing the desktop connection’s read-only flag will not enable CLI writes.
+
+- [MCP server](/docs/automation/mcp-server)
+- [Column masking](/docs/security/column-masking)
+- [Vault and profiles](/docs/connections/vault-and-profiles)

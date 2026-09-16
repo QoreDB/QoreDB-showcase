@@ -1,0 +1,39 @@
+---
+title: Cassandra
+description: "Configurer Cassandra dans QoreDB avec CQL, keyspaces, TLS, édition par clé primaire et lectures bornées."
+premium: false
+---
+
+# Cassandra
+
+Le driver **Cassandra** est inclus dans Core depuis la v0.1.39. QoreDB utilise CQL v4 et liste les keyspaces, tables et colonnes depuis `system_schema`.
+
+## Se connecter
+
+1. Choisissez **Cassandra** dans **Nouvelle connexion**. Utilisez le formulaire, pas une URL `cassandra://` : ce driver ne propose pas d’entrée par URL.
+2. Renseignez l’hôte, le port **9042** et le keyspace à utiliser.
+3. Saisissez les identifiants si le cluster les exige, configurez TLS et testez la connexion.
+
+Activez TLS si le serveur le requiert et fournissez le certificat d’autorité approprié si nécessaire. Le driver ne propose pas de mode TLS permissif contournant la validation des certificats.
+
+## Requêtes et édition
+
+Utilisez CQL dans l’éditeur. Pour une table identifiée par `id`, une requête bornée peut être :
+
+```sql
+SELECT * FROM app.events WHERE id = 'example' LIMIT 100;
+```
+
+Adaptez la clé, le type de valeur et le keyspace à votre schéma. L’exploration utilise des curseurs de pagination natifs. Les insertions, modifications et suppressions nécessitent la clé primaire complète, y compris les clés de partition et de clustering lorsqu’elles existent.
+
+## Limites et sécurité
+
+- QoreDB n’expose pas de contrôles de transaction, routines, triggers ou DDL visuel pour ce driver.
+- Les lectures non bornées sont refusées en production. Bornez vos requêtes et utilisez la clé de partition appropriée.
+- `ALLOW FILTERING` est refusé sur les connexions de **production**.
+
+Une requête refusée doit être réécrite autour de sa clé de partition avec un résultat borné. Changer l’étiquette d’environnement pour contourner le contrôle ne corrige pas son mode d’accès.
+
+- [Environnements](/docs/connections/environments)
+- [Limites des drivers](/docs/reference/driver-limitations)
+- [Bases prises en charge](/docs/connections/supported-databases)

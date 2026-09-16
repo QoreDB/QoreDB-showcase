@@ -2,6 +2,7 @@
   "label": "Sécurité",
   "items": [
     "vault-encryption",
+    "column-masking",
     "sandbox-mode",
     "sql-safety-validation",
     "best-practices"

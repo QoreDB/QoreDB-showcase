@@ -8,7 +8,7 @@ premium: false
 
 QoreDB parses connection URLs into normalized fields before storing them. This page lists every scheme the parser accepts, the query parameters it recognizes, and the defaults that apply when you omit something.
 
-The driver is auto-detected from the scheme: paste a URL and QoreDB picks the right engine. You don't need to set the driver manually if your URL is well-formed.
+The scheme identifies a protocol, and recognized managed-service hosts can refine the selected engine. For compatible engines on generic hosts, verify the selected driver after importing a URL. Some drivers use a form instead of a URL.
 
 ## Quick lookup
 
@@ -44,6 +44,33 @@ Picking the dedicated engine is not cosmetic: PlanetScale and DocumentDB force T
 <Callout type="info">
 **TimescaleDB is deliberately not detected from the URL.** A Timescale instance is an ordinary PostgreSQL server with an extension installed; nothing in the connection string says so. Pick the engine yourself.
 </Callout>
+
+## Drivers added in v0.1.39
+
+These engines reuse existing protocol schemes. Include the correct port explicitly and verify the selected driver after importing the URL.
+
+| Engine | Scheme / default port | Selection |
+| --- | --- | --- |
+| [TiDB](/docs/connections/tidb) | `mysql://`, 4000 | `*.tidbcloud.com`, or select manually. |
+| [StarRocks](/docs/connections/starrocks) | `mysql://`, 9030 | Select manually. |
+| [Apache Doris](/docs/connections/doris) | `mysql://`, 9030 | Select manually. |
+| [SingleStore](/docs/connections/singlestore) | `mysql://`, 3306 | `*.svc.singlestore.com`, or select manually. |
+| [YugabyteDB](/docs/connections/yugabytedb) | `postgresql://`, 5433 | `*.yugabyte.cloud`, or select manually; default database `yugabyte`. |
+| [KeyDB](/docs/connections/keydb) | `redis://` / `rediss://`, 6379 | Select manually. |
+| [Garnet](/docs/connections/garnet) | `redis://` / `rediss://`, 6379 | Select manually. |
+| [Azure SQL](/docs/connections/azuresql) | `sqlserver://` / `mssql://`, 1433 | `*.database.windows.net`; TLS forced. |
+| [Azure Synapse](/docs/connections/synapse) | `sqlserver://` / `mssql://`, 1433 | `*.sql.azuresynapse.net`; TLS forced. |
+
+### Drivers configured through a form
+
+The generic connection-URL parser does **not** accept `snowflake://`, `bigquery://`, `cassandra://`, `scylladb://` or `keyspaces://`.
+
+- [Snowflake](/docs/connections/snowflake): account/host, database, warehouse, role and key-pair or token authentication over HTTPS.
+- [BigQuery](/docs/connections/bigquery): service-account JSON, project, billing project and location over HTTPS.
+- [Cassandra](/docs/connections/cassandra) / [ScyllaDB](/docs/connections/scylladb): host, port 9042, keyspace, credentials and TLS settings.
+- [Amazon Keyspaces](/docs/connections/keyspaces): regional host, port 9142, service-specific credentials and forced TLS.
+
+ClickHouse, Elasticsearch and OpenSearch also use their dedicated connection forms; an HTTP endpoint is not a generic SQL connection URL. See the [complete driver catalog](/docs/connections/supported-databases).
 
 ## PostgreSQL
 

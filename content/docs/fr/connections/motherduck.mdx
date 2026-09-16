@@ -1,0 +1,28 @@
+---
+title: MotherDuck
+description: "Se connecter au point d’accès PostgreSQL de MotherDuck avec un jeton et TLS vérifié."
+premium: false
+---
+
+# MotherDuck
+
+Choisissez **MotherDuck** dans **Nouvelle connexion**. Contrairement au driver DuckDB local, cette connexion utilise le point d’accès compatible PostgreSQL de MotherDuck.
+
+## Champs de connexion
+
+- **Hôte :** point d’accès régional, par exemple `pg.REGION-aws.motherduck.com`.
+- **Port :** `5432`.
+- **Utilisateur :** `postgres`.
+- **Mot de passe :** votre jeton MotherDuck.
+- **Base :** `md:` ou le chemin de base adapté à votre connexion.
+- **TLS :** utilisez une connexion vérifiée, par exemple `sslmode=verify-full`.
+
+```text
+postgresql://postgres:TOKEN@pg.REGION-aws.motherduck.com:5432/md:?sslmode=verify-full
+```
+
+Le formulaire peut déduire l’hôte régional de la propriété `mdRegion` du jeton pour les régions AWS prises en charge. Un hôte personnalisé est conservé. Si le test échoue, vérifiez ensemble l’hôte et le jeton.
+
+Après connexion, utilisez l’explorateur et l’éditeur de requêtes. Il s’agit d’une connexion distante, pas d’un fichier `.duckdb` local. Les fonctionnalités suivent les capacités du driver MotherDuck ; la compatibilité réseau PostgreSQL n’en fait pas un serveur PostgreSQL.
+
+Voir [DuckDB](/docs/connections/duckdb), les [URL de connexion](/docs/reference/connection-urls) et les [bases prises en charge](/docs/connections/supported-databases).

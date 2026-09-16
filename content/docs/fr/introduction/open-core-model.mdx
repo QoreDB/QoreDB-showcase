@@ -23,7 +23,7 @@ Chaque fichier source dans le dépôt porte un en-tête SPDX déclarant sa licen
 
 Le noyau couvre tout ce dont vous avez besoin pour un client de base de données complet et de qualité production :
 
-- **Tous les pilotes de base de données** : PostgreSQL (avec Supabase, Neon, TimescaleDB), MySQL/MariaDB, SQL Server, SQLite, DuckDB (avec MotherDuck), MongoDB, Redis, CockroachDB, ClickHouse, Elasticsearch, OpenSearch
+- **Les 34 drivers** : consultez le [catalogue complet](/docs/connections/supported-databases). Les opérations dépendent du moteur sélectionné.
 - **Gestion des connexions** : coffre-fort (vault), profils, tunnel SSH, protections d'environnement
 - **Éditeur et exécution de requêtes** : éditeurs SQL et MongoDB, coloration syntaxique, autocomplétion, historique, bibliothèque de requêtes
 - **Grille de données et édition** : édition en ligne, virtualisation, filtres côté serveur, édition en masse (jusqu'à 5 lignes)
@@ -32,8 +32,9 @@ Le noyau couvre tout ce dont vous avez besoin pour un client de base de données
 - **Diagramme ER** : graphe de schéma interactif avec des flux de travail d'isolement/focalisation
 - **Notebooks** : moteur de notebook complet avec variables paramétrées, Run All, import/export
 - **Importation CSV**, **pipeline d'exportation** (CSV/JSON/SQL/HTML), **gestion des transactions**
+- **Accès MCP et CLI en lecture seule**, avec autorisation explicite par connexion
+- **Tendances des requêtes** depuis l’audit conservé (P50/P95, exécutions, taux d’erreur)
 - **Journalisation d'audit** avec **empreintes de requêtes (fingerprints)**, **mode lecture seule**, **détection de requêtes dangereuses**
-- **Fédération inter-bases de données** via DuckDB
 - **Helpers de sauvegarde et restauration** : surcouches visuelles autour de `pg_dump`, `mysqldump`, `mongodump`, `sqlite3 .dump` et leurs équivalents de restauration
 - **Raccourcis clavier personnalisables** : chaque chord rebindable depuis les Réglages, avec syntaxe cross-OS
 - **Espaces de travail**, **système multi-onglets**, **recherche globale**, **internationalisation (i18n) en 9 langues**
@@ -49,6 +50,9 @@ En d'autres termes, le noyau est suffisant pour faire du travail réel tous les 
 
 Les fonctionnalités Premium sont des flux de travail avancés qui ne deviennent généralement utiles qu'une fois que vous utilisez intensivement QoreDB ou dans un cadre d'équipe :
 
+- **Fédération entre bases**, y compris l’outil de fédération MCP Pro
+- **Masquage des colonnes** dans les résultats, exports, API et sorties des agents
+- **Détection des régressions et N+1**, alertes de taux d’erreur et de requêtes lentes
 - **Data Diff visuel** : comparaison côte à côte des tables et des résultats de requêtes
 - **Mode bac à sable (sandbox)** : préparez les modifications de la grille, examinez le DML, puis appliquez
 - **Voyage dans le temps (Time Travel)** : historique complet des lignes avec chronologie visuelle, filtres de plage, diff point à point et aperçu SQL d'annulation (Rollback)
