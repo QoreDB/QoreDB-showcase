@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { Callout } from "./Callout";
+import { CodeBlock } from "./CodeBlock";
 import { CodeTabs, Tab } from "./CodeTabs";
+import { DatabaseGrid } from "./DatabaseGrid";
 import { KeyboardShortcut } from "./KeyboardShortcut";
 import { Screenshot } from "./Screenshot";
 import { Steps } from "./Steps";
@@ -11,11 +13,7 @@ import { Steps } from "./Steps";
 // biome-ignore lint/suspicious/noExplicitAny: MDX component map is intentionally permissive
 type MDXComponents = Record<string, React.ComponentType<any>>;
 
-function DocsLink({
-  href = "",
-  children,
-  ...rest
-}: ComponentProps<"a">) {
+function DocsLink({ href = "", children, ...rest }: ComponentProps<"a">) {
   const isExternal = /^(https?:|mailto:|tel:)/.test(href);
   if (isExternal) {
     return (
@@ -34,9 +32,11 @@ function DocsLink({
 export const docsMdxComponents: MDXComponents = {
   Callout,
   CodeTabs,
+  DatabaseGrid,
   Tab,
   KeyboardShortcut,
   Screenshot,
   Steps,
   a: DocsLink,
+  pre: CodeBlock,
 };

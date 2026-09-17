@@ -100,10 +100,9 @@
 }
 
 .docs-prose code:not(pre code) {
-  background: var(--q-bg-1);
-  border: 1px solid var(--q-border);
-  border-radius: 4px;
-  padding: 0.1rem 0.35rem;
+  background: var(--q-bg-2);
+  border-radius: 5px;
+  padding: 0.12rem 0.38rem;
   font-family: var(--font-mono);
   font-size: 0.875em;
   color: var(--q-text-0);
@@ -111,7 +110,6 @@
 
 .docs-prose pre {
   background: var(--q-bg-1);
-  border: 1px solid var(--q-border);
   border-radius: var(--radius-lg);
   padding: 1rem;
   overflow-x: auto;
@@ -259,7 +257,7 @@
 .q-docs-mobile-nav { border-bottom: 1px solid var(--q-border); }
 .q-docs-mobile-nav summary { list-style: none; }
 .q-docs-mobile-nav summary::-webkit-details-marker { display: none; }
-.q-docs-mobile-nav[open] summary svg { transform: rotate(180deg); }
+.q-docs-mobile-nav[open] > summary svg { transform: rotate(180deg); }
 .q-docs-search-dialog {
   position: fixed;
   inset: 0;

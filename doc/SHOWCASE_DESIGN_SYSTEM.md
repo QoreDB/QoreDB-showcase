@@ -106,3 +106,14 @@ Voir le [bilan du raffinement](../DESIGN-IS-2026-09-16/implementation/signature-
 ## Ajustement éditorial après retour utilisateur
 
 Les formules générales qui n’aident pas à comprendre le produit sont retirées ou remplacées par une action concrète. La maxime d’introduction des fonctionnalités et la seconde ligne de légende de la hero sont supprimées. Le titre de section reste disponible pour les technologies d’assistance sous le libellé « Fonctionnalités ». Les titres exploration, offres et téléchargement deviennent directs, dans les sept langues. La composition et les détails de signature visuelle sont conservés.
+
+
+## Premier écran, moteurs et navigation documentaire
+
+À la demande de l’utilisateur, la hero et le bandeau des cinq moteurs constituent désormais un seul premier écran, avec une hauteur minimale égale à la hauteur stable du viewport moins le header. La section des fonctionnalités commence ensuite. Sur mobile ou petite hauteur, le contenu conserve sa hauteur naturelle et peut dépasser le premier écran.
+
+Le bandeau est l’unique exception à la règle initiale d’absence de boucle décorative : translation CSS linéaire sur 38 secondes, bords estompés, arrêt hors écran via IntersectionObserver, pause au survol et au focus, commande de pause/reprise traduite. En réduction du mouvement, tous les noms sont présentés sur une liste statique qui revient à la ligne. Sans JavaScript, la liste reste consultable par défilement horizontal. Aucun nouvel asset ni bibliothèque d’animation n’est ajouté. Les copies nécessaires à la boucle sont masquées aux technologies d’assistance.
+
+Le fil d’Ariane documentaire pointe vers l’index de rubrique lorsqu’il existe, sinon vers son premier article selon l’ordre de navigation. Une rubrique vide reste un libellé sans lien ; aucune URL de dossier inexistant n’est fabriquée. Les liens conservent la langue demandée, et le JSON-LD utilise les mêmes destinations.
+
+Téléchargement Windows : Microsoft Store, installeur EXE et MSI. Les URL des installeurs viennent des entrées `windows-x86_64-nsis` et `windows-x86_64-msi` du manifeste de publication ; un format absent reste indiqué comme indisponible.

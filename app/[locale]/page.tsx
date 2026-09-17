@@ -9,6 +9,7 @@ import { Header } from "@/components/landing/header";
 import { Hero } from "@/components/landing/hero";
 import { McpSection } from "@/components/landing/mcp-section";
 import { MiniFaq } from "@/components/landing/mini-faq";
+import { MoreFeatures } from "@/components/landing/more-features";
 import { PricingPreview } from "@/components/landing/pricing-preview";
 import { normalizeLocale } from "@/lib/locale";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
@@ -82,8 +83,10 @@ export default async function HomePage({
         description: t("metadata.site_description"),
         url: getLocalizedUrl(normalizedLocale, "/"),
         downloadUrl: getLocalizedUrl(normalizedLocale, "/download"),
-        image: getAbsoluteUrl("/images/showcase-v2/query-workspace.webp"),
-        screenshot: getAbsoluteUrl("/images/showcase-v2/query-workspace.webp"),
+        image: getAbsoluteUrl("/images/showcase-v2/query-workspace-dark.webp"),
+        screenshot: getAbsoluteUrl(
+          "/images/showcase-v2/query-workspace-dark.webp",
+        ),
         offers: {
           "@type": "Offer",
           price: "0",
@@ -133,9 +136,12 @@ export default async function HomePage({
       <JsonLd id={`home-jsonld-${normalizedLocale}`} data={structuredData} />
       <Header />
       <main id="main-content" tabIndex={-1} className="q-home">
-        <Hero locale={normalizedLocale} />
+        <div className="q-home-first-screen">
+          <Hero locale={normalizedLocale} />
+        </div>
         <DatabaseStrip locale={normalizedLocale} />
         <FeatureShowcase locale={normalizedLocale} />
+        <MoreFeatures locale={normalizedLocale} />
         <McpSection locale={normalizedLocale} />
         <PricingPreview locale={normalizedLocale} />
         <MiniFaq locale={normalizedLocale} />

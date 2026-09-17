@@ -90,3 +90,14 @@ LCP mobile local médian : **1,284 s**, contre 2,132 s après la première passe
 ### Allègement éditorial
 
 Après suppression des phrases décoratives et simplification des titres dans les sept langues : TypeScript, Biome ciblé (9 fichiers TSX/JSON), build Next et `git diff --check` réussis. Reprise ciblée des sept accueils et de deux formats extrêmes : **9/9 scénarios réussis**, aucun ignoré ; [rapport](../DESIGN-IS-2026-09-16/implementation/copy-refinement/report.json). La maxime est absente du texte rendu, le titre accessible « Fonctionnalités » est conservé visuellement masqué. [Capture de la section](../DESIGN-IS-2026-09-16/implementation/copy-refinement/features-fr.png). Les performances de la passe précédente n’ont pas été remesurées pour ce changement éditorial.
+
+
+### Hero, défilement des moteurs, fil d’Ariane et formats Windows
+
+Le premier build passe **36/36 scénarios ciblés** : accueils localisés, responsive, absence de JavaScript et réduction du mouvement, séparation du premier écran, commandes du bandeau et arrêt hors écran, clics des fils d’Ariane FR/EN, plateformes de téléchargement et formats manquants. [Rapport](../DESIGN-IS-2026-09-16/implementation/final-tweaks/report.json).
+
+Après ajout du fondu aux extrémités du bandeau et retrait des extensions répétées dans les libellés Windows, second build puis index Pagefind réussis. **10/10 reprises ciblées** passent sur cet état : [rapport final](../DESIGN-IS-2026-09-16/implementation/final-tweaks/final-build/report.json). Ces reprises ne sont pas présentées comme une seconde exécution des 36 scénarios.
+
+Tests de régression : `pnpm --config.verify-deps-before-run=false exec tsx --test lib/docs/breadcrumbs.test.ts`, **5/5 réussites** (Introduction FR/EN, destinations de toutes les rubriques, absence de lien inventé pour une rubrique vide). TypeScript normal, Biome ciblé sur 14 fichiers et `git diff --check` réussis.
+
+Quatre vues d’accueil inspectées sur le dernier build (390/1440 px, clair/sombre) : aucun débordement ; section suivante à 900 px sur viewport desktop 900 px, à 1078 px sur mobile 844 px ; CLS observé nul pendant ce bref échantillon local. Le manifeste réellement servi fournit les deux installateurs Windows 0.1.39 et le Store apparaît à côté ; captures FR desktop/mobile conservées. [Relevé visuel et URL observées](../DESIGN-IS-2026-09-16/implementation/final-tweaks/final-build/visual.json). Aucun installateur n’a été exécuté. Les mesures LCP/JS historiques ne sont pas déclarées remesurées ici.

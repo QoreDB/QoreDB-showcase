@@ -21,7 +21,10 @@ export function KeyboardShortcut(props: Props = {}) {
   const keys =
     props.keys ??
     (props.shortcut
-      ? props.shortcut.split("+").map((k) => k.trim()).filter(Boolean)
+      ? props.shortcut
+          .split("+")
+          .map((k) => k.trim())
+          .filter(Boolean)
       : []);
   if (keys.length === 0) return null;
 

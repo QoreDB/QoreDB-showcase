@@ -1,96 +1,113 @@
 {
+  "captureDate": "2026-09-17",
+  "appVersion": "0.1.39",
+  "appCommit": "28f4dc65c66f8026e476614cd5ccdf6bb1f4b05f",
+  "runtime": "Unmodified React production build, official qore-server HTTP transport, real SQLite driver",
   "viewport": {
-    "width": 1280,
-    "height": 800
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 2
   },
-  "timings": [
+  "film": {
+    "width": 1920,
+    "height": 1200,
+    "method": "frame-by-frame 2x screenshots, nominal timing"
+  },
+  "driver": "SQLite",
+  "fixture": "Atelier synthetic commerce dataset (seed 139): 240 customers, 22 products, 1800 orders, 3449 order items, 1627 invoices, 960 deployments",
+  "scenes": [
     {
-      "name": "connect",
-      "seconds": 1
+      "name": "workflow",
+      "tier": "core"
     },
     {
-      "name": "open-editor",
-      "seconds": 3
+      "name": "query-workspace",
+      "tier": "core"
     },
     {
-      "name": "type-select",
-      "seconds": 4.5
+      "name": "table-workspace",
+      "tier": "core"
     },
     {
-      "name": "execute-select",
-      "seconds": 8.5
+      "name": "er-diagram",
+      "tier": "core"
     },
     {
-      "name": "results-visible",
-      "seconds": 8.61
+      "name": "sandbox-changes",
+      "tier": "pro"
     },
     {
-      "name": "prepare-update",
-      "seconds": 16
-    },
-    {
-      "name": "end",
-      "seconds": 24.76
+      "name": "safety-confirm",
+      "tier": "core"
     }
   ],
   "executed": [
-    {
-      "path": "/api/stream/execute_query",
-      "query": "SELECT name, environment, status, region, deployments\nFROM projects\nWHERE environment = 'production'\nORDER BY deployments DESC;"
-    }
+    "SELECT c.company, c.country, COUNT(o.id) AS orders,\nSUM(o.total_cents) / 100.0 AS revenue\nFROM customers c\nJOIN orders o ON o.customer_id = c.id\nWHERE o.status = 'paid'\nGROUP BY c.id\nORDER BY revenue DESC\nLIMIT 50;",
+    "SELECT c.company, c.country, c.plan,\n       COUNT(o.id)                AS orders,\n       SUM(o.total_cents) / 100.0 AS revenue,\n       MAX(o.placed_at)           AS last_order\nFROM customers c\nJOIN orders o ON o.customer_id = c.id\nWHERE o.status = 'paid'\nGROUP BY c.id\nORDER BY revenue DESC\nLIMIT 50;"
   ],
-  "appVersion": "0.1.39",
-  "driver": "SQLite",
-  "fixture": "Atelier synthetic projects",
+  "blockedBeforeReachingServer": [],
   "mutationExecuted": false,
-  "appCommit": "28f4dc65c66f8026e476614cd5ccdf6bb1f4b05f",
-  "runtime": "Unmodified React production build, official qore-server HTTP transport, real SQLite driver",
-  "captureDate": "2026-09-16",
-  "checks": {
-    "orbitStatusAfterRecording": "review",
-    "selectExecuted": 1,
-    "updateExecuted": 0,
-    "appSourceUnchanged": true,
+  "harness": {
+    "licenceStatusAnsweredAsPro": ["sandbox-changes"],
+    "pointerOverlay": ["workflow"],
     "externalBrowserRequestsBlocked": true,
-    "uiVisualInspection": "query, table, draft, video first frame and 8-frame storyboard"
+    "nonSelectStatementsAborted": true
   },
-  "videoProbe": {
-    "programs": [],
-    "stream_groups": [],
-    "streams": [
-      {
-        "codec_name": "h264",
-        "width": 1280,
-        "height": 800,
-        "pix_fmt": "yuv420p",
-        "r_frame_rate": "25/1"
-      }
-    ],
-    "format": {
-      "duration": "22.720000",
-      "size": "291908"
-    }
+  "checks": {
+    "appSourceUnchanged": true,
+    "uiVisualInspection": "all five stills in dark, light spot-checked, film frames at 3/9/14/20/27 s"
   },
-  "assets": [
-    {
-      "path": "public/images/showcase-v2/query-workspace.webp",
-      "bytes": 44944,
-      "sha256": "9c7764828f975bdf93fba69b687bfbc508b0572746c28d48c4e0da39d748903e"
+  "files": {
+    "public/images/showcase-v2/er-diagram-dark.webp": {
+      "bytes": 162720,
+      "sha256": "f5f822bb4ed59b0f862cfce1bf9d7f6230556f977b1e47ee4fc0c5cd56abb88b"
     },
-    {
-      "path": "public/images/showcase-v2/table-workspace.webp",
-      "bytes": 46994,
-      "sha256": "b6cc6681e30edf33e59966867ac647da06cee642de88854cd72914fda238f6f1"
+    "public/images/showcase-v2/er-diagram-light.webp": {
+      "bytes": 165516,
+      "sha256": "2def272a456e6093c018befb266edc95fd31fcf5a302f656af19b4874facc251"
     },
-    {
-      "path": "public/images/showcase-v2/workflow-poster.webp",
-      "bytes": 44944,
-      "sha256": "9c7764828f975bdf93fba69b687bfbc508b0572746c28d48c4e0da39d748903e"
+    "public/images/showcase-v2/query-workspace-dark.webp": {
+      "bytes": 198748,
+      "sha256": "0bd83aa27ef57900825304222eb958a91caa4a2fefc6119fcb53d12551057c9b"
     },
-    {
-      "path": "public/videos/qoredb-workflow.mp4",
-      "bytes": 291908,
-      "sha256": "92d751899a2e9bc7d8c2ad9ee44f4df0a6e094574b441f4463a0a382d5a980c8"
+    "public/images/showcase-v2/query-workspace-light.webp": {
+      "bytes": 190264,
+      "sha256": "bef6583e3f78d1d31f1e45b6ce742e9de55d71f2969921bc31ba2697d172669d"
+    },
+    "public/images/showcase-v2/safety-confirm-dark.webp": {
+      "bytes": 48854,
+      "sha256": "14ae6cfc77559d2f932bf539ec94c1683c13484007d14cea7af54747a3ee8bb8"
+    },
+    "public/images/showcase-v2/safety-confirm-light.webp": {
+      "bytes": 48212,
+      "sha256": "dcc75d8972a854a428044e71775555dbabf9bb149d9d36008c085c700708564b"
+    },
+    "public/images/showcase-v2/sandbox-changes-dark.webp": {
+      "bytes": 197330,
+      "sha256": "d6a0a1659c3b62524c1de64e159580c9e60d991cb1665f91e4a45beb9f0839a0"
+    },
+    "public/images/showcase-v2/sandbox-changes-light.webp": {
+      "bytes": 199548,
+      "sha256": "c8147704a42a2ec8b6a473b5c41fd7c5218ea51444924ff096e9dfdff756c629"
+    },
+    "public/images/showcase-v2/table-workspace-dark.webp": {
+      "bytes": 189338,
+      "sha256": "3b1480febab8abab6d53596a906fd9dce74bbfa575b7f6a070f428adf3d5146c"
+    },
+    "public/images/showcase-v2/table-workspace-light.webp": {
+      "bytes": 190284,
+      "sha256": "e7611773267a6a32110837e339cca95a02ca3f841831e9acb1346f7049276385"
+    },
+    "public/videos/qoredb-workflow.mp4": {
+      "bytes": 1190583,
+      "sha256": "a557d090d7659db1fe48a065d84609b2060f8ec2ddb8a052a2afb2020c052da0",
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1200,
+      "r_frame_rate": "30/1",
+      "bit_rate": "290165",
+      "side_data_list": [{}],
+      "duration": "32.466667"
     }
-  ]
+  }
 }

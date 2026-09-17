@@ -1,0 +1,46 @@
+{
+  "views": [
+    {
+      "theme": "light",
+      "width": 390,
+      "overflow": 390,
+      "featureTop": 1078.421875,
+      "cls": 0
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "overflow": 1440,
+      "featureTop": 900,
+      "cls": 0
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "overflow": 390,
+      "featureTop": 1078.421875,
+      "cls": 0
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "overflow": 1440,
+      "featureTop": 900,
+      "cls": 0
+    }
+  ],
+  "downloads": [
+    {
+      "text": "Microsoft StoreWindows",
+      "url": "https://apps.microsoft.com/detail/9NZLCGFWCHHG"
+    },
+    {
+      "text": "Installeur (.exe)x86_64",
+      "url": "https://github.com/QoreDB/QoreDB/releases/download/v0.1.39/QoreDB_0.1.39_x64-setup.exe"
+    },
+    {
+      "text": "Installeur MSIx86_64",
+      "url": "https://github.com/QoreDB/QoreDB/releases/download/v0.1.39/QoreDB_0.1.39_x64_en-US.msi"
+    }
+  ]
+}

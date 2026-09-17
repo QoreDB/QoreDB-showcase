@@ -1,0 +1,311 @@
+{
+  "base": "http://127.0.0.1:3101/",
+  "createdAt": "2026-09-16T21:07:37.345Z",
+  "summary": {
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "name": "home-fr",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-fr.png",
+      "durationMs": 1610
+    },
+    {
+      "name": "home-en",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-en.png",
+      "durationMs": 1085
+    },
+    {
+      "name": "home-de",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-de.png",
+      "durationMs": 1085
+    },
+    {
+      "name": "home-es",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-es.png",
+      "durationMs": 1081
+    },
+    {
+      "name": "home-ja",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-ja.png",
+      "durationMs": 1076
+    },
+    {
+      "name": "home-it",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-it.png",
+      "durationMs": 1078
+    },
+    {
+      "name": "home-zh",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-zh.png",
+      "durationMs": 2063
+    },
+    {
+      "name": "layout-light-320",
+      "status": "passed",
+      "screenshot": "layout-light-320.png",
+      "durationMs": 1054
+    },
+    {
+      "name": "layout-light-768",
+      "status": "passed",
+      "screenshot": "layout-light-768.png",
+      "durationMs": 921
+    },
+    {
+      "name": "layout-light-1024",
+      "status": "passed",
+      "screenshot": "layout-light-1024.png",
+      "durationMs": 1012
+    },
+    {
+      "name": "layout-light-1440",
+      "status": "passed",
+      "screenshot": "layout-light-1440.png",
+      "durationMs": 1050
+    },
+    {
+      "name": "layout-light-1920",
+      "status": "passed",
+      "screenshot": "layout-light-1920.png",
+      "durationMs": 1020
+    },
+    {
+      "name": "layout-dark-320",
+      "status": "passed",
+      "screenshot": "layout-dark-320.png",
+      "durationMs": 1054
+    },
+    {
+      "name": "layout-dark-768",
+      "status": "passed",
+      "screenshot": "layout-dark-768.png",
+      "durationMs": 919
+    },
+    {
+      "name": "layout-dark-1024",
+      "status": "passed",
+      "screenshot": "layout-dark-1024.png",
+      "durationMs": 947
+    },
+    {
+      "name": "layout-dark-1440",
+      "status": "passed",
+      "screenshot": "layout-dark-1440.png",
+      "durationMs": 990
+    },
+    {
+      "name": "layout-dark-1920",
+      "status": "passed",
+      "screenshot": "layout-dark-1920.png",
+      "durationMs": 996
+    },
+    {
+      "name": "home-no-javascript",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-no-javascript.png",
+      "durationMs": 1084
+    },
+    {
+      "name": "home-reduced-motion",
+      "status": "passed",
+      "detail": {
+        "hidden": [],
+        "infinite": 0,
+        "imageVisible": 265,
+        "loadedFonts": [
+          "Space Grotesk"
+        ]
+      },
+      "screenshot": "home-reduced-motion.png",
+      "durationMs": 1084
+    },
+    {
+      "name": "hero-first-screen-390",
+      "status": "passed",
+      "detail": {
+        "next": 1078.421875,
+        "height": 844
+      },
+      "screenshot": "hero-first-screen-390.png",
+      "durationMs": 1050
+    },
+    {
+      "name": "hero-first-screen-1440",
+      "status": "passed",
+      "detail": {
+        "next": 900,
+        "height": 900
+      },
+      "screenshot": "hero-first-screen-1440.png",
+      "durationMs": 1014
+    },
+    {
+      "name": "hero-first-screen-1920",
+      "status": "passed",
+      "detail": {
+        "next": 1080,
+        "height": 1080
+      },
+      "screenshot": "hero-first-screen-1920.png",
+      "durationMs": 1124
+    },
+    {
+      "name": "drivers-motion-controls",
+      "status": "passed",
+      "screenshot": "drivers-motion-controls.png",
+      "durationMs": 1394
+    },
+    {
+      "name": "drivers-reduced-motion",
+      "status": "passed",
+      "screenshot": "drivers-reduced-motion.png",
+      "durationMs": 1083
+    },
+    {
+      "name": "docs-breadcrumb-fr",
+      "status": "passed",
+      "screenshot": "docs-breadcrumb-fr.png",
+      "durationMs": 1186
+    },
+    {
+      "name": "docs-breadcrumb-en",
+      "status": "passed",
+      "screenshot": "docs-breadcrumb-en.png",
+      "durationMs": 1167
+    },
+    {
+      "name": "download-windows",
+      "status": "passed",
+      "screenshot": "download-windows.png",
+      "durationMs": 1070
+    },
+    {
+      "name": "download-macIntel",
+      "status": "passed",
+      "screenshot": "download-macIntel.png",
+      "durationMs": 1087
+    },
+    {
+      "name": "download-macArm",
+      "status": "passed",
+      "screenshot": "download-macArm.png",
+      "durationMs": 1103
+    },
+    {
+      "name": "download-linux",
+      "status": "passed",
+      "screenshot": "download-linux.png",
+      "durationMs": 1090
+    },
+    {
+      "name": "download-unknown",
+      "status": "passed",
+      "screenshot": "download-unknown.png",
+      "durationMs": 1116
+    },
+    {
+      "name": "download-windows-missing-installers",
+      "status": "passed",
+      "screenshot": "download-windows-missing-installers.png",
+      "durationMs": 1095
+    },
+    {
+      "name": "download-formats",
+      "status": "passed",
+      "screenshot": "download-formats.png",
+      "durationMs": 1161
+    },
+    {
+      "name": "download-loading",
+      "status": "passed",
+      "screenshot": "download-loading.png",
+      "durationMs": 345
+    },
+    {
+      "name": "download-error-retry",
+      "status": "passed",
+      "screenshot": "download-error-retry.png",
+      "durationMs": 1159
+    },
+    {
+      "name": "download-missing-format",
+      "status": "passed",
+      "screenshot": "download-missing-format.png",
+      "durationMs": 1056
+    }
+  ]
+}

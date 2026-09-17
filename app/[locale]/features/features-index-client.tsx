@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -21,14 +21,14 @@ export function FeaturesIndexClient() {
         tabIndex={-1}
         className="q-container flex-1 pt-20 pb-20 lg:pt-24"
       >
-        <div className="q-page-header mb-8">
+        <div className="q-page-header mb-12">
           <h1 className="mb-5 max-w-4xl">{t("features_index.title")}</h1>
           <p className="max-w-2xl text-lg leading-relaxed text-(--q-text-1)">
             {t("features_index.subtitle")}
           </p>
         </div>
 
-        <div className="grid gap-x-12 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {FEATURE_PAGES.map((feature) => {
             const Icon = feature.icon;
             const base = `features_pages.${feature.slug}`;
@@ -38,34 +38,45 @@ export function FeaturesIndexClient() {
                 key={feature.slug}
                 href={`/${locale}/features/${feature.slug}`}
                 prefetch={false}
-                className="group flex min-w-0 flex-col border-b border-(--q-border) py-8 transition-colors hover:border-(--q-accent)"
+                className="group flex min-w-0 flex-col overflow-hidden rounded-2xl bg-(--q-bg-1) transition-colors hover:bg-(--q-bg-2)"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="flex size-8 items-center text-(--q-accent)">
-                    <Icon className="w-5 h-5" />
-                  </span>
-                  <span
-                    className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium ${
-                      isPro
-                        ? "bg-(--q-accent)/10 text-(--q-accent) border border-(--q-accent)/30"
-                        : "bg-(--q-bg-0) text-(--q-text-2) border border-(--q-border)"
-                    }`}
-                  >
-                    {isPro
-                      ? t("features_common.tier_pro")
-                      : t("features_common.tier_core")}
-                  </span>
+                {/* Real desktop captures; features without one fall back to their icon. */}
+                <div className="relative aspect-[16/9] overflow-hidden bg-[#0b0b0d]">
+                  {feature.image ? (
+                    <Image
+                      src={feature.image}
+                      alt=""
+                      width={2000}
+                      height={1310}
+                      sizes="(max-width: 640px) 100vw, 650px"
+                      loading="lazy"
+                      className="absolute left-1/2 top-0 h-auto w-[112%] max-w-none -translate-x-1/2 -translate-y-[3%] transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <span className="absolute inset-0 grid place-items-center bg-[radial-gradient(60%_80%_at_50%_0%,rgba(122,108,255,0.35),transparent_70%)] text-[#aa9fff]">
+                      <Icon className="size-12" aria-hidden="true" />
+                    </span>
+                  )}
                 </div>
-                <h2 className="text-2xl font-semibold tracking-tight text-(--q-text-0) mb-2">
-                  {t(`${base}.title`)}
-                </h2>
-                <p className="text-sm text-(--q-text-1) leading-relaxed flex-1">
-                  {t(`${base}.teaser`)}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-(--q-accent)">
-                  {t("features_common.learn_more")}
-                  <ArrowRight className="w-4 h-4" />
-                </span>
+                <div className="flex flex-1 flex-col p-6">
+                  <h2 className="mb-2 flex items-center gap-3 text-2xl font-semibold tracking-tight text-(--q-text-0)">
+                    {t(`${base}.title`)}
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 font-sans text-xs font-semibold tracking-normal ${
+                        isPro
+                          ? "bg-(--q-accent-soft) text-(--q-accent)"
+                          : "bg-(--q-bg-0) text-(--q-text-0)"
+                      }`}
+                    >
+                      {isPro
+                        ? t("features_common.tier_pro")
+                        : t("features_common.tier_core")}
+                    </span>
+                  </h2>
+                  <p className="flex-1 text-[15px] leading-relaxed text-(--q-text-1)">
+                    {t(`${base}.teaser`)}
+                  </p>
+                </div>
               </Link>
             );
           })}

@@ -32,7 +32,7 @@ export function NextSteps() {
   ];
 
   return (
-    <section className="q-container border-t border-(--q-border) py-16 lg:py-24">
+    <section className="q-container py-16 lg:py-24">
       <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
         <div className="">
           <span className="font-mono text-xs text-(--q-accent)">
@@ -46,14 +46,14 @@ export function NextSteps() {
           </p>
         </div>
 
-        <div className="divide-y divide-(--q-border)">
+        <div className="grid gap-2">
           {items.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group relative flex flex-col gap-2 py-6 pr-8 first:pt-0"
+                className="group relative flex flex-col gap-2 rounded-2xl bg-(--q-bg-1) p-6 pr-12 transition-colors hover:bg-(--q-bg-2)"
               >
                 <div className="text-(--q-accent)">
                   <Icon className="size-5" />
@@ -62,7 +62,7 @@ export function NextSteps() {
                   {item.title}
                 </h3>
                 <p className="text-sm text-(--q-text-2)">{item.description}</p>
-                <span className="absolute right-0 top-7 inline-flex text-(--q-accent)">
+                <span className="absolute right-6 top-7 inline-flex text-(--q-accent)">
                   <ArrowRight className="size-4" />
                 </span>
               </Link>

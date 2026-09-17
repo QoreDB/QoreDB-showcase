@@ -41,6 +41,16 @@ export function DownloadSection() {
               detail: "Windows",
               url: getDownloadLink("windows"),
             },
+            {
+              label: t("download.windows_installer"),
+              detail: "x86_64",
+              url: release?.platforms["windows-x86_64-nsis"]?.url,
+            },
+            {
+              label: t("download.windows_msi"),
+              detail: "x86_64",
+              url: release?.platforms["windows-x86_64-msi"]?.url,
+            },
           ]
         : selected === "linux"
           ? [

@@ -1,111 +1,67 @@
 {
   "home": {
     "demo": {
-      "eyebrow": "操作デモ / Core",
       "title": "クエリから結果まで。",
       "silent": "音声なし",
-      "posterAlt": "デモ用のSQLiteデータベースに接続したQoreDB。",
+      "posterAlt": "デモ用 SQLite データベースで JOIN クエリとその結果を表示している QoreDB のクエリエディタ。",
       "play": "デモを見る",
       "loading": "動画を読み込み中…",
       "error": "動画を読み込めませんでした。",
       "retry": "再試行",
       "open": "動画を開く",
-      "caption": "デモデータを使った、実際のQoreDBの操作画面です。",
       "transcript": "操作の流れを読む",
       "steps": [
-        "「Atelier / demo」接続を開き、SQLエディターを開きます。",
-        "本番環境のプロジェクトをデプロイ数の多い順に取得します。結果にはAtlas（128）、Forma（96）、Prism（84）、Tempo（72）と、それぞれの環境、状態、リージョンが表示されます。",
-        "UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging' を準備します。下書きのまま保持し、実行はしません。"
+        "「Atelier / demo」接続を開き、続いて「atelier」データベースと 6 つのテーブルを開きます。",
+        "customers テーブルを開き、会社、担当者、メール、国、プラン、シート数の行をスクロールします。",
+        "SQL エディタを開き、customers と orders を結合するクエリを書きます。顧客ごとの支払い済み注文数と売上を降順で、50 件まで取得します。",
+        "実行します。グリッドに数ミリ秒で 50 行が表示され、結果をスクロールします。"
       ]
     },
     "download": "QoreDBをダウンロード",
-    "fullImage": "スクリーンショット全体を開く",
     "hero": {
       "eyebrow": "デスクトップクライアント · SQL + NoSQL",
-      "title": ["データベースを、", "ひとつの", "作業空間に"],
+      "title": [
+        "データベースを、",
+        "ひとつの",
+        "作業空間に"
+      ],
       "description": "データの探索、クエリ、編集をひとつの画面で。状況を把握しながら、確実に作業できます。",
       "explore": "製品を見る",
       "free": "Coreは無料",
-      "workspace": "あなたのワークスペース",
-      "alt": "QoreDBのSQLエディター、結果のグリッド、SQLite接続。",
-      "caption": "クエリから結果まで。"
+      "alt": "QoreDBのSQLエディター、結果のグリッド、SQLite接続。"
     },
     "compatibility": {
-      "label": "対応するエンジンとサービス",
-      "title": "エンジンが違っても。",
-      "subtitle": "操作はいつもの感覚で。",
-      "link": "対応データベース一覧"
+      "link": "対応データベース一覧",
+      "heading": "種類のエンジンを、ひとつの画面で。"
     },
     "workflows": {
-      "eyebrow": "使い心地を詳しく",
       "title": "機能",
       "explore": {
         "label": "探索とクエリ",
         "title": "テーブルを探索。データをクエリ。",
         "description": "テーブルを開き、クエリを書き、結果を確認。接続先もデータも、同じ作業空間にまとまります。",
-        "steps": [
-          {
-            "title": "接続先を選ぶ",
-            "description": "どこで作業しているかが明確です。"
-          },
-          {
-            "title": "読んで、探索する",
-            "description": "テーブルと構造にすぐアクセス。"
-          },
-          {
-            "title": "検索を絞り込む",
-            "description": "グリッドでデータを絞り込み、詳しく確認。"
-          }
-        ],
         "link": "ドキュメントを見る",
-        "alt": "QoreDBのデータグリッド。テーブルのナビゲーション、列、検索欄を表示。",
-        "caption": "テーブル、列、作業の文脈をひとつに。· Core"
+        "alt": "QoreDBのデータグリッド。テーブルのナビゲーション、列、検索欄を表示。"
       },
       "sandbox": {
         "label": "準備と確認",
         "title": "変更の結果より先に、変更内容を確認。",
         "description": "Proのサンドボックスで変更をローカルに準備。保留中の操作を確認してからSQLを生成し、適用するか判断できます。",
-        "steps": [
-          {
-            "title": "落ち着いて編集する",
-            "description": "変更したセルは明確に表示されます。"
-          },
-          {
-            "title": "操作を見直す",
-            "description": "追加、更新、削除をまとめて確認。"
-          }
-        ],
         "link": "サンドボックスを見る",
-        "alt": "編集済みセルと保留中の操作パネルを表示したQoreDBサンドボックス。",
-        "caption": "適用する前に、変更内容を確認。· Pro"
+        "alt": "編集済みセルと保留中の操作パネルを表示したQoreDBサンドボックス。"
       },
       "safety": {
         "label": "保護機能とともに作業",
         "title": "大切な場面で、ひと呼吸。",
         "description": "本番環境での作業には慎重さが必要です。組み込みの保護機能が、重要な操作を実行前に明示します。",
-        "steps": [
-          {
-            "title": "環境を識別する",
-            "description": "開発、テスト、本番を明確に区別。"
-          },
-          {
-            "title": "重要な操作を確認する",
-            "description": "画面は、本番データベース削除前の警告です。"
-          }
-        ],
         "link": "保護機能について",
-        "alt": "QoreDBのデータベース削除確認。本番環境の警告とキャンセル・続行の選択肢を表示。",
-        "caption": "本番環境の確認 · Core。カスタムルール · Pro。"
+        "alt": "QoreDB の「Confirm Production Operation」ダイアログ。本番データベースの警告と、DELETE の実行前にデータベース名を入力する欄が表示されています。"
       }
     },
     "mcp": {
-      "eyebrow": "自動化 · MCP / Core",
       "title": "あなたの文脈を、エージェントにも。",
       "description": "許可した接続先をMCP対応ツールと連携。読み取り専用セッションでスキーマを探索し、データをクエリできます。",
       "link": "MCPサーバーを設定する",
-      "flowLabel": "MCPリクエストの流れ",
-      "assistant": "エージェント",
-      "connections": "許可した接続先",
       "access": {
         "title": "明示的な許可",
         "description": "公開する接続先は自分で選択。クエリ制限と監査ログは引き続き有効です。"
@@ -114,14 +70,16 @@
         "title": "ローカル優先",
         "description": "クライアントは手元のマシンで動作。任意のサービスは提供元と通信する場合があります。"
       },
-      "source": {
-        "title": "公開されたCore",
-        "description": "コアはApache-2.0。Premiumモジュールには別途BUSL-1.1ライセンスが適用されます。"
-      },
-      "note": "Pro内蔵のAIは任意です。外部アシスタントは設定に応じて結果を提供元に送信する場合があります。"
+      "note": "Pro内蔵のAIは任意です。外部アシスタントは設定に応じて結果を提供元に送信する場合があります。",
+      "clients": "対応クライアント",
+      "example": {
+        "label": "エージェントとのやり取りの例",
+        "prompt": "売上が最も多い顧客はどこですか？",
+        "readonly": "読み取り専用",
+        "answer": "売上トップは Galen Foods の 138,635.87 で、Cobalt Health、Delta Labs が続きます。"
+      }
     },
     "pricing": {
-      "eyebrow": "プラン",
       "title": "Core・Pro・Team",
       "compare": "プランを比較",
       "core": {
@@ -136,12 +94,10 @@
       },
       "team": {
         "model": "席数ごと・年額",
-        "description": "チーム向けのプラン。対象機能、条件、提供状況は料金ページで確認できます。",
         "link": "Teamを見る"
       }
     },
     "faq": {
-      "eyebrow": "始める前に",
       "title": "よくある質問。",
       "start": {
         "question": "無料で始められますか？",
@@ -157,9 +113,7 @@
       }
     },
     "cta": {
-      "eyebrow": "ダウンロード",
-      "title": "QoreDBを使い始める。",
-      "description": "macOS、Windows、Linuxに対応。"
+      "title": "QoreDBを使い始める。"
     }
   },
   "a11y": {
@@ -284,7 +238,7 @@
       "connection": "新しい接続",
       "settings": "設定"
     },
-    "release": "v0.1.39 の新機能：14 の新しいドライバー + MCP"
+    "release": "新機能：14 の新しいドライバー + MCP"
   },
   "preview": {
     "eyebrow": "プレビュー",
@@ -650,10 +604,10 @@
     "title": "QoreDB ロードマップ",
     "subtitle": "QoreDB 開発の次のステップをご覧ください。",
     "now": {
-      "title": "v0.1.39 の新機能：14 の新しいドライバー + MCP",
+      "title": "新機能：14 の新しいドライバー + MCP",
       "quote": "QoreDB はより速く、より安全になり、本格的な日常使用の準備が整いました。",
       "items": {
-        "1": "v0.1.39 は 34 ドライバーに対応。対応エンジン： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "1": "34 ドライバーに対応。対応エンジン： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
         "2": "読み取り専用 MCP サーバー — 外部 AI エージェントに、明示的に許可した接続、スキーマ、保存済みクエリへのアクセスを提供します。",
         "3": "列マスキング · Pro — 接続ごとに機密列を完全・部分・ハッシュ形式でマスク。結果、エクスポート、API、エージェントに適用されます。",
         "4": "クエリ傾向 · Core — 保存された監査履歴から、7・14・30 日間の実行回数、P50/P95 レイテンシ、エラー率を追跡します。",
@@ -729,7 +683,7 @@
       },
       "supported_databases": {
         "question": "どのデータベースがサポートされていますか?",
-        "answer": "v0.1.39 は 34 ドライバーに対応。対応エンジン：\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\n閲覧、クエリ、編集、トランザクションの対応範囲は、選択したドライバーによって異なります。"
+        "answer": "34 ドライバーに対応。対応エンジン：\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\n閲覧、クエリ、編集、トランザクションの対応範囲は、選択したドライバーによって異なります。"
       },
       "remote_ssh": {
         "question": "リモート接続と SSH は機能しますか?",
@@ -1378,7 +1332,9 @@
     "quick_start_cta": "クイックスタート",
     "databases_cta": "データベース",
     "more_pages": "他 {{remaining}} 件",
-    "explore_section": "セクションを見る"
+    "explore_section": "セクションを見る",
+    "copy_code": "コードをコピー",
+    "copied": "コピーしました"
   },
   "marketplace": {
     "categories": {
