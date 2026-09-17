@@ -6,7 +6,12 @@ type CalloutType = "info" | "tip" | "warning" | "danger";
 
 const STYLES: Record<
   CalloutType,
-  { icon: typeof Info; container: string; iconClass: string; titleClass: string }
+  {
+    icon: typeof Info;
+    container: string;
+    iconClass: string;
+    titleClass: string;
+  }
 > = {
   info: {
     icon: Info,
@@ -55,12 +60,7 @@ export function Callout({
   const heading = title ?? DEFAULT_TITLES[type];
 
   return (
-    <aside
-      className={cn(
-        "my-6 rounded-lg border px-4 py-3",
-        config.container,
-      )}
-    >
+    <aside className={cn("my-6 rounded-lg border px-4 py-3", config.container)}>
       <div className="text-sm leading-relaxed text-(--q-text-1)">
         <p
           className={cn(

@@ -1,55 +1,24 @@
 ---
 title: Bases de données prises en charge
-description: "Bases de données prises en charge — QoreDB v0.1.39, Core, 34 drivers."
+description: "Bases de données prises en charge — QoreDB Core, 34 drivers."
 premium: false
 ---
 
 # Bases de données prises en charge
 
-QoreDB v0.1.39 propose **34 drivers**, tous inclus dans **Core**. Choisissez un moteur ci-dessous pour ouvrir son guide. Les moteurs compatibles conservent leurs valeurs par défaut et limites : un même protocole ne garantit pas les mêmes fonctions d’édition, de DDL ou de transaction.
+QoreDB propose **34 drivers**, tous inclus dans **Core**. Choisissez un moteur ci-dessous pour ouvrir son guide. Les moteurs compatibles conservent leurs valeurs par défaut et limites : un même protocole ne garantit pas les mêmes fonctions d’édition, de DDL ou de transaction.
 
 ## SQL et bases managées
 
-- [PostgreSQL](/docs/connections/postgresql)
-- [Supabase](/docs/connections/postgresql)
-- [Neon](/docs/connections/postgresql)
-- [TimescaleDB](/docs/connections/postgresql)
-- [CockroachDB](/docs/connections/cockroachdb)
-- [YugabyteDB](/docs/connections/yugabytedb)
-- [MySQL](/docs/connections/mysql)
-- [MariaDB](/docs/connections/mysql)
-- [PlanetScale](/docs/connections/planetscale)
-- [TiDB](/docs/connections/tidb)
-- [SingleStore](/docs/connections/singlestore)
-- [SQL Server](/docs/connections/sqlserver)
-- [Azure SQL](/docs/connections/azuresql)
-- [SQLite](/docs/connections/sqlite)
+<DatabaseGrid group="sql" />
 
 ## Analytique et entrepôts cloud
 
-- [DuckDB](/docs/connections/duckdb)
-- [MotherDuck](/docs/connections/motherduck)
-- [ClickHouse](/docs/connections/clickhouse)
-- [Snowflake](/docs/connections/snowflake)
-- [BigQuery](/docs/connections/bigquery)
-- [StarRocks](/docs/connections/starrocks)
-- [Apache Doris](/docs/connections/doris)
-- [Azure Synapse](/docs/connections/synapse)
+<DatabaseGrid group="analytics" />
 
 ## Documents, clé-valeur, recherche et colonnes larges
 
-- [MongoDB](/docs/connections/mongodb)
-- [Amazon DocumentDB](/docs/connections/documentdb)
-- [Redis](/docs/connections/redis)
-- [Valkey](/docs/connections/dragonfly)
-- [Dragonfly](/docs/connections/dragonfly)
-- [KeyDB](/docs/connections/keydb)
-- [Garnet](/docs/connections/garnet)
-- [Elasticsearch](/docs/connections/elasticsearch)
-- [OpenSearch](/docs/connections/opensearch)
-- [Cassandra](/docs/connections/cassandra)
-- [ScyllaDB](/docs/connections/scylladb)
-- [Amazon Keyspaces](/docs/connections/keyspaces)
+<DatabaseGrid group="nosql" />
 
 ## Méthodes de connexion
 

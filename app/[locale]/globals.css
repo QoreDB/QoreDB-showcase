@@ -680,3 +680,12 @@ summary:focus-visible {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Single-colour database logos: PlanetScale ships white, MySQL ships dark. */
+:root:not(.dark)
+  :is(.q-home-engines img, img.q-database-logo)[src*="planetscale"] {
+  filter: invert(1);
+}
+.dark :is(.q-home-engines img, img.q-database-logo)[src*="mysql"] {
+  filter: brightness(1.8);
+}

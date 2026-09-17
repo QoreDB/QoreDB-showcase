@@ -621,22 +621,84 @@ export const IMAGE_VARIANTS: Record<string, number[]> = {
     1200,
     1600
   ],
-  "/images/showcase-v2/query-workspace.webp": [
+  "/images/showcase-v2/er-diagram-dark.webp": [
     384,
     640,
     828,
-    1200
+    1200,
+    1600,
+    2048
   ],
-  "/images/showcase-v2/table-workspace.webp": [
+  "/images/showcase-v2/er-diagram-light.webp": [
     384,
     640,
     828,
-    1200
+    1200,
+    1600,
+    2048
   ],
-  "/images/showcase-v2/workflow-poster.webp": [
+  "/images/showcase-v2/query-workspace-dark.webp": [
     384,
     640,
     828,
-    1200
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/query-workspace-light.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/safety-confirm-dark.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/safety-confirm-light.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/sandbox-changes-dark.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/sandbox-changes-light.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/table-workspace-dark.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
+  ],
+  "/images/showcase-v2/table-workspace-light.webp": [
+    384,
+    640,
+    828,
+    1200,
+    1600,
+    2048
   ]
 };

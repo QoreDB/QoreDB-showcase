@@ -1,25 +1,13 @@
 .q-demo {
-  padding: 0 0 64px;
   max-width: 1100px;
-  margin: 80px auto 0;
-}
-.q-demo + .q-home-workflow {
-  padding-top: 64px;
-  border-top: 1px solid var(--q-border);
+  margin: 120px auto 0;
 }
 .q-demo-heading {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   justify-content: space-between;
   gap: 24px;
   margin: 0 0 24px;
-}
-.q-demo-index {
-  margin: 0 0 10px;
-  color: var(--q-accent);
-  font-size: 11px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
 }
 .q-demo h3 {
   margin: 0;
@@ -28,29 +16,21 @@
   letter-spacing: -0.035em;
 }
 .q-demo-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
   flex-shrink: 0;
   margin: 0;
-  text-align: right;
   color: var(--q-text-2);
-  font-size: 12px;
-  line-height: 1.4;
-}
-.q-demo-meta > span {
-  color: var(--q-text-0);
+  font-size: 13px;
   font-variant-numeric: tabular-nums;
-  font-family: ui-monospace, monospace;
-  font-size: 15px;
 }
 .q-demo-frame {
   position: relative;
   aspect-ratio: 8 / 5;
   overflow: hidden;
-  border: 1px solid var(--q-border);
-  border-radius: 6px;
+  border-radius: 14px;
   background: #101114;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--q-text-0) 14%, transparent),
+    0 40px 80px -40px color-mix(in srgb, var(--q-accent) 50%, #000);
 }
 .q-demo-poster,
 .q-demo-video {
@@ -104,32 +84,8 @@
   font-family: ui-monospace, monospace;
   font-size: 12px;
 }
-.q-demo-caption {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 15px 0;
-  color: var(--q-text-2);
-  font-size: 12px;
-  line-height: 1.6;
-}
-.q-demo-caption p {
-  margin: 0;
-}
-.q-demo-caption a {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  color: var(--q-text-0);
-}
-.q-demo-caption a > span {
-  color: var(--q-accent);
-}
 .q-demo-transcript {
-  border-top: 1px solid var(--q-border);
+  margin-top: 8px;
   color: var(--q-text-1);
   font-size: 13px;
   line-height: 1.7;
@@ -204,11 +160,6 @@
   }
   .q-demo-play-time {
     padding-left: 12px;
-  }
-  .q-demo-caption {
-    flex-direction: column;
-    gap: 0;
-    padding-bottom: 8px;
   }
   .q-demo-transcript ol {
     grid-template-columns: 1fr;

@@ -7,12 +7,7 @@ export async function MiniFaq({ locale }: { locale: string }) {
       className="q-home-faq q-container"
       aria-labelledby="home-faq-title"
     >
-      <div>
-        <p className="q-eyebrow">
-          <span>05 /</span> {t("home.faq.eyebrow")}
-        </p>
-        <h2 id="home-faq-title">{t("home.faq.title")}</h2>
-      </div>
+      <h2 id="home-faq-title">{t("home.faq.title")}</h2>
       <div>
         {["start", "privacy", "license"].map((key) => (
           <details key={key}>

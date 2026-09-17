@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { Button } from "@/components/ui/button";
+import socialStats from "@/lib/data/social-stats.json";
 
 export async function Hero({ locale }: { locale: string }) {
   const { t } = await getTranslation(locale, "common");
@@ -10,85 +11,60 @@ export async function Hero({ locale }: { locale: string }) {
   return (
     <section className="q-home-hero q-container" aria-labelledby="home-title">
       <div className="q-home-hero-copy">
-        <p className="q-eyebrow">
-          <svg
-            className="q-home-signature"
-            viewBox="0 0 32 32"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path d="m16 2 12 7v14l-12 7L4 23V9Z" />
-            <path d="m16 9 6 3.5v7L16 23l-6-3.5v-7Z" />
-            <path d="m10 12.5 6 3.5 6-3.5M16 16v7" />
-          </svg>
-          {t("home.hero.eyebrow")}
-        </p>
+        <p className="q-eyebrow">{t("home.hero.eyebrow")}</p>
         <h1 id="home-title">
           {title.map((line, index) => (
-            <span key={line}>
+            <span key={line} className={index === 0 ? "q-cell" : undefined}>
               {line}
-              {index === title.length - 1 && <b aria-hidden="true">.</b>}
             </span>
           ))}
         </h1>
         <p className="q-home-intro">{t("home.hero.description")}</p>
         <div className="q-home-actions">
           <Button asChild className="q-home-download">
-            <Link href={`/${locale}/download`}>
-              {t("home.download")} <span aria-hidden="true">↗︎</span>
-            </Link>
+            <Link href={`/${locale}/download`}>{t("home.download")}</Link>
           </Button>
           <a className="q-home-link" href="#preview">
-            {t("home.hero.explore")} <span aria-hidden="true">↓</span>
+            {t("home.hero.explore")}
           </a>
         </div>
         <p className="q-home-platforms">
-          macOS <span>·</span> Windows <span>·</span> Linux <span>/</span>{" "}
+          macOS <span>·</span> Windows <span>·</span> Linux <span>·</span>{" "}
           {t("home.hero.free")}
         </p>
+        {/* Real figures, refreshed from GitHub at build time (scripts/fetch-stats.ts). */}
+        <a
+          className="q-home-proofline"
+          href="https://github.com/QoreDB/QoreDB"
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`GitHub — ${t("social_proof.aria_label")}`}
+        >
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"
+            />
+          </svg>
+          <span>{t("social_proof.stars", { count: socialStats.stars })}</span>
+          <span>
+            {t("social_proof.downloads", {
+              value: socialStats.downloads_display,
+            })}
+          </span>
+          <span>Apache-2.0</span>
+        </a>
       </div>
       <figure className="q-home-hero-product">
-        <svg
-          className="q-home-product-signature"
-          viewBox="0 0 620 480"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path d="M268 64h280v320H108V144h80" />
-          <path d="M300 88h224v272H132V168h80" />
-          <path d="M332 112h168v224H156V192h80" />
-          <path d="M108 48v352M564 64v336" className="q-home-signature-axis" />
-          <rect x="261" y="61" width="6" height="6" />
-          <rect x="293" y="85" width="6" height="6" />
-          <rect x="325" y="109" width="6" height="6" />
-        </svg>
-        <div className="q-home-ruler">
-          <span>{t("home.hero.workspace")}</span>
-          <span>SQL / 01</span>
-        </div>
-        <div className="q-home-product-frame">
-          <div className="q-home-product-window">
-            <Image
-              src="/images/showcase-v2/query-workspace.webp"
-              alt={t("home.hero.alt")}
-              width={1280}
-              height={800}
-              sizes="(max-width: 760px) 700px, 1000px"
-              priority
-              fetchPriority="high"
-            />
-          </div>
-        </div>
-        <figcaption>
-          <span className="q-home-caption-marker" aria-hidden="true">
-            ↳
-          </span>
-          <span>{t("home.hero.caption")}</span>
-          <a href="/images/showcase-v2/query-workspace.webp">
-            <span aria-hidden="true">↗︎</span>
-            <span className="sr-only">{t("home.fullImage")}</span>
-          </a>
-        </figcaption>
+        <Image
+          src="/images/showcase-v2/query-workspace-dark.webp"
+          alt={t("home.hero.alt")}
+          width={2880}
+          height={1800}
+          sizes="(max-width: 760px) 100vw, 1040px"
+          priority
+          fetchPriority="high"
+        />
       </figure>
     </section>
   );

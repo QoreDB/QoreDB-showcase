@@ -632,6 +632,12 @@
       "title": "Le masquage de colonnes dans QoreDB : une règle par connexion, appliquée à toutes les sorties",
       "category": "Security",
       "publishedAt": "2026-09-16"
+    },
+    {
+      "slug": "distribution-qoredb-tag-git-plateformes-canaux",
+      "title": "Comment QoreDB est distribué : un tag Git, quatre plateformes, six canaux d'installation",
+      "category": "Open Source",
+      "publishedAt": "2026-09-17"
     }
   ],
   "queue": []

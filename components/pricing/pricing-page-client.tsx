@@ -377,13 +377,16 @@ export default function PricingPageClient({
           <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-8">
             {t("pricing_page.faq_title")}
           </h2>
-          <div className="divide-y divide-(--q-border) border-y border-(--q-border)">
+          <div className="grid gap-2">
             {faqItems.map((item) => (
-              <details key={item.question} className="py-5">
+              <details
+                key={item.question}
+                className="rounded-2xl bg-(--q-bg-1) px-6 py-5"
+              >
                 <summary className="cursor-pointer font-medium leading-relaxed text-(--q-text-0)">
                   {item.question}
                 </summary>
-                <p className="pt-4 text-sm leading-relaxed text-(--q-text-1)">
+                <p className="pt-4 text-[15px] leading-relaxed text-(--q-text-1)">
                   {item.answer}
                 </p>
               </details>

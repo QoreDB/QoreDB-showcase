@@ -307,9 +307,7 @@ async function checkHome(page, locale, requests) {
     const infinite = document
       .getAnimations()
       .filter(
-        (animation) =>
-          animation.effect.getTiming().iterations === Infinity &&
-          !animation.effect.target?.matches(".q-home-drivers-track"),
+        (animation) => animation.effect.getTiming().iterations === Infinity,
       ).length;
     const image = main.querySelector("figure img");
     let imageVisible = 0;
@@ -400,73 +398,15 @@ try {
       { viewport: { width, height } },
     );
   }
-  await scenario(
-    "drivers-motion-controls",
-    async (page) => {
-      await navigate(page, "/fr");
-      await page.waitForSelector(
-        '.q-home-drivers[data-ready="true"][data-playing="true"]',
-      );
-      const track = ".q-home-drivers-track";
-      const state = () =>
-        page.$eval(track, (e) => getComputedStyle(e).animationPlayState);
-      await page.mouse.move(0, 0);
-      assert.equal(await state(), "running");
-      const before = await page.$eval(
-        track,
-        (e) => getComputedStyle(e).transform,
-      );
-      await new Promise((r) => setTimeout(r, 250));
-      assert.notEqual(
-        await page.$eval(track, (e) => getComputedStyle(e).transform),
-        before,
-      );
-      await page.click(".q-home-drivers-pause");
-      await page.$eval(".q-home-drivers-pause", (e) => e.blur());
-      await page.mouse.move(0, 0);
-      assert.equal(await state(), "paused");
-      await page.focus(".q-home-drivers-pause");
-      await page.keyboard.press("Enter");
-      await page.$eval(".q-home-drivers-pause", (e) => e.blur());
-      assert.equal(await state(), "running");
-      await page.hover(".q-home-drivers");
-      assert.equal(await state(), "paused");
-      await page.mouse.move(0, 0);
-      await page.$eval("footer", (e) => e.scrollIntoView());
-      await page.waitForSelector('.q-home-drivers[data-playing="false"]');
-      assert.equal(await state(), "paused");
-    },
-    { viewport: { width: 1440, height: 900 } },
-  );
-  await scenario(
-    "drivers-reduced-motion",
-    async (page) => {
-      await navigate(page, "/fr");
-      assert.equal(
-        await page.$eval(
-          ".q-home-drivers-track",
-          (e) => getComputedStyle(e).animationName,
-        ),
-        "none",
-      );
-      assert.equal(
-        await page.$eval(
-          ".q-home-drivers-pause",
-          (e) => getComputedStyle(e).display,
-        ),
-        "none",
-      );
-      assert.equal(
-        await page.$$eval(
-          ".q-home-drivers-track > ul li",
-          (items) => items.length,
-        ),
-        5,
-      );
-      await noOverflow(page);
-    },
-    { reducedMotion: true },
-  );
+  await scenario("engines-wall", async (page) => {
+    await navigate(page, "/fr");
+    assert.equal(
+      await page.$$eval(".q-home-engines li", (items) => items.length),
+      34,
+    );
+    assert.equal(await page.$(".q-home-drivers"), null);
+    await noOverflow(page);
+  });
   for (const locale of ["fr", "en"]) {
     await scenario(`docs-breadcrumb-${locale}`, async (page) => {
       await navigate(page, `/${locale}/docs/introduction/open-core-model`);
@@ -716,7 +656,7 @@ try {
     );
     assert.equal(
       await page.$$eval(".q-demo-transcript li", (elements) => elements.length),
-      3,
+      4,
     );
     return { duration, nativeKeyboardPauseResume: true, endsWithoutLoop: true };
   });

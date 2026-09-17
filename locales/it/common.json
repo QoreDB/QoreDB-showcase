@@ -1,113 +1,67 @@
 {
   "home": {
     "demo": {
-      "eyebrow": "In azione / Core",
       "title": "Dalla query ai risultati.",
       "silent": "Senza audio",
-      "posterAlt": "QoreDB collegato a un database SQLite dimostrativo.",
+      "posterAlt": "Editor di query QoreDB con una query JOIN e i suoi risultati, su un database SQLite dimostrativo.",
       "play": "Guarda la demo",
       "loading": "Caricamento del video…",
       "error": "Impossibile caricare il video.",
       "retry": "Riprova",
       "open": "Apri il video",
-      "caption": "Una sessione reale di QoreDB con dati dimostrativi.",
       "transcript": "Leggi i passaggi",
       "steps": [
-        "Aprire la connessione «Atelier / demo», poi l’editor SQL.",
-        "Selezionare i progetti di produzione, ordinati per numero di distribuzioni decrescente. La griglia mostra Atlas (128), Forma (96), Prism (84) e Tempo (72), con ambiente, stato e regione.",
-        "Preparare UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging'. L’istruzione rimane una bozza e non viene eseguita."
+        "Aprire la connessione «Atelier / demo», poi il database «atelier» con le sue sei tabelle.",
+        "Aprire la tabella customers e scorrere le righe: azienda, contatto, e-mail, paese, piano e postazioni.",
+        "Aprire l’editor SQL e scrivere una query che unisce customers e orders: numero di ordini pagati e ricavi per cliente, in ordine decrescente, limitata a 50.",
+        "Eseguirla. La griglia mostra 50 righe in pochi millisecondi; scorrere i risultati."
       ]
     },
     "download": "Scarica QoreDB",
-    "fullImage": "Apri lo screenshot completo",
     "hero": {
       "eyebrow": "Client desktop · SQL + NoSQL",
-      "title": ["I tuoi database.", "Un unico", "spazio"],
+      "title": [
+        "I tuoi database.",
+        "Un unico",
+        "spazio"
+      ],
       "description": "Esplora, interroga e modifica i dati in un’interfaccia pensata per mantenere il controllo.",
       "explore": "Scopri il prodotto",
       "free": "Core gratuito",
-      "workspace": "Il tuo spazio di lavoro",
-      "alt": "Editor SQL di QoreDB, tabella dei risultati e connessione SQLite.",
-      "caption": "Dalla query ai risultati."
+      "alt": "Editor SQL di QoreDB, tabella dei risultati e connessione SQLite."
     },
     "compatibility": {
-      "label": "Motori e servizi compatibili",
-      "title": "Motori diversi.",
-      "subtitle": "Gli stessi riferimenti.",
       "link": "Tutte le compatibilità",
-      "pause": "Metti in pausa lo scorrimento dei motori",
-      "resume": "Riprendi lo scorrimento dei motori"
+      "heading": "motori, un’unica interfaccia."
     },
     "workflows": {
-      "eyebrow": "Da vicino",
       "title": "Funzionalità",
       "explore": {
         "label": "Esplorare e interrogare",
         "title": "Esplora le tabelle. Interroga i dati.",
         "description": "Sfoglia una tabella, scrivi una query, esamina i risultati. Le connessioni e i dati condividono lo stesso spazio.",
-        "steps": [
-          {
-            "title": "Scegliere la connessione",
-            "description": "Il contesto di lavoro è sempre chiaro."
-          },
-          {
-            "title": "Leggere ed esplorare",
-            "description": "Tabelle e struttura a portata di mano."
-          },
-          {
-            "title": "Affinare la ricerca",
-            "description": "Una griglia per filtrare ed esaminare i dati."
-          }
-        ],
         "link": "Esplora la documentazione",
-        "alt": "Griglia di QoreDB con navigazione tra tabelle, colonne e ricerca.",
-        "caption": "La tabella, le colonne, il tuo contesto. · Core"
+        "alt": "Griglia di QoreDB con navigazione tra tabelle, colonne e ricerca."
       },
       "sandbox": {
         "label": "Preparare e verificare",
         "title": "Le modifiche. Prima delle conseguenze.",
         "description": "Prepara le modifiche localmente con la sandbox Pro. Controlla le operazioni in sospeso prima di generare SQL e decidere se applicarlo.",
-        "steps": [
-          {
-            "title": "Modificare con calma",
-            "description": "Le celle modificate restano evidenziate."
-          },
-          {
-            "title": "Rivedere le operazioni",
-            "description": "Inserimenti, modifiche ed eliminazioni in un unico posto."
-          }
-        ],
         "link": "Scopri la sandbox",
-        "alt": "Sandbox QoreDB con celle modificate e pannello delle operazioni in sospeso.",
-        "caption": "Le modifiche restano visibili prima dell’applicazione. · Pro"
+        "alt": "Sandbox QoreDB con celle modificate e pannello delle operazioni in sospeso."
       },
       "safety": {
         "label": "Lavorare con protezioni",
         "title": "Una pausa al momento giusto.",
         "description": "Un ambiente di produzione merita tutta la tua attenzione. Le protezioni integrate rendono esplicite le operazioni delicate prima dell’esecuzione.",
-        "steps": [
-          {
-            "title": "Identificare l’ambiente",
-            "description": "Sviluppo, test e produzione sono riconoscibili."
-          },
-          {
-            "title": "Confermare un’azione delicata",
-            "description": "Qui: un avviso prima di eliminare un database di produzione."
-          }
-        ],
         "link": "Comprendi le protezioni",
-        "alt": "Conferma di eliminazione di un database QoreDB con avviso di produzione e opzioni Annulla o Continua.",
-        "caption": "Conferma in produzione · Core. Regole personalizzate · Pro."
+        "alt": "Finestra di dialogo QoreDB «Confirm Production Operation»: avviso di database di produzione e campo in cui digitare il nome del database prima di eseguire un DELETE."
       }
     },
     "mcp": {
-      "eyebrow": "Automazione · MCP / Core",
       "title": "Il tuo contesto. Anche per gli agenti.",
       "description": "Collega gli strumenti compatibili con MCP alle connessioni che autorizzi. Esplorano gli schemi e interrogano i dati in sessioni di sola lettura.",
       "link": "Configura il server MCP",
-      "flowLabel": "Percorso di una richiesta MCP",
-      "assistant": "Il tuo agente",
-      "connections": "Connessioni autorizzate",
       "access": {
         "title": "Accesso esplicito",
         "description": "Scegli tu quali connessioni esporre. I limiti delle query e la registrazione restano attivi."
@@ -116,14 +70,16 @@
         "title": "Local-first",
         "description": "Il client lavora dal tuo computer. I servizi opzionali possono comunicare con i rispettivi fornitori."
       },
-      "source": {
-        "title": "Core aperto",
-        "description": "Il nucleo usa Apache-2.0. I moduli Premium hanno una licenza BUSL-1.1 distinta."
-      },
-      "note": "L’IA integrata in Pro è opzionale. Gli assistenti esterni possono inviare risultati al fornitore in base alla configurazione."
+      "note": "L’IA integrata in Pro è opzionale. Gli assistenti esterni possono inviare risultati al fornitore in base alla configurazione.",
+      "clients": "Funziona con",
+      "example": {
+        "label": "Esempio di scambio con un agente",
+        "prompt": "Quali clienti hanno generato più ricavi?",
+        "readonly": "sola lettura",
+        "answer": "Galen Foods è in testa con 138.635,87 di ricavi, davanti a Cobalt Health e Delta Labs."
+      }
     },
     "pricing": {
-      "eyebrow": "Piani",
       "title": "Core, Pro e Team",
       "compare": "Confronta i piani",
       "core": {
@@ -138,12 +94,10 @@
       },
       "team": {
         "model": "Per postazione / anno",
-        "description": "Per i team: consulta funzionalità, condizioni e disponibilità del piano nella pagina dei prezzi.",
         "link": "Scopri il piano Team"
       }
     },
     "faq": {
-      "eyebrow": "Prima di iniziare",
       "title": "Le domande giuste.",
       "start": {
         "question": "Posso iniziare gratuitamente?",
@@ -159,9 +113,7 @@
       }
     },
     "cta": {
-      "eyebrow": "Download",
-      "title": "Inizia con QoreDB.",
-      "description": "Disponibile per macOS, Windows e Linux."
+      "title": "Inizia con QoreDB."
     }
   },
   "a11y": {
@@ -286,7 +238,7 @@
       "connection": "Nuova connessione",
       "settings": "Impostazioni"
     },
-    "release": "Novità in v0.1.39: 14 nuovi driver + MCP"
+    "release": "Novità: 14 nuovi driver + MCP"
   },
   "preview": {
     "eyebrow": "Anteprima",
@@ -652,10 +604,10 @@
     "title": "QoreDB Tabella di marcia",
     "subtitle": "Scopri i passaggi successivi nello sviluppo di QoreDB.",
     "now": {
-      "title": "Novità in v0.1.39: 14 nuovi driver + MCP",
+      "title": "Novità: 14 nuovi driver + MCP",
       "quote": "QoreDB è più veloce, più sicuro e pronto per un uso quotidiano serio.",
       "items": {
-        "1": "34 driver in v0.1.39. Motori supportati: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "1": "34 driver. Motori supportati: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
         "2": "Server MCP in sola lettura — Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
         "3": "Mascheramento colonne · Pro — Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti.",
         "4": "Tendenze delle query · Core — Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata.",
@@ -731,7 +683,7 @@
       },
       "supported_databases": {
         "question": "Quali database sono supportati?",
-        "answer": "34 driver in v0.1.39. Motori supportati:\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\nLe capacità variano per motore: esplorazione, query, modifica e transazioni dipendono dal driver."
+        "answer": "34 driver. Motori supportati:\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\nLe capacità variano per motore: esplorazione, query, modifica e transazioni dipendono dal driver."
       },
       "remote_ssh": {
         "question": "Funziona con connessioni remote e SSH?",
@@ -1380,7 +1332,9 @@
     "quick_start_cta": "Inizia subito",
     "databases_cta": "Database",
     "more_pages": "+ {{remaining}} altri",
-    "explore_section": "Esplora la sezione"
+    "explore_section": "Esplora la sezione",
+    "copy_code": "Copia il codice",
+    "copied": "Copiato"
   },
   "marketplace": {
     "categories": {

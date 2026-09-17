@@ -226,14 +226,14 @@ export function FeaturePageClient({ slug }: { slug: string }) {
         </header>
 
         {feature.image && (
-          <figure className="mb-16 max-w-5xl">
+          <figure className="mb-16 overflow-hidden rounded-2xl bg-[#0b0b0d] shadow-[0_40px_80px_-40px_color-mix(in_srgb,var(--q-accent)_45%,#000)]">
             <Image
               src={feature.image}
               alt={t(`${base}.title`)}
-              width={1600}
-              height={1000}
-              className="w-full h-auto rounded-lg border border-(--q-border)"
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              width={2000}
+              height={1310}
+              className="h-auto w-full"
+              sizes="(max-width: 1320px) 100vw, 1320px"
             />
           </figure>
         )}

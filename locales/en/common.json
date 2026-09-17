@@ -1,113 +1,67 @@
 {
   "home": {
     "demo": {
-      "eyebrow": "In action / Core",
       "title": "From query to results.",
       "silent": "No audio",
-      "posterAlt": "QoreDB connected to a demonstration SQLite database.",
+      "posterAlt": "QoreDB query editor with a JOIN query and its results on a demonstration SQLite database.",
       "play": "Watch the demo",
       "loading": "Loading video…",
       "error": "The video could not be loaded.",
       "retry": "Try again",
       "open": "Open the video",
-      "caption": "A real QoreDB session, using demonstration data.",
       "transcript": "Read the walkthrough",
       "steps": [
-        "Open the “Atelier / demo” connection, then the SQL editor.",
-        "Select production projects, ordered by deployment count from highest to lowest. The grid shows Atlas (128), Forma (96), Prism (84) and Tempo (72), with their environment, status and region.",
-        "Prepare UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging'. The statement remains a draft; it is not executed."
+        "Open the “Atelier / demo” connection, then the “atelier” database and its six tables.",
+        "Open the customers table and scroll through its rows: company, contact, email, country, plan and seats.",
+        "Open the SQL editor and write a query joining customers and orders: number of paid orders and revenue per customer, highest first, limited to 50.",
+        "Run it. The grid shows 50 rows in a few milliseconds; scroll through the results."
       ]
     },
     "download": "Download QoreDB",
-    "fullImage": "Open the full screenshot",
     "hero": {
       "eyebrow": "Desktop client · SQL + NoSQL",
-      "title": ["Your databases.", "One place", "to work"],
+      "title": [
+        "Your databases.",
+        "One place",
+        "to work"
+      ],
       "description": "Explore, query and edit your data in an interface designed to keep you in control.",
       "explore": "See the product",
       "free": "Free Core",
-      "workspace": "Your workspace",
-      "alt": "QoreDB SQL editor, results grid and SQLite connection.",
-      "caption": "From query to results."
+      "alt": "QoreDB SQL editor, results grid and SQLite connection."
     },
     "compatibility": {
-      "label": "Supported engines and services",
-      "title": "Different engines.",
-      "subtitle": "Familiar ground.",
       "link": "All supported databases",
-      "pause": "Pause database scrolling",
-      "resume": "Resume database scrolling"
+      "heading": "engines, one interface."
     },
     "workflows": {
-      "eyebrow": "A closer look",
       "title": "Features",
       "explore": {
         "label": "Explore & query",
         "title": "Explore your tables. Query your data.",
         "description": "Browse a table, write a query, inspect the results. Your connections and your data share one workspace.",
-        "steps": [
-          {
-            "title": "Choose a connection",
-            "description": "Know exactly where you are working."
-          },
-          {
-            "title": "Read and explore",
-            "description": "Tables and their structure within reach."
-          },
-          {
-            "title": "Narrow your search",
-            "description": "A grid to filter and inspect your data."
-          }
-        ],
         "link": "Explore the documentation",
-        "alt": "QoreDB data grid showing table navigation, columns and search.",
-        "caption": "The table, its columns, your context. · Core"
+        "alt": "QoreDB data grid showing table navigation, columns and search."
       },
       "sandbox": {
         "label": "Prepare & review",
         "title": "Your changes. Before their consequences.",
         "description": "Prepare edits locally with the Pro sandbox. Review pending operations before generating SQL and deciding whether to apply it.",
-        "steps": [
-          {
-            "title": "Make room to edit",
-            "description": "Changed cells stay clearly marked."
-          },
-          {
-            "title": "Review each operation",
-            "description": "Inserts, updates and deletes in one place."
-          }
-        ],
         "link": "Explore the sandbox",
-        "alt": "QoreDB sandbox with edited cells and a panel of pending operations.",
-        "caption": "Changes stay visible before you apply them. · Pro"
+        "alt": "QoreDB sandbox with edited cells and a panel of pending operations."
       },
       "safety": {
         "label": "Work with safeguards",
         "title": "A pause when it matters.",
         "description": "Production deserves your full attention. Built-in safeguards make sensitive operations explicit before they run.",
-        "steps": [
-          {
-            "title": "Identify the environment",
-            "description": "Development, staging and production have clear labels."
-          },
-          {
-            "title": "Confirm a sensitive action",
-            "description": "Shown here: a warning before deleting a production database."
-          }
-        ],
         "link": "Understand the safeguards",
-        "alt": "QoreDB database deletion confirmation with a production warning and Cancel or Continue choices.",
-        "caption": "Production confirmation · Core. Custom rules · Pro."
+        "alt": "QoreDB “Confirm Production Operation” dialog: a production database warning and a field to type the database name before a DELETE runs."
       }
     },
     "mcp": {
-      "eyebrow": "Automation · MCP / Core",
       "title": "Your context. For your agents, too.",
       "description": "Connect MCP-compatible tools to the connections you authorize. They explore schemas and query data in read-only sessions.",
       "link": "Set up the MCP server",
-      "flowLabel": "Path of an MCP request",
-      "assistant": "Your agent",
-      "connections": "Authorized connections",
       "access": {
         "title": "Explicit access",
         "description": "You choose which connections to expose. Query limits and audit logging stay active."
@@ -116,14 +70,16 @@
         "title": "Local-first",
         "description": "The client works from your machine. Optional services may communicate with their providers."
       },
-      "source": {
-        "title": "Open Core",
-        "description": "The core uses Apache-2.0. Premium modules have a separate BUSL-1.1 license."
-      },
-      "note": "Built-in Pro AI is optional. External assistants may send results to their provider depending on their configuration."
+      "note": "Built-in Pro AI is optional. External assistants may send results to their provider depending on their configuration.",
+      "clients": "Works with",
+      "example": {
+        "label": "Example exchange with an agent",
+        "prompt": "Which customers brought in the most revenue?",
+        "readonly": "read-only",
+        "answer": "Galen Foods leads with 138,635.87 in revenue, ahead of Cobalt Health and Delta Labs."
+      }
     },
     "pricing": {
-      "eyebrow": "Plans",
       "title": "Core, Pro and Team",
       "compare": "Compare plans",
       "core": {
@@ -138,12 +94,10 @@
       },
       "team": {
         "model": "Per seat / year",
-        "description": "For teams: see the pricing page for the scope, terms and availability of this plan.",
         "link": "Explore Team"
       }
     },
     "faq": {
-      "eyebrow": "Before you begin",
       "title": "Good questions.",
       "start": {
         "question": "Can I start for free?",
@@ -159,9 +113,7 @@
       }
     },
     "cta": {
-      "eyebrow": "Download",
-      "title": "Get started with QoreDB.",
-      "description": "Available on macOS, Windows and Linux."
+      "title": "Get started with QoreDB."
     }
   },
   "a11y": {
@@ -389,7 +341,7 @@
       "connection": "New Connection",
       "settings": "Settings"
     },
-    "release": "New in v0.1.39: 14 new drivers + MCP"
+    "release": "New: 14 new drivers + MCP"
   },
   "preview": {
     "eyebrow": "Preview",
@@ -755,10 +707,10 @@
     "title": "QoreDB Roadmap",
     "subtitle": "Discover what just shipped and what's coming next.",
     "now": {
-      "title": "New in v0.1.39: 14 new drivers + MCP",
+      "title": "New: 14 new drivers + MCP",
       "quote": "QoreDB is faster, safer and ready for serious daily use.",
       "items": {
-        "1": "34 drivers in v0.1.39. Supported engines: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "1": "34 drivers. Supported engines: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
         "2": "Read-only MCP server — Give external AI agents access to explicitly enabled connections, with schema discovery and saved queries.",
         "3": "Column masking · Pro — Mask sensitive columns per connection with full, partial or hashed values, across results, exports, APIs and agents.",
         "4": "Query trends · Core — Track execution counts, P50/P95 latency and error rates over 7, 14 or 30 days from your retained audit history.",
@@ -834,7 +786,7 @@
       },
       "supported_databases": {
         "question": "Which databases are supported?",
-        "answer": "34 drivers in v0.1.39. Supported engines:\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\nCapabilities vary by engine: browsing, queries, editing and transactions depend on the selected driver."
+        "answer": "34 drivers. Supported engines:\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\nCapabilities vary by engine: browsing, queries, editing and transactions depend on the selected driver."
       },
       "remote_ssh": {
         "question": "Does it work with remote connections and SSH?",
@@ -1483,7 +1435,9 @@
     "quick_start_cta": "Quick Start",
     "databases_cta": "Databases",
     "more_pages": "+ {{remaining}} more",
-    "explore_section": "Explore section"
+    "explore_section": "Explore section",
+    "copy_code": "Copy code",
+    "copied": "Copied"
   },
   "features_common": {
     "tier_pro": "Pro",

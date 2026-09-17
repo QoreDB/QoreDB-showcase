@@ -1,113 +1,66 @@
 {
   "home": {
     "demo": {
-      "eyebrow": "实际操作 / Core",
       "title": "从查询到结果。",
       "silent": "无声视频",
-      "posterAlt": "QoreDB已连接到用于演示的SQLite数据库。",
+      "posterAlt": "QoreDB 查询编辑器，在演示用 SQLite 数据库上显示一条 JOIN 查询及其结果。",
       "play": "观看演示",
       "loading": "正在加载视频…",
       "error": "无法加载视频。",
       "retry": "重试",
       "open": "打开视频",
-      "caption": "使用演示数据录制的真实QoreDB操作。",
       "transcript": "阅读操作步骤",
       "steps": [
-        "打开“Atelier / demo”连接，然后打开SQL编辑器。",
-        "查询生产环境的项目，按部署次数从高到低排序。结果表格显示Atlas（128）、Forma（96）、Prism（84）和Tempo（72），以及各自的环境、状态和区域。",
-        "准备UPDATE projects SET status = 'healthy' WHERE name = 'Orbit' AND environment = 'staging'。语句保留为草稿，不执行。"
+        "打开“Atelier / demo”连接，然后打开“atelier”数据库及其六张表。",
+        "打开 customers 表并滚动浏览各行：公司、联系人、邮箱、国家、套餐和席位数。",
+        "打开 SQL 编辑器，编写一条关联 customers 与 orders 的查询：按客户统计已付款订单数和收入，降序排列，限制 50 条。",
+        "执行查询。表格在几毫秒内显示 50 行；滚动浏览结果。"
       ]
     },
     "download": "下载 QoreDB",
-    "fullImage": "打开完整截图",
     "hero": {
       "eyebrow": "桌面客户端 · SQL + NoSQL",
-      "title": ["你的数据库，", "一个工作空间"],
+      "title": [
+        "你的数据库，",
+        "一个工作空间"
+      ],
       "description": "在精心设计的界面中探索、查询和编辑数据，始终掌握每一步操作。",
       "explore": "查看产品",
       "free": "Core 免费",
-      "workspace": "你的工作空间",
-      "alt": "QoreDB 的 SQL 编辑器、查询结果表格和 SQLite 连接。",
-      "caption": "从查询到结果。"
+      "alt": "QoreDB 的 SQL 编辑器、查询结果表格和 SQLite 连接。"
     },
     "compatibility": {
-      "label": "兼容的引擎与服务",
-      "title": "不同引擎。",
-      "subtitle": "熟悉的操作方式。",
       "link": "查看全部兼容性",
-      "pause": "暂停数据库滚动",
-      "resume": "继续数据库滚动"
+      "heading": "种引擎，一个界面。"
     },
     "workflows": {
-      "eyebrow": "细看每一处",
       "title": "功能",
       "explore": {
         "label": "探索与查询",
         "title": "浏览表，查询数据。",
         "description": "浏览表格，编写查询，检查结果。连接与数据，都在同一个工作空间。",
-        "steps": [
-          {
-            "title": "选择连接",
-            "description": "当前的工作环境一目了然。"
-          },
-          {
-            "title": "阅读与探索",
-            "description": "随时查看表格及其结构。"
-          },
-          {
-            "title": "缩小搜索范围",
-            "description": "通过表格筛选并检查数据。"
-          }
-        ],
         "link": "浏览文档",
-        "alt": "QoreDB 数据表格，包含表导航、列和搜索功能。",
-        "caption": "表格、列与工作上下文，尽在眼前。· Core"
+        "alt": "QoreDB 数据表格，包含表导航、列和搜索功能。"
       },
       "sandbox": {
         "label": "准备与检查",
         "title": "先看清更改，再决定执行。",
         "description": "通过 Pro 沙盒在本地准备修改。先检查待处理操作，再生成 SQL，并决定是否应用。",
-        "steps": [
-          {
-            "title": "从容编辑",
-            "description": "修改过的单元格始终清晰标记。"
-          },
-          {
-            "title": "复核操作",
-            "description": "在同一处查看新增、更新和删除。"
-          }
-        ],
         "link": "了解沙盒",
-        "alt": "QoreDB 沙盒，显示修改过的单元格和待处理操作面板。",
-        "caption": "应用前，所有更改清晰可见。· Pro"
+        "alt": "QoreDB 沙盒，显示修改过的单元格和待处理操作面板。"
       },
       "safety": {
         "label": "有保护的操作",
         "title": "关键时刻，停下来确认。",
         "description": "生产环境值得格外谨慎。内置保护会在执行前明确提示敏感操作。",
-        "steps": [
-          {
-            "title": "识别环境",
-            "description": "开发、测试与生产都有清晰标识。"
-          },
-          {
-            "title": "确认敏感操作",
-            "description": "图中展示删除生产数据库前的警告。"
-          }
-        ],
         "link": "了解保护机制",
-        "alt": "QoreDB 删除数据库确认窗口，包含生产环境警告以及取消和继续选项。",
-        "caption": "生产环境确认 · Core。自定义规则 · Pro。"
+        "alt": "QoreDB“Confirm Production Operation”对话框：生产数据库警告，以及在执行 DELETE 前输入数据库名称的输入框。"
       }
     },
     "mcp": {
-      "eyebrow": "自动化 · MCP / Core",
       "title": "你的上下文，也能交给智能体。",
       "description": "将兼容 MCP 的工具连接到你明确授权的数据库连接。在只读会话中探索结构、查询数据。",
       "link": "配置 MCP 服务器",
-      "flowLabel": "MCP 请求流程",
-      "assistant": "你的智能体",
-      "connections": "已授权的连接",
       "access": {
         "title": "明确授权",
         "description": "由你选择公开哪些连接。查询限制与审计日志持续生效。"
@@ -116,14 +69,16 @@
         "title": "本地优先",
         "description": "客户端在你的电脑上工作。可选服务可能与其提供方通信。"
       },
-      "source": {
-        "title": "开放的 Core",
-        "description": "核心采用 Apache-2.0。Premium 模块使用独立的 BUSL-1.1 许可证。"
-      },
-      "note": "Pro 内置 AI 为可选功能。外部助手可能根据配置将结果发送给其提供方。"
+      "note": "Pro 内置 AI 为可选功能。外部助手可能根据配置将结果发送给其提供方。",
+      "clients": "适用于",
+      "example": {
+        "label": "与智能体的对话示例",
+        "prompt": "哪些客户带来的收入最多？",
+        "readonly": "只读",
+        "answer": "Galen Foods 以 138,635.87 的收入居首，其后是 Cobalt Health 和 Delta Labs。"
+      }
     },
     "pricing": {
-      "eyebrow": "方案",
       "title": "Core、Pro 和 Team",
       "compare": "比较方案",
       "core": {
@@ -138,12 +93,10 @@
       },
       "team": {
         "model": "每席位 / 年",
-        "description": "面向团队。方案范围、条款与可用状态请查看定价页面。",
         "link": "查看 Team 方案"
       }
     },
     "faq": {
-      "eyebrow": "开始之前",
       "title": "你可能想了解。",
       "start": {
         "question": "可以免费开始吗？",
@@ -159,9 +112,7 @@
       }
     },
     "cta": {
-      "eyebrow": "下载",
-      "title": "开始使用 QoreDB。",
-      "description": "支持 macOS、Windows 和 Linux。"
+      "title": "开始使用 QoreDB。"
     }
   },
   "a11y": {
@@ -286,7 +237,7 @@
       "connection": "新连接",
       "settings": "设置"
     },
-    "release": "v0.1.39 新增：14 个驱动 + MCP"
+    "release": "新增：14 个驱动 + MCP"
   },
   "preview": {
     "eyebrow": "预览",
@@ -652,10 +603,10 @@
     "title": "QoreDB 路线图",
     "subtitle": "了解 QoreDB 开发的后续步骤。",
     "now": {
-      "title": "v0.1.39 新增：14 个驱动 + MCP",
+      "title": "新增：14 个驱动 + MCP",
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
-        "1": "v0.1.39 支持 34 个驱动。支持的引擎： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
+        "1": "支持 34 个驱动。支持的引擎： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
         "2": "只读 MCP 服务器 — 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
         "3": "列脱敏 · Pro — 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。",
         "4": "查询趋势 · Core — 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。",
@@ -731,7 +682,7 @@
       },
       "supported_databases": {
         "question": "支持哪些数据库？",
-        "answer": "v0.1.39 支持 34 个驱动。支持的引擎：\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\n浏览、查询、编辑和事务的支持范围取决于所选驱动。"
+        "answer": "支持 34 个驱动。支持的引擎：\n\n* PostgreSQL, Supabase, Neon, TimescaleDB, CockroachDB, YugabyteDB, MySQL, MariaDB, PlanetScale, TiDB, SingleStore, SQL Server, Azure SQL, SQLite\n* DuckDB, MotherDuck, ClickHouse, Snowflake, BigQuery, StarRocks, Apache Doris, Azure Synapse\n* MongoDB, Amazon DocumentDB, Redis, Valkey, Dragonfly, KeyDB, Garnet, Elasticsearch, OpenSearch, Cassandra, ScyllaDB, Amazon Keyspaces\n\n浏览、查询、编辑和事务的支持范围取决于所选驱动。"
       },
       "remote_ssh": {
         "question": "它可以与远程连接和 SSH 一起使用吗？",
@@ -1380,7 +1331,9 @@
     "quick_start_cta": "快速开始",
     "databases_cta": "数据库",
     "more_pages": "+ 另外 {{remaining}} 个",
-    "explore_section": "浏览此章节"
+    "explore_section": "浏览此章节",
+    "copy_code": "复制代码",
+    "copied": "已复制"
   },
   "marketplace": {
     "categories": {

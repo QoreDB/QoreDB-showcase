@@ -1,34 +1,28 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { ProductDemo } from "./product-demo";
+import { ProductShot } from "./product-shot";
 
 const workflows = [
   {
     key: "explore",
     tier: "Core",
-    image: "/images/showcase-v2/table-workspace.webp",
-    width: 1280,
-    height: 800,
-    sizes: "(max-width: 760px) 760px, 900px",
+    shot: "table-workspace",
+    sizes: "(max-width: 760px) 1000px, 960px",
     href: "/docs/querying/results-and-exports",
   },
   {
     key: "sandbox",
     tier: "Pro",
-    image: "/images/features/sandbox.webp",
-    width: 2000,
-    height: 1310,
-    sizes: "(max-width: 760px) 1250px, 1100px",
+    shot: "sandbox-changes",
+    sizes: "(max-width: 760px) 1200px, 1100px",
     href: "/features/sandbox",
   },
   {
     key: "safety",
     tier: "Core",
-    image: "/images/features/query-safety.webp",
-    width: 2000,
-    height: 1310,
+    shot: "safety-confirm",
     sizes: "(max-width: 760px) 1000px, 1200px",
     href: "/docs/connections/environments",
   },
@@ -42,20 +36,11 @@ export async function FeatureShowcase({ locale }: { locale: string }) {
       className="q-home-workflows q-container"
       aria-labelledby="workflows-title"
     >
-      <div id="preview" className="q-home-section-heading">
-        <p className="q-eyebrow">
-          <span>02 /</span> {t("home.workflows.eyebrow")}
-        </p>
-        <h2 id="workflows-title" className="sr-only">
-          {t("home.workflows.title")}
-        </h2>
-      </div>
+      <h2 id="workflows-title" className="sr-only">
+        {t("home.workflows.title")}
+      </h2>
       {workflows.map((workflow, index) => {
         const key = `home.workflows.${workflow.key}`;
-        const steps = t(`${key}.steps`, { returnObjects: true }) as {
-          title: string;
-          description: string;
-        }[];
         return (
           <Fragment key={workflow.key}>
             <article
@@ -63,51 +48,31 @@ export async function FeatureShowcase({ locale }: { locale: string }) {
               aria-labelledby={`workflow-${workflow.key}`}
             >
               <div className="q-home-workflow-copy">
-                <p className="q-home-proof-label">
-                  0{index + 1} — {t(`${key}.label`)}{" "}
-                  <span>{workflow.tier}</span>
+                <p className="q-home-kicker">
+                  {t(`${key}.label`)}
+                  <span className="q-tier" data-tier={workflow.tier}>
+                    {workflow.tier}
+                  </span>
                 </p>
                 <h3 id={`workflow-${workflow.key}`}>{t(`${key}.title`)}</h3>
                 <p className="q-home-workflow-description">
                   {t(`${key}.description`)}
                 </p>
-                <ol className="q-home-steps">
-                  {steps.map((step, stepIndex) => (
-                    <li key={step.title}>
-                      <span aria-hidden="true">0{stepIndex + 1}</span>
-                      <div>
-                        <strong>{step.title}</strong>
-                        <p>{step.description}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
                 <Link
                   className="q-home-link"
                   href={`/${locale}${workflow.href}`}
                 >
-                  {t(`${key}.link`)} <span aria-hidden="true">↗︎</span>
+                  {t(`${key}.link`)}
                 </Link>
               </div>
-              <figure className="q-home-proof-image">
+              <figure className="q-home-proof">
                 <div className="q-home-proof-crop">
-                  <Image
-                    src={workflow.image}
+                  <ProductShot
+                    name={workflow.shot}
                     alt={t(`${key}.alt`)}
-                    width={workflow.width}
-                    height={workflow.height}
-                    fetchPriority="low"
                     sizes={workflow.sizes}
                   />
                 </div>
-                <figcaption>
-                  <span>FIG. 0{index + 1}</span>
-                  <span>{t(`${key}.caption`)}</span>
-                  <a href={workflow.image}>
-                    <span aria-hidden="true">↗︎</span>
-                    <span className="sr-only">{t("home.fullImage")}</span>
-                  </a>
-                </figcaption>
               </figure>
             </article>
             {index === 0 && <ProductDemo locale={locale} />}

@@ -3,7 +3,7 @@
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import type { DocsTreeNode } from "@/lib/docs/types";
 import { cn } from "@/lib/utils";
@@ -28,7 +28,7 @@ function NodeLink({
         prefetch={false}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "group flex items-center justify-between rounded-md px-3 py-2.5 text-sm transition-colors",
+          "group flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors",
           active
             ? "bg-(--q-accent-soft) font-medium text-(--q-accent-strong)"
             : "text-(--q-text-1) hover:bg-(--q-bg-1) hover:text-(--q-text-0)",
@@ -40,17 +40,23 @@ function NodeLink({
     );
   }
 
+  // Long groups (33 connectors) stay folded until one of their pages is open.
+  const open = node.children.length <= 5 || containsPath(node, pathname);
   return (
-    <div className="mt-4 first:mt-0">
-      <p
+    <details className="q-docs-group group/section mt-1 first:mt-0" open={open}>
+      <summary
         className={cn(
-          "px-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-(--q-text-2)",
-          depth > 0 && "mt-2",
+          "flex min-h-9 cursor-pointer list-none items-center justify-between gap-2 rounded-md px-3 py-2 text-[13px] font-semibold text-(--q-text-0) hover:bg-(--q-bg-1) [&::-webkit-details-marker]:hidden",
+          depth > 0 && "font-medium",
         )}
       >
         {node.label}
-      </p>
-      <ul className="space-y-0.5">
+        <ChevronDown
+          className="size-3.5 shrink-0 text-(--q-text-2) transition-transform group-open/section:rotate-180"
+          aria-hidden="true"
+        />
+      </summary>
+      <ul className="mb-2 ml-3 space-y-0.5 border-l border-(--q-border) pl-2">
         {node.children.map((child) => (
           <li key={child.slug.join("/")}>
             <NodeLink
@@ -62,8 +68,14 @@ function NodeLink({
           </li>
         ))}
       </ul>
-    </div>
+    </details>
   );
+}
+
+function containsPath(node: DocsTreeNode, pathname: string): boolean {
+  return node.kind === "page"
+    ? node.href === pathname
+    : node.children.some((child) => containsPath(child, pathname));
 }
 
 export function DocsSidebar({
@@ -76,6 +88,18 @@ export function DocsSidebar({
   const pathname = usePathname();
   const { t } = useTranslation();
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  // Bring the current page into view inside the sidebar, without moving the page itself.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: re-run on navigation.
+  useEffect(() => {
+    const nav = navRef.current;
+    const current = nav?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!nav || !current) return;
+    const offset =
+      current.getBoundingClientRect().top - nav.getBoundingClientRect().top;
+    if (offset < 0 || offset > nav.clientHeight - 48)
+      nav.scrollTop += offset - nav.clientHeight / 2;
+  }, [pathname]);
   const links = tree.map((node) => (
     <NodeLink
       key={node.slug.join("/") || "root"}
@@ -119,6 +143,7 @@ export function DocsSidebar({
         </nav>
       </details>
       <nav
+        ref={navRef}
         aria-label={t("docs.navigation_label")}
         data-pagefind-ignore
         className="hidden max-h-[calc(100dvh-13rem)] overflow-y-auto pr-4 lg:block"

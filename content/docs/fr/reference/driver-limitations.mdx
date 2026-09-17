@@ -11,7 +11,7 @@ QoreDB essaie d'exposer une interface cohérente sur tous les pilotes pris en ch
 Cette liste reflète le comportement actuel. Les choses qui "devraient fonctionner" du point de vue de la liste des fonctionnalités, mais qui ont en réalité une mise en garde, sont répertoriées ici.
 
 
-## Drivers ajoutés en v0.1.39
+## Drivers les plus récents
 
 | Driver | Limites propres à QoreDB |
 | --- | --- |
@@ -124,7 +124,7 @@ Toutes les limitations Redis ci-dessus s'appliquent aux deux, sans exception.
 - **Commandes dangereuses refusées** : `OPTIMIZE … FINAL`, `KILL QUERY` et toutes les opérations `SYSTEM …` sont rejetées par le classifieur de sûreté. Passez par `clickhouse-client` pour ces commandes.
 - **Annulation best-effort** : `KILL QUERY WHERE query_id = …` marque la requête à annuler ; ClickHouse stoppe le fragment courant à la prochaine vérification.
 - **Éditeur DDL Alter limité à la famille MergeTree** : les altérations de tables distribuées et `ON CLUSTER` ne sont pas exposées dans l'éditeur visuel en v1. Écrivez-les dans l'éditeur SQL.
-- **Sauvegardes non couvertes par les helpers** : les helpers de backup intégrés ne pilotent pas ClickHouse en v0.1.31. Utilisez l'instruction native `BACKUP TO …` ou l'outillage de snapshot de votre cluster.
+- **Sauvegardes non couvertes par les helpers** : les helpers de backup intégrés ne pilotent pas ClickHouse. Utilisez l'instruction native `BACKUP TO …` ou l'outillage de snapshot de votre cluster.
 - **Types inconnus rétrogradés en texte** : les types rares ou exotiques hors du mapping des 28 types s'affichent en texte plutôt que de faire échouer le résultat.
 
 ## Elasticsearch & OpenSearch
