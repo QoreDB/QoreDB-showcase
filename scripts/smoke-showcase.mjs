@@ -387,7 +387,19 @@ try {
         const bounds = await page.evaluate(() => ({
           next: document.querySelector("#features").getBoundingClientRect().top,
           height: innerHeight,
+          left: document
+            .querySelector(".q-home-hero-copy")
+            .getBoundingClientRect().left,
+          right:
+            innerWidth -
+            document
+              .querySelector(".q-home-hero-product")
+              .getBoundingClientRect().right,
         }));
+        assert.ok(
+          Math.abs(bounds.left - bounds.right) <= 1,
+          `Hero margins are unequal: left ${bounds.left}px, right ${bounds.right}px`,
+        );
         assert.ok(
           bounds.next >= bounds.height - 1,
           `Next section begins at ${bounds.next}, inside ${bounds.height}px viewport`,

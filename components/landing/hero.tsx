@@ -61,7 +61,7 @@ export async function Hero({ locale }: { locale: string }) {
           alt={t("home.hero.alt")}
           width={2880}
           height={1800}
-          sizes="(max-width: 760px) 100vw, 1040px"
+          sizes="(max-width: 760px) 100vw, (max-width: 1150px) 50vw, (max-width: 1416px) 60vw, 784px"
           priority
           fetchPriority="high"
         />
