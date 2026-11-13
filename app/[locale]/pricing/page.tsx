@@ -12,7 +12,7 @@ import {
 } from "@/lib/seo";
 import { getStripePricing, getStripeTeamPricing } from "@/lib/stripe/pricing";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

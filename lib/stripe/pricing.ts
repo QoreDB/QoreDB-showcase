@@ -7,10 +7,22 @@ export type StripePricingPayload = {
   unitAmount: number;
 };
 
+const CACHE_TTL_MS = 60 * 60 * 1000;
+const pricingCache = new Map<
+  string,
+  { expiresAt: number; payload: StripePricingPayload }
+>();
+
 async function getPricing(
   priceId: string,
   locale: string,
 ): Promise<StripePricingPayload> {
+  const cacheKey = `${priceId}:${locale}`;
+  const cached = pricingCache.get(cacheKey);
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.payload;
+  }
+
   const stripe = getStripeClient();
   const price = await stripe.prices.retrieve(priceId);
   if (price.unit_amount == null) {
@@ -24,11 +36,17 @@ async function getPricing(
     currency,
   }).format(unitAmount / 100);
 
-  return {
+  const payload = {
     formattedPrice,
     currency,
     unitAmount,
   };
+  pricingCache.set(cacheKey, {
+    expiresAt: Date.now() + CACHE_TTL_MS,
+    payload,
+  });
+
+  return payload;
 }
 
 export async function getStripePricing(

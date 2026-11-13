@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import { getStripeTeamPricing } from "@/lib/stripe/pricing";
 import { TEAM_MIN_SEATS } from "@/lib/stripe/server";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
