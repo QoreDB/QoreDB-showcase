@@ -47,33 +47,35 @@ function PlanCard({
 }) {
   return (
     <div
-      className={`rounded-lg border p-6 sm:p-7 h-full flex flex-col ${
+      className={`rounded-lg border p-5 sm:p-6 h-full flex flex-col ${
         highlighted
           ? "border-(--q-accent) bg-(--q-bg-1)"
           : "border-(--q-border) bg-(--q-bg-0)"
       }`}
     >
-      <div className="mb-5">
+      <div className="mb-4">
         {badge ? (
-          <span className="inline-flex font-mono text-(--q-accent) text-xs mb-5">
+          <span className="inline-flex font-mono text-(--q-accent) text-xs mb-2.5">
             {badge}
           </span>
         ) : null}
-        <h2 className="font-heading text-3xl font-semibold tracking-tight text-(--q-text-0)">
+        <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight text-(--q-text-0)">
           {title}
         </h2>
         {tagline ? (
-          <p className="text-sm font-medium text-(--q-accent) mt-1">
+          <p className="text-sm font-medium text-(--q-accent) mt-0.5">
             {tagline}
           </p>
         ) : null}
-        <p className="text-sm text-(--q-text-2) mt-2">{description}</p>
-        <div className="mt-7 flex items-baseline gap-2 flex-wrap">
-          <span className="font-heading text-4xl font-semibold tracking-tight text-(--q-text-0)">
+        <p className="text-sm leading-5 text-(--q-text-2) mt-1.5 md:min-h-10">
+          {description}
+        </p>
+        <div className="mt-4 flex items-baseline gap-2 flex-wrap">
+          <span className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight text-(--q-text-0)">
             {price}
           </span>
         </div>
-        <p className="mt-2 text-sm text-(--q-text-1)">{priceNote}</p>
+        <p className="mt-1 text-xs sm:text-sm text-(--q-text-1)">{priceNote}</p>
       </div>
 
       {customCta ? (
@@ -81,7 +83,7 @@ function PlanCard({
       ) : href ? (
         <Link
           href={href}
-          className={`inline-flex w-full items-center justify-center rounded-md min-h-12 px-4 py-3 font-semibold transition ${
+          className={`inline-flex w-full items-center justify-center rounded-md min-h-10 px-4 py-2.5 text-sm font-semibold transition ${
             disabled
               ? "pointer-events-none opacity-50 border border-(--q-border)"
               : highlighted
@@ -97,7 +99,7 @@ function PlanCard({
           onClick={onClick}
           disabled={disabled || loading}
           aria-busy={loading}
-          className={`inline-flex w-full items-center justify-center rounded-md min-h-12 px-4 py-3 font-semibold transition ${
+          className={`inline-flex w-full items-center justify-center rounded-md min-h-10 px-4 py-2.5 text-sm font-semibold transition ${
             highlighted
               ? "bg-(--q-action) text-(--q-on-action) hover:bg-(--q-action-hover)"
               : "border border-(--q-border) hover:border-(--q-accent)/40"
@@ -109,18 +111,18 @@ function PlanCard({
           {ctaLabel}
         </button>
       )}
-      {footerNote ? <div className="mt-3">{footerNote}</div> : null}
-      <ul className="space-y-3 mt-7 border-t border-(--q-border) pt-6">
+      {footerNote ? <div className="mt-2">{footerNote}</div> : null}
+      <ul className="space-y-2 mt-5 border-t border-(--q-border) pt-4">
         {features.map((feature) => (
           <li
             key={feature.id ?? feature.label}
             id={feature.id}
-            className="flex items-start gap-2.5 text-(--q-text-1) scroll-mt-32 target:bg-(--q-accent)/10 target:rounded-md target:-mx-1 target:px-1 transition-colors"
+            className="flex items-start gap-2 text-(--q-text-1) scroll-mt-32 target:bg-(--q-accent)/10 target:rounded-md target:-mx-1 target:px-1 transition-colors"
           >
             <span className="mt-0.5 shrink-0">
-              <Check className="h-4 w-4 text-(--q-accent)" />
+              <Check className="h-3.5 w-3.5 text-(--q-accent)" />
             </span>
-            <span className="text-sm leading-relaxed">{feature.label}</span>
+            <span className="text-[13px] leading-snug">{feature.label}</span>
           </li>
         ))}
       </ul>
@@ -244,19 +246,19 @@ export default function PricingPageClient({
       <main
         id="main-content"
         tabIndex={-1}
-        className="q-container flex-1 pt-32 pb-20 lg:pt-44"
+        className="q-container flex-1 pt-24 pb-16 lg:pt-28"
       >
         <section className="">
-          <div className="max-w-3xl">
-            <h1 className="font-heading text-5xl leading-[1.05] sm:text-6xl lg:text-7xl font-semibold tracking-[-0.045em]">
+          <div className="max-w-4xl">
+            <h1 className="font-heading text-3xl leading-[1.1] sm:text-4xl lg:text-5xl font-semibold tracking-[-0.035em]">
               {t("pricing_page.title")}
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-(--q-text-1)">
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-(--q-text-1)">
               {t("pricing_page.subtitle")}
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             <div className="h-full">
               <PlanCard
                 title={t("pricing_page.core.title")}
@@ -285,22 +287,23 @@ export default function PricingPageClient({
                 onClick={startCheckout}
                 loading={loadingCheckout}
                 footerNote={
-                  <>
+                  <div className="text-center text-xs text-(--q-text-2)">
                     {checkoutError && (
-                      <p role="alert" className="text-sm text-(--q-error)">
+                      <p role="alert" className="text-sm text-(--q-error) mb-1">
                         {checkoutError}
                       </p>
                     )}
-                    <p className="text-center text-xs text-(--q-text-2) mt-3">
-                      {t("pricing_page.pro.individual_use")}
-                    </p>
+                    <span>{t("pricing_page.pro.individual_use")}</span>
+                    <span className="mx-1.5" aria-hidden="true">
+                      ·
+                    </span>
                     <a
                       href={getContactMailtoHref()}
-                      className="mt-1.5 flex min-h-11 items-center justify-center text-center text-xs text-(--q-text-2) underline underline-offset-4 hover:text-(--q-accent)"
+                      className="inline-flex items-center py-1 underline underline-offset-4 hover:text-(--q-accent)"
                     >
                       {t("pricing_page.pro.student_note")}
                     </a>
-                  </>
+                  </div>
                 }
               />
             </div>

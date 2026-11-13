@@ -829,7 +829,7 @@
   "pricing_page": {
     "badge": "Open Core",
     "title": "Choisissez le plan qui vous correspond",
-    "subtitle": "Core est gratuit. Pro s’achète en une fois. Team étend Pro à chaque membre de l’équipe.",
+    "subtitle": "Core est gratuit. Passez à Pro en un paiement unique. Team étend Pro à chaque membre de l’équipe.",
     "checkout_error": "Impossible de démarrer Stripe Checkout pour le moment.",
     "faq_title": "Questions fréquentes",
     "core": {
@@ -842,10 +842,10 @@
       "features": {
         "drivers": "Moteurs et services SQL et NoSQL : PostgreSQL, MySQL, MongoDB, Redis, Snowflake, BigQuery, Cassandra…",
         "crud": "CRUD complet + éditeur SQL/Mongo avec autocomplétion et linting",
-        "workspaces": "Workspaces:regroupez connexions, requêtes et notebooks par projet",
+        "workspaces": "Workspaces : regroupez connexions, requêtes et notebooks par projet",
         "grid": "Grille haute performance avec bulk edit et filtres avancés",
         "er_diagram": "Diagramme ER interactif et Table Insights",
-        "ddl": "Gestion DDL: CREATE / ALTER TABLE, clés étrangères, index",
+        "ddl": "Gestion DDL : CREATE / ALTER TABLE, clés étrangères, index",
         "history": "Historique, favoris et tab groups",
         "vault": "Vault chiffré (Argon2) + support proxy et ssh-agent",
         "ssh": "Tunneling SSH natif (OpenSSH, proxy jump)",
@@ -869,7 +869,7 @@
       "features": {
         "everything_core": "Tout ce qui est dans Core",
         "sandbox": "Mode Sandbox avec génération de migrations",
-        "time_travel": "Time Travel:historique des lignes, diff de versions et SQL de rollback",
+        "time_travel": "Time Travel : historique des lignes, diff de versions et SQL de rollback",
         "visual_diff": "Visual Data Diff (comparaison de tables)",
         "audit_advanced": "Audit log avancé (illimité, filtrable, exportable)",
         "profiling": "Alertes de performance · Pro — Repérez les régressions et les schémas N+1 potentiels. Définissez des seuils d’erreurs et de requêtes lentes.",
@@ -920,7 +920,7 @@
       },
       "lifetime_updates": {
         "question": "Les mises à jour sont-elles incluses à vie ?",
-        "answer": "Pro s’achète en un paiement unique, avec les mises à jour à vie incluses. Team est un abonnement distinct, facturé par siège et par an."
+        "answer": "Pro fonctionne par paiement unique, avec les mises à jour à vie incluses. Team est un abonnement distinct, facturé par siège et par an."
       },
       "try_pro": {
         "question": "Puis-je essayer les features Pro ?",
