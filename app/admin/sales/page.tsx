@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getSalesSnapshot } from "@/lib/admin/sales";
-import socialStats from "@/lib/data/social-stats.json";
+import { getSocialStats } from "@/lib/github";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -49,11 +49,14 @@ export default async function AdminSalesPage({
 
   let snapshot: Awaited<ReturnType<typeof getSalesSnapshot>> | null = null;
   let error: string | null = null;
-  try {
-    snapshot = await getSalesSnapshot();
-  } catch (e) {
-    error = e instanceof Error ? e.message : "Failed to fetch sales";
-  }
+  const [snapshotResult, socialStats] = await Promise.all([
+    getSalesSnapshot().catch((e: unknown) => {
+      error = e instanceof Error ? e.message : "Failed to fetch sales";
+      return null;
+    }),
+    getSocialStats(),
+  ]);
+  snapshot = snapshotResult;
 
   const downloadsTotal = socialStats.downloads_raw;
   const stars = socialStats.stars;

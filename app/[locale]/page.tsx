@@ -15,6 +15,8 @@ import { normalizeLocale } from "@/lib/locale";
 import { buildPageMetadata, getAbsoluteUrl, getLocalizedUrl } from "@/lib/seo";
 import "@/components/landing/home.css";
 
+export const revalidate = 3600;
+
 const OFFER_COUNTRIES = [
   "FR",
   "BE",

@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslation as getTranslation } from "@/app/[locale]/i18n";
 import { Button } from "@/components/ui/button";
-import socialStats from "@/lib/data/social-stats.json";
+import { getSocialStats } from "@/lib/github";
 
 export async function Hero({ locale }: { locale: string }) {
-  const { t } = await getTranslation(locale, "common");
+  const [{ t }, socialStats] = await Promise.all([
+    getTranslation(locale, "common"),
+    getSocialStats(),
+  ]);
   const title = t("home.hero.title", { returnObjects: true }) as string[];
 
   return (
@@ -32,7 +35,7 @@ export async function Hero({ locale }: { locale: string }) {
           macOS <span>·</span> Windows <span>·</span> Linux <span>·</span>{" "}
           {t("home.hero.free")}
         </p>
-        {/* Real figures, refreshed from GitHub at build time (scripts/fetch-stats.ts). */}
+        {/* Real figures, refreshed from GitHub via ISR (lib/github.ts) with build-time fallback. */}
         <a
           className="q-home-proofline"
           href="https://github.com/QoreDB/QoreDB"
