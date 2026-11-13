@@ -804,7 +804,96 @@
       "from_price": "Ab {{price}}",
       "discover_cta": "Team entdecken",
       "back": "Zurück zu den Preisen",
-      "page_subtitle": "Pro-Funktionen für das ganze Team — namentliche Plätze, zentrale Abrechnung, priorisierter Support."
+      "page_subtitle": "Pro-Funktionen für das ganze Team — namentliche Plätze, zentrale Abrechnung, priorisierter Support.",
+      "landing": {
+        "eyebrow_pill": "Self-Service · Local-First",
+        "trust_stripe": "Sicher über Stripe",
+        "trust_invoice": "Firmenrechnung (EU-USt.)",
+        "trust_instant": "Sofortige Aktivierung",
+        "presets_label": "Teamgröße",
+        "seats_unit_one": "{{count}} Platz",
+        "seats_unit_other": "{{count}} Plätze",
+        "breakdown": "{{count}} × {{price}}",
+        "steps_eyebrow": "So funktioniert’s",
+        "steps_title": "QoreDB Pro in 2 Minuten im Team ausrollen",
+        "steps_subtitle": "Keine komplexe Konsole und kein Pflicht-SSO zum Start. Alles läuft per Self-Service.",
+        "steps": [
+          {
+            "num": "01",
+            "title": "Plätze buchen",
+            "body": "Anzahl der Plätze wählen und über Stripe bezahlen. Ihre Firmenrechnung steht sofort bereit und Ihr eigener Platz ist direkt aktiv."
+          },
+          {
+            "num": "02",
+            "title": "Einladungslink teilen",
+            "body": "Teilen Sie den Team-Link mit Ihren Entwicklern. Jedes Mitglied gibt seine geschäftliche E-Mail ein und erhält einen eigenen Lizenzschlüssel."
+          },
+          {
+            "num": "03",
+            "title": "Plätze jederzeit neu zuweisen",
+            "body": "Jemand verlässt das Team? Widerrufen Sie den Platz mit einem Klick im Admin-Portal – er wird sofort für neue Mitglieder frei."
+          }
+        ],
+        "pro_eyebrow": "In jedem Platz enthalten",
+        "pro_title": "Ganz QoreDB Pro, gemacht für sichere Team-Workflows",
+        "pro_subtitle": "Jeder Team-Platz schaltet alle Pro-Funktionen auf macOS, Windows und Linux frei.",
+        "capabilities": [
+          {
+            "title": "Sandbox & Dry-Run",
+            "body": "Testen Sie UPDATE-, DELETE- und DDL-Änderungen sicher vorab und prüfen Sie den Diff vor dem Produktiv-Commit."
+          },
+          {
+            "title": "Spaltenmaskierung",
+            "body": "Maskieren Sie sensible PII-Spalten pro Verbindung (vollständig, teilweise oder gehasht) in Tabellen, Exporten, APIs und KI-Agenten."
+          },
+          {
+            "title": "Visueller Diff & Time Travel",
+            "body": "Vergleichen Sie Schemata oder Datensätze nebeneinander und durchsuchen Sie Ihren lokalen Änderungsverlauf."
+          },
+          {
+            "title": "Audit, Profiling & Regeln",
+            "body": "Erkennen Sie langsame Abfragen, protokollieren Sie lokale Aktivitäten und setzen Sie Schutzregeln für kritische Umgebungen."
+          },
+          {
+            "title": "100 % Local-First",
+            "body": "Ihre Zugangsdaten und Abfragen verlassen niemals Ihre Rechner. Jeder Arbeitsplatz verbindet sich direkt mit Ihren Datenbanken."
+          },
+          {
+            "title": "Priorisierter Support & Abrechnung",
+            "body": "Eine zentrale Jahresrechnung, EU-USt.-Abwicklung über Stripe und priorisierter Support."
+          }
+        ],
+        "enterprise_title": "25+ Plätze, SSO/SAML oder individueller Vertrag?",
+        "enterprise_body": "Sprechen Sie mit uns über Sicherheitsanforderungen, Beschaffungsprozesse oder ein unternehmensweites Rollout.",
+        "enterprise_cta": "Kontakt aufnehmen",
+        "faq_title": "Häufige Fragen zum Team-Tarif",
+        "faq": [
+          {
+            "q": "Wie aktivieren meine Kollegen ihre Lizenz?",
+            "a": "Nach dem Kauf erhalten Sie einen Einladungslink. Jedes Teammitglied gibt dort seine E-Mail ein und erhält sofort seinen persönlichen Lizenzschlüssel für QoreDB (Einstellungen › Lizenz)."
+          },
+          {
+            "q": "Was passiert, wenn jemand das Team verlässt?",
+            "a": "Im Self-Service-Admin-Portal können Sie den Platz mit einem Klick widerrufen und bei Bedarf den Einladungslink erneuern. Der Platz ist sofort wieder frei."
+          },
+          {
+            "q": "Können wir später Plätze hinzufügen oder entfernen?",
+            "a": "Ja. Sie können die Anzahl der Plätze jederzeit im Stripe-Abrechnungsportal anpassen."
+          },
+          {
+            "q": "Erhalten wir eine ordnungsgemäße Firmenrechnung?",
+            "a": "Ja. Stripe erstellt automatisch eine Firmenrechnung mit Unterstützung für EU-Umsatzsteuer-IDs."
+          },
+          {
+            "q": "Laufen unsere Daten oder Zugangsdaten über QoreDB-Server?",
+            "a": "Nein. QoreDB arbeitet Local-First: Jeder Entwickler verbindet sich direkt von seinem Rechner aus ohne Proxy-Server."
+          },
+          {
+            "q": "Was ist der Unterschied zwischen Pro (einmalig) und Team (jährlich)?",
+            "a": "Pro ist eine unbefristete Einzellizenz. Team ist ein jährliches Abo pro Platz für Unternehmen mit Self-Service-Verwaltung, Neuzuweisung, zentraler Abrechnung und Prioritäts-Support."
+          }
+        ]
+      }
     },
     "faq": {
       "open_core_why": {

@@ -907,7 +907,96 @@
       "from_price": "À partir de {{price}}",
       "discover_cta": "Découvrir l'offre Team",
       "back": "Retour aux tarifs",
-      "page_subtitle": "Les fonctionnalités Pro pour toute l'équipe — sièges nominatifs, facturation centralisée, support prioritaire."
+      "page_subtitle": "Les fonctionnalités Pro pour toute l'équipe — sièges nominatifs, facturation centralisée, support prioritaire.",
+      "landing": {
+        "eyebrow_pill": "Self-service · Local-first",
+        "trust_stripe": "Paiement Stripe sécurisé",
+        "trust_invoice": "Facture entreprise (TVA UE)",
+        "trust_instant": "Activation immédiate",
+        "presets_label": "Taille d’équipe",
+        "seats_unit_one": "{{count}} siège",
+        "seats_unit_other": "{{count}} sièges",
+        "breakdown": "{{count}} × {{price}}",
+        "steps_eyebrow": "Fonctionnement",
+        "steps_title": "Déployez QoreDB Pro dans votre équipe en 2 minutes",
+        "steps_subtitle": "Pas de console complexe ni de SSO obligatoire pour démarrer. Tout est géré en self-service.",
+        "steps": [
+          {
+            "num": "01",
+            "title": "Souscrivez vos sièges",
+            "body": "Choisissez le nombre de sièges et réglez par carte ou virement via Stripe. Votre facture entreprise est disponible immédiatement et votre propre siège est actif."
+          },
+          {
+            "num": "02",
+            "title": "Partagez un lien d’invitation",
+            "body": "Envoyez le lien d’équipe à vos développeurs. Chacun saisit son e-mail professionnel et reçoit sa propre clé nominative à coller dans QoreDB."
+          },
+          {
+            "num": "03",
+            "title": "Réattribuez les sièges librement",
+            "body": "Un membre quitte l’équipe ? Révoquez son siège en un clic depuis votre portail d’administration : la place est immédiatement libérée pour un nouvel arrivant."
+          }
+        ],
+        "pro_eyebrow": "Inclus pour chaque siège",
+        "pro_title": "Tout QoreDB Pro, pensé pour travailler en sécurité",
+        "pro_subtitle": "Chaque licence Team débloque l’intégralité des fonctionnalités Pro sur macOS, Windows et Linux.",
+        "capabilities": [
+          {
+            "title": "Sandbox & Dry-Run",
+            "body": "Testez vos UPDATE, DELETE et migrations DDL dans un bac à sable et inspectez le diff avant d’appliquer en production."
+          },
+          {
+            "title": "Masquage des colonnes sensibles",
+            "body": "Masquez automatiquement les colonnes PII par connexion (complet, partiel ou empreinte) dans les grilles, exports, APIs et agents IA."
+          },
+          {
+            "title": "Diff visuel & Time Travel",
+            "body": "Comparez deux schémas ou jeux de données côte à côte et parcourez l’historique local de vos modifications."
+          },
+          {
+            "title": "Audit, Profiling & Règles",
+            "body": "Détectez les requêtes lentes, suivez l’activité en local et appliquez des garde-fous sur vos bases critiques."
+          },
+          {
+            "title": "100 % Local-first",
+            "body": "Vos identifiants et requêtes ne transitent jamais par nos serveurs. Chaque poste se connecte directement à vos bases."
+          },
+          {
+            "title": "Support prioritaire & Facturation",
+            "body": "Une seule facture annuelle centralisée, gestion de la TVA intracommunautaire et accès prioritaire au support."
+          }
+        ],
+        "enterprise_title": "Besoin de 25+ sièges, de SSO/SAML ou d’un contrat sur mesure ?",
+        "enterprise_body": "Discutons de vos contraintes de sécurité, d’achat (bon de commande, virement) ou de déploiement à grande échelle.",
+        "enterprise_cta": "Contacter l’équipe",
+        "faq_title": "Questions fréquentes sur l’offre Team",
+        "faq": [
+          {
+            "q": "Comment mes collègues activent-ils leur licence ?",
+            "a": "Dès le paiement validé, vous recevez un lien d’invitation à partager. Chaque collègue y saisit son adresse e-mail et reçoit immédiatement sa clé de licence nominative à activer dans QoreDB (Réglages › Licence)."
+          },
+          {
+            "q": "Que se passe-t-il si un développeur quitte l’équipe ?",
+            "a": "Depuis votre portail d’administration Team, vous pouvez révoquer son siège en un clic et régénérer le lien d’invitation si besoin. Le siège redevient aussitôt disponible pour un autre membre."
+          },
+          {
+            "q": "Puis-je ajouter ou retirer des sièges plus tard ?",
+            "a": "Oui. Vous pouvez ajuster le nombre de sièges ou gérer vos moyens de paiement à tout moment depuis le portail de facturation Stripe."
+          },
+          {
+            "q": "Obtiendrai-je une facture conforme pour la comptabilité ?",
+            "a": "Oui. Stripe génère automatiquement une facture entreprise avec prise en charge des numéros de TVA intracommunautaire et de vos coordonnées de facturation."
+          },
+          {
+            "q": "Nos données ou identifiants passent-ils par vos serveurs ?",
+            "a": "Non. QoreDB est local-first : les connexions aux bases de données s’effectuent directement depuis la machine de chaque développeur, sans serveur intermédiaire."
+          },
+          {
+            "q": "Quelle est la différence entre Pro (paiement unique) et Team (annuel) ?",
+            "a": "Pro est une licence perpétuelle strictement individuelle. Team est un abonnement annuel par siège conçu pour les entreprises, incluant la gestion des sièges en self-service, la réattribution, la facturation centralisée et le support prioritaire."
+          }
+        ]
+      }
     },
     "faq": {
       "open_core_why": {

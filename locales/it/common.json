@@ -804,7 +804,96 @@
       "from_price": "A partire da {{price}}",
       "discover_cta": "Scopri Team",
       "back": "Torna ai prezzi",
-      "page_subtitle": "Le funzioni Pro per tutto il team — postazioni nominative, fatturazione centralizzata, supporto prioritario."
+      "page_subtitle": "Le funzioni Pro per tutto il team — postazioni nominative, fatturazione centralizzata, supporto prioritario.",
+      "landing": {
+        "eyebrow_pill": "Self-service · Local-first",
+        "trust_stripe": "Pagamento sicuro Stripe",
+        "trust_invoice": "Fattura aziendale (IVA UE)",
+        "trust_instant": "Attivazione immediata",
+        "presets_label": "Dimensione del team",
+        "seats_unit_one": "{{count}} postazione",
+        "seats_unit_other": "{{count}} postazioni",
+        "breakdown": "{{count}} × {{price}}",
+        "steps_eyebrow": "Come funziona",
+        "steps_title": "Distribuisci QoreDB Pro al tuo team in 2 minuti",
+        "steps_subtitle": "Nessuna console complessa né SSO obbligatorio per iniziare. Tutto in self-service.",
+        "steps": [
+          {
+            "num": "01",
+            "title": "Acquista le postazioni",
+            "body": "Scegli il numero di postazioni e paga tramite Stripe. La fattura aziendale è subito disponibile e la tua postazione è già attiva."
+          },
+          {
+            "num": "02",
+            "title": "Condividi un link d’invito",
+            "body": "Invia il link del team ai tuoi sviluppatori. Ognuno inserisce la propria email aziendale e riceve la propria chiave nominativa."
+          },
+          {
+            "num": "03",
+            "title": "Riassegna le postazioni quando vuoi",
+            "body": "Qualcuno lascia il team? Revoca la postazione in un clic dal portale admin: torna subito disponibile per un nuovo membro."
+          }
+        ],
+        "pro_eyebrow": "Incluso in ogni postazione",
+        "pro_title": "Tutto QoreDB Pro, progettato per lavorare in sicurezza",
+        "pro_subtitle": "Ogni postazione Team sblocca tutte le funzionalità Pro su macOS, Windows e Linux.",
+        "capabilities": [
+          {
+            "title": "Sandbox & Dry-Run",
+            "body": "Testa modifiche UPDATE, DELETE e DDL in una sandbox sicura e controlla il diff prima di applicare in produzione."
+          },
+          {
+            "title": "Mascheramento colonne",
+            "body": "Maschera automaticamente le colonne PII sensibili per connessione in griglie, export, API e agenti AI."
+          },
+          {
+            "title": "Diff visivo & Time Travel",
+            "body": "Confronta schemi o dati fianco a fianco e consulta la cronologia locale delle modifiche."
+          },
+          {
+            "title": "Audit, Profiling & Regole",
+            "body": "Individua query lente, traccia l’attività locale e applica protezioni sugli ambienti critici."
+          },
+          {
+            "title": "100% Local-first",
+            "body": "Credenziali e query non passano mai dai nostri server. Ogni postazione si connette direttamente ai tuoi database."
+          },
+          {
+            "title": "Supporto prioritario & Fatturazione",
+            "body": "Un’unica fattura annuale centralizzata, gestione IVA UE tramite Stripe e supporto prioritario."
+          }
+        ],
+        "enterprise_title": "Servono 25+ postazioni, SSO/SAML o un contratto su misura?",
+        "enterprise_body": "Parliamo dei tuoi requisiti di sicurezza, processo di acquisto o distribuzione su larga scala.",
+        "enterprise_cta": "Contattaci",
+        "faq_title": "Domande frequenti sul piano Team",
+        "faq": [
+          {
+            "q": "Come attivano la licenza i miei colleghi?",
+            "a": "Subito dopo il pagamento ricevi un link d’invito da condividere. Ogni collega inserisce la propria email e riceve immediatamente la chiave nominativa da inserire in QoreDB (Impostazioni › Licenza)."
+          },
+          {
+            "q": "Cosa succede se qualcuno lascia il team?",
+            "a": "Dal portale admin Team puoi revocare la postazione in un clic e rigenerare il link se necessario. La postazione torna subito libera."
+          },
+          {
+            "q": "Possiamo aggiungere o rimuovere postazioni in seguito?",
+            "a": "Sì. Puoi modificare il numero di postazioni in qualsiasi momento dal portale di fatturazione Stripe."
+          },
+          {
+            "q": "Riceveremo una fattura aziendale valida?",
+            "a": "Sì. Stripe emette automaticamente una fattura aziendale con supporto per partita IVA UE."
+          },
+          {
+            "q": "I nostri dati o credenziali passano dai vostri server?",
+            "a": "No. QoreDB è local-first: ogni sviluppatore si connette direttamente dalla propria macchina, senza server proxy."
+          },
+          {
+            "q": "Qual è la differenza tra Pro (una tantum) e Team (annuale)?",
+            "a": "Pro è una licenza perpetua individuale. Team è un abbonamento annuale per postazione per aziende, con gestione self-service, riassegnazione, fatturazione centralizzata e supporto prioritario."
+          }
+        ]
+      }
     },
     "faq": {
       "open_core_why": {

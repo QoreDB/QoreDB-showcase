@@ -804,7 +804,96 @@
       "from_price": "Desde {{price}}",
       "discover_cta": "Descubrir Team",
       "back": "Volver a precios",
-      "page_subtitle": "Las funciones Pro para todo el equipo — asientos nominativos, facturación centralizada, soporte prioritario."
+      "page_subtitle": "Las funciones Pro para todo el equipo — asientos nominativos, facturación centralizada, soporte prioritario.",
+      "landing": {
+        "eyebrow_pill": "Autoservicio · Local-first",
+        "trust_stripe": "Pago seguro con Stripe",
+        "trust_invoice": "Factura de empresa (IVA UE)",
+        "trust_instant": "Activación inmediata",
+        "presets_label": "Tamaño del equipo",
+        "seats_unit_one": "{{count}} puesto",
+        "seats_unit_other": "{{count}} puestos",
+        "breakdown": "{{count}} × {{price}}",
+        "steps_eyebrow": "Cómo funciona",
+        "steps_title": "Despliega QoreDB Pro en tu equipo en 2 minutos",
+        "steps_subtitle": "Sin consolas complejas ni SSO obligatorio para empezar. Todo en autoservicio.",
+        "steps": [
+          {
+            "num": "01",
+            "title": "Contrata tus puestos",
+            "body": "Elige el número de puestos y paga con Stripe. Tu factura de empresa está disponible al instante y tu propio puesto queda activo."
+          },
+          {
+            "num": "02",
+            "title": "Comparte un enlace de invitación",
+            "body": "Envía el enlace del equipo a tus desarrolladores. Cada persona introduce su correo profesional y recibe su propia clave nominativa."
+          },
+          {
+            "num": "03",
+            "title": "Reasigna puestos cuando quieras",
+            "body": "¿Alguien deja el equipo? Revoca su puesto en un clic desde tu portal de administración y queda libre al instante."
+          }
+        ],
+        "pro_eyebrow": "Incluido en cada puesto",
+        "pro_title": "Todo QoreDB Pro, pensado para trabajar en equipo con seguridad",
+        "pro_subtitle": "Cada puesto Team desbloquea todas las funciones Pro en macOS, Windows y Linux.",
+        "capabilities": [
+          {
+            "title": "Sandbox y Dry-Run",
+            "body": "Prueba cambios UPDATE, DELETE y DDL en un entorno seguro e inspecciona el diff antes de aplicar en producción."
+          },
+          {
+            "title": "Enmascaramiento de columnas",
+            "body": "Oculta columnas PII sensibles por conexión (total, parcial o hash) en cuadrículas, exportaciones, APIs y agentes IA."
+          },
+          {
+            "title": "Diff visual y Time Travel",
+            "body": "Compara esquemas o datos lado a lado y consulta el historial local de modificaciones."
+          },
+          {
+            "title": "Auditoría, Profiling y Reglas",
+            "body": "Detecta consultas lentas, registra actividad local y aplica salvaguardas en entornos críticos."
+          },
+          {
+            "title": "100 % Local-first",
+            "body": "Tus credenciales y consultas nunca pasan por nuestros servidores. Cada equipo se conecta directamente a tus bases."
+          },
+          {
+            "title": "Soporte prioritario y Facturación",
+            "body": "Una sola factura anual centralizada, gestión de IVA intracomunitario con Stripe y soporte prioritario."
+          }
+        ],
+        "enterprise_title": "¿Necesitas 25+ puestos, SSO/SAML o un contrato a medida?",
+        "enterprise_body": "Hablemos sobre tus requisitos de seguridad, proceso de compra o despliegue a gran escala.",
+        "enterprise_cta": "Contactar",
+        "faq_title": "Preguntas frecuentes sobre Team",
+        "faq": [
+          {
+            "q": "¿Cómo activan su licencia mis compañeros?",
+            "a": "Tras el pago recibes un enlace de invitación. Cada compañero introduce su correo y recibe al instante su clave nominativa para activar en QoreDB (Ajustes › Licencia)."
+          },
+          {
+            "q": "¿Qué ocurre si alguien deja el equipo?",
+            "a": "Desde el portal de administración Team puedes revocar su puesto en un clic y regenerar el enlace si hace falta. El puesto queda libre de inmediato."
+          },
+          {
+            "q": "¿Podemos añadir o quitar puestos más adelante?",
+            "a": "Sí. Puedes ajustar el número de puestos en cualquier momento desde el portal de facturación de Stripe."
+          },
+          {
+            "q": "¿Tendremos una factura válida para contabilidad?",
+            "a": "Sí. Stripe emite automáticamente una factura de empresa compatible con números de IVA intracomunitario."
+          },
+          {
+            "q": "¿Nuestros datos o credenciales pasan por vuestros servidores?",
+            "a": "No. QoreDB es local-first: cada desarrollador se conecta directamente desde su máquina, sin servidor proxy."
+          },
+          {
+            "q": "¿Cuál es la diferencia entre Pro (pago único) y Team (anual)?",
+            "a": "Pro es una licencia perpetua individual. Team es una suscripción anual por puesto para empresas con gestión de puestos en autoservicio, reasignación, facturación centralizada y soporte prioritario."
+          }
+        ]
+      }
     },
     "faq": {
       "open_core_why": {

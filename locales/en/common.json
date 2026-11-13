@@ -907,7 +907,96 @@
       "from_price": "From {{price}}",
       "discover_cta": "Explore Team",
       "back": "Back to pricing",
-      "page_subtitle": "Pro features for the whole team — named seats, central billing, priority support."
+      "page_subtitle": "Pro features for the whole team — named seats, central billing, priority support.",
+      "landing": {
+        "eyebrow_pill": "Self-service · Local-first",
+        "trust_stripe": "Secured by Stripe",
+        "trust_invoice": "Company invoice (EU VAT)",
+        "trust_instant": "Instant activation",
+        "presets_label": "Team size",
+        "seats_unit_one": "{{count}} seat",
+        "seats_unit_other": "{{count}} seats",
+        "breakdown": "{{count}} × {{price}}",
+        "steps_eyebrow": "How it works",
+        "steps_title": "Roll out QoreDB Pro to your team in 2 minutes",
+        "steps_subtitle": "No complex admin console or mandatory SSO to get started. Everything is self-service.",
+        "steps": [
+          {
+            "num": "01",
+            "title": "Purchase your seats",
+            "body": "Pick your seat count and pay via Stripe. Your company invoice is available immediately and your own Pro seat is active right away."
+          },
+          {
+            "num": "02",
+            "title": "Share one invite link",
+            "body": "Send the team invite link to your developers. Each teammate enters their work email and receives their own named license key for QoreDB."
+          },
+          {
+            "num": "03",
+            "title": "Reassign seats anytime",
+            "body": "Someone leaves the team? Revoke their seat in one click from your admin portal—the seat is immediately freed for a new teammate."
+          }
+        ],
+        "pro_eyebrow": "Included in every seat",
+        "pro_title": "All of QoreDB Pro, built for safe team workflows",
+        "pro_subtitle": "Every Team seat unlocks the complete Pro feature set across macOS, Windows, and Linux.",
+        "capabilities": [
+          {
+            "title": "Sandbox & Dry-Run",
+            "body": "Test UPDATE, DELETE, and DDL changes in a safe sandbox and inspect the diff before committing to production."
+          },
+          {
+            "title": "Column Masking",
+            "body": "Automatically mask sensitive PII columns per connection (full, partial, or hashed) across grids, exports, APIs, and AI agents."
+          },
+          {
+            "title": "Visual Diff & Time Travel",
+            "body": "Compare schemas or datasets side by side and browse your local history of changes."
+          },
+          {
+            "title": "Audit, Profiling & Rules",
+            "body": "Spot slow queries, track local activity, and enforce safety guardrails on critical environments."
+          },
+          {
+            "title": "100% Local-first",
+            "body": "Your credentials and queries never transit through our servers. Every workstation connects directly to your databases."
+          },
+          {
+            "title": "Priority Support & Central Billing",
+            "body": "One consolidated annual invoice, EU VAT handling via Stripe, and priority support."
+          }
+        ],
+        "enterprise_title": "Need 25+ seats, SSO/SAML, or a custom contract?",
+        "enterprise_body": "Let’s discuss your security requirements, procurement process (PO, wire transfer), or organization-wide rollout.",
+        "enterprise_cta": "Contact us",
+        "faq_title": "Team licensing FAQ",
+        "faq": [
+          {
+            "q": "How do teammates activate their license?",
+            "a": "Right after checkout, you receive a team invite link to share. Each teammate enters their email address and immediately receives their own named license key to paste in QoreDB (Settings › License)."
+          },
+          {
+            "q": "What happens when someone leaves the team?",
+            "a": "From your self-service Team admin portal, you can revoke their seat in one click and rotate the invite link if needed. The seat is immediately available for someone else."
+          },
+          {
+            "q": "Can we add or remove seats later?",
+            "a": "Yes. You can adjust your seat count or update billing details anytime from the Stripe billing portal."
+          },
+          {
+            "q": "Do we get a compliant company invoice?",
+            "a": "Yes. Stripe automatically issues a company invoice with support for EU VAT numbers and your billing details."
+          },
+          {
+            "q": "Do our credentials or database queries go through QoreDB servers?",
+            "a": "No. QoreDB is local-first: every developer connects directly from their own machine, with no intermediary proxy server."
+          },
+          {
+            "q": "What is the difference between Pro (one-time) and Team (annual)?",
+            "a": "Pro is an individual perpetual license. Team is an annual per-seat subscription built for companies, adding self-service seat management, seat reassignment, centralized billing, and priority support."
+          }
+        ]
+      }
     },
     "faq": {
       "open_core_why": {
