@@ -73,7 +73,7 @@ export async function generateMetadata({
     return buildPageMetadata({
       locale,
       pathname: `/plugins/${plugin.id}`,
-      title: `${plugin.name} — ${t("marketplace.page_title")}`,
+      title: `${plugin.name} · ${t("marketplace.page_title")}`,
       description: plugin.description ?? t("marketplace.page_subtitle"),
     });
   } catch {

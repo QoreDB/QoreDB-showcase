@@ -334,7 +334,7 @@
       },
       "instant_api": {
         "title": "Data API istantanea",
-        "desc": "Trasforma qualsiasi query salvata in un endpoint REST sicuro — auth via token, rate limiting e documentazione OpenAPI auto-generata, in un clic."
+        "desc": "Trasforma qualsiasi query salvata in un endpoint REST sicuro, auth via token, rate limiting e documentazione OpenAPI auto-generata, in un clic."
       },
       "export": {
         "title": "Esportazione multiformato",
@@ -388,7 +388,7 @@
       },
       "federation": {
         "title": "Federazione tra database",
-        "desc": "Esegui una singola query SQL che fa JOIN tra tabelle di più connessioni attive — Postgres, MySQL e altro — senza esportare CSV né allestire un warehouse.",
+        "desc": "Esegui una singola query SQL che fa JOIN tra tabelle di più connessioni attive (Postgres, MySQL e altro) senza esportare CSV né allestire un warehouse.",
         "badge": "Una query, tutti i DB",
         "list": {
           "join": "JOIN tra connessioni attive in un'unica query",
@@ -608,10 +608,10 @@
       "quote": "QoreDB è più veloce, più sicuro e pronto per un uso quotidiano serio.",
       "items": {
         "1": "34 driver. Motori supportati: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
-        "2": "Server MCP in sola lettura — Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
-        "3": "Mascheramento colonne · Pro — Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti.",
-        "4": "Tendenze delle query · Core — Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata.",
-        "5": "Avvisi sulle prestazioni · Pro — Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente."
+        "2": "Server MCP in sola lettura: Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
+        "3": "Mascheramento colonne · Pro: Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti.",
+        "4": "Tendenze delle query · Core: Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata.",
+        "5": "Avvisi sulle prestazioni · Pro: Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente."
       },
       "goal": "Obiettivo: uno strumento che gli sviluppatori già utilizzano e consigliano con sicurezza."
     },
@@ -750,8 +750,8 @@
         "audit_basic": "Registro di controllo di base (10.000 voci) con redaction delle query",
         "export_basic": "Esportazione CSV / JSON / SQL e link condivisibili dei risultati",
         "shortcuts": "Cronologia, preferiti, tab groups, scorciatoie da tastiera e 9 lingue di interfaccia",
-        "mcp": "Server MCP in sola lettura — Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
-        "trends": "Tendenze delle query · Core — Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata."
+        "mcp": "Server MCP in sola lettura: Dai agli agenti IA esterni accesso alle connessioni autorizzate esplicitamente, agli schemi e alle query salvate.",
+        "trends": "Tendenze delle query · Core: Monitora esecuzioni, latenze P50/P95 e tassi di errore su 7, 14 o 30 giorni dalla cronologia di audit conservata."
       },
       "billing": "Gratis, senza abbonamento"
     },
@@ -769,13 +769,13 @@
         "time_travel": "Time Travel:cronologia delle righe, diff di versioni e SQL di rollback",
         "visual_diff": "Differenza dati visivi (confronto tabelle)",
         "audit_advanced": "Log di controllo avanzato (illimitato, filtrabile, esportabile)",
-        "profiling": "Avvisi sulle prestazioni · Pro — Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente.",
+        "profiling": "Avvisi sulle prestazioni · Pro: Individua regressioni e possibili pattern N+1. Imposta soglie per errori e query lente.",
         "ai": "Assistente AI (BYOK: OpenAI / Anthropic / Ollama)",
         "export_advanced": "Esportazioni avanzate (XLSX, Parquet)",
         "security_rules": "Regole di sicurezza personalizzate",
         "library_advanced": "Libreria di query avanzate",
         "virtual_relations": "Suggerisci automaticamente le relazioni virtuali",
-        "masking": "Mascheramento colonne · Pro — Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti."
+        "masking": "Mascheramento colonne · Pro: Maschera colonne sensibili per connessione con valori completi, parziali o hash in risultati, esportazioni, API e agenti."
       },
       "individual_use": "Licenza per uso individuale.",
       "billing": "Pagamento unico · licenza individuale"
@@ -804,7 +804,7 @@
       "from_price": "A partire da {{price}}",
       "discover_cta": "Scopri Team",
       "back": "Torna ai prezzi",
-      "page_subtitle": "Le funzioni Pro per tutto il team — postazioni nominative, fatturazione centralizzata, supporto prioritario.",
+      "page_subtitle": "Le funzioni Pro per tutto il team, postazioni nominative, fatturazione centralizzata, supporto prioritario.",
       "landing": {
         "eyebrow_pill": "Self-service · Local-first",
         "trust_stripe": "Pagamento sicuro Stripe",
@@ -962,7 +962,7 @@
   "team_waitlist": {
     "placeholder": "tu@azienda.com",
     "cta": "Avvisami quando è pronto",
-    "success": "Grazie — ti contatteremo.",
+    "success": "Grazie: ti contatteremo.",
     "error": "Invio fallito. Riprova."
   },
   "oss_program": {
@@ -973,7 +973,7 @@
       "stars_title": "1.000+ stelle",
       "stars_body": "Il tuo repository principale ha almeno 1.000 stelle GitHub.",
       "maintainer_title": "Maintainer attivo",
-      "maintainer_body": "Mantieni attivamente il repo — commit, review, release.",
+      "maintainer_body": "Mantieni attivamente il repo, commit, review, release.",
       "spirit_title": "Spirito open source",
       "spirit_body": "Credi nel restituire. Anche noi."
     },
@@ -984,7 +984,7 @@
       "repo": "Repository principale",
       "repo_hint": "Formato: owner/repo (es. rust-lang/rust)",
       "note": "Altro?",
-      "note_hint": "Opzionale — parlaci del tuo progetto."
+      "note_hint": "Opzionale: parlaci del tuo progetto."
     },
     "submit": "Invia richiesta",
     "success_title": "Richiesta ricevuta",
@@ -1059,7 +1059,7 @@
     "sections": {
       "intro": {
         "title": "1. Titolare del trattamento",
-        "content": "<p>Il titolare del trattamento è <strong>Raphaël Plassart</strong>, imprenditore individuale (microimpresa francese), editore e gestore di <strong>QoreDB</strong>.</p><ul><li>SIREN: 942 906 157</li><li>SIRET (sede): 942 906 157 00014</li><li>Codice attività (APE): 62.01Z — Programmazione informatica</li><li>Contatto: <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>L'indirizzo postale della sede viene comunicato su semplice richiesta scritta a questo indirizzo di contatto.</p>"
+        "content": "<p>Il titolare del trattamento è <strong>Raphaël Plassart</strong>, imprenditore individuale (microimpresa francese), editore e gestore di <strong>QoreDB</strong>.</p><ul><li>SIREN: 942 906 157</li><li>SIRET (sede): 942 906 157 00014</li><li>Codice attività (APE): 62.01Z: Programmazione informatica</li><li>Contatto: <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>L'indirizzo postale della sede viene comunicato su semplice richiesta scritta a questo indirizzo di contatto.</p>"
       },
       "data_collection": {
         "title": "2. Raccolta dati",
@@ -1079,7 +1079,7 @@
       },
       "hosting": {
         "title": "6. Hosting e sub-responsabili del trattamento",
-        "content": "<p>Il sito e i servizi QoreDB si avvalgono dei seguenti responsabili del trattamento:</p><ul><li><strong>Hetzner Online GmbH</strong> (Germania) — hosting del sito e dei servizi, su server situati a Norimberga, nell'Unione europea;</li><li><strong>Cloudflare, Inc.</strong> (Stati Uniti) — gestione DNS del dominio, distribuzione dei contenuti e protezione dagli attacchi;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda) — pagamenti, fatturazione e gestione degli abbonamenti;</li><li><strong>Resend</strong> — invio delle e-mail transazionali e della newsletter;</li><li><strong>Sanity</strong> — gestione dei contenuti editoriali (blog).</li></ul><p>La misurazione del pubblico è affidata a <strong>Umami</strong>, auto-ospitato sul server Hetzner di QoreDB: le statistiche di visita non vengono trasmesse ad alcun fornitore terzo.</p><p>I dati del sito sono ospitati nell'Unione europea. I trattamenti tecnici effettuati al di fuori dell'Unione europea (in particolare da Cloudflare e Stripe) si basano su garanzie conformi al GDPR, in particolare le clausole contrattuali tipo della Commissione europea.</p>"
+        "content": "<p>Il sito e i servizi QoreDB si avvalgono dei seguenti responsabili del trattamento:</p><ul><li><strong>Hetzner Online GmbH</strong> (Germania): hosting del sito e dei servizi, su server situati a Norimberga, nell'Unione europea;</li><li><strong>Cloudflare, Inc.</strong> (Stati Uniti): gestione DNS del dominio, distribuzione dei contenuti e protezione dagli attacchi;</li><li><strong>Stripe Payments Europe, Limited</strong> (Irlanda): pagamenti, fatturazione e gestione degli abbonamenti;</li><li><strong>Resend</strong>: invio delle e-mail transazionali e della newsletter;</li><li><strong>Sanity</strong>: gestione dei contenuti editoriali (blog).</li></ul><p>La misurazione del pubblico è affidata a <strong>Umami</strong>, auto-ospitato sul server Hetzner di QoreDB: le statistiche di visita non vengono trasmesse ad alcun fornitore terzo.</p><p>I dati del sito sono ospitati nell'Unione europea. I trattamenti tecnici effettuati al di fuori dell'Unione europea (in particolare da Cloudflare e Stripe) si basano su garanzie conformi al GDPR, in particolare le clausole contrattuali tipo della Commissione europea.</p>"
       },
       "security": {
         "title": "7. Sicurezza dei dati",
@@ -1113,7 +1113,7 @@
     "sections": {
       "editor": {
         "title": "Redattore del sito",
-        "content": "**Editore del sito e del software:** Raphaël Plassart, imprenditore individuale (*micro-entreprise* francese)\n**Direttore della pubblicazione:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (sede):** 942 906 157 00014\n**Codice attività (APE):** 62.01Z — Programmazione informatica\n**Registrazione:** impresa registrata in Francia, attiva dal 4 aprile 2025\n**IVA:** IVA non applicabile, articolo 293 B del Codice generale delle imposte francese\n**Contatto:** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB è un prodotto software edito e gestito da questa microimpresa, che assume tutti i rapporti contrattuali con utenti e clienti.\n\n> L'indirizzo postale della sede viene comunicato su semplice richiesta scritta all'indirizzo di contatto sopra indicato."
+        "content": "**Editore del sito e del software:** Raphaël Plassart, imprenditore individuale (*micro-entreprise* francese)\n**Direttore della pubblicazione:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (sede):** 942 906 157 00014\n**Codice attività (APE):** 62.01Z: Programmazione informatica\n**Registrazione:** impresa registrata in Francia, attiva dal 4 aprile 2025\n**IVA:** IVA non applicabile, articolo 293 B del Codice generale delle imposte francese\n**Contatto:** [qoredb@gmail.com](mailto:qoredb@gmail.com) QoreDB è un prodotto software edito e gestito da questa microimpresa, che assume tutti i rapporti contrattuali con utenti e clienti. > L'indirizzo postale della sede viene comunicato su semplice richiesta scritta all'indirizzo di contatto sopra indicato."
       },
       "hosting": {
         "title": "Hosting",
@@ -1145,7 +1145,7 @@
       },
       "license": {
         "title": "Licenza",
-        "content": "QoreDB è distribuito secondo un modello **open core**, con **doppia licenza**:\n\n* **Cuore — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: uso, modifica, ridistribuzione e uso commerciale liberi, senza royalty, nel rispetto degli obblighi di attribuzione.\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: codice sorgente consultabile, uso personale e interno all'azienda gratuito, vietata la commercializzazione di un'offerta concorrente. Ogni versione passa automaticamente alla licenza Apache 2.0 quattro anni dopo la sua pubblicazione.\n\nOgni file sorgente del repository riporta un'intestazione SPDX che indica la licenza applicabile. Fanno fede unicamente i file di licenza presenti nella radice del repository ufficiale.\n\n➡️ [Modello open core e licenze](/docs/introduction/open-core-model)"
+        "content": "QoreDB è distribuito secondo un modello **open core**, con **doppia licenza**: * **Cuore, [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: uso, modifica, ridistribuzione e uso commerciale liberi, senza royalty, nel rispetto degli obblighi di attribuzione.\n* **Premium, [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: codice sorgente consultabile, uso personale e interno all'azienda gratuito, vietata la commercializzazione di un'offerta concorrente. Ogni versione passa automaticamente alla licenza Apache 2.0 quattro anni dopo la sua pubblicazione. Ogni file sorgente del repository riporta un'intestazione SPDX che indica la licenza applicabile. Fanno fede unicamente i file di licenza presenti nella radice del repository ufficiale. ➡️ [Modello open core e licenze](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "Contatto",
@@ -1181,7 +1181,7 @@
       },
       "payments": {
         "title": "6. Acquisti, pagamento e fatturazione",
-        "content": "Le licenze a pagamento (Pro, Team) sono commercializzate dalla microimpresa Raphaël Plassart.\n\n* i pagamenti sono gestiti esclusivamente da **Stripe** (Stripe Payments Europe, Limited); QoreDB non ha accesso ad alcun dato di carta di pagamento,\n* i prezzi sono indicati in euro, senza IVA — IVA non applicabile, articolo 293 B del Codice generale delle imposte francese,\n* la fattura è emessa e messa a disposizione da Stripe al termine del pagamento,\n* la chiave di licenza viene consegnata via e-mail dopo la conferma del pagamento,\n* gli abbonamenti si rinnovano automaticamente secondo la periodicità sottoscritta e possono essere disdetti in qualsiasi momento dal portale clienti Stripe; la disdetta ha effetto al termine del periodo in corso.\n\nAi sensi dell'articolo L221-28 del Codice del consumo francese, il consumatore che richiede la fornitura immediata della propria chiave di licenza rinuncia al diritto di recesso una volta eseguita integralmente la prestazione. Qualsiasi richiesta relativa a un pagamento o a un rimborso può essere inviata all'indirizzo di contatto indicato sul sito."
+        "content": "Le licenze a pagamento (Pro, Team) sono commercializzate dalla microimpresa Raphaël Plassart. * i pagamenti sono gestiti esclusivamente da **Stripe** (Stripe Payments Europe, Limited); QoreDB non ha accesso ad alcun dato di carta di pagamento,\n* i prezzi sono indicati in euro, senza IVA: IVA non applicabile, articolo 293 B del Codice generale delle imposte francese,\n* la fattura è emessa e messa a disposizione da Stripe al termine del pagamento,\n* la chiave di licenza viene consegnata via e-mail dopo la conferma del pagamento,\n* gli abbonamenti si rinnovano automaticamente secondo la periodicità sottoscritta e possono essere disdetti in qualsiasi momento dal portale clienti Stripe; la disdetta ha effetto al termine del periodo in corso. Ai sensi dell'articolo L221-28 del Codice del consumo francese, il consumatore che richiede la fornitura immediata della propria chiave di licenza rinuncia al diritto di recesso una volta eseguita integralmente la prestazione. Qualsiasi richiesta relativa a un pagamento o a un rimborso può essere inviata all'indirizzo di contatto indicato sul sito."
       },
       "user_obligations": {
         "title": "7. Obblighi dell'utente",
@@ -1441,8 +1441,8 @@
       "field_name": "Nome visualizzato",
       "field_version": "Versione",
       "field_kind": "Tipo di plugin",
-      "field_kind_declarative": "Dichiarativo — solo snippet, temi e template di connessione",
-      "field_kind_executable": "Eseguibile — include un modulo WASM in sandbox",
+      "field_kind_declarative": "Dichiarativo: solo snippet, temi e template di connessione",
+      "field_kind_executable": "Eseguibile: include un modulo WASM in sandbox",
       "field_description": "Breve descrizione",
       "field_author": "Autore / manutentore",
       "field_contact_email": "Email di contatto",
@@ -1451,7 +1451,7 @@
       "field_manifest": "plugin.json",
       "field_manifest_hint": "Incolla il manifest così com'è. L'ID e la versione del plugin devono corrispondere ai campi qui sopra.",
       "field_archive": "plugin.zip",
-      "field_archive_hint": "Archivio piatto contenente plugin.json e il modulo WASM (se presente). Massimo 8 MiB — lo stesso budget di installazione applicato da QoreDB.",
+      "field_archive_hint": "Archivio piatto contenente plugin.json e il modulo WASM (se presente). Massimo 8 MiB, lo stesso budget di installazione applicato da QoreDB.",
       "submit_button": "Invia per la revisione",
       "submitting": "Invio in corso…",
       "success_title": "Invio ricevuto",
@@ -1505,7 +1505,7 @@
       "manifest_kind": "Tipo",
       "manifest_archive_sha": "sha256 dell'archivio",
       "manifest_integrity": "Integrità WASM",
-      "manifest_no_integrity": "Non firmato — QoreDB contrassegnerà questo plugin come Non firmato nel pannello.",
+      "manifest_no_integrity": "Non firmato: QoreDB contrassegnerà questo plugin come Non firmato nel pannello.",
       "manifest_hooks": "Hook del ciclo di vita",
       "manifest_no_hooks": "Nessun hook del ciclo di vita (plugin dichiarativo).",
       "manifest_capabilities": "Capacità richieste",
@@ -1614,7 +1614,7 @@
           },
           {
             "title": "Timeline e storico per riga",
-            "body": "La timeline raggruppa i cambiamenti; il pannello dello storico mostra, per una data riga, tutte le sue versioni successive — un blame a livello del dato."
+            "body": "La timeline raggruppa i cambiamenti; il pannello dello storico mostra, per una data riga, tutte le sue versioni successive, un blame a livello del dato."
           },
           {
             "title": "Diff temporale",
@@ -1635,7 +1635,7 @@
         "title": "I limiti, in piena trasparenza",
         "intro": "Il Time-Travel è un registro a livello di applicazione, non una capacità del motore del database. I suoi confini:",
         "items": [
-          "Vengono catturate solo le mutazioni fatte da QoreDB. Le scritture esterne — la tua applicazione, psql, un altro strumento — no.",
+          "Vengono catturate solo le mutazioni fatte da QoreDB. Le scritture esterne (la tua applicazione, psql, un altro strumento) no.",
           "La riga deve avere una chiave primaria: è ciò che identifica l'immagine prima/dopo e rende possibile il rollback.",
           "L'immagine «prima» viene catturata al meglio (un limite di 2 s per non rallentare la mutazione); se fallisce, l'inversione può essere parziale e un avviso lo indica.",
           "Il registro è locale, con rotazione e retention configurabili; le colonne sensibili possono essere mascherate ([REDACTED]) prima della scrittura su disco.",
@@ -1757,7 +1757,7 @@
     "sandbox": {
       "eyebrow": "Data Tools · Modalità Sandbox",
       "title": "Modalità Sandbox",
-      "subtitle": "Trattieni localmente le modifiche fatte nella griglia, leggi l'SQL che producono, poi applicale — oppure scartale e vai avanti.",
+      "subtitle": "Trattieni localmente le modifiche fatte nella griglia, leggi l'SQL che producono, poi applicale, oppure scartale e vai avanti.",
       "teaser": "Le modifiche fatte nella griglia dati vengono trattenute localmente invece di essere scritte. Leggi l'SQL prima che qualcosa raggiunga il database.",
       "problem": {
         "title": "Il problema",
@@ -1873,7 +1873,7 @@
       "teaser": "Celle SQL e Markdown, parametri tipizzati, Run All o Run From Here: in un file JSON il cui diff resta pulito in Git.",
       "problem": {
         "title": "Il problema",
-        "body": "Una query che risponde a una domanda vera non è mai solo una query. Ha bisogno del contesto attorno: perché quel filtro, cosa significa davvero quel numero, cosa controllare dopo. Quel contesto finisce in un thread Slack, in una pagina wiki, o da nessuna parte. Sei mesi dopo la query è ancora nell'editor di qualcuno e nessuno ricorda a cosa servisse. Gli strumenti che risolvono la cosa per bene — Jupyter, i notebook ospitati — significano un runtime Python, un altro driver da configurare e le tue credenziali in un secondo posto."
+        "body": "Una query che risponde a una domanda vera non è mai solo una query. Ha bisogno del contesto attorno: perché quel filtro, cosa significa davvero quel numero, cosa controllare dopo. Quel contesto finisce in un thread Slack, in una pagina wiki, o da nessuna parte. Sei mesi dopo la query è ancora nell'editor di qualcuno e nessuno ricorda a cosa servisse. Gli strumenti che risolvono la cosa per bene (Jupyter, i notebook ospitati) significano un runtime Python, un altro driver da configurare e le tue credenziali in un secondo posto."
       },
       "solution": {
         "title": "Come lo risolve QoreDB",
@@ -1885,7 +1885,7 @@
           },
           {
             "title": "Parametri, tipizzati e dichiarati una volta sola",
-            "body": "Dichiara una variabile e usala come $customer_id o {{date_from}} ovunque nel notebook. Quattro tipi — testo, numero, data, selezione — ciascuno con il proprio campo di input. Cambi il valore in cima, riesegui, e l'intero documento si adegua."
+            "body": "Dichiara una variabile e usala come $customer_id o {{date_from}} ovunque nel notebook. Quattro tipi (testo, numero, data, selezione) ciascuno con il proprio campo di input. Cambi il valore in cima, riesegui, e l'intero documento si adegua."
           },
           {
             "title": "Run All, oppure Run From Here",
@@ -1940,7 +1940,7 @@
         "steps": [
           {
             "title": "Classificazione a partire dall'istruzione analizzata",
-            "body": "Il tuo SQL viene analizzato con il dialetto del driver a cui sei connesso, e la classificazione nasce dall'albero sintattico che ne risulta. DROP, TRUNCATE, ALTER nelle sue molte forme, un UPDATE senza WHERE, un DELETE senza WHERE e un EXPLAIN ANALYZE che ne avvolga uno qualsiasi. Una CTE che modifica dati — WITH x AS (DELETE ...) SELECT — viene intercettata come mutazione, cosa che un confronto di pattern sulla prima parola chiave non vede mai."
+            "body": "Il tuo SQL viene analizzato con il dialetto del driver a cui sei connesso, e la classificazione nasce dall'albero sintattico che ne risulta. DROP, TRUNCATE, ALTER nelle sue molte forme, un UPDATE senza WHERE, un DELETE senza WHERE e un EXPLAIN ANALYZE che ne avvolga uno qualsiasi. Una CTE che modifica dati (WITH x AS (DELETE ...) SELECT) viene intercettata come mutazione, cosa che un confronto di pattern sulla prima parola chiave non vede mai."
           },
           {
             "title": "Fail closed in produzione",
@@ -1948,7 +1948,7 @@
           },
           {
             "title": "Regole che puoi leggere e cambiare",
-            "body": "Le regole integrate bloccano DROP e TRUNCATE in produzione, chiedono conferma su DELETE e avvisano su ALTER. Ciascuna dichiara il proprio nome quando scatta, così un rifiuto ti dice quale regola ha rifiutato e perché. Su Pro aggiungi le tue: un ambiente, un'operazione, un pattern facoltativo e una di tre azioni — bloccare, avvisare o chiedere."
+            "body": "Le regole integrate bloccano DROP e TRUNCATE in produzione, chiedono conferma su DELETE e avvisano su ALTER. Ciascuna dichiara il proprio nome quando scatta, così un rifiuto ti dice quale regola ha rifiutato e perché. Su Pro aggiungi le tue: un ambiente, un'operazione, un pattern facoltativo e una di tre azioni, bloccare, avvisare o chiedere."
           },
           {
             "title": "Irrobustimento specifico per motore",
@@ -2091,7 +2091,7 @@
     "error": "Iscrizione fallita. Riprova.",
     "card_title": "Resta aggiornato sulle novità",
     "card_subtitle": "Iscriviti per ricevere i rilasci, i nuovi driver e i nostri tutorial tecnici.",
-    "card_bonus": "🎁 Bonus: ricevi il nostro prontuario sulle prestazioni SQL — 9 pagine, PostgreSQL / MySQL / SQLite (PDF)."
+    "card_bonus": "🎁 Bonus: ricevi il nostro prontuario sulle prestazioni SQL, 9 pagine, PostgreSQL / MySQL / SQLite (PDF)."
   },
   "mcp_showcase": {
     "title": "I tuoi database nei tuoi strumenti IA",

@@ -154,7 +154,7 @@ export function TeamPlanClient({
               </div>
 
               <h1 className="mt-4 font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] leading-[1.06]">
-                {t("pricing_page.team.title")} —{" "}
+                {t("pricing_page.team.title")} ·{" "}
                 <span className="text-(--q-accent)">
                   {t("pricing_page.team.tagline")}
                 </span>

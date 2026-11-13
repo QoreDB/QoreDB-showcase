@@ -333,7 +333,7 @@
       },
       "instant_api": {
         "title": "即时数据 API",
-        "desc": "一键将任何已保存查询转换为安全的 REST 端点 — 令牌认证、速率限制、自动生成 OpenAPI 文档。"
+        "desc": "一键将任何已保存查询转换为安全的 REST 端点, 令牌认证、速率限制、自动生成 OpenAPI 文档。"
       },
       "export": {
         "title": "多格式导出",
@@ -387,7 +387,7 @@
       },
       "federation": {
         "title": "跨数据库联邦查询",
-        "desc": "用一条 SQL 查询即可在多个活动连接（Postgres、MySQL 等）之间进行 JOIN —— 无需导出 CSV，也无需搭建数据仓库。",
+        "desc": "用一条 SQL 查询即可在多个活动连接（Postgres、MySQL 等）之间进行 JOIN ：： 无需导出 CSV，也无需搭建数据仓库。",
         "badge": "一条查询，覆盖所有数据库",
         "list": {
           "join": "在一条查询中跨活动连接进行 JOIN",
@@ -607,10 +607,10 @@
       "quote": "QoreDB 更快、更安全，已为认真的日常使用做好准备。",
       "items": {
         "1": "支持 34 个驱动。支持的引擎： Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
-        "2": "只读 MCP 服务器 — 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
-        "3": "列脱敏 · Pro — 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。",
-        "4": "查询趋势 · Core — 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。",
-        "5": "性能告警 · Pro — 识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。"
+        "2": "只读 MCP 服务器: 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
+        "3": "列脱敏 · Pro: 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。",
+        "4": "查询趋势 · Core: 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。",
+        "5": "性能告警 · Pro: 识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。"
       },
       "goal": "目标：开发者已经放心使用和推荐的工具。"
     },
@@ -749,8 +749,8 @@
         "audit_basic": "基本审核日志（10,000 条）含查询 redaction",
         "export_basic": "CSV/JSON/SQL 导出和可分享的结果链接",
         "shortcuts": "历史记录、收藏夹、tab groups、键盘快捷键和 9 种界面语言",
-        "mcp": "只读 MCP 服务器 — 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
-        "trends": "查询趋势 · Core — 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。"
+        "mcp": "只读 MCP 服务器: 让外部 AI 代理访问明确授权的连接、数据库结构和已保存的查询。",
+        "trends": "查询趋势 · Core: 基于保留的审计历史，追踪 7、14 或 30 天的执行次数、P50/P95 延迟和错误率。"
       },
       "billing": "免费，无需订阅"
     },
@@ -768,13 +768,13 @@
         "time_travel": "Time Travel：行历史、版本 diff 和回滚 SQL",
         "visual_diff": "视觉数据差异（表格比较）",
         "audit_advanced": "高级审核日志（无限制、可过滤、可导出）",
-        "profiling": "性能告警 · Pro — 识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。",
+        "profiling": "性能告警 · Pro: 识别性能退化和潜在 N+1 模式，设置错误和慢查询阈值。",
         "ai": "AI 助手（BYOK：OpenAI / Anthropic / Ollama）",
         "export_advanced": "高级导出（XLSX、Parquet）",
         "security_rules": "自定义安全规则",
         "library_advanced": "高级查询库",
         "virtual_relations": "自动建议虚拟关系",
-        "masking": "列脱敏 · Pro — 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。"
+        "masking": "列脱敏 · Pro: 按连接对敏感列进行完整、部分或哈希脱敏，覆盖结果、导出、API 和代理。"
       },
       "individual_use": "个人使用许可证。",
       "billing": "一次性付款 · 个人许可"
@@ -803,7 +803,7 @@
       "from_price": "{{price}} 起",
       "discover_cta": "了解 Team",
       "back": "返回价格",
-      "page_subtitle": "为整个团队提供 Pro 功能——实名席位、集中计费、优先支持。",
+      "page_subtitle": "为整个团队提供 Pro 功能：：实名席位、集中计费、优先支持。",
       "landing": {
         "eyebrow_pill": "自助管理 · 本地优先",
         "trust_stripe": "Stripe 安全支付",
@@ -961,7 +961,7 @@
   "team_waitlist": {
     "placeholder": "you@company.com",
     "cta": "准备好后通知我",
-    "success": "谢谢 — 我们会联系您。",
+    "success": "谢谢: 我们会联系您。",
     "error": "提交失败，请重试。"
   },
   "oss_program": {
@@ -972,7 +972,7 @@
       "stars_title": "1,000+ 星",
       "stars_body": "您的主仓库至少有 1,000 个 GitHub 星标。",
       "maintainer_title": "活跃维护者",
-      "maintainer_body": "您积极维护仓库 — 提交、评审、发布。",
+      "maintainer_body": "您积极维护仓库: 提交、评审、发布。",
       "spirit_title": "开源精神",
       "spirit_body": "您相信回馈。我们也一样。"
     },
@@ -983,7 +983,7 @@
       "repo": "主仓库",
       "repo_hint": "格式：owner/repo（如 rust-lang/rust）",
       "note": "其他说明？",
-      "note_hint": "可选 — 介绍一下您的项目。"
+      "note_hint": "可选: 介绍一下您的项目。"
     },
     "submit": "提交申请",
     "success_title": "申请已收到",
@@ -1058,11 +1058,11 @@
     "sections": {
       "intro": {
         "title": "1. 数据控制者",
-        "content": "<p>数据控制者为 <strong>Raphaël Plassart</strong>，法国个体经营者（微型企业），<strong>QoreDB</strong> 的出版和运营方。</p><ul><li>SIREN：942 906 157</li><li>SIRET（主要经营场所）：942 906 157 00014</li><li>经营活动代码（APE）：62.01Z — 计算机编程</li><li>联系方式：<a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>注册经营场所的通信地址可应书面请求，通过该联系邮箱提供。</p>"
+        "content": "<p>数据控制者为 <strong>Raphaël Plassart</strong>，法国个体经营者（微型企业），<strong>QoreDB</strong> 的出版和运营方。</p><ul><li>SIREN：942 906 157</li><li>SIRET（主要经营场所）：942 906 157 00014</li><li>经营活动代码（APE）：62.01Z, 计算机编程</li><li>联系方式：<a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>注册经营场所的通信地址可应书面请求，通过该联系邮箱提供。</p>"
       },
       "data_collection": {
         "title": "2. 数据收集",
-        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB 使用 <strong>Umami</strong>——一款自托管于自有服务器（Hetzner，德国）的开源访问统计方案：</p><ul><li>无 Cookie，</li><li>无跨站点跟踪，</li><li>无广告画像，</li><li>统计数据不会传输给任何第三方服务商。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul><h3>2.3 购买与许可证相关数据</h3><p>购买许可证时，支付由 <strong>Stripe</strong> 处理。银行卡信息直接在 Stripe 的基础设施上输入：绝不会经过 QoreDB 的服务器，也不会存储在其中。</p><p>QoreDB 仅保留签发和管理许可证所必需的信息：</p><ul><li>购买时使用的电子邮件地址，</li><li>Stripe 的支付或订阅标识符，</li><li>关联的许可证密钥，以及（如适用）已分配的席位。</li></ul>"
+        "content": "<p>QoreDB 严格限制个人数据的收集。</p><h3>2.1 导航数据（网站）</h3><p>在查阅网站时，可能会收集匿名技术数据用于统计目的，包括：</p><ul><li>访问的页面、</li><li>设备类型和浏览器、</li><li>操作系统，</li><li>大致国家或地理区域，</li><li>加载时间和性能。</li></ul><p>此数据<strong>不允许识别用户的个人身份</strong>.</p><p>QoreDB 使用 <strong>Umami</strong>：：一款自托管于自有服务器（Hetzner，德国）的开源访问统计方案：</p><ul><li>无 Cookie，</li><li>无跨站点跟踪，</li><li>无广告画像，</li><li>统计数据不会传输给任何第三方服务商。</li></ul><h3>2.2 自愿提供的数据</h3><p>某些数据可能由用户自愿提供，例如：</p><ul><li>在联系期间，</li><li>在注册时事通讯期间，</li><li>在使用需要身份验证的未来服务期间。</li></ul><p>收集的数据可能包括：</p><ul><li>电子邮件地址，</li><li>姓名或笔名，</li><li>消息内容.</li></ul><h3>2.3 购买与许可证相关数据</h3><p>购买许可证时，支付由 <strong>Stripe</strong> 处理。银行卡信息直接在 Stripe 的基础设施上输入：绝不会经过 QoreDB 的服务器，也不会存储在其中。</p><p>QoreDB 仅保留签发和管理许可证所必需的信息：</p><ul><li>购买时使用的电子邮件地址，</li><li>Stripe 的支付或订阅标识符，</li><li>关联的许可证密钥，以及（如适用）已分配的席位。</li></ul>"
       },
       "purposes": {
         "title": "3. 处理目的",
@@ -1078,7 +1078,7 @@
       },
       "hosting": {
         "title": "6. 托管和子处理者",
-        "content": "<p>QoreDB 网站及服务依托以下受托处理方：</p><ul><li><strong>Hetzner Online GmbH</strong>（德国） — 网站及服务的托管，服务器位于欧盟境内的纽伦堡；</li><li><strong>Cloudflare, Inc.</strong>（美国） — 域名 DNS 管理、内容分发及攻击防护；</li><li><strong>Stripe Payments Europe, Limited</strong>（爱尔兰） — 支付、开票及订阅管理；</li><li><strong>Resend</strong> — 发送事务性邮件和新闻通讯；</li><li><strong>Sanity</strong> — 编辑内容（博客）管理。</li></ul><p>访问统计由 <strong>Umami</strong> 提供，自托管于 QoreDB 的 Hetzner 服务器：访问数据不会传输给任何第三方服务商。</p><p>本网站数据托管于欧盟境内。在欧盟境外进行的技术处理（尤其是 Cloudflare 和 Stripe）依据符合 GDPR 的保障措施，特别是欧盟委员会的标准合同条款。</p>"
+        "content": "<p>QoreDB 网站及服务依托以下受托处理方：</p><ul><li><strong>Hetzner Online GmbH</strong>（德国） (网站及服务的托管，服务器位于欧盟境内的纽伦堡；</li><li><strong>Cloudflare, Inc.</strong>（美国）) 域名 DNS 管理、内容分发及攻击防护；</li><li><strong>Stripe Payments Europe, Limited</strong>（爱尔兰） (支付、开票及订阅管理；</li><li><strong>Resend</strong>) 发送事务性邮件和新闻通讯；</li><li><strong>Sanity</strong>: 编辑内容（博客）管理。</li></ul><p>访问统计由 <strong>Umami</strong> 提供，自托管于 QoreDB 的 Hetzner 服务器：访问数据不会传输给任何第三方服务商。</p><p>本网站数据托管于欧盟境内。在欧盟境外进行的技术处理（尤其是 Cloudflare 和 Stripe）依据符合 GDPR 的保障措施，特别是欧盟委员会的标准合同条款。</p>"
       },
       "security": {
         "title": "7. 数据安全",
@@ -1112,7 +1112,7 @@
     "sections": {
       "editor": {
         "title": "网站编辑",
-        "content": "**网站及软件运营方：** Raphaël Plassart，法国个体经营者（*micro-entreprise* 微型企业）\n**出版负责人：** Raphaël Plassart\n**SIREN：** 942 906 157\n**SIRET（主要经营场所）：** 942 906 157 00014\n**经营活动代码（APE）：** 62.01Z — 计算机编程\n**注册信息：** 于法国注册，自 2025 年 4 月 4 日起营业\n**增值税：** 根据法国《税法典》第 293 B 条（小规模企业免税制度），不适用增值税\n**联系方式：** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB 是由该微型企业出版和运营的软件产品，与所有用户和客户的合同关系均由该企业承担。\n\n> 注册经营场所的通信地址可应书面请求，通过上述联系邮箱提供。"
+        "content": "**网站及软件运营方：** Raphaël Plassart，法国个体经营者（*micro-entreprise* 微型企业）\n**出版负责人：** Raphaël Plassart\n**SIREN：** 942 906 157\n**SIRET（主要经营场所）：** 942 906 157 00014\n**经营活动代码（APE）：** 62.01Z, 计算机编程\n**注册信息：** 于法国注册，自 2025 年 4 月 4 日起营业\n**增值税：** 根据法国《税法典》第 293 B 条（小规模企业免税制度），不适用增值税\n**联系方式：** [qoredb@gmail.com](mailto:qoredb@gmail.com) QoreDB 是由该微型企业出版和运营的软件产品，与所有用户和客户的合同关系均由该企业承担。 > 注册经营场所的通信地址可应书面请求，通过上述联系邮箱提供。"
       },
       "hosting": {
         "title": "托管",
@@ -1144,7 +1144,7 @@
       },
       "license": {
         "title": "许可证",
-        "content": "QoreDB 采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布：\n\n* **核心 — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**：在遵守署名义务的前提下，可自由使用、修改、再分发并用于商业用途，无需支付使用费。\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**：源代码可供查阅，个人使用和企业内部使用免费，禁止以此提供与之竞争的商业产品。每个版本在发布四年后自动转为 Apache 2.0 许可证。\n\n仓库中的每个源文件都带有 SPDX 头部，标明其适用许可证。仅以官方仓库根目录下的许可证文件为准。\n\n➡️ [开放核心模式与许可证](/docs/introduction/open-core-model)"
+        "content": "QoreDB 采用 **开放核心（open core）** 模式，以 **双重许可** 方式发布： * **核心, [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**：在遵守署名义务的前提下，可自由使用、修改、再分发并用于商业用途，无需支付使用费。\n* **Premium, [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**：源代码可供查阅，个人使用和企业内部使用免费，禁止以此提供与之竞争的商业产品。每个版本在发布四年后自动转为 Apache 2.0 许可证。 仓库中的每个源文件都带有 SPDX 头部，标明其适用许可证。仅以官方仓库根目录下的许可证文件为准。 ➡️ [开放核心模式与许可证](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "联系方式",
@@ -1180,7 +1180,7 @@
       },
       "payments": {
         "title": "6. 购买、支付与开票",
-        "content": "付费许可证（Pro、Team）由微型企业 Raphaël Plassart 销售。\n\n* 支付仅由 **Stripe**（Stripe Payments Europe, Limited）处理；QoreDB 无法访问任何银行卡数据；\n* 价格以欧元标示且不含增值税 — 根据法国《税法典》第 293 B 条不适用增值税；\n* 发票在支付完成后由 Stripe 开具并提供；\n* 许可证密钥在支付确认后通过电子邮件发送；\n* 订阅按所选周期自动续订，可随时在 Stripe 客户门户中取消，取消将于当前周期结束时生效。\n\n根据法国《消费法典》第 L221-28 条，要求立即交付许可证密钥的消费者在服务完全履行后即放弃其撤回权。有关支付或退款的任何问题，可发送至网站上标明的联系邮箱。"
+        "content": "付费许可证（Pro、Team）由微型企业 Raphaël Plassart 销售。 * 支付仅由 **Stripe**（Stripe Payments Europe, Limited）处理；QoreDB 无法访问任何银行卡数据；\n* 价格以欧元标示且不含增值税, 根据法国《税法典》第 293 B 条不适用增值税；\n* 发票在支付完成后由 Stripe 开具并提供；\n* 许可证密钥在支付确认后通过电子邮件发送；\n* 订阅按所选周期自动续订，可随时在 Stripe 客户门户中取消，取消将于当前周期结束时生效。 根据法国《消费法典》第 L221-28 条，要求立即交付许可证密钥的消费者在服务完全履行后即放弃其撤回权。有关支付或退款的任何问题，可发送至网站上标明的联系邮箱。"
       },
       "user_obligations": {
         "title": "7. 用户义务",
@@ -1434,14 +1434,14 @@
     },
     "submit": {
       "title": "提交插件",
-      "subtitle": "插件在出现在市场之前会由 QoreDB 维护者审核。审核通常需要几天时间——我们会查看清单、请求的权限以及 WASM 模块的来源。",
+      "subtitle": "插件在出现在市场之前会由 QoreDB 维护者审核。审核通常需要几天时间：：我们会查看清单、请求的权限以及 WASM 模块的来源。",
       "field_plugin_id": "插件 ID",
       "field_plugin_id_hint": "反向 DNS，例如 acme.linter。必须与 plugin.json#id 匹配。",
       "field_name": "显示名称",
       "field_version": "版本",
       "field_kind": "插件类型",
-      "field_kind_declarative": "声明式 — 仅代码片段、主题和连接模板",
-      "field_kind_executable": "可执行 — 附带沙箱化的 WASM 模块",
+      "field_kind_declarative": "声明式: 仅代码片段、主题和连接模板",
+      "field_kind_executable": "可执行: 附带沙箱化的 WASM 模块",
       "field_description": "简短描述",
       "field_author": "作者 / 维护者",
       "field_contact_email": "联系邮箱",
@@ -1450,16 +1450,16 @@
       "field_manifest": "plugin.json",
       "field_manifest_hint": "原样粘贴清单。插件 ID 和版本必须与上面的字段匹配。",
       "field_archive": "plugin.zip",
-      "field_archive_hint": "包含 plugin.json 和 WASM 模块（如有）的扁平归档包。最大 8 MiB — 与 QoreDB 强制执行的安装上限相同。",
+      "field_archive_hint": "包含 plugin.json 和 WASM 模块（如有）的扁平归档包。最大 8 MiB, 与 QoreDB 强制执行的安装上限相同。",
       "submit_button": "提交审核",
       "submitting": "提交中…",
       "success_title": "已收到提交",
-      "success_body": "谢谢。您的插件已进入审核队列——审核完成后我们会发送邮件至 {{email}}。",
+      "success_body": "谢谢。您的插件已进入审核队列：：审核完成后我们会发送邮件至 {{email}}。",
       "error_title": "提交失败",
       "checklist_title": "提交前",
       "checklist_items": [
         "WASM 模块能够顺利实例化，并导出清单中声明的钩子。",
-        "清单请求的每项权限都确实需要——用户会在同意对话框中看到它们。",
+        "清单请求的每项权限都确实需要：：用户会在同意对话框中看到它们。",
         "如果插件进行 HTTP 调用，allowedHosts 是精确的列表，而非通配符。",
         "runtime.integrity 包含最终 .wasm 字节的 sha256。",
         "归档包根目录只包含 plugin.json 和 WASM 模块。"
@@ -1504,7 +1504,7 @@
       "manifest_kind": "类型",
       "manifest_archive_sha": "归档包 sha256",
       "manifest_integrity": "WASM 完整性",
-      "manifest_no_integrity": "未签名 — QoreDB 会在面板中将此插件标记为「未签名」。",
+      "manifest_no_integrity": "未签名: QoreDB 会在面板中将此插件标记为「未签名」。",
       "manifest_hooks": "生命周期钩子",
       "manifest_no_hooks": "没有生命周期钩子（声明式插件）。",
       "manifest_capabilities": "请求的权限",
@@ -1546,7 +1546,7 @@
       "eyebrow": "Data Tools · 跨库联邦查询",
       "title": "跨库联邦查询",
       "subtitle": "用一条 SQL 查询在多个数据库之间执行 JOIN，无需导出 CSV，也无需搭建数据仓库。",
-      "teaser": "用一条 SQL 查询联接来自多个活动连接的表——PostgreSQL、MySQL、MongoDB 等。",
+      "teaser": "用一条 SQL 查询联接来自多个活动连接的表：：PostgreSQL、MySQL、MongoDB 等。",
       "problem": {
         "title": "问题所在",
         "body": "你的数据分散在多个数据库中：应用用 PostgreSQL，计费用 MySQL，事件用 MongoDB。要回答一个横跨它们的问题，就得导出 CSV、编写胶水脚本，或搭建数据仓库。对于一次性的核对，或生产与计费之间的对账，这样做代价过高。"
@@ -1576,7 +1576,7 @@
       "example": {
         "title": "一个具体示例",
         "intro": "这里 prod_pg 是一个 PostgreSQL 连接，billing_mysql 是一个 MySQL 连接。一条查询即可将应用用户与计费订单关联起来：",
-        "caption": "两个数据库、两种引擎、一次联接——无需中间导出。查询保持只读：它绝不会写入你的数据源。"
+        "caption": "两个数据库、两种引擎、一次联接：：无需中间导出。查询保持只读：它绝不会写入你的数据源。"
       },
       "limits": {
         "title": "坦诚说明限制",
@@ -1613,7 +1613,7 @@
           },
           {
             "title": "时间线与逐行历史",
-            "body": "时间线把变更聚合在一起；历史面板则展示某一行的所有历次版本——数据层面的 blame。"
+            "body": "时间线把变更聚合在一起；历史面板则展示某一行的所有历次版本：：数据层面的 blame。"
           },
           {
             "title": "时间点差异",
@@ -1634,7 +1634,7 @@
         "title": "坦诚说明限制",
         "intro": "Time-Travel 是应用层的日志，而非数据库引擎的能力。它的边界：",
         "items": [
-          "只捕获从 QoreDB 发起的变更。外部写入——你的应用、psql、其他工具——不会被捕获。",
+          "只捕获从 QoreDB 发起的变更。外部写入：：你的应用、psql、其他工具：：不会被捕获。",
           "该行必须有主键：正是主键标识改前/改后镜像，并使回滚成为可能。",
           "“改前”镜像采用尽力而为的方式捕获（设有 2 秒上限，以免拖慢变更）；若失败，反向撤销可能不完整，并会给出警告。",
           "日志保存在本地，轮转与保留期可配置；敏感列可在写入磁盘前被脱敏（[REDACTED]）。",
@@ -1657,7 +1657,7 @@
       },
       "solution": {
         "title": "QoreDB 如何解决",
-        "intro": "你用一份 YAML 契约描述期望——一张表、一组规则。QoreDB 会把每条规则翻译成适配该引擎的 SQL 并执行，再把结果汇总成一个健康状态。契约存于你的代码仓库，与其余代码一同版本化。",
+        "intro": "你用一份 YAML 契约描述期望：：一张表、一组规则。QoreDB 会把每条规则翻译成适配该引擎的 SQL 并执行，再把结果汇总成一个健康状态。契约存于你的代码仓库，与其余代码一同版本化。",
         "steps": [
           {
             "title": "声明式契约",
@@ -1680,7 +1680,7 @@
       "example": {
         "title": "一个具体示例",
         "intro": "一份针对订单表的契约：邮箱存在、状态落在封闭取值域内、外键完整、总额为正。",
-        "caption": "契约是一个受版本管理的文件。它在运行时检测违规——并不替代数据库约束，而是在约束缺失之处对其加以补充。"
+        "caption": "契约是一个受版本管理的文件。它在运行时检测违规：：并不替代数据库约束，而是在约束缺失之处对其加以补充。"
       },
       "limits": {
         "title": "坦诚说明限制",
@@ -1708,7 +1708,7 @@
       },
       "solution": {
         "title": "QoreDB 如何解决",
-        "intro": "QoreDB 内嵌了一个 HTTP 服务器，把你的查询作为 GET 接口对外提供。你声明查询及其参数，路由、类型、鉴权与文档交给 QoreDB。服务器只绑定 127.0.0.1，别无其他——没有任何设置可以把它暴露到网络上。",
+        "intro": "QoreDB 内嵌了一个 HTTP 服务器，把你的查询作为 GET 接口对外提供。你声明查询及其参数，路由、类型、鉴权与文档交给 QoreDB。服务器只绑定 127.0.0.1，别无其他：：没有任何设置可以把它暴露到网络上。",
         "steps": [
           {
             "title": "声明接口",
@@ -1743,7 +1743,7 @@
           "限流为每个接口每秒 10 个请求，突发上限 10，不可配置。",
           "行数上限（默认 100 行）是在查询已经执行完之后对响应做截断。对于大表，请在查询里自己写 LIMIT。",
           "没有分页，也没有查询超时：慢查询会一直阻塞，直到驱动返回。",
-          "支持 14 个驱动 ID——PostgreSQL 家族、MySQL/MariaDB、SQLite、DuckDB、SQL Server 与 ClickHouse。MongoDB、Redis 及其他驱动会被拒绝。",
+          "支持 14 个驱动 ID：：PostgreSQL 家族、MySQL/MariaDB、SQLite、DuckDB、SQL Server 与 ClickHouse。MongoDB、Redis 及其他驱动会被拒绝。",
           "服务器不会自行启动；每个会话都需要你手动启动。你的接口定义则会被保留。",
           "接口无法编辑。修改查询意味着删除并重新创建，这会签发一个新令牌。"
         ]
@@ -1756,7 +1756,7 @@
     "sandbox": {
       "eyebrow": "Data Tools · Sandbox 模式",
       "title": "Sandbox 模式",
-      "subtitle": "把你在数据表格中的编辑暂存在本地，读一遍它们生成的 SQL，然后应用它们——或者丢弃，继续干别的。",
+      "subtitle": "把你在数据表格中的编辑暂存在本地，读一遍它们生成的 SQL，然后应用它们：：或者丢弃，继续干别的。",
       "teaser": "在数据表格中所做的编辑会暂存在本地而不写入。在任何内容抵达数据库之前，你先读到 SQL。",
       "problem": {
         "title": "问题所在",
@@ -1869,10 +1869,10 @@
       "eyebrow": "Analysis · Notebooks",
       "title": "数据库笔记本（Notebooks）",
       "subtitle": "可执行的文档，把 SQL 与 Markdown 混合起来，针对一个活动连接运行；保存为一个纯文件，你的团队可以在 pull request 里评审。",
-      "teaser": "SQL 与 Markdown 单元、带类型的参数、Run All 或 Run From Here——都在一个能在 Git 里干净地做差异比对的 JSON 文件里。",
+      "teaser": "SQL 与 Markdown 单元、带类型的参数、Run All 或 Run From Here：：都在一个能在 Git 里干净地做差异比对的 JSON 文件里。",
       "problem": {
         "title": "问题所在",
-        "body": "一条能回答真实问题的查询，从来都不只是一条查询。它需要周围的上下文：为什么用这个过滤条件、这个数字究竟意味着什么、接下来该核对什么。这些上下文最后落在某个 Slack 线程里、某个 wiki 页面上，或者干脆无处安放。半年之后，查询还躺在某人的编辑器里，没人记得它是干什么用的。能把这件事真正解决好的工具——Jupyter、托管的 notebook——意味着一个 Python 运行时、又一个要配置的驱动，以及你的凭据出现在第二个地方。"
+        "body": "一条能回答真实问题的查询，从来都不只是一条查询。它需要周围的上下文：为什么用这个过滤条件、这个数字究竟意味着什么、接下来该核对什么。这些上下文最后落在某个 Slack 线程里、某个 wiki 页面上，或者干脆无处安放。半年之后，查询还躺在某人的编辑器里，没人记得它是干什么用的。能把这件事真正解决好的工具：：Jupyter、托管的 notebook：：意味着一个 Python 运行时、又一个要配置的驱动，以及你的凭据出现在第二个地方。"
       },
       "solution": {
         "title": "QoreDB 如何解决",
@@ -1880,11 +1880,11 @@
         "steps": [
           {
             "title": "针对活动连接的单元",
-            "body": "SQL 单元在笔记本的连接与命名空间上执行，并就地渲染结果。Markdown 单元承载推理过程。QoreDB 支持的每一种数据库都能用，因为单元会把它的源文本原封不动交给会话——在 MongoDB 连接上，你在同一个单元里写 MQL，由驱动来解释。"
+            "body": "SQL 单元在笔记本的连接与命名空间上执行，并就地渲染结果。Markdown 单元承载推理过程。QoreDB 支持的每一种数据库都能用，因为单元会把它的源文本原封不动交给会话：：在 MongoDB 连接上，你在同一个单元里写 MQL，由驱动来解释。"
           },
           {
             "title": "参数带类型，且只声明一次",
-            "body": "声明一个变量，就能在笔记本的任何位置以 $customer_id 或 {{date_from}} 使用它。四种类型——文本、数字、日期、下拉选择——每种都有为它渲染的输入控件。在顶部改一个值，重新运行，整份文档随之更新。"
+            "body": "声明一个变量，就能在笔记本的任何位置以 $customer_id 或 {{date_from}} 使用它。四种类型：：文本、数字、日期、下拉选择：：每种都有为它渲染的输入控件。在顶部改一个值，重新运行，整份文档随之更新。"
           },
           {
             "title": "Run All，或者 Run From Here",
@@ -1896,7 +1896,7 @@
           },
           {
             "title": "AI 单元（Pro）",
-            "body": "用平实的语言描述你想要什么；该单元会把 SQL 写进正下方的一个新单元，你在运行前先读它。Bring your own key——OpenAI、Anthropic、Mistral、Gemini、DeepSeek，或者用 Ollama 让模型永不离开你的机器。密钥存放在你操作系统的钥匙串里。"
+            "body": "用平实的语言描述你想要什么；该单元会把 SQL 写进正下方的一个新单元，你在运行前先读它。Bring your own key：：OpenAI、Anthropic、Mistral、Gemini、DeepSeek，或者用 Ollama 让模型永不离开你的机器。密钥存放在你操作系统的钥匙串里。"
           }
         ]
       },
@@ -1927,7 +1927,7 @@
     "production-safety": {
       "eyebrow": "Safety · 生产环境防护栏",
       "title": "生产环境防护栏",
-      "subtitle": "把一个连接标记为生产环境，QoreDB 就会在每条语句执行前读懂它——用的是真正的 SQL 解析器，而不是模式匹配。",
+      "subtitle": "把一个连接标记为生产环境，QoreDB 就会在每条语句执行前读懂它：：用的是真正的 SQL 解析器，而不是模式匹配。",
       "teaser": "开发、预发环境 与生产连接的行为各不相同。危险语句是从解析出的 AST 来分类的，而不是对第一个单词做正则匹配。",
       "problem": {
         "title": "问题所在",
@@ -1939,15 +1939,15 @@
         "steps": [
           {
             "title": "从解析后的语句做分类",
-            "body": "你的 SQL 会按你所连驱动的方言被解析，分类来自由此得到的语法树：DROP、TRUNCATE、形态各异的 ALTER、没有 WHERE 的 UPDATE、没有 WHERE 的 DELETE，以及把它们包起来的 EXPLAIN ANALYZE。一个会修改数据的 CTE——WITH x AS (DELETE ...) SELECT——会被识别为变更，而对第一个关键字做模式匹配永远看不到它。"
+            "body": "你的 SQL 会按你所连驱动的方言被解析，分类来自由此得到的语法树：DROP、TRUNCATE、形态各异的 ALTER、没有 WHERE 的 UPDATE、没有 WHERE 的 DELETE，以及把它们包起来的 EXPLAIN ANALYZE。一个会修改数据的 CTE：：WITH x AS (DELETE ...) SELECT：：会被识别为变更，而对第一个关键字做模式匹配永远看不到它。"
           },
           {
             "title": "生产环境下，读不懂就不执行",
-            "body": "在生产连接上，如果解析器读不懂你的语句，这条语句就不会执行。QoreDB 拒绝对一条它没有理解的查询做猜测——尤其是在最不该猜的那个数据库上。"
+            "body": "在生产连接上，如果解析器读不懂你的语句，这条语句就不会执行。QoreDB 拒绝对一条它没有理解的查询做猜测：：尤其是在最不该猜的那个数据库上。"
           },
           {
             "title": "你读得懂、也改得了的规则",
-            "body": "内置规则会在生产环境拦下 DROP 与 TRUNCATE，对 DELETE 要求确认，对 ALTER 发出警告。每条规则触发时都会报出自己的名字，因此一次拒绝会告诉你是哪条规则、为什么拒绝。在 Pro 上你可以添加自己的规则：一个环境、一个操作、一个可选的模式，以及三种动作之一——拦截、警告或询问。"
+            "body": "内置规则会在生产环境拦下 DROP 与 TRUNCATE，对 DELETE 要求确认，对 ALTER 发出警告。每条规则触发时都会报出自己的名字，因此一次拒绝会告诉你是哪条规则、为什么拒绝。在 Pro 上你可以添加自己的规则：一个环境、一个操作、一个可选的模式，以及三种动作之一：：拦截、警告或询问。"
           },
           {
             "title": "针对引擎的加固",
@@ -1968,7 +1968,7 @@
         "title": "坦诚说明限制",
         "intro": "这是一道防事故的防护栏，不是一项安全控制。这个区别很重要，所以完整写在这里：",
         "items": [
-          "数据库侧不强制任何东西，DuckDB 除外——那里的只读是设在引擎自身上的。只读以及每一条规则，都是 QoreDB 在发送查询之前做出的决定。你的凭据仍然拥有它一直以来的全部权限，用同一套凭据的其他客户端不受任何影响。",
+          "数据库侧不强制任何东西，DuckDB 除外：：那里的只读是设在引擎自身上的。只读以及每一条规则，都是 QoreDB 在发送查询之前做出的决定。你的凭据仍然拥有它一直以来的全部权限，用同一套凭据的其他客户端不受任何影响。",
           "如果你需要的是一道真正的防护栏，可持久的做法是一个只有你想要的权限的数据库角色。QoreDB 保护你不被自己的手滑所伤；它不保护数据库不被它的使用者所伤。",
           "开箱即用时，生产环境会对危险语句要求确认，但不会依据策略硬性拦截。拦截是一个设置项，而且默认是关闭的。内置规则确实会拦下 DROP 与 TRUNCATE，而这些规则也可以被禁用。",
           "确认由客户端驱动。后端信任发给它的那个确认，所以确认防的是仓促，不是防一个铁了心要绕过它的人。只有策略层面的拦截是无条件的。",
@@ -1989,14 +1989,14 @@
       "eyebrow": "Extensibility · 插件系统",
       "title": "插件（Plugins）",
       "subtitle": "用以沙箱化 WebAssembly 运行的插件扩展 QoreDB：能力由你逐项授予，且无需重启即可撤销。",
-      "teaser": "带计量燃料、内存上限与时间边界的 WebAssembly 模块——外加完全声明式、不执行任何代码的插件。",
+      "teaser": "带计量燃料、内存上限与时间边界的 WebAssembly 模块：：外加完全声明式、不执行任何代码的插件。",
       "problem": {
         "title": "问题所在",
-        "body": "一个数据库客户端不可能内置你团队的每一种工作流。通常的答案是插件 API，通常的代价是：插件成为一段拥有你权限的代码——你的连接、你的凭据、你的文件系统。你为了美化一个 JSON 列而装上它，它却能读到你查询过的一切。这正是大多数人一个都不装的原因。"
+        "body": "一个数据库客户端不可能内置你团队的每一种工作流。通常的答案是插件 API，通常的代价是：插件成为一段拥有你权限的代码：：你的连接、你的凭据、你的文件系统。你为了美化一个 JSON 列而装上它，它却能读到你查询过的一切。这正是大多数人一个都不装的原因。"
       },
       "solution": {
         "title": "QoreDB 如何解决",
-        "intro": "QoreDB 的插件有两种形态。简单的那种是纯数据：一份提供 snippets、连接模板或主题的清单，没有任何代码要运行。其余的会编译成 WebAssembly，并在一个不带环境权限的解释器中执行——除非清单提出请求且你予以授予，否则它什么都碰不到。",
+        "intro": "QoreDB 的插件有两种形态。简单的那种是纯数据：一份提供 snippets、连接模板或主题的清单，没有任何代码要运行。其余的会编译成 WebAssembly，并在一个不带环境权限的解释器中执行：：除非清单提出请求且你予以授予，否则它什么都碰不到。",
         "steps": [
           {
             "title": "一份清单，以及可选的一个模块",
@@ -2016,7 +2016,7 @@
           },
           {
             "title": "插件够不到的东西",
-            "body": "它不能执行 SQL——这项能力是被移除的，而不是被加了门禁。它读不到你的连接凭据，也读不到你的保险库（vault）。它不能改动查询结果。它出不了自己的数据文件夹。除此之外没有文件系统，没有套接字，也没有子进程。"
+            "body": "它不能执行 SQL：：这项能力是被移除的，而不是被加了门禁。它读不到你的连接凭据，也读不到你的保险库（vault）。它不能改动查询结果。它出不了自己的数据文件夹。除此之外没有文件系统，没有套接字，也没有子进程。"
           }
         ]
       },
@@ -2029,7 +2029,7 @@
         "title": "坦诚说明限制",
         "intro": "沙箱是一组具体的保证，而不是一个笼统的承诺。以下是这些保证是什么、又不是什么：",
         "items": [
-          "被校验的是完整性，不是作者身份。这里没有签名。marketplace 校验的是压缩包与注册表记录的 SHA-256 是否一致，这只能证明字节在传输中未被改动——证明不了是谁写的。谁控制了注册表，谁就控制了那个摘要。",
+          "被校验的是完整性，不是作者身份。这里没有签名。marketplace 校验的是压缩包与注册表记录的 SHA-256 是否一致，这只能证明字节在传输中未被改动：：证明不了是谁写的。谁控制了注册表，谁就控制了那个摘要。",
           "清单里的模块哈希是可选的。没有它的插件照样能安装；界面会把它标为未签名。",
           "读取查询结果与发起 HTTP 调用是两项独立的能力，但同时被授予两者的插件，可以把你查询到的每一行都发往它允许列表里的主机。这正是审计插件的用途，同时也是数据外泄的通道。要同时授予，就请有意为之。",
           "同意对话框会预先勾选清单请求的全部内容。底层模型是选择加入的；对话框不是。请读它，而不是确认它。",
@@ -2090,7 +2090,7 @@
     "error": "订阅失败。请重试。",
     "card_title": "及时了解最新动态",
     "card_subtitle": "订阅我们的通讯，获取版本发布、新驱动通知和技术教程。",
-    "card_bonus": "🎁 福利：领取我们的 SQL 性能速查表 —— 共 9 页，涵盖 PostgreSQL / MySQL / SQLite（PDF）！"
+    "card_bonus": "🎁 福利：领取我们的 SQL 性能速查表 ：： 共 9 页，涵盖 PostgreSQL / MySQL / SQLite（PDF）！"
   },
   "mcp_showcase": {
     "title": "让 AI 工具连接你的数据库",

@@ -176,7 +176,7 @@
       "manifest_kind": "Kind",
       "manifest_archive_sha": "Archive sha256",
       "manifest_integrity": "WASM integrity",
-      "manifest_no_integrity": "Unsigned — QoreDB will flag this plugin as Unsigned in the panel.",
+      "manifest_no_integrity": "Unsigned: QoreDB will flag this plugin as Unsigned in the panel.",
       "manifest_hooks": "Lifecycle hooks",
       "manifest_no_hooks": "No lifecycle hooks (declarative plugin).",
       "manifest_capabilities": "Requested capabilities",
@@ -200,14 +200,14 @@
     },
     "submit": {
       "title": "Submit a plugin",
-      "subtitle": "Plugins are reviewed by the QoreDB maintainers before they appear in the marketplace. The review typically takes a few days — we look at the manifest, the requested capabilities, and the source of the WASM module.",
+      "subtitle": "Plugins are reviewed by the QoreDB maintainers before they appear in the marketplace. The review typically takes a few days, we look at the manifest, the requested capabilities, and the source of the WASM module.",
       "field_plugin_id": "Plugin id",
       "field_plugin_id_hint": "Reverse-DNS, e.g. acme.linter. Must match plugin.json#id.",
       "field_name": "Display name",
       "field_version": "Version",
       "field_kind": "Plugin kind",
-      "field_kind_declarative": "Declarative — snippets, themes, connection templates only",
-      "field_kind_executable": "Executable — ships a sandboxed WASM module",
+      "field_kind_declarative": "Declarative: snippets, themes, connection templates only",
+      "field_kind_executable": "Executable: ships a sandboxed WASM module",
       "field_description": "Short description",
       "field_author": "Author / maintainer",
       "field_contact_email": "Contact email",
@@ -216,16 +216,16 @@
       "field_manifest": "plugin.json",
       "field_manifest_hint": "Paste the manifest verbatim. The plugin id and version must match the fields above.",
       "field_archive": "plugin.zip",
-      "field_archive_hint": "Flat archive containing plugin.json and the WASM module (if any). Max 8 MiB — the same install budget QoreDB enforces.",
+      "field_archive_hint": "Flat archive containing plugin.json and the WASM module (if any). Max 8 MiB, the same install budget QoreDB enforces.",
       "submit_button": "Submit for review",
       "submitting": "Submitting…",
       "success_title": "Submission received",
-      "success_body": "Thanks. Your plugin is in the review queue — we'll email {{email}} once it's been looked at.",
+      "success_body": "Thanks. Your plugin is in the review queue, we'll email {{email}} once it's been looked at.",
       "error_title": "Submission failed",
       "checklist_title": "Before submitting",
       "checklist_items": [
         "The WASM module instantiates cleanly and exports the hooks declared in the manifest.",
-        "Every capability the manifest requests is genuinely needed — users see them in the consent dialog.",
+        "Every capability the manifest requests is genuinely needed, users see them in the consent dialog.",
         "If the plugin makes HTTP calls, allowedHosts is a precise list, not a wildcard.",
         "runtime.integrity carries the sha256 of the final .wasm bytes.",
         "The archive contains only plugin.json + the WASM module at its root."
@@ -437,7 +437,7 @@
       },
       "instant_api": {
         "title": "Instant Data API",
-        "desc": "Turn any saved query into a secure REST endpoint — token auth, rate limiting, and auto-generated OpenAPI docs in one click."
+        "desc": "Turn any saved query into a secure REST endpoint, token auth, rate limiting, and auto-generated OpenAPI docs in one click."
       },
       "plugins": {
         "title": "Plugin system",
@@ -491,7 +491,7 @@
       },
       "federation": {
         "title": "Cross-Database Federation",
-        "desc": "Run one SQL query that JOINs tables across several live connections — Postgres, MySQL and more — with no CSV exports and no warehouse to stand up.",
+        "desc": "Run one SQL query that JOINs tables across several live connections (Postgres, MySQL and more) with no CSV exports and no warehouse to stand up.",
         "badge": "One query, every DB",
         "list": {
           "join": "JOIN across active connections in a single query",
@@ -711,10 +711,10 @@
       "quote": "QoreDB is faster, safer and ready for serious daily use.",
       "items": {
         "1": "34 drivers. Supported engines: Snowflake, BigQuery, Cassandra, ScyllaDB, Amazon Keyspaces…",
-        "2": "Read-only MCP server — Give external AI agents access to explicitly enabled connections, with schema discovery and saved queries.",
-        "3": "Column masking · Pro — Mask sensitive columns per connection with full, partial or hashed values, across results, exports, APIs and agents.",
-        "4": "Query trends · Core — Track execution counts, P50/P95 latency and error rates over 7, 14 or 30 days from your retained audit history.",
-        "5": "Performance alerts · Pro — Spot query regressions and potential N+1 patterns. Set thresholds for errors and slow queries."
+        "2": "Read-only MCP server: Give external AI agents access to explicitly enabled connections, with schema discovery and saved queries.",
+        "3": "Column masking · Pro: Mask sensitive columns per connection with full, partial or hashed values, across results, exports, APIs and agents.",
+        "4": "Query trends · Core: Track execution counts, P50/P95 latency and error rates over 7, 14 or 30 days from your retained audit history.",
+        "5": "Performance alerts · Pro: Spot query regressions and potential N+1 patterns. Set thresholds for errors and slow queries."
       },
       "goal": "Goal: a tool developers already use and recommend with confidence."
     },
@@ -853,8 +853,8 @@
         "audit_basic": "Basic audit log (10,000 entries) with query redaction",
         "export_basic": "CSV / JSON / SQL export and shareable result links",
         "shortcuts": "Query history, favorites, tab groups, keyboard shortcuts and 9 UI languages",
-        "mcp": "Read-only MCP server — Give external AI agents access to explicitly enabled connections, with schema discovery and saved queries.",
-        "trends": "Query trends · Core — Track execution counts, P50/P95 latency and error rates over 7, 14 or 30 days from your retained audit history."
+        "mcp": "Read-only MCP server: Give external AI agents access to explicitly enabled connections, with schema discovery and saved queries.",
+        "trends": "Query trends · Core: Track execution counts, P50/P95 latency and error rates over 7, 14 or 30 days from your retained audit history."
       },
       "billing": "Free, no subscription"
     },
@@ -872,13 +872,13 @@
         "time_travel": "Time Travel:row history, version diff and rollback SQL",
         "visual_diff": "Visual Data Diff (table comparison)",
         "audit_advanced": "Advanced audit log (unlimited, filterable, exportable)",
-        "profiling": "Performance alerts · Pro — Spot query regressions and potential N+1 patterns. Set thresholds for errors and slow queries.",
+        "profiling": "Performance alerts · Pro: Spot query regressions and potential N+1 patterns. Set thresholds for errors and slow queries.",
         "ai": "AI assistant & Q agent (BYOK + Qore AI Local, .qoredb/context.json semantic context, Fix with AI)",
         "export_advanced": "Advanced exports (XLSX, Parquet)",
         "security_rules": "Custom safety rules",
         "library_advanced": "Advanced query library",
         "virtual_relations": "Auto-suggest virtual relations",
-        "masking": "Column masking · Pro — Mask sensitive columns per connection with full, partial or hashed values, across results, exports, APIs and agents."
+        "masking": "Column masking · Pro: Mask sensitive columns per connection with full, partial or hashed values, across results, exports, APIs and agents."
       },
       "individual_use": "License for individual use.",
       "billing": "One-time payment · individual license"
@@ -907,7 +907,7 @@
       "from_price": "From {{price}}",
       "discover_cta": "Explore Team",
       "back": "Back to pricing",
-      "page_subtitle": "Pro features for the whole team — named seats, central billing, priority support.",
+      "page_subtitle": "Pro features for the whole team, named seats, central billing, priority support.",
       "landing": {
         "eyebrow_pill": "Self-service · Local-first",
         "trust_stripe": "Secured by Stripe",
@@ -934,7 +934,7 @@
           {
             "num": "03",
             "title": "Reassign seats anytime",
-            "body": "Someone leaves the team? Revoke their seat in one click from your admin portal—the seat is immediately freed for a new teammate."
+            "body": "Someone leaves the team? Revoke their seat in one click from your admin portal, the seat is immediately freed for a new teammate."
           }
         ],
         "pro_eyebrow": "Included in every seat",
@@ -1065,7 +1065,7 @@
   "team_waitlist": {
     "placeholder": "you@company.com",
     "cta": "Notify me when ready",
-    "success": "Thanks — we’ll be in touch.",
+    "success": "Thanks: we’ll be in touch.",
     "error": "Could not submit. Please try again."
   },
   "oss_program": {
@@ -1076,7 +1076,7 @@
       "stars_title": "1,000+ stars",
       "stars_body": "Your main repository has at least 1,000 GitHub stars.",
       "maintainer_title": "Active maintainer",
-      "maintainer_body": "You actively maintain the repo — commits, reviews, releases.",
+      "maintainer_body": "You actively maintain the repo, commits, reviews, releases.",
       "spirit_title": "Open-source spirit",
       "spirit_body": "You believe in giving back. Same here."
     },
@@ -1087,7 +1087,7 @@
       "repo": "Main repository",
       "repo_hint": "Format: owner/repo (e.g. rust-lang/rust)",
       "note": "Anything else?",
-      "note_hint": "Optional — tell us about your project."
+      "note_hint": "Optional: tell us about your project."
     },
     "submit": "Submit application",
     "success_title": "Application received",
@@ -1162,7 +1162,7 @@
     "sections": {
       "intro": {
         "title": "1. Data Controller",
-        "content": "<p>The data controller is <strong>Raphaël Plassart</strong>, sole trader (French micro-enterprise), publisher and operator of <strong>QoreDB</strong>.</p><ul><li>SIREN: 942 906 157</li><li>SIRET (registered establishment): 942 906 157 00014</li><li>Business activity code (APE): 62.01Z — Computer programming</li><li>Contact: <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>The postal address of the registered establishment is provided on written request sent to this contact address.</p>"
+        "content": "<p>The data controller is <strong>Raphaël Plassart</strong>, sole trader (French micro-enterprise), publisher and operator of <strong>QoreDB</strong>.</p><ul><li>SIREN: 942 906 157</li><li>SIRET (registered establishment): 942 906 157 00014</li><li>Business activity code (APE): 62.01Z: Computer programming</li><li>Contact: <a href=\"mailto:qoredb@gmail.com\">qoredb@gmail.com</a></li></ul><p>The postal address of the registered establishment is provided on written request sent to this contact address.</p>"
       },
       "data_collection": {
         "title": "2. Data Collection",
@@ -1182,7 +1182,7 @@
       },
       "hosting": {
         "title": "6. Hosting and Sub-processors",
-        "content": "<p>The QoreDB website and services rely on the following processors:</p><ul><li><strong>Hetzner Online GmbH</strong> (Germany) — hosting of the website and services, on servers located in Nuremberg, in the European Union;</li><li><strong>Cloudflare, Inc.</strong> (United States) — domain DNS management, content delivery and attack protection;</li><li><strong>Stripe Payments Europe, Limited</strong> (Ireland) — payments, invoicing and subscription management;</li><li><strong>Resend</strong> — transactional emails and newsletter delivery;</li><li><strong>Sanity</strong> — editorial content management (blog).</li></ul><p>Analytics are handled by <strong>Umami</strong>, self-hosted on QoreDB's Hetzner server: visit statistics are not shared with any third-party provider.</p><p>Website data is hosted in the European Union. Technical processing carried out outside the European Union (notably by Cloudflare and Stripe) relies on GDPR-compliant safeguards, in particular the European Commission's standard contractual clauses.</p>"
+        "content": "<p>The QoreDB website and services rely on the following processors:</p><ul><li><strong>Hetzner Online GmbH</strong> (Germany): hosting of the website and services, on servers located in Nuremberg, in the European Union;</li><li><strong>Cloudflare, Inc.</strong> (United States): domain DNS management, content delivery and attack protection;</li><li><strong>Stripe Payments Europe, Limited</strong> (Ireland) (payments, invoicing and subscription management;</li><li><strong>Resend</strong>) transactional emails and newsletter delivery;</li><li><strong>Sanity</strong>: editorial content management (blog).</li></ul><p>Analytics are handled by <strong>Umami</strong>, self-hosted on QoreDB's Hetzner server: visit statistics are not shared with any third-party provider.</p><p>Website data is hosted in the European Union. Technical processing carried out outside the European Union (notably by Cloudflare and Stripe) relies on GDPR-compliant safeguards, in particular the European Commission's standard contractual clauses.</p>"
       },
       "security": {
         "title": "7. Data Security",
@@ -1216,7 +1216,7 @@
     "sections": {
       "editor": {
         "title": "Site Editor",
-        "content": "**Publisher of the website and software:** Raphaël Plassart, sole trader (French *micro-entreprise*)\n**Publication director:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (registered establishment):** 942 906 157 00014\n**Business activity code (APE):** 62.01Z — Computer programming\n**Registration:** business registered in France, active since 4 April 2025\n**VAT:** VAT not applicable, Article 293 B of the French General Tax Code\n**Contact:** [qoredb@gmail.com](mailto:qoredb@gmail.com)\n\nQoreDB is a software product published and operated by this micro-enterprise, which is the contracting party for all users and customers.\n\n> The postal address of the registered establishment is provided on written request sent to the contact address above."
+        "content": "**Publisher of the website and software:** Raphaël Plassart, sole trader (French *micro-entreprise*)\n**Publication director:** Raphaël Plassart\n**SIREN:** 942 906 157\n**SIRET (registered establishment):** 942 906 157 00014\n**Business activity code (APE):** 62.01Z: Computer programming\n**Registration:** business registered in France, active since 4 April 2025\n**VAT:** VAT not applicable, Article 293 B of the French General Tax Code\n**Contact:** [qoredb@gmail.com](mailto:qoredb@gmail.com) QoreDB is a software product published and operated by this micro-enterprise, which is the contracting party for all users and customers. > The postal address of the registered establishment is provided on written request sent to the contact address above."
       },
       "hosting": {
         "title": "Hosting",
@@ -1248,7 +1248,7 @@
       },
       "license": {
         "title": "License",
-        "content": "QoreDB is distributed under an **open core** model, with a **dual licence**:\n\n* **Core — [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: free to use, modify, redistribute and use commercially, royalty-free, subject to the standard attribution obligations.\n* **Premium — [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: source-available, free for personal and internal business use, no competing commercial offering allowed. Each release automatically converts to the Apache 2.0 licence four years after its publication.\n\nEvery source file in the repository carries an SPDX header declaring its licence. The licence files at the root of the official repository are the only authoritative reference.\n\n➡️ [Open core model and licences](/docs/introduction/open-core-model)"
+        "content": "QoreDB is distributed under an **open core** model, with a **dual licence**: * **Core, [Apache License 2.0](https://github.com/QoreDB/QoreDB/blob/main/LICENSE)**: free to use, modify, redistribute and use commercially, royalty-free, subject to the standard attribution obligations.\n* **Premium, [Business Source License 1.1](https://github.com/QoreDB/QoreDB/blob/main/LICENSE-BSL)**: source-available, free for personal and internal business use, no competing commercial offering allowed. Each release automatically converts to the Apache 2.0 licence four years after its publication. Every source file in the repository carries an SPDX header declaring its licence. The licence files at the root of the official repository are the only authoritative reference. ➡️ [Open core model and licences](/docs/introduction/open-core-model)"
       },
       "contact": {
         "title": "Contact",
@@ -1284,7 +1284,7 @@
       },
       "payments": {
         "title": "6. Purchases, payment and invoicing",
-        "content": "Paid licences (Pro, Team) are sold by the Raphaël Plassart micro-enterprise.\n\n* payments are processed exclusively by **Stripe** (Stripe Payments Europe, Limited); QoreDB has no access to any card data,\n* prices are shown in euros, without VAT — VAT not applicable, Article 293 B of the French General Tax Code,\n* the invoice is issued and made available by Stripe once payment is complete,\n* the licence key is delivered by email after payment confirmation,\n* subscriptions renew automatically for the subscribed period and can be cancelled at any time from the Stripe customer portal, cancellation taking effect at the end of the current period.\n\nUnder Article L221-28 of the French Consumer Code, a consumer who requests immediate delivery of their licence key waives their right of withdrawal once the service has been fully performed. Any question regarding a payment or a refund can be sent to the contact address indicated on the website."
+        "content": "Paid licences (Pro, Team) are sold by the Raphaël Plassart micro-enterprise. * payments are processed exclusively by **Stripe** (Stripe Payments Europe, Limited); QoreDB has no access to any card data,\n* prices are shown in euros, without VAT: VAT not applicable, Article 293 B of the French General Tax Code,\n* the invoice is issued and made available by Stripe once payment is complete,\n* the licence key is delivered by email after payment confirmation,\n* subscriptions renew automatically for the subscribed period and can be cancelled at any time from the Stripe customer portal, cancellation taking effect at the end of the current period. Under Article L221-28 of the French Consumer Code, a consumer who requests immediate delivery of their licence key waives their right of withdrawal once the service has been fully performed. Any question regarding a payment or a refund can be sent to the contact address indicated on the website."
       },
       "user_obligations": {
         "title": "7. User Obligations",
@@ -1546,8 +1546,8 @@
     "federation": {
       "eyebrow": "Data Tools · Cross-database federation",
       "title": "Cross-database federation",
-      "subtitle": "Run one SQL query that JOINs tables across several databases — no CSV exports, no warehouse to stand up.",
-      "teaser": "A single SQL query to join tables from several active connections — PostgreSQL, MySQL, MongoDB and the rest.",
+      "subtitle": "Run one SQL query that JOINs tables across several databases, no CSV exports, no warehouse to stand up.",
+      "teaser": "A single SQL query to join tables from several active connections: PostgreSQL, MySQL, MongoDB and the rest.",
       "problem": {
         "title": "The problem",
         "body": "Your data lives across several databases: PostgreSQL for the app, MySQL for billing, MongoDB for events. Answering one question that spans them means exporting CSVs, writing glue scripts, or standing up a warehouse. For a one-off check or a reconciliation between prod and billing, that is out of proportion."
@@ -1577,7 +1577,7 @@
       "example": {
         "title": "A concrete example",
         "intro": "Here, prod_pg is a PostgreSQL connection and billing_mysql a MySQL connection. One query joins the app's users with the billing orders:",
-        "caption": "Two databases, two engines, one join — with no intermediate export. The query stays read-only: it never writes to your sources."
+        "caption": "Two databases, two engines, one join, with no intermediate export. The query stays read-only: it never writes to your sources."
       },
       "limits": {
         "title": "The limits, stated plainly",
@@ -1614,7 +1614,7 @@
           },
           {
             "title": "Timeline and per-row history",
-            "body": "The timeline groups changes together; the history panel shows, for a given row, all of its successive versions — a blame at the data level."
+            "body": "The timeline groups changes together; the history panel shows, for a given row, all of its successive versions, a blame at the data level."
           },
           {
             "title": "Temporal diff",
@@ -1635,7 +1635,7 @@
         "title": "The limits, stated plainly",
         "intro": "Time-Travel is an application-level log, not a database-engine capability. Its boundaries:",
         "items": [
-          "Only mutations made from QoreDB are captured. External writes — your application, psql, another tool — are not.",
+          "Only mutations made from QoreDB are captured. External writes (your application, psql, another tool) are not.",
           "The row must have a primary key: it is what identifies the before/after image and makes rollback possible.",
           "The “before” image is captured on a best-effort basis (a 2 s ceiling so it can't slow the mutation down); if it fails, the reversal may be partial and a warning says so.",
           "The log is local, with configurable rotation and retention; sensitive columns can be redacted ([REDACTED]) before being written to disk.",
@@ -1651,14 +1651,14 @@
       "eyebrow": "Data Tools · Query Replay Lab",
       "title": "Query Replay Lab",
       "subtitle": "Record the queries you actually run, then replay the set after a migration. The report says what broke, what changed, and what got slower.",
-      "teaser": "A recorded set of queries, replayed after a change — with a verdict per query and a row-level diff.",
+      "teaser": "A recorded set of queries, replayed after a change, with a verdict per query and a row-level diff.",
       "problem": {
         "title": "The problem",
-        "body": "You changed a schema. Did anything break? The honest answer is usually that you re-ran a handful of queries by hand and squinted at the results. What you needed was the set of queries you actually run, replayed in one go, with a verdict per query — and nothing in a database client gives you that."
+        "body": "You changed a schema. Did anything break? The honest answer is usually that you re-ran a handful of queries by hand and squinted at the results. What you needed was the set of queries you actually run, replayed in one go, with a verdict per query, and nothing in a database client gives you that."
       },
       "solution": {
         "title": "How QoreDB solves it",
-        "intro": "Record a set while you work normally, and QoreDB keeps the queries alongside what they returned. Replay the set later — after a migration, on another branch, on another connection — and read a report that answers four questions at once.",
+        "intro": "Record a set while you work normally, and QoreDB keeps the queries alongside what they returned. Replay the set later (after a migration, on another branch, on another connection) and read a report that answers four questions at once.",
         "steps": [
           {
             "title": "Record while you work",
@@ -1666,11 +1666,11 @@
           },
           {
             "title": "Queries go in Git, rows stay local",
-            "body": "The set lives in .qoredb/replays/ and holds queries and expectations — never a result row. The captured rows stay on your machine as the baseline, so the repository never carries your data."
+            "body": "The set lives in .qoredb/replays/ and holds queries and expectations, never a result row. The captured rows stay on your machine as the baseline, so the repository never carries your data."
           },
           {
             "title": "Replay against whatever you like",
-            "body": "Compare against the original recording, against a previous run when the change was intentional, or against a second live connection — production versus a migrated staging, for instance."
+            "body": "Compare against the original recording, against a previous run when the change was intentional, or against a second live connection, production versus a migrated staging, for instance."
           },
           {
             "title": "Read the verdicts, then the diff",
@@ -1681,13 +1681,13 @@
       "example": {
         "title": "A concrete example",
         "intro": "A set of 24 queries recorded before a migration, replayed after it. Six rows tell you everything you need to look at:",
-        "caption": "Content changes are detected by a SHA-256 digest of the result, with rows canonically sorted so a query without ORDER BY doesn't report a false positive. Ignored columns — updated_at and friends — are excluded from the digest and versioned with the set."
+        "caption": "Content changes are detected by a SHA-256 digest of the result, with rows canonically sorted so a query without ORDER BY doesn't report a false positive. Ignored columns (updated_at and friends) are excluded from the digest and versioned with the set."
       },
       "limits": {
         "title": "The limits, stated plainly",
         "intro": "Replay is a comparison report, not a test framework. Its boundaries are explicit:",
         "items": [
-          "Mutations are excluded from replay by default, and refused outright against production — classified from the query text, never from a flag stored in the file.",
+          "Mutations are excluded from replay by default, and refused outright against production, classified from the query text, never from a flag stored in the file.",
           "Query text is versioned verbatim: a query containing a literal secret ends up in the repository. QoreDB flags secret-looking queries, and can redact them at the cost of making the set unreplayable.",
           "Capture is bounded: 1,000 rows per result and a 64 MB budget per recording by default. Past that, the comparison falls back to metadata and the report says so.",
           "\"Slower\" requires both a 2× ratio and a 100 ms absolute delta, so ordinary jitter stays out of the report.",
@@ -1711,7 +1711,7 @@
       },
       "solution": {
         "title": "How QoreDB solves it",
-        "intro": "You describe your expectations in a YAML contract — a table, a list of rules. QoreDB translates each rule into engine-specific SQL, runs it, and aggregates the results into a health status. The contract lives in your repository, versioned with the rest.",
+        "intro": "You describe your expectations in a YAML contract, a table, a list of rules. QoreDB translates each rule into engine-specific SQL, runs it, and aggregates the results into a health status. The contract lives in your repository, versioned with the rest.",
         "steps": [
           {
             "title": "A declarative contract",
@@ -1734,7 +1734,7 @@
       "example": {
         "title": "A concrete example",
         "intro": "A contract for an orders table: email present, status within a closed domain, foreign-key integrity, positive total.",
-        "caption": "The contract is a versioned file. It detects violations when it runs — it doesn't replace database constraints, it complements them where they're missing."
+        "caption": "The contract is a versioned file. It detects violations when it runs, it doesn't replace database constraints, it complements them where they're missing."
       },
       "limits": {
         "title": "The limits, stated plainly",
@@ -1762,7 +1762,7 @@
       },
       "solution": {
         "title": "How QoreDB solves it",
-        "intro": "QoreDB embeds an HTTP server that serves your queries as GET endpoints. You declare the query and its parameters; QoreDB handles routing, typing, authentication and documentation. The server binds to 127.0.0.1 and nothing else — there is no setting to expose it on the network.",
+        "intro": "QoreDB embeds an HTTP server that serves your queries as GET endpoints. You declare the query and its parameters; QoreDB handles routing, typing, authentication and documentation. The server binds to 127.0.0.1 and nothing else, there is no setting to expose it on the network.",
         "steps": [
           {
             "title": "Declare the endpoint",
@@ -1797,7 +1797,7 @@
           "Rate limit of 10 requests per second per endpoint, burst of 10, not configurable.",
           "The row cap (100 by default) trims the response after the query has already run. For a large table, write your own LIMIT in the query.",
           "No pagination and no query timeout: a slow query blocks until the driver returns.",
-          "Fourteen driver IDs are supported — the PostgreSQL family, MySQL/MariaDB, SQLite, DuckDB, SQL Server and ClickHouse. MongoDB, Redis and the others are rejected.",
+          "Fourteen driver IDs are supported, the PostgreSQL family, MySQL/MariaDB, SQLite, DuckDB, SQL Server and ClickHouse. MongoDB, Redis and the others are rejected.",
           "The server does not start on its own; you start it each session. Your endpoint definitions do persist.",
           "An endpoint cannot be edited. Changing a query means deleting and recreating it, which issues a new token."
         ]
@@ -1810,7 +1810,7 @@
     "sandbox": {
       "eyebrow": "Data Tools · Sandbox mode",
       "title": "Sandbox mode",
-      "subtitle": "Hold your grid edits locally, read the SQL they produce, then apply them — or drop them and move on.",
+      "subtitle": "Hold your grid edits locally, read the SQL they produce, then apply them, or drop them and move on.",
       "teaser": "Edits made in the data grid are held locally instead of being written. You read the SQL before anything reaches the database.",
       "problem": {
         "title": "The problem",
@@ -1923,10 +1923,10 @@
       "eyebrow": "Analysis · Notebooks",
       "title": "Database notebooks",
       "subtitle": "Executable documents mixing SQL and Markdown against a live connection, saved as a plain file your team can review in a pull request.",
-      "teaser": "SQL and Markdown cells, typed parameters, run all or run from here — in a JSON file that diffs cleanly in Git.",
+      "teaser": "SQL and Markdown cells, typed parameters, run all or run from here, in a JSON file that diffs cleanly in Git.",
       "problem": {
         "title": "The problem",
-        "body": "A query that answers a real question is never just a query. It needs the context around it: why this filter, what the number actually means, what to check next. That context ends up in a Slack thread, a wiki page, or nowhere. Six months later the query is still in someone's editor and no one remembers what it was for. The tools that solve this properly — Jupyter, hosted notebooks — mean a Python runtime, another driver to configure, and your credentials in a second place."
+        "body": "A query that answers a real question is never just a query. It needs the context around it: why this filter, what the number actually means, what to check next. That context ends up in a Slack thread, a wiki page, or nowhere. Six months later the query is still in someone's editor and no one remembers what it was for. The tools that solve this properly (Jupyter, hosted notebooks) mean a Python runtime, another driver to configure, and your credentials in a second place."
       },
       "solution": {
         "title": "How QoreDB solves it",
@@ -1934,11 +1934,11 @@
         "steps": [
           {
             "title": "Cells against a live connection",
-            "body": "A SQL cell runs on the notebook's connection and namespace and renders its result inline. A Markdown cell holds the reasoning. Every database QoreDB supports works, because the cell hands its source to the session unchanged — on a MongoDB connection you write MQL in the same cell and the driver interprets it."
+            "body": "A SQL cell runs on the notebook's connection and namespace and renders its result inline. A Markdown cell holds the reasoning. Every database QoreDB supports works, because the cell hands its source to the session unchanged, on a MongoDB connection you write MQL in the same cell and the driver interprets it."
           },
           {
             "title": "Parameters, typed and declared once",
-            "body": "Declare a variable and use it as $customer_id or {{date_from}} anywhere in the notebook. Four types — text, number, date, select — each with an input rendered for it. Change the value at the top, rerun, and the whole document follows."
+            "body": "Declare a variable and use it as $customer_id or {{date_from}} anywhere in the notebook. Four types (text, number, date, select) each with an input rendered for it. Change the value at the top, rerun, and the whole document follows."
           },
           {
             "title": "Run all, or run from here",
@@ -1950,7 +1950,7 @@
           },
           {
             "title": "AI cells (Pro)",
-            "body": "Describe what you want in plain language; the cell writes SQL into a new cell directly below, which you read before you run. Bring your own key — OpenAI, Anthropic, Mistral, Gemini, DeepSeek, or Ollama for a model that never leaves your machine. Keys live in your OS keychain."
+            "body": "Describe what you want in plain language; the cell writes SQL into a new cell directly below, which you read before you run. Bring your own key: OpenAI, Anthropic, Mistral, Gemini, DeepSeek, or Ollama for a model that never leaves your machine. Keys live in your OS keychain."
           }
         ]
       },
@@ -1993,7 +1993,7 @@
         "steps": [
           {
             "title": "Classification from the parsed statement",
-            "body": "Your SQL is parsed with the dialect of the driver you are connected to, and the classification comes from the resulting syntax tree. DROP, TRUNCATE, ALTER in its many forms, an UPDATE with no WHERE, a DELETE with no WHERE, and EXPLAIN ANALYZE wrapping any of those. A data-modifying CTE — WITH x AS (DELETE ...) SELECT — is caught as a mutation, which a pattern match on the first keyword never sees."
+            "body": "Your SQL is parsed with the dialect of the driver you are connected to, and the classification comes from the resulting syntax tree. DROP, TRUNCATE, ALTER in its many forms, an UPDATE with no WHERE, a DELETE with no WHERE, and EXPLAIN ANALYZE wrapping any of those. A data-modifying CTE (WITH x AS (DELETE ...) SELECT) is caught as a mutation, which a pattern match on the first keyword never sees."
           },
           {
             "title": "Fail closed in production",
@@ -2001,7 +2001,7 @@
           },
           {
             "title": "Rules you can read and change",
-            "body": "Built-in rules block DROP and TRUNCATE on production, ask for confirmation on DELETE, and warn on ALTER. Each one names itself when it fires, so a refusal tells you which rule refused and why. On Pro you add your own: an environment, an operation, an optional pattern, and one of three actions — block, warn, or ask."
+            "body": "Built-in rules block DROP and TRUNCATE on production, ask for confirmation on DELETE, and warn on ALTER. Each one names itself when it fires, so a refusal tells you which rule refused and why. On Pro you add your own: an environment, an operation, an optional pattern, and one of three actions, block, warn, or ask."
           },
           {
             "title": "Engine-specific hardening",
@@ -2043,14 +2043,14 @@
       "eyebrow": "Extensibility · Plugin system",
       "title": "Plugins",
       "subtitle": "Extend QoreDB with plugins that run as sandboxed WebAssembly, with capabilities you grant one by one and can revoke without a restart.",
-      "teaser": "WebAssembly modules with metered fuel, capped memory and bounded time — plus purely declarative plugins that execute no code at all.",
+      "teaser": "WebAssembly modules with metered fuel, capped memory and bounded time, plus purely declarative plugins that execute no code at all.",
       "problem": {
         "title": "The problem",
         "body": "A database client cannot ship every workflow your team has. The usual answer is a plugin API, and the usual cost is that a plugin becomes code with your privileges: your connections, your credentials, your filesystem. You install one to pretty-print a JSON column and it can read everything you ever query. That is why most people never install any."
       },
       "solution": {
         "title": "How QoreDB solves it",
-        "intro": "QoreDB plugins come in two shapes. The simple ones are pure data: a manifest contributing snippets, connection templates or themes, with no code to run. The rest compile to WebAssembly and execute inside an interpreter with no ambient authority — nothing is reachable unless the manifest asks for it and you grant it.",
+        "intro": "QoreDB plugins come in two shapes. The simple ones are pure data: a manifest contributing snippets, connection templates or themes, with no code to run. The rest compile to WebAssembly and execute inside an interpreter with no ambient authority, nothing is reachable unless the manifest asks for it and you grant it.",
         "steps": [
           {
             "title": "A manifest, and optionally a module",
@@ -2070,7 +2070,7 @@
           },
           {
             "title": "What a plugin cannot reach",
-            "body": "It cannot execute SQL — that capability was removed rather than gated. It cannot read your connection credentials or your vault. It cannot alter a query result. It cannot leave its own data folder. There is no filesystem beyond that, no sockets, no subprocesses."
+            "body": "It cannot execute SQL: that capability was removed rather than gated. It cannot read your connection credentials or your vault. It cannot alter a query result. It cannot leave its own data folder. There is no filesystem beyond that, no sockets, no subprocesses."
           }
         ]
       },
@@ -2083,7 +2083,7 @@
         "title": "The limits, stated plainly",
         "intro": "A sandbox is a set of specific guarantees, not a general promise. Here is what these ones are and are not:",
         "items": [
-          "Integrity is checked, authorship is not. There are no signatures. The marketplace verifies that an archive matches the SHA-256 the registry recorded, which proves the bytes were not altered in transit — not who wrote them. Whoever controls the registry controls that digest.",
+          "Integrity is checked, authorship is not. There are no signatures. The marketplace verifies that an archive matches the SHA-256 the registry recorded, which proves the bytes were not altered in transit, not who wrote them. Whoever controls the registry controls that digest.",
           "The module hash in a manifest is optional. A plugin without one still installs; the interface labels it unsigned.",
           "Reading query results and making HTTP calls are separate capabilities, but a plugin granted both can send every row you query to its allow-listed host. That is the point of an audit plugin, and it is also the exfiltration path. Grant them together on purpose.",
           "The consent dialog pre-selects everything the manifest requested. The model underneath is opt-in; the dialog is not. Read it rather than confirming it.",
@@ -2144,7 +2144,7 @@
     "error": "Failed to subscribe. Please try again.",
     "card_title": "Stay updated on new releases",
     "card_subtitle": "Subscribe to get product releases, new drivers notifications, and technical tutorials.",
-    "card_bonus": "🎁 Bonus: Get our free SQL Performance Cheat Sheet — 9 pages, PostgreSQL / MySQL / SQLite (PDF)!"
+    "card_bonus": "🎁 Bonus: Get our free SQL Performance Cheat Sheet, 9 pages, PostgreSQL / MySQL / SQLite (PDF)!"
   },
   "mcp_showcase": {
     "title": "Your databases, connected to your AI tools",

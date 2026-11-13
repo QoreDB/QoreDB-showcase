@@ -41,7 +41,7 @@ export async function Hero({ locale }: { locale: string }) {
           href="https://github.com/QoreDB/QoreDB"
           target="_blank"
           rel="noreferrer"
-          aria-label={`GitHub — ${t("social_proof.aria_label")}`}
+          aria-label={`GitHub · ${t("social_proof.aria_label")}`}
         >
           <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
             <path

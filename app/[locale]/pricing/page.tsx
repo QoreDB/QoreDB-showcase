@@ -61,7 +61,7 @@ export default async function PricingPage({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${SITE_NAME} — ${t("pricing_page.title")}`,
+    name: `${SITE_NAME} · ${t("pricing_page.title")}`,
     description: t("pricing_page.subtitle"),
     url: canonical,
     image: getAbsoluteUrl(DEFAULT_OG_IMAGE_PATH),
