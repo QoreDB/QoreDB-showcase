@@ -56,7 +56,7 @@ The result streams as it's generated, so you see the query taking shape rather t
 
 ### Explain a result
 
-Run a query, then ask the assistant to explain what it does, what the result means, or why a value looks the way it does. Useful for picking up unfamiliar schemas or onboarding teammates.
+Run a query, then ask the assistant to explain what it does, what the result means, or why a value looks the way it does (directly in the assistant thread). You can also summarize or document queries from notebooks. Useful for picking up unfamiliar schemas or onboarding teammates.
 
 ### Summarize the schema
 
@@ -64,7 +64,7 @@ Point the assistant at a table or a database and get a human-readable summary: w
 
 ### Fix an error
 
-When a query fails, the assistant takes the query and the error message and proposes a corrected version. Streaming, like generation. Common patterns it handles well: typos in column names, missing joins, dialect-specific syntax mistakes.
+When a query fails, use **Fix with AI** directly from the error: the assistant takes the query and the error message and proposes a corrected version. Streaming, like generation. Common patterns it handles well: typos in column names, missing joins, dialect-specific syntax mistakes.
 
 ## Schema awareness
 
@@ -73,6 +73,7 @@ Before sending your prompt to the provider, the assistant builds a context paylo
 - Up to **30 tables** (prioritizing the ones mentioned in your prompt).
 - For each table: column names, types, nullability, primary keys, foreign keys, indexes.
 - Any [virtual relations](/docs/schema/browser#foreign-keys-and-virtual-relations) you've declared.
+- Semantic annotations for tables and columns defined in `.qoredb/context.json` (shareable through Git) — used by both the assistant and **[Q](/docs/ai-features/agent)**.
 
 The context is built locally from the schema metadata QoreDB already has cached, so there's no extra round-trip to the database.
 

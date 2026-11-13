@@ -25,7 +25,7 @@ Dans la boîte de dialogue de connexion, développez la section **Tunnel SSH** (
 
 ## Authentification
 
-Deux méthodes d'authentification sont prises en charge.
+Trois méthodes d'authentification sont prises en charge.
 
 ### Fichier de clé (recommandé)
 
@@ -38,6 +38,14 @@ Pointez QoreDB vers votre fichier de clé privée (généralement sous `~/.ssh/`
 | **Phrase secrète de la clé**| Optionnel. Requis si la clé est chiffrée.                                         |
 
 C'est la méthode recommandée, à la fois pour la sécurité et parce qu'elle correspond à votre flux de travail SSH normal.
+
+### Agent SSH (`ssh-agent`)
+
+Authentifiez le tunnel via votre agent SSH système (`SSH_AUTH_SOCK` / Pageant / agent OpenSSH) sans jamais exposer la clé privée à QoreDB ni saisir de phrase secrète dans l'application.
+
+| Champ                       | Remarques                                                |
+| --------------------------- | -------------------------------------------------------- |
+| **Type d'authentification** | `SSH Agent`                                              |
 
 ### Mot de passe
 

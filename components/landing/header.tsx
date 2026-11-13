@@ -14,6 +14,9 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const resourcesMenu = useRef<HTMLDetailsElement>(null);
+  const resourcesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
   const pathname = usePathname();
   const params = useParams();
   const locale = (params.locale as string) || "fr";
@@ -50,10 +53,34 @@ export function Header() {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
     return () => {
+      if (resourcesCloseTimer.current) {
+        clearTimeout(resourcesCloseTimer.current);
+      }
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
     };
   }, [mobileMenuOpen]);
+
+  const openResourcesOnHover = () => {
+    if (resourcesCloseTimer.current) {
+      clearTimeout(resourcesCloseTimer.current);
+      resourcesCloseTimer.current = null;
+    }
+    if (resourcesMenu.current) {
+      resourcesMenu.current.open = true;
+    }
+  };
+
+  const closeResourcesOnHover = () => {
+    if (resourcesCloseTimer.current) {
+      clearTimeout(resourcesCloseTimer.current);
+    }
+    resourcesCloseTimer.current = setTimeout(() => {
+      if (resourcesMenu.current) {
+        resourcesMenu.current.open = false;
+      }
+    }, 140);
+  };
 
   return (
     <>
@@ -96,7 +123,12 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <details className="q-resources-menu" ref={resourcesMenu}>
+            <details
+              className="q-resources-menu"
+              ref={resourcesMenu}
+              onMouseEnter={openResourcesOnHover}
+              onMouseLeave={closeResourcesOnHover}
+            >
               <summary>
                 {t("nav.resources")}
                 <ChevronDown size={14} aria-hidden="true" />

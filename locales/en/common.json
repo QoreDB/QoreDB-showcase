@@ -873,7 +873,7 @@
         "visual_diff": "Visual Data Diff (table comparison)",
         "audit_advanced": "Advanced audit log (unlimited, filterable, exportable)",
         "profiling": "Performance alerts · Pro — Spot query regressions and potential N+1 patterns. Set thresholds for errors and slow queries.",
-        "ai": "AI assistant (BYOK: OpenAI / Anthropic / Ollama)",
+        "ai": "AI assistant & Q agent (BYOK + Qore AI Local, .qoredb/context.json semantic context, Fix with AI)",
         "export_advanced": "Advanced exports (XLSX, Parquet)",
         "security_rules": "Custom safety rules",
         "library_advanced": "Advanced query library",
@@ -1473,7 +1473,7 @@
           },
           {
             "title": "QoreDB plans the fetch",
-            "body": "Only the columns you use are read, and WHERE filters are pushed down to each source where possible, to keep the transferred volume small."
+            "body": "Only the columns you use are read, simple WHERE filters are pushed down to each source, and recent source reads are cached for the session to keep the transferred volume small."
           },
           {
             "title": "The join runs in memory",
@@ -1965,7 +1965,7 @@
         "steps": [
           {
             "title": "A manifest, and optionally a module",
-            "body": "Every plugin is a folder with a plugin.json. It can contribute snippets, connection templates, themes, result viewers and commands. If it stops there, no code runs and there is nothing to sandbox. If it ships a .wasm module, the manifest declares which hooks it implements and which capabilities it needs."
+            "body": "Every plugin is a folder with a plugin.json. It can contribute snippets, connection templates, themes, result viewers, commands, and cell actions & previews. If it stops there, no code runs and there is nothing to sandbox. If it ships a .wasm module, the manifest declares which hooks it implements and which capabilities it needs."
           },
           {
             "title": "Seven capabilities, granted individually",

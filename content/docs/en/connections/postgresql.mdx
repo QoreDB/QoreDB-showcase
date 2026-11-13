@@ -50,6 +50,8 @@ For production traffic over the public internet, `verify-full` is the safe defau
 
 You can pass the mode either through the form (SSL mode dropdown) or as a `?sslmode=…` parameter on the URL.
 
+For mutual TLS (mTLS) authentication, you can also provide a **CA certificate**, **client certificate**, and **client key** directly in the connection's SSL options.
+
 <Callout type="tip">
 If you see a `connection requires SSL` error, set the SSL mode to `require` (or higher) and try again. Most cloud-hosted Postgres servers reject unencrypted connections by default.
 </Callout>
@@ -57,6 +59,8 @@ If you see a `connection requires SSL` error, set the SSL mode to `require` (or 
 ## Postgres-compatible providers
 
 Anything that speaks the Postgres wire protocol works through this driver. There is no special configuration: paste the DSN your provider gives you and connect.
+
+For **TimescaleDB**, hypertables are automatically flagged in the explorer; the **Info** tab shows their dimensions, chunk interval, chunk count, compression, and retention policies.
 
 ### Supabase
 

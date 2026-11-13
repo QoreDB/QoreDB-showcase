@@ -408,6 +408,9 @@ summary:focus-visible {
 .q-resources-menu summary::-webkit-details-marker {
   display: none;
 }
+.q-resources-menu summary svg {
+  transition: transform 0.15s ease;
+}
 .q-resources-menu[open] summary svg {
   transform: rotate(180deg);
 }
@@ -421,6 +424,14 @@ summary:focus-visible {
   border-radius: 8px;
   background: var(--q-bg-0);
   box-shadow: 0 12px 32px -20px #0008;
+}
+.q-resources-panel::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
 }
 .q-resources-panel a {
   display: flex;

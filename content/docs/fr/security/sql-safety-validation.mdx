@@ -10,7 +10,7 @@ QoreDB inspecte chaque requête avant qu'elle ne quitte votre machine. Le but n'
 
 ## Couche 1 : le détecteur de requêtes dangereuses
 
-Chaque requête passe par un détecteur de modèles avant son exécution. Le détecteur signale deux catégories.
+Chaque requête passe par un analyseur syntaxique (AST SQL pour les moteurs relationnels) avant son exécution — les commentaires et chaînes de caractères ne peuvent donc pas tromper les règles de sécurité. Le détecteur signale deux catégories.
 
 ### Mutations
 

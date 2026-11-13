@@ -10,7 +10,7 @@ QoreDB inspects every query before it leaves your machine. The goal isn't to rep
 
 ## Layer 1: the dangerous-query detector
 
-Every query is run through a pattern detector before execution. The detector flags two categories.
+Every query is inspected before execution — using parsed SQL AST analysis for relational engines, so comments and string literals cannot fool the safety rules. The detector flags two categories.
 
 ### Mutations
 

@@ -40,6 +40,7 @@ Le module WASM d'un plugin exécutable expose jusqu'à trois hooks :
 - `pre_execute(ctx) -> Decision` tourne **avant** une requête et peut renvoyer `allow`, `warn` ou `block`. Un `block` arrête la requête avant qu'elle n'atteigne la base ; un `warn` la laisse partir et fait apparaître un toast.
 - `post_execute(envelope)` tourne **après** une requête — réussie ou non. Sa valeur de retour est ignorée.
 - `command(envelope) -> json` tourne quand l'utilisateur clique sur une commande contribuée. La valeur JSON retournée est remontée dans l'UI.
+- **Actions et aperçus de cellules** : les plugins WASM peuvent ajouter des actions au menu contextuel d'une cellule et renvoyer des aperçus (texte, badges, JSON ou tableaux) dessinés par QoreDB, sans accès réseau, fichiers ou secrets.
 
 Les hooks sont sans état : chaque appel obtient un store WASM neuf (nouvelle mémoire linéaire, nouveau budget de fuel). Tout état qui doit survivre entre les appels passe par le KV store de l'hôte (capacité `storage`).
 

@@ -25,7 +25,7 @@ In the connection dialog, expand the **SSH tunnel** section and fill the bastion
 
 ## Authentication
 
-Two authentication methods are supported.
+Three authentication methods are supported.
 
 ### Key file (recommended)
 
@@ -38,6 +38,14 @@ Point QoreDB at your private key file (typically under `~/.ssh/`). If the key is
 | **Key passphrase** | Optional. Required if the key is encrypted.                                          |
 
 This is the recommended method, both for security and because it matches your normal SSH workflow.
+
+### SSH Agent (`ssh-agent`)
+
+Authenticate the tunnel through your system SSH agent (`SSH_AUTH_SOCK` / Pageant / OpenSSH agent) without ever handing your private key or passphrase to QoreDB.
+
+| Field         | Notes       |
+| ------------- | ----------- |
+| **Auth type** | `SSH Agent` |
 
 ### Password
 

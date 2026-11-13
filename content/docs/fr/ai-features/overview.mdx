@@ -56,7 +56,7 @@ Le résultat est diffusé (stream) au fur et à mesure de sa génération, vous 
 
 ### Expliquer un résultat
 
-Exécutez une requête, puis demandez à l'assistant d'expliquer ce qu'elle fait, ce que signifie le résultat, ou pourquoi une valeur se présente ainsi. Utile pour s'approprier des schémas peu familiers ou pour l'intégration de collègues.
+Exécutez une requête, puis demandez à l'assistant d'expliquer ce qu'elle fait, ce que signifie le résultat, ou pourquoi une valeur se présente ainsi (directement dans le fil de l'assistant). Vous pouvez également résumer ou documenter des requêtes depuis les notebooks. Utile pour s'approprier des schémas peu familiers ou pour l'intégration de collègues.
 
 ### Résumer le schéma
 
@@ -64,7 +64,7 @@ Pointez l'assistant sur une table ou une base de données et obtenez un résumé
 
 ### Corriger une erreur
 
-Lorsqu'une requête échoue, l'assistant prend la requête et le message d'erreur et propose une version corrigée. En streaming, comme pour la génération. Modèles courants qu'il gère bien : fautes de frappe dans les noms de colonnes, jointures manquantes, erreurs de syntaxe spécifiques au dialecte.
+Lorsqu'une requête échoue, utilisez **Corriger avec l'IA** (Fix with AI) directement depuis l'erreur : l'assistant prend la requête et le message d'erreur et propose une version corrigée. En streaming, comme pour la génération. Modèles courants qu'il gère bien : fautes de frappe dans les noms de colonnes, jointures manquantes, erreurs de syntaxe spécifiques au dialecte.
 
 ## Prise en compte du schéma
 
@@ -73,6 +73,7 @@ Avant d'envoyer votre invite au fournisseur, l'assistant construit un contexte �
 - Jusqu'à **30 tables** (en donnant la priorité à celles mentionnées dans votre invite).
 - Pour chaque table : noms de colonnes, types, nullité, clés primaires, clés étrangères, index.
 - Toutes les [relations virtuelles](/docs/schema/browser#cles-etrangeres-et-relations-virtuelles) que vous avez déclarées.
+- Les annotations métier et sémantiques définies dans `.qoredb/context.json` (partageables via Git) pour décrire vos tables et colonnes — utilisées par l'assistant comme par l'agent **[Q](/docs/ai-features/agent)**.
 
 Le contexte est construit localement à partir des métadonnées de schéma que QoreDB a déjà mises en cache, il n'y a donc pas d'aller-retour supplémentaire vers la base de données.
 

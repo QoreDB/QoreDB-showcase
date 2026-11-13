@@ -873,7 +873,7 @@
         "visual_diff": "Visual Data Diff (comparaison de tables)",
         "audit_advanced": "Audit log avancé (illimité, filtrable, exportable)",
         "profiling": "Alertes de performance · Pro — Repérez les régressions et les schémas N+1 potentiels. Définissez des seuils d’erreurs et de requêtes lentes.",
-        "ai": "Assistant IA (BYOK: OpenAI / Anthropic / Ollama)",
+        "ai": "Assistant IA & agent Q (BYOK + Qore AI Local, contexte sémantique .qoredb/context.json, Fix with AI)",
         "export_advanced": "Export avancé (XLSX, Parquet)",
         "security_rules": "Règles de sécurité personnalisées",
         "library_advanced": "Bibliothèque de requêtes avancée",
@@ -1473,7 +1473,7 @@
           },
           {
             "title": "QoreDB planifie la récupération",
-            "body": "Seules les colonnes utilisées sont lues, et les filtres WHERE sont poussés vers chaque source quand c'est possible, pour limiter le volume transféré."
+            "body": "Seules les colonnes utilisées sont lues, les filtres WHERE simples sont poussés vers chaque source et les lectures récentes sont mises en cache pour la session afin de limiter le volume transféré."
           },
           {
             "title": "La jointure s'exécute en mémoire",
@@ -1965,7 +1965,7 @@
         "steps": [
           {
             "title": "Un manifeste, et éventuellement un module",
-            "body": "Chaque plugin est un dossier avec un plugin.json. Il peut contribuer des snippets, des modèles de connexion, des thèmes, des visualiseurs de résultats et des commandes. S'il s'arrête là, aucun code ne s'exécute et il n'y a rien à sandboxer. S'il embarque un module .wasm, le manifeste déclare quels hooks il implémente et quelles capacités il lui faut."
+            "body": "Chaque plugin est un dossier avec un plugin.json. Il peut contribuer des snippets, des modèles de connexion, des thèmes, des visualiseurs de résultats, des commandes ainsi que des actions et aperçus de cellules. S'il s'arrête là, aucun code ne s'exécute et il n'y a rien à sandboxer. S'il embarque un module .wasm, le manifeste déclare quels hooks il implémente et quelles capacités il lui faut."
           },
           {
             "title": "Sept capacités, accordées une par une",

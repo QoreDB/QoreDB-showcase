@@ -50,6 +50,8 @@ Pour le trafic de production sur l'Internet public, `verify-full` est la valeur 
 
 Vous pouvez passer le mode via le formulaire (menu déroulant du mode SSL) ou en tant que paramètre `?sslmode=…` dans l'URL.
 
+Pour l'authentification TLS mutuelle (mTLS), vous pouvez également fournir un **certificat CA**, un **certificat client** et une **clé client** directement dans les options SSL de la connexion.
+
 <Callout type="tip">
 Si vous voyez une erreur `connection requires SSL`, définissez le mode SSL sur `require` (ou plus élevé) et réessayez. La plupart des serveurs Postgres hébergés dans le cloud rejettent les connexions non chiffrées par défaut.
 </Callout>
@@ -57,6 +59,8 @@ Si vous voyez une erreur `connection requires SSL`, définissez le mode SSL sur 
 ## Fournisseurs compatibles Postgres
 
 Tout ce qui parle le protocole filaire Postgres fonctionne via ce pilote. Il n'y a pas de configuration spéciale : collez le DSN que votre fournisseur vous donne et connectez-vous.
+
+Pour **TimescaleDB**, les hypertables sont automatiquement signalées dans l'explorateur ; l'onglet **Info** affiche leurs dimensions, l'intervalle et le nombre de chunks, ainsi que les politiques de compression et de rétention.
 
 ### Supabase
 
