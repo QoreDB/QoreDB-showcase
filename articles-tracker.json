@@ -638,6 +638,354 @@
       "title": "Comment QoreDB est distribué : un tag Git, quatre plateformes, six canaux d'installation",
       "category": "Open Source",
       "publishedAt": "2026-09-17"
+    },
+    {
+      "slug": "frontiere-core-premium-spdx-par-fichier",
+      "title": "La frontière Core/Premium de QoreDB : un en-tête SPDX par fichier",
+      "category": "Open Source",
+      "publishedAt": "2026-09-18"
+    },
+    {
+      "slug": "familles-compatibilite-34-moteurs-qoredb",
+      "title": "34 moteurs dans QoreDB : les familles de compatibilité en pratique",
+      "category": "Updates",
+      "publishedAt": "2026-09-19"
+    },
+    {
+      "slug": "rate-limiting-requetes-token-bucket-qoredb",
+      "title": "Le rate limiting des requêtes dans QoreDB : un token bucket contre les boucles accidentelles",
+      "category": "Security",
+      "publishedAt": "2026-09-20"
+    },
+    {
+      "slug": "query-replay-lab-rejouer-requetes-apres-migration",
+      "title": "Le Query Replay Lab : rejouer un jeu de requêtes après une migration",
+      "category": "Updates",
+      "publishedAt": "2026-09-21"
+    },
+    {
+      "slug": "migrations-manager-fichiers-sql-versionnes",
+      "title": "Le Migrations Manager de QoreDB : fichiers SQL versionnés et chemin d'exécution unique",
+      "category": "Updates",
+      "publishedAt": "2026-09-22"
+    },
+    {
+      "slug": "bac-a-sable-wasm-plugins-qoredb",
+      "title": "Exécuter du code tiers dans QoreDB : le bac à sable WASM des plugins",
+      "category": "Open Source",
+      "publishedAt": "2026-09-23"
+    },
+    {
+      "slug": "instant-data-api-requete-endpoint-rest-local",
+      "title": "L'Instant Data API de QoreDB : une requête sauvegardée, un endpoint REST local",
+      "category": "Updates",
+      "publishedAt": "2026-09-24"
+    },
+    {
+      "slug": "data-contracts-yaml-assertions-executees-sql",
+      "title": "Les Data Contracts de QoreDB : des assertions de qualité en YAML, exécutées en SQL",
+      "category": "Updates",
+      "publishedAt": "2026-09-25"
+    },
+    {
+      "slug": "detection-drift-baseline-schema-live",
+      "title": "La détection de drift dans QoreDB : une baseline structurée, comparée au schéma live",
+      "category": "Updates",
+      "publishedAt": "2026-09-26"
+    },
+    {
+      "slug": "detecter-n-plus-1-regressions-p95",
+      "title": "Détecter les N+1 et les régressions de P95 dans QoreDB",
+      "category": "Security",
+      "publishedAt": "2026-09-27"
+    },
+    {
+      "slug": "qore-ai-local-runtime-modele-embarque",
+      "title": "Qore AI Local : exécuter le modèle du Database Agent sur sa propre machine",
+      "category": "Updates",
+      "publishedAt": "2026-09-28"
+    },
+    {
+      "slug": "backup-restore-piloter-outils-officiels",
+      "title": "Backup et restore dans QoreDB : piloter pg_dump plutôt que le réécrire",
+      "category": "Open Source",
+      "publishedAt": "2026-09-29"
+    },
+    {
+      "slug": "cache-resultats-lru-ttl-invalidation-connexion",
+      "title": "Le cache de résultats de QoreDB : un LRU borné, un TTL court, une invalidation par connexion",
+      "category": "Updates",
+      "publishedAt": "2026-09-30"
+    },
+    {
+      "slug": "snowflake-bigquery-api-rest-socle-commun",
+      "title": "Snowflake et BigQuery dans QoreDB : deux API REST, un socle commun",
+      "category": "Updates",
+      "publishedAt": "2026-10-01"
+    },
+    {
+      "slug": "huit-crates-qoredb-logique-metier-hors-tauri",
+      "title": "Les huit crates de QoreDB : pourquoi la logique métier ne vit pas dans Tauri",
+      "category": "Open Source",
+      "publishedAt": "2026-10-02"
+    },
+    {
+      "title": "Le permission gate de QoreDB : classer chaque action de l'IA avant de l'exécuter",
+      "slug": "permission-gate-actions-ia-qoredb",
+      "category": "Vision",
+      "date": "2026-10-03",
+      "sanityId": "ba7acb81-c83b-4b68-a076-02bc59b56f81"
+    },
+    {
+      "title": "Le client CQL de QoreDB : écrire le protocole plutôt qu'importer un driver",
+      "slug": "client-cql-ecrit-main-cassandra-scylladb-keyspaces",
+      "category": "Updates",
+      "publishedAt": "2026-10-04",
+      "sanityId": "ce2c7d4f-ca0a-4afe-a1da-83aefc8f4835"
+    },
+    {
+      "title": "Le repository checker de QoreDB : un script Node qui garde le dépôt navigable",
+      "slug": "repository-checker-depot-navigable-qoredb",
+      "category": "Open Source",
+      "publishedAt": "2026-10-05",
+      "sanityId": "36fcd403-742e-418f-801e-4a0aea749896"
+    },
+    {
+      "title": "Pourquoi QoreDB montre le SQL avant de l'exécuter",
+      "slug": "pourquoi-qoredb-montre-le-sql-avant-de-l-executer",
+      "category": "Vision",
+      "publishedAt": "2026-10-06",
+      "sanityId": "bd337ed3-61b1-47aa-ab77-272eb251f12f"
+    },
+    {
+      "title": "Le driver ClickHouse de QoreDB : parler HTTP et classer chaque requête",
+      "slug": "driver-clickhouse-http-classer-requetes",
+      "category": "Updates",
+      "publishedAt": "2026-10-07",
+      "sanityId": "31a1e619-2f59-431b-93ab-a31cd0e4dd2e"
+    },
+    {
+      "title": "Elasticsearch et OpenSearch dans QoreDB : une console REST branchée sur une grille",
+      "slug": "elasticsearch-opensearch-console-rest-grille",
+      "category": "Updates",
+      "publishedAt": "2026-10-08",
+      "sanityId": "5a13fef0-dff4-43bf-871a-262e794529a3"
+    },
+    {
+      "title": "Le workspace .qoredb : pourquoi QoreDB range son état dans le dépôt du projet",
+      "slug": "workspace-qoredb-etat-depot-projet",
+      "category": "Vision",
+      "publishedAt": "2026-10-09",
+      "sanityId": "7e1e4484-8483-4090-b3ba-08e5f60075ae"
+    },
+    {
+      "title": "Les fixtures navigateur de QoreDB : tester la vraie UI sans base ni Tauri",
+      "slug": "fixtures-navigateur-tester-vraie-ui-sans-base",
+      "category": "Open Source",
+      "publishedAt": "2026-10-11",
+      "sanityId": "121a569b-7698-4844-89bc-143d33b38a3e"
+    },
+    {
+      "title": "Pourquoi Time Travel écrit son propre journal au lieu d'interroger la base",
+      "slug": "time-travel-journal-local-plutot-que-moteur",
+      "category": "Vision",
+      "publishedAt": "2026-10-12",
+      "sanityId": "7efac372-8cbd-42fa-8585-af7ea5f2b433"
+    },
+    {
+      "title": "Les requêtes paramétrées de QoreDB : une substitution en une seule passe",
+      "slug": "requetes-parametrees-substitution-une-passe",
+      "category": "Security",
+      "publishedAt": "2026-10-13",
+      "sanityId": "168ef919-f76d-49a3-a203-ac52f6795945"
+    },
+    {
+      "title": "Le Notebook de QoreDB : références entre cellules et invalidation transitive",
+      "slug": "notebook-references-cellules-invalidation-transitive",
+      "category": "Updates",
+      "publishedAt": "2026-10-14",
+      "sanityId": "1632eaa8-850c-4cbe-8f5a-31235cde6236"
+    },
+    {
+      "title": "L'écriture atomique des fichiers dans QoreDB : un voisin privé, un seul renommage",
+      "slug": "ecriture-atomique-fichiers-voisin-prive-renommage",
+      "category": "Security",
+      "publishedAt": "2026-10-15",
+      "sanityId": "9cd41dbe-d607-4e0c-ade0-301a6a1957c2"
+    },
+    {
+      "title": "Comment QoreDB suit la compatibilité cloud sans compte chez chaque fournisseur",
+      "slug": "suivi-compatibilite-cloud-niveaux-validation",
+      "category": "Open Source",
+      "publishedAt": "2026-10-16",
+      "sanityId": "8c6787d2-aaa9-4b88-8465-b5e4a357f493"
+    },
+    {
+      "title": "Le Data Generator de QoreDB : des lignes de seed dérivées du schéma",
+      "slug": "data-generator-seed-derive-du-schema",
+      "category": "Updates",
+      "publishedAt": "2026-10-18",
+      "sanityId": "ee9a8fa5-7e96-46b8-8345-ae03020b2ec8"
+    },
+    {
+      "title": "Comment QoreDB lie DuckDB : bibliothèque partagée en développement, statique à la distribution",
+      "slug": "linkage-duckdb-partage-developpement-statique-distribution",
+      "category": "Open Source",
+      "publishedAt": "2026-10-19",
+      "sanityId": "9425b75f-4cb4-4d16-937a-538dddb45b82"
+    },
+    {
+      "title": "Partager un export sans serveur QoreDB : le provider reste le vôtre",
+      "slug": "partager-export-sans-serveur-provider-utilisateur",
+      "category": "Vision",
+      "publishedAt": "2026-10-20",
+      "sanityId": "0d7b2a77-8df4-4b08-9496-df5edccaadd5"
+    },
+    {
+      "title": "Les alertes de seuil dans QoreDB : une fenêtre glissante de quinze minutes",
+      "slug": "alertes-seuil-fenetre-glissante-quinze-minutes",
+      "category": "Security",
+      "publishedAt": "2026-10-21",
+      "sanityId": "67ff555a-194b-42ef-b313-1325beabe3c0"
+    },
+    {
+      "title": "Ajouter un driver à QoreDB : le chemin complet du contributeur",
+      "slug": "ajouter-driver-qoredb-chemin-contributeur",
+      "category": "Open Source",
+      "publishedAt": "2026-10-22",
+      "sanityId": "7fea079f-78f4-4410-a317-41f876871af8"
+    },
+    {
+      "title": "Pourquoi l'historique de Time Travel est borné par défaut",
+      "slug": "historique-time-travel-borne-par-defaut",
+      "category": "Vision",
+      "publishedAt": "2026-10-23",
+      "sanityId": "1088cfb3-28a5-4300-b9a7-e29e671be040"
+    },
+    {
+      "title": "Le budget de bundle de QoreDB : huit vérifications et une référence locale",
+      "slug": "budget-bundle-huit-verifications-reference-locale",
+      "category": "Open Source",
+      "publishedAt": "2026-10-24",
+      "sanityId": "3d1ae279-0da5-4d64-a3d3-fb0552b6f63f"
+    },
+    {
+      "title": "Les suggestions d'index de QoreDB : dérivées du plan, pas du texte SQL",
+      "slug": "suggestions-index-derivees-du-plan-explain",
+      "category": "Updates",
+      "publishedAt": "2026-10-25",
+      "sanityId": "91e59add-5b2f-4cba-a28f-6514ad0bcef6"
+    },
+    {
+      "title": "Installer un plugin depuis le marketplace QoreDB : le digest avant l'archive",
+      "slug": "marketplace-plugins-digest-avant-archive",
+      "category": "Open Source",
+      "publishedAt": "2026-10-26",
+      "sanityId": "a00fa0ab-c0f1-45d7-9035-210e080ea09f"
+    },
+    {
+      "title": "Les règles d'interface de QoreDB : une UI qui s'efface devant les données",
+      "slug": "regles-interface-ui-s-efface-devant-donnees",
+      "category": "Vision",
+      "publishedAt": "2026-10-27",
+      "sanityId": "b7b9ceb0-e40b-47af-b1e6-f73eb4131b77"
+    },
+    {
+      "title": "Les certificats client dans QoreDB : trois chemins de fichiers pour un TLS mutuel",
+      "slug": "certificats-client-tls-mutuel-chemins-fichiers",
+      "category": "Security",
+      "publishedAt": "2026-10-28",
+      "sanityId": "fede2050-4fe3-442f-8833-c63a6344be21"
+    },
+    {
+      "title": "Les clés générées à l'insertion : comment QoreDB retrouve la ligne qu'il vient d'écrire",
+      "slug": "cles-generees-insertion-retrouver-la-ligne-ecrite",
+      "category": "Updates",
+      "publishedAt": "2026-10-29",
+      "sanityId": "b1ccaefb-761e-40d9-9d3e-c1eefe526938"
+    },
+    {
+      "slug": "entier-64-bits-transport-sans-arrondi",
+      "title": "Transporter un entier 64 bits jusqu'à l'interface sans l'arrondir",
+      "category": "Vision",
+      "publishedAt": "2026-10-30"
+    },
+    {
+      "title": "L'authentification par agent SSH dans QoreDB : ne jamais détenir la clé privée",
+      "slug": "authentification-agent-ssh-cle-privee-jamais-detenue",
+      "category": "Security",
+      "publishedAt": "2026-10-31",
+      "sanityId": "17fa558b-c458-41e5-a31e-a8b8d995fa93"
+    },
+    {
+      "title": "Pourquoi QoreDB met ses événements en file avant que l'interface soit montée",
+      "slug": "file-evenements-avant-interface-montee",
+      "category": "Open Source",
+      "publishedAt": "2026-11-01",
+      "sanityId": "df0164d0-c1d0-44c1-b7d2-44f2926ba19b"
+    },
+    {
+      "title": "Pourquoi QoreDB compile son SQL interne depuis un AST plutôt que des chaînes",
+      "slug": "sql-interne-compile-depuis-ast",
+      "category": "Vision",
+      "publishedAt": "2026-11-02",
+      "sanityId": "79d586cb-b953-4bf7-80d8-9e0d38dcf01c"
+    },
+    {
+      "title": "Afficher une colonne binaire dans une grille : aperçu borné et visualiseur à la demande",
+      "slug": "colonne-binaire-apercu-borne-visualiseur-demande",
+      "category": "Updates",
+      "publishedAt": "2026-11-03",
+      "sanityId": "8f811c16-8673-41d7-a245-adcaa19e97c3"
+    },
+    {
+      "title": "L'édition en masse dans QoreDB : un UPDATE par ligne, montré avant d'être exécuté",
+      "slug": "edition-en-masse-update-par-ligne-apercu-sql",
+      "category": "Updates",
+      "publishedAt": "2026-11-04",
+      "sanityId": "1324d1c8-1db5-4db4-9cac-ad209d4a2142"
+    },
+    {
+      "title": "La capability Tauri de QoreDB : une liste de permissions explicite et des chemins interdits",
+      "slug": "capability-tauri-permissions-explicites-chemins-interdits",
+      "category": "Security",
+      "publishedAt": "2026-11-05",
+      "sanityId": "d843d1ee-71c8-46c4-b4f6-98c7d57c6b73"
+    },
+    {
+      "title": "Pourquoi QoreDB refuse de générer une migration depuis une capture de schéma incomplète",
+      "slug": "refus-migration-capture-schema-incomplete",
+      "category": "Vision",
+      "publishedAt": "2026-11-06",
+      "sanityId": "8820e271-9f63-45d2-b032-ebece5e40095"
+    },
+    {
+      "title": "Un seul numéro de version dans QoreDB : de package.json au manifeste de mise à jour",
+      "slug": "numero-version-unique-package-json-manifeste-update",
+      "category": "Open Source",
+      "publishedAt": "2026-11-07",
+      "sanityId": "6c259ba9-f194-46cb-b717-fdffaa5573e4"
+    },
+    {
+      "title": "Les filtres en langage naturel du Data Grid : du texte vers des filtres structurés",
+      "slug": "filtres-langage-naturel-filtres-structures",
+      "category": "Updates",
+      "publishedAt": "2026-11-08",
+      "sanityId": "11f62ec9-b25a-4b32-a609-6c1ac60f8b39"
+    },
+    {
+      "title": "Le crash reporting de QoreDB : un rapport écrit sur disque, jamais envoyé",
+      "slug": "crash-reporting-local-rapport-jamais-envoye",
+      "category": "Vision",
+      "publishedAt": "2026-11-09",
+      "sanityId": "325146c2-9536-4aba-893c-015736848b67"
+    },
+    {
+      "title": "La qualification native de QoreDB : un profil jetable et la vraie WebView",
+      "slug": "qualification-native-profil-jetable-vraie-webview",
+      "category": "Open Source",
+      "publishedAt": "2026-11-10",
+      "sanityId": "5cc387e9-5336-43b3-8836-39e09344b4aa"
     }
   ],
   "queue": []
