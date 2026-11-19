@@ -941,23 +941,26 @@
   "pricing_comparison": {
     "title": "正直な価格比較",
     "subtitle": "同じ日常的な利用、まったく異なる総コスト。3年後の状況を見てください。",
-    "year_label": "/年",
-    "perpetual_label": "一度きり",
-    "tco_label": "{{years}} 年間の合計",
+    "tco_label": "アップデート込みで {{years}} 年間",
     "lifetime_perk": "その後は生涯 0 €",
-    "note": "競合他社の価格は公式サイトより、EUR 換算、2026 年 5 月時点。",
+    "note": "価格は各公式サイトの表示価格（米ドル、税抜）で、2026 年 11 月に確認しました。DBeaver PRO Lite の年間プランと、1 台用の TablePlus Basic ライセンスです。",
     "tools": {
       "dbeaver": {
-        "name": "DBeaver PRO",
-        "tagline": "サブスク"
+        "name": "DBeaver PRO Lite",
+        "tagline": "サブスク",
+        "price_label": "/年",
+        "detail": "PRO のエントリー版です。Enterprise は年 255 $、Ultimate は年 510 $ です。"
       },
       "tableplus": {
-        "name": "TablePlus",
-        "tagline": "年間ライセンス"
+        "name": "TablePlus Basic",
+        "tagline": "ライセンス + アップデート",
+        "price_label": "一度きり",
+        "detail": "1 年間のアップデートを含み、その後もアップデートを受け取るには年 59 $ が必要です。更新しなくてもライセンスは使い続けられます。"
       },
       "qoredb": {
         "name": "QoreDB Pro",
-        "tagline": "永久"
+        "tagline": "永久",
+        "price_label": "一度きり"
       }
     }
   },

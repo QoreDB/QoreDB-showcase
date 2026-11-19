@@ -940,23 +940,26 @@
   "pricing_comparison": {
     "title": "诚实的价格对比",
     "subtitle": "相同的日常使用，截然不同的总成本。看看 3 年后的对比。",
-    "year_label": "每年",
-    "perpetual_label": "一次性",
-    "tco_label": "{{years}} 年总计",
+    "tco_label": "含更新的 {{years}} 年总计",
     "lifetime_perk": "之后终身 0 €",
-    "note": "竞品价格来自其官方网站，欧元等值，2026 年 5 月。",
+    "note": "价格为各官方网站的标价（美元，不含税），于 2026 年 11 月核实。DBeaver PRO Lite 年度方案，TablePlus Basic 单设备授权。",
     "tools": {
       "dbeaver": {
-        "name": "DBeaver PRO",
-        "tagline": "订阅"
+        "name": "DBeaver PRO Lite",
+        "tagline": "订阅",
+        "price_label": "每年",
+        "detail": "PRO 入门版。Enterprise 每年 255 $，Ultimate 每年 510 $。"
       },
       "tableplus": {
-        "name": "TablePlus",
-        "tagline": "年度授权"
+        "name": "TablePlus Basic",
+        "tagline": "授权 + 更新",
+        "price_label": "一次性",
+        "detail": "包含 1 年更新，之后每年 59 $ 才能继续获得更新。不续费授权仍可继续使用。"
       },
       "qoredb": {
         "name": "QoreDB Pro",
-        "tagline": "永久"
+        "tagline": "永久",
+        "price_label": "一次性"
       }
     }
   },

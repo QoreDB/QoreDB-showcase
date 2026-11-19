@@ -941,23 +941,26 @@
   "pricing_comparison": {
     "title": "Un confronto onesto sui prezzi",
     "subtitle": "Stesso uso quotidiano, costo totale molto diverso. Guarda il risultato dopo 3 anni.",
-    "year_label": "all’anno",
-    "perpetual_label": "pagamento unico",
-    "tco_label": "Totale su {{years}} anni",
+    "tco_label": "{{years}} anni con aggiornamenti",
     "lifetime_perk": "Poi 0 € a vita",
-    "note": "Prezzi dei concorrenti dai loro siti ufficiali, equivalente in EUR, maggio 2026.",
+    "note": "Prezzi indicati sui siti ufficiali, in dollari USA, tasse escluse, verificati a novembre 2026. Piano annuale DBeaver PRO Lite e licenza TablePlus Basic per 1 dispositivo.",
     "tools": {
       "dbeaver": {
-        "name": "DBeaver PRO",
-        "tagline": "Abbonamento"
+        "name": "DBeaver PRO Lite",
+        "tagline": "Abbonamento",
+        "price_label": "all’anno",
+        "detail": "Edizione PRO di base. Enterprise costa 255 $ e Ultimate 510 $ all’anno."
       },
       "tableplus": {
-        "name": "TablePlus",
-        "tagline": "Licenza annuale"
+        "name": "TablePlus Basic",
+        "tagline": "Licenza + aggiornamenti",
+        "price_label": "pagamento unico",
+        "detail": "Include 1 anno di aggiornamenti, poi 59 $ all’anno per continuare a riceverli. La licenza continua a funzionare senza rinnovo."
       },
       "qoredb": {
         "name": "QoreDB Pro",
-        "tagline": "Perpetua"
+        "tagline": "Perpetua",
+        "price_label": "pagamento unico"
       }
     }
   },

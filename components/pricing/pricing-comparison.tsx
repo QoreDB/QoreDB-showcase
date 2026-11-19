@@ -7,21 +7,24 @@ const TCO_YEARS = 3;
 
 type Competitor = {
   id: "dbeaver" | "tableplus" | "qoredb";
-  /** Annual subscription price in EUR (null = perpetual). */
-  yearlyPrice: number | null;
+  /** Listed price in USD, without conversion; null uses the QoreDB Pro price. */
+  price: number | null;
+  /** Yearly cost after the first year to keep receiving updates. */
+  renewal: number;
   highlight: boolean;
 };
 
 const competitors: Competitor[] = [
-  { id: "dbeaver", yearlyPrice: 199, highlight: false },
-  { id: "tableplus", yearlyPrice: 89, highlight: false },
-  { id: "qoredb", yearlyPrice: null, highlight: true },
+  { id: "dbeaver", price: 113, renewal: 113, highlight: false },
+  { id: "tableplus", price: 99, renewal: 59, highlight: false },
+  { id: "qoredb", price: null, renewal: 0, highlight: true },
 ];
 
-function formatEuro(value: number): string {
-  return new Intl.NumberFormat("fr-FR", {
+function formatUsd(value: number, locale: string): string {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: "EUR",
+    currency: "USD",
+    currencyDisplay: "narrowSymbol",
     maximumFractionDigits: 0,
   }).format(value);
 }
@@ -31,7 +34,7 @@ export function PricingComparison({
 }: {
   qoredbPrice: string | null;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const fallbackPrice = t("pricing_page.pro.price");
   const qoredbDisplay = qoredbPrice ?? fallbackPrice;
 
@@ -49,11 +52,11 @@ export function PricingComparison({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {competitors.map((c) => {
           const isQoreDb = c.id === "qoredb";
-          const yearlyDisplay =
-            c.yearlyPrice != null ? formatEuro(c.yearlyPrice) : qoredbDisplay;
+          const priceDisplay =
+            c.price != null ? formatUsd(c.price, i18n.language) : qoredbDisplay;
           const tcoDisplay =
-            c.yearlyPrice != null
-              ? formatEuro(c.yearlyPrice * TCO_YEARS)
+            c.price != null
+              ? formatUsd(c.price + c.renewal * (TCO_YEARS - 1), i18n.language)
               : qoredbDisplay;
           return (
             <div
@@ -87,16 +90,14 @@ export function PricingComparison({
               <div className="space-y-2 text-sm mt-2">
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="text-(--q-text-2)">
-                    {isQoreDb
-                      ? t("pricing_comparison.perpetual_label")
-                      : t("pricing_comparison.year_label")}
+                    {t(`pricing_comparison.tools.${c.id}.price_label`)}
                   </span>
                   <span
                     className={`font-bold text-lg ${
                       isQoreDb ? "text-(--q-accent)" : "text-(--q-text-0)"
                     }`}
                   >
-                    {yearlyDisplay}
+                    {priceDisplay}
                   </span>
                 </div>
                 <div className="flex items-baseline justify-between gap-2 pt-2 border-t border-(--q-border)/50">
@@ -118,7 +119,11 @@ export function PricingComparison({
                   <Check className="w-3.5 h-3.5" />
                   {t("pricing_comparison.lifetime_perk")}
                 </p>
-              ) : null}
+              ) : (
+                <p className="mt-4 text-xs leading-relaxed text-(--q-text-2)">
+                  {t(`pricing_comparison.tools.${c.id}.detail`)}
+                </p>
+              )}
             </div>
           );
         })}
