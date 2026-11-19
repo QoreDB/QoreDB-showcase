@@ -1,0 +1,816 @@
+{
+  "index": {
+    "title": "适用于你所用每一种引擎的数据库客户端",
+    "meta_title": "支持的数据库：SQL、分析型与 NoSQL 客户端",
+    "subtitle": "QoreDB 在 macOS、Windows 和 Linux 上用同一个桌面应用连接 {{count}} 种数据库。选择一种引擎，了解它如何连接、哪些功能可用，以及需要先了解什么。"
+  },
+  "page": {
+    "meta_title": "适用于 macOS、Windows 和 Linux 的 {{name}} 客户端",
+    "title": "适用于 macOS、Windows 和 Linux 的 {{name}} 客户端",
+    "breadcrumb": "数据库",
+    "back": "全部数据库",
+    "core_badge": "包含在 Core 中",
+    "official_listing": "已收录于 {{name}} 官方文档",
+    "why_title": "为什么用 QoreDB 连接 {{name}}",
+    "highlights_title": "使用 {{name}} 时你能获得什么",
+    "connection_title": "连接概览",
+    "facts": {
+      "port": "默认端口",
+      "protocol": "协议",
+      "schemes": "URL 协议头",
+      "tls": "TLS",
+      "auth": "认证方式"
+    },
+    "no_port": "无，本地文件",
+    "form_only": "仅支持连接表单",
+    "file_path": "文件路径或 :memory:",
+    "tls": {
+      "optional": "支持，可按连接配置",
+      "required": "由服务强制要求",
+      "local": "不适用，本地文件"
+    },
+    "protocols": {
+      "postgres_wire": "PostgreSQL 线路协议",
+      "mysql_wire": "MySQL 线路协议",
+      "tds": "TDS（SQL Server）",
+      "embedded": "嵌入式，进程内运行",
+      "http": "HTTP / HTTPS",
+      "snowflake_api": "基于 HTTPS 的 Snowflake SQL API v2",
+      "bigquery_api": "Google BigQuery REST API",
+      "mongodb_wire": "MongoDB 线路协议",
+      "resp": "RESP（Redis 协议）",
+      "cql": "CQL 原生协议 v4"
+    },
+    "auth": {
+      "password": "用户名和密码",
+      "sqlserver": "SQL 登录、Windows NTLM 或集成认证（SSPI）",
+      "none": "无，直接访问文件",
+      "token": "MotherDuck 访问令牌",
+      "snowflake": "密钥对（RS256 JWT）或程序化访问令牌",
+      "service_account": "服务账号 JSON 密钥",
+      "redis": "密码，或 ACL 用户名和密码",
+      "elasticsearch": "无、基本认证、API 密钥或 Bearer 令牌；支持 Cloud ID",
+      "opensearch": "无、基本认证、API 密钥或 Bearer 令牌",
+      "keyspaces": "服务专用凭据"
+    },
+    "shared_title": "每个 {{name}} 连接还包含",
+    "shared": [
+      "凭据加密保存在本地保险库（vault）中，绝不同步到服务器",
+      "开发、预发和生产环境标签：在生产环境中，DROP 和 TRUNCATE 会被拦截，DELETE 需要确认",
+      "可按连接启用只读模式",
+      "本地审计日志，记录已执行的查询",
+      "无遥测：查询和结果始终留在你的设备上"
+    ],
+    "limits_title": "连接前请了解",
+    "limits_more": "查看全部驱动限制",
+    "guide_title": "分步设置",
+    "guide_body": "连接指南涵盖 {{name}} 的每个字段、TLS 选项和常见错误。",
+    "guide_link": "阅读 {{name}} 连接指南",
+    "related_title": "相关数据库",
+    "cta_title": "在 QoreDB 中打开 {{name}}",
+    "cta_body": "免费开源的 Core，支持 macOS、Windows 和 Linux，无需注册账号。",
+    "cta_download": "下载 QoreDB",
+    "cta_compare": "对比版本"
+  },
+  "databases": {
+    "postgresql": {
+      "description": "用 Rust 构建的高性能桌面 PostgreSQL 客户端：结构浏览器、带自动补全的 SQL 编辑器、可编辑的结果和生产环境防护，全平台可用。",
+      "intro": "QoreDB 将 PostgreSQL 作为一等引擎支持。粘贴 postgresql:// URL 或填写表单，选择从 disable 到 verify-full 的 SSL 模式，即可在同一棵树中浏览模式、表、视图、函数和触发器。查询在原生应用中运行，而不是在浏览器标签页里。",
+      "highlights": [
+        {
+          "title": "支持所有 SSL 模式",
+          "body": "可使用 disable、prefer、require、verify-ca 或 verify-full 连接，服务器位于私有网络时还可配合客户端证书和 SSH 隧道。"
+        },
+        {
+          "title": "真正的取消",
+          "body": "运行中的查询会通过独立连接上的 pg_cancel_backend 取消，因此慢语句不会锁住编辑器。"
+        },
+        {
+          "title": "任何兼容 Postgres 的服务",
+          "body": "Supabase、Neon、TimescaleDB 以及其他线路协议兼容的服务，直接使用它们提供的 DSN 即可，无需额外设置。"
+        }
+      ],
+      "limits": [
+        "每个连接限定于一个数据库。若要浏览同一服务器上的另一个数据库，请再创建一个连接。",
+        "取消其他用户的查询需要 pg_signal_backend 角色，或拥有该查询。"
+      ]
+    },
+    "supabase": {
+      "description": "用控制台中的连接字符串将 QoreDB 连接到 Supabase Postgres。支持直连或连接池，默认启用 TLS，并带有生产环境防护。",
+      "intro": "Supabase 运行的是标准 PostgreSQL，因此 QoreDB 使用其完整的 PostgreSQL 驱动。读写操作请复制直连字符串，短会话请复制端口 6543 上的 PgBouncer 连接池字符串，然后粘贴到“新建连接”中。",
+      "highlights": [
+        {
+          "title": "粘贴控制台中的字符串",
+          "body": "使用“项目设置”的“数据库”页面中的 URL。Supabase 主机会被自动识别，TLS 保持开启。"
+        },
+        {
+          "title": "直连或连接池",
+          "body": "可同时保留两个连接：直连用于迁移和编辑，连接池用于快速读取。"
+        },
+        {
+          "title": "更安全的生产环境操作",
+          "body": "将项目标记为生产环境：DROP 和 TRUNCATE 会被拦截，DELETE 会先要求确认。"
+        }
+      ],
+      "limits": [
+        "如果项目启用了 IP 白名单，需先放行你的设备地址，连接才能生效。",
+        "连接池端点使用事务级池化，因此会话级设置不会在语句之间保留。"
+      ]
+    },
+    "neon": {
+      "description": "适用于 Neon 无服务器 Postgres 的桌面客户端：粘贴连接字符串，保持 TLS 开启，并用原生 SQL 编辑器浏览各分支的结构。",
+      "intro": "Neon 使用 PostgreSQL 协议，因此 QoreDB 通过其 PostgreSQL 驱动，使用 Neon 控制台中的字符串进行连接。端点主机和 sslmode=require 已包含在其中。为你使用的每个分支各保存一个连接。",
+      "highlights": [
+        {
+          "title": "每个分支一个连接",
+          "body": "将不同连接分别指向开发分支和生产分支，并为每个连接标记对应的环境。"
+        },
+        {
+          "title": "开箱即用的 TLS",
+          "body": "Neon 字符串带有 sslmode=require，QoreDB 会保留它。凭据加密保存在本地保险库中。"
+        },
+        {
+          "title": "完整的 PostgreSQL 工具集",
+          "body": "结构浏览器、可编辑的结果、导出和笔记本的使用方式与自托管服务器完全一致。"
+        }
+      ],
+      "limits": [
+        "缩容到零的端点在冷启动后，响应第一次查询需要稍等片刻。"
+      ]
+    },
+    "timescaledb": {
+      "description": "用桌面 SQL 客户端查询 TimescaleDB 和 Timescale Cloud，可查看超表的维度、分块、压缩和保留策略。",
+      "intro": "TimescaleDB 是带有时序扩展的 PostgreSQL，QoreDB 使用 PostgreSQL 驱动连接它。超表会在浏览器中被标出，其“信息”选项卡会显示维度、分块间隔与数量，以及压缩和保留策略。",
+      "highlights": [
+        {
+          "title": "让超表一目了然",
+          "body": "查看哪些表是超表、它们如何分块，以及适用哪些压缩和保留策略。"
+        },
+        {
+          "title": "标准 SQL",
+          "body": "连续聚合和 time_bucket 查询可在常规编辑器中运行，并支持自动补全和结果导出。"
+        },
+        {
+          "title": "自托管或云端",
+          "body": "同一个连接表单既适用于本地实例，也适用于启用 TLS 的 Timescale Cloud。"
+        }
+      ],
+      "limits": [
+        "TimescaleDB 无法从主机地址识别。请在连接对话框中选择该引擎，才能看到超表详情。"
+      ]
+    },
+    "cockroachdb": {
+      "description": "带专用驱动的桌面 CockroachDB 客户端：端口 26257、defaultdb、已过滤的系统目录，以及你熟悉的 PostgreSQL 工具集。",
+      "intro": "CockroachDB 在 QoreDB 中拥有独立的引擎，基于 PostgreSQL 线路协议，并针对 CockroachDB 的目录做了调整。结构树会隐藏 crdb_internal，跳过 CockroachDB 不具备的物化视图，并将维护操作精简为 ANALYZE。",
+      "highlights": [
+        {
+          "title": "了解 CockroachDB 的驱动",
+          "body": "默认使用端口 26257 和 defaultdb 数据库，并可识别 cockroachdb:// URL。"
+        },
+        {
+          "title": "清爽的结构浏览",
+          "body": "内部目录已被过滤，因此结构树只显示你的数据库、模式和表。"
+        },
+        {
+          "title": "支持 CockroachDB Cloud",
+          "body": "使用 sslmode=verify-full 和集群 CA 连接，并标记生产集群，使破坏性语句受到防护。"
+        }
+      ],
+      "limits": [
+        "发生序列化冲突时，事务被要求重试的情况可能比 PostgreSQL 更常见。请在编辑器中重新执行失败的语句。",
+        "不提供 VACUUM 和 REINDEX，CockroachDB 会自行完成这类维护。"
+      ]
+    },
+    "yugabytedb": {
+      "description": "通过端口 5433 将 QoreDB 连接到 YugabyteDB YSQL。具备结构浏览、编辑和生产环境防护的桌面 SQL 客户端。",
+      "intro": "QoreDB 内置 YugabyteDB 驱动，使用 PostgreSQL 协议和目录，并采用 YugabyteDB 的默认值：端口 5433 和 yugabyte 数据库。yugabyte.cloud 下的主机会被自动识别。",
+      "highlights": [
+        {
+          "title": "YugabyteDB 默认值",
+          "body": "端口 5433 和 yugabyte 数据库已预先填写，本地集群无需猜测即可连接。"
+        },
+        {
+          "title": "PostgreSQL 工具集",
+          "body": "与在 PostgreSQL 上一样，可浏览模式、运行带自动补全的 SQL、编辑并导出结果。"
+        },
+        {
+          "title": "托管集群",
+          "body": "yugabyte.cloud 下的主机会被识别，经过验证的 TLS 可确保与集群之间连接的身份可信。"
+        }
+      ],
+      "limits": [
+        "此处连接的是 YSQL API，而不是 YCQL。",
+        "PostgreSQL 兼容并不保证你的集群上存在所有扩展或管理命令。"
+      ]
+    },
+    "mysql": {
+      "description": "适用于 macOS、Windows 和 Linux 的原生 MySQL 客户端：SQL 编辑器、存储例程、触发器和事件、可编辑的结果，以及安全的生产环境访问。",
+      "intro": "QoreDB 通过 mysql:// URL 或表单连接 MySQL，SSL 模式从 disabled 到 verify-identity。结构树会列出数据库、表、视图、存储例程、触发器和事件，并默认隐藏系统模式。",
+      "highlights": [
+        {
+          "title": "存储例程、触发器和事件",
+          "body": "在结构树中浏览存储过程、函数、触发器和计划事件。"
+        },
+        {
+          "title": "查询取消",
+          "body": "长时间运行的查询通过 KILL QUERY 停止，因此失控的语句可以直接在编辑器中取消。"
+        },
+        {
+          "title": "内置备份",
+          "body": "已安装 mysqldump 时，可在界面中运行它，支持流式输出和取消。"
+        }
+      ],
+      "limits": [
+        "回滚以 InnoDB 为前提。使用 MyISAM 或其他非事务引擎的表无法回滚。",
+        "取消查询需要 PROCESS 权限；取消其他用户的查询还需要 SUPER 权限。"
+      ]
+    },
+    "mariadb": {
+      "description": "用 Rust 构建的桌面 MariaDB 客户端：与 MySQL 使用同一驱动，支持 SSL、存储例程、触发器、备份，并在生产环境执行破坏性查询前要求确认。",
+      "intro": "MariaDB 在 QoreDB 中使用 MySQL 驱动，mysql:// URL、SSL 模式和结构树都与 MySQL 相同。请在对话框中选择 MariaDB，使连接被正确标注，然后浏览数据库、存储例程、触发器和事件。",
+      "highlights": [
+        {
+          "title": "一个驱动，两种引擎",
+          "body": "在 MySQL 上可用的功能在 MariaDB 上同样可用：编辑器、可编辑的结果、存储例程、事件和导出。"
+        },
+        {
+          "title": "在界面中备份",
+          "body": "你的设备上有 mysqldump 可执行文件时，可使用其辅助功能并获得流式输出。"
+        },
+        {
+          "title": "生产环境防护",
+          "body": "将服务器标记为生产环境：DROP 和 TRUNCATE 会被拦截，DELETE 需要确认。"
+        }
+      ],
+      "limits": [
+        "MariaDB 无法从 URL 识别。请在对话框中选择该引擎。",
+        "MyISAM 等非事务存储引擎无法回滚。"
+      ]
+    },
+    "planetscale": {
+      "description": "强制启用 TLS 并呈现 Vitess 限制，将 QoreDB 连接到 PlanetScale：面向无服务器分支的桌面 MySQL 客户端。",
+      "intro": "PlanetScale 连接使用 MySQL 驱动，并叠加 PlanetScale 的规则。QoreDB 会识别 psdb.cloud 主机，连接时强制启用 TLS，并隐藏 Vitess 不运行的存储例程、触发器和事件，而不是让你编辑注定会失败的内容。",
+      "highlights": [
+        {
+          "title": "TLS 始终开启",
+          "body": "disable 或 prefer 的 SSL 模式会被提升为 require，更严格的验证模式则保持不变。"
+        },
+        {
+          "title": "如实呈现 Vitess",
+          "body": "不支持的存储例程、触发器、事件和序列会被报告为不存在，因此界面只提供可以运行的功能。"
+        },
+        {
+          "title": "面向分支的工作流",
+          "body": "让一个连接指向开发分支以进行结构变更，并让生产分支保持只读。"
+        }
+      ],
+      "limits": [
+        "未提供部署请求的建模。迁移会直接应用到所连接的分支。",
+        "除非分支启用了外键约束，否则不会强制执行外键。"
+      ]
+    },
+    "tidb": {
+      "description": "桌面 TiDB 客户端：端口 4000 上的 MySQL 协议，自动识别 TiDB Cloud 主机，只提供 TiDB 支持的操作。",
+      "intro": "QoreDB 内置基于 MySQL 协议的 TiDB 驱动，采用 TiDB 的默认值和限制。端口 4000 已预先填写，tidbcloud.com 主机会被识别，TiDB 不支持的 MySQL 控件保持隐藏。",
+      "highlights": [
+        {
+          "title": "支持 TiDB Cloud",
+          "body": "粘贴 tidbcloud.com URL，即可自动选中 TiDB 引擎并启用 TLS。"
+        },
+        {
+          "title": "只提供 TiDB 能运行的功能",
+          "body": "TiDB 不支持的存储例程、触发器、事件和维护操作会被隐藏。"
+        },
+        {
+          "title": "熟悉的 MySQL 工具集",
+          "body": "浏览数据库和表，运行带自动补全的 SQL，并将结果导出为 CSV、JSON 或 SQL。"
+        }
+      ],
+      "limits": [
+        "对于本地服务器，请显式选择 TiDB；通用的 mysql:// URL 会被识别为 MySQL。"
+      ]
+    },
+    "singlestore": {
+      "description": "通过 MySQL 协议将 QoreDB 连接到 SingleStore，适配 SingleStore 的会话处理，并自动识别云主机。",
+      "intro": "SingleStore 驱动使用 MySQL 协议，并针对 SingleStore 调整了会话设置。svc.singlestore.com 下的云主机会被识别，可视化 DDL 编辑器只显示 SingleStore 接受的约束。",
+      "highlights": [
+        {
+          "title": "适配的会话设置",
+          "body": "会跳过 SingleStore 拒绝的时区设置，因此连接可以顺利建立。"
+        },
+        {
+          "title": "适配的 DDL 编辑器",
+          "body": "由于 SingleStore 对这些约束的处理方式不同，可视化编辑器中隐藏了外键、CHECK 和唯一性控件。"
+        },
+        {
+          "title": "云端识别",
+          "body": "SingleStore Helios 端点会自动选中正确的引擎。"
+        }
+      ],
+      "limits": [
+        "自托管集群请显式选择 SingleStore；普通的 mysql:// URL 会被识别为 MySQL。"
+      ]
+    },
+    "sql-server": {
+      "description": "不止 Windows，也适用于 macOS 和 Linux 的 SQL Server 客户端：SQL、NTLM 或集成认证，结构浏览，以及安全的生产环境操作。",
+      "intro": "QoreDB 通过原生 TDS 驱动连接 Microsoft SQL Server，因此除 Windows 外，也能在 macOS 和 Linux 上运行。SQL 认证可在任何平台使用，NTLM 和集成认证则适用于 Windows。你可以浏览模式、表、视图和存储过程。",
+      "highlights": [
+        {
+          "title": "任何操作系统上的 SQL Server",
+          "body": "无需安装 ODBC 驱动：TDS 客户端已内置在应用中，支持 macOS、Windows 和 Linux。"
+        },
+        {
+          "title": "三种认证模式",
+          "body": "SQL 登录适用于所有平台；Windows NTLM 和集成认证（SSPI）在 Windows 上可用。"
+        },
+        {
+          "title": "连接池",
+          "body": "连接池使你在浏览的同时，还能在并行标签页中运行查询，编辑器依然保持响应。"
+        }
+      ],
+      "limits": [
+        "不支持依赖 SQL Server Browser 服务的命名实例。请使用该实例的静态端口。",
+        "启用 SSL 时，服务器证书会被直接信任，不做严格的 CA 验证。"
+      ]
+    },
+    "azure-sql": {
+      "description": "适用于 macOS、Windows 和 Linux 的桌面 Azure SQL Database 客户端，强制启用 TLS，并自动识别 database.windows.net 主机。",
+      "intro": "Azure SQL 在 QoreDB 中使用 SQL Server 的 TDS 驱动，拥有独立的标识，并对每个连接强制启用 TLS。database.windows.net 下的主机会被识别，因此粘贴服务器名称即可选中该引擎。",
+      "highlights": [
+        {
+          "title": "强制加密",
+          "body": "无论 URL 如何写，驱动都会强制启用 TLS。"
+        },
+        {
+          "title": "在 macOS 和 Linux 上原生运行",
+          "body": "无需 Windows 或 ODBC 配置，即可在与其他数据库相同的应用中查询 Azure SQL。"
+        },
+        {
+          "title": "受防护的生产环境访问",
+          "body": "将数据库标记为生产环境，使破坏性语句被拦截或需要确认。"
+        }
+      ],
+      "limits": [
+        "Azure SQL 上可能不存在实例级的 SQL Server 管理功能。服务器允许什么，取决于你的角色。"
+      ]
+    },
+    "sqlite": {
+      "description": "适用于 macOS、Windows 和 Linux 的高性能 SQLite 浏览器与编辑器。打开 .db 文件或内存数据库，无需服务器或凭据。",
+      "intro": "打开任意 .db、.sqlite 或 .sqlite3 文件，或新建内存数据库，QoreDB 都会提供与服务器引擎相同的结构树、SQL 编辑器和可编辑表格。支持 WAL 模式、FTS5 表和转储备份。",
+      "highlights": [
+        {
+          "title": "面向文件，而非服务器",
+          "body": "指向本地文件或使用 :memory:。无需配置端口、用户或密码。"
+        },
+        {
+          "title": "安全地编辑数据",
+          "body": "在结果表格中编辑行，并应用与服务器引擎相同的环境防护。"
+        },
+        {
+          "title": "转储与导出",
+          "body": "使用 sqlite3 转储辅助功能备份，或将结果导出为 CSV、JSON、SQL 或 HTML。"
+        }
+      ],
+      "limits": [
+        "SQLite 会串行化写入，因此长时间的写事务会阻塞其他写入方，直到它提交。",
+        "除非表被声明为 STRICT，否则列使用类型亲和性。"
+      ]
+    },
+    "duckdb": {
+      "description": "桌面 DuckDB 客户端：打开 .duckdb 文件，查询本地 CSV 和 Parquet，在任意操作系统的原生 SQL 编辑器中进行分析。",
+      "intro": "DuckDB 直接运行在 QoreDB 内部，无需另外启动任何服务。打开 .duckdb 或 .db 文件，或内存数据库，即可用 DuckDB SQL 查询本地 CSV 和 Parquet 文件。QoreDB 的跨库查询也使用 DuckDB 作为底层引擎。",
+      "highlights": [
+        {
+          "title": "全速处理本地文件",
+          "body": "直接查询 CSV 和 Parquet 文件，查询在 UI 线程之外运行，应用保持响应。"
+        },
+        {
+          "title": "内存草稿区",
+          "body": "打开 :memory: 进行一次性分析，再将需要保留的内容导出为 CSV 或 JSON。"
+        },
+        {
+          "title": "跨数据库联接",
+          "body": "在 Pro 版中，DuckDB 驱动联邦查询：在一条查询中将 PostgreSQL 表与 MongoDB 集合联接。"
+        }
+      ],
+      "limits": [
+        "数据库文件必须使用 .duckdb 或 .db 扩展名。",
+        "连接关闭后，内存中的数据会丢失。"
+      ]
+    },
+    "motherduck": {
+      "description": "使用令牌，通过其兼容 PostgreSQL 的端点将 QoreDB 连接到 MotherDuck，并在桌面端浏览云端 DuckDB 目录。",
+      "intro": "MotherDuck 驱动将你的访问令牌作为密码，连接到 MotherDuck 兼容 PostgreSQL 的端点，并读取 DuckDB 目录以浏览结构。区域主机可以从令牌中推断。",
+      "highlights": [
+        {
+          "title": "令牌登录",
+          "body": "粘贴 MotherDuck 令牌。它加密保存在本地保险库中，绝不会出现在查询里。"
+        },
+        {
+          "title": "从令牌获取区域",
+          "body": "对于受支持的 AWS 区域，表单会根据令牌的 mdRegion 声明填充区域主机。"
+        },
+        {
+          "title": "DuckDB 目录",
+          "body": "模式和表来自 information_schema 和 duckdb_ 目录函数，而不是 PostgreSQL 的目录。"
+        }
+      ],
+      "limits": [
+        "这是远程连接，而不是本地 .duckdb 文件。文件请使用 DuckDB 引擎。",
+        "PostgreSQL 线路协议兼容并不意味着 MotherDuck 是 PostgreSQL 服务器；功能以 MotherDuck 驱动为准。"
+      ]
+    },
+    "clickhouse": {
+      "description": "已收录于 ClickHouse 官方文档的原生 ClickHouse 客户端：HTTP 和 HTTPS、28 种映射类型、KILL QUERY 取消与查询安全。",
+      "intro": "QoreDB 内置基于 HTTP（8123）或 HTTPS（8443）的原生 ClickHouse 驱动，使用 Rustls，无需系统 OpenSSL。语句在运行前会先被分类，结果会映射 28 种 ClickHouse 类型，可视化 DDL 编辑器能够理解 MergeTree 表。",
+      "highlights": [
+        {
+          "title": "面向集群的查询安全",
+          "body": "SYSTEM 命令和 OPTIMIZE FINAL 会被拒绝，生产环境规则适用于每一次变更。"
+        },
+        {
+          "title": "丰富的类型支持",
+          "body": "数组、元组、映射、枚举、IPv4 和 IPv6、DateTime64 以及 Decimal 都能在表格中正确显示。"
+        },
+        {
+          "title": "真正有效的取消",
+          "body": "长时间的聚合查询可直接在编辑器中，通过针对其 query_id 的 KILL QUERY 停止。"
+        }
+      ],
+      "limits": [
+        "不支持端口 9000 上的原生 TCP 协议；请使用 HTTP 或 HTTPS。",
+        "可视化编辑器中没有 ON CLUSTER 和分布式表的修改，请用 SQL 编写。"
+      ]
+    },
+    "snowflake": {
+      "description": "桌面 Snowflake 客户端：密钥对或令牌认证，按连接设置仓库和角色，异步查询和真正的取消。",
+      "intro": "QoreDB 通过基于 HTTPS 的 SQL API v2 与 Snowflake 通信，不依赖厂商 SDK。可按连接选择仓库和角色，使用密钥对或程序化访问令牌登录，语句以异步方式运行，取消请求会发送到服务端。",
+      "highlights": [
+        {
+          "title": "密钥对认证",
+          "body": "粘贴你的 RSA 私钥；QoreDB 在本地签发 RS256 令牌，并将密钥保存在加密的保险库中。"
+        },
+        {
+          "title": "按连接设置仓库和角色",
+          "body": "为每个仓库和角色各保存一个连接，使成本和权限一目了然。"
+        },
+        {
+          "title": "真正地取消",
+          "body": "取消语句会在 Snowflake 中真正停止它，而不仅仅是在界面中。"
+        }
+      ],
+      "limits": [
+        "结果上限为 200,000 行；若还有更多分页，会明确报错。",
+        "不支持密码和浏览器登录。不提供事务、可视化 DDL 和存储例程管理。"
+      ]
+    },
+    "bigquery": {
+      "description": "在运行查询前估算扫描量，并在产生费用前询问确认的桌面 BigQuery 客户端。服务账号登录，支持任意操作系统。",
+      "intro": "QoreDB 通过 Google 的 REST API，使用服务账号 JSON 密钥连接 BigQuery。它会列出该账号可见的各项目中的数据集，无需运行扫描即可预览表，并在每条编辑器查询运行前进行估算。",
+      "highlights": [
+        {
+          "title": "先估算扫描量",
+          "body": "编辑器中的查询会先进行试运行；当扫描可能产生费用时，QoreDB 会要求确认。"
+        },
+        {
+          "title": "免费的表预览",
+          "body": "预览使用 tabledata.list，因此打开表不会产生查询费用。"
+        },
+        {
+          "title": "项目与位置",
+          "body": "可按连接设置默认项目、计费项目和位置，并跨项目浏览数据集。"
+        }
+      ],
+      "limits": [
+        "个人 Google 登录或 API 密钥无法替代服务账号密钥。",
+        "结果上限为 200,000 行。不提供事务、可视化 DDL 和存储例程管理。"
+      ]
+    },
+    "starrocks": {
+      "description": "通过 MySQL 端点，在桌面 SQL 客户端中浏览和查询 StarRocks，支持结构内省和生产环境防护。",
+      "intro": "StarRocks 驱动连接到端口 9030 上的前端 MySQL 端点，并内省数据库、表和列。它面向查询而设计：由于 StarRocks 的键和分布模型与 MySQL 不同，行编辑、事务和可视化 DDL 均已关闭。",
+      "highlights": [
+        {
+          "title": "为分析而生",
+          "body": "在 StarRocks 上运行 SQL，支持自动补全，并用虚拟化表格处理大型结果集。"
+        },
+        {
+          "title": "没有误导性的控件",
+          "body": "行编辑、事务和可视化 DDL 被直接禁用，而不是先提供、再在服务端失败。"
+        },
+        {
+          "title": "导出",
+          "body": "将结果导出为 CSV、JSON 或 SQL，用于报表和下游工具。"
+        }
+      ],
+      "limits": [
+        "请显式选择 StarRocks；通用的 mysql:// URL 无法识别它。"
+      ]
+    },
+    "apache-doris": {
+      "description": "通过 MySQL 协议连接 Apache Doris 的桌面客户端：浏览目录，运行分析型 SQL，并带有生产环境防护。",
+      "intro": "QoreDB 连接到端口 9030 上的 Apache Doris 前端 MySQL 端点。可浏览目录并运行 SQL；由于 Doris 的 OLAP 模型与 MySQL 不同，结构化行编辑、事务和可视化 DDL 均已禁用。",
+      "highlights": [
+        {
+          "title": "SQL 优先",
+          "body": "编写带自动补全的分析型查询，并在虚拟化表格中查看大型结果。"
+        },
+        {
+          "title": "目录浏览",
+          "body": "数据库、表和列通过 MySQL 协议，来自 Doris 目录。"
+        },
+        {
+          "title": "同样的安全保障",
+          "body": "只读模式和生产环境确认与其他所有引擎一样适用。"
+        }
+      ],
+      "limits": [
+        "请使用前端查询端口，而不是 HTTP 管理端口。",
+        "MySQL 线路协议兼容并不等于与 MySQL 功能对等。"
+      ]
+    },
+    "azure-synapse": {
+      "description": "在 macOS、Windows 和 Linux 的桌面客户端中查询 Azure Synapse 专用和无服务器 SQL 池，强制启用 TLS。",
+      "intro": "Azure Synapse 驱动使用 TDS 并强制启用 TLS，可识别 sql.azuresynapse.net 主机。它专注于 SQL 查询和目录浏览，并禁用行编辑、事务、维护和可视化 DDL，使专用池和无服务器池的行为保持一致。",
+      "highlights": [
+        {
+          "title": "专用或无服务器",
+          "body": "可连接到工作区的任一端点；驱动会避开只有其中一种才支持的操作。"
+        },
+        {
+          "title": "任何桌面操作系统",
+          "body": "无需安装 ODBC 驱动，即可在 macOS 或 Linux 上查询 Synapse。"
+        },
+        {
+          "title": "默认加密",
+          "body": "每个连接都强制启用 TLS，凭据保存在本地保险库中。"
+        }
+      ],
+      "limits": [
+        "此驱动禁用了结构化行编辑、事务、维护操作和可视化 DDL。"
+      ]
+    },
+    "mongodb": {
+      "description": "桌面 MongoDB 客户端，带专用查询编辑器、聚合管道、文档表格、索引和生产环境防护。支持 SRV 和 Atlas。",
+      "intro": "QoreDB 通过 mongodb:// 或 mongodb+srv:// URL 连接独立部署的 MongoDB、副本集和 Atlas。专用编辑器运行 find 和 aggregate 命令，文档可在表格中或以 JSON 形式打开，索引则在集合视图中管理。",
+      "highlights": [
+        {
+          "title": "真正的 Mongo 编辑器",
+          "body": "在为 JSON 和 BSON 设计的编辑器中编写查询和聚合管道，运行前会先进行校验。"
+        },
+        {
+          "title": "Atlas 与副本集",
+          "body": "SRV 记录、TLS 和认证选项均由连接表单处理。"
+        },
+        {
+          "title": "默认安全",
+          "body": "$where、$function 和 $accumulator 会被拦截，因此客户端不会运行任何服务端 JavaScript。"
+        }
+      ],
+      "limits": [
+        "多文档事务需要副本集；独立部署的服务器不支持。",
+        "聚合管道最多 50 个阶段。"
+      ]
+    },
+    "amazon-documentdb": {
+      "description": "强制启用 TLS，验证 Amazon 的 CA 证书包，并处理 retryWrites，将 QoreDB 连接到 Amazon DocumentDB。面向 DocumentDB 集群的桌面客户端。",
+      "intro": "DocumentDB 使用 MongoDB 驱动，并应用 DocumentDB 的规则。TLS 被强制启用，以 Amazon 的 global-bundle.pem 作为信任锚，retryWrites 被关闭，位于 VPC 内的集群则通过连接表单中的 SSH 隧道访问。",
+      "highlights": [
+        {
+          "title": "经过验证的 TLS",
+          "body": "当 CA 证书包路径缺失时，QoreDB 会拒绝连接，而不是退回到未验证的连接。"
+        },
+        {
+          "title": "VPC 访问",
+          "body": "通过 SSH 隧道访问私有集群；隧道之后仍会验证 CA。"
+        },
+        {
+          "title": "MongoDB 工具集",
+          "body": "在 DocumentDB 集合上使用 Mongo 编辑器、文档表格和索引视图。"
+        }
+      ],
+      "limits": [
+        "DocumentDB 仅部分兼容 MongoDB：缺少一些聚合运算符和索引类型，服务端错误会原样传递。",
+        "可重试写入始终处于禁用状态。"
+      ]
+    },
+    "redis": {
+      "description": "适用于 macOS、Windows 和 Linux 的 Redis 图形界面：用 SCAN 浏览键，检查每种数据类型，运行命令并防护危险命令。",
+      "intro": "QoreDB 通过 redis:// 或 rediss:// URL 连接 Redis，列出非空数据库，并用 SCAN 浏览键。字符串、哈希、列表、集合、有序集合和流，各自在与其类型相匹配的视图中打开。",
+      "highlights": [
+        {
+          "title": "每种数据类型",
+          "body": "检查字符串、哈希、列表、集合、有序集合和流，并针对每种类型提供适配的预览。"
+        },
+        {
+          "title": "命令控制台",
+          "body": "在编辑器中运行 Redis 命令；写入会被归类为变更，并遵循环境规则。"
+        },
+        {
+          "title": "标出危险命令",
+          "body": "FLUSHALL、FLUSHDB、CONFIG、SHUTDOWN 和 SCRIPT FLUSH 会在到达服务器之前触发警告。"
+        }
+      ],
+      "limits": [
+        "键和值不能在表格中就地编辑；请使用 SET 或 HSET 等命令。",
+        "Redis Cluster 通过入口节点访问，而不是作为单独的集群视图。"
+      ]
+    },
+    "valkey": {
+      "description": "支持 valkey:// 和 valkeys:// URL 的桌面 Valkey 客户端：浏览键，检查数据类型，并在安全检查下运行命令。",
+      "intro": "Valkey 在 QoreDB 中使用 Redis 驱动，拥有自己的标识和 URL 协议头。valkey:// 和 valkeys:// 可被识别，因此粘贴 URL 即可选中正确的引擎，QoreDB 为 Redis 提供的一切功能在这里的工作方式都相同。",
+      "highlights": [
+        {
+          "title": "原生 URL 协议头",
+          "body": "valkey:// 通过 TCP 连接，valkeys:// 通过 TLS 连接，与 redis:// 和 rediss:// 相对应。"
+        },
+        {
+          "title": "键浏览器",
+          "body": "用 SCAN 浏览数据库和键，并在专用视图中打开每种数据类型。"
+        },
+        {
+          "title": "安全检查",
+          "body": "破坏性命令会被标出，生产环境连接适用更严格的规则。"
+        }
+      ],
+      "limits": [
+        "Redis 驱动的所有限制均适用，包括不能在表格中就地编辑值。"
+      ]
+    },
+    "dragonfly": {
+      "description": "通过 Redis 协议，在桌面客户端中浏览和查询 Dragonfly：键浏览器、数据类型视图和命令控制台。",
+      "intro": "Dragonfly 与 Redis 线路协议兼容，因此 QoreDB 使用 Redis 驱动，以 Dragonfly 的标识连接它。使用 redis:// 或 rediss:// URL，并在对话框中选择 Dragonfly，使连接被正确标注。",
+      "highlights": [
+        {
+          "title": "Redis 兼容",
+          "body": "键浏览、类型预览和命令执行的工作方式与 Redis 相同。"
+        },
+        {
+          "title": "需要时启用 TLS",
+          "body": "rediss:// 启用 TLS，凭据加密保存在本地保险库中。"
+        },
+        {
+          "title": "环境防护",
+          "body": "将 Dragonfly 实例标记为生产环境，使破坏性命令受到防护。"
+        }
+      ],
+      "limits": [
+        "Dragonfly 没有自己的 URL 协议头，也无法从服务器识别。请在对话框中选择它。"
+      ]
+    },
+    "keydb": {
+      "description": "基于 RESP 的桌面 KeyDB 客户端：浏览键，检查数据类型，并在与 Redis 相同的安全检查下运行命令。",
+      "intro": "QoreDB 通过其 RESP 驱动，以 KeyDB 的标识连接 KeyDB。使用 redis:// 或 rediss:// URL，在对话框中选择 KeyDB，然后像在 Redis 上一样浏览键和运行命令。",
+      "highlights": [
+        {
+          "title": "键浏览",
+          "body": "用 SCAN 列出数据库和键，并在各自的视图中预览每种数据类型。"
+        },
+        {
+          "title": "命令编辑器",
+          "body": "在编辑器中运行 KeyDB 命令，带有历史记录和结果视图。"
+        },
+        {
+          "title": "受防护的写入",
+          "body": "变更和破坏性命令遵循只读模式和生产环境确认。"
+        }
+      ],
+      "limits": [
+        "KeyDB 无法从服务器识别，也没有 keydb:// 协议头。请显式选择它。",
+        "KeyDB 专有的管理功能不是单独的特性；适用 Redis 驱动的限制。"
+      ]
+    },
+    "garnet": {
+      "description": "通过 Redis 协议将 QoreDB 连接到 Microsoft Garnet：浏览键，运行你的服务器支持的命令。",
+      "intro": "Garnet 使用 RESP，因此 QoreDB 使用 Redis 驱动，以 Garnet 的标识连接它。使用 redis:// 或 rediss:// URL，在对话框中选择 Garnet，即可浏览键和运行命令。",
+      "highlights": [
+        {
+          "title": "RESP 客户端",
+          "body": "键浏览和命令执行与 Redis、Valkey 和 Dragonfly 使用同一个驱动。"
+        },
+        {
+          "title": "TLS 与凭据",
+          "body": "使用 rediss:// 启用 TLS；密码加密保存在本地保险库中。"
+        },
+        {
+          "title": "同样的安全保障",
+          "body": "危险命令会被标出，生产环境连接适用更严格的规则。"
+        }
+      ],
+      "limits": [
+        "Redis 协议兼容并不保证 Garnet 支持每一条 Redis 命令或模块。",
+        "没有 garnet:// 协议头。请在对话框中选择该引擎。"
+      ]
+    },
+    "elasticsearch": {
+      "description": "桌面 Elasticsearch 客户端，带 Dev Tools 风格的控制台、SQL 模式、映射浏览器和受防护的索引操作。",
+      "intro": "QoreDB 通过端口 9200 上的 HTTP 或 HTTPS 连接 Elasticsearch，或使用 Cloud ID 连接 Elastic Cloud。以 METHOD /path 加 JSON 请求体的形式编写请求，切换到 SQL 模式进行表格化查询，并在结构树中浏览索引映射。",
+      "highlights": [
+        {
+          "title": "Dev Tools 控制台",
+          "body": "发送任意带 JSON 请求体的 REST 请求，并以表格或原始 JSON 查看响应。"
+        },
+        {
+          "title": "支持 Elastic Cloud",
+          "body": "使用 Cloud ID 连接，并通过基本认证、API 密钥或 Bearer 令牌进行认证。密钥保存在本地保险库中。"
+        },
+        {
+          "title": "受防护的索引操作",
+          "body": "索引的创建和删除、文档写入、_reindex 和集群设置遵循只读模式和生产环境规则。"
+        }
+      ],
+      "limits": [
+        "SQL 模式受 Elasticsearch SQL API 的限制：其中无法使用联接、部分函数和 DDL。",
+        "结构浏览器按引擎所知的样子显示映射；动态映射意味着字段在不同文档之间可能不同。"
+      ]
+    },
+    "opensearch": {
+      "description": "桌面 OpenSearch 客户端：REST 控制台、SQL 模式、映射浏览器，以及对索引和集群操作的安全检查。",
+      "intro": "OpenSearch 驱动与 Elasticsearch 共用 QoreDB 的搜索引擎支持，并在连接时检查服务器的发行版。可发送带 JSON 请求体的 REST 请求，用 SQL 模式查询，并浏览索引映射。",
+      "highlights": [
+        {
+          "title": "REST 控制台",
+          "body": "编写 METHOD /path 加 JSON 请求体的请求，并以表格或 JSON 查看响应。"
+        },
+        {
+          "title": "灵活的认证",
+          "body": "可通过 HTTP 或 HTTPS 使用无认证、基本认证、API 密钥或 Bearer 令牌。"
+        },
+        {
+          "title": "安全的集群操作",
+          "body": "索引删除、重建索引和集群设置受只读模式和生产环境确认的约束。"
+        }
+      ],
+      "limits": [
+        "要求 SigV4 请求签名的 AWS OpenSearch Service 域需要通过代理访问。",
+        "SQL 模式受 OpenSearch SQL 插件的限制。"
+      ]
+    },
+    "cassandra": {
+      "description": "带原生 CQL v4 驱动的桌面 Cassandra 客户端：键空间浏览、游标分页、主键编辑和生产环境防护。",
+      "intro": "QoreDB 使用依据协议规范编写的自有 CQL v4 客户端与 Cassandra 通信。它从 system_schema 列出键空间、表和列，用原生游标对表分页，并通过完整主键编辑行。",
+      "highlights": [
+        {
+          "title": "原生 CQL 客户端",
+          "body": "没有第三方驱动：帧格式、握手、SASL 认证和类型均在应用内实现，TLS 通过 Rustls 提供。"
+        },
+        {
+          "title": "真正的分页",
+          "body": "使用 Cassandra 的分页状态浏览表，而不是会扫描分区的 offset 查询。"
+        },
+        {
+          "title": "感知生产环境",
+          "body": "生产环境连接会拒绝无界读取和 ALLOW FILTERING。"
+        }
+      ],
+      "limits": [
+        "行的插入、更新和删除需要完整主键。",
+        "不提供事务、存储例程、触发器和可视化 DDL；CQL 本身没有这些功能。"
+      ]
+    },
+    "scylladb": {
+      "description": "基于 CQL v4 的桌面 ScyllaDB 客户端：浏览键空间，用原生游标对表分页，并通过主键编辑行。",
+      "intro": "ScyllaDB 在 QoreDB 中使用与 Cassandra 相同的原生 CQL v4 客户端，但拥有自己的标识。从 system_schema 浏览键空间和表，在编辑器中编写 CQL，并用 ScyllaDB 的分页状态对结果分页。",
+      "highlights": [
+        {
+          "title": "同一协议，独立标识",
+          "body": "CQL 客户端与 Cassandra 共用；只有引擎名称和标签不同。"
+        },
+        {
+          "title": "游标分页",
+          "body": "大表可逐页浏览，无需 offset 扫描。"
+        },
+        {
+          "title": "有界查询",
+          "body": "生产环境连接会拒绝无界读取和 ALLOW FILTERING，从而保护繁忙的集群。"
+        }
+      ],
+      "limits": [
+        "行编辑需要完整主键，包括聚簇列。",
+        "不提供事务、存储例程、触发器或可视化 DDL。"
+      ]
+    },
+    "amazon-keyspaces": {
+      "description": "使用服务专用凭据，通过端口 9142 上的 TLS 将 QoreDB 连接到 Amazon Keyspaces。CQL 编辑器、键空间浏览器和感知成本的安全防护。",
+      "intro": "Amazon Keyspaces 使用 QoreDB 的 CQL 客户端，并应用 Keyspaces 的规则：在端口 9142 上强制启用 TLS，使用服务专用凭据，并识别 cassandra.REGION.amazonaws.com 端点。",
+      "highlights": [
+        {
+          "title": "感知成本的安全防护",
+          "body": "在所有环境中都会拒绝 ALLOW FILTERING，因为 Keyspaces 会对读取的每一行计费。"
+        },
+        {
+          "title": "强制 TLS",
+          "body": "按服务要求，连接始终在端口 9142 上使用 TLS。"
+        },
+        {
+          "title": "CQL 工具集",
+          "body": "浏览键空间和表，运行 CQL，并用原生游标对结果分页。"
+        }
+      ],
+      "limits": [
+        "不支持使用 SigV4 认证的 AWS 访问密钥。请使用服务专用凭据。",
+        "Cassandra 驱动的限制同样适用，包括行编辑需要完整主键。"
+      ]
+    }
+  }
+}

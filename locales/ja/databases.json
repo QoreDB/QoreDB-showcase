@@ -1,0 +1,816 @@
+{
+  "index": {
+    "title": "運用中のあらゆるエンジンに対応するデータベースクライアント",
+    "meta_title": "対応データベース：SQL、分析、NoSQL クライアント",
+    "subtitle": "QoreDB は、macOS、Windows、Linux 上の 1 つのデスクトップアプリから {{count}} 個のデータベースに接続します。エンジンを選ぶと、接続方法、利用できる機能、最初に知っておくべき点を確認できます。"
+  },
+  "page": {
+    "meta_title": "macOS、Windows、Linux 向け {{name}} クライアント",
+    "title": "macOS、Windows、Linux 向け {{name}} クライアント",
+    "breadcrumb": "データベース",
+    "back": "すべてのデータベース",
+    "core_badge": "Core に含まれます",
+    "official_listing": "{{name}} 公式ドキュメントに掲載されています",
+    "why_title": "{{name}} に QoreDB を選ぶ理由",
+    "highlights_title": "{{name}} で利用できること",
+    "connection_title": "接続の概要",
+    "facts": {
+      "port": "既定のポート",
+      "protocol": "プロトコル",
+      "schemes": "URL スキーム",
+      "tls": "TLS",
+      "auth": "認証"
+    },
+    "no_port": "なし（ローカルファイル）",
+    "form_only": "接続フォームのみ",
+    "file_path": "ファイルパスまたは :memory:",
+    "tls": {
+      "optional": "対応、接続ごとに設定可能",
+      "required": "サービスにより必須",
+      "local": "該当なし（ローカルファイル）"
+    },
+    "protocols": {
+      "postgres_wire": "PostgreSQL ワイヤープロトコル",
+      "mysql_wire": "MySQL ワイヤープロトコル",
+      "tds": "TDS（SQL Server）",
+      "embedded": "組み込み（インプロセス）",
+      "http": "HTTP / HTTPS",
+      "snowflake_api": "HTTPS 上の Snowflake SQL API v2",
+      "bigquery_api": "Google BigQuery REST API",
+      "mongodb_wire": "MongoDB ワイヤープロトコル",
+      "resp": "RESP（Redis プロトコル）",
+      "cql": "CQL ネイティブプロトコル v4"
+    },
+    "auth": {
+      "password": "ユーザーとパスワード",
+      "sqlserver": "SQL ログイン、Windows NTLM、または統合認証（SSPI）",
+      "none": "なし（ファイルアクセス）",
+      "token": "MotherDuck アクセストークン",
+      "snowflake": "キーペア（RS256 JWT）またはプログラムによるアクセストークン",
+      "service_account": "サービスアカウントの JSON キー",
+      "redis": "パスワード、または ACL ユーザーとパスワード",
+      "elasticsearch": "なし、Basic、API キー、Bearer トークン。Cloud ID にも対応",
+      "opensearch": "なし、Basic、API キー、Bearer トークン",
+      "keyspaces": "サービス固有の認証情報"
+    },
+    "shared_title": "{{name}} の接続すべてに追加で提供されるもの",
+    "shared": [
+      "認証情報はローカルの暗号化ボールトに保存され、サーバーに同期されることはありません",
+      "開発、ステージング、本番のタグ：本番では DROP と TRUNCATE がブロックされ、DELETE は確認が求められます",
+      "接続ごとの読み取り専用モード",
+      "実行したクエリのローカル監査ログ",
+      "テレメトリーなし：クエリと結果はお使いのマシンの外に出ません"
+    ],
+    "limits_title": "接続前に知っておくこと",
+    "limits_more": "ドライバーの制限をすべて見る",
+    "guide_title": "ステップごとのセットアップ",
+    "guide_body": "接続ガイドでは、{{name}} のすべてのフィールド、TLS オプション、よくあるエラーを説明しています。",
+    "guide_link": "{{name}} 接続ガイドを読む",
+    "related_title": "関連するデータベース",
+    "cta_title": "QoreDB で {{name}} を開く",
+    "cta_body": "無料のオープンソース Core を macOS、Windows、Linux で提供します。アカウントは不要です。",
+    "cta_download": "QoreDB をダウンロード",
+    "cta_compare": "エディションを比較"
+  },
+  "databases": {
+    "postgresql": {
+      "description": "Rust 製の高速なデスクトップ PostgreSQL クライアント。スキーマブラウザー、補完付き SQL エディター、編集可能な結果、本番ガードを全 OS で提供します。",
+      "intro": "QoreDB は PostgreSQL をファーストクラスのエンジンとして扱います。postgresql:// の URL を貼り付けるかフォームに入力し、disable から verify-full までの SSL モードを選ぶと、スキーマ、テーブル、ビュー、関数、トリガーを 1 つのツリーで参照できます。クエリはブラウザーのタブではなく、ネイティブアプリで実行されます。",
+      "highlights": [
+        {
+          "title": "すべての SSL モード",
+          "body": "disable、prefer、require、verify-ca、verify-full で接続できます。クライアント証明書や、サーバーが非公開の場合の SSH トンネルにも対応します。"
+        },
+        {
+          "title": "確実なキャンセル",
+          "body": "実行中のクエリは別の接続から pg_cancel_backend で中止されるため、時間のかかる文でエディターがロックされることはありません。"
+        },
+        {
+          "title": "Postgres 互換のあらゆるサービス",
+          "body": "Supabase、Neon、TimescaleDB などのワイヤー互換サービスは、提供された DSN をそのまま使え、追加設定は不要です。"
+        }
+      ],
+      "limits": [
+        "各接続は 1 つのデータベースに紐づきます。同じサーバー上の別のデータベースを参照するには、2 つ目の接続を作成してください。",
+        "他のユーザーのクエリをキャンセルするには、pg_signal_backend ロールか、そのクエリの所有権が必要です。"
+      ]
+    },
+    "supabase": {
+      "description": "ダッシュボードの接続文字列で QoreDB を Supabase Postgres に接続します。直接接続とプール接続に対応し、TLS は既定で有効、本番ガード付きです。",
+      "intro": "Supabase は標準の PostgreSQL を実行しているため、QoreDB は PostgreSQL ドライバーをそのまま使います。読み書きには直接接続の文字列を、短時間のセッションにはポート 6543 の PgBouncer プール接続の文字列をコピーして、新規接続に貼り付けてください。",
+      "highlights": [
+        {
+          "title": "ダッシュボードの文字列を貼り付け",
+          "body": "Project settings の Database にある URL を使います。Supabase のホストは自動検出され、TLS は有効のままです。"
+        },
+        {
+          "title": "直接接続とプール接続",
+          "body": "2 つの接続を並べて保存できます。マイグレーションや編集には直接接続、素早い読み取りにはプール接続を使います。"
+        },
+        {
+          "title": "より安全な本番作業",
+          "body": "プロジェクトに本番のタグを付けると、DROP と TRUNCATE はブロックされ、DELETE は先に確認が求められます。"
+        }
+      ],
+      "limits": [
+        "プロジェクトで IP 許可リストが有効な場合、接続するにはお使いのマシンのアドレスを許可しておく必要があります。",
+        "プール接続のエンドポイントはトランザクションプーリングを使うため、セッションレベルの設定は文の間で保持されません。"
+      ]
+    },
+    "neon": {
+      "description": "Neon サーバーレス Postgres 用のデスクトップクライアント。接続文字列を貼り付け、TLS を有効にしたまま、ネイティブ SQL エディターでブランチのスキーマを参照できます。",
+      "intro": "Neon は PostgreSQL を話すため、QoreDB は Neon ダッシュボードの文字列を使って PostgreSQL ドライバーで接続します。エンドポイントのホストと sslmode=require は文字列に含まれています。作業するブランチごとに 1 つ接続を保存してください。",
+      "highlights": [
+        {
+          "title": "ブランチごとに 1 接続",
+          "body": "開発ブランチと本番ブランチに別々の接続を向け、それぞれに環境のタグを付けます。"
+        },
+        {
+          "title": "TLS は標準で有効",
+          "body": "Neon の文字列には sslmode=require が含まれ、QoreDB はそれを維持します。認証情報はローカルの暗号化ボールトに保存されます。"
+        },
+        {
+          "title": "PostgreSQL のツールをフルに利用",
+          "body": "スキーマブラウザー、編集可能な結果、エクスポート、ノートブックは、セルフホストのサーバーと同じように動作します。"
+        }
+      ],
+      "limits": [
+        "ゼロにスケールするエンドポイントは、コールドスタート後の最初のクエリへの応答に少し時間がかかります。"
+      ]
+    },
+    "timescaledb": {
+      "description": "ハイパーテーブルのディメンション、チャンク、圧縮、保持ポリシーを表示するデスクトップ SQL クライアントで、TimescaleDB と Timescale Cloud にクエリできます。",
+      "intro": "TimescaleDB は時系列向けの拡張を備えた PostgreSQL で、QoreDB は PostgreSQL ドライバーで接続します。ハイパーテーブルはエクスプローラーで区別して表示され、Info タブにはディメンション、チャンク間隔と数、圧縮ポリシー、保持ポリシーが表示されます。",
+      "highlights": [
+        {
+          "title": "ハイパーテーブルを可視化",
+          "body": "どのテーブルがハイパーテーブルか、どのようにチャンク化されているか、どの圧縮・保持ポリシーが適用されているかを確認できます。"
+        },
+        {
+          "title": "標準の SQL",
+          "body": "連続集計や time_bucket のクエリは通常のエディターで実行でき、補完や結果のエクスポートも使えます。"
+        },
+        {
+          "title": "セルフホストでもクラウドでも",
+          "body": "同じ接続フォームで、ローカルのインスタンスにも TLS 付きの Timescale Cloud にも接続できます。"
+        }
+      ],
+      "limits": [
+        "TimescaleDB はホストからは検出されません。ハイパーテーブルの詳細を表示するには、接続ダイアログでエンジンを選択してください。"
+      ]
+    },
+    "cockroachdb": {
+      "description": "専用ドライバーを備えたデスクトップ CockroachDB クライアント。ポート 26257、defaultdb、フィルター済みのシステムカタログ、使い慣れた PostgreSQL のツールを提供します。",
+      "intro": "QoreDB では CockroachDB は独自のエンジンで、PostgreSQL ワイヤープロトコルをベースに CockroachDB のカタログに合わせて調整されています。スキーマツリーでは crdb_internal が非表示になり、CockroachDB に存在しないマテリアライズドビューは省かれ、メンテナンスは ANALYZE のみになります。",
+      "highlights": [
+        {
+          "title": "CockroachDB を理解したドライバー",
+          "body": "ポート 26257 と defaultdb データベースが既定値で、cockroachdb:// の URL も認識されます。"
+        },
+        {
+          "title": "すっきりしたスキーマ参照",
+          "body": "内部カタログはフィルターで除外されるため、ツリーにはご自身のデータベース、スキーマ、テーブルが表示されます。"
+        },
+        {
+          "title": "CockroachDB Cloud に対応",
+          "body": "sslmode=verify-full とクラスターの CA で接続し、本番クラスターにタグを付けると破壊的な文を保護できます。"
+        }
+      ],
+      "limits": [
+        "シリアライゼーションの競合時に、PostgreSQL よりも頻繁にトランザクションの再試行を求められることがあります。失敗した文はエディターから再実行してください。",
+        "VACUUM と REINDEX は利用できません。このメンテナンスは CockroachDB が自動で行います。"
+      ]
+    },
+    "yugabytedb": {
+      "description": "QoreDB をポート 5433 の YugabyteDB YSQL に接続します。スキーマ参照、編集、本番ガードを備えたデスクトップ SQL クライアントです。",
+      "intro": "QoreDB には、PostgreSQL のプロトコルとカタログを YugabyteDB の既定値（ポート 5433、yugabyte データベース）で使う YugabyteDB ドライバーが含まれています。yugabyte.cloud 配下のホストは自動的に検出されます。",
+      "highlights": [
+        {
+          "title": "YugabyteDB の既定値",
+          "body": "ポート 5433 と yugabyte データベースが入力済みのため、ローカルクラスターには迷わず接続できます。"
+        },
+        {
+          "title": "PostgreSQL のツール",
+          "body": "PostgreSQL と同様に、スキーマの参照、補完付き SQL の実行、結果の編集とエクスポートができます。"
+        },
+        {
+          "title": "マネージドクラスター",
+          "body": "yugabyte.cloud 配下のホストは認識され、検証付き TLS でクラスターへの接続の認証が保たれます。"
+        }
+      ],
+      "limits": [
+        "接続先は YSQL API で、YCQL ではありません。",
+        "PostgreSQL との互換性は、すべての拡張や管理コマンドがお使いのクラスターに存在することを保証するものではありません。"
+      ]
+    },
+    "mysql": {
+      "description": "macOS、Windows、Linux 向けのネイティブ MySQL クライアント。SQL エディター、ルーチン、トリガー、イベント、編集可能な結果、安全な本番アクセスを提供します。",
+      "intro": "QoreDB は mysql:// の URL またはフォームで MySQL に接続し、disabled から verify-identity までの SSL モードを選べます。ツリーにはデータベース、テーブル、ビュー、ルーチン、トリガー、イベントが一覧表示され、システムスキーマは既定で非表示です。",
+      "highlights": [
+        {
+          "title": "ルーチン、トリガー、イベント",
+          "body": "ストアドプロシージャ、関数、トリガー、スケジュール済みイベントをスキーマツリーから参照できます。"
+        },
+        {
+          "title": "クエリのキャンセル",
+          "body": "長時間のクエリは KILL QUERY で停止されるため、暴走した文もエディターからキャンセルできます。"
+        },
+        {
+          "title": "組み込みのバックアップ",
+          "body": "mysqldump がインストールされていれば、ストリーミング出力とキャンセルに対応して、インターフェイスから実行できます。"
+        }
+      ],
+      "limits": [
+        "ロールバックは InnoDB を前提としています。MyISAM などのトランザクション非対応エンジンのテーブルはロールバックされません。",
+        "クエリのキャンセルには PROCESS 権限が必要で、他のユーザーのクエリには SUPER 権限が必要です。"
+      ]
+    },
+    "mariadb": {
+      "description": "Rust 製のデスクトップ MariaDB クライアント。MySQL と同じドライバーで、SSL、ルーチン、トリガー、バックアップに対応し、本番での破壊的クエリの前に確認を求めます。",
+      "intro": "MariaDB は QoreDB では MySQL ドライバーを使い、mysql:// の URL、SSL モード、スキーマツリーも同じです。接続が正しくラベル付けされるよう、ダイアログで MariaDB を選択してから、データベース、ルーチン、トリガー、イベントを参照してください。",
+      "highlights": [
+        {
+          "title": "1 つのドライバーで 2 つのエンジン",
+          "body": "エディター、編集可能な結果、ルーチン、イベント、エクスポートなど、MySQL で動作するものは MariaDB でも動作します。"
+        },
+        {
+          "title": "インターフェイスからバックアップ",
+          "body": "お使いのマシンにバイナリがあれば、ストリーミング出力付きの mysqldump ヘルパーを使えます。"
+        },
+        {
+          "title": "本番ガード",
+          "body": "サーバーに本番のタグを付けると、DROP と TRUNCATE はブロックされ、DELETE は確認が求められます。"
+        }
+      ],
+      "limits": [
+        "MariaDB は URL からは検出されません。ダイアログでエンジンを選択してください。",
+        "MyISAM などのトランザクション非対応ストレージエンジンはロールバックされません。"
+      ]
+    },
+    "planetscale": {
+      "description": "TLS を強制し、Vitess の制約を明示して QoreDB を PlanetScale に接続します。サーバーレスブランチ向けのデスクトップ MySQL クライアントです。",
+      "intro": "PlanetScale の接続は MySQL ドライバーに PlanetScale のルールを加えて処理します。QoreDB は psdb.cloud のホストを認識し、接続時に TLS を強制し、Vitess が実行しないストアドルーチン、トリガー、イベントは、失敗する操作を編集させないよう非表示にします。",
+      "highlights": [
+        {
+          "title": "TLS は常に有効",
+          "body": "SSL モードが disable または prefer の場合は require に引き上げられます。より厳格な検証モードはそのまま保持されます。"
+        },
+        {
+          "title": "Vitess について正直に",
+          "body": "非対応のルーチン、トリガー、イベント、シーケンスは存在しないものとして扱われ、インターフェイスには実行できるものだけが表示されます。"
+        },
+        {
+          "title": "ブランチを意識したワークフロー",
+          "body": "スキーマ変更には開発ブランチへの接続を使い、本番は読み取り専用に保ちます。"
+        }
+      ],
+      "limits": [
+        "デプロイリクエストはモデル化されていません。マイグレーションは接続中のブランチに直接適用されます。",
+        "ブランチで外部キー制約が有効になっていない限り、外部キーは強制されません。"
+      ]
+    },
+    "tidb": {
+      "description": "デスクトップ TiDB クライアント。ポート 4000 の MySQL プロトコル、TiDB Cloud ホストの検出、TiDB がサポートする操作のみに対応します。",
+      "intro": "QoreDB には、MySQL プロトコルをベースに TiDB の既定値と制約を反映した TiDB ドライバーが含まれています。ポート 4000 が入力済みで、tidbcloud.com のホストは検出され、TiDB が対応しない MySQL の操作は非表示のままです。",
+      "highlights": [
+        {
+          "title": "TiDB Cloud に対応",
+          "body": "tidbcloud.com の URL を貼り付けると TiDB エンジンが自動で選択され、TLS が有効になります。"
+        },
+        {
+          "title": "TiDB が実行できるものだけ",
+          "body": "ルーチン、トリガー、イベント、メンテナンス操作は、TiDB が対応していない箇所では非表示になります。"
+        },
+        {
+          "title": "使い慣れた MySQL のツール",
+          "body": "データベースとテーブルの参照、補完付き SQL の実行、結果の CSV・JSON・SQL へのエクスポートができます。"
+        }
+      ],
+      "limits": [
+        "ローカルサーバーでは TiDB を明示的に選択してください。汎用の mysql:// の URL は MySQL として識別されます。"
+      ]
+    },
+    "singlestore": {
+      "description": "MySQL プロトコルで QoreDB を SingleStore に接続します。SingleStore のセッション処理に対応し、クラウドホストも検出されます。",
+      "intro": "SingleStore ドライバーは、SingleStore 向けに調整したセッション設定で MySQL プロトコルを使います。svc.singlestore.com 配下のクラウドホストは検出され、ビジュアル DDL エディターには SingleStore が受け付ける制約のみが表示されます。",
+      "highlights": [
+        {
+          "title": "適合するセッション設定",
+          "body": "SingleStore が拒否するタイムゾーン設定はスキップされるため、接続は問題なく開きます。"
+        },
+        {
+          "title": "調整された DDL エディター",
+          "body": "SingleStore では扱いが異なるため、外部キー、CHECK、一意性のコントロールはビジュアルエディターで非表示になります。"
+        },
+        {
+          "title": "クラウドの検出",
+          "body": "SingleStore Helios のエンドポイントでは、適切なエンジンが自動で選択されます。"
+        }
+      ],
+      "limits": [
+        "セルフホストのクラスターでは SingleStore を明示的に選択してください。通常の mysql:// の URL は MySQL として扱われます。"
+      ]
+    },
+    "sql-server": {
+      "description": "Windows だけでなく macOS と Linux でも使える SQL Server クライアント。SQL 認証、NTLM、統合認証、スキーマ参照、安全な本番作業に対応します。",
+      "intro": "QoreDB はネイティブの TDS ドライバーで Microsoft SQL Server に接続するため、Windows に加えて macOS と Linux でも動作します。SQL 認証はどの OS でも使え、NTLM と統合認証は Windows で利用できます。スキーマ、テーブル、ビュー、プロシージャを参照できます。",
+      "highlights": [
+        {
+          "title": "どの OS でも SQL Server",
+          "body": "インストールが必要な ODBC ドライバーはありません。TDS クライアントは macOS、Windows、Linux のアプリに組み込まれています。"
+        },
+        {
+          "title": "3 つの認証モード",
+          "body": "SQL ログインはどこでも使えます。Windows の NTLM と統合認証（SSPI）は Windows で利用できます。"
+        },
+        {
+          "title": "プールされた接続",
+          "body": "接続プールにより、参照中や複数タブで並行してクエリを実行している間もエディターの応答性が保たれます。"
+        }
+      ],
+      "limits": [
+        "SQL Server Browser サービスに依存する名前付きインスタンスはサポートされていません。インスタンスの固定ポートを使用してください。",
+        "SSL を有効にした場合、サーバー証明書は厳密な CA 検証なしで信頼されます。"
+      ]
+    },
+    "azure-sql": {
+      "description": "macOS、Windows、Linux 向けのデスクトップ Azure SQL Database クライアント。TLS を強制し、database.windows.net のホストを検出します。",
+      "intro": "Azure SQL は QoreDB では SQL Server の TDS ドライバーを使い、独自の識別と、すべての接続での TLS 強制が加わります。database.windows.net 配下のホストは検出されるため、サーバー名を貼り付けるだけでエンジンが選択されます。",
+      "highlights": [
+        {
+          "title": "暗号化を強制",
+          "body": "URL の指定に関わらず、ドライバーが TLS を強制します。"
+        },
+        {
+          "title": "macOS と Linux でネイティブに動作",
+          "body": "Windows や ODBC の設定なしで、他のデータベースと同じアプリから Azure SQL にクエリできます。"
+        },
+        {
+          "title": "保護された本番アクセス",
+          "body": "データベースに本番のタグを付けると、破壊的な文はブロックされるか、確認が必要になります。"
+        }
+      ],
+      "limits": [
+        "SQL Server のインスタンスレベルの管理機能は Azure SQL には存在しない場合があります。サーバーが許可する操作は、お使いのロールによって決まります。"
+      ]
+    },
+    "sqlite": {
+      "description": "macOS、Windows、Linux 向けの高速な SQLite ブラウザー兼エディター。.db ファイルやインメモリデータベースを開けます。サーバーも認証情報も不要です。",
+      "intro": "任意の .db、.sqlite、.sqlite3 ファイルを開くか、インメモリデータベースを開始すると、QoreDB はサーバー型エンジンと同じスキーマツリー、SQL エディター、編集可能なグリッドを提供します。WAL モード、FTS5 テーブル、ダンプによるバックアップに対応しています。",
+      "highlights": [
+        {
+          "title": "サーバーではなくファイル",
+          "body": "ローカルファイルを指定するか :memory: を使います。設定するポート、ユーザー、パスワードはありません。"
+        },
+        {
+          "title": "データを安全に編集",
+          "body": "結果グリッドで行を編集できます。サーバー型エンジンと同じ環境ガードが適用されます。"
+        },
+        {
+          "title": "ダンプとエクスポート",
+          "body": "sqlite3 のダンプヘルパーでバックアップするか、結果を CSV、JSON、SQL、HTML にエクスポートできます。"
+        }
+      ],
+      "limits": [
+        "SQLite は書き込みを直列化するため、長い書き込みトランザクションは、コミットされるまで他の書き込みをブロックします。",
+        "テーブルが STRICT で宣言されていない限り、列は型アフィニティを使用します。"
+      ]
+    },
+    "duckdb": {
+      "description": "デスクトップ DuckDB クライアント。.duckdb ファイルを開き、ローカルの CSV や Parquet にクエリして、ネイティブ SQL エディターで分析を実行できます。全 OS に対応します。",
+      "intro": "DuckDB は QoreDB の内部で動作するため、起動するものは何もありません。.duckdb または .db ファイル、あるいはインメモリデータベースを開き、DuckDB SQL でローカルの CSV や Parquet ファイルにクエリできます。QoreDB は、データベース横断クエリのエンジンとしても DuckDB を使っています。",
+      "highlights": [
+        {
+          "title": "ローカルファイルを全速で",
+          "body": "CSV と Parquet のファイルに直接クエリできます。クエリは UI スレッドの外で実行されるため、アプリの応答性は保たれます。"
+        },
+        {
+          "title": "インメモリのスクラッチパッド",
+          "body": "使い捨ての分析には :memory: を開き、残したい内容を CSV や JSON にエクスポートします。"
+        },
+        {
+          "title": "データベース横断の結合",
+          "body": "Pro エディションでは、DuckDB がフェデレーションを支えます。PostgreSQL のテーブルと MongoDB のコレクションを 1 つのクエリで結合できます。"
+        }
+      ],
+      "limits": [
+        "データベースファイルの拡張子は .duckdb または .db である必要があります。",
+        "インメモリのデータは、接続を閉じると失われます。"
+      ]
+    },
+    "motherduck": {
+      "description": "アクセストークンを使い、PostgreSQL 互換エンドポイント経由で QoreDB を MotherDuck に接続し、クラウドの DuckDB カタログをデスクトップから参照できます。",
+      "intro": "MotherDuck ドライバーは、アクセストークンをパスワードとして MotherDuck の PostgreSQL 互換エンドポイントに接続し、スキーマ参照には DuckDB カタログを読み取ります。リージョンのホストはトークンから推測できます。",
+      "highlights": [
+        {
+          "title": "トークンでサインイン",
+          "body": "MotherDuck のトークンを貼り付けます。トークンはローカルの暗号化ボールトに保存され、クエリに含まれることはありません。"
+        },
+        {
+          "title": "トークンからリージョンを取得",
+          "body": "対応する AWS リージョンでは、フォームがトークンの mdRegion クレームからリージョンのホストを入力します。"
+        },
+        {
+          "title": "DuckDB カタログ",
+          "body": "スキーマとテーブルは、PostgreSQL のカタログではなく、information_schema と duckdb_ カタログ関数から取得されます。"
+        }
+      ],
+      "limits": [
+        "これはリモート接続であり、ローカルの .duckdb ファイルではありません。ファイルには DuckDB エンジンを使用してください。",
+        "PostgreSQL ワイヤー互換であっても MotherDuck が PostgreSQL サーバーになるわけではなく、機能は MotherDuck ドライバーに従います。"
+      ]
+    },
+    "clickhouse": {
+      "description": "ClickHouse 公式ドキュメントに掲載されているネイティブクライアント。HTTP と HTTPS、28 種類の型マッピング、KILL QUERY によるキャンセル、クエリの安全性に対応します。",
+      "intro": "QoreDB は HTTP（8123）または HTTPS（8443）で動作するネイティブ ClickHouse ドライバーを搭載し、Rustls を使うためシステムの OpenSSL は不要です。文は実行前に分類され、結果は 28 種類の ClickHouse の型にマッピングされ、ビジュアル DDL エディターは MergeTree テーブルを理解します。",
+      "highlights": [
+        {
+          "title": "クラスター向けのクエリ安全性",
+          "body": "SYSTEM コマンドと OPTIMIZE FINAL は拒否され、すべての変更操作に本番ルールが適用されます。"
+        },
+        {
+          "title": "豊富な型のサポート",
+          "body": "配列、タプル、マップ、列挙型、IPv4 と IPv6、DateTime64、Decimal がグリッドで正しく表示されます。"
+        },
+        {
+          "title": "確実に動くキャンセル",
+          "body": "時間のかかる集計は、query_id に対する KILL QUERY で、エディターから直接停止できます。"
+        }
+      ],
+      "limits": [
+        "ポート 9000 のネイティブ TCP プロトコルはサポートされていません。HTTP または HTTPS を使用してください。",
+        "ON CLUSTER と分散テーブルの変更はビジュアルエディターにありません。SQL で記述してください。"
+      ]
+    },
+    "snowflake": {
+      "description": "デスクトップ Snowflake クライアント。キーペアまたはトークンによる認証、接続ごとのウェアハウスとロール、非同期クエリ、確実なキャンセルに対応します。",
+      "intro": "QoreDB は、ベンダーの SDK を使わず、HTTPS 上の SQL API v2 で Snowflake と通信します。接続ごとにウェアハウスとロールを選び、キーペアまたはプログラムによるアクセストークンでサインインします。文は非同期で実行され、キャンセルはサービスに送信されます。",
+      "highlights": [
+        {
+          "title": "キーペア認証",
+          "body": "RSA 秘密鍵を貼り付けると、QoreDB が RS256 トークンをローカルで署名し、鍵は暗号化ボールトに保管されます。"
+        },
+        {
+          "title": "接続ごとのウェアハウスとロール",
+          "body": "ウェアハウスとロールごとに 1 つ接続を保存すれば、コストと権限が明確に保たれます。"
+        },
+        {
+          "title": "確実なキャンセル",
+          "body": "文のキャンセルは、インターフェイス上だけでなく Snowflake 側でも文を停止します。"
+        }
+      ],
+      "limits": [
+        "結果は 200,000 行が上限で、さらにページが残っている場合は明示的なエラーになります。",
+        "パスワードとブラウザーによるサインインはサポートされていません。トランザクション、ビジュアル DDL、ルーチン管理は提供されません。"
+      ]
+    },
+    "bigquery": {
+      "description": "クエリの実行前にスキャンサイズを見積もり、課金が発生する場合は事前に確認するデスクトップ BigQuery クライアント。サービスアカウントでサインインでき、全 OS に対応します。",
+      "intro": "QoreDB は、サービスアカウントの JSON キーを使い、Google の REST API で BigQuery に接続します。アカウントから見えるプロジェクトをまたいでデータセットを一覧し、スキャンを実行せずにテーブルをプレビューし、エディターのすべてのクエリを実行前に見積もります。",
+      "highlights": [
+        {
+          "title": "まずスキャンを見積もり",
+          "body": "エディターのクエリはまずドライランされ、スキャンで課金が発生する可能性がある場合、QoreDB は確認を求めます。"
+        },
+        {
+          "title": "無料のテーブルプレビュー",
+          "body": "プレビューには tabledata.list を使うため、テーブルを開いてもクエリは課金されません。"
+        },
+        {
+          "title": "プロジェクトとロケーション",
+          "body": "既定のプロジェクト、課金プロジェクト、ロケーションを接続ごとに設定し、プロジェクトをまたいでデータセットを参照できます。"
+        }
+      ],
+      "limits": [
+        "個人の Google ログインや API キーでは、サービスアカウントキーの代わりにはなりません。",
+        "結果は 200,000 行が上限です。トランザクション、ビジュアル DDL、ルーチン管理は提供されません。"
+      ]
+    },
+    "starrocks": {
+      "description": "MySQL エンドポイント経由で、デスクトップ SQL クライアントから StarRocks を参照・クエリできます。スキーマのイントロスペクションと本番ガードに対応します。",
+      "intro": "StarRocks ドライバーはポート 9030 のフロントエンドの MySQL エンドポイントに接続し、データベース、テーブル、列をイントロスペクトします。クエリを主眼にしており、StarRocks のキーと分散のモデルは MySQL と異なるため、行の編集、トランザクション、ビジュアル DDL は無効になっています。",
+      "highlights": [
+        {
+          "title": "分析向けに構築",
+          "body": "補完付きで StarRocks に SQL を実行でき、大きな結果セットは仮想化されたグリッドで表示されます。"
+        },
+        {
+          "title": "誤解を招くコントロールなし",
+          "body": "行の編集、トランザクション、ビジュアル DDL は、提供してサーバーで失敗させるのではなく、無効にしています。"
+        },
+        {
+          "title": "エクスポート",
+          "body": "結果を CSV、JSON、SQL にエクスポートして、レポートや下流のツールで利用できます。"
+        }
+      ],
+      "limits": [
+        "StarRocks を明示的に選択してください。汎用の mysql:// の URL では識別されません。"
+      ]
+    },
+    "apache-doris": {
+      "description": "MySQL プロトコルで使う Apache Doris 用デスクトップクライアント。カタログを参照し、本番ガード付きで分析 SQL を実行できます。",
+      "intro": "QoreDB はポート 9030 の Apache Doris フロントエンドの MySQL エンドポイントに接続します。カタログを参照して SQL を実行できます。Doris の OLAP モデルは MySQL と異なるため、構造化された行の編集、トランザクション、ビジュアル DDL は無効です。",
+      "highlights": [
+        {
+          "title": "SQL を第一に",
+          "body": "補完付きで分析クエリを記述し、大きな結果は仮想化されたグリッドで読み取れます。"
+        },
+        {
+          "title": "カタログの参照",
+          "body": "データベース、テーブル、列は、MySQL プロトコル経由で Doris のカタログから取得されます。"
+        },
+        {
+          "title": "同じセーフティネット",
+          "body": "読み取り専用モードと本番での確認は、他のすべてのエンジンと同様に適用されます。"
+        }
+      ],
+      "limits": [
+        "HTTP の管理ポートではなく、フロントエンドのクエリポートを使用してください。",
+        "MySQL ワイヤー互換は、MySQL と同等の機能を意味するものではありません。"
+      ]
+    },
+    "azure-synapse": {
+      "description": "macOS、Windows、Linux のデスクトップクライアントから、Azure Synapse の専用 SQL プールとサーバーレス SQL プールにクエリできます。TLS は強制されます。",
+      "intro": "Azure Synapse ドライバーは TLS を強制した TDS を使い、sql.azuresynapse.net のホストを検出します。SQL クエリとカタログの参照に特化しており、専用プールとサーバーレスプールで同じように動作するよう、行の編集、トランザクション、メンテナンス、ビジュアル DDL は無効です。",
+      "highlights": [
+        {
+          "title": "専用でもサーバーレスでも",
+          "body": "ワークスペースのどちらのエンドポイントにも接続できます。ドライバーは、一方でしかサポートされない操作を避けます。"
+        },
+        {
+          "title": "どのデスクトップ OS でも",
+          "body": "ODBC ドライバーをインストールせずに、macOS や Linux から Synapse にクエリできます。"
+        },
+        {
+          "title": "既定で暗号化",
+          "body": "すべての接続で TLS が強制され、認証情報はローカルのボールトに保管されます。"
+        }
+      ],
+      "limits": [
+        "構造化された行の編集、トランザクション、メンテナンス操作、ビジュアル DDL は、このドライバーでは無効です。"
+      ]
+    },
+    "mongodb": {
+      "description": "専用のクエリエディター、アグリゲーションパイプライン、ドキュメントグリッド、インデックス、本番ガードを備えたデスクトップ MongoDB クライアント。SRV と Atlas に対応します。",
+      "intro": "QoreDB は mongodb:// または mongodb+srv:// の URL で、スタンドアロンの MongoDB、レプリカセット、Atlas に接続します。専用エディターが find と aggregate コマンドを実行し、ドキュメントはグリッドまたは JSON で開き、インデックスはコレクションビューから管理できます。",
+      "highlights": [
+        {
+          "title": "本格的な Mongo エディター",
+          "body": "JSON と BSON 向けのエディターでクエリやアグリゲーションパイプラインを記述でき、実行前に検証されます。"
+        },
+        {
+          "title": "Atlas とレプリカセット",
+          "body": "SRV レコード、TLS、認証オプションは接続フォームで処理されます。"
+        },
+        {
+          "title": "既定で安全",
+          "body": "$where、$function、$accumulator はブロックされるため、クライアントからサーバーサイド JavaScript が実行されることはありません。"
+        }
+      ],
+      "limits": [
+        "マルチドキュメントトランザクションにはレプリカセットが必要で、スタンドアロンサーバーではサポートされません。",
+        "アグリゲーションパイプラインは 50 ステージが上限です。"
+      ]
+    },
+    "amazon-documentdb": {
+      "description": "TLS を強制し、Amazon の CA バンドルを検証し、retryWrites を処理して QoreDB を Amazon DocumentDB に接続します。DocumentDB クラスター向けのデスクトップクライアントです。",
+      "intro": "DocumentDB は MongoDB ドライバーに DocumentDB のルールを適用して使います。TLS は Amazon の global-bundle.pem を信頼の起点として強制され、retryWrites は無効になり、VPC 内のクラスターには接続フォームの SSH トンネルで到達します。",
+      "highlights": [
+        {
+          "title": "検証済みの TLS",
+          "body": "CA バンドルのパスがない場合、QoreDB は未検証の接続にフォールバックせず、接続を拒否します。"
+        },
+        {
+          "title": "VPC へのアクセス",
+          "body": "プライベートクラスターには SSH トンネル経由で到達できます。トンネルの内側でも CA は検証されます。"
+        },
+        {
+          "title": "MongoDB のツール",
+          "body": "DocumentDB のコレクションでも、Mongo エディター、ドキュメントグリッド、インデックスビューを使えます。"
+        }
+      ],
+      "limits": [
+        "DocumentDB は MongoDB と部分的に互換です。一部のアグリゲーション演算子やインデックスの種類が存在せず、サーバーのエラーはそのまま渡されます。",
+        "リトライ可能な書き込みは常に無効です。"
+      ]
+    },
+    "redis": {
+      "description": "macOS、Windows、Linux 向けの Redis GUI。SCAN でキーを参照し、すべてのデータ型を確認し、コマンドを実行して、危険なコマンドから保護します。",
+      "intro": "QoreDB は redis:// または rediss:// の URL で Redis に接続し、空でないデータベースを一覧して SCAN でキーを参照します。文字列、ハッシュ、リスト、セット、ソート済みセット、ストリームは、それぞれの型に合ったビューで開きます。",
+      "highlights": [
+        {
+          "title": "すべてのデータ型",
+          "body": "文字列、ハッシュ、リスト、セット、ソート済みセット、ストリームを、それぞれに合わせたプレビューで確認できます。"
+        },
+        {
+          "title": "コマンドコンソール",
+          "body": "エディターから Redis コマンドを実行できます。書き込みは変更操作として分類され、環境のルールに従います。"
+        },
+        {
+          "title": "危険なコマンドを検出",
+          "body": "FLUSHALL、FLUSHDB、CONFIG、SHUTDOWN、SCRIPT FLUSH は、サーバーに届く前に警告が表示されます。"
+        }
+      ],
+      "limits": [
+        "キーと値はグリッド内でインライン編集できません。SET や HSET などのコマンドを使用してください。",
+        "Redis Cluster は、独立したクラスタービューではなく、エントリーノード経由で接続します。"
+      ]
+    },
+    "valkey": {
+      "description": "valkey:// と valkeys:// の URL に対応するデスクトップ Valkey クライアント。キーの参照、データ型の確認、安全チェック付きのコマンド実行ができます。",
+      "intro": "Valkey は QoreDB では Redis ドライバーを使い、独自の識別と URL スキームを持ちます。valkey:// と valkeys:// は認識されるため、貼り付けた URL で適切なエンジンが選択され、QoreDB が Redis に対して行うことはすべて同じように動作します。",
+      "highlights": [
+        {
+          "title": "ネイティブの URL スキーム",
+          "body": "valkey:// は TCP、valkeys:// は TLS で接続し、redis:// と rediss:// に対応します。"
+        },
+        {
+          "title": "キーブラウザー",
+          "body": "SCAN でデータベースとキーを参照し、各データ型を専用のビューで開けます。"
+        },
+        {
+          "title": "安全チェック",
+          "body": "破壊的なコマンドは検出され、本番の接続ではより厳格なルールが適用されます。"
+        }
+      ],
+      "limits": [
+        "Redis ドライバーの制限がすべて適用されます。グリッドで値をインライン編集できない点も同様です。"
+      ]
+    },
+    "dragonfly": {
+      "description": "Redis プロトコルで使うデスクトップクライアントから Dragonfly を参照・クエリできます。キーブラウザー、データ型ビュー、コマンドコンソールを備えます。",
+      "intro": "Dragonfly は Redis とワイヤー互換のため、QoreDB は Dragonfly の識別で Redis ドライバーを使って接続します。redis:// または rediss:// の URL を使い、接続が正しくラベル付けされるようダイアログで Dragonfly を選択してください。",
+      "highlights": [
+        {
+          "title": "Redis 互換",
+          "body": "キーの参照、型のプレビュー、コマンドの実行は Redis と同様に動作します。"
+        },
+        {
+          "title": "必要なときは TLS",
+          "body": "rediss:// で TLS が有効になり、認証情報はローカルの暗号化ボールトに保存されます。"
+        },
+        {
+          "title": "環境ガード",
+          "body": "Dragonfly のインスタンスに本番のタグを付けると、破壊的なコマンドが保護されます。"
+        }
+      ],
+      "limits": [
+        "Dragonfly には独自の URL スキームがなく、サーバーからも検出されません。ダイアログで選択してください。"
+      ]
+    },
+    "keydb": {
+      "description": "RESP で使うデスクトップ KeyDB クライアント。キーの参照、データ型の確認、Redis と同じ安全チェック付きのコマンド実行ができます。",
+      "intro": "QoreDB は KeyDB の識別を持つ RESP ドライバーで KeyDB に接続します。redis:// または rediss:// の URL を使い、ダイアログで KeyDB を選択すると、Redis と同じようにキーを参照し、コマンドを実行できます。",
+      "highlights": [
+        {
+          "title": "キーの参照",
+          "body": "SCAN でデータベースとキーを一覧し、各データ型をそれぞれのビューでプレビューできます。"
+        },
+        {
+          "title": "コマンドエディター",
+          "body": "履歴と結果ビュー付きのエディターから KeyDB コマンドを実行できます。"
+        },
+        {
+          "title": "保護された書き込み",
+          "body": "変更を伴うコマンドや破壊的なコマンドは、読み取り専用モードと本番での確認に従います。"
+        }
+      ],
+      "limits": [
+        "KeyDB はサーバーから検出されず、keydb:// スキームもありません。明示的に選択してください。",
+        "KeyDB 固有の管理機能は独立した機能ではなく、Redis ドライバーの制限が適用されます。"
+      ]
+    },
+    "garnet": {
+      "description": "Redis プロトコルで QoreDB を Microsoft Garnet に接続し、キーを参照して、サーバーがサポートするコマンドを実行できます。",
+      "intro": "Garnet は RESP を話すため、QoreDB は Garnet の識別で Redis ドライバーを使って接続します。redis:// または rediss:// の URL を使い、ダイアログで Garnet を選択して、キーの参照とコマンドの実行を行います。",
+      "highlights": [
+        {
+          "title": "RESP クライアント",
+          "body": "キーの参照とコマンドの実行は、Redis、Valkey、Dragonfly と同じドライバーを使います。"
+        },
+        {
+          "title": "TLS と認証情報",
+          "body": "TLS には rediss:// を使います。パスワードはローカルの暗号化ボールトに保存されます。"
+        },
+        {
+          "title": "同じセーフティネット",
+          "body": "危険なコマンドは検出され、本番の接続ではより厳格なルールが適用されます。"
+        }
+      ],
+      "limits": [
+        "Redis プロトコルとの互換性は、Garnet がすべての Redis コマンドやモジュールをサポートすることを保証するものではありません。",
+        "garnet:// スキームはありません。ダイアログでエンジンを選択してください。"
+      ]
+    },
+    "elasticsearch": {
+      "description": "Dev Tools 形式のコンソール、SQL モード、マッピングエクスプローラー、保護されたインデックス操作を備えたデスクトップ Elasticsearch クライアント。",
+      "intro": "QoreDB は、ポート 9200 の HTTP または HTTPS で Elasticsearch に、Cloud ID で Elastic Cloud に接続します。リクエストは METHOD /path と JSON ボディで記述し、表形式のクエリには SQL モードに切り替え、インデックスのマッピングはツリーから参照できます。",
+      "highlights": [
+        {
+          "title": "Dev Tools コンソール",
+          "body": "JSON ボディ付きの任意の REST リクエストを送信し、レスポンスを表または生の JSON で読み取れます。"
+        },
+        {
+          "title": "Elastic Cloud に対応",
+          "body": "Cloud ID で接続し、Basic 認証、API キー、Bearer トークンで認証できます。シークレットはローカルのボールトに保管されます。"
+        },
+        {
+          "title": "保護されたインデックス操作",
+          "body": "インデックスの作成と削除、ドキュメントの書き込み、_reindex、クラスター設定は、読み取り専用モードと本番ルールに従います。"
+        }
+      ],
+      "limits": [
+        "SQL モードは Elasticsearch の SQL API の制約を受け、結合、一部の関数、DDL は利用できません。",
+        "スキーマブラウザーはエンジンが認識しているとおりにマッピングを表示します。動的マッピングのため、フィールドはドキュメントごとに異なる場合があります。"
+      ]
+    },
+    "opensearch": {
+      "description": "デスクトップ OpenSearch クライアント。REST コンソール、SQL モード、マッピングエクスプローラー、インデックスとクラスター操作の安全チェックを備えます。",
+      "intro": "OpenSearch ドライバーは QoreDB の検索エンジンサポートを Elasticsearch と共有し、接続時にサーバーのディストリビューションを確認します。JSON ボディ付きの REST リクエストを送信し、SQL モードでクエリし、インデックスのマッピングを参照できます。",
+      "highlights": [
+        {
+          "title": "REST コンソール",
+          "body": "JSON ボディ付きの METHOD /path リクエストを記述し、レスポンスを表または JSON で読み取れます。"
+        },
+        {
+          "title": "柔軟な認証",
+          "body": "HTTP または HTTPS で、認証なし、Basic、API キー、Bearer トークンから選べます。"
+        },
+        {
+          "title": "安全なクラスター作業",
+          "body": "インデックスの削除、再インデックス、クラスター設定は、読み取り専用モードと本番での確認で制御されます。"
+        }
+      ],
+      "limits": [
+        "SigV4 によるリクエスト署名が必要な AWS OpenSearch Service のドメインには、プロキシが必要です。",
+        "SQL モードは OpenSearch SQL プラグインの制約を受けます。"
+      ]
+    },
+    "cassandra": {
+      "description": "ネイティブ CQL v4 ドライバーを備えたデスクトップ Cassandra クライアント。キースペースの参照、カーソルページネーション、主キーによる編集、本番ガードに対応します。",
+      "intro": "QoreDB は、プロトコル仕様に沿って実装した独自の CQL v4 クライアントで Cassandra と通信します。system_schema からキースペース、テーブル、列を一覧し、ネイティブカーソルでテーブルをページ送りし、完全な主キーで行を編集します。",
+      "highlights": [
+        {
+          "title": "ネイティブ CQL クライアント",
+          "body": "サードパーティのドライバーは使いません。フレーミング、ハンドシェイク、SASL 認証、型はアプリ内で実装され、TLS は Rustls で処理されます。"
+        },
+        {
+          "title": "本物のページネーション",
+          "body": "テーブルは、パーティションをスキャンするオフセットクエリではなく、Cassandra のページング状態で参照されます。"
+        },
+        {
+          "title": "本番を意識した設計",
+          "body": "本番の接続では、範囲を限定しない読み取りと ALLOW FILTERING は拒否されます。"
+        }
+      ],
+      "limits": [
+        "行の挿入、更新、削除には、完全な主キーが必要です。",
+        "トランザクション、ストアドルーチン、トリガー、ビジュアル DDL は利用できません。CQL にはそれらがないためです。"
+      ]
+    },
+    "scylladb": {
+      "description": "CQL v4 で使うデスクトップ ScyllaDB クライアント。キースペースの参照、ネイティブカーソルによるテーブルのページ送り、主キーによる行の編集ができます。",
+      "intro": "ScyllaDB は QoreDB では Cassandra と同じネイティブ CQL v4 クライアントを、独自の識別で使います。system_schema からキースペースとテーブルを参照し、エディターで CQL を記述し、ScyllaDB のページング状態で結果をページ送りします。",
+      "highlights": [
+        {
+          "title": "同じプロトコル、独自の識別",
+          "body": "CQL クライアントは Cassandra と共有され、エンジン名とラベルだけが異なります。"
+        },
+        {
+          "title": "カーソルページネーション",
+          "body": "大きなテーブルは、オフセットスキャンなしでページ単位に参照できます。"
+        },
+        {
+          "title": "範囲を限定したクエリ",
+          "body": "本番の接続では、範囲を限定しない読み取りと ALLOW FILTERING が拒否され、負荷の高いクラスターを保護します。"
+        }
+      ],
+      "limits": [
+        "行の編集には、クラスタリング列を含む完全な主キーが必要です。",
+        "トランザクション、ルーチン、トリガー、ビジュアル DDL はありません。"
+      ]
+    },
+    "amazon-keyspaces": {
+      "description": "サービス固有の認証情報とポート 9142 の TLS で QoreDB を Amazon Keyspaces に接続します。CQL エディター、キースペースブラウザー、コストを意識した安全機能を備えます。",
+      "intro": "Amazon Keyspaces は QoreDB の CQL クライアントに Keyspaces のルールを適用して使います。ポート 9142 での TLS の強制、サービス固有の認証情報、cassandra.REGION.amazonaws.com エンドポイントの検出が含まれます。",
+      "highlights": [
+        {
+          "title": "コストを意識した安全機能",
+          "body": "Keyspaces は読み取った行ごとに課金されるため、ALLOW FILTERING はすべての環境で拒否されます。"
+        },
+        {
+          "title": "TLS を強制",
+          "body": "サービスの要件どおり、接続は常にポート 9142 の TLS を使います。"
+        },
+        {
+          "title": "CQL のツール",
+          "body": "キースペースとテーブルを参照し、CQL を実行し、ネイティブカーソルで結果をページ送りできます。"
+        }
+      ],
+      "limits": [
+        "SigV4 認証の AWS アクセスキーはサポートされていません。サービス固有の認証情報を使用してください。",
+        "Cassandra ドライバーの制限が適用されます。行の編集に完全な主キーが必要な点も同様です。"
+      ]
+    }
+  }
+}

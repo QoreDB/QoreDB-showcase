@@ -289,6 +289,7 @@
     "load_more": "Charger plus de versions"
   },
   "footer": {
+    "databases": "Bases de données",
     "license_summary": "Core : Apache-2.0. Fonctions Premium : BUSL-1.1.",
     "newsletter_label": "Newsletter",
     "product": "Produit",

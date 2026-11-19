@@ -185,6 +185,7 @@
     "load_more": "加载更多版本"
   },
   "footer": {
+    "databases": "数据库",
     "license_summary": "Core：Apache-2.0。Premium 功能：BUSL-1.1。",
     "newsletter_label": "订阅简报",
     "product": "产品展示",

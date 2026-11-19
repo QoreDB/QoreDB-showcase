@@ -1,0 +1,816 @@
+{
+  "index": {
+    "title": "Datenbank-Clients für jede Engine, die Sie betreiben",
+    "meta_title": "Unterstützte Datenbanken: SQL-, Analytik- und NoSQL-Clients",
+    "subtitle": "QoreDB verbindet sich mit {{count}} Datenbanken aus einer Desktop-App für macOS, Windows und Linux. Wählen Sie eine Engine und sehen Sie, wie die Verbindung läuft, was funktioniert und was Sie vorab wissen sollten."
+  },
+  "page": {
+    "meta_title": "{{name}}-Client für macOS, Windows und Linux",
+    "title": "{{name}}-Client für macOS, Windows und Linux",
+    "breadcrumb": "Datenbanken",
+    "back": "Alle Datenbanken",
+    "core_badge": "In Core enthalten",
+    "official_listing": "In der offiziellen {{name}}-Dokumentation aufgeführt",
+    "why_title": "Warum QoreDB für {{name}}",
+    "highlights_title": "Das bekommen Sie mit {{name}}",
+    "connection_title": "Verbindung auf einen Blick",
+    "facts": {
+      "port": "Standardport",
+      "protocol": "Protokoll",
+      "schemes": "URL-Schemata",
+      "tls": "TLS",
+      "auth": "Authentifizierung"
+    },
+    "no_port": "Keiner, lokale Datei",
+    "form_only": "Nur über das Verbindungsformular",
+    "file_path": "Dateipfad oder :memory:",
+    "tls": {
+      "optional": "Unterstützt, pro Verbindung konfigurierbar",
+      "required": "Vom Dienst vorausgesetzt",
+      "local": "Nicht zutreffend, lokale Datei"
+    },
+    "protocols": {
+      "postgres_wire": "PostgreSQL-Wire-Protokoll",
+      "mysql_wire": "MySQL-Wire-Protokoll",
+      "tds": "TDS (SQL Server)",
+      "embedded": "Eingebettet, im selben Prozess",
+      "http": "HTTP / HTTPS",
+      "snowflake_api": "Snowflake SQL API v2 über HTTPS",
+      "bigquery_api": "Google-BigQuery-REST-APIs",
+      "mongodb_wire": "MongoDB-Wire-Protokoll",
+      "resp": "RESP (Redis-Protokoll)",
+      "cql": "CQL-Native-Protokoll v4"
+    },
+    "auth": {
+      "password": "Benutzer und Passwort",
+      "sqlserver": "SQL-Login, Windows NTLM oder integriert (SSPI)",
+      "none": "Keine, Dateizugriff",
+      "token": "MotherDuck-Zugriffstoken",
+      "snowflake": "Schlüsselpaar (RS256-JWT) oder Programmatic Access Token",
+      "service_account": "JSON-Schlüssel eines Dienstkontos",
+      "redis": "Passwort oder ACL-Benutzer und Passwort",
+      "elasticsearch": "Keine, Basic, API-Schlüssel oder Bearer-Token; Cloud ID unterstützt",
+      "opensearch": "Keine, Basic, API-Schlüssel oder Bearer-Token",
+      "keyspaces": "Dienstspezifische Zugangsdaten"
+    },
+    "shared_title": "Jede {{name}}-Verbindung bietet außerdem",
+    "shared": [
+      "Zugangsdaten verschlüsselt in einem lokalen Vault, nie mit einem Server synchronisiert",
+      "Tags für Entwicklung, Staging und Produktion: In der Produktion sind DROP und TRUNCATE blockiert, und DELETE verlangt eine Bestätigung",
+      "Schreibgeschützter Modus pro Verbindung",
+      "Ein lokales Audit-Protokoll der ausgeführten Abfragen",
+      "Keine Telemetrie: Abfragen und Ergebnisse bleiben auf Ihrem Rechner"
+    ],
+    "limits_title": "Vor dem Verbinden wissen",
+    "limits_more": "Alle Treiber-Einschränkungen ansehen",
+    "guide_title": "Einrichtung Schritt für Schritt",
+    "guide_body": "Die Verbindungsanleitung erklärt für {{name}} jedes Feld, die TLS-Optionen und häufige Fehler.",
+    "guide_link": "Verbindungsanleitung für {{name}} lesen",
+    "related_title": "Verwandte Datenbanken",
+    "cta_title": "{{name}} in QoreDB öffnen",
+    "cta_body": "Freier Open-Source-Kern für macOS, Windows und Linux. Kein Konto erforderlich.",
+    "cta_download": "QoreDB herunterladen",
+    "cta_compare": "Editionen vergleichen"
+  },
+  "databases": {
+    "postgresql": {
+      "description": "Ein schneller, in Rust gebauter PostgreSQL-Desktop-Client: Schema-Browser, SQL-Editor mit Autovervollständigung, bearbeitbare Ergebnisse und Schutz für die Produktion, auf jedem Betriebssystem.",
+      "intro": "QoreDB behandelt PostgreSQL als erstklassige Engine. Fügen Sie eine postgresql://-URL ein oder füllen Sie das Formular aus, wählen Sie einen SSL-Modus von disable bis verify-full und durchsuchen Sie Schemas, Tabellen, Views, Funktionen und Trigger in einem Baum. Abfragen laufen in einer nativen App, nicht in einem Browser-Tab.",
+      "highlights": [
+        {
+          "title": "Jeder SSL-Modus",
+          "body": "Verbinden Sie sich mit disable, prefer, require, verify-ca oder verify-full, mit Client-Zertifikaten und SSH-Tunneln, wenn der Server privat ist."
+        },
+        {
+          "title": "Echter Abbruch",
+          "body": "Eine laufende Abfrage wird mit pg_cancel_backend über eine separate Verbindung abgebrochen, sodass eine langsame Anweisung den Editor nie blockiert."
+        },
+        {
+          "title": "Jeder Postgres-kompatible Dienst",
+          "body": "Supabase, Neon, TimescaleDB und andere Wire-kompatible Dienste funktionieren mit dem DSN, den sie Ihnen geben, ohne zusätzliche Einrichtung."
+        }
+      ],
+      "limits": [
+        "Jede Verbindung ist auf eine Datenbank beschränkt. Legen Sie eine zweite Verbindung an, um eine andere Datenbank auf demselben Server zu durchsuchen.",
+        "Um die Abfrage eines anderen Benutzers abzubrechen, benötigen Sie die Rolle pg_signal_backend oder müssen Eigentümer dieser Abfrage sein."
+      ]
+    },
+    "supabase": {
+      "description": "Verbinden Sie QoreDB mit Supabase Postgres über den Connection String aus Ihrem Dashboard. Direkt oder gepoolt, standardmäßig mit TLS und Schutz für die Produktion.",
+      "intro": "Supabase betreibt Standard-PostgreSQL, daher nutzt QoreDB seinen vollständigen PostgreSQL-Treiber. Kopieren Sie den direkten String für Lese- und Schreibarbeit oder den gepoolten PgBouncer-String auf Port 6543 für kurze Sitzungen und fügen Sie ihn in „Neue Verbindung“ ein.",
+      "highlights": [
+        {
+          "title": "Dashboard-String einfügen",
+          "body": "Verwenden Sie die URL aus Project settings, Database. Supabase-Hosts werden erkannt, und TLS bleibt aktiv."
+        },
+        {
+          "title": "Direkt oder gepoolt",
+          "body": "Halten Sie beide Verbindungen nebeneinander bereit: die direkte für Migrationen und Änderungen, die gepoolte für schnelle Lesezugriffe."
+        },
+        {
+          "title": "Sicherer in der Produktion arbeiten",
+          "body": "Markieren Sie das Projekt als Produktion: DROP und TRUNCATE sind blockiert, und DELETE verlangt zuerst eine Bestätigung."
+        }
+      ],
+      "limits": [
+        "Ist für das Projekt eine IP-Allowlist aktiviert, muss die Adresse Ihres Rechners freigegeben sein, bevor die Verbindung funktioniert.",
+        "Der gepoolte Endpoint nutzt Transaction Pooling, daher bleiben Einstellungen auf Sitzungsebene zwischen Anweisungen nicht erhalten."
+      ]
+    },
+    "neon": {
+      "description": "Ein Desktop-Client für Neon Serverless Postgres: Connection String einfügen, TLS aktiv lassen und die Schemas Ihrer Branches mit einem nativen SQL-Editor durchsuchen.",
+      "intro": "Neon spricht PostgreSQL, daher verbindet sich QoreDB über seinen PostgreSQL-Treiber mit dem String aus dem Neon-Dashboard. Der Endpoint-Host und sslmode=require sind darin bereits enthalten. Speichern Sie je Branch, an dem Sie arbeiten, eine Verbindung.",
+      "highlights": [
+        {
+          "title": "Eine Verbindung pro Branch",
+          "body": "Richten Sie getrennte Verbindungen auf Ihre Entwicklungs- und Produktions-Branches aus und versehen Sie jede mit ihrer Umgebung."
+        },
+        {
+          "title": "TLS ab Werk",
+          "body": "Neon-Strings enthalten sslmode=require, und QoreDB behält es bei. Die Zugangsdaten bleiben im lokalen Vault verschlüsselt."
+        },
+        {
+          "title": "Volle PostgreSQL-Werkzeuge",
+          "body": "Schema-Browser, bearbeitbare Ergebnisse, Exporte und Notebooks funktionieren genau wie auf einem selbst betriebenen Server."
+        }
+      ],
+      "limits": [
+        "Endpoints, die auf null skalieren, brauchen nach einem Kaltstart einen Moment, um die erste Abfrage zu beantworten."
+      ]
+    },
+    "timescaledb": {
+      "description": "Fragen Sie TimescaleDB und Timescale Cloud mit einem SQL-Desktop-Client ab, der Hypertable-Dimensionen, Chunks, Kompression und Aufbewahrung anzeigt.",
+      "intro": "TimescaleDB ist PostgreSQL mit Zeitreihen-Erweiterungen, und QoreDB verbindet sich mit dem PostgreSQL-Treiber. Hypertables sind im Explorer markiert, und ihr Tab „Info“ zeigt Dimensionen, Chunk-Intervall und -Anzahl sowie Kompressions- und Aufbewahrungsrichtlinien.",
+      "highlights": [
+        {
+          "title": "Hypertables sichtbar gemacht",
+          "body": "Sehen Sie, welche Tabellen Hypertables sind, wie sie in Chunks aufgeteilt sind und welche Kompressions- und Aufbewahrungsrichtlinien gelten."
+        },
+        {
+          "title": "Standard-SQL",
+          "body": "Continuous Aggregates und time_bucket-Abfragen laufen im normalen Editor, mit Autovervollständigung und Ergebnisexporten."
+        },
+        {
+          "title": "Selbst betrieben oder Cloud",
+          "body": "Dasselbe Verbindungsformular funktioniert für eine lokale Instanz und für Timescale Cloud mit TLS."
+        }
+      ],
+      "limits": [
+        "TimescaleDB wird am Host nicht erkannt. Wählen Sie die Engine im Verbindungsdialog aus, um die Hypertable-Details zu erhalten."
+      ]
+    },
+    "cockroachdb": {
+      "description": "Ein CockroachDB-Desktop-Client mit eigenem Treiber: Port 26257, defaultdb, gefilterte Systemkataloge und die PostgreSQL-Werkzeuge, die Sie schon kennen.",
+      "intro": "CockroachDB hat in QoreDB eine eigene Engine, die auf dem PostgreSQL-Wire-Protokoll aufbaut und an den Katalog von CockroachDB angepasst ist. Der Schema-Baum blendet crdb_internal aus, überspringt Materialized Views, die CockroachDB nicht kennt, und reduziert die Wartung auf ANALYZE.",
+      "highlights": [
+        {
+          "title": "Ein Treiber, der CockroachDB kennt",
+          "body": "Port 26257 und die Datenbank defaultdb sind die Standardwerte, und cockroachdb://-URLs werden erkannt."
+        },
+        {
+          "title": "Übersichtliches Durchsuchen des Schemas",
+          "body": "Interne Kataloge werden herausgefiltert, sodass der Baum Ihre Datenbanken, Schemas und Tabellen zeigt."
+        },
+        {
+          "title": "Funktioniert mit CockroachDB Cloud",
+          "body": "Verbinden Sie sich mit sslmode=verify-full und der CA des Clusters, und markieren Sie Produktions-Cluster, damit destruktive Anweisungen abgesichert sind."
+        }
+      ],
+      "limits": [
+        "Bei Serialisierungskonflikten können Transaktionen häufiger zum Wiederholen aufgefordert werden als bei PostgreSQL. Führen Sie die fehlgeschlagene Anweisung erneut aus dem Editor aus.",
+        "VACUUM und REINDEX sind nicht verfügbar; CockroachDB übernimmt diese Wartung selbst."
+      ]
+    },
+    "yugabytedb": {
+      "description": "Verbinden Sie QoreDB mit YugabyteDB YSQL auf Port 5433. Ein SQL-Desktop-Client mit Schema-Browser, Bearbeitung und Schutz für die Produktion.",
+      "intro": "QoreDB enthält einen YugabyteDB-Treiber, der das PostgreSQL-Protokoll und den PostgreSQL-Katalog mit den YugabyteDB-Standardwerten nutzt: Port 5433 und die Datenbank yugabyte. Hosts unter yugabyte.cloud werden automatisch erkannt.",
+      "highlights": [
+        {
+          "title": "YugabyteDB-Standardwerte",
+          "body": "Port 5433 und die Datenbank yugabyte sind vorbelegt, sodass sich ein lokaler Cluster ohne Rätselraten verbindet."
+        },
+        {
+          "title": "PostgreSQL-Werkzeuge",
+          "body": "Durchsuchen Sie Schemas, führen Sie SQL mit Autovervollständigung aus, bearbeiten und exportieren Sie Ergebnisse, wie bei PostgreSQL."
+        },
+        {
+          "title": "Verwaltete Cluster",
+          "body": "Hosts unter yugabyte.cloud werden erkannt, und verifiziertes TLS hält die Verbindung zum Cluster authentifiziert."
+        }
+      ],
+      "limits": [
+        "Die Verbindung erfolgt zur YSQL-API, nicht zu YCQL.",
+        "PostgreSQL-Kompatibilität garantiert nicht, dass jede Erweiterung oder jeder administrative Befehl auf Ihrem Cluster vorhanden ist."
+      ]
+    },
+    "mysql": {
+      "description": "Ein nativer MySQL-Client für macOS, Windows und Linux: SQL-Editor, Routinen, Trigger und Events, bearbeitbare Ergebnisse und sicherer Zugriff auf die Produktion.",
+      "intro": "QoreDB verbindet sich mit MySQL über eine mysql://-URL oder das Formular, mit SSL-Modi von disabled bis verify-identity. Der Baum listet Datenbanken, Tabellen, Views, Routinen, Trigger und Events auf und blendet Systemschemas standardmäßig aus.",
+      "highlights": [
+        {
+          "title": "Routinen, Trigger und Events",
+          "body": "Durchsuchen Sie gespeicherte Prozeduren, Funktionen, Trigger und geplante Events im Schema-Baum."
+        },
+        {
+          "title": "Abfrageabbruch",
+          "body": "Lange Abfragen werden mit KILL QUERY gestoppt, sodass sich eine außer Kontrolle geratene Anweisung aus dem Editor abbrechen lässt."
+        },
+        {
+          "title": "Integrierte Backups",
+          "body": "Führen Sie mysqldump aus der Oberfläche aus, wenn es installiert ist, mit Streaming-Ausgabe und Abbruch."
+        }
+      ],
+      "limits": [
+        "Das Zurückrollen setzt InnoDB voraus. Tabellen auf MyISAM oder anderen nicht transaktionalen Engines werden nicht zurückgerollt.",
+        "Zum Abbrechen einer Abfrage ist das Privileg PROCESS nötig, und SUPER für Abfragen anderer Benutzer."
+      ]
+    },
+    "mariadb": {
+      "description": "Ein in Rust gebauter MariaDB-Desktop-Client: derselbe Treiber wie für MySQL, mit SSL, Routinen, Triggern, Backups und Bestätigung vor destruktiven Abfragen in der Produktion.",
+      "intro": "MariaDB nutzt in QoreDB den MySQL-Treiber, mit denselben mysql://-URLs, SSL-Modi und demselben Schema-Baum. Wählen Sie MariaDB im Dialog, damit die Verbindung korrekt beschriftet ist, und durchsuchen Sie dann Datenbanken, Routinen, Trigger und Events.",
+      "highlights": [
+        {
+          "title": "Ein Treiber, zwei Engines",
+          "body": "Alles, was mit MySQL funktioniert, funktioniert auch mit MariaDB: Editor, bearbeitbare Ergebnisse, Routinen, Events und Exporte."
+        },
+        {
+          "title": "Backups aus der Oberfläche",
+          "body": "Nutzen Sie den mysqldump-Helfer mit Streaming-Ausgabe, wenn die Binärdatei auf Ihrem Rechner verfügbar ist."
+        },
+        {
+          "title": "Schutz für die Produktion",
+          "body": "Markieren Sie einen Server als Produktion: DROP und TRUNCATE sind blockiert, und DELETE verlangt eine Bestätigung."
+        }
+      ],
+      "limits": [
+        "MariaDB wird nicht anhand der URL erkannt. Wählen Sie die Engine im Dialog.",
+        "Nicht transaktionale Storage-Engines wie MyISAM werden nicht zurückgerollt."
+      ]
+    },
+    "planetscale": {
+      "description": "Verbinden Sie QoreDB mit PlanetScale, mit erzwungenem TLS und sichtbaren Vitess-Grenzen: ein MySQL-Desktop-Client für Serverless-Branches.",
+      "intro": "PlanetScale-Verbindungen nutzen den MySQL-Treiber, ergänzt um die PlanetScale-Regeln. QoreDB erkennt psdb.cloud-Hosts, erzwingt TLS beim Verbinden und blendet gespeicherte Routinen, Trigger und Events aus, die Vitess nicht ausführt, statt Sie etwas bearbeiten zu lassen, das fehlschlagen wird.",
+      "highlights": [
+        {
+          "title": "TLS immer aktiv",
+          "body": "Ein SSL-Modus von disable oder prefer wird auf require angehoben. Strengere Verifizierungsmodi bleiben erhalten."
+        },
+        {
+          "title": "Ehrlich zu Vitess",
+          "body": "Nicht unterstützte Routinen, Trigger, Events und Sequenzen werden als nicht vorhanden gemeldet, sodass die Oberfläche nur anbietet, was laufen kann."
+        },
+        {
+          "title": "Branch-bewusster Workflow",
+          "body": "Richten Sie eine Verbindung auf einen Entwicklungs-Branch für Schemaänderungen und halten Sie die Produktion schreibgeschützt."
+        }
+      ],
+      "limits": [
+        "Deploy Requests werden nicht abgebildet. Migrationen werden direkt auf den verbundenen Branch angewendet.",
+        "Fremdschlüssel werden nicht erzwungen, solange für den Branch keine Fremdschlüssel-Constraints aktiviert sind."
+      ]
+    },
+    "tidb": {
+      "description": "Ein TiDB-Desktop-Client: MySQL-Protokoll auf Port 4000, TiDB-Cloud-Hosts erkannt und nur die Operationen, die TiDB unterstützt.",
+      "intro": "QoreDB enthält einen TiDB-Treiber auf Basis des MySQL-Protokolls, mit TiDB-Standardwerten und -Grenzen. Port 4000 ist vorbelegt, tidbcloud.com-Hosts werden erkannt, und MySQL-Funktionen, die TiDB nicht unterstützt, bleiben ausgeblendet.",
+      "highlights": [
+        {
+          "title": "Bereit für TiDB Cloud",
+          "body": "Fügen Sie eine tidbcloud.com-URL ein, und die TiDB-Engine wird für Sie ausgewählt, mit aktivem TLS."
+        },
+        {
+          "title": "Nur, was TiDB ausführt",
+          "body": "Routinen, Trigger, Events und Wartungsaktionen sind ausgeblendet, wo TiDB sie nicht unterstützt."
+        },
+        {
+          "title": "Vertraute MySQL-Werkzeuge",
+          "body": "Durchsuchen Sie Datenbanken und Tabellen, führen Sie SQL mit Autovervollständigung aus und exportieren Sie Ergebnisse als CSV, JSON oder SQL."
+        }
+      ],
+      "limits": [
+        "Wählen Sie für einen lokalen Server TiDB ausdrücklich aus; eine generische mysql://-URL wird als MySQL erkannt."
+      ]
+    },
+    "singlestore": {
+      "description": "Verbinden Sie QoreDB über das MySQL-Protokoll mit SingleStore, mit angepasster SingleStore-Sitzungsbehandlung und erkannten Cloud-Hosts.",
+      "intro": "Der SingleStore-Treiber nutzt das MySQL-Protokoll mit an SingleStore angepassten Sitzungseinstellungen. Cloud-Hosts unter svc.singlestore.com werden erkannt, und der visuelle DDL-Editor zeigt nur Constraints, die SingleStore akzeptiert.",
+      "highlights": [
+        {
+          "title": "Passende Sitzungseinstellungen",
+          "body": "Die Zeitzoneneinstellung, die SingleStore ablehnt, wird übersprungen, sodass Verbindungen sauber geöffnet werden."
+        },
+        {
+          "title": "Angepasster DDL-Editor",
+          "body": "Steuerelemente für Fremdschlüssel, CHECK und Eindeutigkeit sind im visuellen Editor ausgeblendet, weil SingleStore sie anders handhabt."
+        },
+        {
+          "title": "Cloud-Erkennung",
+          "body": "SingleStore-Helios-Endpoints wählen automatisch die richtige Engine."
+        }
+      ],
+      "limits": [
+        "Wählen Sie SingleStore für selbst betriebene Cluster ausdrücklich aus; eine einfache mysql://-URL wird als MySQL gelesen."
+      ]
+    },
+    "sql-server": {
+      "description": "Ein SQL-Server-Client für macOS und Linux ebenso wie für Windows: SQL-, NTLM- oder integrierte Authentifizierung, Schema-Browser und sicheres Arbeiten in der Produktion.",
+      "intro": "QoreDB verbindet sich mit Microsoft SQL Server über einen nativen TDS-Treiber und läuft daher auf macOS und Linux ebenso wie auf Windows. Nutzen Sie überall die SQL-Authentifizierung oder unter Windows NTLM und integrierte Authentifizierung, und durchsuchen Sie Schemas, Tabellen, Views und Prozeduren.",
+      "highlights": [
+        {
+          "title": "SQL Server auf jedem Betriebssystem",
+          "body": "Kein ODBC-Treiber zu installieren: Der TDS-Client ist auf macOS, Windows und Linux in die App eingebaut."
+        },
+        {
+          "title": "Drei Authentifizierungsmodi",
+          "body": "Das SQL-Login funktioniert überall; Windows NTLM und integrierte Authentifizierung (SSPI) stehen unter Windows zur Verfügung."
+        },
+        {
+          "title": "Gepoolte Verbindungen",
+          "body": "Ein Verbindungspool hält den Editor reaktionsschnell, während Sie durchsuchen und Abfragen in parallelen Tabs ausführen."
+        }
+      ],
+      "limits": [
+        "Benannte Instanzen, die auf den SQL Server Browser-Dienst angewiesen sind, werden nicht unterstützt. Verwenden Sie den statischen Port der Instanz.",
+        "Bei aktiviertem SSL wird dem Serverzertifikat ohne strenge CA-Validierung vertraut."
+      ]
+    },
+    "azure-sql": {
+      "description": "Ein Azure-SQL-Database-Desktop-Client für macOS, Windows und Linux, mit erzwungenem TLS und erkannten database.windows.net-Hosts.",
+      "intro": "Azure SQL nutzt in QoreDB den SQL-Server-TDS-Treiber, mit eigener Identität und bei jeder Verbindung erzwungenem TLS. Hosts unter database.windows.net werden erkannt, sodass das Einfügen des Servernamens genügt, um die Engine zu wählen.",
+      "highlights": [
+        {
+          "title": "Verschlüsselung erzwungen",
+          "body": "TLS wird vom Treiber erzwungen, unabhängig davon, was die URL angibt."
+        },
+        {
+          "title": "Nativ auf macOS und Linux",
+          "body": "Fragen Sie Azure SQL ohne Windows oder ODBC-Setup ab, in derselben App wie Ihre anderen Datenbanken."
+        },
+        {
+          "title": "Abgesicherter Zugriff auf die Produktion",
+          "body": "Markieren Sie eine Datenbank als Produktion, damit destruktive Anweisungen blockiert werden oder eine Bestätigung verlangen."
+        }
+      ],
+      "limits": [
+        "Administrationsfunktionen von SQL Server auf Instanzebene gibt es unter Azure SQL möglicherweise nicht. Ihre Rolle entscheidet, was der Server erlaubt."
+      ]
+    },
+    "sqlite": {
+      "description": "Ein schneller SQLite-Browser und -Editor für macOS, Windows und Linux. Öffnen Sie eine .db-Datei oder eine In-Memory-Datenbank, ohne Server und ohne Zugangsdaten.",
+      "intro": "Öffnen Sie eine beliebige .db-, .sqlite- oder .sqlite3-Datei oder starten Sie eine In-Memory-Datenbank, und QoreDB bietet Ihnen denselben Schema-Baum, SQL-Editor und dasselbe bearbeitbare Raster wie bei einer Server-Engine. WAL-Modus, FTS5-Tabellen und Dump-Backups werden unterstützt.",
+      "highlights": [
+        {
+          "title": "Dateien statt Server",
+          "body": "Verweisen Sie auf eine lokale Datei oder nutzen Sie :memory:. Es gibt keinen Port, Benutzer oder Passwort zu konfigurieren."
+        },
+        {
+          "title": "Daten sicher bearbeiten",
+          "body": "Bearbeiten Sie Zeilen im Ergebnisraster, mit denselben Umgebungsschutzregeln wie bei Server-Engines."
+        },
+        {
+          "title": "Dump und Export",
+          "body": "Sichern Sie mit dem sqlite3-Dump-Helfer oder exportieren Sie Ergebnisse als CSV, JSON, SQL oder HTML."
+        }
+      ],
+      "limits": [
+        "SQLite serialisiert Schreibzugriffe, daher blockiert eine lange Schreibtransaktion andere Schreiber, bis sie committet.",
+        "Spalten verwenden Type Affinity, es sei denn, die Tabelle ist als STRICT deklariert."
+      ]
+    },
+    "duckdb": {
+      "description": "Ein DuckDB-Desktop-Client: .duckdb-Dateien öffnen, lokale CSV- und Parquet-Dateien abfragen und Analysen in einem nativen SQL-Editor auf jedem Betriebssystem ausführen.",
+      "intro": "DuckDB läuft innerhalb von QoreDB, es gibt also nichts zu starten. Öffnen Sie eine .duckdb- oder .db-Datei oder eine In-Memory-Datenbank und fragen Sie lokale CSV- und Parquet-Dateien mit DuckDB-SQL ab. QoreDB nutzt DuckDB außerdem als Engine hinter seinen datenbankübergreifenden Abfragen.",
+      "highlights": [
+        {
+          "title": "Lokale Dateien in voller Geschwindigkeit",
+          "body": "Fragen Sie CSV- und Parquet-Dateien direkt ab, wobei die Abfragen außerhalb des UI-Threads laufen, damit die App reaktionsschnell bleibt."
+        },
+        {
+          "title": "In-Memory-Notizblöcke",
+          "body": "Öffnen Sie :memory: für Wegwerf-Analysen und exportieren Sie anschließend, was Sie behalten wollen, als CSV oder JSON."
+        },
+        {
+          "title": "Joins über Datenbanken hinweg",
+          "body": "In der Pro-Edition treibt DuckDB die Föderation an: Verbinden Sie eine PostgreSQL-Tabelle mit einer MongoDB-Collection in einer Abfrage."
+        }
+      ],
+      "limits": [
+        "Datenbankdateien müssen die Endung .duckdb oder .db haben.",
+        "Daten im Speicher gehen verloren, wenn die Verbindung geschlossen wird."
+      ]
+    },
+    "motherduck": {
+      "description": "Verbinden Sie QoreDB mit Ihrem Token über den PostgreSQL-kompatiblen Endpoint von MotherDuck und durchsuchen Sie Cloud-DuckDB-Kataloge vom Desktop aus.",
+      "intro": "Der MotherDuck-Treiber verbindet sich mit dem PostgreSQL-kompatiblen Endpoint von MotherDuck, mit Ihrem Zugriffstoken als Passwort, und liest den DuckDB-Katalog für den Schema-Browser. Der regionale Host kann aus dem Token abgeleitet werden.",
+      "highlights": [
+        {
+          "title": "Anmeldung per Token",
+          "body": "Fügen Sie ein MotherDuck-Token ein. Es wird verschlüsselt im lokalen Vault gespeichert, nie in einer Abfrage."
+        },
+        {
+          "title": "Region aus dem Token",
+          "body": "Für unterstützte AWS-Regionen füllt das Formular den regionalen Host aus dem Claim mdRegion des Tokens."
+        },
+        {
+          "title": "DuckDB-Katalog",
+          "body": "Schemas und Tabellen stammen aus information_schema und den duckdb_-Katalogfunktionen, nicht aus dem Katalog von PostgreSQL."
+        }
+      ],
+      "limits": [
+        "Dies ist eine Remote-Verbindung, keine lokale .duckdb-Datei. Nutzen Sie für Dateien die DuckDB-Engine.",
+        "Wire-Kompatibilität mit PostgreSQL macht MotherDuck nicht zu einem PostgreSQL-Server; die Funktionen richten sich nach dem MotherDuck-Treiber."
+      ]
+    },
+    "clickhouse": {
+      "description": "Ein nativer ClickHouse-Client, in der offiziellen ClickHouse-Dokumentation aufgeführt: HTTP und HTTPS, 28 abgebildete Typen, Abbruch per KILL QUERY und Abfragesicherheit.",
+      "intro": "QoreDB liefert einen nativen ClickHouse-Treiber über HTTP (8123) oder HTTPS (8443) mit, mit Rustls und ohne erforderliches System-OpenSSL. Anweisungen werden vor der Ausführung klassifiziert, Ergebnisse bilden 28 ClickHouse-Typen ab, und der visuelle DDL-Editor versteht MergeTree-Tabellen.",
+      "highlights": [
+        {
+          "title": "Abfragesicherheit für Cluster",
+          "body": "SYSTEM-Befehle und OPTIMIZE FINAL werden abgelehnt, und die Produktionsregeln gelten für jede Mutation."
+        },
+        {
+          "title": "Umfassende Typunterstützung",
+          "body": "Arrays, Tupel, Maps, Enums, IPv4 und IPv6, DateTime64 und Decimal werden im Raster korrekt dargestellt."
+        },
+        {
+          "title": "Abbruch, der funktioniert",
+          "body": "Lange Aggregationen werden mit KILL QUERY auf ihre query_id gestoppt, direkt aus dem Editor."
+        }
+      ],
+      "limits": [
+        "Das native TCP-Protokoll auf Port 9000 wird nicht unterstützt; nutzen Sie HTTP oder HTTPS.",
+        "ON CLUSTER und Änderungen an verteilten Tabellen sind im visuellen Editor nicht enthalten. Schreiben Sie sie in SQL."
+      ]
+    },
+    "snowflake": {
+      "description": "Ein Snowflake-Desktop-Client: Authentifizierung per Schlüsselpaar oder Token, Warehouse und Rolle pro Verbindung, asynchrone Abfragen und echter Abbruch.",
+      "intro": "QoreDB spricht mit Snowflake über die SQL API v2 per HTTPS, ohne Hersteller-SDK. Wählen Sie Warehouse und Rolle pro Verbindung, melden Sie sich mit einem Schlüsselpaar oder einem Programmatic Access Token an, und Anweisungen laufen asynchron, wobei der Abbruch an den Dienst gesendet wird.",
+      "highlights": [
+        {
+          "title": "Authentifizierung per Schlüsselpaar",
+          "body": "Fügen Sie Ihren privaten RSA-Schlüssel ein; QoreDB signiert RS256-Token lokal und bewahrt den Schlüssel im verschlüsselten Vault auf."
+        },
+        {
+          "title": "Warehouse und Rolle pro Verbindung",
+          "body": "Speichern Sie je Warehouse und Rolle eine Verbindung, damit Kosten und Berechtigungen eindeutig bleiben."
+        },
+        {
+          "title": "Echter Abbruch",
+          "body": "Das Abbrechen einer Anweisung stoppt sie in Snowflake, nicht nur in der Oberfläche."
+        }
+      ],
+      "limits": [
+        "Ergebnisse sind auf 200.000 Zeilen begrenzt, mit einem expliziten Fehler, wenn weitere Seiten übrig bleiben.",
+        "Anmeldung per Passwort oder Browser wird nicht unterstützt. Transaktionen, visuelles DDL und Routinenverwaltung werden nicht angeboten."
+      ]
+    },
+    "bigquery": {
+      "description": "Ein BigQuery-Desktop-Client, der die Scan-Größe vor der Ausführung einer Abfrage schätzt und nachfragt, bevor sie Kosten verursacht. Anmeldung per Dienstkonto, auf jedem Betriebssystem.",
+      "intro": "QoreDB verbindet sich über die REST-APIs von Google mit BigQuery, mit dem JSON-Schlüssel eines Dienstkontos. Es listet Datasets über alle Projekte auf, die das Konto sehen kann, zeigt Tabellenvorschauen ohne Scan an und schätzt jede Editor-Abfrage, bevor sie läuft.",
+      "highlights": [
+        {
+          "title": "Zuerst Scan-Schätzungen",
+          "body": "Editor-Abfragen laufen zuerst als Dry-Run; QoreDB fragt nach einer Bestätigung, wenn ein Scan Kosten verursachen könnte."
+        },
+        {
+          "title": "Kostenlose Tabellenvorschauen",
+          "body": "Vorschauen nutzen tabledata.list, daher wird das Öffnen einer Tabelle nicht als Abfrage abgerechnet."
+        },
+        {
+          "title": "Projekte und Standorte",
+          "body": "Legen Sie pro Verbindung das Standardprojekt, das Abrechnungsprojekt und den Standort fest und durchsuchen Sie Datasets über Projekte hinweg."
+        }
+      ],
+      "limits": [
+        "Ein persönliches Google-Login oder ein API-Schlüssel kann den Schlüssel des Dienstkontos nicht ersetzen.",
+        "Ergebnisse sind auf 200.000 Zeilen begrenzt. Transaktionen, visuelles DDL und Routinenverwaltung werden nicht angeboten."
+      ]
+    },
+    "starrocks": {
+      "description": "Durchsuchen und Abfragen von StarRocks mit einem SQL-Desktop-Client über den MySQL-Endpoint, mit Schema-Introspektion und Schutz für die Produktion.",
+      "intro": "Der StarRocks-Treiber verbindet sich mit dem Frontend-MySQL-Endpoint auf Port 9030 und liest Datenbanken, Tabellen und Spalten aus. Er ist auf Abfragen ausgelegt: Zeilenbearbeitung, Transaktionen und visuelles DDL sind abgeschaltet, weil sich das Schlüssel- und Verteilungsmodell von StarRocks von MySQL unterscheidet.",
+      "highlights": [
+        {
+          "title": "Für Analytik gebaut",
+          "body": "Führen Sie SQL gegen StarRocks aus, mit Autovervollständigung und einem virtualisierten Raster für große Ergebnismengen."
+        },
+        {
+          "title": "Keine irreführenden Steuerelemente",
+          "body": "Zeilenbearbeitung, Transaktionen und visuelles DDL sind deaktiviert, statt angeboten zu werden und auf dem Server zu scheitern."
+        },
+        {
+          "title": "Exporte",
+          "body": "Exportieren Sie Ergebnisse als CSV, JSON oder SQL für Berichte und nachgelagerte Werkzeuge."
+        }
+      ],
+      "limits": [
+        "Wählen Sie StarRocks ausdrücklich aus; eine generische mysql://-URL identifiziert es nicht."
+      ]
+    },
+    "apache-doris": {
+      "description": "Ein Desktop-Client für Apache Doris über das MySQL-Protokoll: Katalog durchsuchen und analytisches SQL mit Schutz für die Produktion ausführen.",
+      "intro": "QoreDB verbindet sich mit dem Frontend-MySQL-Endpoint von Apache Doris auf Port 9030. Durchsuchen Sie den Katalog und führen Sie SQL aus; strukturierte Zeilenbearbeitung, Transaktionen und visuelles DDL sind deaktiviert, weil sich das OLAP-Modell von Doris von MySQL unterscheidet.",
+      "highlights": [
+        {
+          "title": "SQL zuerst",
+          "body": "Schreiben Sie analytische Abfragen mit Autovervollständigung und lesen Sie große Ergebnisse in einem virtualisierten Raster."
+        },
+        {
+          "title": "Katalog durchsuchen",
+          "body": "Datenbanken, Tabellen und Spalten stammen über das MySQL-Protokoll aus dem Doris-Katalog."
+        },
+        {
+          "title": "Dasselbe Sicherheitsnetz",
+          "body": "Schreibgeschützter Modus und Produktionsbestätigung gelten wie bei jeder anderen Engine."
+        }
+      ],
+      "limits": [
+        "Verwenden Sie den Abfrageport des Frontends, nicht den HTTP-Verwaltungsport.",
+        "MySQL-Wire-Kompatibilität bedeutet nicht, dass der Funktionsumfang von MySQL erreicht wird."
+      ]
+    },
+    "azure-synapse": {
+      "description": "Fragen Sie dedizierte und serverlose SQL-Pools von Azure Synapse mit einem Desktop-Client für macOS, Windows und Linux ab, mit erzwungenem TLS.",
+      "intro": "Der Azure-Synapse-Treiber nutzt TDS mit erzwungenem TLS und erkennt sql.azuresynapse.net-Hosts. Er konzentriert sich auf SQL-Abfragen und den Katalog-Browser und deaktiviert Zeilenbearbeitung, Transaktionen, Wartung und visuelles DDL, damit er auf dedizierten und serverlosen Pools gleich funktioniert.",
+      "highlights": [
+        {
+          "title": "Dediziert oder serverlos",
+          "body": "Verbinden Sie sich mit einem der beiden Endpoints Ihres Workspace; der Treiber vermeidet Operationen, die nur einer von beiden unterstützt."
+        },
+        {
+          "title": "Jedes Desktop-Betriebssystem",
+          "body": "Fragen Sie Synapse von macOS oder Linux ab, ohne einen ODBC-Treiber zu installieren."
+        },
+        {
+          "title": "Standardmäßig verschlüsselt",
+          "body": "TLS wird bei jeder Verbindung erzwungen, und die Zugangsdaten bleiben im lokalen Vault."
+        }
+      ],
+      "limits": [
+        "Strukturierte Zeilenbearbeitung, Transaktionen, Wartungsaktionen und visuelles DDL sind für diesen Treiber deaktiviert."
+      ]
+    },
+    "mongodb": {
+      "description": "Ein MongoDB-Desktop-Client mit eigenem Abfrage-Editor, Aggregation Pipelines, Dokumentraster, Indizes und Schutz für die Produktion. Bereit für SRV und Atlas.",
+      "intro": "QoreDB verbindet sich mit eigenständigem MongoDB, Replica Sets und Atlas über mongodb://- oder mongodb+srv://-URLs. Ein eigener Editor führt find- und aggregate-Befehle aus, Dokumente öffnen sich in einem Raster oder als JSON, und Indizes werden in der Collection-Ansicht verwaltet.",
+      "highlights": [
+        {
+          "title": "Ein echter Mongo-Editor",
+          "body": "Schreiben Sie Abfragen und Aggregation Pipelines in einem Editor für JSON und BSON, mit Validierung vor der Ausführung."
+        },
+        {
+          "title": "Atlas und Replica Sets",
+          "body": "SRV-Records, TLS und Authentifizierungsoptionen werden vom Verbindungsformular abgedeckt."
+        },
+        {
+          "title": "Standardmäßig sicher",
+          "body": "$where, $function und $accumulator sind blockiert, sodass vom Client aus kein serverseitiges JavaScript läuft."
+        }
+      ],
+      "limits": [
+        "Transaktionen über mehrere Dokumente benötigen ein Replica Set; eigenständige Server unterstützen sie nicht.",
+        "Aggregation Pipelines sind auf 50 Stages begrenzt."
+      ]
+    },
+    "amazon-documentdb": {
+      "description": "Verbinden Sie QoreDB mit Amazon DocumentDB, mit erzwungenem TLS, verifiziertem CA-Bundle von Amazon und behandeltem retryWrites. Ein Desktop-Client für DocumentDB-Cluster.",
+      "intro": "DocumentDB nutzt den MongoDB-Treiber mit angewendeten DocumentDB-Regeln. TLS wird erzwungen, mit global-bundle.pem von Amazon als Vertrauensanker, retryWrites ist abgeschaltet, und Cluster innerhalb einer VPC erreichen Sie über den SSH-Tunnel im Verbindungsformular.",
+      "highlights": [
+        {
+          "title": "Verifiziertes TLS",
+          "body": "QoreDB verweigert die Verbindung, wenn der Pfad zum CA-Bundle fehlt, statt auf eine nicht verifizierte Verbindung zurückzufallen."
+        },
+        {
+          "title": "VPC-Zugriff",
+          "body": "Erreichen Sie private Cluster über einen SSH-Tunnel; die CA wird auch hinter dem Tunnel verifiziert."
+        },
+        {
+          "title": "MongoDB-Werkzeuge",
+          "body": "Nutzen Sie den Mongo-Editor, das Dokumentraster und die Indexansichten auf DocumentDB-Collections."
+        }
+      ],
+      "limits": [
+        "DocumentDB ist nur teilweise mit MongoDB kompatibel: Einige Aggregationsoperatoren und Indextypen fehlen, und Serverfehler werden durchgereicht.",
+        "Retryable Writes sind immer deaktiviert."
+      ]
+    },
+    "redis": {
+      "description": "Eine Redis-GUI für macOS, Windows und Linux: Keys mit SCAN durchsuchen, jeden Datentyp inspizieren, Befehle ausführen und gefährliche absichern.",
+      "intro": "QoreDB verbindet sich mit Redis über redis://- oder rediss://-URLs, listet die nicht leeren Datenbanken auf und durchsucht Keys mit SCAN. Strings, Hashes, Listen, Sets, Sorted Sets und Streams öffnen sich jeweils in einer Ansicht, die zu ihrem Typ passt.",
+      "highlights": [
+        {
+          "title": "Jeder Datentyp",
+          "body": "Inspizieren Sie Strings, Hashes, Listen, Sets, Sorted Sets und Streams mit einer jeweils angepassten Vorschau."
+        },
+        {
+          "title": "Befehlskonsole",
+          "body": "Führen Sie Redis-Befehle aus dem Editor aus; Schreibzugriffe werden als Mutationen klassifiziert und folgen den Umgebungsregeln."
+        },
+        {
+          "title": "Gefährliche Befehle markiert",
+          "body": "FLUSHALL, FLUSHDB, CONFIG, SHUTDOWN und SCRIPT FLUSH lösen Warnungen aus, bevor sie den Server erreichen."
+        }
+      ],
+      "limits": [
+        "Keys und Werte werden im Raster nicht inline bearbeitet; nutzen Sie Befehle wie SET oder HSET.",
+        "Redis Cluster wird über einen Einstiegsknoten erreicht, nicht als eigene Cluster-Ansicht."
+      ]
+    },
+    "valkey": {
+      "description": "Ein Valkey-Desktop-Client mit valkey://- und valkeys://-URLs: Keys durchsuchen, Datentypen inspizieren und Befehle mit Sicherheitsprüfungen ausführen.",
+      "intro": "Valkey nutzt in QoreDB den Redis-Treiber, mit eigener Identität und eigenen URL-Schemata. valkey:// und valkeys:// werden erkannt, sodass eine eingefügte URL die richtige Engine wählt, und alles, was QoreDB für Redis leistet, funktioniert genauso.",
+      "highlights": [
+        {
+          "title": "Native URL-Schemata",
+          "body": "valkey:// verbindet über TCP und valkeys:// über TLS, analog zu redis:// und rediss://."
+        },
+        {
+          "title": "Key-Browser",
+          "body": "Durchsuchen Sie Datenbanken und Keys mit SCAN und öffnen Sie jeden Datentyp in einer eigenen Ansicht."
+        },
+        {
+          "title": "Sicherheitsprüfungen",
+          "body": "Destruktive Befehle werden markiert, und Produktionsverbindungen wenden strengere Regeln an."
+        }
+      ],
+      "limits": [
+        "Alle Einschränkungen des Redis-Treibers gelten, einschließlich der fehlenden Inline-Bearbeitung von Werten im Raster."
+      ]
+    },
+    "dragonfly": {
+      "description": "Durchsuchen und Abfragen von Dragonfly mit einem Desktop-Client über das Redis-Protokoll: Key-Browser, Ansichten je Datentyp und Befehlskonsole.",
+      "intro": "Dragonfly ist Wire-kompatibel mit Redis, daher verbindet sich QoreDB mit dem Redis-Treiber unter einer Dragonfly-Identität. Verwenden Sie redis://- oder rediss://-URLs und wählen Sie Dragonfly im Dialog, damit die Verbindung korrekt beschriftet ist.",
+      "highlights": [
+        {
+          "title": "Redis-Kompatibilität",
+          "body": "Key-Browsing, Typvorschauen und Befehlsausführung funktionieren wie bei Redis."
+        },
+        {
+          "title": "TLS, wenn Sie es brauchen",
+          "body": "rediss:// aktiviert TLS, mit verschlüsselt im lokalen Vault gespeicherten Zugangsdaten."
+        },
+        {
+          "title": "Umgebungsschutz",
+          "body": "Markieren Sie eine Dragonfly-Instanz als Produktion, damit destruktive Befehle abgesichert sind."
+        }
+      ],
+      "limits": [
+        "Dragonfly hat kein eigenes URL-Schema und wird nicht anhand des Servers erkannt. Wählen Sie es im Dialog aus."
+      ]
+    },
+    "keydb": {
+      "description": "Ein KeyDB-Desktop-Client über RESP: Keys durchsuchen, Datentypen inspizieren und Befehle mit denselben Sicherheitsprüfungen wie bei Redis ausführen.",
+      "intro": "QoreDB verbindet sich mit KeyDB über seinen RESP-Treiber mit einer KeyDB-Identität. Verwenden Sie redis://- oder rediss://-URLs, wählen Sie KeyDB im Dialog und durchsuchen Sie Keys und führen Sie Befehle aus wie bei Redis.",
+      "highlights": [
+        {
+          "title": "Key-Browsing",
+          "body": "Listen Sie Datenbanken und Keys mit SCAN auf und sehen Sie jeden Datentyp in einer eigenen Ansicht als Vorschau."
+        },
+        {
+          "title": "Befehlseditor",
+          "body": "Führen Sie KeyDB-Befehle aus dem Editor aus, mit Verlauf und Ergebnisansichten."
+        },
+        {
+          "title": "Abgesicherte Schreibzugriffe",
+          "body": "Verändernde und destruktive Befehle folgen dem schreibgeschützten Modus und der Produktionsbestätigung."
+        }
+      ],
+      "limits": [
+        "KeyDB wird nicht anhand des Servers erkannt und hat kein keydb://-Schema. Wählen Sie es ausdrücklich aus.",
+        "KeyDB-spezifische Administration ist keine eigene Funktion; die Einschränkungen des Redis-Treibers gelten."
+      ]
+    },
+    "garnet": {
+      "description": "Verbinden Sie QoreDB über das Redis-Protokoll mit Microsoft Garnet: Keys durchsuchen und die Befehle ausführen, die Ihr Server unterstützt.",
+      "intro": "Garnet spricht RESP, daher verbindet sich QoreDB mit dem Redis-Treiber unter einer Garnet-Identität. Verwenden Sie redis://- oder rediss://-URLs, wählen Sie Garnet im Dialog und durchsuchen Sie Keys und führen Sie Befehle aus.",
+      "highlights": [
+        {
+          "title": "RESP-Client",
+          "body": "Key-Browsing und Befehlsausführung nutzen denselben Treiber wie Redis, Valkey und Dragonfly."
+        },
+        {
+          "title": "TLS und Zugangsdaten",
+          "body": "Verwenden Sie rediss:// für TLS; Passwörter bleiben im lokalen Vault verschlüsselt."
+        },
+        {
+          "title": "Dasselbe Sicherheitsnetz",
+          "body": "Gefährliche Befehle werden markiert, und Produktionsverbindungen wenden strengere Regeln an."
+        }
+      ],
+      "limits": [
+        "Kompatibilität mit dem Redis-Protokoll garantiert nicht, dass jeder Redis-Befehl und jedes Modul auf Garnet unterstützt wird.",
+        "Es gibt kein garnet://-Schema. Wählen Sie die Engine im Dialog aus."
+      ]
+    },
+    "elasticsearch": {
+      "description": "Ein Elasticsearch-Desktop-Client mit Konsole im Stil von Dev Tools, SQL-Modus, Mapping-Explorer und abgesicherten Indexoperationen.",
+      "intro": "QoreDB verbindet sich mit Elasticsearch über HTTP oder HTTPS auf Port 9200 oder mit Elastic Cloud über eine Cloud ID. Schreiben Sie Anfragen als METHOD /path mit JSON-Body, wechseln Sie für tabellarische Abfragen in den SQL-Modus und erkunden Sie Index-Mappings im Baum.",
+      "highlights": [
+        {
+          "title": "Dev-Tools-Konsole",
+          "body": "Senden Sie jede REST-Anfrage mit JSON-Body und lesen Sie die Antworten als Tabellen oder rohes JSON."
+        },
+        {
+          "title": "Bereit für Elastic Cloud",
+          "body": "Verbinden Sie sich mit einer Cloud ID und authentifizieren Sie sich mit Basic Auth, einem API-Schlüssel oder einem Bearer-Token. Geheimnisse bleiben im lokalen Vault."
+        },
+        {
+          "title": "Abgesicherte Indexoperationen",
+          "body": "Erstellen und Löschen von Indizes, Dokumentschreibzugriffe, _reindex und Cluster-Einstellungen folgen dem schreibgeschützten Modus und den Produktionsregeln."
+        }
+      ],
+      "limits": [
+        "Der SQL-Modus ist durch die SQL-API von Elasticsearch begrenzt: Joins, einige Funktionen und DDL sind dort nicht verfügbar.",
+        "Der Schema-Browser zeigt Mappings so, wie die Engine sie kennt; bei dynamischem Mapping können Felder zwischen Dokumenten variieren."
+      ]
+    },
+    "opensearch": {
+      "description": "Ein OpenSearch-Desktop-Client: REST-Konsole, SQL-Modus, Mapping-Explorer und Sicherheitsprüfungen für Index- und Cluster-Operationen.",
+      "intro": "Der OpenSearch-Treiber teilt sich die Suchmaschinen-Unterstützung von QoreDB mit Elasticsearch und prüft beim Verbinden die Distribution des Servers. Senden Sie REST-Anfragen mit JSON-Body, fragen Sie im SQL-Modus ab und durchsuchen Sie Index-Mappings.",
+      "highlights": [
+        {
+          "title": "REST-Konsole",
+          "body": "Schreiben Sie Anfragen als METHOD /path mit JSON-Body und lesen Sie die Antworten als Tabellen oder JSON."
+        },
+        {
+          "title": "Flexible Authentifizierung",
+          "body": "Keine, Basic, API-Schlüssel oder Bearer-Token, über HTTP oder HTTPS."
+        },
+        {
+          "title": "Sicheres Arbeiten am Cluster",
+          "body": "Das Löschen von Indizes, Reindexing und Cluster-Einstellungen sind durch den schreibgeschützten Modus und die Produktionsbestätigung abgesichert."
+        }
+      ],
+      "limits": [
+        "AWS-OpenSearch-Service-Domains, die SigV4-Request-Signierung verlangen, benötigen einen Proxy.",
+        "Der SQL-Modus ist durch das OpenSearch-SQL-Plugin eingeschränkt."
+      ]
+    },
+    "cassandra": {
+      "description": "Ein Cassandra-Desktop-Client mit nativem CQL-v4-Treiber: Keyspace-Browser, Cursor-Paginierung, Änderungen per Primärschlüssel und Schutz für die Produktion.",
+      "intro": "QoreDB spricht mit Cassandra über einen eigenen CQL-v4-Client, der nach der Protokollspezifikation entwickelt wurde. Er listet Keyspaces, Tabellen und Spalten aus system_schema auf, blättert mit nativen Cursorn durch Tabellen und bearbeitet Zeilen anhand ihres vollständigen Primärschlüssels.",
+      "highlights": [
+        {
+          "title": "Nativer CQL-Client",
+          "body": "Kein Treiber von Drittanbietern: Framing, Handshake, SASL-Authentifizierung und Typen sind in der App implementiert, TLS über Rustls."
+        },
+        {
+          "title": "Echte Paginierung",
+          "body": "Tabellen werden mit dem Paging State von Cassandra durchsucht, nicht mit Offset-Abfragen, die Partitionen scannen."
+        },
+        {
+          "title": "Produktionsbewusst",
+          "body": "Unbegrenzte Lesezugriffe und ALLOW FILTERING werden auf Produktionsverbindungen abgelehnt."
+        }
+      ],
+      "limits": [
+        "Das Einfügen, Ändern und Löschen von Zeilen erfordert den vollständigen Primärschlüssel.",
+        "Transaktionen, gespeicherte Routinen, Trigger und visuelles DDL sind nicht verfügbar; CQL kennt sie nicht."
+      ]
+    },
+    "scylladb": {
+      "description": "Ein ScyllaDB-Desktop-Client über CQL v4: Keyspaces durchsuchen, mit nativen Cursorn durch Tabellen blättern und Zeilen per Primärschlüssel bearbeiten.",
+      "intro": "ScyllaDB nutzt in QoreDB denselben nativen CQL-v4-Client wie Cassandra, unter eigener Identität. Durchsuchen Sie Keyspaces und Tabellen aus system_schema, schreiben Sie CQL im Editor und blättern Sie mit dem Paging State von ScyllaDB durch die Ergebnisse.",
+      "highlights": [
+        {
+          "title": "Dasselbe Protokoll, eigene Identität",
+          "body": "Der CQL-Client wird mit Cassandra geteilt; nur Engine-Name und Beschriftungen unterscheiden sich."
+        },
+        {
+          "title": "Cursor-Paginierung",
+          "body": "Große Tabellen werden Seite für Seite ohne Offset-Scans durchsucht."
+        },
+        {
+          "title": "Begrenzte Abfragen",
+          "body": "Produktionsverbindungen lehnen unbegrenzte Lesezugriffe und ALLOW FILTERING ab, was stark ausgelastete Cluster schützt."
+        }
+      ],
+      "limits": [
+        "Zeilenänderungen erfordern den vollständigen Primärschlüssel, einschließlich der Clustering-Spalten.",
+        "Keine Transaktionen, Routinen, Trigger oder visuelles DDL."
+      ]
+    },
+    "amazon-keyspaces": {
+      "description": "Verbinden Sie QoreDB mit Amazon Keyspaces über dienstspezifische Zugangsdaten und TLS auf Port 9142. CQL-Editor, Keyspace-Browser und kostenbewusste Sicherheit.",
+      "intro": "Amazon Keyspaces nutzt den CQL-Client von QoreDB mit angewendeten Keyspaces-Regeln: erzwungenes TLS auf Port 9142, dienstspezifische Zugangsdaten und Erkennung von cassandra.REGION.amazonaws.com-Endpoints.",
+      "highlights": [
+        {
+          "title": "Kostenbewusste Sicherheit",
+          "body": "ALLOW FILTERING wird in jeder Umgebung abgelehnt, weil Keyspaces jede gelesene Zeile abrechnet."
+        },
+        {
+          "title": "TLS erzwungen",
+          "body": "Verbindungen nutzen immer TLS auf Port 9142, wie es der Dienst verlangt."
+        },
+        {
+          "title": "CQL-Werkzeuge",
+          "body": "Durchsuchen Sie Keyspaces und Tabellen, führen Sie CQL aus und blättern Sie mit nativen Cursorn durch die Ergebnisse."
+        }
+      ],
+      "limits": [
+        "AWS-Zugriffsschlüssel mit SigV4-Authentifizierung werden nicht unterstützt. Verwenden Sie dienstspezifische Zugangsdaten.",
+        "Die Einschränkungen des Cassandra-Treibers gelten, einschließlich vollständiger Primärschlüssel für Zeilenänderungen."
+      ]
+    }
+  }
+}

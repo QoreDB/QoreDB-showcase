@@ -29,6 +29,7 @@ const OPEN_GRAPH_LOCALE_MAP: Record<AppLocale, string> = {
 export const INDEXABLE_PATHS = [
   "/",
   "/features",
+  "/databases",
   "/download",
   "/pricing",
   "/pricing/team",

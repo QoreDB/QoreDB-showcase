@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { DATABASE_SLUGS } from "@/lib/databases";
 import { getLastUpdated } from "@/lib/docs/git";
 import { getAllPages } from "@/lib/docs/tree";
 import { DOCS_LOCALES } from "@/lib/docs/types";
@@ -134,5 +135,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  return [...staticRoutes, ...docsRoutes, ...blogRoutes, ...featureRoutes];
+  const databaseRoutes: MetadataRoute.Sitemap = DATABASE_SLUGS.flatMap((slug) =>
+    SUPPORTED_LOCALES.map((locale) => ({
+      url: getLocalizedUrl(locale, `/databases/${slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: getLanguageAlternates(`/databases/${slug}`),
+      },
+    })),
+  );
+
+  return [
+    ...staticRoutes,
+    ...docsRoutes,
+    ...blogRoutes,
+    ...featureRoutes,
+    ...databaseRoutes,
+  ];
 }

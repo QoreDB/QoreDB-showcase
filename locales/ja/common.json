@@ -186,6 +186,7 @@
     "load_more": "さらにリリースをロードする"
   },
   "footer": {
+    "databases": "データベース",
     "license_summary": "Core：Apache-2.0。Premium機能：BUSL-1.1。",
     "newsletter_label": "ニュースレター",
     "product": "製品",

@@ -17,7 +17,7 @@ export async function DatabaseStrip({ locale }: { locale: string }) {
         </h2>
         <Link
           className="q-home-link"
-          href={`/${locale}/docs/connections/supported-databases`}
+          href={`/${locale}/databases`}
           prefetch={false}
         >
           {t("home.compatibility.link")}
@@ -30,7 +30,10 @@ export async function DatabaseStrip({ locale }: { locale: string }) {
             <ul>
               {group.databases.map((database) => (
                 <li key={database.name}>
-                  <Link href={`/${locale}${database.doc}`} prefetch={false}>
+                  <Link
+                    href={`/${locale}/databases/${database.slug}`}
+                    prefetch={false}
+                  >
                     <Image
                       src={database.image}
                       alt=""
