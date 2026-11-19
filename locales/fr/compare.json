@@ -11,6 +11,20 @@
     "breadcrumb": "Comparer",
     "back": "Toutes les comparaisons",
     "eyebrow": "Comparaison",
+    "stats": [
+      {
+        "value": "{{count}}",
+        "label": "bases de données dans Core, gratuit"
+      },
+      {
+        "value": "0",
+        "label": "rapport d'usage ou de plantage envoyé"
+      },
+      {
+        "value": "{{proPrice}}",
+        "label": "une seule fois pour Pro, Core reste gratuit"
+      }
+    ],
     "glance_title": "En bref",
     "column_topic": "Critère",
     "rows": {
@@ -30,6 +44,14 @@
     "stronger_title": "Les points forts de {{name}}",
     "different_title": "Ce qui distingue QoreDB",
     "switch_title": "Passer de {{name}} à QoreDB",
+    "url_label": "URL de connexion",
+    "url_result": "Driver détecté, champs remplis",
+    "fields": {
+      "host": "Hôte",
+      "port": "Port",
+      "user": "Utilisateur",
+      "database": "Base"
+    },
     "other_title": "Autres comparaisons",
     "cta_title": "Essayez QoreDB à côté de {{name}}",
     "cta_body": "L'édition Core est gratuite et open source. Installez-la à côté de votre client actuel et comparez sur vos propres bases.",

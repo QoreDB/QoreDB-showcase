@@ -11,6 +11,20 @@
     "breadcrumb": "对比",
     "back": "全部对比",
     "eyebrow": "对比",
+    "stats": [
+      {
+        "value": "{{count}}",
+        "label": "免费 Core 支持的数据库"
+      },
+      {
+        "value": "0",
+        "label": "发送的使用或崩溃报告"
+      },
+      {
+        "value": "{{proPrice}}",
+        "label": "Pro 一次性付费，Core 始终免费"
+      }
+    ],
     "glance_title": "概览",
     "column_topic": "项目",
     "rows": {
@@ -30,6 +44,14 @@
     "stronger_title": "{{name}} 的优势",
     "different_title": "QoreDB 的不同之处",
     "switch_title": "从 {{name}} 迁移",
+    "url_label": "连接 URL",
+    "url_result": "已识别驱动并填好字段",
+    "fields": {
+      "host": "主机",
+      "port": "端口",
+      "user": "用户",
+      "database": "数据库"
+    },
     "other_title": "其他对比",
     "cta_title": "与 {{name}} 并行试用 QoreDB",
     "cta_body": "Core 版免费且开源。将它与你当前的客户端一起安装，在你自己的数据库上进行比较。",

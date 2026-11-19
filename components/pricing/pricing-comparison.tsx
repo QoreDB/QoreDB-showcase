@@ -67,12 +67,9 @@ export function PricingComparison({
                   : "border-(--q-border) bg-(--q-bg-1)"
               }`}
             >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-bold text-(--q-text-0)">
-                  {t(`pricing_comparison.tools.${c.id}.name`)}
-                </h3>
+              <div className="mb-3 flex flex-col items-start gap-3">
                 <span
-                  className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                  className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold ${
                     isQoreDb
                       ? "bg-(--q-accent)/10 text-(--q-accent)"
                       : "bg-(--q-text-2)/10 text-(--q-text-2)"
@@ -85,6 +82,9 @@ export function PricingComparison({
                   )}
                   {t(`pricing_comparison.tools.${c.id}.tagline`)}
                 </span>
+                <h3 className="text-lg font-bold text-(--q-text-0)">
+                  {t(`pricing_comparison.tools.${c.id}.name`)}
+                </h3>
               </div>
 
               <div className="space-y-2 text-sm mt-2">

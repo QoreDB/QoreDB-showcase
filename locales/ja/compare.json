@@ -11,6 +11,20 @@
     "breadcrumb": "比較",
     "back": "すべての比較",
     "eyebrow": "比較",
+    "stats": [
+      {
+        "value": "{{count}}",
+        "label": "無料の Core で使えるデータベース"
+      },
+      {
+        "value": "0",
+        "label": "送信される使用状況やクラッシュのレポート"
+      },
+      {
+        "value": "{{proPrice}}",
+        "label": "Pro は買い切り、Core は無料のまま"
+      }
+    ],
     "glance_title": "概要",
     "column_topic": "項目",
     "rows": {
@@ -30,6 +44,14 @@
     "stronger_title": "{{name}} が優れている点",
     "different_title": "QoreDB の違い",
     "switch_title": "{{name}} からの移行",
+    "url_label": "接続 URL",
+    "url_result": "ドライバーを検出し、項目を入力しました",
+    "fields": {
+      "host": "ホスト",
+      "port": "ポート",
+      "user": "ユーザー",
+      "database": "データベース"
+    },
     "other_title": "その他の比較",
     "cta_title": "{{name}} と並べて QoreDB を試す",
     "cta_body": "Core エディションは無料のオープンソースです。現在のクライアントと一緒にインストールし、ご自身のデータベースで比較してください。",

@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -122,23 +121,26 @@ export function AccordionTrigger({
   return (
     <button
       type="button"
+      aria-expanded={isOpen}
       onClick={() => value && toggleItem(value)}
       className={cn(
-        "flex w-full items-start justify-between p-6 text-left transition-all hover:bg-(--q-bg-2)/50",
+        "group flex w-full items-start justify-between gap-4 p-6 text-left transition-colors hover:bg-(--q-bg-2)/50 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--q-accent)",
         className,
       )}
       {...props}
     >
-      <div className="flex-1 pr-4 font-semibold text-lg text-(--q-text-0)">
+      <div className="flex-1 font-semibold text-lg text-(--q-text-0)">
         {children}
       </div>
-      <motion.div
-        animate={{ rotate: isOpen ? 180 : 0 }}
-        transition={{ duration: 0.2 }}
-        className="shrink-0 text-(--q-text-2)"
+      <span
+        aria-hidden="true"
+        className={cn(
+          "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-(--q-bg-2) text-(--q-text-2) transition-[transform,color,background-color] duration-300 ease-out motion-reduce:transition-none group-hover:text-(--q-text-0)",
+          isOpen && "rotate-180 bg-(--q-accent)/15 text-(--q-accent)",
+        )}
       >
-        <ChevronDown className="h-5 w-5" />
-      </motion.div>
+        <ChevronDown className="h-4 w-4" />
+      </span>
     </button>
   );
 }
@@ -154,26 +156,24 @@ export function AccordionContent({
   ...props
 }: AccordionContentProps) {
   return (
-    <AnimatePresence initial={false}>
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="overflow-hidden"
-        >
-          <div
-            className={cn(
-              "p-6 pt-0 text-(--q-text-1) leading-relaxed text-base border-t border-(--q-border)/50 mt-2",
-              className,
-            )}
-            {...props}
-          >
-            {children}
-          </div>
-        </motion.div>
+    <div
+      className={cn(
+        "grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none",
+        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
       )}
-    </AnimatePresence>
+      inert={!isOpen}
+    >
+      <div className="overflow-hidden">
+        <div
+          className={cn(
+            "p-6 pt-0 text-(--q-text-1) leading-relaxed text-base",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </div>
+    </div>
   );
 }

@@ -11,6 +11,20 @@
     "breadcrumb": "Vergleich",
     "back": "Alle Vergleiche",
     "eyebrow": "Vergleich",
+    "stats": [
+      {
+        "value": "{{count}}",
+        "label": "Datenbanken im kostenlosen Core"
+      },
+      {
+        "value": "0",
+        "label": "gesendete Nutzungs- oder Absturzberichte"
+      },
+      {
+        "value": "{{proPrice}}",
+        "label": "einmalig für Pro, Core bleibt kostenlos"
+      }
+    ],
     "glance_title": "Auf einen Blick",
     "column_topic": "Thema",
     "rows": {
@@ -30,6 +44,14 @@
     "stronger_title": "Wo {{name}} stärker ist",
     "different_title": "Was QoreDB anders macht",
     "switch_title": "Umstieg von {{name}}",
+    "url_label": "Verbindungs-URL",
+    "url_result": "Treiber erkannt, Felder ausgefüllt",
+    "fields": {
+      "host": "Host",
+      "port": "Port",
+      "user": "Benutzer",
+      "database": "Datenbank"
+    },
     "other_title": "Weitere Vergleiche",
     "cta_title": "QoreDB neben {{name}} ausprobieren",
     "cta_body": "Die Core-Edition ist kostenlos und Open Source. Installieren Sie sie neben Ihrem aktuellen Client und vergleichen Sie mit Ihren eigenen Datenbanken.",

@@ -8,6 +8,12 @@ import { Footer } from "@/components/landing/footer";
 import { Header } from "@/components/landing/header";
 import { PricingComparison } from "@/components/pricing/pricing-comparison";
 import { TeamWaitlistForm } from "@/components/pricing/team-waitlist-form";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { getContactMailtoHref } from "@/lib/contact";
 
 type PlanFeature = { id?: string; label: string };
@@ -380,21 +386,18 @@ export default function PricingPageClient({
           <h2 className="font-heading text-3xl sm:text-4xl font-semibold tracking-tight mb-8">
             {t("pricing_page.faq_title")}
           </h2>
-          <div className="grid gap-2">
+          <Accordion type="single" className="space-y-2">
             {faqItems.map((item) => (
-              <details
-                key={item.question}
-                className="rounded-2xl bg-(--q-bg-1) px-6 py-5"
-              >
-                <summary className="cursor-pointer font-medium leading-relaxed text-(--q-text-0)">
+              <AccordionItem key={item.question} value={item.question}>
+                <AccordionTrigger className="px-6 py-5 [&>div]:text-base">
                   {item.question}
-                </summary>
-                <p className="pt-4 text-[15px] leading-relaxed text-(--q-text-1)">
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-5 text-[15px]">
                   {item.answer}
-                </p>
-              </details>
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </section>
       </main>
       <Footer />
