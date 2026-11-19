@@ -1,0 +1,283 @@
+{
+  "index": {
+    "meta_title": "QoreDB a confronto con altri client di database",
+    "title": "QoreDB a confronto",
+    "subtitle": "Confronti diretti con i client di database più usati dagli sviluppatori. I dati provengono dal sito e dalla documentazione di ciascun produttore, con le fonti e la data di verifica.",
+    "card_cta": "Leggi il confronto"
+  },
+  "page": {
+    "meta_title": "QoreDB vs {{name}}: confronto e alternativa",
+    "title": "QoreDB vs {{name}}",
+    "breadcrumb": "Confronti",
+    "back": "Tutti i confronti",
+    "eyebrow": "Confronto",
+    "glance_title": "In sintesi",
+    "column_topic": "Aspetto",
+    "rows": {
+      "license": "Licenza",
+      "price": "Prezzo",
+      "platforms": "Piattaforme",
+      "technology": "Tecnologia",
+      "databases": "Database",
+      "telemetry": "Telemetria",
+      "safety": "Sicurezza in produzione",
+      "ai": "IA",
+      "notebooks": "Notebook"
+    },
+    "checked": "I dati su {{name}} sono stati verificati il {{date}} sul sito e sulla documentazione ufficiali. I prodotti cambiano rapidamente: se qualcosa qui non è aggiornato, segnalacelo e lo correggeremo.",
+    "sources_title": "Fonti per {{name}}",
+    "report": "Segnala un errore",
+    "stronger_title": "Dove {{name}} è più forte",
+    "different_title": "Dove QoreDB è diverso",
+    "switch_title": "Passare da {{name}}",
+    "other_title": "Altri confronti",
+    "cta_title": "Prova QoreDB accanto a {{name}}",
+    "cta_body": "L'edizione Core è gratuita e open source. Installala accanto al tuo client attuale e confrontali sui tuoi database.",
+    "cta_download": "Scarica QoreDB",
+    "cta_pricing": "Vedi i prezzi"
+  },
+  "qoredb": {
+    "license": "Core: Apache-2.0. Pro: BUSL-1.1.",
+    "price": "Core è gratuito. Pro è un pagamento unico di {{proPrice}}.",
+    "platforms": "macOS, Windows, Linux",
+    "technology": "Rust e Tauri, con la WebView di sistema",
+    "databases": "{{count}} database nel Core gratuito, tra cui MongoDB, Redis, Cassandra, ClickHouse, DuckDB, Snowflake, BigQuery ed Elasticsearch",
+    "telemetry": "Nessuna. Solo un controllo degli aggiornamenti su GitHub, disattivabile.",
+    "safety": "Tag di ambiente. Sulle connessioni di produzione DROP e TRUNCATE sono bloccati, DELETE chiede conferma e ALTER mostra un avviso. Modalità di sola lettura. Regole personalizzate in Pro.",
+    "ai": "Server MCP in sola lettura nel Core. Database Agent in Pro, con 7 provider o Qore AI Local.",
+    "notebooks": "Notebook SQL, MongoDB e Markdown nel Core, salvati come file .qnb"
+  },
+  "competitors": {
+    "dbeaver": {
+      "description": "QoreDB vs DBeaver: licenza, prezzo, database supportati, telemetria, sicurezza in produzione e IA, confrontati con le fonti.",
+      "intro": "DBeaver è uno dei client di database più diffusi. La sua edizione Community è open source e si connette a un numero molto elevato di database tramite driver JDBC e ODBC. QoreDB segue un'altra strada: un'applicazione Rust con driver nativi per {{count}} database, compresi quelli NoSQL, nella sua edizione gratuita.",
+      "values": {
+        "license": "Community: Apache-2.0. Edizioni PRO: proprietarie.",
+        "price": "Community è gratuita. PRO da $113 all'anno (Lite), $255 (Enterprise) o $510 (Ultimate).",
+        "platforms": "Windows, macOS, Linux",
+        "technology": "Java su Eclipse RCP, con un OpenJDK incluso",
+        "databases": "Oltre 100 tramite JDBC e ODBC. Community copre ClickHouse, DuckDB, Snowflake, BigQuery ed Elasticsearch. MongoDB, Redis e Cassandra richiedono un'edizione PRO.",
+        "telemetry": "Statistiche d'uso anonime, disattivabili nelle Preferenze.",
+        "safety": "Tipi di connessione (sviluppo, test, produzione) con conferma prima dell'esecuzione SQL o delle modifiche ai dati. Connessioni in sola lettura.",
+        "ai": "Chat IA con OpenAI o GitHub Copilot in Community. Altri provider in PRO.",
+        "notebooks": "Non trovati nella documentazione"
+      },
+      "stronger": [
+        {
+          "title": "Molti più database",
+          "body": "Tramite JDBC e ODBC, DBeaver raggiunge ben oltre cento database, tra cui Oracle, Db2 e Redshift, che QoreDB non supporta."
+        },
+        {
+          "title": "Restrizioni di connessione dettagliate",
+          "body": "Ogni tipo di connessione può richiedere una conferma separata per l'esecuzione SQL e per la modifica dei dati, oltre alle connessioni in sola lettura."
+        },
+        {
+          "title": "Una lunga storia",
+          "body": "Più di dieci anni di rilasci, una vasta community e una documentazione ampia."
+        }
+      ],
+      "different": [
+        {
+          "title": "NoSQL nell'edizione gratuita",
+          "body": "MongoDB, Redis e Cassandra fanno parte del Core gratuito Apache-2.0. In DBeaver richiedono un'edizione PRO."
+        },
+        {
+          "title": "Nessun runtime Java",
+          "body": "QoreDB è scritto in Rust e disegna la sua interfaccia con la WebView di sistema. Non c'è alcuna JVM da includere o configurare."
+        },
+        {
+          "title": "Regole di produzione per singola istruzione",
+          "body": "QoreDB analizza ogni istruzione: sulle connessioni di produzione blocca DROP e TRUNCATE, chiede conferma per DELETE e avvisa su ALTER."
+        }
+      ],
+      "switch": [
+        "QoreDB non importa le impostazioni di connessione di DBeaver. Per spostare una connessione, copiane l'URL e incollalo nel modulo di connessione di QoreDB, che rileva il driver e compila i campi.",
+        "Gli script salvati possono essere incollati nell'editor di query o in un notebook. Durante il passaggio puoi usare i due strumenti in parallelo."
+      ]
+    },
+    "tableplus": {
+      "description": "QoreDB vs TablePlus: licenza, prezzo, database supportati, telemetria, sicurezza in produzione e IA, confrontati con le fonti.",
+      "intro": "TablePlus è un client di database proprietario e curato, con un'interfaccia nativa su ogni piattaforma. Offre una prova gratuita limitata e una licenza a pagamento unico. QoreDB è open source: la sua edizione Core non ha limiti di schede o finestre e include {{count}} database.",
+      "values": {
+        "license": "Proprietaria",
+        "price": "Prova gratuita limitata a 2 schede, 2 finestre e 2 filtri. Licenza Basic da $99 una tantum per 1 dispositivo con 1 anno di aggiornamenti, poi $59 per rinnovare gli aggiornamenti.",
+        "platforms": "macOS, Windows, Linux, iOS",
+        "technology": "App nativa su ogni piattaforma (la versione Windows gira su .NET Framework 4.8)",
+        "databases": "Circa 23, tra cui Redis, MongoDB, Cassandra, ClickHouse, BigQuery, Snowflake, DuckDB ed Elasticsearch",
+        "telemetry": "Report anonimi degli arresti anomali. Disattivarli richiede una licenza.",
+        "safety": "Safe Mode con diversi livelli, fino alla richiesta di una password prima di eseguire le query. Tag di connessione come produzione.",
+        "ai": "Assistente IA con il tuo provider. Server MCP documentato per macOS.",
+        "notebooks": "Non trovati nella documentazione"
+      },
+      "stronger": [
+        {
+          "title": "Interfaccia nativa",
+          "body": "TablePlus usa il toolkit grafico di ciascun sistema operativo invece di una web view."
+        },
+        {
+          "title": "App iOS",
+          "body": "TablePlus funziona anche su iPhone e iPad. QoreDB è solo desktop."
+        },
+        {
+          "title": "Safe Mode granulare",
+          "body": "Safe Mode può richiedere una password o una conferma prima dell'esecuzione delle query, configurabile per connessione."
+        }
+      ],
+      "different": [
+        {
+          "title": "Open source e gratuito",
+          "body": "L'edizione Core è Apache-2.0, senza limiti di schede, finestre o filtri, per uso personale e commerciale."
+        },
+        {
+          "title": "Nessuna telemetria",
+          "body": "QoreDB non invia dati d'uso né di arresti anomali. Non c'è nulla da disattivare e non serve alcuna licenza per farlo."
+        },
+        {
+          "title": "Notebook e regole di produzione",
+          "body": "I notebook SQL e MongoDB fanno parte del Core, e le connessioni di produzione bloccano le istruzioni distruttive per impostazione predefinita."
+        }
+      ],
+      "switch": [
+        "QoreDB non importa le connessioni di TablePlus. Per spostare una connessione, copiane l'URL e incollalo nel modulo di connessione di QoreDB, che rileva il driver e compila i campi.",
+        "Le query salvate possono essere incollate nell'editor di query o in un notebook. Durante il passaggio puoi usare i due strumenti in parallelo."
+      ]
+    },
+    "datagrip": {
+      "description": "QoreDB vs DataGrip: licenza, prezzo, database supportati, telemetria, sicurezza in produzione e IA, confrontati con le fonti.",
+      "intro": "DataGrip è l'IDE per database di JetBrains, basato sulla piattaforma IntelliJ. È noto per i suoi strumenti di editing SQL ed è gratuito per uso non commerciale, altrimenti in abbonamento. L'edizione Core di QoreDB è gratuita per qualsiasi uso, anche al lavoro, e l'edizione Pro è un pagamento unico.",
+      "values": {
+        "license": "Proprietaria",
+        "price": "Gratuito per uso individuale non commerciale. Licenza individuale €109 il primo anno, poi €87 e €65. Organizzazioni: €259 per utente all'anno. Prezzi IVA esclusa.",
+        "platforms": "Windows, macOS, Linux",
+        "technology": "Piattaforma IntelliJ sul JetBrains Runtime (Java)",
+        "databases": "Più di 50, tra cui MongoDB, Redis, Cassandra, ClickHouse, DuckDB, Snowflake e BigQuery. Il supporto a Elasticsearch è di base.",
+        "telemetry": "Disattivata per impostazione predefinita con una licenza a pagamento, tranne i report di errore. Obbligatoria con la licenza gratuita non commerciale.",
+        "safety": "Sorgenti dati in sola lettura e un colore per ogni sorgente dati.",
+        "ai": "Agenti IA e un server MCP, con la tua chiave o JetBrains AI.",
+        "notebooks": "Solo tramite il plugin Zeppelin, il cui sviluppo è sospeso"
+      },
+      "stronger": [
+        {
+          "title": "Editing SQL da IDE",
+          "body": "Completamento contestuale, refactoring, ispezioni del codice e navigazione tra gli schemi, frutto di anni di lavoro su IntelliJ."
+        },
+        {
+          "title": "Parte dell'ecosistema JetBrains",
+          "body": "Gli stessi strumenti per database sono integrati in altri IDE JetBrains come IntelliJ IDEA."
+        },
+        {
+          "title": "Più database",
+          "body": "Sono supportati più di 50 database, tra cui alcuni che QoreDB non copre, come Oracle e Db2."
+        }
+      ],
+      "different": [
+        {
+          "title": "Gratuito per uso commerciale",
+          "body": "L'edizione Core è Apache-2.0 e gratuita anche al lavoro. Pro è un pagamento unico invece di un abbonamento annuale."
+        },
+        {
+          "title": "Nessuna telemetria in nessuna edizione",
+          "body": "QoreDB non invia dati d'uso, qualunque sia l'edizione o la licenza che usi."
+        },
+        {
+          "title": "Notebook integrati",
+          "body": "I notebook SQL, MongoDB e Markdown fanno parte del Core, salvati come semplici file .qnb."
+        }
+      ],
+      "switch": [
+        "QoreDB non importa le sorgenti dati di DataGrip. Per spostare una connessione, copiane l'URL e incollalo nel modulo di connessione di QoreDB, che rileva il driver e compila i campi.",
+        "Gli scratch file e le query salvate possono essere incollati nell'editor di query o in un notebook. Durante il passaggio puoi usare i due strumenti in parallelo."
+      ]
+    },
+    "beekeeper-studio": {
+      "description": "QoreDB vs Beekeeper Studio: licenza, prezzo, database supportati, telemetria, sicurezza in produzione e IA, confrontati con le fonti.",
+      "intro": "Beekeeper Studio è un client SQL open source e intuitivo, con un'edizione Community sotto GPL e piani a pagamento che sbloccano altri database e funzionalità. QoreDB include tutti i suoi {{count}} database nell'edizione Core gratuita, sotto licenza Apache-2.0.",
+      "values": {
+        "license": "Community: GPL-3.0-or-later. Edizioni a pagamento: proprietarie.",
+        "price": "Community è gratuita. Piani a pagamento da $9 al mese con fatturazione annuale (Indie), $14 (Professional) o $18 (Business).",
+        "platforms": "Windows, macOS, Linux",
+        "technology": "Electron e Vue",
+        "databases": "Gratuiti: PostgreSQL, MySQL, MariaDB, SQLite, SQL Server, CockroachDB, TiDB, Redshift, BigQuery, Redis e altri. DuckDB e Cassandra da Indie, ClickHouse e MongoDB da Professional, Snowflake con Business. Elasticsearch non elencato.",
+        "telemetry": "Su base volontaria (opt-in)",
+        "safety": "Modalità di sola lettura (gratuita dalla versione 6.1) e colori di connessione.",
+        "ai": "AI Shell con la tua chiave, nei piani a pagamento.",
+        "notebooks": "Non trovati nella documentazione"
+      },
+      "stronger": [
+        {
+          "title": "Interfaccia semplice e accessibile",
+          "body": "Beekeeper Studio punta su un'interfaccia pulita e facile da imparare per il lavoro SQL quotidiano."
+        },
+        {
+          "title": "Supporto a Redshift",
+          "body": "Amazon Redshift è disponibile nell'edizione gratuita. QoreDB non lo supporta."
+        }
+      ],
+      "different": [
+        {
+          "title": "Tutti i database nell'edizione gratuita",
+          "body": "ClickHouse, MongoDB, DuckDB, Cassandra, Snowflake ed Elasticsearch fanno parte del Core gratuito. In Beekeeper Studio, diversi di questi richiedono un piano a pagamento."
+        },
+        {
+          "title": "Licenza permissiva",
+          "body": "Core è Apache-2.0 anziché GPL, e Pro è un pagamento unico anziché un abbonamento."
+        },
+        {
+          "title": "Rust invece di Electron",
+          "body": "QoreDB gira su Tauri con la WebView di sistema, senza includere una propria copia di Chromium."
+        }
+      ],
+      "switch": [
+        "QoreDB non importa le connessioni di Beekeeper Studio. Per spostare una connessione, copiane l'URL e incollalo nel modulo di connessione di QoreDB, che rileva il driver e compila i campi.",
+        "Le query salvate possono essere incollate nell'editor di query o in un notebook. Durante il passaggio puoi usare i due strumenti in parallelo."
+      ]
+    },
+    "pgadmin": {
+      "description": "QoreDB vs pgAdmin: licenza, prezzo, database supportati, telemetria, sicurezza in produzione e IA, confrontati con le fonti.",
+      "intro": "pgAdmin è un progetto open source di lunga data dedicato all'amministrazione di PostgreSQL, disponibile come app desktop o come server web. QoreDB è un client di database generico: funziona con PostgreSQL e altri {{others}} database nella stessa finestra.",
+      "values": {
+        "license": "PostgreSQL License",
+        "price": "Gratuito",
+        "platforms": "Windows, macOS, Linux, più una modalità server usata da browser",
+        "technology": "Python (Flask) e React, in una shell Electron per l'app desktop",
+        "databases": "Solo PostgreSQL e database compatibili",
+        "telemetry": "Nessuna statistica d'uso trovata. Un controllo degli aggiornamenti è attivo per impostazione predefinita.",
+        "safety": "Un colore per server. Nessuna modalità di sola lettura trovata nella documentazione.",
+        "ai": "Assistente IA e report gratuiti con il tuo provider.",
+        "notebooks": "Non trovati nella documentazione"
+      },
+      "stronger": [
+        {
+          "title": "Amministrazione PostgreSQL approfondita",
+          "body": "Backup e ripristino, attività di manutenzione, job pgAgent, un debugger PL/pgSQL e confronto degli schemi, tutto dedicato a PostgreSQL."
+        },
+        {
+          "title": "Distribuzione web multiutente",
+          "body": "pgAdmin può funzionare come applicazione web condivisa da un team, con i propri account utente."
+        },
+        {
+          "title": "Funzioni IA gratuite",
+          "body": "L'assistente IA funziona con il tuo provider senza costi. In QoreDB, il Database Agent fa parte di Pro."
+        }
+      ],
+      "different": [
+        {
+          "title": "Oltre PostgreSQL",
+          "body": "Un'unica app per PostgreSQL, MySQL, SQL Server, MongoDB, Redis, ClickHouse, DuckDB e {{count}} database in totale."
+        },
+        {
+          "title": "Protezioni di produzione",
+          "body": "Modalità di sola lettura e connessioni di produzione che bloccano DROP e TRUNCATE e chiedono conferma per DELETE."
+        },
+        {
+          "title": "Notebook",
+          "body": "Combina SQL e Markdown nei notebook, salvati come semplici file .qnb da condividere."
+        }
+      ],
+      "switch": [
+        "QoreDB non importa le esportazioni dei server di pgAdmin. Per spostare un server, copiane l'URL di connessione e incollalo nel modulo di connessione di QoreDB, che rileva il driver e compila i campi.",
+        "Per attività di amministrazione come i job pgAgent o il debugger, puoi tenere pgAdmin accanto a QoreDB."
+      ]
+    }
+  }
+}

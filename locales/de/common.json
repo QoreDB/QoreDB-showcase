@@ -187,6 +187,7 @@
   },
   "footer": {
     "databases": "Datenbanken",
+    "compare": "Vergleiche",
     "license_summary": "Core: Apache-2.0. Premium-Funktionen: BUSL-1.1.",
     "newsletter_label": "Newsletter",
     "product": "Produkt",

@@ -187,6 +187,7 @@
   },
   "footer": {
     "databases": "データベース",
+    "compare": "比較",
     "license_summary": "Core：Apache-2.0。Premium機能：BUSL-1.1。",
     "newsletter_label": "ニュースレター",
     "product": "製品",

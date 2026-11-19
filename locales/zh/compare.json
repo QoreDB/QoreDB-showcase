@@ -1,0 +1,283 @@
+{
+  "index": {
+    "meta_title": "QoreDB 与其他数据库客户端对比",
+    "title": "QoreDB 对比",
+    "subtitle": "与开发者最常用的数据库客户端逐项对比。信息来自各厂商的官网和文档，并注明来源和核实日期。",
+    "card_cta": "阅读对比"
+  },
+  "page": {
+    "meta_title": "QoreDB vs {{name}}：对比与替代方案",
+    "title": "QoreDB vs {{name}}",
+    "breadcrumb": "对比",
+    "back": "全部对比",
+    "eyebrow": "对比",
+    "glance_title": "概览",
+    "column_topic": "项目",
+    "rows": {
+      "license": "许可证",
+      "price": "价格",
+      "platforms": "平台",
+      "technology": "技术栈",
+      "databases": "数据库",
+      "telemetry": "遥测",
+      "safety": "生产环境安全",
+      "ai": "AI",
+      "notebooks": "笔记本"
+    },
+    "checked": "有关 {{name}} 的信息已于 {{date}} 根据其官网和官方文档核实。产品变化很快：如果这里有内容已过时，请告诉我们，我们会修正。",
+    "sources_title": "{{name}} 的信息来源",
+    "report": "报告错误",
+    "stronger_title": "{{name}} 的优势",
+    "different_title": "QoreDB 的不同之处",
+    "switch_title": "从 {{name}} 迁移",
+    "other_title": "其他对比",
+    "cta_title": "与 {{name}} 并行试用 QoreDB",
+    "cta_body": "Core 版免费且开源。将它与你当前的客户端一起安装，在你自己的数据库上进行比较。",
+    "cta_download": "下载 QoreDB",
+    "cta_pricing": "查看价格"
+  },
+  "qoredb": {
+    "license": "Core：Apache-2.0。Pro：BUSL-1.1。",
+    "price": "Core 免费。Pro 为一次性付费 {{proPrice}}。",
+    "platforms": "macOS、Windows、Linux",
+    "technology": "Rust 和 Tauri，使用系统 WebView",
+    "databases": "免费的 Core 支持 {{count}} 种数据库，包括 MongoDB、Redis、Cassandra、ClickHouse、DuckDB、Snowflake、BigQuery 和 Elasticsearch",
+    "telemetry": "无。仅向 GitHub 检查更新，可关闭。",
+    "safety": "环境标签。在生产连接上，DROP 和 TRUNCATE 会被拦截，DELETE 需要确认，ALTER 会显示警告。只读模式。Pro 支持自定义规则。",
+    "ai": "Core 提供只读 MCP 服务器。Pro 提供 Database Agent，支持 7 家提供商或 Qore AI Local。",
+    "notebooks": "Core 提供 SQL、MongoDB 和 Markdown 笔记本，保存为 .qnb 文件"
+  },
+  "competitors": {
+    "dbeaver": {
+      "description": "QoreDB vs DBeaver：许可证、价格、支持的数据库、遥测、生产环境安全和 AI，附来源对比。",
+      "intro": "DBeaver 是使用最广泛的数据库客户端之一。其 Community 版开源，通过 JDBC 和 ODBC 驱动连接数量极多的数据库。QoreDB 走的是另一条路：一个 Rust 应用，免费版即为 {{count}} 种数据库（包括 NoSQL 数据库）提供原生驱动。",
+      "values": {
+        "license": "Community：Apache-2.0。PRO 版：专有。",
+        "price": "Community 免费。PRO 每年 $113 起（Lite）、$255（Enterprise）或 $510（Ultimate）。",
+        "platforms": "Windows、macOS、Linux",
+        "technology": "基于 Eclipse RCP 的 Java，内置 OpenJDK",
+        "databases": "通过 JDBC 和 ODBC 支持 100 多种。Community 涵盖 ClickHouse、DuckDB、Snowflake、BigQuery 和 Elasticsearch。MongoDB、Redis 和 Cassandra 需要 PRO 版。",
+        "telemetry": "匿名使用统计，可在首选项中关闭。",
+        "safety": "连接类型（开发、测试、生产），在执行 SQL 或修改数据前要求确认。只读连接。",
+        "ai": "Community 提供基于 OpenAI 或 GitHub Copilot 的 AI 聊天。PRO 支持更多提供商。",
+        "notebooks": "文档中未找到"
+      },
+      "stronger": [
+        {
+          "title": "支持的数据库多得多",
+          "body": "通过 JDBC 和 ODBC，DBeaver 可连接远超一百种数据库，包括 QoreDB 不支持的 Oracle、Db2 和 Redshift。"
+        },
+        {
+          "title": "细致的连接限制",
+          "body": "除只读连接外，每种连接类型都可以分别要求在执行 SQL 和编辑数据前确认。"
+        },
+        {
+          "title": "长期的积累",
+          "body": "十多年的版本发布、庞大的社区和详尽的文档。"
+        }
+      ],
+      "different": [
+        {
+          "title": "免费版即支持 NoSQL",
+          "body": "MongoDB、Redis 和 Cassandra 包含在免费的 Apache-2.0 Core 中。在 DBeaver 中，它们需要 PRO 版。"
+        },
+        {
+          "title": "无需 Java 运行时",
+          "body": "QoreDB 用 Rust 编写，通过系统 WebView 渲染界面。无需打包或调优 JVM。"
+        },
+        {
+          "title": "语句级生产规则",
+          "body": "QoreDB 会解析每条语句：在生产连接上拦截 DROP 和 TRUNCATE，对 DELETE 要求确认，对 ALTER 给出警告。"
+        }
+      ],
+      "switch": [
+        "QoreDB 不导入 DBeaver 的连接设置。要迁移连接，请复制其 URL 并粘贴到 QoreDB 的连接表单中，表单会识别驱动并自动填写字段。",
+        "已保存的脚本可以粘贴到查询编辑器或笔记本中。迁移期间两个工具可以并行使用。"
+      ]
+    },
+    "tableplus": {
+      "description": "QoreDB vs TablePlus：许可证、价格、支持的数据库、遥测、生产环境安全和 AI，附来源对比。",
+      "intro": "TablePlus 是一款精致的专有数据库客户端，在每个平台上都使用原生界面。它提供有限制的免费试用和一次性许可证。QoreDB 是开源的：其 Core 版没有标签页或窗口数量限制，并支持 {{count}} 种数据库。",
+      "values": {
+        "license": "专有",
+        "price": "免费试用限 2 个标签页、2 个窗口和 2 个筛选器。Basic 许可证一次性 $99，适用 1 台设备，含 1 年更新，之后续订更新为 $59。",
+        "platforms": "macOS、Windows、Linux、iOS",
+        "technology": "各平台原生应用（Windows 版基于 .NET Framework 4.8 运行）",
+        "databases": "约 23 种，包括 Redis、MongoDB、Cassandra、ClickHouse、BigQuery、Snowflake、DuckDB 和 Elasticsearch",
+        "telemetry": "匿名崩溃报告。关闭它需要许可证。",
+        "safety": "多级 Safe Mode，最高可在运行查询前要求输入密码。可为连接添加 production 等标签。",
+        "ai": "使用你自己的提供商的 AI 助手。文档中提供了 macOS 版 MCP 服务器。",
+        "notebooks": "文档中未找到"
+      },
+      "stronger": [
+        {
+          "title": "原生界面",
+          "body": "TablePlus 使用各操作系统自身的 UI 工具包，而不是 Web 视图。"
+        },
+        {
+          "title": "iOS 应用",
+          "body": "TablePlus 也可在 iPhone 和 iPad 上运行。QoreDB 仅支持桌面。"
+        },
+        {
+          "title": "精细的 Safe Mode",
+          "body": "Safe Mode 可在查询运行前要求输入密码或确认，并可按连接配置。"
+        }
+      ],
+      "different": [
+        {
+          "title": "开源且免费使用",
+          "body": "Core 版采用 Apache-2.0，不限标签页、窗口或筛选器数量，可用于个人和商业用途。"
+        },
+        {
+          "title": "完全没有遥测",
+          "body": "QoreDB 不发送任何使用数据或崩溃数据。没有需要关闭的选项，也无需为此购买许可证。"
+        },
+        {
+          "title": "笔记本与生产规则",
+          "body": "SQL 和 MongoDB 笔记本包含在 Core 中，生产连接默认拦截破坏性语句。"
+        }
+      ],
+      "switch": [
+        "QoreDB 不导入 TablePlus 的连接。要迁移连接，请复制其 URL 并粘贴到 QoreDB 的连接表单中，表单会识别驱动并自动填写字段。",
+        "已保存的查询可以粘贴到查询编辑器或笔记本中。迁移期间两个工具可以并行使用。"
+      ]
+    },
+    "datagrip": {
+      "description": "QoreDB vs DataGrip：许可证、价格、支持的数据库、遥测、生产环境安全和 AI，附来源对比。",
+      "intro": "DataGrip 是 JetBrains 基于 IntelliJ 平台打造的数据库 IDE。它以 SQL 编辑工具著称，非商业用途免费，其他情况需订阅。QoreDB 的 Core 版可免费用于任何用途，包括工作场景，Pro 版为一次性付费。",
+      "values": {
+        "license": "专有",
+        "price": "个人非商业用途免费。个人许可证首年 €109，之后为 €87 和 €65。组织：每用户每年 €259。价格不含增值税。",
+        "platforms": "Windows、macOS、Linux",
+        "technology": "运行在 JetBrains Runtime（Java）上的 IntelliJ 平台",
+        "databases": "50 多种，包括 MongoDB、Redis、Cassandra、ClickHouse、DuckDB、Snowflake 和 BigQuery。对 Elasticsearch 的支持较为基础。",
+        "telemetry": "使用付费许可证时默认关闭，错误报告除外。使用免费非商业许可证时必须开启。",
+        "safety": "只读数据源，以及为每个数据源设置颜色。",
+        "ai": "AI 代理和 MCP 服务器，可使用你自己的密钥或 JetBrains AI。",
+        "notebooks": "仅能通过 Zeppelin 插件实现，该插件已暂停开发"
+      },
+      "stronger": [
+        {
+          "title": "IDE 级 SQL 编辑",
+          "body": "上下文感知补全、重构、代码检查和跨结构导航，建立在 IntelliJ 多年的积累之上。"
+        },
+        {
+          "title": "JetBrains 生态的一部分",
+          "body": "同样的数据库工具也内置于 IntelliJ IDEA 等其他 JetBrains IDE 中。"
+        },
+        {
+          "title": "更多数据库",
+          "body": "支持 50 多种数据库，其中包括 QoreDB 未覆盖的一些，例如 Oracle 和 Db2。"
+        }
+      ],
+      "different": [
+        {
+          "title": "商业用途免费",
+          "body": "Core 版采用 Apache-2.0，在工作中同样免费。Pro 为一次性付费，而不是年度订阅。"
+        },
+        {
+          "title": "所有版本均无遥测",
+          "body": "无论你使用哪个版本或许可证，QoreDB 都不发送使用数据。"
+        },
+        {
+          "title": "内置笔记本",
+          "body": "SQL、MongoDB 和 Markdown 笔记本包含在 Core 中，保存为普通的 .qnb 文件。"
+        }
+      ],
+      "switch": [
+        "QoreDB 不导入 DataGrip 的数据源。要迁移连接，请复制其 URL 并粘贴到 QoreDB 的连接表单中，表单会识别驱动并自动填写字段。",
+        "草稿文件和已保存的查询可以粘贴到查询编辑器或笔记本中。迁移期间两个工具可以并行使用。"
+      ]
+    },
+    "beekeeper-studio": {
+      "description": "QoreDB vs Beekeeper Studio：许可证、价格、支持的数据库、遥测、生产环境安全和 AI，附来源对比。",
+      "intro": "Beekeeper Studio 是一款友好的开源 SQL 客户端，提供采用 GPL 的 Community 版，以及可解锁更多数据库和功能的付费方案。QoreDB 在采用 Apache-2.0 许可证的免费 Core 版中包含全部 {{count}} 种数据库。",
+      "values": {
+        "license": "Community：GPL-3.0-or-later。付费版：专有。",
+        "price": "Community 免费。付费方案按年计费，每月 $9 起（Indie）、$14（Professional）或 $18（Business）。",
+        "platforms": "Windows、macOS、Linux",
+        "technology": "Electron 和 Vue",
+        "databases": "免费：PostgreSQL、MySQL、MariaDB、SQLite、SQL Server、CockroachDB、TiDB、Redshift、BigQuery、Redis 等。DuckDB 和 Cassandra 需 Indie 及以上，ClickHouse 和 MongoDB 需 Professional 及以上，Snowflake 需 Business。未列出 Elasticsearch。",
+        "telemetry": "需用户主动开启",
+        "safety": "只读模式（自 6.1 版起免费）和连接颜色。",
+        "ai": "付费方案提供 AI Shell，使用你自己的密钥。",
+        "notebooks": "文档中未找到"
+      },
+      "stronger": [
+        {
+          "title": "简洁易上手的界面",
+          "body": "Beekeeper Studio 专注于为日常 SQL 工作提供简洁、易学的界面。"
+        },
+        {
+          "title": "支持 Redshift",
+          "body": "Amazon Redshift 在免费版中可用。QoreDB 不支持它。"
+        }
+      ],
+      "different": [
+        {
+          "title": "免费版包含所有数据库",
+          "body": "ClickHouse、MongoDB、DuckDB、Cassandra、Snowflake 和 Elasticsearch 都包含在免费的 Core 中。在 Beekeeper Studio 中，其中多个需要付费方案。"
+        },
+        {
+          "title": "宽松的许可证",
+          "body": "Core 采用 Apache-2.0 而不是 GPL，Pro 为一次性付费而不是订阅。"
+        },
+        {
+          "title": "Rust 而非 Electron",
+          "body": "QoreDB 基于 Tauri 和系统 WebView 运行，无需自带一份 Chromium。"
+        }
+      ],
+      "switch": [
+        "QoreDB 不导入 Beekeeper Studio 的连接。要迁移连接，请复制其 URL 并粘贴到 QoreDB 的连接表单中，表单会识别驱动并自动填写字段。",
+        "已保存的查询可以粘贴到查询编辑器或笔记本中。迁移期间两个工具可以并行使用。"
+      ]
+    },
+    "pgadmin": {
+      "description": "QoreDB vs pgAdmin：许可证、价格、支持的数据库、遥测、生产环境安全和 AI，附来源对比。",
+      "intro": "pgAdmin 是一个历史悠久的开源项目，专注于 PostgreSQL 管理，可作为桌面应用或 Web 服务器使用。QoreDB 是通用数据库客户端：在同一窗口中支持 PostgreSQL 以及另外 {{others}} 种数据库。",
+      "values": {
+        "license": "PostgreSQL License",
+        "price": "免费",
+        "platforms": "Windows、macOS、Linux，另有可通过浏览器使用的服务器模式",
+        "technology": "Python（Flask）和 React，桌面应用使用 Electron 外壳",
+        "databases": "仅支持 PostgreSQL 及兼容数据库",
+        "telemetry": "未发现使用统计。默认开启更新检查。",
+        "safety": "为每个服务器设置颜色。文档中未找到只读模式。",
+        "ai": "免费的 AI 助手和报告，使用你自己的提供商。",
+        "notebooks": "文档中未找到"
+      },
+      "stronger": [
+        {
+          "title": "深入的 PostgreSQL 管理",
+          "body": "备份与恢复、维护任务、pgAgent 作业、PL/pgSQL 调试器和结构比对，全部专为 PostgreSQL 打造。"
+        },
+        {
+          "title": "多用户 Web 部署",
+          "body": "pgAdmin 可作为团队共享的 Web 应用运行，并拥有自己的用户账户。"
+        },
+        {
+          "title": "免费的 AI 功能",
+          "body": "AI 助手可免费配合你自己的提供商使用。在 QoreDB 中，Database Agent 属于 Pro。"
+        }
+      ],
+      "different": [
+        {
+          "title": "不止 PostgreSQL",
+          "body": "一个应用即可连接 PostgreSQL、MySQL、SQL Server、MongoDB、Redis、ClickHouse、DuckDB 等共 {{count}} 种数据库。"
+        },
+        {
+          "title": "生产环境防护",
+          "body": "只读模式，以及在生产连接上拦截 DROP 和 TRUNCATE、对 DELETE 要求确认。"
+        },
+        {
+          "title": "笔记本",
+          "body": "在笔记本中混合使用 SQL 和 Markdown，保存为可分享的普通 .qnb 文件。"
+        }
+      ],
+      "switch": [
+        "QoreDB 不导入 pgAdmin 的服务器导出文件。要迁移服务器，请复制其连接 URL 并粘贴到 QoreDB 的连接表单中，表单会识别驱动并自动填写字段。",
+        "对于 pgAgent 作业或调试器等管理任务，你可以在 QoreDB 旁继续使用 pgAdmin。"
+      ]
+    }
+  }
+}

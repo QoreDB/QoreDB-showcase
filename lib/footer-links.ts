@@ -13,6 +13,7 @@ export const getFooterLinks = (t: Translate) => ({
     { label: t("footer.preview"), href: "/#preview" },
     { label: t("footer.pricing"), href: "/pricing" },
     { label: t("footer.databases"), href: "/databases" },
+    { label: t("footer.compare"), href: "/compare" },
     { label: t("nav.marketplace"), href: "/plugins" },
     { label: t("nav.roadmap"), href: "/roadmap" },
     { label: t("footer.changelog"), href: "/changelog" },

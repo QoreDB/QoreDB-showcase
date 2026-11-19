@@ -1,0 +1,283 @@
+{
+  "index": {
+    "meta_title": "QoreDB と他のデータベースクライアントの比較",
+    "title": "QoreDB の比較",
+    "subtitle": "開発者によく使われているデータベースクライアントとの比較です。情報は各ベンダーのウェブサイトとドキュメントに基づき、出典と確認日を記載しています。",
+    "card_cta": "比較を読む"
+  },
+  "page": {
+    "meta_title": "QoreDB vs {{name}}：比較と代替",
+    "title": "QoreDB vs {{name}}",
+    "breadcrumb": "比較",
+    "back": "すべての比較",
+    "eyebrow": "比較",
+    "glance_title": "概要",
+    "column_topic": "項目",
+    "rows": {
+      "license": "ライセンス",
+      "price": "価格",
+      "platforms": "プラットフォーム",
+      "technology": "技術基盤",
+      "databases": "データベース",
+      "telemetry": "テレメトリー",
+      "safety": "本番環境の安全性",
+      "ai": "AI",
+      "notebooks": "ノートブック"
+    },
+    "checked": "{{name}} に関する情報は、{{date}} に公式ウェブサイトとドキュメントで確認しました。製品はすぐに変わります。内容が古くなっている場合はお知らせください。修正します。",
+    "sources_title": "{{name}} の出典",
+    "report": "誤りを報告",
+    "stronger_title": "{{name}} が優れている点",
+    "different_title": "QoreDB の違い",
+    "switch_title": "{{name}} からの移行",
+    "other_title": "その他の比較",
+    "cta_title": "{{name}} と並べて QoreDB を試す",
+    "cta_body": "Core エディションは無料のオープンソースです。現在のクライアントと一緒にインストールし、ご自身のデータベースで比較してください。",
+    "cta_download": "QoreDB をダウンロード",
+    "cta_pricing": "価格を見る"
+  },
+  "qoredb": {
+    "license": "Core：Apache-2.0。Pro：BUSL-1.1。",
+    "price": "Core は無料です。Pro は {{proPrice}} の買い切りです。",
+    "platforms": "macOS、Windows、Linux",
+    "technology": "Rust と Tauri、システムの WebView を使用",
+    "databases": "無料の Core で {{count}} 個のデータベースに対応。MongoDB、Redis、Cassandra、ClickHouse、DuckDB、Snowflake、BigQuery、Elasticsearch を含みます",
+    "telemetry": "なし。GitHub への更新確認のみで、無効にできます。",
+    "safety": "環境タグ。本番接続では DROP と TRUNCATE がブロックされ、DELETE は確認が求められ、ALTER は警告が表示されます。読み取り専用モード。Pro ではカスタムルール。",
+    "ai": "Core に読み取り専用の MCP サーバー。Pro に Database Agent（7 つのプロバイダーまたは Qore AI Local）。",
+    "notebooks": "Core に SQL、MongoDB、Markdown のノートブック。.qnb ファイルとして保存"
+  },
+  "competitors": {
+    "dbeaver": {
+      "description": "QoreDB vs DBeaver：ライセンス、価格、対応データベース、テレメトリー、本番環境の安全性、AI を出典付きで比較します。",
+      "intro": "DBeaver は最も広く使われているデータベースクライアントの 1 つです。Community エディションはオープンソースで、JDBC と ODBC ドライバーを通じて非常に多くのデータベースに接続できます。QoreDB は別のアプローチを取ります。Rust 製のアプリケーションで、無料エディションに NoSQL を含む {{count}} 個のデータベース向けネイティブドライバーを備えています。",
+      "values": {
+        "license": "Community：Apache-2.0。PRO エディション：プロプライエタリ。",
+        "price": "Community は無料です。PRO は年額 $113（Lite）、$255（Enterprise）、$510（Ultimate）から。",
+        "platforms": "Windows、macOS、Linux",
+        "technology": "Eclipse RCP 上の Java、OpenJDK を同梱",
+        "databases": "JDBC と ODBC で 100 以上。Community は ClickHouse、DuckDB、Snowflake、BigQuery、Elasticsearch に対応。MongoDB、Redis、Cassandra には PRO エディションが必要です。",
+        "telemetry": "匿名の利用統計。環境設定で無効にできます。",
+        "safety": "接続タイプ（開発、テスト、本番）により、SQL 実行やデータ変更の前に確認を求めます。読み取り専用接続。",
+        "ai": "Community では OpenAI または GitHub Copilot による AI チャット。PRO ではさらに多くのプロバイダー。",
+        "notebooks": "ドキュメントに記載なし"
+      },
+      "stronger": [
+        {
+          "title": "はるかに多くのデータベース",
+          "body": "DBeaver は JDBC と ODBC を通じて 100 を大きく超えるデータベースに接続できます。QoreDB が対応していない Oracle、Db2、Redshift も含まれます。"
+        },
+        {
+          "title": "きめ細かな接続制限",
+          "body": "読み取り専用接続に加えて、接続タイプごとに SQL 実行とデータ編集それぞれに確認を求めるよう設定できます。"
+        },
+        {
+          "title": "長い実績",
+          "body": "10 年以上のリリース、大きなコミュニティ、充実したドキュメントがあります。"
+        }
+      ],
+      "different": [
+        {
+          "title": "無料エディションで NoSQL",
+          "body": "MongoDB、Redis、Cassandra は無料の Apache-2.0 Core に含まれます。DBeaver では PRO エディションが必要です。"
+        },
+        {
+          "title": "Java ランタイム不要",
+          "body": "QoreDB は Rust で書かれ、システムの WebView でインターフェースを描画します。同梱やチューニングが必要な JVM はありません。"
+        },
+        {
+          "title": "文単位の本番ルール",
+          "body": "QoreDB は各文を解析します。本番接続では DROP と TRUNCATE をブロックし、DELETE には確認を求め、ALTER には警告を表示します。"
+        }
+      ],
+      "switch": [
+        "QoreDB は DBeaver の接続設定をインポートしません。接続を移すには、その URL をコピーして QoreDB の接続フォームに貼り付けてください。ドライバーが検出され、各フィールドが入力されます。",
+        "保存したスクリプトはクエリエディターまたはノートブックに貼り付けられます。移行中は両方のツールを並行して使えます。"
+      ]
+    },
+    "tableplus": {
+      "description": "QoreDB vs TablePlus：ライセンス、価格、対応データベース、テレメトリー、本番環境の安全性、AI を出典付きで比較します。",
+      "intro": "TablePlus は、各プラットフォームでネイティブのインターフェースを持つ、完成度の高いプロプライエタリなデータベースクライアントです。制限付きの無料トライアルと買い切りライセンスを提供しています。QoreDB はオープンソースです。Core エディションにはタブやウィンドウの制限がなく、{{count}} 個のデータベースに対応しています。",
+      "values": {
+        "license": "プロプライエタリ",
+        "price": "無料トライアルはタブ 2 つ、ウィンドウ 2 つ、フィルター 2 つまでに制限。Basic ライセンスは 1 デバイス、1 年間のアップデート付きで $99 の買い切り。以降のアップデート更新は $59。",
+        "platforms": "macOS、Windows、Linux、iOS",
+        "technology": "各プラットフォームのネイティブアプリ（Windows 版は .NET Framework 4.8 で動作）",
+        "databases": "約 23。Redis、MongoDB、Cassandra、ClickHouse、BigQuery、Snowflake、DuckDB、Elasticsearch を含みます",
+        "telemetry": "匿名のクラッシュレポート。無効にするにはライセンスが必要です。",
+        "safety": "複数レベルの Safe Mode。最も厳しいレベルではクエリ実行前にパスワードを求めます。production などの接続タグ。",
+        "ai": "任意のプロバイダーを使う AI アシスタント。macOS 向けに MCP サーバーがドキュメント化されています。",
+        "notebooks": "ドキュメントに記載なし"
+      },
+      "stronger": [
+        {
+          "title": "ネイティブのインターフェース",
+          "body": "TablePlus は Web ビューではなく、各 OS 固有の UI ツールキットを使用しています。"
+        },
+        {
+          "title": "iOS アプリ",
+          "body": "TablePlus は iPhone と iPad でも動作します。QoreDB はデスクトップ専用です。"
+        },
+        {
+          "title": "きめ細かな Safe Mode",
+          "body": "Safe Mode では、クエリ実行前にパスワードまたは確認を求めることができ、接続ごとに設定できます。"
+        }
+      ],
+      "different": [
+        {
+          "title": "オープンソースで無料",
+          "body": "Core エディションは Apache-2.0 で、タブ、ウィンドウ、フィルターの制限はなく、個人でも商用でも使えます。"
+        },
+        {
+          "title": "テレメトリーは一切なし",
+          "body": "QoreDB は利用データもクラッシュデータも送信しません。無効にする設定もなく、そのためのライセンスも不要です。"
+        },
+        {
+          "title": "ノートブックと本番ルール",
+          "body": "SQL と MongoDB のノートブックは Core に含まれ、本番接続では破壊的な文が既定でブロックされます。"
+        }
+      ],
+      "switch": [
+        "QoreDB は TablePlus の接続をインポートしません。接続を移すには、その URL をコピーして QoreDB の接続フォームに貼り付けてください。ドライバーが検出され、各フィールドが入力されます。",
+        "保存したクエリはクエリエディターまたはノートブックに貼り付けられます。移行中は両方のツールを並行して使えます。"
+      ]
+    },
+    "datagrip": {
+      "description": "QoreDB vs DataGrip：ライセンス、価格、対応データベース、テレメトリー、本番環境の安全性、AI を出典付きで比較します。",
+      "intro": "DataGrip は IntelliJ プラットフォーム上に構築された JetBrains のデータベース IDE です。SQL 編集機能で知られ、非商用利用は無料、それ以外はサブスクリプションです。QoreDB の Core エディションは業務を含むあらゆる用途で無料で、Pro エディションは買い切りです。",
+      "values": {
+        "license": "プロプライエタリ",
+        "price": "非商用の個人利用は無料。個人ライセンスは初年度 €109、以降 €87、€65。組織向け：1 ユーザーあたり年額 €259。価格は VAT 別。",
+        "platforms": "Windows、macOS、Linux",
+        "technology": "JetBrains Runtime（Java）上の IntelliJ プラットフォーム",
+        "databases": "50 以上。MongoDB、Redis、Cassandra、ClickHouse、DuckDB、Snowflake、BigQuery を含みます。Elasticsearch のサポートは基本的なものです。",
+        "telemetry": "有料ライセンスでは既定で無効（エラーレポートを除く）。無料の非商用ライセンスでは必須です。",
+        "safety": "読み取り専用のデータソースと、データソースごとの色分け。",
+        "ai": "AI エージェントと MCP サーバー。自分のキーまたは JetBrains AI を使用。",
+        "notebooks": "Zeppelin プラグイン経由のみ（開発は中断中）"
+      },
+      "stronger": [
+        {
+          "title": "IDE レベルの SQL 編集",
+          "body": "コンテキストに応じた補完、リファクタリング、コードインスペクション、スキーマをまたぐナビゲーション。長年の IntelliJ の蓄積に基づいています。"
+        },
+        {
+          "title": "JetBrains エコシステムの一部",
+          "body": "同じデータベースツールが IntelliJ IDEA など他の JetBrains IDE にも組み込まれています。"
+        },
+        {
+          "title": "より多くのデータベース",
+          "body": "50 以上のデータベースに対応しており、Oracle や Db2 など QoreDB が対応していないものも含まれます。"
+        }
+      ],
+      "different": [
+        {
+          "title": "商用利用も無料",
+          "body": "Core エディションは Apache-2.0 で、業務でも無料です。Pro は年間サブスクリプションではなく買い切りです。"
+        },
+        {
+          "title": "どのエディションでもテレメトリーなし",
+          "body": "QoreDB は、どのエディションやライセンスを使っていても利用データを送信しません。"
+        },
+        {
+          "title": "ノートブックを標準搭載",
+          "body": "SQL、MongoDB、Markdown のノートブックは Core に含まれ、プレーンな .qnb ファイルとして保存されます。"
+        }
+      ],
+      "switch": [
+        "QoreDB は DataGrip のデータソースをインポートしません。接続を移すには、その URL をコピーして QoreDB の接続フォームに貼り付けてください。ドライバーが検出され、各フィールドが入力されます。",
+        "スクラッチファイルや保存したクエリはクエリエディターまたはノートブックに貼り付けられます。移行中は両方のツールを並行して使えます。"
+      ]
+    },
+    "beekeeper-studio": {
+      "description": "QoreDB vs Beekeeper Studio：ライセンス、価格、対応データベース、テレメトリー、本番環境の安全性、AI を出典付きで比較します。",
+      "intro": "Beekeeper Studio は使いやすいオープンソースの SQL クライアントで、GPL の Community エディションと、より多くのデータベースや機能を利用できる有料プランがあります。QoreDB は {{count}} 個すべてのデータベースを、Apache-2.0 ライセンスの無料 Core エディションに含めています。",
+      "values": {
+        "license": "Community：GPL-3.0-or-later。有料エディション：プロプライエタリ。",
+        "price": "Community は無料です。有料プランは年払いで月額 $9（Indie）、$14（Professional）、$18（Business）から。",
+        "platforms": "Windows、macOS、Linux",
+        "technology": "Electron と Vue",
+        "databases": "無料：PostgreSQL、MySQL、MariaDB、SQLite、SQL Server、CockroachDB、TiDB、Redshift、BigQuery、Redis など。DuckDB と Cassandra は Indie から、ClickHouse と MongoDB は Professional から、Snowflake は Business。Elasticsearch は記載なし。",
+        "telemetry": "オプトイン",
+        "safety": "読み取り専用モード（バージョン 6.1 から無料）と接続の色分け。",
+        "ai": "有料プランで、自分のキーを使う AI Shell。",
+        "notebooks": "ドキュメントに記載なし"
+      },
+      "stronger": [
+        {
+          "title": "シンプルで親しみやすいインターフェース",
+          "body": "Beekeeper Studio は、日々の SQL 作業向けに、すっきりとして覚えやすいインターフェースを重視しています。"
+        },
+        {
+          "title": "Redshift 対応",
+          "body": "Amazon Redshift は無料エディションで利用できます。QoreDB は対応していません。"
+        }
+      ],
+      "different": [
+        {
+          "title": "すべてのデータベースが無料エディションに",
+          "body": "ClickHouse、MongoDB、DuckDB、Cassandra、Snowflake、Elasticsearch は無料の Core に含まれます。Beekeeper Studio では、これらのいくつかに有料プランが必要です。"
+        },
+        {
+          "title": "寛容なライセンス",
+          "body": "Core は GPL ではなく Apache-2.0 で、Pro はサブスクリプションではなく買い切りです。"
+        },
+        {
+          "title": "Electron ではなく Rust",
+          "body": "QoreDB はシステムの WebView を使う Tauri で動作し、独自の Chromium を同梱しません。"
+        }
+      ],
+      "switch": [
+        "QoreDB は Beekeeper Studio の接続をインポートしません。接続を移すには、その URL をコピーして QoreDB の接続フォームに貼り付けてください。ドライバーが検出され、各フィールドが入力されます。",
+        "保存したクエリはクエリエディターまたはノートブックに貼り付けられます。移行中は両方のツールを並行して使えます。"
+      ]
+    },
+    "pgadmin": {
+      "description": "QoreDB vs pgAdmin：ライセンス、価格、対応データベース、テレメトリー、本番環境の安全性、AI を出典付きで比較します。",
+      "intro": "pgAdmin は PostgreSQL の管理に特化した歴史あるオープンソースプロジェクトで、デスクトップアプリまたは Web サーバーとして利用できます。QoreDB は汎用のデータベースクライアントで、PostgreSQL と他の {{others}} 個のデータベースを同じウィンドウで扱えます。",
+      "values": {
+        "license": "PostgreSQL License",
+        "price": "無料",
+        "platforms": "Windows、macOS、Linux、およびブラウザーから使うサーバーモード",
+        "technology": "Python（Flask）と React。デスクトップアプリは Electron シェル",
+        "databases": "PostgreSQL と互換データベースのみ",
+        "telemetry": "利用統計は見つかりませんでした。更新確認は既定で有効です。",
+        "safety": "サーバーごとの色分け。ドキュメントに読み取り専用モードは見つかりませんでした。",
+        "ai": "任意のプロバイダーを使う無料の AI アシスタントとレポート。",
+        "notebooks": "ドキュメントに記載なし"
+      },
+      "stronger": [
+        {
+          "title": "PostgreSQL の高度な管理",
+          "body": "バックアップと復元、メンテナンス作業、pgAgent ジョブ、PL/pgSQL デバッガー、スキーマ差分。すべて PostgreSQL 専用です。"
+        },
+        {
+          "title": "マルチユーザーの Web デプロイ",
+          "body": "pgAdmin は、独自のユーザーアカウントを持ち、チームで共有する Web アプリケーションとして動作できます。"
+        },
+        {
+          "title": "無料の AI 機能",
+          "body": "AI アシスタントは任意のプロバイダーで無料で使えます。QoreDB では Database Agent は Pro に含まれます。"
+        }
+      ],
+      "different": [
+        {
+          "title": "PostgreSQL の先へ",
+          "body": "PostgreSQL、MySQL、SQL Server、MongoDB、Redis、ClickHouse、DuckDB など、合計 {{count}} 個のデータベースを 1 つのアプリで扱えます。"
+        },
+        {
+          "title": "本番ガード",
+          "body": "読み取り専用モードに加え、本番接続では DROP と TRUNCATE をブロックし、DELETE には確認を求めます。"
+        },
+        {
+          "title": "ノートブック",
+          "body": "ノートブックで SQL と Markdown を組み合わせ、共有できるプレーンな .qnb ファイルとして保存できます。"
+        }
+      ],
+      "switch": [
+        "QoreDB は pgAdmin のサーバーエクスポートをインポートしません。サーバーを移すには、その接続 URL をコピーして QoreDB の接続フォームに貼り付けてください。ドライバーが検出され、各フィールドが入力されます。",
+        "pgAgent ジョブやデバッガーなどの管理作業には、QoreDB と並べて pgAdmin を使い続けることができます。"
+      ]
+    }
+  }
+}

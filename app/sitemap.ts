@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { COMPETITOR_SLUGS } from "@/lib/compare";
 import { DATABASE_SLUGS } from "@/lib/databases";
 import { getLastUpdated } from "@/lib/docs/git";
 import { getAllPages } from "@/lib/docs/tree";
@@ -146,11 +147,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
+  const compareRoutes: MetadataRoute.Sitemap = COMPETITOR_SLUGS.flatMap(
+    (slug) =>
+      SUPPORTED_LOCALES.map((locale) => ({
+        url: getLocalizedUrl(locale, `/compare/${slug}`),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+        alternates: {
+          languages: getLanguageAlternates(`/compare/${slug}`),
+        },
+      })),
+  );
+
   return [
     ...staticRoutes,
     ...docsRoutes,
     ...blogRoutes,
     ...featureRoutes,
     ...databaseRoutes,
+    ...compareRoutes,
   ];
 }
