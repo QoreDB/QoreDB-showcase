@@ -6,7 +6,7 @@ Référence du 16 septembre 2026, issue du plan approuvé. Complète [DESIGN_SYS
 
 La qualité vient de la composition : grand titre droit, asymétrie 5/7, image réelle cadrée pour une tâche, filets précis, légendes courtes, accent violet ponctuel. Le caractère « fait main » repose sur les alignements, les césures, le rythme et le choix des détails montrés. Le produit reste l’objet principal.
 
-[Prototype HTML](../DESIGN-IS-2026-09-16/implementation/reference.html) et [CSS de référence](../DESIGN-IS-2026-09-16/implementation/reference.css) : hero et première preuve, variantes clair/sombre via `?theme=light` ou `?theme=dark`, largeur mobile et desktop. Les polices locales sont figées dans le dossier du prototype pour que celui-ci ne dépende pas des hashes d’un prochain build. En production, conserver les imports `next/font` existants. Le prototype est une référence visuelle autonome ; sa navigation réduite et son sélecteur de thème ne remplacent pas les composants accessibles et traduits du site.
+[Prototype HTML](https://github.com/QoreDB/QoreDB-showcase/blob/94acaacf0db178ea3121c38e25d0a70fd21db568/DESIGN-IS-2026-09-16/implementation/reference.html) et [CSS de référence](https://github.com/QoreDB/QoreDB-showcase/blob/94acaacf0db178ea3121c38e25d0a70fd21db568/DESIGN-IS-2026-09-16/implementation/reference.css) : hero et première preuve, variantes clair/sombre via `?theme=light` ou `?theme=dark`, largeur mobile et desktop. Les polices locales sont figées dans le dossier du prototype pour que celui-ci ne dépende pas des hashes d’un prochain build. En production, conserver les imports `next/font` existants. Le prototype est une référence visuelle autonome ; sa navigation réduite et son sélecteur de thème ne remplacent pas les composants accessibles et traduits du site.
 
 ## Tokens de couleur
 
@@ -76,7 +76,7 @@ Budgets de recette du plan maintenus : JS initial de route ≤300 Kio, JS démar
 
 ## Contrôles de la référence
 
-Captures Chrome en 1440×900 et 390×844, clair et sombre, dans `DESIGN-IS-2026-09-16/implementation/`. Vérifier absence de débordement horizontal, présence de la capture avant le pli mobile, polices chargées et lisibilité des détails au format natif. La composition doit ensuite être vérifiée sur les composants réels, toutes les langues et les contrôles accessibles.
+Captures Chrome en 1440×900 et 390×844, clair et sombre, dans [`DESIGN-IS-2026-09-16/implementation/`](https://github.com/QoreDB/QoreDB-showcase/tree/94acaacf0db178ea3121c38e25d0a70fd21db568/DESIGN-IS-2026-09-16/implementation), retiré du dépôt après livraison. Vérifier absence de débordement horizontal, présence de la capture avant le pli mobile, polices chargées et lisibilité des détails au format natif. La composition doit ensuite être vérifiée sur les composants réels, toutes les langues et les contrôles accessibles.
 
 La revue de compréhension avec 3–5 utilisateurs cibles et le test sur téléphone physique restent à organiser ; aucune préférence utilisateur n’est prétendue mesurée.
 
@@ -91,7 +91,7 @@ Footer : liens de plugins corrigés vers `/plugins`, préchargement Next désact
 
 ## Recette de l’implémentation
 
-La déclinaison est implémentée et vérifiée dans les sept langues. Les captures et mesures finales sont dans le [bilan de livraison](../DESIGN-IS-2026-09-16/implementation/REPORT.md). Les budgets de JavaScript, de logos et d’animations sont respectés ; le budget de non-régression LCP ne l’est pas, écart expliqué et chiffré dans ce bilan. La cible ambitieuse de 250 Kio de JavaScript initial n’est pas atteinte.
+La déclinaison est implémentée et vérifiée dans les sept langues. Les captures et mesures finales sont dans le [bilan de livraison](https://github.com/QoreDB/QoreDB-showcase/blob/94acaacf0db178ea3121c38e25d0a70fd21db568/DESIGN-IS-2026-09-16/implementation/REPORT.md). Les budgets de JavaScript, de logos et d’animations sont respectés ; le budget de non-régression LCP ne l’est pas, écart expliqué et chiffré dans ce bilan. La cible ambitieuse de 250 Kio de JavaScript initial n’est pas atteinte.
 
 
 ## Raffinement de signature et démonstration
@@ -100,7 +100,7 @@ La seconde passe conserve la grille et ajoute un emblème linéaire inspiré du 
 
 Une vidéo muette de 22,72 secondes (libellé 00:23) suit la première preuve. Poster responsive, dimensions réservées 1280×800, aucun `src` vidéo avant activation, aucun autoplay ni boucle. L’îlot client gère lecture, erreur et réessai ; les contrôles restent natifs. Un lien direct fonctionne sans JavaScript et une transcription en sept langues décrit les actions. La vidéo montre le parcours Core et un brouillon SQL, sans prétendre démontrer Sandbox Pro.
 
-Voir le [bilan du raffinement](../DESIGN-IS-2026-09-16/implementation/signature-v2/REPORT.md) pour les mesures de ce nouvel état. Le bilan précédent reste la preuve de la première passe.
+Voir le [bilan du raffinement](https://github.com/QoreDB/QoreDB-showcase/blob/94acaacf0db178ea3121c38e25d0a70fd21db568/DESIGN-IS-2026-09-16/implementation/signature-v2/REPORT.md) pour les mesures de ce nouvel état. Le bilan précédent reste la preuve de la première passe.
 
 
 ## Ajustement éditorial après retour utilisateur
