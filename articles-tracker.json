@@ -986,6 +986,13 @@
       "category": "Open Source",
       "publishedAt": "2026-11-10",
       "sanityId": "5cc387e9-5336-43b3-8836-39e09344b4aa"
+    },
+    {
+      "title": "Le Blast Radius d'une migration dans QoreDB : AST, journal d'audit et sondes en lecture seule",
+      "slug": "blast-radius-migration-ast-audit-sondes",
+      "category": "Security",
+      "publishedAt": "2026-11-20",
+      "sanityId": "804d01dd-4b89-4154-a831-b7426e9bc259"
     }
   ],
   "queue": []
