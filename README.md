@@ -58,7 +58,29 @@ STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 STRIPE_PRICE_ID=price_...
 LICENSE_PRIVATE_KEY=base64_encoded_private_key
+SANITY_API_WRITE_TOKEN=...
+ANTHROPIC_API_KEY=...
+SANITY_TRANSLATION_WEBHOOK_SECRET=...
 ```
+
+### Blog translation
+
+French posts are translated to English by Claude. In production, a Sanity
+webhook calls `POST /api/translate-post` when a French post is published:
+
+- Trigger on create and update, dataset `production`, HTTP method POST.
+- Filter: `_type == "post" && (language == "fr" || !defined(language))`
+- Projection: `{_id}`
+- Secret: the value of `SANITY_TRANSLATION_WEBHOOK_SECRET`.
+
+The route checks the signature, answers immediately and publishes the English
+document `<id>-en` in the background. Posts that already have an English
+version are skipped, so later edits of the French post do not overwrite it.
+Failures are logged with the `[translate-post]` prefix.
+
+`npm run translate:posts pending` lists French posts without an English
+version; `translate`, `submit`/`collect` (Batches API) and `publish` handle
+them from a local machine.
 
 ### 4. Run the development server
 

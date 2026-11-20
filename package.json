@@ -17,7 +17,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",
     "format": "biome format --write .",
-    "test:license": "tsx --test lib/license/generate.test.ts"
+    "test:license": "tsx --test lib/license/generate.test.ts",
+    "test:translation": "tsx --test lib/blog-translation/webhook.test.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.11.0",
